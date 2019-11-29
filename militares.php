@@ -16,7 +16,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="dist/img/gapls.png">
-  <title>SIGPAGPES | Dashboard</title>
+  <title>SISPAGPES | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -200,7 +200,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
       <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
         <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-        <b><span class="brand-text font-weight-light">SIGPAGPES</span></b>
+        <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <!-- Sidebar -->
       <div class="sidebar">
@@ -227,10 +227,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               </a>
             </li>
             <li class="nav-item">
-              <a href="funcionarios.php" class="nav-link active">
+              <a href="militares.php" class="nav-link active">
                 <i class="nav-icon fas fa-fingerprint"></i>
                 <p>
-                  Funcionários
+                  Militares
                 </p>
               </a>
             </li>
@@ -784,7 +784,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM funcionarios";
+                      $query = "SELECT * FROM militares";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
@@ -860,7 +860,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE FUNCIONÁRIOS</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE Militares</strong></h4>
                 </div>
                 <div class="card-body">
                   <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
@@ -875,9 +875,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
 
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from funcionarios where nome LIKE '$nome' order by nome asc";
+                      $query = "select * from militares where nome LIKE '$nome' order by nome asc";
                     } else {
-                      $query = "select * from funcionarios order by nome asc";
+                      $query = "select * from militares order by nome asc";
                     }
 
 
@@ -924,8 +924,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                             <td><?php echo $perfil; ?></td>
                             <td><?php echo $data2; ?></td>
                             <td>
-                              <a class="btn btn-warning btn-sm" href="funcionarios.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                              <a class="btn btn-danger btn-sm" href="funcionarios.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                              <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                              <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
                           </tr>
 
@@ -954,7 +954,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Funcionários</h4>
+                  <h4 class="modal-title">Militaress</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -1103,7 +1103,7 @@ if (isset($_POST['button'])) {
 
   //Verificar se o CPF já está cadastrado
 
-  $query_verificar = "select * from funcionarios where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
@@ -1114,16 +1114,16 @@ if (isset($_POST['button'])) {
     exit();
   }
 
-  $query = "INSERT into funcionarios (saram, cpf, posto, nome, perfil, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$perfil', curDate() )";
+  $query = "INSERT into militares (saram, cpf, posto, nome, perfil, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$perfil', curDate() )";
 
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
     echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='funcionarios.php'; </script>";
+    echo "<script language='javascript'> window.location='militares.php'; </script>";
   } else {
     echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='funcionarios.php'; </script>";
+    echo "<script language='javascript'> window.location='militares.php'; </script>";
   }
 }
 
@@ -1134,9 +1134,9 @@ if (isset($_POST['button'])) {
 <?php
 if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
-  $query = "DELETE FROM funcionarios where id = '$id'";
+  $query = "DELETE FROM militares where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='funcionarios.php'; </script>";
+  echo "<script language='javascript'> window.location='militares.php'; </script>";
 }
 ?>
 <!-------------------------------------------------------------------------------->
@@ -1146,7 +1146,7 @@ if (@$_GET['func'] == 'deleta') {
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "select * from funcionarios where id = '$id'";
+  $query = "select * from militares where id = '$id'";
   $result = mysqli_query($conexao, $query);
 
   while ($res_1 = mysqli_fetch_array($result)) {
@@ -1247,7 +1247,7 @@ if (@$_GET['func'] == 'edita') {
           if ($res_1['cpf'] != $cpf) {
 
             //Verificar se o CPF já está cadastrado
-            $query_verificar = "select * from funcionarios where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+            $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
             $result_verificar = mysqli_query($conexao, $query_verificar);
             $dado_verificar = mysqli_fetch_array($result_verificar);
@@ -1260,16 +1260,16 @@ if (@$_GET['func'] == 'edita') {
           }
 
 
-          $query_editar = "UPDATE funcionarios set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', perfil = '$perfil' where id = '$id'";
+          $query_editar = "UPDATE militares set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', perfil = '$perfil' where id = '$id'";
 
           $result_editar = mysqli_query($conexao, $query_editar);
 
           if ($result_editar == '') {
             echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
-            echo "<script language='javascript'> window.location='funcionarios.php'; </script>";
+            echo "<script language='javascript'> window.location='militares.php'; </script>";
           } else {
             echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-            echo "<script language='javascript'> window.location='funcionarios.php'; </script>";
+            echo "<script language='javascript'> window.location='militares.php'; </script>";
           }
         }
 

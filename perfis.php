@@ -16,7 +16,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="image/png" href="dist/img/gapls.png">
-    <title>SIGPAGPES | Dashboard</title>
+    <title>SISPAGPES | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -200,7 +200,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <!-- Brand Logo -->
             <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
                 <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-                <b><span class="brand-text font-weight-light">SIGPAGPES</span></b>
+                <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -227,10 +227,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="funcionarios.php" class="nav-link">
+                            <a href="militares.php" class="nav-link">
                                 <i class="nav-icon fas fa-fingerprint"></i>
                                 <p>
-                                    Funcionários
+                                    Militares
                                 </p>
                             </a>
                         </li>
@@ -903,9 +903,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                                                     ?>
                                                     <tr style="text-align: center;">
                                                         <td><?php echo $id; ?></td>
-                                                        <!--Tinha esquecido do ponto e vírgula-->
+                                                        
                                                         <td><?php echo $nome; ?></td>
-                                                        <!--Tinha esquecido do ponto e vírgula-->
+                                                        
                                                         <td>
                                                             <a class="btn btn-warning btn-sm" href="perfis.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
                                                             <a class="btn btn-danger btn-sm" href="perfis.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>

@@ -16,7 +16,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="dist/img/gapls.png">
-  <title>SIGPAGPES | Dashboard</title>
+  <title>SISPAGPES | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -200,7 +200,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
       <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
         <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-        <b><span class="brand-text font-weight-light">SIGPAGPES</span></b>
+        <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <!-- Sidebar -->
       <div class="sidebar">
@@ -227,10 +227,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               </a>
             </li>
             <li class="nav-item">
-              <a href="funcionarios.php" class="nav-link">
+              <a href="militares.php" class="nav-link">
                 <i class="nav-icon fas fa-fingerprint"></i>
                 <p>
-                  Funcionários
+                  Militares
                 </p>
               </a>
             </li>
@@ -876,9 +876,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = $_GET['txtpesquisar'] . '%';
-                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_funcionario, f.posto from usuarios as u INNER JOIN funcionarios as f ON u.id_funcionario = f.id where u.nome LIKE '$nome' order by u.nome asc";
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_funcionario, f.posto from usuarios as u INNER JOIN militares as f ON u.id_funcionario = f.id where u.nome LIKE '$nome' order by u.nome asc";
                     } else {
-                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_funcionario, f.posto from usuarios as u INNER JOIN funcionarios as f ON u.id_funcionario = f.id order by u.nome asc";
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_funcionario, f.posto from usuarios as u INNER JOIN militares as f ON u.id_funcionario = f.id order by u.nome asc";
                     }
 
                     $result = mysqli_query($conexao, $query);
@@ -967,7 +967,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                           <option value="" disabled selected hidden>Nome</option>
 
                           <?php
-                          $query = "SELECT * FROM funcionarios ORDER BY nome asc";
+                          $query = "SELECT * FROM militares ORDER BY nome asc";
                           $result = mysqli_query($conexao, $query);
 
                           if (count($result)) {
@@ -1062,7 +1062,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 if (isset($_POST['button'])) {
 
   $funcionario = $_POST['funcionario'];
-  $query_func = "select * from funcionarios where id = '{$funcionario}' ";
+  $query_func = "select * from militares where id = '{$funcionario}' ";
   $result_func = mysqli_query($conexao, $query_func);
   $dado = mysqli_fetch_array($result_func);
   $row = mysqli_num_rows($result_func);

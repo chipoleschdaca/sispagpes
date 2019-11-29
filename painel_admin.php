@@ -16,7 +16,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="dist/img/gapls.png">
-  <title>SIGPAGPES | Dashboard</title>
+  <title>SISPAGPES | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -200,7 +200,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
       <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
         <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-        <b><span class="brand-text font-weight-light">SIGPAGPES</span></b>
+        <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
 
       <!-- Sidebar -->
@@ -229,10 +229,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               </a>
             </li>
             <li class="nav-item">
-              <a href="funcionarios.php" class="nav-link">
+              <a href="militares.php" class="nav-link">
                 <i class="nav-icon fas fa-fingerprint"></i>
                 <p>
-                  Funcionários
+                  Militares
                 </p>
               </a>
             </li>
