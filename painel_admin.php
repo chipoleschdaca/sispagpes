@@ -1255,7 +1255,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </div>
               </div>
               <!-- /.card -->
-
+              
               <!-- solid sales graph -->
               <div class="card bg-gradient-info">
                 <div class="card-header border-0">
@@ -1386,6 +1386,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <!-- JQVMap -->
   <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
   <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <script src="plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
   <!-- jQuery Knob Chart -->
   <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
   <!-- daterangepicker -->
