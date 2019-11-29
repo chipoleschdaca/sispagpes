@@ -3,7 +3,7 @@ include('conexao.php');
 session_start();
 include('verificar_login.php');
 
-if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] != 'Gerente') {
+if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
   header('Location: index.php');
   exit();
 }
@@ -242,7 +242,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                 </p>
               </a>
             <li class="nav-item">
-              <a href="cargos.php" class="nav-link">
+              <a href="perfis.php" class="nav-link">
                 <i class="nav-icon fas fa-sitemap"></i>
                 <p>
                   Perfis
@@ -895,7 +895,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                         <th>CPF</th>
                         <th>Posto</th>
                         <th>Nome</th>
-                        <th>Cargo</th>
+                        <th>Perfil</th>
                         <th>Data</th>
                         <th>Ações</th>
                       </thead>
@@ -910,7 +910,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                           $cpf = $res_1['cpf'];
                           $posto = $res_1['posto'];
                           $nome = $res_1['nome'];
-                          $cargo = $res_1['cargo'];
+                          $perfil = $res_1['perfil'];
                           $data = $res_1['data'];
                           $data2 = implode('/', array_reverse(explode('-', $data)));
                           ?>
@@ -921,7 +921,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                             <td><?php echo $cpf; ?></td>
                             <td><?php echo $posto; ?></td>
                             <td style="text-transform:uppercase;"><?php echo $nome; ?></td>
-                            <td><?php echo $cargo; ?></td>
+                            <td><?php echo $perfil; ?></td>
                             <td><?php echo $data2; ?></td>
                             <td>
                               <a class="btn btn-warning btn-sm" href="funcionarios.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
@@ -998,15 +998,15 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                       <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" style="text-transform: uppercase;" placeholder="Nome Completo" required>
                     </div>
                     <div class="form-group">
-                      <label for="id_produto">Cargo</label>
-                      <select name="cargo" class="form-control mr-2" id="category" name="category">
+                      <label for="id_produto">Perfil</label>
+                      <select name="perfil" class="form-control mr-2" id="category" name="category">
                         <?php
-                        $query = "SELECT cargo FROM cargos ORDER BY cargo asc";
+                        $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
                         $result = mysqli_query($conexao, $query);
                         if (count($result)) {
                           while ($res_1 = mysqli_fetch_array($result)) {
                             ?>
-                            <option value="<?php echo $res_1['cargo']; ?>"><?php echo $res_1['cargo']; ?></option>
+                            <option value="<?php echo $res_1['perfil']; ?>"><?php echo $res_1['perfil']; ?></option>
                         <?php
                           }
                         }
@@ -1098,7 +1098,7 @@ if (isset($_POST['button'])) {
   $cpf = $_POST['txtcpf'];
   $posto = $_POST['txtposto'];
   $nome = strtoupper($_POST['txtnome']);
-  $cargo = $_POST['cargo'];
+  $perfil = $_POST['perfil'];
 
 
   //Verificar se o CPF já está cadastrado
@@ -1114,7 +1114,7 @@ if (isset($_POST['button'])) {
     exit();
   }
 
-  $query = "INSERT into funcionarios (saram, cpf, posto, nome, cargo, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$cargo', curDate() )";
+  $query = "INSERT into funcionarios (saram, cpf, posto, nome, perfil, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$perfil', curDate() )";
 
   $result = mysqli_query($conexao, $query);
 
@@ -1200,15 +1200,15 @@ if (@$_GET['func'] == 'edita') {
                 <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome" value="<?php echo $res_1['nome']; ?>" required>
               </div>
               <div class="form-group">
-                <label for="id_produto">Cargo</label>
-                <select name="cargo" class="form-control mr-2" id="category" name="category">
+                <label for="id_produto">perfil</label>
+                <select name="perfil" class="form-control mr-2" id="category" name="category">
                   <?php
-                      $query = "SELECT cargo FROM cargos ORDER BY cargo asc";
+                      $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
                       $result = mysqli_query($conexao, $query);
                       if (count($result)) {
                         while ($res_2 = mysqli_fetch_array($result)) {
                           ?>
-                      <option value="<?php echo $res_2['cargo']; ?>"><?php echo $res_2['cargo']; ?></option>
+                      <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
                   <?php
                         }
                       }
@@ -1241,7 +1241,7 @@ if (@$_GET['func'] == 'edita') {
           $cpf = $_POST['txtcpf'];
           $posto = $_POST['txtposto'];
           $nome = strtoupper($_POST['txtnome']);
-          $cargo = $_POST['cargo'];
+          $perfil = $_POST['perfil'];
 
 
           if ($res_1['cpf'] != $cpf) {
@@ -1260,7 +1260,7 @@ if (@$_GET['func'] == 'edita') {
           }
 
 
-          $query_editar = "UPDATE funcionarios set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', cargo = '$cargo' where id = '$id'";
+          $query_editar = "UPDATE funcionarios set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', perfil = '$perfil' where id = '$id'";
 
           $result_editar = mysqli_query($conexao, $query_editar);
 

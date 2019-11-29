@@ -3,7 +3,7 @@ include('conexao.php');
 session_start();
 include('verificar_login.php');
 
-if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] != 'Gerente') {
+if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
   header('Location: index.php');
   exit();
 }
@@ -242,7 +242,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                 </p>
               </a>
             <li class="nav-item">
-              <a href="cargos.php" class="nav-link">
+              <a href="perfis.php" class="nav-link">
                 <i class="nav-icon fas fa-sitemap"></i>
                 <p>
                   Perfis
@@ -860,7 +860,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE FUNCIONÁRIOS</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE USUÁRIOS</strong></h4>
                 </div>
                 <div class="card-body">
                   <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
@@ -876,9 +876,9 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
 
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = $_GET['txtpesquisar'] . '%';
-                      $query = "select u.id, u.nome, u.usuario, u.senha, u.cargo, u.id_funcionario, f.posto from usuarios as u INNER JOIN funcionarios as f ON u.id_funcionario = f.id where u.nome LIKE '$nome' order by u.nome asc";
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_funcionario, f.posto from usuarios as u INNER JOIN funcionarios as f ON u.id_funcionario = f.id where u.nome LIKE '$nome' order by u.nome asc";
                     } else {
-                      $query = "select u.id, u.nome, u.usuario, u.senha, u.cargo, u.id_funcionario, f.posto from usuarios as u INNER JOIN funcionarios as f ON u.id_funcionario = f.id order by u.nome asc";
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_funcionario, f.posto from usuarios as u INNER JOIN funcionarios as f ON u.id_funcionario = f.id order by u.nome asc";
                     }
 
                     $result = mysqli_query($conexao, $query);
@@ -895,7 +895,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                         <th>Nome</th>
                         <th>Usuário</th>
                         <th>Senha</th>
-                        <th>Cargo</th>
+                        <th>Perfil</th>
                         <th>Posto</th>
                         <th>Ações</th>
                       </thead>
@@ -907,7 +907,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                           $posto = $res_1["posto"];
                           $senha = $res_1["senha"];
                           $usuario = $res_1["usuario"];
-                          $cargo = $res_1["cargo"];
+                          $perfil = $res_1["perfil"];
                           $id = $res_1["id"];
 
                           ?>
@@ -916,7 +916,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                             <td><?php echo $nome; ?></td>
                             <td><?php echo $usuario; ?></td>
                             <td><?php echo $senha; ?></td>
-                            <td><?php echo $cargo; ?></td>
+                            <td><?php echo $perfil; ?></td>
                             <td><?php echo $posto; ?></td>
                             <td>
                               <a class="btn btn-warning btn-sm" href="usuarios.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
@@ -1069,7 +1069,7 @@ if (isset($_POST['button'])) {
 
   if ($row > 0) {
     $nome = $dado["nome"];;
-    $cargo = $dado["cargo"];;
+    $perfil = $dado["perfil"];;
   }
 
   $usuario = $_POST['txtusuario'];
@@ -1085,7 +1085,7 @@ if (isset($_POST['button'])) {
     exit();
   }
 
-  $query = "INSERT into usuarios (nome, usuario, senha, cargo, id_funcionario) VALUES ('$nome', '$usuario', '$senha', '$cargo', '$funcionario' )";
+  $query = "INSERT into usuarios (nome, usuario, senha, perfil, id_funcionario) VALUES ('$nome', '$usuario', '$senha', '$perfil', '$funcionario' )";
 
   $result = mysqli_query($conexao, $query);
 

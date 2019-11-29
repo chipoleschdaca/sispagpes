@@ -3,7 +3,7 @@
 session_start();
 include('verificar_login.php');
 
-if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] != 'Gerente') {
+if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
   header('Location: index.php');
   exit();
 }
@@ -244,7 +244,7 @@ if ($_SESSION['cargo_usuario'] != 'Administrador' && $_SESSION['cargo_usuario'] 
                 </p>
               </a>
             <li class="nav-item">
-              <a href="cargos.php" class="nav-link">
+              <a href="perfis.php" class="nav-link">
                 <i class="nav-icon fas fa-sitemap"></i>
                 <p>
                   Perfis

@@ -31,21 +31,21 @@ $row = mysqli_num_rows($result);
 if ($row > 0){
 	$_SESSION['usuario'] = $usuario;
 	$_SESSION['nome_usuario'] = $dado['nome'];
-	$_SESSION['cargo_usuario'] = $dado['cargo'];
+	$_SESSION['perfil_usuario'] = $dado['perfil'];
 	
 
-	if ($_SESSION['cargo_usuario'] == 'Administrador' || $_SESSION['cargo_usuario'] == 'Gerente'){
+	if ($_SESSION['perfil_usuario'] == 'Administrador' || $_SESSION['perfil_usuario'] == 'Gerente'){
 		header('Location: painel_admin.php');
 		exit();
 	}
 
-	if ($_SESSION['cargo_usuario'] == 'Tesoureiro'){
+	if ($_SESSION['perfil_usuario'] == 'Tesoureiro'){
 		header('Location: painel_tesouraria.php');
 		exit();
 	}
 
 
-	//if ($_SESSION['cargo_usuario'] == 'Funcionario'){
+	//if ($_SESSION['perfil_usuario'] == 'Funcionario'){
 		header('Location: painel_funcionario.php'); // --> Faz com que qualquer login que não seja com perfil de Administrador ou Tesoureiro caia na página painel_funcionario.
 	//	exit();
 	//}
