@@ -1094,7 +1094,7 @@ if (@$_GET['func'] == 'edita') {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">perfis</h4>
+                        <h4 class="modal-title">Perfis</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -1102,7 +1102,7 @@ if (@$_GET['func'] == 'edita') {
                             <div class="form-group">
                                 <label for="id_produto">Perfis</label>
                                 <select class="form-control mr-2" id="modalEditar" name="txtnome" required>
-                                    <option value="" disabled selected hidden><?php echo $res_1['nome']; ?></option>
+                                    <option value="" disabled selected hidden>Perfil</option>
                                     <option value="Administrador">Administrador</option>
                                     <option value="Gerente">Gerente</option>
                                     <option value="Tesoureiro">Tesoureiro</option>
@@ -1121,8 +1121,6 @@ if (@$_GET['func'] == 'edita') {
             </div>
         </div>
         </div>
-
-
 
         <script>
             $('#modalEditar').modal("show");

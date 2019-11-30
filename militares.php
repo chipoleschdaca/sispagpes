@@ -860,7 +860,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE Militares</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE MILITARES</strong></h4>
                 </div>
                 <div class="card-body">
                   <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
@@ -894,7 +894,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                         <th>Saram</th>
                         <th>CPF</th>
                         <th>Posto</th>
-                        <th>Nome</th>
+                        <th>Nome Completo</th>
+                        <th>Nome de Guerra</th>
                         <th>Perfil</th>
                         <th>Data</th>
                         <th>Ações</th>
@@ -910,6 +911,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                           $cpf = $res_1['cpf'];
                           $posto = $res_1['posto'];
                           $nome = $res_1['nome'];
+                          $nomeguerra = $res_1['nomeguerra'];
                           $perfil = $res_1['perfil'];
                           $data = $res_1['data'];
                           $data2 = implode('/', array_reverse(explode('-', $data)));
@@ -921,6 +923,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                             <td><?php echo $cpf; ?></td>
                             <td><?php echo $posto; ?></td>
                             <td style="text-transform:uppercase;"><?php echo $nome; ?></td>
+                            <td style="text-transform:uppercase;"><?php echo $nomeguerra; ?></td>
                             <td><?php echo $perfil; ?></td>
                             <td><?php echo $data2; ?></td>
                             <td>
@@ -954,7 +957,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Militaress</h4>
+                  <h4 class="modal-title">Militares</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -995,11 +998,16 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     </div>
                     <div class="form-group">
                       <label for="id_produto">Nome Completo</label>
-                      <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" style="text-transform: uppercase;" placeholder="Nome Completo" required>
+                      <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="id_produto">Nome de Guerra</label>
+                      <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" required>
                     </div>
                     <div class="form-group">
                       <label for="id_produto">Perfil</label>
-                      <select name="perfil" class="form-control mr-2" id="category" name="category">
+                      <select name="perfil" class="form-control mr-2" id="category" name="category" required>
+                        <option value="" disabled selected hidden>Perfil</option>
                         <?php
                         $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
                         $result = mysqli_query($conexao, $query);
@@ -1098,6 +1106,7 @@ if (isset($_POST['button'])) {
   $cpf = $_POST['txtcpf'];
   $posto = $_POST['txtposto'];
   $nome = strtoupper($_POST['txtnome']);
+  $nomeguerra = strtoupper($_POST['txtnomeguerra']);
   $perfil = $_POST['perfil'];
 
 
@@ -1114,7 +1123,7 @@ if (isset($_POST['button'])) {
     exit();
   }
 
-  $query = "INSERT into militares (saram, cpf, posto, nome, perfil, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$perfil', curDate() )";
+  $query = "INSERT into militares (saram, cpf, posto, nome, nomeguerra, perfil, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$nomeguerra', '$perfil', curDate() )";
 
   $result = mysqli_query($conexao, $query);
 
@@ -1157,7 +1166,7 @@ if (@$_GET['func'] == 'edita') {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Funcionários</h4>
+            <h4 class="modal-title">Militares</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
@@ -1197,11 +1206,16 @@ if (@$_GET['func'] == 'edita') {
               </div>
               <div class="form-group">
                 <label for="id_produto">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome" value="<?php echo $res_1['nome']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
               </div>
               <div class="form-group">
-                <label for="id_produto">perfil</label>
-                <select name="perfil" class="form-control mr-2" id="category" name="category">
+                <label for="id_produto">Nome Guerra</label>
+                <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" value="<?php echo $res_1['nomeguerra']; ?>" required>
+              </div>
+              <div class="form-group">
+                <label for="id_produto">Perfil</label>
+                <select name="perfil" class="form-control mr-2" id="category" name="category" required>
+                  <option value="" disabled selected hidden><?php echo $res_1['perfil']; ?></option>
                   <?php
                       $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
                       $result = mysqli_query($conexao, $query);
@@ -1241,6 +1255,7 @@ if (@$_GET['func'] == 'edita') {
           $cpf = $_POST['txtcpf'];
           $posto = $_POST['txtposto'];
           $nome = strtoupper($_POST['txtnome']);
+          $nomeguerra = strtoupper($_POST['txtnomeguerra']);
           $perfil = $_POST['perfil'];
 
 
@@ -1260,7 +1275,7 @@ if (@$_GET['func'] == 'edita') {
           }
 
 
-          $query_editar = "UPDATE militares set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', perfil = '$perfil' where id = '$id'";
+          $query_editar = "UPDATE militares set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', nomeguerra = '$nomeguerra', perfil = '$perfil' where id = '$id'";
 
           $result_editar = mysqli_query($conexao, $query_editar);
 
