@@ -1333,13 +1333,13 @@ if (@$_GET['func'] == 'edita') {
                                 </div>
                                 <div class="custom-control custom-radio">
                                     <label class="container">Inativo
-                                        <input type="radio" value="R1" name="txtsituacao">
+                                        <input type="radio" value="R1" name="txtsituacao" required>
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                     <div class="custom-control custom-radio">
                                         <label class="container">Pensionista
-                                            <input type="radio" value="PM" name="txtsituacao">
+                                            <input type="radio" value="PM" name="txtsituacao" required>
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
