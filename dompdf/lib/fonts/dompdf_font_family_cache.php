@@ -80,4 +80,11 @@
   'glyphicons halflings' => array(
     'normal' => $fontDir . '\c47afe5539ba1b2094563d54dce2def7',
   ),
+  'ionicons' => array(
+    'normal' => $fontDir . '/499ed0e151682fc2c1ba5340c204f05f',
+  ),
+  'source sans pro' => array(
+    'italic' => $fontDir . '/ee7ae5fa11aa2d31d073a974b71aff96',
+    'normal' => $fontDir . '/302e2dc707bd747512a5d4b16bfd7a0f',
+  ),
 ) ?>

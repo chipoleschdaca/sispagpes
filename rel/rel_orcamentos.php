@@ -4,13 +4,13 @@ $id = $_GET['id'];
 
 include('../conexao.php');
 
-$query = "select o.id, o.cliente, o.tecnico, o.produto, o.serie, o.problema, o.laudo, o.valor_servico, o.pecas, o.valor_pecas, o.total, o.valor_total, o.data_abertura, o.data_geracao, o.status, c.nome as cli_nome, c.email, c.saram, c.cpf, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where o.id = '$id'";
+$query = "select o.id, o.cliente, o.tecnico, o.produto, o.serie, o.problema, o.laudo, o.valor_servico, o.pecas, o.valor_pecas, o.total, o.valor_total, o.data_abertura, o.data_geracao, o.status, c.nome as cli_nome, c.email, c.saram, c.cpf, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.id = '$id'";
 
 $result = mysqli_query($conexao, $query);
 
  while($res_1 = mysqli_fetch_array($result)){
 
-$data2 = implode('/', array_reverse(explode('-', $res_1['data_geracao'])));
+	$data2 = implode('/', array_reverse(explode('-', $res_1['data_geracao'])));
 
  ?>
 
@@ -81,7 +81,7 @@ $data2 = implode('/', array_reverse(explode('-', $res_1['data_geracao'])));
 <div class="cabecalho">	
 	<div class="row" style="height: 100px;">
 		<div class="col-sm-5">	
-		  <img src="../img/gapls.png" width="80px" style="margin-left: 15px;">
+		  <img src="../dist/img/gapls.png" width="80px" style="margin-left: 15px;">
 		</div>
 		<div class="col-sm-12">	
 		 <h3 class="titulo" style="text-align: center;"><b>SISPAGPES - Assistência Técnica</b></h3>
