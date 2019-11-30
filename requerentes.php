@@ -1052,18 +1052,20 @@ include('verificar_login.php');
                                     <div class="form-group">
                                         <label for="id_produto">Situação</label><br>
 
-                                        <div class="custom-control custom-radio custom-control-inline">
+                                        <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
                                             <label class="custom-control-label" style="cursor: pointer; text-align: left;" for="ativo"><span></span>Ativo</label>
                                         </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
+                                        <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
                                             <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
                                         </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
+                                        <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="reformado" name="txtsituacao" value="PM" required>
                                             <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="reformado"><span></span>Pensionista</label>
+
                                         </div>
+
                                     </div>
                                     <div class="form-group">
                                         <label for="id_produto">Nome Completo</label>
@@ -1323,107 +1325,111 @@ if (@$_GET['func'] == 'edita') {
                             </div>
                             <div class="form-group">
                                 <label for="id_produto">Situação</label><br>
-                                <div class="custom-control custom-radio custom-control-inline">
+                                <div class="custom-control custom-radio">
                                     <label class="container">Ativo
                                         <input type="radio" value="AT" name="txtsituacao" required>
                                         <span class="checkmark"></span>
                                     </label>
+                                </div>
+                                <div class="custom-control custom-radio">
                                     <label class="container">Inativo
                                         <input type="radio" value="R1" name="txtsituacao">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label class="container">Pensionista
-                                        <input type="radio" value="PM"  name="txtsituacao">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                </div>
+                                    <div class="custom-control custom-radio">
+                                        <label class="container">Pensionista
+                                            <input type="radio" value="PM" name="txtsituacao">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_produto">Nome Completo</label>
+                                    <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fornecedor">E-mail</label>
+                                    <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" value="<?php echo $res_1['email']; ?>" placeholder="Email">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="id_produto">Nome Completo</label>
-                                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
                             </div>
 
-                            <div class="form-group">
-                                <label for="fornecedor">E-mail</label>
-                                <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" value="<?php echo $res_1['email']; ?>" placeholder="Email">
-                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                        <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-                    </div>
-
-                    </form>
                 </div>
             </div>
-        </div>
 
 
-        <script>
-            $('#modalEditar').modal("show");
-        </script>
-        <!--Modal EDITAR -->
+            <script>
+                $('#modalEditar').modal("show");
+            </script>
+            <!--Modal EDITAR -->
 
 
-        <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
+            <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
 
-        <?php
-                if (isset($_POST['buttonEditar'])) {
-                    $posto = $_POST['txtposto'];
-                    $situacao = $_POST['txtsituacao'];
-                    $nome = strtoupper($_POST['txtnome']);
-                    $email = strtolower($_POST['txtemail']);
-                    $saram = $_POST['txtsaram'];
-                    $cpf = $_POST['txtcpf'];
+            <?php
+                    if (isset($_POST['buttonEditar'])) {
+                        $posto = $_POST['txtposto'];
+                        $situacao = $_POST['txtsituacao'];
+                        $nome = strtoupper($_POST['txtnome']);
+                        $email = strtolower($_POST['txtemail']);
+                        $saram = $_POST['txtsaram'];
+                        $cpf = $_POST['txtcpf'];
 
-                    if ($res_1['cpf'] != $cpf) {
+                        if ($res_1['cpf'] != $cpf) {
 
-                        //Verificar se o CPF já está cadastrado
-                        $query_verificar = "select * from clientes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+                            //Verificar se o CPF já está cadastrado
+                            $query_verificar = "select * from clientes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
-                        $result_verificar = mysqli_query($conexao, $query_verificar);
-                        $dado_verificar = mysqli_fetch_array($result_verificar);
-                        $row_verificar = mysqli_num_rows($result_verificar);
+                            $result_verificar = mysqli_query($conexao, $query_verificar);
+                            $dado_verificar = mysqli_fetch_array($result_verificar);
+                            $row_verificar = mysqli_num_rows($result_verificar);
 
-                        if ($row_verificar > 0) {
-                            echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
-                            exit();
+                            if ($row_verificar > 0) {
+                                echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+                                exit();
+                            }
+                        }
+
+                        $query_editar = "UPDATE clientes set posto = '$posto', situacao = '$situacao', nome = '$nome', email = '$email', saram = '$saram', cpf = '$cpf' where id = '$id'";
+
+                        $result_editar = mysqli_query($conexao, $query_editar);
+
+                        if ($result_editar == '') {
+                            echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+                            echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+                        } else {
+                            echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+                            echo "<script language='javascript'> window.location='requerentes.php'; </script>";
                         }
                     }
 
-                    $query_editar = "UPDATE clientes set posto = '$posto', situacao = '$situacao', nome = '$nome', email = '$email', saram = '$saram', cpf = '$cpf' where id = '$id'";
+                    ?>
 
-                    $result_editar = mysqli_query($conexao, $query_editar);
+    <?php }
+    } ?>
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-                    if ($result_editar == '') {
-                        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
-                        echo "<script language='javascript'> window.location='requerentes.php'; </script>";
-                    } else {
-                        echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-                        echo "<script language='javascript'> window.location='requerentes.php'; </script>";
-                    }
-                }
-
-                ?>
-
-<?php }
-} ?>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-
-<!--Máscaras-->
-<script>
-    $(document).ready(function() {
-        $('#txtcpf').mask('000.000.000-00', {
-            reverse: true
+    <!--Máscaras-->
+    <script>
+        $(document).ready(function() {
+            $('#txtcpf').mask('000.000.000-00', {
+                reverse: true
+            });
+            $('#txtsaram').mask('000.000-0', {
+                reverse: true
+            });
+            $('#txtcpf2').mask('000.000.000-00', {
+                reverse: true
+            });
+            $('#txtsaram2').mask('000.000-0', {
+                reverse: true
+            });
         });
-        $('#txtsaram').mask('000.000-0', {
-            reverse: true
-        });
-        $('#txtcpf2').mask('000.000.000-00', {
-            reverse: true
-        });
-        $('#txtsaram2').mask('000.000-0', {
-            reverse: true
-        });
-    });
-</script>
+    </script>
