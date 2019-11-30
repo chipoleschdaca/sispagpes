@@ -290,8 +290,6 @@ include('verificar_login.php');
                                 </li>
                             </ul>
                         </li>
-
-
                         <!-- OMITIDO
               <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
