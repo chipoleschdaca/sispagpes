@@ -230,8 +230,8 @@ include('verificar_login.php');
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
                                     Orçamentos
@@ -246,7 +246,7 @@ include('verificar_login.php');
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="fechar_orcamentos.php" class="nav-link active">
+                                    <a href="fechar_orcamentos.php" class="nav-link">
                                         <i class="far fa-hand-point-right nav-icon"></i>
                                         <p>Fechar Orçamento</p>
                                     </a>
@@ -259,8 +259,8 @@ include('verificar_login.php');
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-list-ul"></i>
                                 <p>
                                     Ordens de Serviço
@@ -269,7 +269,7 @@ include('verificar_login.php');
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="os_abertas.php" class="nav-link">
+                                    <a href="os_abertas.php" class="nav-link active">
                                         <i class="far fa-hand-point-right nav-icon"></i>
                                         <p>Abertas</p>
                                     </a>
@@ -821,7 +821,7 @@ include('verificar_login.php');
                                     <span class="info-box-number">
                                         <h4>
                                             <?php
-                                            $query = "SELECT * FROM orcamentos where status = 'Aberto'";
+                                            $query = "SELECT * FROM os where status = 'Aberta'";
                                             $result = mysqli_query($conexao, $query);
                                             $res = mysqli_fetch_array($result);
                                             $row = mysqli_num_rows($result);
@@ -897,25 +897,28 @@ include('verificar_login.php');
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" style="text-align: center;">
-                                    <h4 class="" style="text-align:center;"><strong>TABELA DE ORÇAMENTOS</strong></h4>
+                                    <h4 class="" style="text-align:center;"><strong>TABELA DE ORDENS DE SERVIÇO</stronperfil4>
                                 </div>
-                                <div class="card-body">                                    
+                                <div class="card-body">
                                     <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
-                                        <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+                                        <!-------------LISTAR TODOS AS ORDENS DE SERVIÇO-------------->
 
                                         <?php
 
-                                        $usuario = $_SESSION['nome_usuario'];
-                                        if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                                            $data = $_GET['txtpesquisar'] . '%';
-                                            $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.problema, o.status, o.data_abertura, c.nome as cli_nome, f.nome as func_nome from 
-                            orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by o.id asc";
-                                        } else {
-                                            $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.problema, o.status, o.data_abertura, c.nome as cli_nome, f.nome as func_nome from 
-                            orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.status = 'Aberto' order by o.id asc";
-                                        }
-
+                                            if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != '') {
+                                                $data = $_GET['txtpesquisar'] . '%';
+                                                $statusOrc = $_GET['status'];
+                                                $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = '$statusOrc' order by id asc";
+                                            } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
+                                                $statusOrc = $_GET['status'];
+                                                $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = '$statusOrc' order by id asc";
+                                            } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
+                                                $data = $_GET['txtpesquisar'] . '%';
+                                                $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
+                                            } else {
+                                                $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
+                                            }
 
                                         $result = mysqli_query($conexao, $query);
                                         //$dado = mysqli_fetch_array($result);
@@ -936,9 +939,8 @@ include('verificar_login.php');
                                                     Produto
                                                 </th>
                                                 <th>
-                                                    Defeito
+                                                    Valor Total
                                                 </th>
-
                                                 <th>
                                                     Status
                                                 </th>
@@ -957,11 +959,11 @@ include('verificar_login.php');
                                                     $cliente = $res_1["cli_nome"];
                                                     $tecnico = $res_1["func_nome"];
                                                     $produto = $res_1["produto"];
-                                                    $defeito = $res_1["problema"];
                                                     $valor_total = $res_1["valor_total"];
                                                     $status = $res_1["status"];
                                                     $data_abertura = $res_1['data_abertura'];
                                                     $id = $res_1['id'];
+
                                                     $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
 
                                                     ?>
@@ -970,7 +972,7 @@ include('verificar_login.php');
                                                         <td><?php echo $cliente; ?></td>
                                                         <td><?php echo $tecnico; ?></td>
                                                         <td><?php echo $produto; ?></td>
-                                                        <td><?php echo $defeito; ?></td>
+                                                        <td>R$ <?php echo $valor_total; ?></td>
                                                         <td>
                                                             <?php
                                                                 if ($status == 'Aberto') { ?>
@@ -1001,7 +1003,8 @@ include('verificar_login.php');
                                                         <td><?php echo $data2; ?></td>
 
                                                         <td>
-                                                            <a class="btn btn-primary btn-sm" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="far fa-share-square"></i></a>
+                                                            <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                                            <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                                                         </td>
                                                     </tr>
 
@@ -1013,7 +1016,7 @@ include('verificar_login.php');
                                         <?php
                                         if ($row == '') {
 
-                                            echo "<h3>Não existem dados cadastrados no banco</h3>";
+                                            echo "<h3> Não existem dados cadastrados no banco </h3>";
                                         } else { }
                                         ?>
                                     </div>
@@ -1157,7 +1160,55 @@ include('verificar_login.php');
 
 </html>
 
-<!--FECHAR ORÇAMENTO-->
+<!--CADASTRAR -->
+
+<?php
+if (isset($_POST['button'])) {
+    $nome = $_POST['txtcpf'];
+    $tecnico = $_POST['militar'];
+    $produto = $_POST['txtproduto'];
+    $serie = $_POST['txtserie'];
+    $defeito = $_POST['txtdefeito'];
+    $obs = $_POST['txtobs'];
+
+
+    //VERIFICAR SE O CLIENTE JÁ ESTÁ CADASTRADO
+    $query_verificar = "select * from clientes where cpf = '$nome' ";
+
+    $result_verificar = mysqli_query($conexao, $query_verificar);
+    $row_verificar = mysqli_num_rows($result_verificar);
+
+    if ($row_verificar <= 0) {
+        echo "<script language='javascript'> window.alert('O Cliente não está cadastrado!'); </script>";
+        exit();
+    }
+
+    $query = "INSERT into orcamentos (cliente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
+
+    $result = mysqli_query($conexao, $query);
+
+    if ($result == '') {
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+    } else {
+        echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
+        echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+    }
+}
+?>
+
+
+<!--EXCLUIR -->
+<?php
+if (@$_GET['func'] == 'deleta') {
+    $id = $_GET['id'];
+    $query = "DELETE FROM orcamentos where id = '$id'";
+    mysqli_query($conexao, $query);
+    echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+}
+?>
+
+
+<!--EDITAR -->
 <?php
 if (@$_GET['func'] == 'edita') {
     $id = $_GET['id'];
@@ -1174,68 +1225,50 @@ if (@$_GET['func'] == 'edita') {
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Fechar Orçamento</h4>
+
+                        <h4 class="modal-title">Editar Orçamento</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <form method="POST" action="">
 
-                            <!--<div class="form-group">
-              <label for="fornecedor">Técnico</label>
-               <input type="text" class="form-control mr-2" name="txttecnico" value="<?php echo $res_1['func_nome']; ?>" disabled>
-                               
-                  <select class="form-control mr-2" id="category" name="funcionario">
-                  <?php
+                            <div class="form-group">
+                                <label for="fornecedor">Técnico</label>
 
-                            $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
-                            $result = mysqli_query($conexao, $query);
+                                <select class="form-control mr-2" id="category" name="funcionario">
+                                    <?php
 
-                            if (count($result)) {
-                                while ($res_2 = mysqli_fetch_array($result)) {
-                                    ?>                                             
-                    <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['nome']; ?></option> 
-                         <?php
-                                        }
-                                    }
-                                    ?>
-                  </select>
-              </div>-->
+                                            $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                                            $result = mysqli_query($conexao, $query);
+
+                                            if (count($result)) {
+                                                while ($res_2 = mysqli_fetch_array($result)) {
+                                                    ?>
+                                            <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['nome']; ?></option>
+                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="quantidade">Produto</label>
-                                <input type="text" class="form-control mr-2" name="txtproduto" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" readonly>
+                                <input type="text" class="form-control mr-2" name="txtproduto" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="quantidade">Nº de Série</label>
-                                <input type="text" class="form-control mr-2" name="txtserie" placeholder="Número de Série" value="<?php echo $res_1['serie']; ?>" readonly>
+                                <input type="text" class="form-control mr-2" name="txtserie" placeholder="Número de Série" value="<?php echo $res_1['serie']; ?>" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="quantidade">Defeito</label>
-                                <input type="text" class="form-control mr-2" name="txtdefeito" value="<?php echo $res_1['problema']; ?>" placeholder="Defeito" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="quantidade">Laudo</label>
-                                <textarea type="text-area" class="form-control mr-2" name="txtlaudo" value="<?php echo $res_1['laudo']; ?>" placeholder="Laudo Técnico" required></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="quantidade">Valor do Serviço</label>
-                                <input type="text-area" class="form-control mr-2" name="txtvalorservico" value="" placeholder="Valor do Serviço" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="quantidade">Peças</label>
-                                <input type="text-area" class="form-control mr-2" name="txtpecas" value="" placeholder="Peças" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="quantidade">Valor das Peças</label>
-                                <input type="text-area" class="form-control mr-2" name="txtvalorpeca" value="" placeholder="Valor das Peças" required>
+                                <input type="text" class="form-control mr-2" name="txtdefeito" value="<?php echo $res_1['problema']; ?>" placeholder="Defeito" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="quantidade">Observações</label>
-                                <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" value="<?php echo $res_1['obs']; ?>" readonly>
+                                <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" value="<?php echo $res_1['obs']; ?>" required>
                             </div>
 
                     </div>
@@ -1259,29 +1292,29 @@ if (@$_GET['func'] == 'edita') {
         <?php
                 if (isset($_POST['buttonEditar'])) {
 
-                    $laudo = $_POST['txtlaudo'];
-                    $valor_servico = $_POST['txtvalorservico'];
-                    $pecas = $_POST['txtpecas'];
-                    $valor_pecas = $_POST['txtvalorpeca'];
-                    $desconto = 0;
-                    $total = $_POST['txtvalorservico'] + $_POST['txtvalorpeca'];
-                    $valor_total = $total - $desconto;
-                    $status = 'Aguardando';
+                    $tecnico = $_POST['militar'];
+                    $produto = $_POST['txtproduto'];
+                    $serie = $_POST['txtserie'];
+                    $defeito = $_POST['txtdefeito'];
+                    $obs = $_POST['txtobs'];
 
-                    $query_editar = "UPDATE orcamentos set laudo = '$laudo', valor_servico = '$valor_servico', pecas = '$pecas', valor_pecas = '$valor_pecas', desconto = '$desconto', total = '$total', valor_total = '$valor_total', data_geracao = curDate(), status = '$status' where id = '$id' ";
+                    $query_editar = "UPDATE orcamentos set tecnico = '$tecnico', produto = '$produto', serie = '$serie', problema = '$defeito', obs = '$obs' where id = '$id' ";
 
                     $result_editar = mysqli_query($conexao, $query_editar);
 
                     if ($result_editar == '') {
                         echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
                     } else {
-                        echo "<script language='javascript'> window.alert('Orçamento fechado com sucesso!'); </script>";
-                        echo "<script language='javascript'> window.location='fechar_orcamentos.php'; </script>";
+                        echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+                        echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
                     }
                 }
                 ?>
+
+
 <?php }
 }  ?>
+
 
 
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->

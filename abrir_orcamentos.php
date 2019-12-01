@@ -269,9 +269,9 @@ include('verificar_login.php');
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="abrir_orcamentos.php" class="nav-link">
+                  <a href="os_abertas.php" class="nav-link">
                     <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Alguma coisa aqui</p>
+                    <p>Abertas</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -897,7 +897,7 @@ include('verificar_login.php');
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE MILITARES</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE ORÇAMENTOS</strong></h4>
                 </div>
                 <div class="card-body">
                   <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
@@ -923,7 +923,7 @@ include('verificar_login.php');
                       $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
                     } else {
                       $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on 
-                                                      o.tecnico = f.id order by id asc";
+                                o.tecnico = f.id order by id asc";
                     }
 
                     $result = mysqli_query($conexao, $query);
