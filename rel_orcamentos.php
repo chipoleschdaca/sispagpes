@@ -58,7 +58,8 @@ include('verificar_login.php');
       <!-- SEARCH FORM -->
       <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" id="txtpesquisar" name="txtpesquisar" aria-label="Pesquisar">
+          <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" id="txtpesquisar" name="txtpesquisar" aria-label="Pesquisar" style="margin-right:10px;">
+          <input name="txtpesquisar" id="txtpesquisar" class="form-control form-control-navbar" type="date" placeholder="Pesquisar" aria-label="Pesquisar">
           <div class="input-group-append">
             <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
               <i class="fas fa-search"></i>
@@ -897,7 +898,7 @@ include('verificar_login.php');
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA ORÇAMENTOS</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE ORÇAMENTOS</strong></h4>
                 </div>
                 <div class="card-body">
 
