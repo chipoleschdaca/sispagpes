@@ -915,15 +915,15 @@ include('verificar_login.php');
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != '') {
                       $data = $_GET['txtpesquisar'] . '%';
                       $statusOrc = $_GET['status'];
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = '$statusOrc' order by id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = '$statusOrc' order by id asc";
                     } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
                       $statusOrc = $_GET['status'];
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = '$statusOrc' order by id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = '$statusOrc' order by id asc";
                     } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
                       $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
                     } else {
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on 
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on 
                                 o.tecnico = f.id order by id asc";
                     }
 
@@ -964,7 +964,7 @@ include('verificar_login.php');
                         <?php
 
                         while ($res_1 = mysqli_fetch_array($result)) {
-                          $cliente = $res_1["cli_nome"];
+                          $requerente = $res_1["req_nome"];
                           $tecnico = $res_1["func_nome"];
                           $produto = $res_1["produto"];
                           $valor_total = $res_1["valor_total"];
@@ -977,7 +977,7 @@ include('verificar_login.php');
                           ?>
 
                           <tr>
-                            <td><?php echo $cliente; ?></td>
+                            <td><?php echo $requerente; ?></td>
                             <td><?php echo $tecnico; ?></td>
                             <td><?php echo $produto; ?></td>
                             <td>R$ <?php echo $valor_total; ?></td>
@@ -1013,31 +1013,31 @@ include('verificar_login.php');
                             <td>
                               <!--<?php
                                     if ($status == 'Aberto') { ?>
-                                                                    <a class="btn btn-primary btn-sm" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="far fa-share-square"></i></a>
-                                                                    <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                                                    <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
-                                                                <?php
-                                                                  } elseif ($status == 'Aguardando') { ?>
-                                                                    <a class="btn btn-success btn-sm" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                                                    <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                            
-                                                                    <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                                                    <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
-                                                                <?php
-                                                                  } elseif ($status == 'Aprovado') { ?>
-                                                                    <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                        
-                                                                    
-                                                                    <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                                                    <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
-                                                                <?php
-                                                                  } elseif ($status == 'Cancelado') { ?>
-                                                                <span class="badge badge-danger">
-                                                                    <?php echo $status; ?>
-                                                                    </span>
-                                                                <?php
-                                                                  } else {
-                                                                    echo $status;
-                                                                  }
-                                                                  ?>-->
+                                        <a class="btn btn-primary btn-sm" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="far fa-share-square"></i></a>
+                                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php
+                                      } elseif ($status == 'Aguardando') { ?>
+                                        <a class="btn btn-success btn-sm" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                        <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                            
+                                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php
+                                      } elseif ($status == 'Aprovado') { ?>
+                                        <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                        
+                                        
+                                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php
+                                      } elseif ($status == 'Cancelado') { ?>
+                                    <span class="badge badge-danger">
+                                        <?php echo $status; ?>
+                                        </span>
+                                    <?php
+                                      } else {
+                                        echo $status;
+                                      }
+                                      ?>-->
                               <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
                               <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
@@ -1276,18 +1276,18 @@ if (isset($_POST['button'])) {
   $obs = $_POST['txtobs'];
 
 
-  //VERIFICAR SE O CLIENTE JÁ ESTÁ CADASTRADO
-  $query_verificar = "select * from clientes where cpf = '$nome' ";
+  //VERIFICAR SE O requerente JÁ ESTÁ CADASTRADO
+  $query_verificar = "select * from requerentes where cpf = '$nome' ";
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar <= 0) {
-    echo "<script language='javascript'> window.alert('O Cliente não está cadastrado!'); </script>";
+    echo "<script language='javascript'> window.alert('O Requerente não está cadastrado!'); </script>";
     exit();
   }
 
-  $query = "INSERT into orcamentos (cliente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
+  $query = "INSERT into orcamentos (requerente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
 
   $result = mysqli_query($conexao, $query);
 

@@ -822,7 +822,7 @@ include('verificar_login.php');
                                     <span class="info-box-number">
                                         <h4>
                                             <?php
-                                            $query = "SELECT * FROM clientes";
+                                            $query = "SELECT * FROM requerentes";
                                             $result = mysqli_query($conexao, $query);
                                             $res = mysqli_fetch_array($result);
                                             $row = mysqli_num_rows($result);
@@ -898,7 +898,7 @@ include('verificar_login.php');
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" style="text-align: center;">
-                                    <h4 class="" style="text-align:center;"><strong>TABELA DE MILITARES</strong></h4>
+                                    <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
                                 </div>
                                 <div class="card-body">
                                     <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
@@ -907,14 +907,14 @@ include('verificar_login.php');
 
                                     <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
-                                        <!-------------LISTAR TODOS OS CLIENTES-------------->
+                                        <!-------------LISTAR TODOS OS PROCESSOS-------------->
 
                                         <?php
                                         if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                                             $nome = '%' . $_GET['txtpesquisar'] . '%';
-                                            $query = "select * from clientes where nome LIKE '$nome' order by nome asc";
+                                            $query = "select * from requerentes where nome LIKE '$nome' order by nome asc";
                                         } else {
-                                            $query = "select * from clientes order by nome asc";
+                                            $query = "select * from requerentes order by nome asc";
                                         }
 
 
@@ -1011,7 +1011,7 @@ include('verificar_login.php');
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Clientes</h4>
+                                <h4 class="modal-title">Requerentes</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
@@ -1228,7 +1228,7 @@ if (isset($_POST['button'])) {
 
     //Verificar se o CPF já está cadastrado
 
-    $query_verificar = "select * from clientes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+    $query_verificar = "select * from requerentes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
     $result_verificar = mysqli_query($conexao, $query_verificar);
     $dado_verificar = mysqli_fetch_array($result_verificar);
@@ -1239,7 +1239,7 @@ if (isset($_POST['button'])) {
         exit();
     }
 
-    $query = "INSERT into clientes (posto, situacao, nome, email, saram, cpf, data) VALUES ('$posto', '$situacao', '$nome', '$email', '$saram', '$cpf', curDate() )";
+    $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$email', curDate() )";
 
     $result = mysqli_query($conexao, $query);
 
@@ -1259,7 +1259,7 @@ if (isset($_POST['button'])) {
 <?php
 if (@$_GET['func'] == 'deleta') {
     $id = $_GET['id'];
-    $query = "DELETE FROM clientes  where id = '$id'";
+    $query = "DELETE FROM requerentes where id = '$id'";
     mysqli_query($conexao, $query);
     echo "<script language='javascript'> window.location='requerentes.php'; </script>";
 }
@@ -1273,7 +1273,7 @@ if (@$_GET['func'] == 'deleta') {
 <?php
 if (@$_GET['func'] == 'edita') {
     $id = $_GET['id'];
-    $query = "select * from clientes where id = '$id'";
+    $query = "select * from requerentes where id = '$id'";
     $result = mysqli_query($conexao, $query);
 
     while ($res_1 = mysqli_fetch_array($result)) {
@@ -1284,7 +1284,7 @@ if (@$_GET['func'] == 'edita') {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Clientes</h4>
+                        <h4 class="modal-title">requerentes</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -1385,7 +1385,7 @@ if (@$_GET['func'] == 'edita') {
                         if ($res_1['cpf'] != $cpf) {
 
                             //Verificar se o CPF já está cadastrado
-                            $query_verificar = "select * from clientes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+                            $query_verificar = "select * from requerentes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
                             $result_verificar = mysqli_query($conexao, $query_verificar);
                             $dado_verificar = mysqli_fetch_array($result_verificar);
@@ -1397,7 +1397,7 @@ if (@$_GET['func'] == 'edita') {
                             }
                         }
 
-                        $query_editar = "UPDATE clientes set posto = '$posto', situacao = '$situacao', nome = '$nome', email = '$email', saram = '$saram', cpf = '$cpf' where id = '$id'";
+                        $query_editar = "UPDATE requerentes set posto = '$posto', situacao = '$situacao', nome = '$nome', email = '$email', saram = '$saram', cpf = '$cpf' where id = '$id'";
 
                         $result_editar = mysqli_query($conexao, $query_editar);
 

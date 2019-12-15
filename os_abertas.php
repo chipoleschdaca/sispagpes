@@ -1167,7 +1167,7 @@ if (isset($_POST['button'])) {
 
 
     //VERIFICAR SE O CLIENTE JÁ ESTÁ CADASTRADO
-    $query_verificar = "select * from clientes where cpf = '$nome' ";
+    $query_verificar = "select * from requerentes where cpf = '$nome' ";
 
     $result_verificar = mysqli_query($conexao, $query_verificar);
     $row_verificar = mysqli_num_rows($result_verificar);
@@ -1182,9 +1182,9 @@ if (isset($_POST['button'])) {
     $result = mysqli_query($conexao, $query);
 
     if ($result == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
     } else {
-        echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
+        echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
         echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
     }
 }

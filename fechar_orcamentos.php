@@ -910,11 +910,11 @@ include('verificar_login.php');
                     $usuario = $_SESSION['nome_usuario'];
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.problema, o.status, o.data_abertura, c.nome as cli_nome, f.nome as func_nome from 
-                            orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by o.id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.problema, o.status, o.data_abertura, c.nome as req_nome, f.nome as func_nome from 
+                            orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by o.id asc";
                     } else {
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.problema, o.status, o.data_abertura, c.nome as cli_nome, f.nome as func_nome from 
-                            orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.status = 'Aberto' order by o.id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.problema, o.status, o.data_abertura, c.nome as req_nome, f.nome as func_nome from 
+                            orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.status = 'Aberto' order by o.id asc";
                     }
 
 
@@ -928,7 +928,7 @@ include('verificar_login.php');
                       <thead class="text-primary">
 
                         <th>
-                          Cliente
+                          Requerente
                         </th>
                         <th>
                           Técnico
@@ -939,7 +939,6 @@ include('verificar_login.php');
                         <th>
                           Defeito
                         </th>
-
                         <th>
                           Status
                         </th>
@@ -955,7 +954,7 @@ include('verificar_login.php');
                         <?php
 
                         while ($res_1 = mysqli_fetch_array($result)) {
-                          $cliente = $res_1["cli_nome"];
+                          $requerente = $res_1["req_nome"];
                           $tecnico = $res_1["func_nome"];
                           $produto = $res_1["produto"];
                           $defeito = $res_1["problema"];
@@ -968,7 +967,7 @@ include('verificar_login.php');
                           ?>
 
                           <tr>
-                            <td><?php echo $cliente; ?></td>
+                            <td><?php echo $requerente; ?></td>
                             <td><?php echo $tecnico; ?></td>
                             <td><?php echo $produto; ?></td>
                             <td><?php echo $defeito; ?></td>
@@ -1274,7 +1273,7 @@ if (@$_GET['func'] == 'edita') {
           $result_editar = mysqli_query($conexao, $query_editar);
 
           if ($result_editar == '') {
-            echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+            echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
           } else {
             echo "<script language='javascript'> window.alert('Orçamento fechado com sucesso!'); </script>";
             echo "<script language='javascript'> window.location='fechar_orcamentos.php'; </script>";

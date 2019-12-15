@@ -1,10 +1,9 @@
 <?php
 
 $id = $_GET['id'];
-
 include('../conexao.php');
 
-$query = "select o.id, o.cliente, o.tecnico, o.produto, o.serie, o.problema, o.laudo, o.valor_servico, o.pecas, o.valor_pecas, o.total, o.valor_total, o.data_abertura, o.data_geracao, o.status, c.nome as cli_nome, c.email, c.saram, c.cpf, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.id = '$id'";
+$query = "select o.id, o.requerente, o.tecnico, o.produto, o.serie, o.problema, o.laudo, o.valor_servico, o.pecas, o.valor_pecas, o.total, o.valor_total, o.data_abertura, o.data_geracao, o.status, c.nome as req_nome, c.email, c.saram, c.cpf, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.id = '$id'";
 
 $result = mysqli_query($conexao, $query);
 
@@ -102,12 +101,12 @@ $result = mysqli_query($conexao, $query);
 	<hr>
 		<div class="row">
 			<div class="col-sm-12">
-				<p style="font-size:14px"><b>Dados do Cliente</b></p>
+				<p style="font-size:14px"><b>Dados do Requerente</b></p>
 			</div>
 		</div>
 		<div class="row" style="height: 50px;">
 			<div class="col-sm-3">
-				<p style="font-size:12px;">Nome: <?php echo $res_1['cli_nome']; ?> </p>
+				<p style="font-size:12px;">Nome: <?php echo $res_1['req_nome']; ?> </p>
 			</div>		
 			<div class="col-sm-3" style="margin-left:250px;">
 				<p style="font-size:12px;">Email: <?php echo $res_1['email']; ?> </p>
@@ -121,7 +120,7 @@ $result = mysqli_query($conexao, $query);
 				<p style="font-size:12px">Telefone: <?php echo $res_1['telefone']; ?> </p>
 			</div>
 			<div class="col-sm-3" style="margin-left:250px;">		
-				<p style="font-size:12px">CPF: <?php echo $res_1['cliente']; ?> </p>
+				<p style="font-size:12px">CPF: <?php echo $res_1['requerente']; ?> </p>
 			</div>		
 		</div>
 	<hr>	

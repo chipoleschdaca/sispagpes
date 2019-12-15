@@ -911,15 +911,15 @@ include('verificar_login.php');
 
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != 'Aguardando') {
                       $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
                     } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != 'Aguardando') {
                       $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
                     } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == 'Aguardando') {
                       $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
                     } else {
-                      $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = 'Aguardando' order by id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = 'Aguardando' order by id asc";
                     }
 
                     $result = mysqli_query($conexao, $query);
@@ -933,7 +933,7 @@ include('verificar_login.php');
                       <thead class="text-primary">
 
                         <th>
-                          Cliente
+                          Requerente
                         </th>
                         <th>
                           Técnico
@@ -959,7 +959,7 @@ include('verificar_login.php');
                         <?php
 
                         while ($res_1 = mysqli_fetch_array($result)) {
-                          $cliente = $res_1["cli_nome"];
+                          $requerente = $res_1["req_nome"];
                           $tecnico = $res_1["func_nome"];
                           $produto = $res_1["produto"];
                           $valor_total = $res_1["valor_total"];
@@ -972,7 +972,7 @@ include('verificar_login.php');
                           ?>
 
                           <tr>
-                            <td><?php echo $cliente; ?></td>
+                            <td><?php echo $requerente; ?></td>
                             <td><?php echo $tecnico; ?></td>
                             <td><?php echo $produto; ?></td>
                             <td>R$ <?php echo $valor_total; ?></td>
@@ -1176,7 +1176,7 @@ if (@$_GET['func'] == 'edita') {
 
   while ($res_1 = mysqli_fetch_array($result)) {
     $total = $res_1['total'];
-    $cliente = $res_1['cliente'];
+    $requerente = $res_1['requerente'];
     $produto = $res_1['produto'];
     $tecnico = $res_1['tecnico'];
   }
@@ -1229,7 +1229,7 @@ if (@$_GET['func'] == 'edita') {
       $result_editar = mysqli_query($conexao, $query_editar);
 
       //FAZER ABERTURA DA OS
-      $query_os = "INSERT INTO os (id_orc, cliente, produto, tecnico, total, data_abertura, status) VALUES ('$id', '$cliente', '$produto', '$tecnico', '$valor_total', curDate(), 'Aberta')";
+      $query_os = "INSERT INTO os (id_orc, requerente, produto, tecnico, total, data_abertura, status) VALUES ('$id', '$requerente', '$produto', '$tecnico', '$valor_total', curDate(), 'Aberta')";
       $result_os = mysqli_query($conexao, $query_os); // Os campos que ficarão em branco têm que ser selecionados como "NULL" no banco de dados. Caso contrário, ele não funciona.
 
       if ($result_editar == '' or $result_os == '') {
