@@ -876,9 +876,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = $_GET['txtpesquisar'] . '%';
-                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_funcionario, f.posto from usuarios as u INNER JOIN militares as f ON u.id_funcionario = f.id where u.nome LIKE '$nome' order by u.nome asc";
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id where u.nome LIKE '$nome' order by u.nome asc";
                     } else {
-                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_funcionario, f.posto from usuarios as u INNER JOIN militares as f ON u.id_funcionario = f.id order by u.nome asc";
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id order by u.nome asc";
                     }
 
                     $result = mysqli_query($conexao, $query);
@@ -1085,7 +1085,7 @@ if (isset($_POST['button'])) {
     exit();
   }
 
-  $query = "INSERT into usuarios (nome, usuario, senha, perfil, id_funcionario) VALUES ('$nome', '$usuario', '$senha', '$perfil', '$funcionario' )";
+  $query = "INSERT into usuarios (nome, usuario, senha, perfil, id_militar) VALUES ('$nome', '$usuario', '$senha', '$perfil', '$funcionario' )";
 
   $result = mysqli_query($conexao, $query);
 
