@@ -27,4 +27,4 @@ $pdf = new Dompdf();
 		array("Attachment" => false) //Se quiser que a página faça o download automaticamente, basta alterar para true.
 	);
 
- ?> 
+ ?>

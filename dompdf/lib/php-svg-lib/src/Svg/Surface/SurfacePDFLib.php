@@ -3,7 +3,7 @@
  * @package php-svg-lib
  * @link    http://github.com/PhenX/php-svg-lib
  * @author  Fabien M�nager <fabien.menager@gmail.com>
- * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
+ * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
 namespace Svg\Surface;
@@ -315,7 +315,7 @@ class SurfacePDFLib implements SurfaceInterface
         $this->style = $style;
         $canvas = $this->canvas;
 
-        if ($stroke = $style->stroke && is_array($style->stroke)) {
+        if (($stroke = $style->stroke) && $stroke !== "none") {
             $canvas->setcolor(
                 "stroke",
                 "rgb",
@@ -326,7 +326,7 @@ class SurfacePDFLib implements SurfaceInterface
             );
         }
 
-        if ($fill = $style->fill && is_array($style->fill)) {
+        if (($fill = $style->fill) && $fill !== "none") {
             $canvas->setcolor(
                 "fill",
                 "rgb",
