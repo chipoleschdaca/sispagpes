@@ -901,9 +901,9 @@ include('verificar_login.php');
                         <div class="input-group input-group-sm" style="margin-left:10px;">
                           <select class="form-control" id="category" name="status" style="border-radius:3px;">
                             <option value="" disabled selected hidden>Status</option>
-                            <option value="Aberto">Aberta</option>
-                            <option value="Aguardando">Fechada</option>
-                            <option value="Cancelado">Cancelada</option>
+                            <option value="Aberta">Aberta</option>
+                            <option value="Aprovada">Aprovada</option>
+                            <option value="Cancelada">Cancelada</option>
                           </select>
                           <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="margin-right:10px; margin-left:10px; border-radius:3px;">
                           <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
@@ -925,7 +925,7 @@ include('verificar_login.php');
 
 
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != '') {
-                      $data = $_GET['txtpesquisar'] . '%';
+                      $data = '%' . $_GET['txtpesquisar'] . '%';
                       $status_os = $_GET['status'];
                       $query = "select * from os where data_abertura = '$data' and status = '$status_os' order by id asc";
                     } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {

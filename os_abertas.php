@@ -394,9 +394,9 @@ include('verificar_login.php');
                         <div class="input-group input-group-sm" style="margin-left:10px;">
                           <select class="form-control" id="category" name="status" style="border-radius:3px;">
                             <option value="" disabled selected hidden>Status</option>
-                            <option value="Aberto">Aberta</option>
-                            <option value="Aguardando">Fechada</option>
-                            <option value="Cancelado">Cancelada</option>
+                            <option value="Aberta">Aberta</option>
+                            <option value="Aprovada">Aprovada</option>
+                            <option value="Cancelada">Cancelada</option>
                           </select>
                           <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="margin-right:10px; margin-left:10px; border-radius:3px;">
                           <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
@@ -491,15 +491,10 @@ include('verificar_login.php');
                                 <td>R$ <?php echo $valor_total; ?></td>
                                 <td>
                                   <?php
-                                        if ($status == 'Aberta') { ?>
-                                    <span class="badge badge-secondary">
-                                      <?php echo $status; ?>
-                                    </span>
-                                  <?php
-                                        } elseif ($status == 'Aguardando') { ?>
-                                    <span class="badge badge-warning">
-                                      <?php echo $status; ?>
-                                    </span>
+                                    if ($status == 'Aberta') { ?>
+                                      <span class="badge badge-secondary">
+                                        <?php echo $status; ?>
+                                      </span>                                  
                                   <?php
                                         } elseif ($status == 'Aprovada') { ?>
                                     <span class="badge badge-success">
