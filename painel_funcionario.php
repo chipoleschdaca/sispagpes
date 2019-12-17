@@ -47,12 +47,12 @@ include('verificar_login.php');
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                <!--<li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Início</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contato</a>
-                </li>
+                </li>-->
             </ul>
 
             <!-- SEARCH FORM -->
@@ -277,9 +277,9 @@ include('verificar_login.php');
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="fechar_orcamentos.php" class="nav-link">
+                                    <a href="consultar_os.php" class="nav-link">
                                         <i class="far fa-hand-point-right nav-icon"></i>
-                                        <p>Outra coisa aqui</p>
+                                        <p>Consultar</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

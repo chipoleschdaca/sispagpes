@@ -276,9 +276,9 @@ include('verificar_login.php');
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="fechar_orcamentos.php" class="nav-link">
+                  <a href="consultar_os.php" class="nav-link">
                     <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Outra coisa aqui</p>
+                    <p>Consultar</p>
                   </a>
                 </li>
                 <li class="nav-item">

@@ -1,5 +1,5 @@
-<?php
 
+<?php
 $id = $_GET['id'];
 include('../conexao.php');
 

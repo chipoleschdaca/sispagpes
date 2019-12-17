@@ -47,26 +47,15 @@ include('verificar_login.php');
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
+        <!--<li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Início</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contato</a>
-        </li>
+        </li>-->
       </ul>
 
-      <!-- SEARCH FORM -->
-      <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" id="txtpesquisar" name="txtpesquisar" aria-label="Pesquisar" style="margin-right:10px;">
-          <input name="txtpesquisar" id="txtpesquisar" class="form-control form-control-navbar" type="date" placeholder="Pesquisar" aria-label="Pesquisar">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
@@ -276,9 +265,9 @@ include('verificar_login.php');
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="fechar_orcamentos.php" class="nav-link">
+                  <a href="consultar_os.php" class="nav-link">
                     <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Outra coisa aqui</p>
+                    <p>Consultar</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -816,11 +805,12 @@ include('verificar_login.php');
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE ORÇAMENTOS ABERTOS</span>
+                  <span class="info-box-text">ORÇAMENTOS ABERTOS</span>
                   <span class="info-box-number">
                     <h4>
+
                       <?php
                       $query = "SELECT * FROM orcamentos where status = 'Aberto'";
                       $result = mysqli_query($conexao, $query);
@@ -830,6 +820,7 @@ include('verificar_login.php');
                       <?php
                       echo $row;
                       ?>
+
                     </h4>
                   </span>
                 </div>
@@ -840,12 +831,21 @@ include('verificar_login.php');
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">Likes</span>
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-pause"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">ORÇAMENTOS AGUARDANDO</span>
                   <span class="info-box-number">
-                    <h4>41,410</h4>
+                    <h4>                     
+                      <?php
+                      $query = "SELECT * FROM orcamentos where status = 'Aguardando'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <?php
+                      echo $row;
+                      ?>                      
+                    </h4>
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -856,15 +856,23 @@ include('verificar_login.php');
 
             <!-- fix for small devices only -->
             <div class="clearfix hidden-md-up"></div>
-
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">Sales</span>
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">ORÇAMENTOS APROVADOS</span>
                   <span class="info-box-number">
-                    <h4>760</h4>
+                    <h4>                    
+                      <?php
+                      $query = "SELECT * FROM orcamentos where status = 'Aprovado'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <?php
+                      echo $row;
+                      ?>                    
+                    </h4>
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -874,16 +882,26 @@ include('verificar_login.php');
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">New Members</span>
+                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-dollar-sign"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE ORÇAMENTOS</span>
                   <span class="info-box-number">
-                    <h4>2,000</h4>
+                    <h4>                      
+                      <?php
+                      $query = "SELECT * FROM orcamentos";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <?php
+                      echo $row;
+                      ?>                      
+                    </h4>
                   </span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
+
               <!-- /.info-box -->
             </div>
             <!-- /.col -->
@@ -892,6 +910,7 @@ include('verificar_login.php');
           <!-- /.row -->
           <!-- Main row -->
           <!-- Left col -->
+
           <br>
 
           <div class="row">
@@ -901,9 +920,35 @@ include('verificar_login.php');
                   <h4 class="" style="text-align:center;"><strong>TABELA DE ORÇAMENTOS</strong></h4>
                 </div>
                 <div class="card-body">
-                  <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                    <i class="far fa-folder-open"></i> Inserir Novo
-                  </button>
+                  <div class="row" style="margin-bottom: 20px;">
+                    <div class="col-sm-6">
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
+                        <i class="far fa-folder-open"></i> Inserir Novo
+                      </button>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- SEARCH FORM -->
+                      <form class="form-inline">
+                        <label for="">Filtros: </label>
+                        <div class="input-group input-group-sm" style="margin-left:10px;">
+                          <select class="form-control" id="category" name="status" style="border-radius:3px;">
+                            <option value="" disabled selected hidden>Status</option>
+                            <option value="Aberto">Aberto</option>
+                            <option value="Aguardando">Aguardando</option>
+                            <option value="Aprovado">Aprovado</option>
+                            <option value="Cancelado">Cancelado</option>
+                          </select>
+                          <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="margin-right:10px; margin-left:10px; border-radius:3px;">
+                          <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
+                          <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
+                              <i class="fas fa-search"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
 
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
@@ -923,8 +968,7 @@ include('verificar_login.php');
                       $data = $_GET['txtpesquisar'] . '%';
                       $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
                     } else {
-                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on 
-                                o.tecnico = f.id order by id asc";
+                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
                     }
 
                     $result = mysqli_query($conexao, $query);

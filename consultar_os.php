@@ -46,26 +46,14 @@ include('verificar_login.php');
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-          <!--</li>
-        <li class="nav-item d-none d-sm-inline-block">
+        </li>
+        <!--<li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Início</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contato</a>
         </li>-->
       </ul>
-
-      <!-- SEARCH FORM 
-      <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" id="txtpesquisar" name="txtpesquisar" aria-label="Pesquisar">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>-->
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
@@ -223,7 +211,7 @@ include('verificar_login.php');
               </a>
             </li>
             <li class="nav-item">
-              <a href="requerentes.php" class="nav-link active">
+              <a href="requerentes.php" class="nav-link">
                 <i class="nav-icon fas fa-user-friends"></i>
                 <p>
                   Requerentes
@@ -259,8 +247,8 @@ include('verificar_login.php');
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+            <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-list-ul"></i>
                 <p>
                   Ordens de Serviço
@@ -275,7 +263,7 @@ include('verificar_login.php');
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="consultar_os.php" class="nav-link">
+                  <a href="consultar_os.php" class="nav-link active">
                     <i class="far fa-hand-point-right nav-icon"></i>
                     <p>Consultar</p>
                   </a>
@@ -816,13 +804,12 @@ include('verificar_login.php');
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE REGISTROS</span>
+                  <span class="info-box-text">TOTAL DE ORDENS DE SERVIÇO</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM requerentes";
+                      $query = "SELECT * FROM os";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
@@ -898,21 +885,28 @@ include('verificar_login.php');
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE ORDENS DE SERVIÇO</strong></h4>
                 </div>
                 <div class="card-body">
                   <div class="row" style="margin-bottom: 20px;">
                     <div class="col-sm-6">
                       <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                        <i class="fas fa-user-plus"></i> Inserir Novo
+                        <i class="far fa-folder-open"></i> Inserir Novo
                       </button>
                     </div>
                     <div class="col-sm-6">
                       <!-- SEARCH FORM -->
                       <form class="form-inline">
                         <label for="">Filtros: </label>
-                        <div class="input-group input-group-sm" style="margin-left: 10px; border-radius: 15px;">
-                          <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">                          
+                        <div class="input-group input-group-sm" style="margin-left:10px;">
+                          <select class="form-control" id="category" name="status" style="border-radius:3px;">
+                            <option value="" disabled selected hidden>Status</option>
+                            <option value="Aberto">Aberta</option>
+                            <option value="Aguardando">Fechada</option>
+                            <option value="Cancelado">Cancelada</option>
+                          </select>
+                          <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="margin-right:10px; margin-left:10px; border-radius:3px;">
+                          <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
                           <div class="input-group-append">
                             <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
                               <i class="fas fa-search"></i>
@@ -925,16 +919,24 @@ include('verificar_login.php');
 
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
-                    <!-------------LISTAR TODOS OS PROCESSOS-------------->
+                    <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
 
                     <?php
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                      $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from requerentes where nome LIKE '$nome' order by nome asc";
-                    } else {
-                      $query = "select * from requerentes order by nome asc";
-                    }
 
+
+                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != '') {
+                      $data = $_GET['txtpesquisar'] . '%';
+                      $status_os = $_GET['status'];
+                      $query = "select * from os where data_abertura = '$data' and status = '$status_os' order by id asc";
+                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
+                      $status_os = $_GET['status'];
+                      $query = "select * from os where status = '$status_os' order by id asc";
+                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
+                      $data = $_GET['txtpesquisar'] . '%';
+                      $query = "select * from os where data_abertura = '$data' order by id asc";
+                    } else {
+                      $query = "select * from os order by id asc";
+                    }
 
                     $result = mysqli_query($conexao, $query);
                     //$dado = mysqli_fetch_array($result);
@@ -942,72 +944,142 @@ include('verificar_login.php');
 
                     ?>
 
-                    <!-------------------------------------------------->
 
-                    <table class="table table-striped">
+                    <table class="table">
                       <thead class="text-primary">
+
                         <th>
-                          Saram
+                          Requerente
                         </th>
                         <th>
-                          CPF
+                          Militar
                         </th>
                         <th>
-                          Posto
+                          Produto
                         </th>
                         <th>
-                          Situação
+                          Valor Total
                         </th>
                         <th>
-                          Nome Completo
+                          Status
                         </th>
                         <th>
-                          Email
+                          Data de Abertura
                         </th>
                         <th>
-                          Data
+                          Data de Fechamento
                         </th>
                         <th>
                           Ações
                         </th>
                       </thead>
                       <tbody>
+
                         <?php
+
                         while ($res_1 = mysqli_fetch_array($result)) {
-
-                          $saram = $res_1['saram'];
-                          $cpf = $res_1['cpf'];
-                          $posto = $res_1['posto'];
-                          $situacao = $res_1['situacao'];
-                          $nome = $res_1['nome'];
-                          $email = $res_1['email'];
-                          $data = $res_1['data'];
-                          $data2 = implode('/', array_reverse(explode('-', $data)));
+                          $requerente = $res_1["requerente"];
+                          $tecnico = $res_1["tecnico"];
+                          $produto = $res_1["produto"];
+                          $valor_total = $res_1["total"];
+                          $status = $res_1["status"];
+                          $data_abertura = $res_1['data_abertura'];
+                          $data_fechamento = $res_1['data_fechamento'];
                           $id = $res_1['id'];
-                          ?>
+                          $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+                          $data3 = implode('/', array_reverse(explode('-', $data_fechamento)));
 
-                          <tr>
-                            <td><?php echo $saram; ?></td>
-                            <td><?php echo $cpf; ?></td>
-                            <td><?php echo $posto; ?></td>
-                            <td><?php echo $situacao; ?></td>
-                            <td><?php echo $nome; ?></td>
-                            <td><?php echo $email; ?></td>
-                            <td><?php echo $data2; ?></td>
-                            <td>
-                              <a class="btn btn-warning btn-sm" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                              <a class="btn btn-danger btn-sm" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
-                            </td>
+                          //Recupera o requente através do CPF sem precisar de INNER JOIN
+                          $query_requerente = "select * from requerentes where cpf = '$requerente'";
+                          $result_requerente = mysqli_query($conexao, $query_requerente);
+                          while ($res_requerente = mysqli_fetch_array($result_requerente)) {
+                            $nome_requerente = $res_requerente['nome'];
 
-                          </tr>
+                            //Recupera o técnico através do CPF sem precisar de INNER JOIN
+                            $query_tecnico = "select * from militares where id = '$tecnico'";
+                            $result_tecnico = mysqli_query($conexao, $query_tecnico);
+                            while ($res_tecnico = mysqli_fetch_array($result_tecnico)) {
+                              $nome_tecnico = $res_tecnico['nome'];
+                              ?>
+
+                              <tr>
+                                <td><?php echo $nome_requerente; ?></td>
+                                <td><?php echo $nome_tecnico; ?></td>
+                                <td><?php echo $produto; ?></td>
+                                <td>R$ <?php echo $valor_total; ?></td>
+                                <td>
+                                  <?php
+                                    if ($status == 'Aberta') { ?>
+                                    <span class="badge badge-secondary">
+                                      <?php echo $status; ?>
+                                    </span>
+                                  <?php                                        
+                                    } elseif ($status == 'Aprovada') { ?>
+                                    <span class="badge badge-success">
+                                      <?php echo $status; ?>
+                                    </span>
+                                  <?php
+                                    } elseif ($status == 'Cancelada') { ?>
+                                    <span class="badge badge-danger">
+                                      <?php echo $status; ?>
+                                    </span>
+                                  <?php
+                                    } else {
+                                          echo $status;
+                                    }
+                                  ?>
+                                </td>
+                                <td style="width: 175px;"><?php echo $data2; ?></td>
+                                <td style="width: 175px;"><?php echo $data3; ?></td>
+
+                                <td>
+                                  <!-- <?php
+                                              if ($status == 'Aberto') { ?>
+                                <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                <a class="btn btn-secondary btn-sm" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="far fa-share-square"></i></a>
+                                <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                              <?php
+                                    } elseif ($status == 'Aguardando') { ?>
+                                <a class="btn btn-success btn-sm" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                <a class="btn btn-secondary btn-sm disabled" href="#"><i class="far fa-share-square"></i></a>
+                                <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                              <?php
+                                    } elseif ($status == 'Aprovado') { ?>
+                                <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                <a class="btn btn-secondary btn-sm disabled" href="#"><i class="far fa-share-square"></i></a>
+                                <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                              <?php
+                                    } elseif ($status == 'Cancelado') { ?>
+                                <span class="badge badge-danger">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                                    } else {
+                                      echo $status;
+                                    }
+                                    ?>-->
+                                  <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                  <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                                </td>
+                              </tr>
+
                         <?php
+                            }
+                          }
                         }
                         ?>
                       </tbody>
                     </table>
                     <?php
                     if ($row == '') {
-                      echo "<h3>Não existem dados para consulta</h3>";
+
+                      echo "<h3> Não existem dados cadastrados no banco </h3>";
                     } else { }
                     ?>
                   </div>
@@ -1021,85 +1093,75 @@ include('verificar_login.php');
               </div>
             </div>
           </div>
-        </div>
-        <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
 
-        <div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
-          <!---Modal Exemplo--->
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Requerentes</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" action="">
-                  <div class="form-group">
-                    <label for="fornecedor">Saram</label>
-                    <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="fornecedor">CPF</label>
-                    <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="id_produto">Posto</label>
-                    <select class="form-control mr-2" name="txtposto" required>
-                      <option value="" disabled selected hidden>Posto/Grad.</option>
-                      <option value="PM">PM</option>
-                      <option value="TB">TB</option>
-                      <option value="MB">MB</option>
-                      <option value="BR">BR</option>
-                      <option value="CL">CL</option>
-                      <option value="TC">TC</option>
-                      <option value="MJ">MJ</option>
-                      <option value="CP">CP</option>
-                      <option value="1T">1T</option>
-                      <option value="2T">2T</option>
-                      <option value="AP">AP</option>
-                      <option value="SO">SO</option>
-                      <option value="1S">1S</option>
-                      <option value="2S">2S</option>
-                      <option value="3S">3S</option>
-                      <option value="CB">CB</option>
-                      <option value="S1">S1</option>
-                      <option value="S2">S2</option>
-                      <option value="SD">SD</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="id_produto">Situação</label><br>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
-                      <label class="custom-control-label" style="cursor: pointer; text-align: left;" for="ativo"><span></span>Ativo</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
-                      <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="reformado" name="txtsituacao" value="PM" required>
-                      <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="reformado"><span></span>Pensionista</label>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="id_produto">Nome Completo</label>
-                    <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" required>
-                  </div>
+          <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
 
-                  <div class="form-group">
-                    <label for="fornecedor">E-mail</label>
-                    <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" placeholder="Email">
-                  </div>
+          <!-- Modal -->
+          <div id="modalExemplo" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <h4 class="modal-title">Novo Orçamento</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" action="">
+                    <div class="form-group">
+                      <label for="fornecedor">CPF</label>
+                      <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="fornecedor">Técnico</label>
+
+                      <select class="form-control mr-2" id="category" name="funcionario">
+                        <option value="" disabled selected hidden>Escolha um técnico...</option>
+                        <?php
+
+                        $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                        $result = mysqli_query($conexao, $query);
+
+                        if (count($result)) {
+                          while ($res_1 = mysqli_fetch_array($result)) {
+                            ?>
+                            <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
+                        <?php
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="quantidade">Produto</label>
+                      <input type="text" class="form-control mr-2" name="txtproduto" placeholder="Produto" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="quantidade">Nº de Série</label>
+                      <input type="text" class="form-control mr-2" name="txtserie" placeholder="Nº de Série" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="quantidade">Defeito</label>
+                      <input type="text" class="form-control mr-2" name="txtdefeito" placeholder="Defeito" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="quantidade">Observações</label>
+                      <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" required>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                  <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                  </form>
+                </div>
               </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-              </div>
-              </form>
             </div>
           </div>
-        </div>
       </section>
       <!-- /.content -->
     </div>
@@ -1230,205 +1292,159 @@ include('verificar_login.php');
 
 </html>
 
-<!------------CADASTRAR------------>
+<!--CADASTRAR -->
+
 <?php
 if (isset($_POST['button'])) {
-  $posto = $_POST['txtposto'];
-  $situacao = $_POST['txtsituacao'];
-  $nome = strtoupper($_POST['txtnome']);
-  $email = strtolower($_POST['txtemail']);
-  $saram = $_POST['txtsaram'];
-  $cpf = $_POST['txtcpf'];
+  $nome = $_POST['txtcpf'];
+  $tecnico = $_POST['funcionario'];
+  $produto = $_POST['txtproduto'];
+  $serie = $_POST['txtserie'];
+  $defeito = $_POST['txtdefeito'];
+  $obs = $_POST['txtobs'];
 
 
-  //Verificar se o CPF já está cadastrado
-
-  $query_verificar = "select * from requerentes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  //VERIFICAR SE O requerente JÁ ESTÁ CADASTRADO
+  $query_verificar = "select * from requerentes where cpf = '$nome' ";
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
-  $dado_verificar = mysqli_fetch_array($result_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
-  if ($row_verificar > 0) {
-    echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+  if ($row_verificar <= 0) {
+    echo "<script language='javascript'> window.alert('O Requerente não está cadastrado!'); </script>";
     exit();
   }
 
-  $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$email', curDate() )";
+  $query = "INSERT into orcamentos (requerente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
 
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
     echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='requerentes.php'; </script>";
   } else {
     echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+    echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
   }
 }
-
 ?>
 
 
-<!---------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
+<!--EXCLUIR -->
 <?php
 if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
-  $query = "DELETE FROM requerentes where id = '$id'";
+  $query = "DELETE FROM orcamentos where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+  echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
 }
 ?>
-<!-------------------------------------------------------------------------------->
 
 
-
-
-<!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
+<!--EDITAR -->
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "select * from requerentes where id = '$id'";
+  $query = "select * from orcamentos where id = '$id'";
   $result = mysqli_query($conexao, $query);
 
   while ($res_1 = mysqli_fetch_array($result)) {
 
     ?>
+
+    <!-- Modal -->
     <div id="modalEditar" class="modal fade" role="dialog">
-      <!---Modal EDITAR --->
       <div class="modal-dialog">
+        <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">requerentes</h4>
+
+            <h4 class="modal-title">Editar Orçamento</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <form method="POST" action="">
-              <div class="form-group">
-                <label for="fornecedor">Saram</label>
-                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
-              </div>
 
               <div class="form-group">
-                <label for="fornecedor">CPF</label>
-                <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Posto</label>
-                <select class="form-control mr-2" name="txtposto" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
-                  <option value="PM">PM</option>
-                  <option value="TB">TB</option>
-                  <option value="MB">MB</option>
-                  <option value="BR">BR</option>
-                  <option value="CL">CL</option>
-                  <option value="TC">TC</option>
-                  <option value="MJ">MJ</option>
-                  <option value="CP">CP</option>
-                  <option value="1T">1T</option>
-                  <option value="2T">2T</option>
-                  <option value="AP">AP</option>
-                  <option value="SO">SO</option>
-                  <option value="1S">1S</option>
-                  <option value="2S">2S</option>
-                  <option value="3S">3S</option>
-                  <option value="CB">CB</option>
-                  <option value="S1">S1</option>
-                  <option value="S2">S2</option>
-                  <option value="SD">SD</option>
+                <label for="fornecedor">Técnico</label>
+
+                <select class="form-control mr-2" id="category" name="funcionario">
+                  <?php
+
+                      $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                      $result = mysqli_query($conexao, $query);
+
+                      if (count($result)) {
+                        while ($res_2 = mysqli_fetch_array($result)) {
+                          ?>
+                      <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['nome']; ?></option>
+                  <?php
+                        }
+                      }
+                      ?>
                 </select>
               </div>
               <div class="form-group">
-                <label for="id_produto">Situação</label><br>
-                <div class="custom-control custom-radio">
-                  <label class="container">Ativo
-                    <input type="radio" value="AT" name="txtsituacao" required>
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <label class="container">Inativo
-                    <input type="radio" value="R1" name="txtsituacao" required>
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <label class="container">Pensionista
-                    <input type="radio" value="PM" name="txtsituacao" required>
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
+                <label for="quantidade">Produto</label>
+                <input type="text" class="form-control mr-2" name="txtproduto" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" required>
               </div>
 
               <div class="form-group">
-                <label for="fornecedor">E-mail</label>
-                <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" value="<?php echo $res_1['email']; ?>" placeholder="Email">
+                <label for="quantidade">Nº de Série</label>
+                <input type="text" class="form-control mr-2" name="txtserie" placeholder="Número de Série" value="<?php echo $res_1['serie']; ?>" required>
               </div>
+
+              <div class="form-group">
+                <label for="quantidade">Defeito</label>
+                <input type="text" class="form-control mr-2" name="txtdefeito" value="<?php echo $res_1['problema']; ?>" placeholder="Defeito" required>
+              </div>
+
+              <div class="form-group">
+                <label for="quantidade">Observações</label>
+                <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" value="<?php echo $res_1['obs']; ?>" required>
+              </div>
+
           </div>
+
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+            </form>
           </div>
-
-          </form>
         </div>
       </div>
     </div>
 
-
     <script>
-      $('#modalEditar').modal("show");
+      $("#modalEditar").modal("show");
     </script>
-    <!--Modal EDITAR -->
 
-
-    <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
-
+    <!--Comando para editar os dados UPDATE -->
     <?php
         if (isset($_POST['buttonEditar'])) {
-          $posto = $_POST['txtposto'];
-          $situacao = $_POST['txtsituacao'];
-          $nome = strtoupper($_POST['txtnome']);
-          $email = strtolower($_POST['txtemail']);
-          $saram = $_POST['txtsaram'];
-          $cpf = $_POST['txtcpf'];
 
-          if ($res_1['cpf'] != $cpf) {
+          $tecnico = $_POST['funcionario'];
+          $produto = $_POST['txtproduto'];
+          $serie = $_POST['txtserie'];
+          $defeito = $_POST['txtdefeito'];
+          $obs = $_POST['txtobs'];
 
-            //Verificar se o CPF já está cadastrado
-            $query_verificar = "select * from requerentes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
-
-            $result_verificar = mysqli_query($conexao, $query_verificar);
-            $dado_verificar = mysqli_fetch_array($result_verificar);
-            $row_verificar = mysqli_num_rows($result_verificar);
-
-            if ($row_verificar > 0) {
-              echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
-              exit();
-            }
-          }
-
-          $query_editar = "UPDATE requerentes set posto = '$posto', situacao = '$situacao', nome = '$nome', email = '$email', saram = '$saram', cpf = '$cpf' where id = '$id'";
+          $query_editar = "UPDATE orcamentos set tecnico = '$tecnico', produto = '$produto', serie = '$serie', problema = '$defeito', obs = '$obs' where id = '$id' ";
 
           $result_editar = mysqli_query($conexao, $query_editar);
 
           if ($result_editar == '') {
             echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
-            echo "<script language='javascript'> window.location='requerentes.php'; </script>";
           } else {
             echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-            echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+            echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
           }
         }
-
         ?>
 
+
 <?php }
-} ?>
+}  ?>
+
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <!--Máscaras-->
