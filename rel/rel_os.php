@@ -1,9 +1,11 @@
 
 <?php
 $id = $_GET['id'];
+$id_orc = $_GET['id_orc'];
+
 include('../conexao.php');
 
-$query = "select o.id, o.requerente, o.tecnico, o.produto, o.serie, o.problema, o.laudo, o.valor_servico, o.pecas, o.valor_pecas, o.total, o.valor_total, o.data_abertura, o.data_geracao, o.status, c.nome as req_nome, c.email, c.saram, c.cpf, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.id = '$id'";
+$query = "select o.id, o.requerente, o.tecnico, o.produto, o.serie, o.problema, o.laudo, o.valor_servico, o.pecas, o.valor_pecas, o.total, o.valor_total, o.data_abertura, o.data_geracao, o.status, c.nome as req_nome, c.email, c.saram, c.cpf, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.id = '$id_orc'";
 
 $result = mysqli_query($conexao, $query);
 
@@ -83,7 +85,7 @@ while ($res_1 = mysqli_fetch_array($result)) {
 
 		<div class="row" style="height: 30px;">
 			<div class="col-sm-8">
-				<big style="text-align: center;">Orçamento nº <?php echo $id ?></big>
+				<big style="text-align: center;">Ordem de Serviço nº <?php echo $id ?></big>
 			</div>
 			<div class="col-sm-10" style="text-align: right;">
 				<big> Data: <?php echo $data2; ?> </big>

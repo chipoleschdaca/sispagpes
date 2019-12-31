@@ -1,5 +1,4 @@
 <?php
-$id = $_GET['id'];
 
 //CARREGAR DOMPDF
 require_once '../dompdf/autoload.inc.php';

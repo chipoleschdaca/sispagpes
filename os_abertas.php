@@ -477,6 +477,7 @@ include('verificar_login.php');
                           $data_abertura = $res_1['data_abertura'];
                           $data_fechamento = $res_1['data_fechamento'];
                           $id = $res_1['id'];
+                          $id_orc = $res_1['id_orc'];
                           $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
                           $data3 = implode('/', array_reverse(explode('-', $data_fechamento)));
 
@@ -485,7 +486,7 @@ include('verificar_login.php');
                           while ($res_requerente = mysqli_fetch_array($result_requerente)) {
                             $nome_requerente = $res_requerente['nome'];
 
-                          //Recupera o sacador através do CPF sem precisar de INNER JOIN
+                            //Recupera o sacador através do CPF sem precisar de INNER JOIN
                           $query_tecnico = "select * from militares where id = '$tecnico'";
                           $result_tecnico = mysqli_query($conexao, $query_tecnico);
                           while ($res_tecnico = mysqli_fetch_array($result_tecnico)) {
@@ -526,14 +527,14 @@ include('verificar_login.php');
                                   <?php
                                   if ($status == 'Aberta') { ?>
                                     <a class="btn btn-success btn-sm" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                    <a class="btn btn-warning btn-sm disabled" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                    <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                                    
                                     <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar a OS?');"><i class="far fa-trash-alt"></i></a>
 
                                   <?php
                                   } elseif ($status == 'Aprovada') { ?>
-                                    <a class="btn btn-primary btn-sm" href="rel/rel_os_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
-                                    <a class="btn btn-warning btn-sm disabled" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                    <a class="btn btn-danger btn-sm disabled" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                                    <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                                    <a class="btn btn-primary btn-sm" href="rel/rel_os_class.php?id=<?php echo $id; ?>&id_orc=<?php echo $id_orc; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                                    
+                                    <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar o registro?');"><i class="far fa-trash-alt"></i></a>
                                   <?php
                                   } elseif ($status == 'Cancelada') { ?>
                                     <span class="badge badge-danger">
@@ -699,7 +700,7 @@ include('verificar_login.php');
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: white;
+    background: white;   
   }
 </style>
 
@@ -721,11 +722,11 @@ if (@$_GET['func'] == 'deleta') {
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
+  $id_orc = $res_1['id_orc'];
   $query = "select * from os where id = '$id'";
   $result = mysqli_query($conexao, $query);
 
   while ($res_1 = mysqli_fetch_array($result)) {
-    $id_orc = $res_1['id_orc'];
 
 ?>
 

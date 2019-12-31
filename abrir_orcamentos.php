@@ -1395,7 +1395,7 @@ if (@$_GET['func'] == 'edita') {
 
                   if (count($result)) {
                     while ($res_2 = mysqli_fetch_array($result)) {
-                  ?>
+                  ?>                      
                       <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['nome']; ?></option>
                   <?php
                     }
@@ -1582,8 +1582,7 @@ if (@$_GET['func'] == 'edita') {
       }
     }
     ?>
-<?php }
-
+  <?php }
 } elseif (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
   $query = "select * from orcamentos where id = '$id'"; //filtra o orçamento pelo id -- Esse filtro recupera todas as informações da tabela 'orcamentos'.
@@ -1595,7 +1594,7 @@ if (@$_GET['func'] == 'edita') {
     $produto = $res_1['produto'];
     $tecnico = $res_1['tecnico'];
   }
-?>
+  ?>
 
   <!-- Modal -->
   <div id="modalAprovar" class="modal fade" role="dialog">
