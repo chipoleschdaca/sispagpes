@@ -231,7 +231,7 @@ include('verificar_login.php');
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview menu-open">
+            <li class="nav-item has-treeview">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
@@ -936,7 +936,7 @@ include('verificar_login.php');
                           Requerente
                         </th>
                         <th>
-                          Técnico
+                          Sacador
                         </th>
                         <th>
                           Produto
@@ -1007,7 +1007,7 @@ include('verificar_login.php');
 
                             <td>
                               <a class="btn btn-success btn-sm" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                              <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                              <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>"target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
                             </td>
                           </tr>
 
@@ -1033,7 +1033,7 @@ include('verificar_login.php');
               </div>
             </div>
           </div>
-          <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
+  <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
 
 
       </section>
@@ -1183,7 +1183,7 @@ if (@$_GET['func'] == 'edita') {
   ?>
 
   <!-- Modal -->
-  <div id="modalEditar" class="modal fade" role="dialog">
+  <div id="modalAprovar" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -1206,7 +1206,7 @@ if (@$_GET['func'] == 'edita') {
             </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+          <button type="submit" class="btn btn-primary btn-sm" name="buttonAprovar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
           <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
           </form>
         </div>
@@ -1215,12 +1215,12 @@ if (@$_GET['func'] == 'edita') {
   </div>
 
   <script>
-    $("#modalEditar").modal("show");
+    $("#modalAprovar").modal("show");
   </script>
 
   <!--Comando para editar os dados UPDATE -->
   <?php
-    if (isset($_POST['buttonEditar'])) {
+    if (isset($_POST['buttonAprovar'])) {
 
       $pgto = $_POST['pgto'];
       $desconto = $_POST['txtdesconto'];

@@ -247,7 +247,8 @@ include('verificar_login.php');
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview menu-open">
+            <li class="nav-item has-treeview">
+              <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-list-ul"></i>
                 <p>
@@ -923,7 +924,6 @@ include('verificar_login.php');
 
                     <?php
 
-
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != '') {
                       $data = '%' . $_GET['txtpesquisar'] . '%';
                       $status_os = $_GET['status'];
@@ -952,7 +952,7 @@ include('verificar_login.php');
                           Requerente
                         </th>
                         <th>
-                          Militar
+                          Sacador
                         </th>
                         <th>
                           Produto
@@ -995,12 +995,12 @@ include('verificar_login.php');
                           while ($res_requerente = mysqli_fetch_array($result_requerente)) {
                             $nome_requerente = $res_requerente['nome'];
 
-                            //Recupera o técnico através do CPF sem precisar de INNER JOIN
+                            //Recupera o sacador através do CPF sem precisar de INNER JOIN
                             $query_tecnico = "select * from militares where id = '$tecnico'";
                             $result_tecnico = mysqli_query($conexao, $query_tecnico);
                             while ($res_tecnico = mysqli_fetch_array($result_tecnico)) {
                               $nome_tecnico = $res_tecnico['nome'];
-                              ?>
+                        ?>
 
                               <tr>
                                 <td><?php echo $nome_requerente; ?></td>
@@ -1009,24 +1009,24 @@ include('verificar_login.php');
                                 <td>R$ <?php echo $valor_total; ?></td>
                                 <td>
                                   <?php
-                                    if ($status == 'Aberta') { ?>
+                                  if ($status == 'Aberta') { ?>
                                     <span class="badge badge-secondary">
                                       <?php echo $status; ?>
                                     </span>
-                                  <?php                                        
-                                    } elseif ($status == 'Aprovada') { ?>
+                                  <?php
+                                  } elseif ($status == 'Aprovada') { ?>
                                     <span class="badge badge-success">
                                       <?php echo $status; ?>
                                     </span>
                                   <?php
-                                    } elseif ($status == 'Cancelada') { ?>
+                                  } elseif ($status == 'Cancelada') { ?>
                                     <span class="badge badge-danger">
                                       <?php echo $status; ?>
                                     </span>
                                   <?php
-                                    } else {
-                                          echo $status;
-                                    }
+                                  } else {
+                                    echo $status;
+                                  }
                                   ?>
                                 </td>
                                 <td style="width: 175px;"><?php echo $data2; ?></td>
@@ -1034,41 +1034,42 @@ include('verificar_login.php');
 
                                 <td>
                                   <!-- <?php
-                                              if ($status == 'Aberto') { ?>
+                                        if ($status == 'Aberto') { ?>
                                 <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
                                 <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
                                 <a class="btn btn-secondary btn-sm" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="far fa-share-square"></i></a>
                                 <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
                                 <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
                               <?php
-                                    } elseif ($status == 'Aguardando') { ?>
+                                        } elseif ($status == 'Aguardando') { ?>
                                 <a class="btn btn-success btn-sm" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
                                 <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
                                 <a class="btn btn-secondary btn-sm disabled" href="#"><i class="far fa-share-square"></i></a>
                                 <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
                                 <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
                               <?php
-                                    } elseif ($status == 'Aprovado') { ?>
+                                        } elseif ($status == 'Aprovado') { ?>
                                 <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
                                 <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
                                 <a class="btn btn-secondary btn-sm disabled" href="#"><i class="far fa-share-square"></i></a>
                                 <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
                                 <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                               <?php
-                                    } elseif ($status == 'Cancelado') { ?>
-                                <span class="badge badge-danger">
-                                  <?php echo $status; ?>
-                                </span>
+                                        } elseif ($status == 'Cancelado') { ?>
+                                <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                <a class="btn btn-secondary btn-sm disabled" href="#"><i class="far fa-share-square"></i></a>
+                                <a class="btn btn-warning btn-sm disabled" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-sm disabled" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                               <?php
-                                    } else {
-                                      echo $status;
-                                    }
-                                    ?>-->
+                                        } else {
+                                          echo $status;
+                                        }
+                              ?>-->
                                   <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                  <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                                  <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                                 </td>
                               </tr>
-
                         <?php
                             }
                           }
@@ -1080,7 +1081,8 @@ include('verificar_login.php');
                     if ($row == '') {
 
                       echo "<h3> Não existem dados cadastrados no banco </h3>";
-                    } else { }
+                    } else {
+                    }
                     ?>
                   </div>
                 </div>
@@ -1113,10 +1115,10 @@ include('verificar_login.php');
                       <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
                     </div>
                     <div class="form-group">
-                      <label for="fornecedor">Técnico</label>
+                      <label for="fornecedor">Sacador</label>
 
                       <select class="form-control mr-2" id="category" name="funcionario">
-                        <option value="" disabled selected hidden>Escolha um técnico...</option>
+                        <option value="" disabled selected hidden>Escolha um sacador...</option>
                         <?php
 
                         $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
@@ -1124,7 +1126,7 @@ include('verificar_login.php');
 
                         if (count($result)) {
                           while ($res_1 = mysqli_fetch_array($result)) {
-                            ?>
+                        ?>
                             <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
                         <?php
                           }
@@ -1328,7 +1330,6 @@ if (isset($_POST['button'])) {
 }
 ?>
 
-
 <!--EXCLUIR -->
 <?php
 if (@$_GET['func'] == 'deleta') {
@@ -1339,7 +1340,6 @@ if (@$_GET['func'] == 'deleta') {
 }
 ?>
 
-
 <!--EDITAR -->
 <?php
 if (@$_GET['func'] == 'edita') {
@@ -1349,7 +1349,7 @@ if (@$_GET['func'] == 'edita') {
 
   while ($res_1 = mysqli_fetch_array($result)) {
 
-    ?>
+?>
 
     <!-- Modal -->
     <div id="modalEditar" class="modal fade" role="dialog">
@@ -1365,22 +1365,22 @@ if (@$_GET['func'] == 'edita') {
             <form method="POST" action="">
 
               <div class="form-group">
-                <label for="fornecedor">Técnico</label>
+                <label for="fornecedor">Sacador</label>
 
                 <select class="form-control mr-2" id="category" name="funcionario">
                   <?php
 
-                      $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
-                      $result = mysqli_query($conexao, $query);
+                  $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                  $result = mysqli_query($conexao, $query);
 
-                      if (count($result)) {
-                        while ($res_2 = mysqli_fetch_array($result)) {
-                          ?>
+                  if (count($result)) {
+                    while ($res_2 = mysqli_fetch_array($result)) {
+                  ?>
                       <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['nome']; ?></option>
                   <?php
-                        }
-                      }
-                      ?>
+                    }
+                  }
+                  ?>
                 </select>
               </div>
               <div class="form-group">
@@ -1420,26 +1420,26 @@ if (@$_GET['func'] == 'edita') {
 
     <!--Comando para editar os dados UPDATE -->
     <?php
-        if (isset($_POST['buttonEditar'])) {
+    if (isset($_POST['buttonEditar'])) {
 
-          $tecnico = $_POST['funcionario'];
-          $produto = $_POST['txtproduto'];
-          $serie = $_POST['txtserie'];
-          $defeito = $_POST['txtdefeito'];
-          $obs = $_POST['txtobs'];
+      $tecnico = $_POST['funcionario'];
+      $produto = $_POST['txtproduto'];
+      $serie = $_POST['txtserie'];
+      $defeito = $_POST['txtdefeito'];
+      $obs = $_POST['txtobs'];
 
-          $query_editar = "UPDATE orcamentos set tecnico = '$tecnico', produto = '$produto', serie = '$serie', problema = '$defeito', obs = '$obs' where id = '$id' ";
+      $query_editar = "UPDATE orcamentos set tecnico = '$tecnico', produto = '$produto', serie = '$serie', problema = '$defeito', obs = '$obs' where id = '$id' ";
 
-          $result_editar = mysqli_query($conexao, $query_editar);
+      $result_editar = mysqli_query($conexao, $query_editar);
 
-          if ($result_editar == '') {
-            echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
-          } else {
-            echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-            echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
-          }
-        }
-        ?>
+      if ($result_editar == '') {
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+      } else {
+        echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+        echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+      }
+    }
+    ?>
 
 
 <?php }

@@ -231,7 +231,7 @@ include('verificar_login.php');
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview menu-open">
+            <li class="nav-item has-treeview"> <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
@@ -931,7 +931,7 @@ include('verificar_login.php');
                           Requerente
                         </th>
                         <th>
-                          Técnico
+                          Sacador
                         </th>
                         <th>
                           Produto
@@ -964,7 +964,7 @@ include('verificar_login.php');
                           $id = $res_1['id'];
                           $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
 
-                          ?>
+                        ?>
 
                           <tr>
                             <td><?php echo $requerente; ?></td>
@@ -973,30 +973,30 @@ include('verificar_login.php');
                             <td><?php echo $defeito; ?></td>
                             <td>
                               <?php
-                                if ($status == 'Aberto') { ?>
+                              if ($status == 'Aberto') { ?>
                                 <span class="badge badge-secondary">
                                   <?php echo $status; ?>
                                 </span>
                               <?php
-                                } elseif ($status == 'Aguardando') { ?>
+                              } elseif ($status == 'Aguardando') { ?>
                                 <span class="badge badge-warning">
                                   <?php echo $status; ?>
                                 </span>
                               <?php
-                                } elseif ($status == 'Aprovado') { ?>
+                              } elseif ($status == 'Aprovado') { ?>
                                 <span class="badge badge-success">
                                   <?php echo $status; ?>
                                 </span>
                               <?php
-                                } elseif ($status == 'Cancelado') { ?>
+                              } elseif ($status == 'Cancelado') { ?>
                                 <span class="badge badge-danger">
                                   <?php echo $status; ?>
                                 </span>
                               <?php
-                                } else {
-                                  echo $status;
-                                }
-                                ?>
+                              } else {
+                                echo $status;
+                              }
+                              ?>
                             </td>
                             <td><?php echo $data2; ?></td>
 
@@ -1014,7 +1014,8 @@ include('verificar_login.php');
                     if ($row == '') {
 
                       echo "<h3>Não existem dados cadastrados no banco</h3>";
-                    } else { }
+                    } else {
+                    }
                     ?>
                   </div>
                 </div>
@@ -1166,10 +1167,10 @@ if (@$_GET['func'] == 'edita') {
 
   while ($res_1 = mysqli_fetch_array($result)) {
 
-    ?>
+?>
 
     <!-- Modal -->
-    <div id="modalEditar" class="modal fade" role="dialog">
+    <div id="modalFecharOrcamento" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -1181,23 +1182,23 @@ if (@$_GET['func'] == 'edita') {
             <form method="POST" action="">
 
               <!--<div class="form-group">
-              <label for="fornecedor">Técnico</label>
+              <label for="fornecedor">Sacador</label>
                <input type="text" class="form-control mr-2" name="txttecnico" value="<?php echo $res_1['func_nome']; ?>" disabled>
                                
                   <select class="form-control mr-2" id="category" name="funcionario">
                   <?php
 
-                      $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
-                      $result = mysqli_query($conexao, $query);
+                  $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                  $result = mysqli_query($conexao, $query);
 
-                      if (count($result)) {
-                        while ($res_2 = mysqli_fetch_array($result)) {
-                          ?>                                             
+                  if (count($result)) {
+                    while ($res_2 = mysqli_fetch_array($result)) {
+                  ?>                                             
                     <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['nome']; ?></option> 
                          <?php
-                                }
-                              }
-                              ?>
+                        }
+                      }
+                          ?>
                   </select>
               </div>-->
               <div class="form-group">
@@ -1241,7 +1242,7 @@ if (@$_GET['func'] == 'edita') {
           </div>
 
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+            <button type="submit" class="btn btn-primary btn-sm" name="buttonFechar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
             </form>
           </div>
@@ -1252,34 +1253,34 @@ if (@$_GET['func'] == 'edita') {
 
 
     <script>
-      $("#modalEditar").modal("show");
+      $("#modalFecharOrcamento").modal("show");
     </script>
 
     <!--Comando para editar os dados UPDATE -->
     <?php
-        if (isset($_POST['buttonEditar'])) {
+    if (isset($_POST['buttonFechar'])) {
 
-          $laudo = $_POST['txtlaudo'];
-          $valor_servico = $_POST['txtvalorservico'];
-          $pecas = $_POST['txtpecas'];
-          $valor_pecas = $_POST['txtvalorpeca'];
-          $desconto = 0;
-          $total = $_POST['txtvalorservico'] + $_POST['txtvalorpeca'];
-          $valor_total = $total - $desconto;
-          $status = 'Aguardando';
+      $laudo = $_POST['txtlaudo'];
+      $valor_servico = $_POST['txtvalorservico'];
+      $pecas = $_POST['txtpecas'];
+      $valor_pecas = $_POST['txtvalorpeca'];
+      $desconto = 0;
+      $total = $_POST['txtvalorservico'] + $_POST['txtvalorpeca'];
+      $valor_total = $total - $desconto;
+      $status = 'Aguardando';
 
-          $query_editar = "UPDATE orcamentos set laudo = '$laudo', valor_servico = '$valor_servico', pecas = '$pecas', valor_pecas = '$valor_pecas', desconto = '$desconto', total = '$total', valor_total = '$valor_total', data_geracao = curDate(), status = '$status' where id = '$id' ";
+      $query_editar = "UPDATE orcamentos set laudo = '$laudo', valor_servico = '$valor_servico', pecas = '$pecas', valor_pecas = '$valor_pecas', desconto = '$desconto', total = '$total', valor_total = '$valor_total', data_geracao = curDate(), status = '$status' where id = '$id' ";
 
-          $result_editar = mysqli_query($conexao, $query_editar);
+      $result_editar = mysqli_query($conexao, $query_editar);
 
-          if ($result_editar == '') {
-            echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-          } else {
-            echo "<script language='javascript'> window.alert('Orçamento fechado com sucesso!'); </script>";
-            echo "<script language='javascript'> window.location='fechar_orcamentos.php'; </script>";
-          }
-        }
-        ?>
+      if ($result_editar == '') {
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
+      } else {
+        echo "<script language='javascript'> window.alert('Orçamento fechado com sucesso!'); </script>";
+        echo "<script language='javascript'> window.location='fechar_orcamentos.php'; </script>";
+      }
+    }
+    ?>
 <?php }
 }  ?>
 

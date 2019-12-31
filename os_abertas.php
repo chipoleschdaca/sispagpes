@@ -47,13 +47,13 @@ include('verificar_login.php');
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-       <!-- <li class="nav-item d-none d-sm-inline-block">
+        <!-- <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Início</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contato</a>
         </li>-->
-      </ul>      
+      </ul>
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
@@ -237,7 +237,8 @@ include('verificar_login.php');
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview menu-open">
+            <li class="nav-item has-treeview">
+              <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-list-ul"></i>
                 <p>
@@ -415,11 +416,18 @@ include('verificar_login.php');
 
                     <?php
 
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != '') {
+                      $data = '%' . $_GET['txtpesquisar'] . '%';
+                      $status_os = $_GET['status'];
+                      $query = "select * from os where data_abertura = '$data' and status = '$status_os' order by id asc";
+                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
+                      $status_os = $_GET['status'];
+                      $query = "select * from os where status = '$status_os' order by id asc";
+                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
                       $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select ord.id, ord.requerente, ord.produto, ord.tecnico, ord.total, ord.data_abertura, ord.data_fechamento, ord.status, mil.nome from os as ord INNER JOIN militares as mil ON ord.tecnico = mil.id where ord.data_abertura = '$data' and ord.status = 'Aberta' order by id asc";
+                      $query = "select * from os where data_abertura = '$data' order by id asc";
                     } else {
-                      $query = "select ord.id, ord.requerente, ord.produto, ord.tecnico, ord.total, ord.data_abertura, ord.data_fechamento, ord.status, mil.nome from os as ord INNER JOIN militares as mil ON ord.tecnico = mil.id order by id asc";
+                      $query = "select * from os order by id asc";
                     }
 
                     $result = mysqli_query($conexao, $query);
@@ -435,7 +443,7 @@ include('verificar_login.php');
                           Requerente
                         </th>
                         <th>
-                          Técnico
+                          Sacador
                         </th>
                         <th>
                           Produto
@@ -477,12 +485,12 @@ include('verificar_login.php');
                           while ($res_requerente = mysqli_fetch_array($result_requerente)) {
                             $nome_requerente = $res_requerente['nome'];
 
-                            //Recupera o técnico através do CPF sem precisar de INNER JOIN
-                            $query_tecnico = "select * from militares where id = '$tecnico'";
-                            $result_tecnico = mysqli_query($conexao, $query_tecnico);
-                            while ($res_tecnico = mysqli_fetch_array($result_tecnico)) {
-                              $nome_tecnico = $res_tecnico['nome'];
-                              ?>
+                          //Recupera o sacador através do CPF sem precisar de INNER JOIN
+                          $query_tecnico = "select * from militares where id = '$tecnico'";
+                          $result_tecnico = mysqli_query($conexao, $query_tecnico);
+                          while ($res_tecnico = mysqli_fetch_array($result_tecnico)) {
+                            $nome_tecnico = $res_tecnico['nome'];
+                        ?>
 
                               <tr>
                                 <td><?php echo $nome_requerente; ?></td>
@@ -491,32 +499,53 @@ include('verificar_login.php');
                                 <td>R$ <?php echo $valor_total; ?></td>
                                 <td>
                                   <?php
-                                    if ($status == 'Aberta') { ?>
-                                      <span class="badge badge-secondary">
-                                        <?php echo $status; ?>
-                                      </span>                                  
+                                  if ($status == 'Aberta') { ?>
+                                    <span class="badge badge-secondary">
+                                      <?php echo $status; ?>
+                                    </span>
                                   <?php
-                                        } elseif ($status == 'Aprovada') { ?>
+                                  } elseif ($status == 'Aprovada') { ?>
                                     <span class="badge badge-success">
                                       <?php echo $status; ?>
                                     </span>
                                   <?php
-                                        } elseif ($status == 'Cancelada') { ?>
+                                  } elseif ($status == 'Cancelada') { ?>
                                     <span class="badge badge-danger">
                                       <?php echo $status; ?>
                                     </span>
                                   <?php
-                                        } else {
-                                          echo $status;
-                                        }
-                                        ?>
+                                  } else {
+                                    echo $status;
+                                  }
+                                  ?>
                                 </td>
                                 <td style="width: 10px;"><?php echo $data2; ?></td>
                                 <td style="width: 10px;"><?php echo $data3; ?></td>
 
                                 <td>
-                                  <a class="btn btn-success btn-sm" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                  <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar a OS?');"><i class="far fa-trash-alt"></i></a>
+                                  <?php
+                                  if ($status == 'Aberta') { ?>
+                                    <a class="btn btn-success btn-sm" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                    <a class="btn btn-warning btn-sm disabled" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                    <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar a OS?');"><i class="far fa-trash-alt"></i></a>
+
+                                  <?php
+                                  } elseif ($status == 'Aprovada') { ?>
+                                    <a class="btn btn-primary btn-sm" href="rel/rel_os_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                    <a class="btn btn-warning btn-sm disabled" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                    <a class="btn btn-danger btn-sm disabled" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                                  <?php
+                                  } elseif ($status == 'Cancelada') { ?>
+                                    <span class="badge badge-danger">
+                                      <?php echo $status; ?>
+                                    </span>
+                                  <?php
+                                  } else {
+                                    echo $status;
+                                  }
+                                  ?>
+                                  <!--<a class="btn btn-success btn-sm" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                  <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar a OS?');"><i class="far fa-trash-alt"></i></a>-->
                                 </td>
                               </tr>
 
@@ -531,7 +560,8 @@ include('verificar_login.php');
                     if ($row == '') {
 
                       echo "<h3> Não existem dados cadastrados no banco </h3>";
-                    } else { }
+                    } else {
+                    }
 
                     ?>
                   </div>
@@ -695,8 +725,9 @@ if (@$_GET['func'] == 'edita') {
   $result = mysqli_query($conexao, $query);
 
   while ($res_1 = mysqli_fetch_array($result)) {
+    $id_orc = $res_1['id_orc'];
 
-    ?>
+?>
 
     <!-- Modal -->
     <div id="modalEditar" class="modal fade" role="dialog">
@@ -736,25 +767,26 @@ if (@$_GET['func'] == 'edita') {
 
     <!--Comando para editar os dados UPDATE -->
     <?php
-        if (isset($_POST['buttonEditar'])) {
-          $garantia = $_POST['txtgarantia'];
-          $data_fechamento_os = $_POST['txtdatafechamento'];
-          $serie = $_POST['txtserie'];
-          $defeito = $_POST['txtdefeito'];
-          $obs = $_POST['txtobs'];
+    if (isset($_POST['buttonEditar'])) {
+      $garantia = $_POST['txtgarantia'];
+      $data_fechamento_os = $_POST['txtdatafechamento'];
+      $serie = $_POST['txtserie'];
+      $defeito = $_POST['txtdefeito'];
+      $obs = $_POST['txtobs'];
 
-          $query_editar = "UPDATE os set garantia = '$garantia', data_fechamento = '$data_fechamento_os', status = 'Aprovada' where id = '$id' ";
+      $query_editar = "UPDATE os set garantia = '$garantia', data_fechamento = '$data_fechamento_os', status = 'Aprovada' where id = '$id' ";
 
-          $result_editar = mysqli_query($conexao, $query_editar);
+      $result_editar = mysqli_query($conexao, $query_editar);
 
-          if ($result_editar == '') {
-            echo "<script language='javascript'> window.alert('Ocorreu um erro ao tentar encerrar a OS!'); </script>";
-          } else {
-            echo "<script language='javascript'> window.alert('OS concluída com sucesso!'); </script>";
-            echo "<script language='javascript'> window.location='os_abertas.php'; </script>";
-          }
-        }
-        ?>
+      if ($result_editar == '') {
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao tentar encerrar a OS!'); </script>";
+      } else {
+        echo "<script language='javascript'> window.alert('OS concluída com sucesso!'); </script>";
+        echo "<script language='javascript'> window.location='os_abertas.php'; </script>";
+        //echo "<script language='javascript'> window.location='rel/rel_os_class.php?id=$id&id_orc=$id_orc'; </script>";
+      }
+    }
+    ?>
 
 
 <?php }
