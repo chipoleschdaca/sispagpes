@@ -76,7 +76,7 @@ while ($res_1 = mysqli_fetch_array($result)) {
 				<img src="../dist/img/gapls.png" width="80px" style="margin-left: 15px;">
 			</div>
 			<div class="col-sm-12">
-				<h3 class="titulo" style="text-align: center;"><b>SISPAGPES - Assistência Técnica</b></h3>
+				<h3 class="titulo" style="text-align: center;"><b>SISPAGPES - Exercício Anterior</b></h3>
 				<h6 class="titulo" style="text-align: center;">Av. Brig. Eduardo Gomes, s/nº, Vila Asas, Lagoa Santa - MG - CEP 33400-000</h6>
 			</div>
 		</div>
