@@ -26,5 +26,4 @@ $pdf = new Dompdf();
 		'RelatorioOrcamento.pdf',
 		array("Attachment" => false) //Se quiser que a página faça o download automaticamente, basta alterar para true.
 	);
-
  ?>

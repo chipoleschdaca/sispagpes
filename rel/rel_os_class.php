@@ -1,7 +1,7 @@
 <?php
 
 //CARREGAR DOMPDF
-require_once '../dompdf/autoload.inc.php';
+require_once ('../dompdf/autoload.inc.php');
 use Dompdf\Dompdf;
 
 $id = $_GET['id'];
@@ -14,19 +14,19 @@ $html = utf8_encode(file_get_contents("http://localhost/sispagpes/rel/rel_os.php
 //INICIALIZAR A CLASSE DO DOMPDF
 $pdf = new Dompdf();
 
-	//TAMANHO DO PAPEL E ORIENTAÇÃO
-	$pdf->setPaper('A4', 'portrait');
+//TAMANHO DO PAPEL E ORIENTAÇÃO
+$pdf->setPaper('A4', 'portrait');
 
-	//CARREGAR CONTEÚDO HTML
-	$pdf->loadHtml(utf8_decode($html));
+//CARREGAR CONTEÚDO HTML
+$pdf->loadHtml(utf8_decode($html));
 
-	//RENDERIZAR PDF
-	$pdf->render();
+//RENDERIZAR PDF
+$pdf->render();
 
-	//NOMINAR PDF GERADO
-	$pdf->stream(
-		'RelatorioOS.pdf',
-		array("Attachment" => false) //Se quiser que a página faça o download automaticamente, basta alterar para true.
-	);
+//NOMINAR PDF GERADO
+$pdf->stream(
+	'RelatorioOS.pdf',
+	array("Attachment" => false) //Se quiser que a página faça o download automaticamente, basta alterar para true.
+);
 
  ?>

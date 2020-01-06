@@ -533,7 +533,8 @@ include('verificar_login.php');
                                   <?php
                                   } elseif ($status == 'Aprovada') { ?>
                                     <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
-                                    <a class="btn btn-primary btn-sm" href="rel/rel_os_class.php?id=<?php echo $id; ?>&id_orc=<?php echo $id_orc; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                                    
+                                    <a class="btn btn-primary btn-sm" href="rel/rel_os_class.php?id=<?php echo $id; ?>&id_orc=<?php echo $id_orc; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                    <a class="btn btn-success btn-sm" href="rel/exemplo.php" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
                                     <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar o registro?');"><i class="far fa-trash-alt"></i></a>
                                   <?php
                                   } elseif ($status == 'Cancelada') { ?>
@@ -759,8 +760,6 @@ if (@$_GET['func'] == 'edita') {
         </div>
       </div>
     </div>
-
-
 
     <script>
       $("#modalEditar").modal("show");
