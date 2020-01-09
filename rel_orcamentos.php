@@ -929,30 +929,15 @@ include('verificar_login.php');
                     ?>
 
 
-                    <table class="table">
+                    <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
-
-                        <th>
-                          Requerente
-                        </th>
-                        <th>
-                          Sacador
-                        </th>
-                        <th>
-                          Produto
-                        </th>
-                        <th>
-                          Valor Total
-                        </th>
-                        <th>
-                          Status
-                        </th>
-                        <th>
-                          Data de Abertura
-                        </th>
-                        <th>
-                          Ações
-                        </th>
+                        <th class="align-middle">Requerente</th>
+                        <th class="align-middle">Sacador</th>
+                        <th class="align-middle">Produto</th>
+                        <th class="align-middle">Valor Total</th>
+                        <th class="align-middle">Status</th>
+                        <th class="align-middle">Data de Abertura</th>
+                        <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
 
@@ -972,11 +957,11 @@ include('verificar_login.php');
                           ?>
 
                           <tr>
-                            <td><?php echo $requerente; ?></td>
-                            <td><?php echo $tecnico; ?></td>
-                            <td><?php echo $produto; ?></td>
-                            <td>R$ <?php echo $valor_total; ?></td>
-                            <td>
+                            <td class="align-middle"><?php echo $requerente; ?></td>
+                            <td class="align-middle"><?php echo $tecnico; ?></td>
+                            <td class="align-middle"><?php echo $produto; ?></td>
+                            <td class="align-middle">R$ <?php echo $valor_total; ?></td>
+                            <td class="align-middle">
                               <?php
                                 if ($status == 'Aberto') { ?>
                                 <span class="badge badge-secondary">
@@ -1003,14 +988,12 @@ include('verificar_login.php');
                                 }
                                 ?>
                             </td>
-                            <td><?php echo $data2; ?></td>
-
-                            <td>
+                            <td class="align-middle"><?php echo $data2; ?></td>
+                            <td class="align-middle">
                               <a class="btn btn-success btn-sm" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
                               <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>"target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
                             </td>
                           </tr>
-
                         <?php
                         }
                         ?>
@@ -1018,7 +1001,6 @@ include('verificar_login.php');
                     </table>
                     <?php
                     if ($row == '') {
-
                       echo "<h3> Não existem dados cadastrados no banco </h3>";
                     } else { }
                     ?>
@@ -1184,7 +1166,7 @@ if (@$_GET['func'] == 'edita') {
 
   <!-- Modal -->
   <div id="modalAprovar" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">

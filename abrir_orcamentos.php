@@ -803,8 +803,33 @@ include('verificar_login.php');
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-dollar-sign"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE ORÇAMENTOS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM orcamentos";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <?php
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
-                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
                 <div class="info-box-content" style="text-align:center;">
                   <span class="info-box-text">ORÇAMENTOS ABERTOS</span>
                   <span class="info-box-number">
@@ -830,7 +855,7 @@ include('verificar_login.php');
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-pause"></i></span>
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cogs"></i></span>
                 <div class="info-box-content" style="text-align:center;">
                   <span class="info-box-text">ORÇAMENTOS AGUARDANDO</span>
                   <span class="info-box-number">
@@ -879,15 +904,16 @@ include('verificar_login.php');
               <!-- /.info-box -->
             </div>
             <!-- /.col -->
+            <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-dollar-sign"></i></span>
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE ORÇAMENTOS</span>
+                  <span class="info-box-text">ORÇAMENTOS CANCELADOS</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM orcamentos";
+                      $query = "SELECT * FROM orcamentos where status = 'Cancelado'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
@@ -900,10 +926,9 @@ include('verificar_login.php');
                 </div>
                 <!-- /.info-box-content -->
               </div>
-
               <!-- /.info-box -->
             </div>
-            <!-- /.col -->
+            <!-- /.col -->            
           </div>
           <!-- /.row -->
           <!-- /.row -->
@@ -924,13 +949,16 @@ include('verificar_login.php');
                       <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
                         <i class="far fa-folder-open"></i> Inserir Novo
                       </button>
+                      <a class="btn btn-app">
+                        <i class="fas fa-play"></i> Play
+                      </a>
                     </div>
                     <div class="col-sm-6">
                       <!-- SEARCH FORM -->
                       <form class="form-inline">
                         <label for="">Filtros: </label>
                         <div class="input-group input-group-sm" style="margin-left:10px;">
-                          <select class="form-control" id="category" name="status" style="border-radius:3px;">
+                          <select class="form-control select2" id="category" name="status" style="border-radius:3px;">
                             <option value="" disabled selected hidden>Status</option>
                             <option value="Aberto">Aberto</option>
                             <option value="Aguardando">Aguardando</option>
@@ -949,7 +977,7 @@ include('verificar_login.php');
                     </div>
                   </div>
 
-                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                  <div class="table-responsive" style="text-align: center;">
 
                     <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
 
@@ -976,31 +1004,15 @@ include('verificar_login.php');
 
                     ?>
 
-
-                    <table class="table">
+                    <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
-
-                        <th>
-                          Requerente
-                        </th>
-                        <th>
-                          Sacador
-                        </th>
-                        <th>
-                          Produto
-                        </th>
-                        <th>
-                          Valor Total
-                        </th>
-                        <th>
-                          Status
-                        </th>
-                        <th>
-                          Data de Abertura
-                        </th>
-                        <th>
-                          Ações
-                        </th>
+                        <th class="align-middle">Requerente</th>
+                        <th class="align-middle">Sacador</th>
+                        <th class="align-middle">Produto</th>
+                        <th class="align-middle">Valor Total</th>
+                        <th class="align-middle">Status</th>
+                        <th class="align-middle">Data de Abertura</th>
+                        <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
 
@@ -1020,11 +1032,11 @@ include('verificar_login.php');
                         ?>
 
                           <tr>
-                            <td><?php echo $requerente; ?></td>
-                            <td><?php echo $tecnico; ?></td>
-                            <td><?php echo $produto; ?></td>
-                            <td>R$ <?php echo $valor_total; ?></td>
-                            <td>
+                            <td class="align-middle"><?php echo $requerente; ?></td>
+                            <td class="align-middle"><?php echo $tecnico; ?></td>
+                            <td class="align-middle"><?php echo $produto; ?></td>
+                            <td class="align-middle">R$ <?php echo $valor_total; ?></td>
+                            <td class="align-middle">
                               <?php
                               if ($status == 'Aberto') { ?>
                                 <span class="badge badge-secondary">
@@ -1051,9 +1063,9 @@ include('verificar_login.php');
                               }
                               ?>
                             </td>
-                            <td><?php echo $data2; ?></td>
+                            <td class="align-middle"><?php echo $data2; ?></td>
 
-                            <td>
+                            <td class="align-middle">
                               <?php
                               if ($status == 'Aberto') { ?>
                                 <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
@@ -1118,7 +1130,7 @@ include('verificar_login.php');
 
           <!-- Modal -->
           <div id="modalExemplo" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
@@ -1135,7 +1147,7 @@ include('verificar_login.php');
                     <div class="form-group">
                       <label for="fornecedor">Sacador</label>
 
-                      <select class="form-control mr-2" id="category" name="funcionario">
+                      <select class="form-control select2" id="category" name="funcionario">
                         <option value="" disabled selected hidden>Escolha um sacador...</option>
                         <?php
 
@@ -1373,7 +1385,7 @@ if (@$_GET['func'] == 'edita') {
 
     <!-- Modal -->
     <div id="modalEditar" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">

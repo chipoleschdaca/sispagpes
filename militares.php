@@ -889,22 +889,19 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
                     <!-------------------------------------------------->
 
-                    <table class="table table-striped">
-                      <thead class="text-primary">
-                        <th>Saram</th>
-                        <th>CPF</th>
-                        <th>Posto</th>
-                        <th>Nome Completo</th>
-                        <th>Nome de Guerra</th>
-                        <th>Perfil</th>
-                        <th>Data</th>
-                        <th>Ações</th>
+                    <table class="table table-sm table-bordered table-striped">
+                      <thead class="text-primary align-middle">
+                        <th class="align-middle">Saram</th>
+                        <th class="align-middle">CPF</th>
+                        <th class="align-middle">Posto</th>
+                        <th class="align-middle">Nome Completo</th>
+                        <th class="align-middle">Nome de Guerra</th>
+                        <th class="align-middle">Perfil</th>
+                        <th class="align-middle">Data</th>
+                        <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
-
                         <?php
-
-
                         while ($res_1 = mysqli_fetch_array($result)) {
                           $id = $res_1['id'];
                           $saram = $res_1['saram'];
@@ -915,37 +912,30 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                           $perfil = $res_1['perfil'];
                           $data = $res_1['data'];
                           $data2 = implode('/', array_reverse(explode('-', $data)));
-                          ?>
-
-
+                        ?>
                           <tr>
-                            <td><?php echo $saram; ?></td>
-                            <td><?php echo $cpf; ?></td>
-                            <td><?php echo $posto; ?></td>
-                            <td style="text-transform:uppercase;"><?php echo $nome; ?></td>
-                            <td style="text-transform:uppercase;"><?php echo $nomeguerra; ?></td>
-                            <td><?php echo $perfil; ?></td>
-                            <td><?php echo $data2; ?></td>
-                            <td>
+                            <td class="align-middle"><?php echo $saram; ?></td>
+                            <td class="align-middle"><?php echo $cpf; ?></td>
+                            <td class="align-middle"><?php echo $posto; ?></td>
+                            <td class="align-middle" style="text-transform:uppercase;"><?php echo $nome; ?></td>
+                            <td class="align-middle" style="text-transform:uppercase;"><?php echo $nomeguerra; ?></td>
+                            <td class="align-middle"><?php echo $perfil; ?></td>
+                            <td class="align-middle"><?php echo $data2; ?></td>
+                            <td class="align-middle">
                               <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
                               <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
                           </tr>
-
-
                         <?php
-
                         }
-
                         ?>
-
                       </tbody>
                     </table>
                     <?php
                     if ($row == '') {
-
                       echo "<h3>Não existem dados para consulta</h3>";
-                    } else { }
+                    } else {
+                    }
                     ?>
                   </div>
                 </div>
@@ -954,7 +944,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           </div>
           <div id="modalExemplo" class="modal fade" role="dialog">
             <!---Modal Exemplo--->
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
                   <h4 class="modal-title">Militares</h4>
@@ -1013,7 +1003,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                         $result = mysqli_query($conexao, $query);
                         if (count($result)) {
                           while ($res_1 = mysqli_fetch_array($result)) {
-                            ?>
+                        ?>
                             <option value="<?php echo $res_1['perfil']; ?>"><?php echo $res_1['perfil']; ?></option>
                         <?php
                           }
@@ -1160,10 +1150,10 @@ if (@$_GET['func'] == 'edita') {
 
   while ($res_1 = mysqli_fetch_array($result)) {
 
-    ?>
+?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title">Militares</h4>
@@ -1217,16 +1207,16 @@ if (@$_GET['func'] == 'edita') {
                 <select name="perfil" class="form-control mr-2" id="category" name="category" required>
                   <option value="" disabled selected hidden><?php echo $res_1['perfil']; ?></option>
                   <?php
-                      $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
-                      $result = mysqli_query($conexao, $query);
-                      if (count($result)) {
-                        while ($res_2 = mysqli_fetch_array($result)) {
-                          ?>
+                  $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
+                  $result = mysqli_query($conexao, $query);
+                  if (count($result)) {
+                    while ($res_2 = mysqli_fetch_array($result)) {
+                  ?>
                       <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
                   <?php
-                        }
-                      }
-                      ?>
+                    }
+                  }
+                  ?>
                 </select>
               </div>
           </div>
@@ -1250,45 +1240,45 @@ if (@$_GET['func'] == 'edita') {
 
     <!--Comando para editar os dados UPDATE -->
     <?php
-        if (isset($_POST['buttonEditar'])) {
-          $saram = $_POST['txtsaram'];
-          $cpf = $_POST['txtcpf'];
-          $posto = $_POST['txtposto'];
-          $nome = strtoupper($_POST['txtnome']);
-          $nomeguerra = strtoupper($_POST['txtnomeguerra']);
-          $perfil = $_POST['perfil'];
+    if (isset($_POST['buttonEditar'])) {
+      $saram = $_POST['txtsaram'];
+      $cpf = $_POST['txtcpf'];
+      $posto = $_POST['txtposto'];
+      $nome = strtoupper($_POST['txtnome']);
+      $nomeguerra = strtoupper($_POST['txtnomeguerra']);
+      $perfil = $_POST['perfil'];
 
 
-          if ($res_1['cpf'] != $cpf) {
+      if ($res_1['cpf'] != $cpf) {
 
-            //Verificar se o CPF já está cadastrado
-            $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+        //Verificar se o CPF já está cadastrado
+        $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
-            $result_verificar = mysqli_query($conexao, $query_verificar);
-            $dado_verificar = mysqli_fetch_array($result_verificar);
-            $row_verificar = mysqli_num_rows($result_verificar);
+        $result_verificar = mysqli_query($conexao, $query_verificar);
+        $dado_verificar = mysqli_fetch_array($result_verificar);
+        $row_verificar = mysqli_num_rows($result_verificar);
 
-            if ($row_verificar > 0) {
-              echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
-              exit();
-            }
-          }
-
-
-          $query_editar = "UPDATE militares set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', nomeguerra = '$nomeguerra', perfil = '$perfil' where id = '$id'";
-
-          $result_editar = mysqli_query($conexao, $query_editar);
-
-          if ($result_editar == '') {
-            echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
-            echo "<script language='javascript'> window.location='militares.php'; </script>";
-          } else {
-            echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-            echo "<script language='javascript'> window.location='militares.php'; </script>";
-          }
+        if ($row_verificar > 0) {
+          echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+          exit();
         }
+      }
 
-        ?>
+
+      $query_editar = "UPDATE militares set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', nomeguerra = '$nomeguerra', perfil = '$perfil' where id = '$id'";
+
+      $result_editar = mysqli_query($conexao, $query_editar);
+
+      if ($result_editar == '') {
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+        echo "<script language='javascript'> window.location='militares.php'; </script>";
+      } else {
+        echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+        echo "<script language='javascript'> window.location='militares.php'; </script>";
+      }
+    }
+
+    ?>
 
 <?php }
 } ?>

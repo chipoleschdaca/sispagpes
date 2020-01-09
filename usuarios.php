@@ -890,14 +890,14 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
                     <!----------------------------------------------------------------------->
 
-                    <table class="table table-striped">
+                    <table class="table table-sm table-bordered table-striped">
                       <thead class=" text-primary">
-                        <th>Nome</th>
-                        <th>Usuário</th>
-                        <th>Senha</th>
-                        <th>Perfil</th>
-                        <th>Posto</th>
-                        <th>Ações</th>
+                        <th class="align-middle">Nome</th>
+                        <th class="align-middle">Usuário</th>
+                        <th class="align-middle">Senha</th>
+                        <th class="align-middle">Perfil</th>
+                        <th class="align-middle">Posto</th>
+                        <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
 
@@ -913,12 +913,12 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                           ?>
 
                           <tr>
-                            <td><?php echo $nome; ?></td>
-                            <td><?php echo $usuario; ?></td>
-                            <td><?php echo $senha; ?></td>
-                            <td><?php echo $perfil; ?></td>
-                            <td><?php echo $posto; ?></td>
-                            <td>
+                            <td class="align-middle"><?php echo $nome; ?></td>
+                            <td class="align-middle"><?php echo $usuario; ?></td>
+                            <td class="align-middle"><?php echo $senha; ?></td>
+                            <td class="align-middle"><?php echo $perfil; ?></td>
+                            <td class="align-middle"><?php echo $posto; ?></td>
+                            <td class="align-middle">
                               <a class="btn btn-warning btn-sm" href="usuarios.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
                               <a class="btn btn-danger btn-sm" href="usuarios.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
@@ -944,7 +944,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           
           <!---Modal Exemplo--->
             <div id="modalExemplo" class="modal fade" role="dialog">
-              <div class="modal-dialog">
+              <div class="modal-dialog modal-dialog-centered">
                 <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
@@ -1121,7 +1121,7 @@ if (@$_GET['func'] == 'edita') {
     ?>
     <!--------Modal---------------->
     <div id="modalEditar" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">

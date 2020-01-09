@@ -1,4 +1,5 @@
-<?php  
+<?php
+
  function fetch_data()  
  {  
       $output = '';  
@@ -81,6 +82,18 @@
                      ?>  
                      </table>  
                 </div>  
-           </div>           
+           </div>
+           <div class="row no-print" align="center;">
+              <div class="col-12">
+                <a href="invoice-print.php" target="_blank" rel=”noopener” class="btn btn-default"><i class="fas fa-print"></i> Print</a>                
+                <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+                  Payment
+                </button>
+                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                  <i class="fas fa-download"></i> Generate PDF
+                </button>
+              </div>
+            </div>
+          </div>      
       </body>  
 </html>

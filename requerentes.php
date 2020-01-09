@@ -944,32 +944,16 @@ include('verificar_login.php');
 
                     <!-------------------------------------------------->
 
-                    <table class="table table-striped">
+                    <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
-                        <th>
-                          Saram
-                        </th>
-                        <th>
-                          CPF
-                        </th>
-                        <th>
-                          Posto
-                        </th>
-                        <th>
-                          Situação
-                        </th>
-                        <th>
-                          Nome Completo
-                        </th>
-                        <th>
-                          Email
-                        </th>
-                        <th>
-                          Data
-                        </th>
-                        <th>
-                          Ações
-                        </th>
+                        <th class="align-middle">Saram</th>
+                        <th class="align-middle">CPF</th>
+                        <th class="align-middle">Posto</th>
+                        <th class="align-middle">Situação</th>
+                        <th class="align-middle">Nome Completo</th>
+                        <th class="align-middle">Email</th>
+                        <th class="align-middle">Data</th>
+                        <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
                         <?php
@@ -987,18 +971,17 @@ include('verificar_login.php');
                           ?>
 
                           <tr>
-                            <td><?php echo $saram; ?></td>
-                            <td><?php echo $cpf; ?></td>
-                            <td><?php echo $posto; ?></td>
-                            <td><?php echo $situacao; ?></td>
-                            <td><?php echo $nome; ?></td>
-                            <td><?php echo $email; ?></td>
-                            <td><?php echo $data2; ?></td>
-                            <td>
+                            <td class="align-middle"><?php echo $saram; ?></td>
+                            <td class="align-middle"><?php echo $cpf; ?></td>
+                            <td class="align-middle"><?php echo $posto; ?></td>
+                            <td class="align-middle"><?php echo $situacao; ?></td>
+                            <td class="align-middle"><?php echo $nome; ?></td>
+                            <td class="align-middle"><?php echo $email; ?></td>
+                            <td class="align-middle"><?php echo $data2; ?></td>
+                            <td class="align-middle">
                               <a class="btn btn-warning btn-sm" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                              <a class="btn btn-danger btn-sm" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>
+                              <a class="btn btn-danger btn-sm" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
-
                           </tr>
                         <?php
                         }
@@ -1026,7 +1009,7 @@ include('verificar_login.php');
 
         <div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
           <!---Modal Exemplo--->
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Requerentes</h4>
@@ -1080,7 +1063,7 @@ include('verificar_login.php');
                     <div class="custom-control custom-radio">
                       <input type="radio" class="custom-control-input" id="reformado" name="txtsituacao" value="PM" required>
                       <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="reformado"><span></span>Pensionista</label>
-                    </div>
+                    </div>                    
                   </div>
                   <div class="form-group">
                     <label for="id_produto">Nome Completo</label>
@@ -1296,7 +1279,7 @@ if (@$_GET['func'] == 'edita') {
     ?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title">requerentes</h4>
@@ -1357,7 +1340,7 @@ if (@$_GET['func'] == 'edita') {
                     <input type="radio" value="PM" name="txtsituacao" required>
                     <span class="checkmark"></span>
                   </label>
-                </div>
+                </div>              
               </div>
               <div class="form-group">
                 <label for="id_produto">Nome Completo</label>
@@ -1373,7 +1356,6 @@ if (@$_GET['func'] == 'edita') {
             <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
           </div>
-
           </form>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <?php
 
 //CARREGAR DOMPDF
-require_once ('../dompdf/autoload.inc.php');
+include ('../dompdf/autoload.inc.php');
 use Dompdf\Dompdf;
 
 $id = $_GET['id'];

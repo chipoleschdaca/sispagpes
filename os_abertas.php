@@ -260,7 +260,7 @@ include('verificar_login.php');
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="rel_orcamentos.php" class="nav-link">
+                  <a href="rel_os.php" class="nav-link">
                     <i class="far fa-hand-point-right nav-icon"></i>
                     <p>Relatórios</p>
                   </a>
@@ -269,7 +269,6 @@ include('verificar_login.php');
             </li>
       </div>
     </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -306,9 +305,7 @@ include('verificar_login.php');
                       $query = "SELECT * FROM os where status = 'Aberta'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
+                      $row = mysqli_num_rows($result);                      
                       echo $row;
                       ?>
                     </h4>
@@ -410,7 +407,7 @@ include('verificar_login.php');
                       </form>
                     </div>
                   </div>
-                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                  <div class="table-responsive" style="text-align: center; ">
 
                     <!-------------LISTAR TODOS AS ORDENS DE SERVIÇO-------------->
 
@@ -436,33 +433,16 @@ include('verificar_login.php');
 
                     ?>
 
-                    <table class="table">
+                    <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
-
-                        <th>
-                          Requerente
-                        </th>
-                        <th>
-                          Sacador
-                        </th>
-                        <th>
-                          Produto
-                        </th>
-                        <th>
-                          Valor Total
-                        </th>
-                        <th>
-                          Status
-                        </th>
-                        <th style="width: 175px;">
-                          Data de Abertura
-                        </th>
-                        <th style="width: 175px;">
-                          Data do Fechamento
-                        </th>
-                        <th>
-                          Ações
-                        </th>
+                        <th class="align-middle">Requerente</th>
+                        <th class="align-middle">Sacador</th>
+                        <th class="align-middle">Produto</th>
+                        <th class="align-middle">Valor Total</th>
+                        <th class="align-middle">Status</th>
+                        <th class="align-middle" style="width: 175px;">Data de Abertura</th>
+                        <th class="align-middle" style="width: 175px;">Data do Fechamento</th>
+                        <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
 
@@ -494,11 +474,11 @@ include('verificar_login.php');
                         ?>
 
                               <tr>
-                                <td><?php echo $nome_requerente; ?></td>
-                                <td><?php echo $nome_tecnico; ?></td>
-                                <td><?php echo $produto; ?></td>
-                                <td>R$ <?php echo $valor_total; ?></td>
-                                <td>
+                                <td class="align-middle"><?php echo $nome_requerente; ?></td>
+                                <td class="align-middle"><?php echo $nome_tecnico; ?></td>
+                                <td class="align-middle"><?php echo $produto; ?></td>
+                                <td class="align-middle">R$ <?php echo $valor_total; ?></td>
+                                <td class="align-middle">
                                   <?php
                                   if ($status == 'Aberta') { ?>
                                     <span class="badge badge-secondary">
@@ -520,10 +500,10 @@ include('verificar_login.php');
                                   }
                                   ?>
                                 </td>
-                                <td style="width: 10px;"><?php echo $data2; ?></td>
-                                <td style="width: 10px;"><?php echo $data3; ?></td>
+                                <td class="align-middle" style="width: 10px;"><?php echo $data2; ?></td>
+                                <td class="align-middle" style="width: 10px;"><?php echo $data3; ?></td>
 
-                                <td>
+                                <td class="align-middle">
                                   <?php
                                   if ($status == 'Aberta') { ?>
                                     <a class="btn btn-success btn-sm" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
@@ -534,7 +514,7 @@ include('verificar_login.php');
                                   } elseif ($status == 'Aprovada') { ?>
                                     <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
                                     <a class="btn btn-primary btn-sm" href="rel/rel_os_class.php?id=<?php echo $id; ?>&id_orc=<?php echo $id_orc; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
-                                    <a class="btn btn-success btn-sm" href="rel/exemplo.php" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                    <a class="btn btn-success btn-sm" href="rel/invoice-print.php" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
                                     <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar o registro?');"><i class="far fa-trash-alt"></i></a>
                                   <?php
                                   } elseif ($status == 'Cancelada') { ?>
@@ -733,7 +713,7 @@ if (@$_GET['func'] == 'edita') {
 
     <!-- Modal -->
     <div id="modalEditar" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">

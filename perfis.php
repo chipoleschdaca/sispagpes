@@ -887,10 +887,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
                                         <!-------------------------------------------------->
 
-                                        <table class="table table-striped" style="table-layout: fixed;">
+                                        <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
                                             <thead class="text-primary" style="text-align: center;">
 
-                                                <th>Id</th>
+                                                <th>#</th>
                                                 <th>Perfil</th>
                                                 <th>Ações</th>
                                             </thead>
@@ -936,7 +936,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
                     <div id="modalExemplo" class="modal fade" role="dialog">
                         <!---Modal Exemplo--->
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">perfis</h4>
@@ -1091,7 +1091,7 @@ if (@$_GET['func'] == 'edita') {
         ?>
         <div id="modalEditar" class="modal fade" role="dialog">
             <!---Modal EDITAR --->
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Perfis</h4>
