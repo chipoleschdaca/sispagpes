@@ -1,25 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head lang="pt-br">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Invoice</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap 4 -->
+<?php 
+include('../conexao.php');
+session_start();
+include('../verificar_login.php');
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body>
-<div class="wrapper">
+$query = "select o.id, o.requerente, o.tecnico, o.produto, o.serie, o.problema, o.laudo, o.valor_servico, o.pecas, o.valor_pecas, o.total, o.valor_total, o.data_abertura, o.data_geracao, o.status, c.nome as req_nome, c.email, c.saram, c.cpf, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.id = '$id_orc'";
+ ?>
+ <html>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>AdminLTE 3 | Invoice</title>
+      <!-- Tell the browser to be responsive to screen width -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Bootstrap 4 -->
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+      <!-- Google Font: Source Sans Pro -->
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+   </head>
+   <body>
+     <div class="wrapper">
   <!-- Main content -->
   <section class="invoice">
     <!-- title row -->
@@ -66,7 +70,6 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-
     <!-- Table row -->
     <div class="row">
       <div class="col-12 table-responsive">
@@ -115,7 +118,6 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-
     <div class="row">
       <!-- accepted payments column -->
       <div class="col-6">
@@ -124,7 +126,6 @@
         <img src="../dist/img/credit/mastercard.png" alt="Mastercard">
         <img src="../dist/img/credit/american-express.png" alt="American Express">
         <img src="../dist/img/credit/paypal2.png" alt="Paypal">
-
         <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
           Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr
           jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
@@ -162,17 +163,15 @@
   <!-- /.content -->
 </div>
 <!-- ./wrapper -->
-
 <!--<script type="text/javascript"> 
   window.addEventListener("load", window.print());
 </script>-->
-
-<div class="row no-print" align="center;">
+  <div class="row no-print" align="center;">
     <div class="col-12">
       <a class="btn btn-default" href="#" onclick="window.print();"><i class="fas fa-print"></i> Imprimir</a>
       <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Enviar Pagamento</button>
       <button type="button" class="btn btn-primary float-right" onclick="" style="margin-right: 5px;"><i class="fas fa-download"></i> Gerar PDF</button>
     </div>
   </div>
-</body>
-</html>
+   </body>
+ </html>

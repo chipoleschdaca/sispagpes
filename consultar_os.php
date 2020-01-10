@@ -444,7 +444,7 @@ include('verificar_login.php');
                     $row = mysqli_num_rows($result);
 
                     ?>
-
+                    
 
                     <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">

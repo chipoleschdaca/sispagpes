@@ -986,7 +986,7 @@ include('verificar_login.php');
                             <td class="align-middle"><?php echo $data2; ?></td>
 
                             <td class="align-middle">
-                              <a class="btn btn-primary btn-sm" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="far fa-share-square"></i></a>
+                              <a class="btn btn-primary btn-sm" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-save"></i></a>
                             </td>
                           </tr>
 
