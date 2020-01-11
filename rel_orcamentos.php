@@ -455,7 +455,6 @@ include('verificar_login.php');
                           $status = $res_1["status"];
                           $data_abertura = $res_1['data_abertura'];
                           $id = $res_1['id'];
-
                           $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
 
                           ?>

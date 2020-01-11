@@ -413,7 +413,7 @@ include('verificar_login.php');
 
                     <?php
 
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != '') {
+                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] and $_GET['status'] != '') {
                       $data = '%' . $_GET['txtpesquisar'] . '%';
                       $status_os = $_GET['status'];
                       $query = "select * from os where data_abertura = '$data' and status = '$status_os' order by id asc";

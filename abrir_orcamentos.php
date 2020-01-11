@@ -35,7 +35,6 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">     
@@ -388,23 +387,23 @@
       <br>          
       <div class="row">
         <p>
-          <a class="btn btn-primary btn-sm" style="font-style: arial;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+          <a class="btn btn-outline-dark btn-sm" style="font-style: arial;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
             <i class="fa fa-plus"></i> Filtrar
           </a>              
         </p>
-        <div class="collapse" id="collapseExample" style="width: 100%" aria-expanded="true">
+        <div class="collapse" id="collapseExample" style="width: 100%;" aria-expanded="true">
           <div class="card card-body">
             <div class="col-sm-12">
-              <form class="form-inline" style="margin-bottom: 10px;">
+              <form class="form-inline">
                 <div class="input-group input-group-sm">                              
-                  <label for="txtpesquisar">Requerente: </label>
+                  <label for="txtpesquisar" style="margin-right: 10px;">Requerente: </label>
                   <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">                  
                 </div>
               </form>                            
-              <form class="form-inline" style="margin-bottom: 10px;">
+              <form class="form-inline">
                 <div class="input-group input-group-sm">                              
-                  <label for="category">Status: </label>         
-                  <select class="form-control select2" id="category" name="status" style="border-radius:3px;">
+                  <label for="status" style="margin-right: 10px;">Status: </label>         
+                  <select class="form-control select2" id="status" name="status" style="border-radius:3px;">
                     <option value="" disabled selected hidden>Status</option>
                     <option value="Aberto">Aberto</option>
                     <option value="Aguardando">Aguardando</option>
@@ -413,13 +412,13 @@
                   </select>                
                 </div>
               </form>              
-              <form class="form-inline" style="margin-bottom: 10px;">
+              <form class="form-inline">
                 <div class="input-group input-group-sm">
-                  <label for="txtpesquisar2">Data de Abertura: </label>
-                  <input class="form-control" type="date" id="txtpesquisar2" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">                
+                  <label for="txtpesquisar2" style="margin-right: 10px;">Data de Abertura: </label>
+                  <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">           
                 </form>
                 <div class="input-group-append">
-                  <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
+                  <button class="btn btn-app" type="submit" name="buttonPesquisar">
                     <i class="fas fa-search"></i>
                   </button>
                 </div>
@@ -449,226 +448,213 @@
 
             <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
 
-              <?php
+            <?php
 
+            if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] and $_GET['status'] != '') {
+              $data = $_GET['txtpesquisar'] . '%';
+              $statusOrc = $_GET['status'];
+              $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = '$statusOrc' order by id asc";
 
-              if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] and $_GET['status'] != '') {
-                $data = $_GET['txtpesquisar'] . '%';
-                $statusOrc = $_GET['status'];
-                $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = '$statusOrc' order by id asc";
+            } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
+              $data = $_GET['txtpesquisar'] . '%';
+              $statusOrc = $_GET['status'];
+              $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = '$statusOrc' order by id asc";
 
-              } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
-                $requerente = '%' . $_GET['txtpesquisar'] . '%';
-                $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.requerente LIKE '$requerente' order by id asc";
+            } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
+              $data = $_GET['txtpesquisar'] . '%';
+              $statusOrc = $_GET['status'];
+              $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
 
-              } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
-                $statusOrc = $_GET['status'];
-                $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = '$statusOrc' order by id asc";
+            } else {
+              $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
+            }
 
-              } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
-                $data = $_GET['txtpesquisar'] . '%';
-                $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
-
-              } else {
-                $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
-              }
-
-              $result = mysqli_query($conexao, $query);
+            $result = mysqli_query($conexao, $query);
               //$dado = mysqli_fetch_array($result);
-              $row = mysqli_num_rows($result);
+            $row = mysqli_num_rows($result);
 
-              ?>
+            ?>
 
-              <table class="table table-sm table-bordered table-striped">
-                <thead class="text-primary">
-                  <th class="align-middle">Requerente</th>
-                  <th class="align-middle">Sacador</th>
-                  <th class="align-middle">Produto</th>
-                  <th class="align-middle">Valor Total</th>
-                  <th class="align-middle">Status</th>
-                  <th class="align-middle">Data de Abertura</th>
-                  <th class="align-middle">Ações</th>
-                </thead>
-                <tbody>
+            <table class="table table-sm table-bordered table-striped">
+              <thead class="text-primary">
+                <th class="align-middle">Requerente</th>
+                <th class="align-middle">Sacador</th>
+                <th class="align-middle">Produto</th>
+                <th class="align-middle">Valor Total</th>
+                <th class="align-middle">Status</th>
+                <th class="align-middle">Data de Abertura</th>
+                <th class="align-middle">Ações</th>
+              </thead>
+              <tbody>
 
-                  <?php
-
-                  while ($res_1 = mysqli_fetch_array($result)) {
-                    $requerente = $res_1["req_nome"];
-                    $tecnico = $res_1["func_nome"];
-                    $produto = $res_1["produto"];
-                    $valor_total = $res_1["valor_total"];
-                    $status = $res_1["status"];
-                    $data_abertura = $res_1['data_abertura'];
-                    $id = $res_1['id'];
-
-                    $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
-
-                    ?>
-
-                    <tr>
-                      <td class="align-middle"><?php echo $requerente; ?></td>
-                      <td class="align-middle"><?php echo $tecnico; ?></td>
-                      <td class="align-middle"><?php echo $produto; ?></td>
-                      <td class="align-middle">R$ <?php echo $valor_total; ?></td>
-                      <td class="align-middle">
-                        <?php
-                        if ($status == 'Aberto') { ?>
-                          <span class="badge badge-secondary">
-                            <?php echo $status; ?>
-                          </span>
-                          <?php
-                        } elseif ($status == 'Aguardando') { ?>
-                          <span class="badge badge-warning">
-                            <?php echo $status; ?>
-                          </span>
-                          <?php
-                        } elseif ($status == 'Aprovado') { ?>
-                          <span class="badge badge-success">
-                            <?php echo $status; ?>
-                          </span>
-                          <?php
-                        } elseif ($status == 'Cancelado') { ?>
-                          <span class="badge badge-danger">
-                            <?php echo $status; ?>
-                          </span>
-                          <?php
-                        } else {
-                          echo $status;
-                        }
-                        ?>
-                      </td>
-                      <td class="align-middle"><?php echo $data2; ?></td>
-
-                      <td class="align-middle">
-                        <?php
-                        if ($status == 'Aberto') { ?>
-                          <a class="btn btn-dark btn-sm" href="abrir_orcamentos.php?func=fecha&id=<?php echo $id; ?>"><i class="fas fa-save"></i></a>
-                          <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
-                          <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                          <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                          <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-                          <?php
-                        } elseif ($status == 'Aguardando') { ?>
-                          <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
-                          <a class="btn btn-success btn-sm" href="abrir_orcamentos.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                          <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                          <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                          <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-                          <?php
-                        } elseif ($status == 'Aprovado') { ?>
-                          <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
-                          <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
-                          <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                          <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                          <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-                          <?php
-                        } elseif ($status == 'Cancelado') { ?>
-                          <span class="badge badge-danger">
-                            <?php echo $status; ?>
-                          </span>
-                          <?php
-                        } else {
-                          echo $status;
-                        }
-                        ?>
-                        <!--<a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                          <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo deletar o registro?');"><i class="far fa-trash-alt"></i></a>-->
-                        </td>
-                      </tr>
-                    <?php } ?>
-                  </tbody>
-                </table>
                 <?php
-                if ($row == '') {
-                  echo "<h3> Não existem dados cadastrados no banco </h3>";
-                } 
-                ?>
-              </div>
-            </div>
-            <div class="card-footer">
-              <hr>
-              <div class="stats">
-                <i class="fa fa-history"></i>Updated 3 minutes ago
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-<!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
-<div id="modalExemplo" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-
-        <h4 class="modal-title">Novo Orçamento</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="">
-          <div class="form-group">
-            <label for="fornecedor">CPF</label>
-            <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
-          </div>
-          <div class="form-group">
-            <label for="fornecedor">Sacador</label>
-
-            <select class="form-control select2" id="category" name="funcionario">
-              <option value="" disabled selected hidden>Escolha um sacador...</option>
-              <?php
-
-              $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
-              $result = mysqli_query($conexao, $query);
-
-              if (count($result)) {
                 while ($res_1 = mysqli_fetch_array($result)) {
+                  $requerente = $res_1["req_nome"];
+                  $tecnico = $res_1["func_nome"];
+                  $produto = $res_1["produto"];
+                  $valor_total = $res_1["valor_total"];
+                  $status = $res_1["status"];
+                  $data_abertura = $res_1['data_abertura'];
+                  $id = $res_1['id'];
+                  $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+
                   ?>
-                  <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
-                  <?php
-                }
-              }
-              ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="quantidade">Produto</label>
-            <input type="text" class="form-control mr-2" name="txtproduto" placeholder="Produto" required>
-          </div>
 
-          <div class="form-group">
-            <label for="quantidade">Nº de Série</label>
-            <input type="text" class="form-control mr-2" name="txtserie" placeholder="Nº de Série" required>
-          </div>
+                  <tr>
+                    <td class="align-middle"><?php echo $requerente; ?></td>
+                    <td class="align-middle"><?php echo $tecnico; ?></td>
+                    <td class="align-middle"><?php echo $produto; ?></td>
+                    <td class="align-middle">R$ <?php echo $valor_total; ?></td>
+                    <td class="align-middle">
+                      <?php
+                      if ($status == 'Aberto') { ?>
+                        <span class="badge badge-secondary">
+                          <?php echo $status; ?>
+                        </span>
+                        <?php
+                      } elseif ($status == 'Aguardando') { ?>
+                        <span class="badge badge-warning">
+                          <?php echo $status; ?>
+                        </span>
+                        <?php
+                      } elseif ($status == 'Aprovado') { ?>
+                        <span class="badge badge-success">
+                          <?php echo $status; ?>
+                        </span>
+                        <?php
+                      } elseif ($status == 'Cancelado') { ?>
+                        <span class="badge badge-danger">
+                          <?php echo $status; ?>
+                        </span>
+                        <?php
+                      } else {
+                        echo $status;
+                      }
+                      ?>
+                    </td>
+                    <td class="align-middle"><?php echo $data2; ?></td>
 
-          <div class="form-group">
-            <label for="quantidade">Defeito</label>
-            <input type="text" class="form-control mr-2" name="txtdefeito" placeholder="Defeito" required>
-          </div>
-
-          <div class="form-group">
-            <label for="quantidade">Observações</label>
-            <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" required>
+                    <td class="align-middle">
+                      <?php
+                      if ($status == 'Aberto') { ?>
+                        <a class="btn btn-dark btn-sm" href="abrir_orcamentos.php?func=fecha&id=<?php echo $id; ?>"><i class="fas fa-save"></i></a>
+                        <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                        <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
+                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                        <?php
+                      } elseif ($status == 'Aguardando') { ?>
+                        <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
+                        <a class="btn btn-success btn-sm" href="abrir_orcamentos.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                        <a class="btn btn-primary btn-sm" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
+                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                        <?php
+                      } elseif ($status == 'Aprovado') { ?>
+                        <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
+                        <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                        <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
+                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                        <?php
+                      } elseif ($status == 'Cancelado') { ?>
+                        <span class="badge badge-danger">
+                          <?php echo $status; ?>
+                        </span>
+                        <?php
+                      } else {
+                        echo $status;
+                      } ?>                        
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+            <?php
+            if ($row == '') {
+              echo "<h3> Não existem dados cadastrados no banco </h3>";
+            } 
+            ?>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-        </form>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-history"></i>Updated 3 minutes ago
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="info-box">
-    <button class="info-box-icon bg-success"><i class="fas fa-thumbs-up"></i></button>
-  </div>       
-  <button class="btn btn-app">
-    <i class="fas fa-save"></i> Salvar
-  </button>
-</div>
-</section>
+
+  <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
+  <div id="modalExemplo" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">   
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Novo Orçamento</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="">
+            <div class="form-group">
+              <label for="fornecedor">CPF</label>
+              <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
+            </div>
+            <div class="form-group">
+              <label for="fornecedor">Sacador</label>
+              <select class="form-control select2" id="category" name="funcionario">
+                <option value="" disabled selected hidden>Escolha um sacador...</option>
+                <?php
+
+                $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                $result = mysqli_query($conexao, $query);
+
+                if (count($result)) {
+                  while ($res_1 = mysqli_fetch_array($result)) {
+                    ?>
+                    <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
+                  <?php } } ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="quantidade">Produto</label>
+                <input type="text" class="form-control mr-2" name="txtproduto" placeholder="Produto" required>
+              </div>
+
+              <div class="form-group">
+                <label for="quantidade">Nº de Série</label>
+                <input type="text" class="form-control mr-2" name="txtserie" placeholder="Nº de Série" required>
+              </div>
+
+              <div class="form-group">
+                <label for="quantidade">Defeito</label>
+                <input type="text" class="form-control mr-2" name="txtdefeito" placeholder="Defeito" required>
+              </div>
+
+              <div class="form-group">
+                <label for="quantidade">Observações</label>
+                <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+              <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="info-box">
+        <button class="info-box-icon bg-success"><i class="fas fa-thumbs-up"></i></button>
+      </div>       
+      <button class="btn btn-app">
+        <i class="fas fa-save"></i> Salvar
+      </button>
+    </div>
+  </section>
 </div>
 <footer class="main-footer">
   <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>

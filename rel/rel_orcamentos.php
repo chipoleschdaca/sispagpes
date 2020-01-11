@@ -59,8 +59,6 @@ $query = "select o.id, o.requerente, o.tecnico, o.produto, o.serie, o.problema, 
 			margin: 1px;
 		}
 	</style>
-
-
 	<div class="cabecalho">
 		<div class="row" style="height: 100px;">
 			<div class="col-sm-5">
@@ -73,7 +71,6 @@ $query = "select o.id, o.requerente, o.tecnico, o.produto, o.serie, o.problema, 
 		</div>
 	</div>
 	<div class="container">
-
 		<div class="row" style="height: 30px;">
 			<div class="col-sm-8">
 				<big style="text-align: center;">Orçamento nº <?php echo $id ?></big>

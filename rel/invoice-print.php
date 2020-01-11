@@ -1,9 +1,27 @@
+<?php
+include('../conexao.php');
+$id = $_GET['id'];
+$query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
+$result = mysqli_query($conexao, $query);
+$row = mysqli_num_rows($result);
+$res_1 = mysqli_fetch_array($result);
+$requerente = $res_1["req_nome"];
+$tecnico = $res_1["func_nome"];
+$produto = $res_1["produto"];
+$valor_total = $res_1["valor_total"];
+$status = $res_1["status"];
+$data_abertura = $res_1['data_abertura'];
+$id = $res_1['id'];
+$data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head lang="pt-br">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Invoice</title>
+  <title>Orçamento nº <?php echo $id ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 4 -->
@@ -19,7 +37,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper" style="border: 2px solid #000; padding: 10px;">
   <!-- Main content -->
   <section class="invoice">
     <!-- title row -->
@@ -27,7 +45,7 @@
       <div class="col-12">
         <h2 class="page-header">
           <i class="fas fa-globe"></i> AdminLTE, Inc.
-          <small class="float-right">Date: 2/10/2014</small>
+          <small class="float-right">Data: <?php echo $data2 ?></small>
         </h2>
       </div>
       <!-- /.col -->
@@ -35,20 +53,19 @@
     <!-- info row -->
     <div class="row invoice-info">
       <div class="col-sm-4 invoice-col">
-        From
+        Requerente:
         <address>          
-          <strong>Admin, Inc.</strong><br>
+          <strong><?php echo $requerente ?></strong><br>
           795 Folsom Ave, Suite 600<br>
           San Francisco, CA 94107<br>
           Phone: (804) 123-5432<br>
           Email: info@almasaeedstudio.com
         </address>
-      </div>
-      <!-- /.col -->
+      </div>      
       <div class="col-sm-4 invoice-col">
-        To
+        Sacador:
         <address>
-          <strong>John Doe</strong><br>
+          <strong><?php echo $tecnico ?></strong><br>
           795 Folsom Ave, Suite 600<br>
           San Francisco, CA 94107<br>
           Phone: (555) 539-1037<br>
@@ -66,7 +83,6 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-
     <!-- Table row -->
     <div class="row">
       <div class="col-12 table-responsive">
@@ -115,7 +131,6 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-
     <div class="row">
       <!-- accepted payments column -->
       <div class="col-6">
@@ -124,7 +139,6 @@
         <img src="../dist/img/credit/mastercard.png" alt="Mastercard">
         <img src="../dist/img/credit/american-express.png" alt="American Express">
         <img src="../dist/img/credit/paypal2.png" alt="Paypal">
-
         <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
           Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr
           jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
@@ -161,12 +175,6 @@
   </section>
   <!-- /.content -->
 </div>
-<!-- ./wrapper -->
-
-<!--<script type="text/javascript"> 
-  window.addEventListener("load", window.print());
-</script>-->
-
 <div class="row no-print" align="center;">
     <div class="col-12">
       <a class="btn btn-default" href="#" onclick="window.print();"><i class="fas fa-print"></i> Imprimir</a>
