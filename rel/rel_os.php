@@ -1,4 +1,3 @@
-
 <?php
 $id = $_GET['id'];
 $id_orc = $_GET['id_orc'];
@@ -69,8 +68,6 @@ while ($res_1 = mysqli_fetch_array($result)) {
 			margin: 1px;
 		}
 	</style>
-
-
 	<div class="cabecalho">
 		<div class="row" style="height: 100px;">
 			<div class="col-sm-5">
@@ -176,10 +173,8 @@ while ($res_1 = mysqli_fetch_array($result)) {
 		<div class="row">
 			<div class="col-sm-6">
 				<p style="font-size:14px"><b>Técnico: </b> <?php echo $res_1['func_nome']; ?> </p>
-
 			</div>
 			<div class="col-sm-4 areaTotal">
-
 				<p class="pgto" style="font-size:14px"> <b>Total a Pagar: </b> R$ <?php echo $res_1['valor_total']; ?> </p>
 			</div>
 		</div>

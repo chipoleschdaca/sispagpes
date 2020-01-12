@@ -157,555 +157,543 @@
   </li>
 </ul>
 </nav>
-
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
- 
+<aside class="main-sidebar sidebar-dark-primary elevation-4"> 
   <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
     <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
     <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
-  </a>
- 
+  </a> 
   <div class="sidebar">
-<!-- Sidebar user panel (optional) 
-<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-<div class="image">
-<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-</div>
-<div class="info">
-<a href="#" class="d-block">Alexander Pierce</a>
-</div>
-</div> -->
-<!-- Sidebar Menu -->
-<nav class="mt-2">
-  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-  <li class="nav-item">
-    <a href="painel_funcionario.php" class="nav-link">
-      <i class="nav-icon fas fa-home"></i>
-      <p>
-        Página Inicial
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a href="requerentes.php" class="nav-link">
-      <i class="nav-icon fas fa-user-friends"></i>
-      <p>
-        Requerentes
-      </p>
-    </a>
-  </li>
-  <li class="nav-item has-treeview">
-    <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
-    <a href="#" class="nav-link active">
-      <i class="nav-icon fas fa-chart-pie"></i>
-      <p>
-        Orçamentos
-        <i class="right fas fa-angle-left"></i>
-      </p>
-    </a>
-    <ul class="nav nav-treeview">
-      <li class="nav-item">
-        <a href="abrir_orcamentos.php" class="nav-link active">
-          <i class="far fa-hand-point-right nav-icon"></i>
-          <p>Abrir Orçamento</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="fechar_orcamentos.php" class="nav-link">
-          <i class="far fa-hand-point-right nav-icon"></i>
-          <p>Fechar Orçamento</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="rel_orcamentos.php" class="nav-link">
-          <i class="far fa-hand-point-right nav-icon"></i>
-          <p>Relatórios</p>
-        </a>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item has-treeview">
-    <a href="#" class="nav-link">
-      <i class="nav-icon fas fa-list-ul"></i>
-      <p>
-        Ordens de Serviço
-        <i class="right fas fa-angle-left"></i>
-      </p>
-    </a>
-    <ul class="nav nav-treeview">
-      <li class="nav-item">
-        <a href="os_abertas.php" class="nav-link">
-          <i class="far fa-hand-point-right nav-icon"></i>
-          <p>Abertas</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="consultar_os.php" class="nav-link">
-          <i class="far fa-hand-point-right nav-icon"></i>
-          <p>Consultar</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="rel_orcamentos.php" class="nav-link">
-          <i class="far fa-hand-point-right nav-icon"></i>
-          <p>Relatórios</p>
-        </a>
-      </li>
-    </ul>
-  </li>            
-</div>
-</aside>
-<div class="content-wrapper">  
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Dashboard</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
-          </ol>
-        </div>
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <a href="painel_funcionario.php" class="nav-link">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Página Inicial
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="requerentes.php" class="nav-link">
+            <i class="nav-icon fas fa-user-friends"></i>
+            <p>
+              Requerentes
+            </p>
+          </a>
+        </li>
+        <li class="nav-item has-treeview">
+          <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              Orçamentos
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="abrir_orcamentos.php" class="nav-link active">
+                <i class="far fa-hand-point-right nav-icon"></i>
+                <p>Abrir Orçamento</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="fechar_orcamentos.php" class="nav-link">
+                <i class="far fa-hand-point-right nav-icon"></i>
+                <p>Fechar Orçamento</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="rel_orcamentos.php" class="nav-link">
+                <i class="far fa-hand-point-right nav-icon"></i>
+                <p>Relatórios</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-list-ul"></i>
+            <p>
+              Ordens de Serviço
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="os_abertas.php" class="nav-link">
+                <i class="far fa-hand-point-right nav-icon"></i>
+                <p>Abertas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="consultar_os.php" class="nav-link">
+                <i class="far fa-hand-point-right nav-icon"></i>
+                <p>Consultar</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="rel_orcamentos.php" class="nav-link">
+                <i class="far fa-hand-point-right nav-icon"></i>
+                <p>Relatórios</p>
+              </a>
+            </li>
+          </ul>
+        </li>            
       </div>
-    </div>
-  </div>
-  <section class="content">
-    <div class="container-fluid">      
-      <div class="row">
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-dollar-sign"></i></span>
-            <div class="info-box-content" style="text-align:center;">
-              <span class="info-box-text">TOTAL DE ORÇAMENTOS</span>
-              <span class="info-box-number">
-                <h4>
-                  <?php
-                  $query = "SELECT * FROM orcamentos";
-                  $result = mysqli_query($conexao, $query);
-                  $res = mysqli_fetch_array($result);
-                  $row = mysqli_num_rows($result);
-                  ?>
-                  <?php
-                  echo $row;
-                  ?>
-                </h4>
-              </span>
-            </div>            
-          </div>          
-        </div>       
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box">
-            <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
-            <div class="info-box-content" style="text-align:center;">
-              <span class="info-box-text">ORÇAMENTOS ABERTOS</span>
-              <span class="info-box-number">
-                <h4>
-
-                  <?php
-                  $query = "SELECT * FROM orcamentos where status = 'Aberto'";
-                  $result = mysqli_query($conexao, $query);
-                  $res = mysqli_fetch_array($result);
-                  $row = mysqli_num_rows($result);
-                  ?>
-                  <?php
-                  echo $row;
-                  ?>
-
-                </h4>
-              </span>
-            </div>           
-          </div>          
-        </div>        
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cogs"></i></span>
-            <div class="info-box-content" style="text-align:center;">
-              <span class="info-box-text">ORÇAMENTOS AGUARDANDO</span>
-              <span class="info-box-number">
-                <h4>
-                  <?php
-                  $query = "SELECT * FROM orcamentos where status = 'Aguardando'";
-                  $result = mysqli_query($conexao, $query);
-                  $res = mysqli_fetch_array($result);
-                  $row = mysqli_num_rows($result);
-                  ?>
-                  <?php
-                  echo $row;
-                  ?>
-                </h4>
-              </span>
-            </div>            
-          </div>          
-        </div>
-        <div class="clearfix hidden-md-up"></div>
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
-            <div class="info-box-content" style="text-align:center;">
-              <span class="info-box-text">ORÇAMENTOS APROVADOS</span>
-              <span class="info-box-number">
-                <h4>
-                  <?php
-                  $query = "SELECT * FROM orcamentos where status = 'Aprovado'";
-                  $result = mysqli_query($conexao, $query);
-                  $res = mysqli_fetch_array($result);
-                  $row = mysqli_num_rows($result);
-                  ?>
-                  <?php
-                  echo $row;
-                  ?>
-                </h4>
-              </span>
-            </div>           
-          </div>          
-        </div>        
-        <div class="clearfix hidden-md-up"></div>
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3">
-            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
-            <div class="info-box-content" style="text-align:center;">
-              <span class="info-box-text">ORÇAMENTOS CANCELADOS</span>
-              <span class="info-box-number">
-                <h4>
-                  <?php
-                  $query = "SELECT * FROM orcamentos where status = 'Cancelado'";
-                  $result = mysqli_query($conexao, $query);
-                  $res = mysqli_fetch_array($result);
-                  $row = mysqli_num_rows($result);
-                  ?>
-                  <?php
-                  echo $row;
-                  ?>
-                </h4>
-              </span>
-            </div>            
-          </div>          
-        </div>       
-      </div>     
-      <br>          
-      <div class="row">
-        <p>
-          <a class="btn btn-outline-dark btn-sm" style="font-style: arial;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
-            <i class="fa fa-plus"></i> Filtrar
-          </a>              
-        </p>
-        <div class="collapse" id="collapseExample" style="width: 100%;" aria-expanded="true">
-          <div class="card card-body">
-            <div class="col-sm-12">
-              <form class="form-inline">
-                <div class="input-group input-group-sm">                              
-                  <label for="txtpesquisar" style="margin-right: 10px;">Requerente: </label>
-                  <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">                  
-                </div>
-              </form>                            
-              <form class="form-inline">
-                <div class="input-group input-group-sm">                              
-                  <label for="status" style="margin-right: 10px;">Status: </label>         
-                  <select class="form-control select2" id="status" name="status" style="border-radius:3px;">
-                    <option value="" disabled selected hidden>Status</option>
-                    <option value="Aberto">Aberto</option>
-                    <option value="Aguardando">Aguardando</option>
-                    <option value="Aprovado">Aprovado</option>
-                    <option value="Cancelado">Cancelado</option>
-                  </select>                
-                </div>
-              </form>              
-              <form class="form-inline">
-                <div class="input-group input-group-sm">
-                  <label for="txtpesquisar2" style="margin-right: 10px;">Data de Abertura: </label>
-                  <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">           
-                </form>
-                <div class="input-group-append">
-                  <button class="btn btn-app" type="submit" name="buttonPesquisar">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>                       
-  </div>          
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header" style="text-align: center;">
-          <h4 class="align-middle" style="text-align:center;"><strong>TABELA DE ORÇAMENTOS</strong></h4>
-        </div>
-        <div class="card-body">
-          <div class="row" style="margin-bottom: 20px;">                    
+    </aside>
+    <div class="content-wrapper">  
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
             <div class="col-sm-6">
-              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                <i class="far fa-folder-open"></i> Inserir Novo
-              </button>
-            </div>                    
+              <h1 class="m-0 text-dark">Dashboard</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
+              </ol>
+            </div>
           </div>
-
-          <div class="table-responsive" style="text-align: center;">
-
-            <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
-
-            <?php
-
-            if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] and $_GET['status'] != '') {
-              $data = $_GET['txtpesquisar'] . '%';
-              $statusOrc = $_GET['status'];
-              $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = '$statusOrc' order by id asc";
-
-            } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
-              $data = $_GET['txtpesquisar'] . '%';
-              $statusOrc = $_GET['status'];
-              $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = '$statusOrc' order by id asc";
-
-            } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
-              $data = $_GET['txtpesquisar'] . '%';
-              $statusOrc = $_GET['status'];
-              $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
-
-            } else {
-              $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
-            }
-
-            $result = mysqli_query($conexao, $query);
-              //$dado = mysqli_fetch_array($result);
-            $row = mysqli_num_rows($result);
-
-            ?>
-
-            <table class="table table-sm table-bordered table-striped">
-              <thead class="text-primary">
-                <th class="align-middle">Requerente</th>
-                <th class="align-middle">Sacador</th>
-                <th class="align-middle">Produto</th>
-                <th class="align-middle">Valor Total</th>
-                <th class="align-middle">Status</th>
-                <th class="align-middle">Data de Abertura</th>
-                <th class="align-middle">Ações</th>
-              </thead>
-              <tbody>
-
-                <?php
-
-                while ($res_1 = mysqli_fetch_array($result)) {
-                  $requerente = $res_1["req_nome"];
-                  $tecnico = $res_1["func_nome"];
-                  $produto = $res_1["produto"];
-                  $valor_total = $res_1["valor_total"];
-                  $status = $res_1["status"];
-                  $data_abertura = $res_1['data_abertura'];
-                  $id = $res_1['id'];
-                  $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
-
-                  ?>
-
-                  <tr>
-                    <td class="align-middle"><?php echo $requerente; ?></td>
-                    <td class="align-middle"><?php echo $tecnico; ?></td>
-                    <td class="align-middle"><?php echo $produto; ?></td>
-                    <td class="align-middle">R$ <?php echo $valor_total; ?></td>
-                    <td class="align-middle">
+        </div>
+      </div>
+      <section class="content">
+        <div class="container-fluid">      
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-dollar-sign"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE ORÇAMENTOS</span>
+                  <span class="info-box-number">
+                    <h4>
                       <?php
-                      if ($status == 'Aberto') { ?>
-                        <span class="badge badge-secondary">
-                          <?php echo $status; ?>
-                        </span>
-                        <?php
-                      } elseif ($status == 'Aguardando') { ?>
-                        <span class="badge badge-warning">
-                          <?php echo $status; ?>
-                        </span>
-                        <?php
-                      } elseif ($status == 'Aprovado') { ?>
-                        <span class="badge badge-success">
-                          <?php echo $status; ?>
-                        </span>
-                        <?php
-                      } elseif ($status == 'Cancelado') { ?>
-                        <span class="badge badge-danger">
-                          <?php echo $status; ?>
-                        </span>
-                        <?php
-                      } else {
-                        echo $status;
-                      }
+                      $query = "SELECT * FROM orcamentos";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
                       ?>
-                    </td>
-                    <td class="align-middle"><?php echo $data2; ?></td>
-
-                    <td class="align-middle">
                       <?php
-                      if ($status == 'Aberto') { ?>
-                        <a class="btn btn-dark btn-sm" href="abrir_orcamentos.php?func=fecha&id=<?php echo $id; ?>"><i class="fas fa-save"></i></a>
-                        <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
-                        <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-                        <?php
-                      } elseif ($status == 'Aguardando') { ?>
-                        <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
-                        <a class="btn btn-success btn-sm" href="abrir_orcamentos.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                        <a class="btn btn-primary btn-sm" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-                        <?php
-                      } elseif ($status == 'Aprovado') { ?>
-                        <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
-                        <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
-                        <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                        <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                        <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-                        <?php
-                      } elseif ($status == 'Cancelado') { ?>
-                        <span class="badge badge-danger">
-                          <?php echo $status; ?>
-                        </span>
-                        <?php
-                      } else {
-                        echo $status;
-                      } ?>                        
-                    </td>
-                  </tr>
-                <?php } ?>
-              </tbody>
-            </table>
-            <?php
-            if ($row == '') {
-              echo "<h3> Não existem dados cadastrados no banco </h3>";
-            } 
-            ?>
-          </div>
-        </div>
-        <div class="card-footer">
-          <hr>
-          <div class="stats">
-            <i class="fa fa-history"></i>Updated 3 minutes ago
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>            
+              </div>          
+            </div>       
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">ORÇAMENTOS ABERTOS</span>
+                  <span class="info-box-number">
+                    <h4>
 
-  <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
-  <div id="modalExemplo" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">   
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Novo Orçamento</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form method="POST" action="">
-            <div class="form-group">
-              <label for="fornecedor">CPF</label>
-              <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
+                      <?php
+                      $query = "SELECT * FROM orcamentos where status = 'Aberto'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <?php
+                      echo $row;
+                      ?>
+
+                    </h4>
+                  </span>
+                </div>           
+              </div>          
+            </div>        
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cogs"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">ORÇAMENTOS AGUARDANDO</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM orcamentos where status = 'Aguardando'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <?php
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>            
+              </div>          
             </div>
-            <div class="form-group">
-              <label for="fornecedor">Sacador</label>
-              <select class="form-control select2" id="category" name="funcionario">
-                <option value="" disabled selected hidden>Escolha um sacador...</option>
+            <div class="clearfix hidden-md-up"></div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">ORÇAMENTOS APROVADOS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM orcamentos where status = 'Aprovado'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <?php
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>           
+              </div>          
+            </div>        
+            <div class="clearfix hidden-md-up"></div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">ORÇAMENTOS CANCELADOS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM orcamentos where status = 'Cancelado'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <?php
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>            
+              </div>          
+            </div>       
+          </div>     
+          <br>          
+          <div class="row">
+            <p>
+              <a class="btn btn-outline-dark btn-sm" style="font-style: arial;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+                <i class="fa fa-plus"></i> Filtrar
+              </a>              
+            </p>
+            <div class="collapse" id="collapseExample" style="width: 100%;" aria-expanded="true">
+              <div class="card card-body">
+                <div class="col-sm-12">
+                  <form class="form-inline">
+                    <div class="input-group input-group-sm">                              
+                      <label for="txtpesquisar" style="margin-right: 10px;">Requerente: </label>
+                      <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">                  
+                    </div>
+                  </form>                            
+                  <form class="form-inline">
+                    <div class="input-group input-group-sm">                              
+                      <label for="status" style="margin-right: 10px;">Status: </label>         
+                      <select class="form-control select2" id="status" name="status" style="border-radius:3px;">
+                        <option value="" disabled selected hidden>Status</option>
+                        <option value="Aberto">Aberto</option>
+                        <option value="Aguardando">Aguardando</option>
+                        <option value="Aprovado">Aprovado</option>
+                        <option value="Cancelado">Cancelado</option>
+                      </select>                
+                    </div>
+                  </form>              
+                  <form class="form-inline">
+                    <div class="input-group input-group-sm">
+                      <label for="txtpesquisar2" style="margin-right: 10px;">Data de Abertura: </label>
+                      <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">           
+                    </form>
+                    <div class="input-group-append">
+                      <button class="btn btn-app" type="submit" name="buttonPesquisar">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>                       
+      </div>          
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header" style="text-align: center;">
+              <h4 class="align-middle" style="text-align:center;"><strong>TABELA DE ORÇAMENTOS</strong></h4>
+            </div>
+            <div class="card-body">
+              <div class="row" style="margin-bottom: 20px;">                    
+                <div class="col-sm-6">
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
+                    <i class="far fa-folder-open"></i> Inserir Novo
+                  </button>
+                </div>                    
+              </div>
+
+              <div class="table-responsive" style="text-align: center;">
+
+                <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+
                 <?php
 
-                $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] and $_GET['status'] != '') {
+                  $data = $_GET['txtpesquisar'] . '%';
+                  $statusOrc = $_GET['status'];
+                  $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = '$statusOrc' order by id asc";
+
+                } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
+                  $data = $_GET['txtpesquisar'] . '%';
+                  $statusOrc = $_GET['status'];
+                  $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = '$statusOrc' order by id asc";
+
+                } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
+                  $data = $_GET['txtpesquisar'] . '%';
+                  $statusOrc = $_GET['status'];
+                  $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' order by id asc";
+
+                } else {
+                  $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
+                }
+
                 $result = mysqli_query($conexao, $query);
+              //$dado = mysqli_fetch_array($result);
+                $row = mysqli_num_rows($result);
 
-                if (count($result)) {
-                  while ($res_1 = mysqli_fetch_array($result)) {
-                    ?>
-                    <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
-                  <?php } } ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="quantidade">Produto</label>
-                <input type="text" class="form-control mr-2" name="txtproduto" placeholder="Produto" required>
-              </div>
+                ?>
 
-              <div class="form-group">
-                <label for="quantidade">Nº de Série</label>
-                <input type="text" class="form-control mr-2" name="txtserie" placeholder="Nº de Série" required>
-              </div>
+                <table class="table table-sm table-bordered table-striped">
+                  <thead class="text-primary">
+                    <th class="align-middle">Requerente</th>
+                    <th class="align-middle">Sacador</th>
+                    <th class="align-middle">Produto</th>
+                    <th class="align-middle">Valor Total</th>
+                    <th class="align-middle">Status</th>
+                    <th class="align-middle">Data de Abertura</th>
+                    <th class="align-middle">Ações</th>
+                  </thead>
+                  <tbody>
 
-              <div class="form-group">
-                <label for="quantidade">Defeito</label>
-                <input type="text" class="form-control mr-2" name="txtdefeito" placeholder="Defeito" required>
-              </div>
+                    <?php
 
-              <div class="form-group">
-                <label for="quantidade">Observações</label>
-                <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" required>
+                    while ($res_1 = mysqli_fetch_array($result)) {
+                      $requerente = $res_1["req_nome"];
+                      $tecnico = $res_1["func_nome"];
+                      $produto = $res_1["produto"];
+                      $valor_total = $res_1["valor_total"];
+                      $status = $res_1["status"];
+                      $data_abertura = $res_1['data_abertura'];
+                      $id = $res_1['id'];
+                      $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+
+                      ?>
+
+                      <tr>
+                        <td class="align-middle"><?php echo $requerente; ?></td>
+                        <td class="align-middle"><?php echo $tecnico; ?></td>
+                        <td class="align-middle"><?php echo $produto; ?></td>
+                        <td class="align-middle">R$ <?php echo $valor_total; ?></td>
+                        <td class="align-middle">
+                          <?php
+                          if ($status == 'Aberto') { ?>
+                            <span class="badge badge-secondary">
+                              <?php echo $status; ?>
+                            </span>
+                            <?php
+                          } elseif ($status == 'Aguardando') { ?>
+                            <span class="badge badge-warning">
+                              <?php echo $status; ?>
+                            </span>
+                            <?php
+                          } elseif ($status == 'Aprovado') { ?>
+                            <span class="badge badge-success">
+                              <?php echo $status; ?>
+                            </span>
+                            <?php
+                          } elseif ($status == 'Cancelado') { ?>
+                            <span class="badge badge-danger">
+                              <?php echo $status; ?>
+                            </span>
+                            <?php
+                          } else {
+                            echo $status;
+                          }
+                          ?>
+                        </td>
+                        <td class="align-middle"><?php echo $data2; ?></td>
+
+                        <td class="align-middle">
+                          <?php
+                          if ($status == 'Aberto') { ?>
+                            <a class="btn btn-dark btn-sm" href="abrir_orcamentos.php?func=fecha&id=<?php echo $id; ?>"><i class="fas fa-save"></i></a>
+                            <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                            <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
+                            <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                            <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                            <?php
+                          } elseif ($status == 'Aguardando') { ?>
+                            <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
+                            <a class="btn btn-success btn-sm" href="abrir_orcamentos.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                            <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
+                            <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                            <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                            <?php
+                          } elseif ($status == 'Aprovado') { ?>
+                            <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
+                            <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                            <a class="btn btn-primary btn-sm" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
+                            <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                            <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                            <?php
+                          } elseif ($status == 'Cancelado') { ?>
+                            <span class="badge badge-danger">
+                              <?php echo $status; ?>
+                            </span>
+                            <?php
+                          } else {
+                            echo $status;
+                          } ?>                        
+                        </td>
+                      </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+                <?php
+                if ($row == '') {
+                  echo "<h3> Não existem dados cadastrados no banco </h3>";
+                } 
+                ?>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-              <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-            </form>
+            <div class="card-footer">
+              <hr>
+              <div class="stats">
+                <i class="fa fa-history"></i>Updated 3 minutes ago
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
+      <div id="modalExemplo" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">   
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Novo Orçamento</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="">
+                <div class="form-group">
+                  <label for="fornecedor">CPF</label>
+                  <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
+                </div>
+                <div class="form-group">
+                  <label for="fornecedor">Sacador</label>
+                  <select class="form-control select2" id="category" name="funcionario">
+                    <option value="" disabled selected hidden>Escolha um sacador...</option>
+                    <?php
+
+                    $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                    $result = mysqli_query($conexao, $query);
+
+                    if (count($result)) {
+                      while ($res_1 = mysqli_fetch_array($result)) {
+                        ?>
+                        <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
+                      <?php } } ?>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="quantidade">Produto</label>
+                    <input type="text" class="form-control mr-2" name="txtproduto" placeholder="Produto" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="quantidade">Nº de Série</label>
+                    <input type="text" class="form-control mr-2" name="txtserie" placeholder="Nº de Série" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="quantidade">Defeito</label>
+                    <input type="text" class="form-control mr-2" name="txtdefeito" placeholder="Defeito" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="quantidade">Observações</label>
+                    <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                  <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="info-box">
+            <button class="info-box-icon bg-success"><i class="fas fa-thumbs-up"></i></button>
+          </div>       
+          <button class="btn btn-app">
+            <i class="fas fa-save"></i> Salvar
+          </button>
+        </div>
+      </section>
     </div>
-    <div class="row">
-      <div class="info-box">
-        <button class="info-box-icon bg-success"><i class="fas fa-thumbs-up"></i></button>
-      </div>       
-      <button class="btn btn-app">
-        <i class="fas fa-save"></i> Salvar
-      </button>
-    </div>
-  </section>
-</div>
-<footer class="main-footer">
-  <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-  Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-  <div class="float-right d-none d-sm-inline-block">
-    <b>Versão</b> 1.0.0
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Versão</b> 1.0.0
+      </div>
+    </footer>
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
   </div>
-</footer>
-<aside class="control-sidebar control-sidebar-dark">
-</aside>
-</div>
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- jQuery Mask -->
-<script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery Mask -->
+  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="plugins/chart.js/Chart.min.js"></script>
+  <!-- Sparkline -->
+  <script src="plugins/sparklines/sparkline.js"></script>
+  <!-- JQVMap -->
+  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="plugins/moment/moment.min.js"></script>
+  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="dist/js/pages/dashboard.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="dist/js/demo.js"></script>
 
-<!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
+  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
-<!---------------------------------------------------------------------------------------------->
+  <!---------------------------------------------------------------------------------------------->
 </body>
 <style>
   /* The container */

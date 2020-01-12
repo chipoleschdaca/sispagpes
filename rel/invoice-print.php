@@ -1,18 +1,25 @@
 <?php
 include('../conexao.php');
+session_start();
+
 $id = $_GET['id'];
-$query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
+
+$query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where o.id = '$id' order by id asc";
+
 $result = mysqli_query($conexao, $query);
 $row = mysqli_num_rows($result);
 $res_1 = mysqli_fetch_array($result);
+//$id = $res_1['id'];
 $requerente = $res_1["req_nome"];
 $tecnico = $res_1["func_nome"];
 $produto = $res_1["produto"];
 $valor_total = $res_1["valor_total"];
+$valor_total2 = implode(',', explode('.', $valor_total));
 $status = $res_1["status"];
 $data_abertura = $res_1['data_abertura'];
-$id = $res_1['id'];
 $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+
+//Se eu coloco o $id como res_1 ele pega sempre o primeiro id da lista, mas se eu coloco como $_GET, ele pega o id correto, mas traz os dados somente do primeiro id.
 
 ?>
 
@@ -45,7 +52,7 @@ $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
       <div class="col-12">
         <h2 class="page-header">
           <i class="fas fa-globe"></i> AdminLTE, Inc.
-          <small class="float-right">Data: <?php echo $data2 ?></small>
+          <small class="float-right">Data: <?php echo $data2; ?></small>
         </h2>
       </div>
       <!-- /.col -->
@@ -164,7 +171,7 @@ $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
             </tr>
             <tr>
               <th>Total:</th>
-              <td>$265.24</td>
+              <td>R$ <?php echo $valor_total2 ?></td>
             </tr>
           </table>
         </div>
