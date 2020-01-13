@@ -190,7 +190,6 @@ include('verificar_login.php');
       </ul>
     </nav>
     <!-- /.navbar -->
-
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
@@ -213,8 +212,8 @@ include('verificar_login.php');
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-            <li class="nav-item">
+             with font-awesome or any other icon font library -->
+             <li class="nav-item">
               <a href="painel_funcionario.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
@@ -287,503 +286,7 @@ include('verificar_login.php');
                   </a>
                 </li>
               </ul>
-            </li>
-            <!-- OMITIDO
-              <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-home"></i>
-                <p>
-                  Home
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="./index.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v1</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index2.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v2</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index3.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v3</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                  Widgets
-                  <span class="right badge badge-danger">New</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
-                <p>
-                  Layout Options
-                  <i class="fas fa-angle-left right"></i>
-                  <span class="badge badge-info right">6</span>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/layout/top-nav.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Top Navigation</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/layout/boxed.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Boxed</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Fixed Sidebar</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Fixed Navbar</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/layout/fixed-footer.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Fixed Footer</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Collapsed Sidebar</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie"></i>
-                <p>
-                  Charts
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/charts/chartjs.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>ChartJS</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/charts/flot.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Flot</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/charts/inline.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inline</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tree"></i>
-                <p>
-                  UI Elements
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/UI/general.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>General</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/icons.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Icons</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/buttons.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Buttons</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/sliders.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Sliders</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/modals.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Modals & Alerts</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/navbar.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Navbar & Tabs</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/timeline.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Timeline</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/ribbons.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ribbons</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>
-                  Forms
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/forms/general.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>General Elements</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/forms/advanced.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Advanced Elements</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/forms/editors.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Editors</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                <p>
-                  Tables
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Simple Tables</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>DataTables</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/tables/jsgrid.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>jsGrid</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-header">EXAMPLES</li>
-            <li class="nav-item">
-              <a href="pages/calendar.html" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Calendar
-                  <span class="badge badge-info right">2</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon far fa-envelope"></i>
-                <p>
-                  Mailbox
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/mailbox/mailbox.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inbox</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/mailbox/compose.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Compose</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/mailbox/read-mail.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Read</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-book"></i>
-                <p>
-                  Pages
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/examples/invoice.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Invoice</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/profile.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Profile</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/e_commerce.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>E-commerce</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/projects.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Projects</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/project_add.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Project Add</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/project_edit.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Project Edit</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/project_detail.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Project Detail</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/contacts.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Contacts</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon far fa-plus-square"></i>
-                <p>
-                  Extras
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/examples/login.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Login</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/register.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Register</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/lockscreen.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lockscreen</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/legacy-user-menu.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Legacy User Menu</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/language-menu.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Language Menu</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/404.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Error 404</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/500.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Error 500</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/pace.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pace</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/blank.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Blank Page</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="starter.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Starter Page</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-header">MISCELLANEOUS</li>
-            <li class="nav-item">
-              <a href="https://adminlte.io/docs/3.0" class="nav-link">
-                <i class="nav-icon fas fa-file"></i>
-                <p>Documentation</p>
-              </a>
-            </li>
-            <li class="nav-header">MULTI LEVEL EXAMPLE</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fas fa-circle nav-icon"></i>
-                <p>Level 1</p>
-              </a>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
-                <p>
-                  Level 1
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Level 2</p>
-                  </a>
-                </li>
-                <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>
-                      Level 2
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Level 3</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Level 3</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Level 3</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Level 2</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fas fa-circle nav-icon"></i>
-                <p>Level 1</p>
-              </a>
-            </li>
-            <li class="nav-header">LABELS</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon far fa-circle text-danger"></i>
-                <p class="text">Important</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon far fa-circle text-warning"></i>
-                <p>Warning</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon far fa-circle text-info"></i>
-                <p>Informational</p>
-              </a>
-            </li>
-          </ul>
-        </nav> -->
-            <!-- /.sidebar-menu -->
+            </li>           
       </div>
       <!--/.sidebar -->
     </aside>
@@ -807,7 +310,6 @@ include('verificar_login.php');
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -893,7 +395,6 @@ include('verificar_login.php');
           <!-- Main row -->
           <!-- Left col -->
           <br>
-
           <div class="row">
             <div class="col-md-12">
               <div class="card">
@@ -922,11 +423,8 @@ include('verificar_login.php');
                       </form>
                     </div>
                   </div>
-
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
                     <!-------------LISTAR TODOS OS PROCESSOS-------------->
-
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
@@ -934,16 +432,10 @@ include('verificar_login.php');
                     } else {
                       $query = "select * from requerentes order by nome asc";
                     }
-
-
                     $result = mysqli_query($conexao, $query);
                     //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
-
                     ?>
-
-                    <!-------------------------------------------------->
-
                     <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
                         <th class="align-middle">Saram</th>
@@ -958,7 +450,6 @@ include('verificar_login.php');
                       <tbody>
                         <?php
                         while ($res_1 = mysqli_fetch_array($result)) {
-
                           $saram = $res_1['saram'];
                           $cpf = $res_1['cpf'];
                           $posto = $res_1['posto'];
@@ -969,181 +460,174 @@ include('verificar_login.php');
                           $data2 = implode('/', array_reverse(explode('-', $data)));
                           $id = $res_1['id'];
                           ?>
-
                           <tr>
                             <td class="align-middle"><?php echo $saram; ?></td>
                             <td class="align-middle"><?php echo $cpf; ?></td>
                             <td class="align-middle"><?php echo $posto; ?></td>
                             <td class="align-middle"><?php echo $situacao; ?></td>
-                            <td class="align-middle"><?php echo $nome; ?></td>
+                            <td class="align-middle"><?php echo '<a class="nav-link" href="requerentes.php?func=consulta&id='.$id.'&cpf='.$cpf.'" ?>'; echo $nome; ?></td>
                             <td class="align-middle"><?php echo $email; ?></td>
                             <td class="align-middle"><?php echo $data2; ?></td>
                             <td class="align-middle">
+                              <a class="btn btn-info btn-sm" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
                               <a class="btn btn-warning btn-sm" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
                               <a class="btn btn-danger btn-sm" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
-                          </tr>
-                        <?php
-                        }
-                        ?>
-                      </tbody>
-                    </table>
-                    <?php
-                    if ($row == '') {
-                      echo "<h3>Não existem dados para consulta</h3>";
-                    } else { }
-                    ?>
+                            </tr>
+                          <?php } ?>
+                        </tbody>
+                      </table>
+                      <?php
+                      if ($row == '') {
+                        echo "<h3>Não existem dados para consulta</h3>";
+                      } ?>
+                    </div>
                   </div>
-                </div>
-                <div class="card-footer">
-                  <hr>
-                  <div class="stats">
-                    <i class="fa fa-history"></i>Updated 3 minutes ago
+                  <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                      <i class="fa fa-history"></i>Updated 3 minutes ago
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
-
-        <div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
-          <!---Modal Exemplo--->
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Requerentes</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" action="">
-                  <div class="form-group">
-                    <label for="fornecedor">Saram</label>
-                    <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="fornecedor">CPF</label>
-                    <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="id_produto">Posto</label>
-                    <select class="form-control mr-2" name="txtposto" required>
-                      <option value="" disabled selected hidden>Posto/Grad.</option>
-                      <option value="PM">PM</option>
-                      <option value="TB">TB</option>
-                      <option value="MB">MB</option>
-                      <option value="BR">BR</option>
-                      <option value="CL">CL</option>
-                      <option value="TC">TC</option>
-                      <option value="MJ">MJ</option>
-                      <option value="CP">CP</option>
-                      <option value="1T">1T</option>
-                      <option value="2T">2T</option>
-                      <option value="AP">AP</option>
-                      <option value="SO">SO</option>
-                      <option value="1S">1S</option>
-                      <option value="2S">2S</option>
-                      <option value="3S">3S</option>
-                      <option value="CB">CB</option>
-                      <option value="S1">S1</option>
-                      <option value="S2">S2</option>
-                      <option value="SD">SD</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="id_produto">Situação</label><br>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
-                      <label class="custom-control-label" style="cursor: pointer; text-align: left;" for="ativo"><span></span>Ativo</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
-                      <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="reformado" name="txtsituacao" value="PM" required>
-                      <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="reformado"><span></span>Pensionista</label>
-                    </div>                    
-                  </div>
-                  <div class="form-group">
-                    <label for="id_produto">Nome Completo</label>
-                    <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="fornecedor">E-mail</label>
-                    <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" placeholder="Email">
-                  </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Versão</b> 1.0.0
+<!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
+<div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
+  <!---Modal Exemplo--->
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Requerentes</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-    </footer>
+      <div class="modal-body">
+        <form method="POST" action="">
+          <div class="form-group">
+            <label for="fornecedor">Saram</label>
+            <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
+          </div>
+          <div class="form-group">
+            <label for="fornecedor">CPF</label>
+            <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
+          </div>
+          <div class="form-group">
+            <label for="id_produto">Posto</label>
+            <select class="form-control mr-2" name="txtposto" required>
+              <option value="" disabled selected hidden>Posto/Grad.</option>
+              <option value="PM">PM</option>
+              <option value="TB">TB</option>
+              <option value="MB">MB</option>
+              <option value="BR">BR</option>
+              <option value="CL">CL</option>
+              <option value="TC">TC</option>
+              <option value="MJ">MJ</option>
+              <option value="CP">CP</option>
+              <option value="1T">1T</option>
+              <option value="2T">2T</option>
+              <option value="AP">AP</option>
+              <option value="SO">SO</option>
+              <option value="1S">1S</option>
+              <option value="2S">2S</option>
+              <option value="3S">3S</option>
+              <option value="CB">CB</option>
+              <option value="S1">S1</option>
+              <option value="S2">S2</option>
+              <option value="SD">SD</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="id_produto">Situação</label><br>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
+              <label class="custom-control-label" style="cursor: pointer; text-align: left;" for="ativo"><span></span>Ativo</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
+              <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="reformado" name="txtsituacao" value="PM" required>
+              <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="reformado"><span></span>Pensionista</label>
+            </div>                    
+          </div>
+          <div class="form-group">
+            <label for="id_produto">Nome Completo</label>
+            <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" required>
+          </div>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+          <div class="form-group">
+            <label for="fornecedor">E-mail</label>
+            <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" placeholder="Email">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <!-- ./wrapper -->
+</div>
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+  <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+  Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+  <div class="float-right d-none d-sm-inline-block">
+    <b>Versão</b> 1.0.0
+  </div>
+</footer>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery Mask -->
+<script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
 
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="plugins/moment/moment.min.js"></script>
-  <script src="plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
+<!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
-  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
-
-  <!---------------------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------------------------------->
 </body>
 <style>
   /* The container */
@@ -1210,9 +694,7 @@ include('verificar_login.php');
     background: white;
   }
 </style>
-
 </html>
-
 <!------------CADASTRAR------------>
 <?php
 if (isset($_POST['button'])) {
@@ -1249,9 +731,7 @@ if (isset($_POST['button'])) {
     echo "<script language='javascript'> window.location='requerentes.php'; </script>";
   }
 }
-
 ?>
-
 
 <!---------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
 <?php
@@ -1264,25 +744,20 @@ if (@$_GET['func'] == 'deleta') {
 ?>
 <!-------------------------------------------------------------------------------->
 
-
-
-
 <!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
   $query = "select * from requerentes where id = '$id'";
   $result = mysqli_query($conexao, $query);
-
   while ($res_1 = mysqli_fetch_array($result)) {
-
     ?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">requerentes</h4>
+            <h4 class="modal-title">Requerentes</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
@@ -1291,7 +766,6 @@ if (@$_GET['func'] == 'edita') {
                 <label for="fornecedor">Saram</label>
                 <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
               </div>
-
               <div class="form-group">
                 <label for="fornecedor">CPF</label>
                 <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
@@ -1351,35 +825,31 @@ if (@$_GET['func'] == 'edita') {
                 <label for="fornecedor">E-mail</label>
                 <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" value="<?php echo $res_1['email']; ?>" placeholder="Email">
               </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+              <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+            </div>
           </form>
         </div>
       </div>
     </div>
-
-
     <script>
       $('#modalEditar').modal("show");
     </script>
     <!--Modal EDITAR -->
-
-
     <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
 
     <?php
-        if (isset($_POST['buttonEditar'])) {
-          $posto = $_POST['txtposto'];
-          $situacao = $_POST['txtsituacao'];
-          $nome = strtoupper($_POST['txtnome']);
-          $email = strtolower($_POST['txtemail']);
-          $saram = $_POST['txtsaram'];
-          $cpf = $_POST['txtcpf'];
+    if (isset($_POST['buttonEditar'])) {
+      $posto = $_POST['txtposto'];
+      $situacao = $_POST['txtsituacao'];
+      $nome = strtoupper($_POST['txtnome']);
+      $email = strtolower($_POST['txtemail']);
+      $saram = $_POST['txtsaram'];
+      $cpf = $_POST['txtcpf'];
 
-          if ($res_1['cpf'] != $cpf) {
+      if ($res_1['cpf'] != $cpf) {
 
             //Verificar se o CPF já está cadastrado
             $query_verificar = "select * from requerentes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
@@ -1406,27 +876,282 @@ if (@$_GET['func'] == 'edita') {
             echo "<script language='javascript'> window.location='requerentes.php'; </script>";
           }
         }
+      }
+    } ?>
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
+    <!---------------------------Consultar Orçamentos e Ordens de Serviço---------------------------->
+    <?php
+    if (@$_GET['func'] == 'consulta') {
+      $id = $_GET['id'];
+      $query = "select * from requerentes where id = '$id'";
+      $result = mysqli_query($conexao, $query);
+      while ($res_1 = mysqli_fetch_array($result)) {
         ?>
+        <div id="modalConsultar" class="modal fade" role="dialog">
+          <!---Modal EDITAR --->
+          <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+              <div class="modal-header" style="width: 100%;">
+                <?php 
+                $cpf = $_GET['cpf'];
+                $query = "select * from requerentes where cpf = '$cpf'";
+                $result = mysqli_query($conexao, $query);
+                //$dado = mysqli_fetch_array($result);
+                $row = mysqli_num_rows($result);
+                $res_1 = mysqli_fetch_array($result);                         
+                $nome = $res_1['nome'];
+                $posto = $res_1['posto'];
+                $situacao = $res_1['situacao'];
+                ?>
+                <h4 class="modal-title" style="text-align:center; width: 100%;">    DADOS DO(A): <strong><?php echo $posto," ", $situacao," ", $nome?></strong></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>          
+              <div class="modal-body">
+                <div class="card" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);">
+                  <div class="card-header" style="text-align: center;">                    
+                    <h5 class="" style="text-align:center;">ORÇAMENTOS</strong></h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                      <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+                      <?php
+                      $cpf = $_GET['cpf'];
+                      $query = "select * from orcamentos where requerente = '$cpf'";
+                      $result = mysqli_query($conexao, $query);
+                      //$dado = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      ?>
+                      <table class="table table-sm table-bordered table-striped">
+                        <thead class="text-primary">
+                          <th class="align-middle">#</th>
+                          <th class="align-middle">Produto</th>
+                          <th class="align-middle">Problema</th>                            
+                          <th class="align-middle">Valor Total</th>                        
+                          <th class="align-middle">Data de Abertura</th>                        
+                          <th class="align-middle">Data de Aprovação</th>
+                          <th class="align-middle">Status</th>                   
+                        </thead>
+                        <tbody>
+                          <?php
+                          function data($data){
+                            return date("d/m/Y", strtotime($data));
+                          }
+                          while ($res_1 = mysqli_fetch_array($result)) {
+                            $id = $res_1['id'];                            
+                            $produto = $res_1["produto"];
+                            $defeito = $res_1["problema"];
+                            $valor_total = $res_1["valor_total"];
+                            $status = $res_1["status"];
+                            $data_abertura = $res_1['data_abertura'];
+                            $data_aprovacao = $res_1['data_aprovacao'];                          
+                            ?>
+                            <tr>
+                              <td class="align-middle"><?php echo $id; ?></td>                            
+                              <td class="align-middle"><?php echo $produto; ?></td>
+                              <td class="align-middle"><?php echo $defeito; ?></td>                                
+                              <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
+                              <td class="align-middle"><?php echo data($data_abertura); ?></td>
+                              <td class="align-middle">
+                                <?php 
+                                if ($data_aprovacao >= 2019) {
+                                 echo data($data_aprovacao);
+                               }  else {
+                                echo "Não há";
+                              }
+                              ?>                                    
+                            </td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aberto') { ?>
+                                <span class="badge badge-secondary">
+                                  <?php echo $status; ?>
+                                </span>
+                                <?php
+                              } elseif ($status == 'Aguardando') { ?>
+                                <span class="badge badge-warning">
+                                  <?php echo $status; ?>
+                                </span>
+                                <?php
+                              } elseif ($status == 'Aprovado') { ?>
+                                <span class="badge badge-success">
+                                  <?php echo $status; ?>
+                                </span>
+                                <?php
+                              } elseif ($status == 'Cancelado') { ?>
+                                <span class="badge badge-danger">
+                                  <?php echo $status; ?>
+                                </span>
+                                <?php
+                              } else {
+                                echo $status;
+                              }
+                              ?>
+                            </td>
+                          </tr>
+                        <?php } ?>
+                      </tbody>
+                    </table>
+                    <?php
+                    if ($row == '') {
+                      echo "<h3>Não existem dados cadastrados no banco</h3>";
+                    } ?>
+                  </div>
+                </div>
+              </div>                
+              <br>
+              <div class="card" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);">
+                <div class="card-header" style="text-align: center;">                  
+                  <h5 class="" style="text-align:center;">ORDENS DE SERVIÇO</strong></h5>
+                </div>
+                <div class="card-body">   
+                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                    <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+                    <?php
+                    $cpf = $_GET['cpf'];
+                    $query = "select * from os where requerente = '$cpf'";
+                    $result = mysqli_query($conexao, $query);
+                      //$dado = mysqli_fetch_array($result);
+                    $row = mysqli_num_rows($result);
+                    ?>
+                    <table class="table table-sm table-bordered table-striped">
+                      <thead class="text-primary">
+                        <th class="align-middle">#</th>
+                        <th class="align-middle">Produto</th>                            
+                        <th class="align-middle">Garantia</th>
+                        <th class="align-middle">Valor Total</th>                        
+                        <th class="align-middle">Data de Abertura</th>                        
+                        <th class="align-middle">Data de Fechamento</th>
+                        <th class="align-middle">Status</th>                       
+                      </thead>
+                      <tbody>
+                        <?php
+                        while ($res_1 = mysqli_fetch_array($result)) {
+                          $id = $res_1['id'];                             
+                          $produto = $res_1["produto"];
+                          $defeito = $res_1["problema"];
+                          $valor_total = $res_1["total"];
+                          $status = $res_1["status"];
+                          $garantia = $res_1["garantia"];
+                          $data_abertura = $res_1['data_abertura'];
+                          $data_fechamento = $res_1['data_fechamento'];                          
+                          ?>
+                          <tr>
+                            <td class="align-middle"><?php echo $id; ?></td>                            
+                            <td class="align-middle"><?php echo $produto; ?></td>                                
+                            <td class="align-middle"><?php echo $garantia; ?></td>
+                            <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
+                            <td class="align-middle"><?php echo data($data_abertura); ?></td>
+                            <td class="align-middle">
+                              <?php 
+                              if ($data_aprovacao >= 2019) {
+                               echo data($data_aprovacao);
+                             } else {
+                              echo "Não há";
+                            } ?>                                    
+                          </td>
+                          <td class="align-middle">
+                            <?php
+                            if ($status == 'Aberta') { ?>
+                              <span class="badge badge-secondary">
+                                <?php echo $status; ?>
+                              </span>
+                              <?php                                  
+                            } elseif ($status == 'Aprovada') { ?>
+                              <span class="badge badge-success">
+                                <?php echo $status; ?>
+                              </span>
+                              <?php
+                            } elseif ($status == 'Cancelada') { ?>
+                              <span class="badge badge-danger">
+                                <?php echo $status; ?>
+                              </span>
+                              <?php
+                            } else {
+                              echo $status;
+                            }
+                            ?>
+                          </td>
+                        </tr>
+                        <?php
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                  <?php
+                  if ($row == '') {
+                    echo "<h3>Não existem dados cadastrados no banco</h3>";
+                  } ?>
+                </div>
+              </div>
+            </div>
+            <form method="POST" action="">              
+              <div class="modal-footer">                
+                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <script>
+    $('#modalConsultar').modal("show");
+  </script>
+  <!--Modal EDITAR -->
+  <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
 
-<?php }
-} ?>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <?php
+  if (isset($_POST['buttonConsultar'])) {
+    $posto = $_POST['txtposto'];
+    $situacao = $_POST['txtsituacao'];
+    $nome = strtoupper($_POST['txtnome']);
+    $email = strtolower($_POST['txtemail']);
+    $saram = $_POST['txtsaram'];
+    $cpf = $_POST['txtcpf'];
 
-<!--Máscaras-->
-<script>
-  $(document).ready(function() {
-    $('#txtcpf').mask('000.000.000-00', {
-      reverse: true
-    });
-    $('#txtsaram').mask('000.000-0', {
-      reverse: true
-    });
-    $('#txtcpf2').mask('000.000.000-00', {
-      reverse: true
-    });
-    $('#txtsaram2').mask('000.000-0', {
-      reverse: true
-    });
-  });
-</script>
+    if ($res_1['cpf'] != $cpf) {
+
+            //Verificar se o CPF já está cadastrado
+            $query_verificar = "select * from requerentes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+
+            $result_verificar = mysqli_query($conexao, $query_verificar);
+            $dado_verificar = mysqli_fetch_array($result_verificar);
+            $row_verificar = mysqli_num_rows($result_verificar);
+
+            if ($row_verificar > 0) {
+              echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+              exit();
+            }
+          }
+
+          $query_editar = "UPDATE requerentes set posto = '$posto', situacao = '$situacao', nome = '$nome', email = '$email', saram = '$saram', cpf = '$cpf' where id = '$id'";
+
+          $result_editar = mysqli_query($conexao, $query_editar);
+
+          if ($result_editar == '') {
+            echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+            echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+          } else {
+            echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+            echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+          }
+        }
+      }
+    } ?>
+
+    <!--Máscaras-->
+    <script>
+      $(document).ready(function() {
+        $('#txtcpf').mask('000.000.000-00', {
+          reverse: true
+        });
+        $('#txtsaram').mask('000.000-0', {
+          reverse: true
+        });
+        $('#txtcpf2').mask('000.000.000-00', {
+          reverse: true
+        });
+        $('#txtsaram2').mask('000.000-0', {
+          reverse: true
+        });
+      });
+    </script>

@@ -477,7 +477,7 @@ include('verificar_login.php');
                                 <td class="align-middle"><?php echo $nome_requerente; ?></td>
                                 <td class="align-middle"><?php echo $nome_tecnico; ?></td>
                                 <td class="align-middle"><?php echo $produto; ?></td>
-                                <td class="align-middle">R$ <?php echo $valor_total; ?></td>
+                                <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.') ?></td>
                                 <td class="align-middle">
                                   <?php
                                   if ($status == 'Aberta') { ?>

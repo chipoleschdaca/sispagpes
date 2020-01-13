@@ -737,9 +737,6 @@ if (@$_GET['func'] == 'edita') {
         </div>
       </div>
     </div>
-
-
-
     <script>
       $("#modalFecharOrcamento").modal("show");
     </script>

@@ -45,12 +45,14 @@ function data($data){
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 4 -->
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -70,7 +72,7 @@ function data($data){
     </div>
     <!-- info row -->
     <div class="row invoice-info">
-      <div class="col-sm-4 invoice-col">
+      <div class="col-3 invoice-col">
         Requerente:
         <address>          
           <strong><?php echo $requerente ?></strong><br>
@@ -80,7 +82,7 @@ function data($data){
           Email: info@almasaeedstudio.com
         </address>
       </div>      
-      <div class="col-sm-4 invoice-col">
+      <div class="col-6 invoice-col">
         Sacador:
         <address>
           <strong><?php echo $tecnico ?></strong><br>
@@ -91,7 +93,7 @@ function data($data){
         </address>
       </div>
       <!-- /.col -->
-      <div class="col-sm-4 invoice-col">
+      <div class="col-3 invoice-col float-right">
         <b>Invoice #<?php echo $serie ?> </b><br>
         <br>
         <?php
@@ -182,13 +184,14 @@ function data($data){
         <img src="../dist/img/credit/mastercard.png" alt="Mastercard">
         <img src="../dist/img/credit/american-express.png" alt="American Express">
         <img src="../dist/img/credit/paypal2.png" alt="Paypal">
-        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px; margin-right: 10px;" align="justify">
+        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </div>
       <!-- /.col -->
       <div class="col-6">
         <p class="lead">Valor fechado em <?php echo data($data_aprovacao) ?></p>
+
         <div class="table-responsive">
           <table class="table">
             <tr>
@@ -217,11 +220,11 @@ function data($data){
   <!-- /.content -->
 </div>
 <div class="row no-print" align="center;">
-  <div class="col-12">
-    <a class="btn btn-default" href="#" onclick="window.print();"><i class="fas fa-print"></i> Imprimir</a>
-    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Enviar Pagamento</button>
-    <button type="button" class="btn btn-primary float-right" onclick="" style="margin-right: 5px;"><i class="fas fa-download"></i> Gerar PDF</button>
+    <div class="col-12">
+      <a class="btn btn-default" href="#" onclick="window.print();"><i class="fas fa-print"></i> Imprimir</a>
+      <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Enviar Pagamento</button>
+      <button type="button" class="btn btn-primary float-right" onclick="" style="margin-right: 5px;"><i class="fas fa-download"></i> Gerar PDF</button>
+    </div>
   </div>
-</div>
 </body>
 </html>
