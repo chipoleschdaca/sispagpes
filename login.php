@@ -20,10 +20,8 @@ if(empty($_POST['usuario']) || empty($_POST['senha'])){
 }
 
 $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
-$senha = mysqli_real_escape_string($conexao, $_POST['senha']);
-
-$query = "select * from usuarios where usuario = '{$usuario}' and senha = '{$senha}' ";
-
+$senha = mysqli_real_escape_string($conexao, md5($_POST['senha']));
+$query = "select * from usuarios where usuario = '{$usuario}' and senha = '{$senha}'";
 $result = mysqli_query($conexao, $query);
 $dado = mysqli_fetch_array($result);
 $row = mysqli_num_rows($result);
@@ -43,7 +41,6 @@ if ($row > 0){
 		header('Location: painel_tesouraria.php');
 		exit();
 	}
-
 
 	//if ($_SESSION['perfil_usuario'] == 'Funcionario'){
 		header('Location: painel_funcionario.php'); // --> Faz com que qualquer login que não seja com perfil de Administrador ou Tesoureiro caia na página painel_funcionario.

@@ -46,16 +46,8 @@ include('verificar_login.php');
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-        </li>
-        <!-- <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Início</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contato</a>
-        </li>-->
-      </ul>
-
-      <!-- Right navbar links -->
+        </li>        
+      </ul>      
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
@@ -267,529 +259,522 @@ include('verificar_login.php');
                 </li>
               </ul>
             </li>
-      </div>
-    </aside>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Dashboard</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-                <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE <b>ORDENS DE SERVIÇO</b> ABERTAS</span>
-                  <span class="info-box-number">
-                    <h4>
-                      <?php
-                      $query = "SELECT * FROM os where status = 'Aberta'";
-                      $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);                      
-                      echo $row;
-                      ?>
-                    </h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">Likes</span>
-                  <span class="info-box-number">
-                    <h4>41,410</h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-
-            <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
-
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">Sales</span>
-                  <span class="info-box-number">
-                    <h4>760</h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">New Members</span>
-                  <span class="info-box-number">
-                    <h4>2,000</h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
-          <!-- /.row -->
-          <!-- Main row -->
-          <!-- Left col -->
-          <br>
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+          <div class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1 class="m-0 text-dark">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard v1</li>
+                  </ol>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+          </div>
+          <!-- /.content-header -->
 
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE ORDENS DE SERVIÇO</strong></h4>
-                </div>
-                <div class="card-body">
-                  <div class="row" style="margin-bottom: 20px;">
-                    <div class="col-sm-6">
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                        <i class="far fa-folder-open"></i> Inserir Novo
-                      </button>
+          <!-- Main content -->
+          <section class="content">
+            <div class="container-fluid">
+              <!-- Small boxes (Stat box) -->
+              <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                    <div class="info-box-content" style="text-align:center;">
+                      <span class="info-box-text">TOTAL DE <b>ORDENS DE SERVIÇO</b> ABERTAS</span>
+                      <span class="info-box-number">
+                        <h4>
+                          <?php
+                          $query = "SELECT * FROM os where status = 'Aberta'";
+                          $result = mysqli_query($conexao, $query);
+                          $res = mysqli_fetch_array($result);
+                          $row = mysqli_num_rows($result);                      
+                          echo $row;
+                          ?>
+                        </h4>
+                      </span>
                     </div>
-                    <div class="col-sm-6">
-                      <!-- SEARCH FORM -->
-                      <form class="form-inline">
-                        <label for="">Filtros: </label>
-                        <div class="input-group input-group-sm" style="margin-left:10px;">
-                          <select class="form-control" id="category" name="status" style="border-radius:3px;">
-                            <option value="" disabled selected hidden>Status</option>
-                            <option value="Aberta">Aberta</option>
-                            <option value="Aprovada">Aprovada</option>
-                            <option value="Cancelada">Cancelada</option>
-                          </select>
-                          <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="margin-right:10px; margin-left:10px; border-radius:3px;">
-                          <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
-                          <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
-                              <i class="fas fa-search"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
+                    <!-- /.info-box-content -->
                   </div>
-                  <div class="table-responsive" style="text-align: center; ">
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box mb-3">
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
-                    <!-------------LISTAR TODOS AS ORDENS DE SERVIÇO-------------->
+                    <div class="info-box-content">
+                      <span class="info-box-text">Likes</span>
+                      <span class="info-box-number">
+                        <h4>41,410</h4>
+                      </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
 
-                    <?php
+                <!-- fix for small devices only -->
+                <div class="clearfix hidden-md-up"></div>
 
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] and $_GET['status'] != '') {
-                      $data = '%' . $_GET['txtpesquisar'] . '%';
-                      $status_os = $_GET['status'];
-                      $query = "select * from os where data_abertura = '$data' and status = '$status_os' order by id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
-                      $status_os = $_GET['status'];
-                      $query = "select * from os where status = '$status_os' order by id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
-                      $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select * from os where data_abertura = '$data' order by id asc";
-                    } else {
-                      $query = "select * from os order by id asc";
-                    }
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
-                    $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
-                    $row = mysqli_num_rows($result);
+                    <div class="info-box-content">
+                      <span class="info-box-text">Sales</span>
+                      <span class="info-box-number">
+                        <h4>760</h4>
+                      </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
-                    ?>
+                    <div class="info-box-content">
+                      <span class="info-box-text">New Members</span>
+                      <span class="info-box-number">
+                        <h4>2,000</h4>
+                      </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+              <!-- /.row -->
+              <!-- Main row -->
+              <!-- Left col -->
+              <br>
 
-                    <table class="table table-sm table-bordered table-striped">
-                      <thead class="text-primary">
-                        <th class="align-middle">Requerente</th>
-                        <th class="align-middle">Sacador</th>
-                        <th class="align-middle">Produto</th>
-                        <th class="align-middle">Valor Total</th>
-                        <th class="align-middle">Status</th>
-                        <th class="align-middle" style="width: 175px;">Data de Abertura</th>
-                        <th class="align-middle" style="width: 175px;">Data do Fechamento</th>
-                        <th class="align-middle">Ações</th>
-                      </thead>
-                      <tbody>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header" style="text-align: center;">
+                      <h4 class="" style="text-align:center;"><strong>TABELA DE ORDENS DE SERVIÇO</strong></h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="row" style="margin-bottom: 20px;">
+                        <div class="col-sm-6">
+                          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
+                            <i class="far fa-folder-open"></i> Inserir Novo
+                          </button>
+                        </div>
+                        <div class="col-sm-6">
+                          <!-- SEARCH FORM -->
+                          <form class="form-inline">
+                            <label for="">Filtros: </label>
+                            <div class="input-group input-group-sm" style="margin-left:10px;">
+                              <select class="form-control" id="category" name="status" style="border-radius:3px;">
+                                <option value="" disabled selected hidden>Status</option>
+                                <option value="Aberta">Aberta</option>
+                                <option value="Aprovada">Aprovada</option>
+                                <option value="Cancelada">Cancelada</option>
+                              </select>
+                              <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="margin-right:10px; margin-left:10px; border-radius:3px;">
+                              <input class="form-control" type="date" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
+                              <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
+                                  <i class="fas fa-search"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="table-responsive" style="text-align: center; ">
+
+                        <!-------------LISTAR TODOS AS ORDENS DE SERVIÇO-------------->
 
                         <?php
 
-                        while ($res_1 = mysqli_fetch_array($result)) {
-                          $requerente = $res_1["requerente"];
-                          $tecnico = $res_1["tecnico"];
-                          $produto = $res_1["produto"];
-                          $valor_total = $res_1["total"];
-                          $status = $res_1["status"];
-                          $data_abertura = $res_1['data_abertura'];
-                          $data_fechamento = $res_1['data_fechamento'];
-                          $id = $res_1['id'];
-                          $id_orc = $res_1['id_orc'];
-                          $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
-                          $data3 = implode('/', array_reverse(explode('-', $data_fechamento)));
+                        if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] and $_GET['status'] != '') {
+                          $data = '%' . $_GET['txtpesquisar'] . '%';
+                          $status_os = $_GET['status'];
+                          $query = "select * from os where data_abertura = '$data' and status = '$status_os' order by id asc";
+                        } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
+                          $status_os = $_GET['status'];
+                          $query = "select * from os where status = '$status_os' order by id asc";
+                        } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
+                          $data = $_GET['txtpesquisar'] . '%';
+                          $query = "select * from os where data_abertura = '$data' order by id asc";
+                        } else {
+                          $query = "select * from os order by id asc";
+                        }
 
-                          $query_requerente = "select * from requerentes where cpf = '$requerente'";
-                          $result_requerente = mysqli_query($conexao, $query_requerente);
-                          while ($res_requerente = mysqli_fetch_array($result_requerente)) {
-                            $nome_requerente = $res_requerente['nome'];
+                        $result = mysqli_query($conexao, $query);
+                    //$dado = mysqli_fetch_array($result);
+                        $row = mysqli_num_rows($result);
+
+                        ?>
+
+                        <table class="table table-sm table-bordered table-striped">
+                          <thead class="text-primary">
+                            <th class="align-middle">Requerente</th>
+                            <th class="align-middle">Sacador</th>
+                            <th class="align-middle">Produto</th>
+                            <th class="align-middle">Valor Total</th>
+                            <th class="align-middle">Status</th>
+                            <th class="align-middle" style="width: 175px;">Data de Abertura</th>
+                            <th class="align-middle" style="width: 175px;">Data do Fechamento</th>
+                            <th class="align-middle">Ações</th>
+                          </thead>
+                          <tbody>
+
+                            <?php
+
+                            while ($res_1 = mysqli_fetch_array($result)) {
+                              $requerente = $res_1["requerente"];
+                              $tecnico = $res_1["tecnico"];
+                              $produto = $res_1["produto"];
+                              $valor_total = $res_1["total"];
+                              $status = $res_1["status"];
+                              $data_abertura = $res_1['data_abertura'];
+                              $data_fechamento = $res_1['data_fechamento'];
+                              $id = $res_1['id'];
+                              $id_orc = $res_1['id_orc'];
+                              $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+                              $data3 = implode('/', array_reverse(explode('-', $data_fechamento)));
+
+                              $query_requerente = "select * from requerentes where cpf = '$requerente'";
+                              $result_requerente = mysqli_query($conexao, $query_requerente);
+                              while ($res_requerente = mysqli_fetch_array($result_requerente)) {
+                                $nome_requerente = $res_requerente['nome'];
 
                             //Recupera o sacador através do CPF sem precisar de INNER JOIN
-                          $query_tecnico = "select * from militares where id = '$tecnico'";
-                          $result_tecnico = mysqli_query($conexao, $query_tecnico);
-                          while ($res_tecnico = mysqli_fetch_array($result_tecnico)) {
-                            $nome_tecnico = $res_tecnico['nome'];
-                        ?>
-
-                              <tr>
-                                <td class="align-middle"><?php echo $nome_requerente; ?></td>
-                                <td class="align-middle"><?php echo $nome_tecnico; ?></td>
-                                <td class="align-middle"><?php echo $produto; ?></td>
-                                <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.') ?></td>
-                                <td class="align-middle">
-                                  <?php
-                                  if ($status == 'Aberta') { ?>
-                                    <span class="badge badge-secondary">
-                                      <?php echo $status; ?>
-                                    </span>
-                                  <?php
-                                  } elseif ($status == 'Aprovada') { ?>
-                                    <span class="badge badge-success">
-                                      <?php echo $status; ?>
-                                    </span>
-                                  <?php
-                                  } elseif ($status == 'Cancelada') { ?>
-                                    <span class="badge badge-danger">
-                                      <?php echo $status; ?>
-                                    </span>
-                                  <?php
-                                  } else {
-                                    echo $status;
-                                  }
+                                $query_tecnico = "select * from militares where id = '$tecnico'";
+                                $result_tecnico = mysqli_query($conexao, $query_tecnico);
+                                while ($res_tecnico = mysqli_fetch_array($result_tecnico)) {
+                                  $nome_tecnico = $res_tecnico['nome'];
                                   ?>
-                                </td>
-                                <td class="align-middle" style="width: 10px;"><?php echo $data2; ?></td>
-                                <td class="align-middle" style="width: 10px;"><?php echo $data3; ?></td>
 
-                                <td class="align-middle">
-                                  <?php
-                                  if ($status == 'Aberta') { ?>
-                                    <a class="btn btn-success btn-sm" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                    <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                                    
-                                    <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar a OS?');"><i class="far fa-trash-alt"></i></a>
+                                  <tr>
+                                    <td class="align-middle"><?php echo $nome_requerente; ?></td>
+                                    <td class="align-middle"><?php echo $nome_tecnico; ?></td>
+                                    <td class="align-middle"><?php echo $produto; ?></td>
+                                    <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.') ?></td>
+                                    <td class="align-middle">
+                                      <?php
+                                      if ($status == 'Aberta') { ?>
+                                        <span class="badge badge-secondary">
+                                          <?php echo $status; ?>
+                                        </span>
+                                        <?php
+                                      } elseif ($status == 'Aprovada') { ?>
+                                        <span class="badge badge-success">
+                                          <?php echo $status; ?>
+                                        </span>
+                                        <?php
+                                      } elseif ($status == 'Cancelada') { ?>
+                                        <span class="badge badge-danger">
+                                          <?php echo $status; ?>
+                                        </span>
+                                        <?php
+                                      } else {
+                                        echo $status;
+                                      }
+                                      ?>
+                                    </td>
+                                    <td class="align-middle" style="width: 10px;"><?php echo $data2; ?></td>
+                                    <td class="align-middle" style="width: 10px;"><?php echo $data3; ?></td>
 
-                                  <?php
-                                  } elseif ($status == 'Aprovada') { ?>
-                                    <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
-                                    <a class="btn btn-primary btn-sm" href="rel/rel_os_class.php?id=<?php echo $id; ?>&id_orc=<?php echo $id_orc; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
-                                    <a class="btn btn-success btn-sm" href="rel/invoice-print.php" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                                    <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar o registro?');"><i class="far fa-trash-alt"></i></a>
-                                  <?php
-                                  } elseif ($status == 'Cancelada') { ?>
-                                    <span class="badge badge-danger">
-                                      <?php echo $status; ?>
-                                    </span>
-                                  <?php
-                                  } else {
-                                    echo $status;
-                                  }
-                                  ?>
+                                    <td class="align-middle">
+                                      <?php
+                                      if ($status == 'Aberta') { ?>
+                                        <a class="btn btn-success btn-sm" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                        <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>                                    
+                                        <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar a OS?');"><i class="far fa-trash-alt"></i></a>
+
+                                        <?php
+                                      } elseif ($status == 'Aprovada') { ?>
+                                        <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
+                                        <a class="btn btn-primary btn-sm" href="rel/rel_os_class.php?id=<?php echo $id; ?>&id_orc=<?php echo $id_orc; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                        <a class="btn btn-success btn-sm" href="rel/invoice-print.php" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
+                                        <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar o registro?');"><i class="far fa-trash-alt"></i></a>
+                                        <?php
+                                      } elseif ($status == 'Cancelada') { ?>
+                                        <span class="badge badge-danger">
+                                          <?php echo $status; ?>
+                                        </span>
+                                        <?php
+                                      } else {
+                                        echo $status;
+                                      }
+                                      ?>
                                   <!--<a class="btn btn-success btn-sm" href="os_abertas.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                  <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar a OS?');"><i class="far fa-trash-alt"></i></a>-->
-                                </td>
-                              </tr>
+                                    <a class="btn btn-danger btn-sm" href="os_abertas.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo cancelar a OS?');"><i class="far fa-trash-alt"></i></a>-->
+                                  </td>
+                                </tr>
 
-                        <?php
+                                <?php
+                              }
                             }
                           }
-                        }
-                        ?>
-                      </tbody>
-                    </table>
-                    <?php
-                    if ($row == '') {
+                          ?>
+                        </tbody>
+                      </table>
+                      <?php
+                      if ($row == '') {
 
-                      echo "<h3> Não existem dados cadastrados no banco </h3>";
-                    } else {
-                    }
+                        echo "<h3> Não existem dados cadastrados no banco </h3>";
+                      } else {
+                      }
 
-                    ?>
+                      ?>
+                    </div>
                   </div>
-                </div>
-                <div class="card-footer">
-                  <hr>
-                  <div class="stats">
-                    <i class="fa fa-history"></i>Updated 3 minutes ago
+                  <div class="card-footer">
+                    <hr>
+                    <div class="stats">
+                      <i class="fa fa-history"></i>Updated 3 minutes ago
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Versão</b> 1.0.0
-      </div>
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="plugins/moment/moment.min.js"></script>
-  <script src="plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
-
-  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
-
-  <!---------------------------------------------------------------------------------------------->
-</body>
-<style>
-  /* The container */
-  .container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  /* Hide the browser's default radio button */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-  }
-
-  /* Create a custom radio button */
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #eee;
-    border-radius: 50%;
-  }
-
-  /* On mouse-over, add a grey background color */
-  .container:hover input~.checkmark {
-    background-color: #ccc;
-  }
-
-  /* When the radio button is checked, add a blue background */
-  .container input:checked~.checkmark {
-    background-color: #2196F3;
-  }
-
-  /* Create the indicator (the dot/circle - hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-
-  /* Show the indicator (dot/circle) when checked */
-  .container input:checked~.checkmark:after {
-    display: block;
-  }
-
-  /* Style the indicator (dot/circle) */
-  .container .checkmark:after {
-    top: 7px;
-    left: 7px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;   
-  }
-</style>
-
-</html>
-
-
-<!--CANCELAR OS -->
-<?php
-if (@$_GET['func'] == 'deleta') {
-  $id = $_GET['id'];
-  $query_cancelar = "UPDATE os set status = 'Cancelada' where id = '$id' ";
-  mysqli_query($conexao, $query_cancelar);
-  echo "<script language='javascript'> window.location='os_abertas.php'; </script>";
-}
-?>
-
-
-<!--EDITAR -->
-<?php
-if (@$_GET['func'] == 'edita') {
-  $id = $_GET['id'];
-  $id_orc = $res_1['id_orc'];
-  $query = "select * from os where id = '$id'";
-  $result = mysqli_query($conexao, $query);
-
-  while ($res_1 = mysqli_fetch_array($result)) {
-
-?>
-
-    <!-- Modal -->
-    <div id="modalEditar" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-dialog-centered">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-
-            <h4 class="modal-title">Fechar Ordem de Serviço</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <form method="POST" action="">
-              <div class="form-group">
-                <label for="quantidade">Garantia do Serviço</label>
-                <input type="text" class="form-control mr-2" name="txtgarantia" placeholder="Garantia" required>
-              </div>
-              <div class="form-group">
-                <label for="quantidade">Data de Fechamento</label>
-                <input type="date" class="form-control mr-2" name="txtdatafechamento" required>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-            </form>
-          </div>
+          </section>
+          <!-- /.content -->
         </div>
+        <!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+          <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+          Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+          <div class="float-right d-none d-sm-inline-block">
+            <b>Versão</b> 1.0.0
+          </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+          <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
       </div>
-    </div>
+      <!-- ./wrapper -->
 
-    <script>
-      $("#modalEditar").modal("show");
-    </script>
+      <!-- jQuery -->
+      <script src="plugins/jquery/jquery.min.js"></script>
+      <!-- jQuery Mask -->
+      <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+      <!-- jQuery UI 1.11.4 -->
+      <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+      <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+      <script>
+        $.widget.bridge('uibutton', $.ui.button)
+      </script>
+      <!-- Bootstrap 4 -->
+      <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- ChartJS -->
+      <script src="plugins/chart.js/Chart.min.js"></script>
+      <!-- Sparkline -->
+      <script src="plugins/sparklines/sparkline.js"></script>
+      <!-- JQVMap -->
+      <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+      <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+      <!-- jQuery Knob Chart -->
+      <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+      <!-- daterangepicker -->
+      <script src="plugins/moment/moment.min.js"></script>
+      <script src="plugins/daterangepicker/daterangepicker.js"></script>
+      <!-- Tempusdominus Bootstrap 4 -->
+      <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+      <!-- Summernote -->
+      <script src="plugins/summernote/summernote-bs4.min.js"></script>
+      <!-- overlayScrollbars -->
+      <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+      <!-- AdminLTE App -->
+      <script src="dist/js/adminlte.js"></script>
+      <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+      <script src="dist/js/pages/dashboard.js"></script>
+      <!-- AdminLTE for demo purposes -->
+      <script src="dist/js/demo.js"></script>
 
-    <!--Comando para editar os dados UPDATE -->
-    <?php
-    if (isset($_POST['buttonEditar'])) {
-      $garantia = $_POST['txtgarantia'];
-      $data_fechamento_os = $_POST['txtdatafechamento'];
-      $serie = $_POST['txtserie'];
-      $defeito = $_POST['txtdefeito'];
-      $obs = $_POST['txtobs'];
+      <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
-      $query_editar = "UPDATE os set garantia = '$garantia', data_fechamento = '$data_fechamento_os', status = 'Aprovada' where id = '$id' ";
-
-      $result_editar = mysqli_query($conexao, $query_editar);
-
-      if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao tentar encerrar a OS!'); </script>";
-      } else {
-        echo "<script language='javascript'> window.alert('OS concluída com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='os_abertas.php'; </script>";
-        //echo "<script language='javascript'> window.location='rel/rel_os_class.php?id=$id&id_orc=$id_orc'; </script>";
+      <!---------------------------------------------------------------------------------------------->
+    </body>
+    <style>
+      /* The container */
+      .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
+
+      /* Hide the browser's default radio button */
+      .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      /* Create a custom radio button */
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+      }
+
+      /* On mouse-over, add a grey background color */
+      .container:hover input~.checkmark {
+        background-color: #ccc;
+      }
+
+      /* When the radio button is checked, add a blue background */
+      .container input:checked~.checkmark {
+        background-color: #2196F3;
+      }
+
+      /* Create the indicator (the dot/circle - hidden when not checked) */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      /* Show the indicator (dot/circle) when checked */
+      .container input:checked~.checkmark:after {
+        display: block;
+      }
+
+      /* Style the indicator (dot/circle) */
+      .container .checkmark:after {
+        top: 7px;
+        left: 7px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: white;   
+      }
+    </style>
+
+    </html>
+
+
+    <!--CANCELAR OS -->
+    <?php
+    if (@$_GET['func'] == 'deleta') {
+      $id = $_GET['id'];
+      $query_cancelar = "UPDATE os set status = 'Cancelada' where id = '$id' ";
+      mysqli_query($conexao, $query_cancelar);
+      echo "<script language='javascript'> window.location='os_abertas.php'; </script>";
     }
     ?>
 
 
-<?php }
-}  ?>
+    <!--EDITAR -->
+    <?php
+    if (@$_GET['func'] == 'edita') {
+      $id = $_GET['id'];
+      $id_orc = $res_1['id_orc'];
+      $query = "select * from os where id = '$id'";
+      $result = mysqli_query($conexao, $query);
 
+      while ($res_1 = mysqli_fetch_array($result)) {
 
+        ?>
 
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+        <!-- Modal -->
+        <div id="modalEditar" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-dialog-centered">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
 
-<!--Máscaras-->
-<script>
-  $(document).ready(function() {
-    $('#txtcpf').mask('000.000.000-00', {
-      reverse: true
-    });
-    $('#txtsaram').mask('000.000-0', {
-      reverse: true
-    });
-    $('#txtcpf2').mask('000.000.000-00', {
-      reverse: true
-    });
-    $('#txtsaram2').mask('000.000-0', {
-      reverse: true
-    });
-  });
-</script>
+                <h4 class="modal-title">Fechar Ordem de Serviço</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form method="POST" action="">
+                  <div class="form-group">
+                    <label for="quantidade">Garantia do Serviço</label>
+                    <input type="text" class="form-control mr-2" name="txtgarantia" placeholder="Garantia" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="quantidade">Data de Fechamento</label>
+                    <input type="date" class="form-control mr-2" name="txtdatafechamento" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                  <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          $("#modalEditar").modal("show");
+        </script>
+        <!--Comando para editar os dados UPDATE -->
+        <?php
+        if (isset($_POST['buttonEditar'])) {
+          $garantia = $_POST['txtgarantia'];
+          $data_fechamento_os = $_POST['txtdatafechamento'];
+          $serie = $_POST['txtserie'];
+          $defeito = $_POST['txtdefeito'];
+          $obs = $_POST['txtobs'];
+
+          $query_editar = "UPDATE os set garantia = '$garantia', data_fechamento = '$data_fechamento_os', status = 'Aprovada' where id = '$id' ";
+
+          $result_editar = mysqli_query($conexao, $query_editar);
+
+          if ($result_editar == '') {
+            echo "<script language='javascript'> window.alert('Ocorreu um erro ao tentar encerrar a OS!'); </script>";
+          } else {
+            echo "<script language='javascript'> window.alert('OS concluída com sucesso!'); </script>";
+            echo "<script language='javascript'> window.location='os_abertas.php'; </script>";
+        //echo "<script language='javascript'> window.location='rel/rel_os_class.php?id=$id&id_orc=$id_orc'; </script>";
+          }
+        }
+      }
+    }  ?>
+
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <!--Máscaras-->
+    <script>
+      $(document).ready(function() {
+        $('#txtcpf').mask('000.000.000-00', {
+          reverse: true
+        });
+        $('#txtsaram').mask('000.000-0', {
+          reverse: true
+        });
+        $('#txtcpf2').mask('000.000.000-00', {
+          reverse: true
+        });
+        $('#txtsaram2').mask('000.000-0', {
+          reverse: true
+        });
+      });
+    </script>

@@ -273,9 +273,7 @@
                       $query = "SELECT * FROM orcamentos";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
+                      $row = mysqli_num_rows($result);                      
                       echo $row;
                       ?>
                     </h4>
@@ -295,9 +293,7 @@
                       $query = "SELECT * FROM orcamentos where status = 'Aberto'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
+                      $row = mysqli_num_rows($result);                      
                       echo $row;
                       ?>
 
@@ -317,9 +313,7 @@
                       $query = "SELECT * FROM orcamentos where status = 'Aguardando'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
+                      $row = mysqli_num_rows($result);                      
                       echo $row;
                       ?>
                     </h4>
@@ -339,9 +333,7 @@
                       $query = "SELECT * FROM orcamentos where status = 'Aprovado'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
+                      $row = mysqli_num_rows($result);                      
                       echo $row;
                       ?>
                     </h4>
@@ -361,9 +353,7 @@
                       $query = "SELECT * FROM orcamentos where status = 'Cancelado'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
+                      $row = mysqli_num_rows($result);                      
                       echo $row;
                       ?>
                     </h4>

@@ -36,7 +36,6 @@ include('verificar_login.php');
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
@@ -67,7 +66,6 @@ include('verificar_login.php');
           </div>
         </div>
       </form>
-
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
@@ -200,16 +198,7 @@ include('verificar_login.php');
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user panel (optional) 
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
-          </div>
-        </div> -->
+      <div class="sidebar">        
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -289,373 +278,367 @@ include('verificar_login.php');
                 </li>
               </ul>
             </li>            
-      </div>
-      <!--/.sidebar -->
-    </aside>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Dashboard</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-                <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE ORÇAMENTOS AGUARDANDO</span>
-                  <span class="info-box-number">
-                    <h4>
-                      <?php
-                      $query = "SELECT * FROM orcamentos where status = 'Aguardando'";
-                      $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
-                      echo $row;
-                      ?>
-                    </h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">Likes</span>
-                  <span class="info-box-number">
-                    <h4>41,410</h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-
-            <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
-
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">Sales</span>
-                  <span class="info-box-number">
-                    <h4>760</h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-text">New Members</span>
-                  <span class="info-box-number">
-                    <h4>2,000</h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
-          <!-- /.row -->
-          <!-- Main row -->
-          <!-- Left col -->
-          <br>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE ORÇAMENTOS</strong></h4>
-                </div>
-                <div class="card-body">
-
-                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
-                    <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
-
-                    <?php
-
-
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != 'Aguardando') {
-                      $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != 'Aguardando') {
-                      $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == 'Aguardando') {
-                      $data = $_GET['txtpesquisar'] . '%';
-                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
-                    } else {
-                      $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = 'Aguardando' order by id asc";
-                    }
-
-                    $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
-                    $row = mysqli_num_rows($result);
-
-                    ?>
-
-
-                    <table class="table table-sm table-bordered table-striped">
-                      <thead class="text-primary">
-                        <th class="align-middle">Requerente</th>
-                        <th class="align-middle">Sacador</th>
-                        <th class="align-middle">Produto</th>
-                        <th class="align-middle">Valor Total</th>
-                        <th class="align-middle">Status</th>
-                        <th class="align-middle">Data de Abertura</th>
-                        <th class="align-middle">Ações</th>
-                      </thead>
-                      <tbody>
-
-                        <?php
-
-                        while ($res_1 = mysqli_fetch_array($result)) {
-                          $requerente = $res_1["req_nome"];
-                          $tecnico = $res_1["func_nome"];
-                          $produto = $res_1["produto"];
-                          $valor_total = $res_1["valor_total"];
-                          $status = $res_1["status"];
-                          $data_abertura = $res_1['data_abertura'];
-                          $id = $res_1['id'];
-                          $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
-
+          <!--/.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+          <div class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1 class="m-0 text-dark">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard v1</li>
+                  </ol>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+          </div>          
+          <section class="content">
+            <div class="container-fluid">
+              <!-- Small boxes (Stat box) -->
+              <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                    <div class="info-box-content" style="text-align:center;">
+                      <span class="info-box-text">TOTAL DE ORÇAMENTOS AGUARDANDO</span>
+                      <span class="info-box-number">
+                        <h4>
+                          <?php
+                          $query = "SELECT * FROM orcamentos where status = 'Aguardando'";
+                          $result = mysqli_query($conexao, $query);
+                          $res = mysqli_fetch_array($result);
+                          $row = mysqli_num_rows($result);                          
+                          echo $row;
                           ?>
-
-                          <tr>
-                            <td class="align-middle"><?php echo $requerente; ?></td>
-                            <td class="align-middle"><?php echo $tecnico; ?></td>
-                            <td class="align-middle"><?php echo $produto; ?></td>
-                            <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.') ?></td>
-                            <td class="align-middle">
-                              <?php
-                                if ($status == 'Aberto') { ?>
-                                <span class="badge badge-secondary">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                                } elseif ($status == 'Aguardando') { ?>
-                                <span class="badge badge-warning">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                                } elseif ($status == 'Aprovado') { ?>
-                                <span class="badge badge-success">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                                } elseif ($status == 'Cancelado') { ?>
-                                <span class="badge badge-danger">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                                } else {
-                                  echo $status;
-                                }
-                                ?>
-                            </td>
-                            <td class="align-middle"><?php echo $data2; ?></td>
-                            <td class="align-middle">
-                              <a class="btn btn-success btn-sm" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                              <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>"target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
-                            </td>
-                          </tr>
-                        <?php
-                        }
-                        ?>
-                      </tbody>
-                    </table>
-                    <?php
-                    if ($row == '') {
-                      echo "<h3> Não existem dados cadastrados no banco </h3>";
-                    } else { }
-                    ?>
+                        </h4>
+                      </span>
+                    </div>
+                    <!-- /.info-box-content -->
                   </div>
+                  <!-- /.info-box -->
                 </div>
-                <div class="card-footer">
-                  <hr>
-                  <div class="stats">
-                    <i class="fa fa-history"></i>Updated 3 minutes ago
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box mb-3">
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Likes</span>
+                      <span class="info-box-number">
+                        <h4>41,410</h4>
+                      </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+                <!-- fix for small devices only -->
+                <div class="clearfix hidden-md-up"></div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Sales</span>
+                      <span class="info-box-number">
+                        <h4>760</h4>
+                      </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">New Members</span>
+                      <span class="info-box-number">
+                        <h4>2,000</h4>
+                      </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+              <!-- /.row -->
+              <!-- Main row -->
+              <!-- Left col -->
+              <br>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header" style="text-align: center;">
+                      <h4 class="" style="text-align:center;"><strong>TABELA DE ORÇAMENTOS</strong></h4>
+                    </div>
+                    <div class="card-body">
+
+                      <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+
+                        <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+
+                        <?php
+
+
+                        if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != 'Aguardando') {
+                          $data = $_GET['txtpesquisar'] . '%';
+                          $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
+                        } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != 'Aguardando') {
+                          $data = $_GET['txtpesquisar'] . '%';
+                          $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
+                        } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == 'Aguardando') {
+                          $data = $_GET['txtpesquisar'] . '%';
+                          $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
+                        } else {
+                          $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id where status = 'Aguardando' order by id asc";
+                        }
+
+                        $result = mysqli_query($conexao, $query);
+                    //$dado = mysqli_fetch_array($result);
+                        $row = mysqli_num_rows($result);
+
+                        ?>
+
+
+                        <table class="table table-sm table-bordered table-striped">
+                          <thead class="text-primary">
+                            <th class="align-middle">Requerente</th>
+                            <th class="align-middle">Sacador</th>
+                            <th class="align-middle">Produto</th>
+                            <th class="align-middle">Valor Total</th>
+                            <th class="align-middle">Status</th>
+                            <th class="align-middle">Data de Abertura</th>
+                            <th class="align-middle">Ações</th>
+                          </thead>
+                          <tbody>
+
+                            <?php
+
+                            while ($res_1 = mysqli_fetch_array($result)) {
+                              $requerente = $res_1["req_nome"];
+                              $tecnico = $res_1["func_nome"];
+                              $produto = $res_1["produto"];
+                              $valor_total = $res_1["valor_total"];
+                              $status = $res_1["status"];
+                              $data_abertura = $res_1['data_abertura'];
+                              $id = $res_1['id'];
+                              $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+
+                              ?>
+
+                              <tr>
+                                <td class="align-middle"><?php echo $requerente; ?></td>
+                                <td class="align-middle"><?php echo $tecnico; ?></td>
+                                <td class="align-middle"><?php echo $produto; ?></td>
+                                <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.') ?></td>
+                                <td class="align-middle">
+                                  <?php
+                                  if ($status == 'Aberto') { ?>
+                                    <span class="badge badge-secondary">
+                                      <?php echo $status; ?>
+                                    </span>
+                                    <?php
+                                  } elseif ($status == 'Aguardando') { ?>
+                                    <span class="badge badge-warning">
+                                      <?php echo $status; ?>
+                                    </span>
+                                    <?php
+                                  } elseif ($status == 'Aprovado') { ?>
+                                    <span class="badge badge-success">
+                                      <?php echo $status; ?>
+                                    </span>
+                                    <?php
+                                  } elseif ($status == 'Cancelado') { ?>
+                                    <span class="badge badge-danger">
+                                      <?php echo $status; ?>
+                                    </span>
+                                    <?php
+                                  } else {
+                                    echo $status;
+                                  }
+                                  ?>
+                                </td>
+                                <td class="align-middle"><?php echo $data2; ?></td>
+                                <td class="align-middle">
+                                  <a class="btn btn-success btn-sm" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                  <a class="btn btn-primary btn-sm" href="rel/rel_orcamentos_class.php?id=<?php echo $id; ?>"target="_blank" rel=”noopener” style="width: 33px;"><i class="far fa-file-pdf"></i></a>
+                                </td>
+                              </tr>
+                              <?php
+                            }
+                            ?>
+                          </tbody>
+                        </table>
+                        <?php
+                        if ($row == '') {
+                          echo "<h3> Não existem dados cadastrados no banco </h3>";
+                        } else { }
+                        ?>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <hr>
+                      <div class="stats">
+                        <i class="fa fa-history"></i>Updated 3 minutes ago
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
+
+
+            </section>
+            <!-- /.content -->
           </div>
-  <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
+          <!-- /.content-wrapper -->
 
+          <footer class="main-footer">
+            <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+            Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+              <b>Versão</b> 1.0.0
+            </div>
+          </footer>
 
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+          <!-- Control Sidebar -->
+          <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+          </aside>
+          <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
 
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Versão</b> 1.0.0
-      </div>
-    </footer>
+        <!-- jQuery -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <!-- jQuery Mask -->
+        <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+          $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 -->
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- ChartJS -->
+        <script src="plugins/chart.js/Chart.min.js"></script>
+        <!-- Sparkline -->
+        <script src="plugins/sparklines/sparkline.js"></script>
+        <!-- JQVMap -->
+        <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+        <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+        <!-- daterangepicker -->
+        <script src="plugins/moment/moment.min.js"></script>
+        <script src="plugins/daterangepicker/daterangepicker.js"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <!-- Summernote -->
+        <script src="plugins/summernote/summernote-bs4.min.js"></script>
+        <!-- overlayScrollbars -->
+        <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="dist/js/adminlte.js"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="dist/js/pages/dashboard.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="dist/js/demo.js"></script>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
+        <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="plugins/moment/moment.min.js"></script>
-  <script src="plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
+        <!---------------------------------------------------------------------------------------------->
+      </body>
+      <style>
+        /* The container */
+        .container {
+          display: block;
+          position: relative;
+          padding-left: 35px;
+          margin-bottom: 12px;
+          cursor: pointer;
+          font-size: 16px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
 
-  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
+        /* Hide the browser's default radio button */
+        .container input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+        }
 
-  <!---------------------------------------------------------------------------------------------->
-</body>
-<style>
-  /* The container */
-  .container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+        /* Create a custom radio button */
+        .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          background-color: #eee;
+          border-radius: 50%;
+        }
 
-  /* Hide the browser's default radio button */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-  }
+        /* On mouse-over, add a grey background color */
+        .container:hover input~.checkmark {
+          background-color: #ccc;
+        }
 
-  /* Create a custom radio button */
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #eee;
-    border-radius: 50%;
-  }
+        /* When the radio button is checked, add a blue background */
+        .container input:checked~.checkmark {
+          background-color: #2196F3;
+        }
 
-  /* On mouse-over, add a grey background color */
-  .container:hover input~.checkmark {
-    background-color: #ccc;
-  }
+        /* Create the indicator (the dot/circle - hidden when not checked) */
+        .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+        }
 
-  /* When the radio button is checked, add a blue background */
-  .container input:checked~.checkmark {
-    background-color: #2196F3;
-  }
+        /* Show the indicator (dot/circle) when checked */
+        .container input:checked~.checkmark:after {
+          display: block;
+        }
 
-  /* Create the indicator (the dot/circle - hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
+        /* Style the indicator (dot/circle) */
+        .container .checkmark:after {
+          top: 7px;
+          left: 7px;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: white;
+        }
+      </style>
 
-  /* Show the indicator (dot/circle) when checked */
-  .container input:checked~.checkmark:after {
-    display: block;
-  }
+      </html>
 
-  /* Style the indicator (dot/circle) */
-  .container .checkmark:after {
-    top: 7px;
-    left: 7px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;
-  }
-</style>
+      <!--ALTERAR STATUS -->
 
-</html>
-
-<!--ALTERAR STATUS -->
-
-<?php
-if (@$_GET['func'] == 'edita') {
-  $id = $_GET['id'];
+      <?php
+      if (@$_GET['func'] == 'edita') {
+        $id = $_GET['id'];
   $query = "select * from orcamentos where id = '$id'"; //filtra o orçamento pelo id -- Esse filtro recupera todas as informações da tabela 'orcamentos'.
   $result = mysqli_query($conexao, $query);
 
@@ -689,10 +672,10 @@ if (@$_GET['func'] == 'edita') {
               <label for="quantidade">Desconto</label>
               <input type="text" class="form-control mr-2" name="txtdesconto" value="<?php echo $res_1['produto']; ?>" placeholder="Desconto" required>
             </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-sm" name="buttonAprovar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-sm" name="buttonAprovar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
           </form>
         </div>
       </div>
@@ -705,16 +688,16 @@ if (@$_GET['func'] == 'edita') {
 
   <!--Comando para editar os dados UPDATE -->
   <?php
-    if (isset($_POST['buttonAprovar'])) {
+  if (isset($_POST['buttonAprovar'])) {
 
-      $pgto = $_POST['pgto'];
-      $desconto = $_POST['txtdesconto'];
-      $valor_total = $total - $desconto;
-      $query_editar = "UPDATE orcamentos set desconto = '$desconto', valor_total = '$valor_total', pgto = '$pgto', data_aprovacao = curDate(), status = 'Aprovado' where id = '$id' ";
-      $result_editar = mysqli_query($conexao, $query_editar);
+    $pgto = $_POST['pgto'];
+    $desconto = $_POST['txtdesconto'];
+    $valor_total = $total - $desconto;
+    $query_editar = "UPDATE orcamentos set desconto = '$desconto', valor_total = '$valor_total', pgto = '$pgto', data_aprovacao = curDate(), status = 'Aprovado' where id = '$id' ";
+    $result_editar = mysqli_query($conexao, $query_editar);
 
       //FAZER ABERTURA DA OS
-      $query_os = "INSERT INTO os (id_orc, requerente, produto, tecnico, total, data_abertura, status) VALUES ('$id', '$requerente', '$produto', '$tecnico', '$valor_total', curDate(), 'Aberta')";
+    $query_os = "INSERT INTO os (id_orc, requerente, produto, tecnico, total, data_abertura, status) VALUES ('$id', '$requerente', '$produto', '$tecnico', '$valor_total', curDate(), 'Aberta')";
       $result_os = mysqli_query($conexao, $query_os); // Os campos que ficarão em branco têm que ser selecionados como "NULL" no banco de dados. Caso contrário, ele não funciona.
 
       if ($result_editar == '' or $result_os == '') {
@@ -726,24 +709,24 @@ if (@$_GET['func'] == 'edita') {
     }
     ?>
 
-<?php } ?>
+  <?php } ?>
 
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-<!--Máscaras-->
-<script>
-  $(document).ready(function() {
-    $('#txtcpf').mask('000.000.000-00', {
-      reverse: true
+  <!--Máscaras-->
+  <script>
+    $(document).ready(function() {
+      $('#txtcpf').mask('000.000.000-00', {
+        reverse: true
+      });
+      $('#txtsaram').mask('000.000-0', {
+        reverse: true
+      });
+      $('#txtcpf2').mask('000.000.000-00', {
+        reverse: true
+      });
+      $('#txtsaram2').mask('000.000-0', {
+        reverse: true
+      });
     });
-    $('#txtsaram').mask('000.000-0', {
-      reverse: true
-    });
-    $('#txtcpf2').mask('000.000.000-00', {
-      reverse: true
-    });
-    $('#txtsaram2').mask('000.000-0', {
-      reverse: true
-    });
-  });
-</script>
+  </script>

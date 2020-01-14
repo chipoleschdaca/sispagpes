@@ -328,9 +328,7 @@ include('verificar_login.php');
                           $query = "SELECT * FROM orcamentos where status = 'Aberto'";
                           $result = mysqli_query($conexao, $query);
                           $res = mysqli_fetch_array($result);
-                          $row = mysqli_num_rows($result);
-                          ?>
-                          <?php
+                          $row = mysqli_num_rows($result);                          
                           echo $row;
                           ?>
                         </h4>
