@@ -6,7 +6,7 @@ session_start();
 <head>
   <link rel="stylesheet" href="icons/fontawesome-free-5.11.2-web/css/all.min.css">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <link href="dist/css/login.css" rel="stylesheet" id="bootstrap-css">
+  <link href="dist/css/index.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -53,7 +53,7 @@ session_start();
         <small><a class="underlineHover" href="solicitar_acesso.php">Registre-se</a></small>
       </div>
     </div>
-    <div class="footer" style="padding-top:80px; position:relative; color:grey; font-size:small;">
+    <div class="footer" style="padding-top:70px; position:relative; color:grey; font-size:small;">
       <footer class="main-footer">
         <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
         Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.

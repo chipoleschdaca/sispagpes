@@ -527,10 +527,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     $result = mysqli_query($conexao, $query);
 
     if ($result == '') {
-      echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+      echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
       echo "<script language='javascript'> window.location='perfis.php'; </script>";
     } else {
-      echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
+      echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
       echo "<script language='javascript'> window.location='perfis.php'; </script>";
     }
   }
@@ -615,10 +615,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     $query_editar = "UPDATE perfis set perfil = '$nome' where id = '$id'";
     $result_editar = mysqli_query($conexao, $query_editar);
     if ($result_editar == '') {
-      echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+      echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
       echo "<script language='javascript'> window.location='perfis.php'; </script>";
     } else {
-      echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+      echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
       echo "<script language='javascript'> window.location='perfis.php'; </script>";
     }
   }

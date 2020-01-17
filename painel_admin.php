@@ -372,7 +372,6 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               <div class="card direct-chat direct-chat-primary">
                 <div class="card-header">
                   <h3 class="card-title">Direct Chat</h3>
-
                   <div class="card-tools">
                     <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">

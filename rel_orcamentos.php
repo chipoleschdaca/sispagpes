@@ -220,7 +220,7 @@ include('verificar_login.php');
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview">
+            <li class="nav-item has-treeview menu-open">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>

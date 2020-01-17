@@ -420,7 +420,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       <!-- Modal content-->
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h4 class="modal-title">Usuários</h4>
+                          <h4 class="modal-title">Inserir novo usuário</h4>
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
@@ -434,7 +434,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                               <input type="text" class="form-control mr-2" name="txtsenha" placeholder="Senha" required>
                             </div>
                             <div class="form-group">
-                              <label for="fornecedor">Funcionário</label>
+                              <label for="fornecedor">Militar</label>
                               <select class="form-control mr-2" id="category" name="funcionario">
                                 <option value="" disabled selected hidden>Nome</option>
                                 <?php
@@ -450,11 +450,11 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                                 ?>
                               </select>
                             </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
                           </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>                          
                         </div>
                       </div>
                     </div>
@@ -521,7 +521,6 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
         <?php
         if (isset($_POST['button'])) {
-
           $funcionario = $_POST['funcionario'];
           $query_func = "select * from militares where id = '{$funcionario}' ";
           $result_func = mysqli_query($conexao, $query_func);
@@ -536,21 +535,21 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           $usuario = $_POST['txtusuario'];
           $senha = $_POST['txtsenha'];
 
-  //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
+          //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
           $query_verificar = "select * from usuarios where usuario = '$usuario' ";
           $result_verificar = mysqli_query($conexao, $query_verificar);
           $row_verificar = mysqli_num_rows($result_verificar);
 
           if ($row_verificar > 0) {
-            echo "<script language='javascript'> window.alert('Usuário já Cadastrado!'); </script>";
+            echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
             exit();
           }
           $query = "INSERT into usuarios (nome, usuario, senha, perfil, id_militar) VALUES ('$nome', '$usuario', '$senha', '$perfil', '$funcionario' )";
           $result = mysqli_query($conexao, $query);
           if ($result == '') {
-            echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+            echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
           } else {
-            echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
+            echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
             echo "<script language='javascript'> window.location='usuarios.php'; </script>";
           }
         }
@@ -598,8 +597,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                      <button type="button" class="btn btn-light" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                      <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                      <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
                     </form>
                   </div>
                 </div>
@@ -632,9 +631,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               $query_editar = "UPDATE usuarios set usuario = '$usuario', senha = '$senha' where id = '$id' ";
               $result_editar = mysqli_query($conexao, $query_editar);
               if ($result_editar == '') {
-                echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+                echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
               } else {
-                echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+                echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
                 echo "<script language='javascript'> window.location='usuarios.php'; </script>";
               }
             }

@@ -182,7 +182,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item has-treeview">
+        <li class="nav-item has-treeview menu-open">
           <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-chart-pie"></i>
@@ -362,7 +362,7 @@
               </div>          
             </div>       
           </div>     
-          <br>          
+          <br>        
           <div class="row">
             <p>
               <a class="btn btn-outline-dark btn-sm" style="font-style: arial;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
@@ -421,7 +421,6 @@
                   </button>
                 </div>                    
               </div>
-
               <div class="table-responsive" style="text-align: center;">
 
                 <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
@@ -807,7 +806,6 @@ if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
   $query = "select * from orcamentos where id = '$id'";
   $result = mysqli_query($conexao, $query);
-
   while ($res_1 = mysqli_fetch_array($result)) {
 
     ?>
@@ -902,15 +900,13 @@ if (@$_GET['func'] == 'edita') {
     }
     ?>
   <?php }
+
 } elseif (@$_GET['func'] == 'fecha') {
   $id = $_GET['id'];
   $query = "select * from orcamentos where id = '$id'";
   $result = mysqli_query($conexao, $query);
-
   while ($res_1 = mysqli_fetch_array($result)) {
-
     ?>
-
     <!-- Modal -->
     <div id="modalFecharOrcamento" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -941,84 +937,84 @@ if (@$_GET['func'] == 'edita') {
               }
               ?>
               </select>
-              </div>-->
-              <div class="form-group">
-                <label for="quantidade">Produto</label>
-                <input type="text" class="form-control mr-2" name="txtproduto" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" readonly>
-              </div>
-
-              <div class="form-group">
-                <label for="quantidade">Nº de Série</label>
-                <input type="text" class="form-control mr-2" name="txtserie" placeholder="Número de Série" value="<?php echo $res_1['serie']; ?>" readonly>
-              </div>
-
-              <div class="form-group">
-                <label for="quantidade">Defeito</label>
-                <input type="text" class="form-control mr-2" name="txtdefeito" value="<?php echo $res_1['problema']; ?>" placeholder="Defeito" readonly>
-              </div>
-
-              <div class="form-group">
-                <label for="quantidade">Laudo</label>
-                <textarea type="text-area" class="form-control mr-2" name="txtlaudo" value="<?php echo $res_1['laudo']; ?>" placeholder="Laudo Técnico" required></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="quantidade">Valor do Serviço</label>
-                <input type="text-area" class="form-control mr-2" name="txtvalorservico" value="" placeholder="Valor do Serviço" required>
-              </div>
-              <div class="form-group">
-                <label for="quantidade">Peças</label>
-                <input type="text-area" class="form-control mr-2" name="txtpecas" value="" placeholder="Peças" required>
-              </div>
-              <div class="form-group">
-                <label for="quantidade">Valor das Peças</label>
-                <input type="text-area" class="form-control mr-2" name="txtvalorpeca" value="" placeholder="Valor das Peças" required>
-              </div>
-
-              <div class="form-group">
-                <label for="quantidade">Observações</label>
-                <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" value="<?php echo $res_1['obs']; ?>" readonly>
-              </div>
-
+            </div>-->
+            <div class="form-group">
+              <label for="quantidade">Produto</label>
+              <input type="text" class="form-control mr-2" name="txtproduto" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" readonly>
             </div>
 
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary btn-sm" name="buttonFechar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-              <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-            </form>
+            <div class="form-group">
+              <label for="quantidade">Nº de Série</label>
+              <input type="text" class="form-control mr-2" name="txtserie" placeholder="Número de Série" value="<?php echo $res_1['serie']; ?>" readonly>
+            </div>
+
+            <div class="form-group">
+              <label for="quantidade">Defeito</label>
+              <input type="text" class="form-control mr-2" name="txtdefeito" value="<?php echo $res_1['problema']; ?>" placeholder="Defeito" readonly>
+            </div>
+
+            <div class="form-group">
+              <label for="quantidade">Laudo</label>
+              <textarea type="text-area" class="form-control mr-2" name="txtlaudo" value="<?php echo $res_1['laudo']; ?>" placeholder="Laudo Técnico" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="quantidade">Valor do Serviço</label>
+              <input type="text-area" class="form-control mr-2" name="txtvalorservico" value="" placeholder="Valor do Serviço" required>
+            </div>
+            <div class="form-group">
+              <label for="quantidade">Peças</label>
+              <input type="text-area" class="form-control mr-2" name="txtpecas" value="" placeholder="Peças" required>
+            </div>
+            <div class="form-group">
+              <label for="quantidade">Valor das Peças</label>
+              <input type="text-area" class="form-control mr-2" name="txtvalorpeca" value="" placeholder="Valor das Peças" required>
+            </div>
+
+            <div class="form-group">
+              <label for="quantidade">Observações</label>
+              <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" value="<?php echo $res_1['obs']; ?>" readonly>
+            </div>
+
           </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-sm" name="buttonFechar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+          </form>
         </div>
       </div>
     </div>
-    <script>
-      $("#modalFecharOrcamento").modal("show");
-    </script>
-    <!--Comando para editar os dados UPDATE -->
-    <?php
-    if (isset($_POST['buttonFechar'])) {
+  </div>
+  <script>
+    $("#modalFecharOrcamento").modal("show");
+  </script>
+  <!--Comando para editar os dados UPDATE -->
+  <?php
+  if (isset($_POST['buttonFechar'])) {
 
-      $laudo = $_POST['txtlaudo'];
-      $valor_servico = $_POST['txtvalorservico'];
-      $pecas = $_POST['txtpecas'];
-      $valor_pecas = $_POST['txtvalorpeca'];
-      $desconto = 0;
-      $total = $_POST['txtvalorservico'] + $_POST['txtvalorpeca'];
-      $valor_total = $total - $desconto;
-      $status = 'Aguardando';
+    $laudo = $_POST['txtlaudo'];
+    $valor_servico = $_POST['txtvalorservico'];
+    $pecas = $_POST['txtpecas'];
+    $valor_pecas = $_POST['txtvalorpeca'];
+    $desconto = 0;
+    $total = $_POST['txtvalorservico'] + $_POST['txtvalorpeca'];
+    $valor_total = $total - $desconto;
+    $status = 'Aguardando';
 
-      $query_editar = "UPDATE orcamentos set laudo = '$laudo', valor_servico = '$valor_servico', pecas = '$pecas', valor_pecas = '$valor_pecas', desconto = '$desconto', total = '$total', valor_total = '$valor_total', data_geracao = curDate(), status = '$status' where id = '$id' ";
+    $query_editar = "UPDATE orcamentos set laudo = '$laudo', valor_servico = '$valor_servico', pecas = '$pecas', valor_pecas = '$valor_pecas', desconto = '$desconto', total = '$total', valor_total = '$valor_total', data_geracao = curDate(), status = '$status' where id = '$id' ";
 
-      $result_editar = mysqli_query($conexao, $query_editar);
+    $result_editar = mysqli_query($conexao, $query_editar);
 
-      if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-      } else {
-        echo "<script language='javascript'> window.alert('Orçamento fechado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
-      }
+    if ($result_editar == '') {
+      echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
+    } else {
+      echo "<script language='javascript'> window.alert('Orçamento fechado com sucesso!'); </script>";
+      echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
     }
-    ?>
-  <?php }
+  }
+  ?>
+<?php }
 } elseif (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
   $query = "select * from orcamentos where id = '$id'";
@@ -1088,8 +1084,8 @@ if (@$_GET['func'] == 'edita') {
       echo "<script language='javascript'> window.alert('Orçamento aprovado e OS criada com sucesso!'); </script>";
       echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
     }
-    }
-    } ?>
+  }
+} ?>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 

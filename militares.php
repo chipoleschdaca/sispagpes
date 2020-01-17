@@ -271,13 +271,59 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 <div class="row">
                   <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
-                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                      <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-users"></i></span>
                       <div class="info-box-content" style="text-align:center;">
-                        <span class="info-box-text">TOTAL DE REGISTROS</span>
+                        <span class="info-box-text">TOTAL DE SOLICITAÇÕES</span>
+                        <span class="info-box-number">
+                          <h4>                            
+                            <?php
+                            $query = "SELECT * FROM militares";
+                            $result = mysqli_query($conexao, $query);
+                            $res = mysqli_fetch_array($result);
+                            $row = mysqli_num_rows($result);                           
+                            echo $row;
+                            ?>                            
+                          </h4>
+                        </span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                      <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-check"></i></span>
+                      <div class="info-box-content" style="text-align:center;">
+                        <span class="info-box-text">SOLICITAÇÕES APROVADAS</span>
                         <span class="info-box-number">
                           <h4>
                             <?php
-                            $query = "SELECT * FROM militares";
+                            $query = "SELECT * FROM militares where status = 'Aprovado'";
+                            $result = mysqli_query($conexao, $query);
+                            $res = mysqli_fetch_array($result);
+                            $row = mysqli_num_rows($result);                           
+                            echo $row;
+                            ?>                              
+                            </h4>
+                        </span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <!-- fix for small devices only -->
+                  <div class="clearfix hidden-md-up"></div>
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                      <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-user-cog"></i></span>
+                      <div class="info-box-content" style="text-align:center;">
+                        <span class="info-box-text">SOLICITAÇÕES AGUARDANDO</span>
+                        <span class="info-box-number">
+                          <h4>
+                            <?php
+                            $query = "SELECT * FROM militares where status = 'Aguardando'";
                             $result = mysqli_query($conexao, $query);
                             $res = mysqli_fetch_array($result);
                             $row = mysqli_num_rows($result);                           
@@ -293,41 +339,19 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   <!-- /.col -->
                   <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                      <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-                      <div class="info-box-content">
-                        <span class="info-box-text">Likes</span>
+                      <span class="info-box-icon badge-danger elevation-1"><i class="fa fa-user-times"></i></span>
+                      <div class="info-box-content" style="text-align:center;">
+                        <span class="info-box-text">SOLICITAÇÕES REJEITADAS</span>
                         <span class="info-box-number">
-                          <h4>41,410</h4>
-                        </span>
-                      </div>
-                      <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                  </div>
-                  <!-- /.col -->
-                  <!-- fix for small devices only -->
-                  <div class="clearfix hidden-md-up"></div>
-                  <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                      <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-                      <div class="info-box-content">
-                        <span class="info-box-text">Sales</span>
-                        <span class="info-box-number">
-                          <h4>760</h4>
-                        </span>
-                      </div>
-                      <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                      <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-                      <div class="info-box-content">
-                        <span class="info-box-text">New Members</span>
-                        <span class="info-box-number">
-                          <h4>2,000</h4>
+                          <h4>
+                            <?php
+                            $query = "SELECT * FROM militares where status = 'Rejeitado'";
+                            $result = mysqli_query($conexao, $query);
+                            $res = mysqli_fetch_array($result);
+                            $row = mysqli_num_rows($result);                           
+                            echo $row;
+                            ?>                              
+                            </h4>
                         </span>
                       </div>
                       <!-- /.info-box-content -->
@@ -341,7 +365,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   <div class="col-md-12">
                     <div class="card">
                       <div class="card-header" style="text-align: center;">
-                        <h4 class="" style="text-align:center;"><strong>TABELA DE MILITARES</strong></h4>
+                        <h4 class="" style="text-align:center;"><strong>TABELA DE MILITARES CADASTRADOS</strong></h4>
                       </div>
                       <div class="card-body">
                         <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
@@ -426,8 +450,23 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                                    </td>
                                    <td class="align-middle"><?php echo data($data); ?></td>
                                    <td class="align-middle">
-                                    <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                    <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php 
+                                    if ($status == 'Aprovado') { ?>
+                                      <a class="btn btn-success btn-sm disabled" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                      <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i>
+                                     <?php 
+                                    } elseif ($status == 'Aguardando') { ?>
+                                      <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                      <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></
+                                    <?php 
+                                    }else { ?>
+                                      <a class="btn btn-success btn-sm disabled" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                      <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt">
+                                    <?php } ?>
+                                    </a>
                                   </td>
                                 </tr>
                                 <?php
@@ -447,7 +486,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   </div>
                 </div>
                 <div id="modalExemplo" class="modal fade" role="dialog">
-<!---Modal Exemplo--->
+                <!---Modal Exemplo--->
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -602,10 +641,10 @@ if (isset($_POST['button'])) {
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
-    echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
     echo "<script language='javascript'> window.location='militares.php'; </script>";
   } else {
-    echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
+    echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
     echo "<script language='javascript'> window.location='militares.php'; </script>";
   }
 } ?>
@@ -706,12 +745,9 @@ if (@$_GET['func'] == 'edita') {
     <script>
       $('#modalEditar').modal("show");
     </script>
-<!--Modal EDITAR -->
 
+<!--Modal EDITAR -->  
 
-    
-
-    
     <?php
     if (isset($_POST['buttonEditar'])) {
       $saram = $_POST['txtsaram'];
@@ -719,7 +755,7 @@ if (@$_GET['func'] == 'edita') {
       $posto = $_POST['txtposto'];
       $nome = strtoupper($_POST['txtnome']);
       $nomeguerra = strtoupper($_POST['txtnomeguerra']);
-      $perfil = $_POST['perfil'];
+      $perfil = $_POST['perfil'];      
 
       if ($res_1['cpf'] != $cpf) {
 
@@ -741,10 +777,135 @@ if (@$_GET['func'] == 'edita') {
       $result_editar = mysqli_query($conexao, $query_editar);
 
       if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
         echo "<script language='javascript'> window.location='militares.php'; </script>";
       } else {
-        echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
+        echo "<script language='javascript'> window.location='militares.php'; </script>";
+      }  }  }  } ?>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+<!---------------------------Aprovar REGISTRO DA TABELA---------------------------->
+<?php
+if (@$_GET['func'] == 'aprova') {
+  $id = $_GET['id'];
+  $query = "select * from militares where id = '$id'";
+  $result = mysqli_query($conexao, $query);
+  while ($res_1 = mysqli_fetch_array($result)) { ?>
+    <div id="modalAprovar" class="modal fade" role="dialog">
+      <!---Modal EDITAR --->
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Militares</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="">
+              <div class="form-group">
+                <label for="fornecedor">Saram</label>
+                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
+              </div>
+              <div class="form-group">
+                <label for="fornecedor">CPF</label>
+                <input type="text" class="form-control mr-2" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
+              </div>
+              <div class="form-group">
+                <label for="id_produto">Posto/Grad.</label>
+                <select class="form-control mr-2" name="txtposto" required>
+                  <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
+                  <option value="PM">PM</option>
+                  <option value="TB">TB</option>
+                  <option value="MB">MB</option>
+                  <option value="BR">BR</option>
+                  <option value="CL">CL</option>
+                  <option value="TC">TC</option>
+                  <option value="MJ">MJ</option>
+                  <option value="CP">CP</option>
+                  <option value="1T">1T</option>
+                  <option value="2T">2T</option>
+                  <option value="AP">AP</option>
+                  <option value="SO">SO</option>
+                  <option value="1S">1S</option>
+                  <option value="2S">2S</option>
+                  <option value="3S">3S</option>
+                  <option value="CB">CB</option>
+                  <option value="S1">S1</option>
+                  <option value="S2">S2</option>
+                  <option value="SD">SD</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="id_produto">Nome Completo</label>
+                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
+              </div>
+              <div class="form-group">
+                <label for="id_produto">Nome Guerra</label>
+                <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" value="<?php echo $res_1['nomeguerra']; ?>" required>
+              </div>
+              <div class="form-group">
+                <label for="id_produto">Perfil</label>
+                <select name="perfil" class="form-control mr-2" id="category" name="category" required>
+                  <option value="" disabled selected hidden><?php echo $res_1['perfil']; ?></option>
+                  <?php
+                  $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
+                  $result = mysqli_query($conexao, $query);
+                  if (count($result)) {
+                    while ($res_2 = mysqli_fetch_array($result)) {
+                      ?>
+                      <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
+                      <?php } } ?>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success btn-sm" name="buttonAprovar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Aprovar</button>
+              <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      $('#modalAprovar').modal("show");
+    </script>
+
+<!--Modal Aprovar -->  
+
+    <?php
+    if (isset($_POST['buttonAprovar'])) {
+      $saram = $_POST['txtsaram'];
+      $cpf = $_POST['txtcpf'];
+      $posto = $_POST['txtposto'];
+      $nome = strtoupper($_POST['txtnome']);
+      $nomeguerra = strtoupper($_POST['txtnomeguerra']);
+      $perfil = $_POST['perfil'];
+
+      if ($res_1['cpf'] != $cpf) {
+
+        //Verificar se o CPF já está cadastrado
+        $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+
+        $result_verificar = mysqli_query($conexao, $query_verificar);
+        $dado_verificar = mysqli_fetch_array($result_verificar);
+        $row_verificar = mysqli_num_rows($result_verificar);
+
+        if ($row_verificar > 0) {
+          echo "<script language='javascript'> window.alert('CPF já cadastrado!'); </script>";
+          exit();
+        }
+      }
+
+      $query_editar = "UPDATE militares set status = 'Aprovado' where id = '$id'";
+
+      $result_editar = mysqli_query($conexao, $query_editar);
+
+      if ($result_editar == '') {
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao aprovar!'); </script>";
+        echo "<script language='javascript'> window.location='militares.php'; </script>";
+      } else {
+        echo "<script language='javascript'> window.alert('Aprovado com sucesso!'); </script>";
         echo "<script language='javascript'> window.location='militares.php'; </script>";
       }  }  }  } ?>
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->

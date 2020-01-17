@@ -136,18 +136,7 @@ include('conexao.php');
                 <?php } } ?>
               </select>
             </div>
-          </fieldset>
-          <fieldset>
-            <div class="form-group">
-              <label for="id_produto">Usuário</label>
-              <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Digite o Usuário" required>
-            </div>
-            <div class="form-group">
-              <label for="id_produto">Senha</label>
-              <input type="password" class="form-control mr-2" id="txtsenha" name="txtsenha" autocomplete="off" placeholder="Digite uma Senha" required>
-            </div>
-          </div>
-        </fieldset>
+          </fieldset>          
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
           <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
@@ -219,3 +208,39 @@ include('conexao.php');
     });
   });
 </script>
+
+<?php
+if (isset($_POST['button'])) {
+  $saram = $_POST['txtsaram'];
+  $cpf = $_POST['txtcpf'];
+  $posto = $_POST['txtposto'];
+  $nome = strtoupper($_POST['txtnome']);
+  $nomeguerra = strtoupper($_POST['txtnomeguerra']);
+  $perfil = $_POST['perfil'];
+  $status = 'Aguardando';
+
+  //Verificar se o CPF já está cadastrado
+
+  $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+
+  $result_verificar = mysqli_query($conexao, $query_verificar);
+  $dado_verificar = mysqli_fetch_array($result_verificar);
+  $row_verificar = mysqli_num_rows($result_verificar);
+
+  if ($row_verificar > 0) {
+    echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+    exit();
+  }
+
+  $query = "INSERT into militares (saram, cpf, posto, nome, nomeguerra, perfil, status, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$nomeguerra', '$perfil', '$status', curDate() )";
+
+  $result = mysqli_query($conexao, $query);
+
+  if ($result == '') {
+    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
+    echo "<script language='javascript'> window.location='solicitar_acesso.php'; </script>";
+  } else {
+    echo "<script language='javascript'> window.alert('Solicitação encaminhada ao administrador do sistema!'); </script>";
+    echo "<script language='javascript'> window.location='index.php'; </script>";
+  }
+} ?>

@@ -229,7 +229,7 @@ include('verificar_login.php');
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
+            <li class="nav-item has-treeview menu-open">
               <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-list-ul"></i>
