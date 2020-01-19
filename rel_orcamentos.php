@@ -213,7 +213,7 @@ include('verificar_login.php');
               </a>
             </li>
             <li class="nav-item">
-              <a href="requerentes.php" class="nav-link">
+              <a href="requerentes_orc.php" class="nav-link">
                 <i class="nav-icon fas fa-user-friends"></i>
                 <p>
                   Requerentes

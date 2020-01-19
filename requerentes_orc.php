@@ -2,6 +2,7 @@
 include('conexao.php');
 session_start();
 include('verificar_login.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -173,10 +174,12 @@ include('verificar_login.php');
       </a>
       <!-- Sidebar -->
       <div class="sidebar">
+
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
            <li class="nav-item">
-            <a href="painel_exant.php" class="nav-link">
+            <a href="painel_funcionario.php" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Página Inicial
@@ -184,7 +187,7 @@ include('verificar_login.php');
             </a>
           </li>
           <li class="nav-item">
-            <a href="requerentes.php" class="nav-link active">
+            <a href="requerentes_orc.php" class="nav-link active">
               <i class="nav-icon fas fa-user-friends"></i>
               <p>
                 Requerentes
@@ -193,19 +196,31 @@ include('verificar_login.php');
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-folder-open"></i>
+              <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Processos
+                Orçamentos
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="processos_exant.php" class="nav-link">
+                <a href="abrir_orcamentos.php" class="nav-link">
                   <i class="far fa-hand-point-right nav-icon"></i>
-                  <p>Abrir Processo</p>
+                  <p>Abrir Orçamento</p>
                 </a>
-              </li>              
+              </li>
+              <li class="nav-item">
+                <a href="fechar_orcamentos.php" class="nav-link">
+                  <i class="far fa-hand-point-right nav-icon"></i>
+                  <p>Fechar Orçamento</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="rel_orcamentos.php" class="nav-link">
+                  <i class="far fa-hand-point-right nav-icon"></i>
+                  <p>Relatórios</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -268,7 +283,6 @@ include('verificar_login.php');
               <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box">
                   <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-
                   <div class="info-box-content" style="text-align:center;">
                     <span class="info-box-text">TOTAL DE REGISTROS</span>
                     <span class="info-box-number">
@@ -293,7 +307,6 @@ include('verificar_login.php');
               <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
                   <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
                   <div class="info-box-content">
                     <span class="info-box-text">Likes</span>
                     <span class="info-box-number">
@@ -303,10 +316,7 @@ include('verificar_login.php');
                   <!-- /.info-box-content -->
                 </div>
                 <!-- /.info-box -->
-              </div>
-              <!-- /.col -->
-
-              <!-- fix for small devices only -->
+              </div>              
               <div class="clearfix hidden-md-up"></div>
 
               <div class="col-12 col-sm-6 col-md-3">

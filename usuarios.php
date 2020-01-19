@@ -282,9 +282,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                               $query = "SELECT * FROM usuarios";
                               $result = mysqli_query($conexao, $query);
                               //$res = mysqli_fetch_array($result);
-                              $row = mysqli_num_rows($result);
-                              ?>
-                              <?php
+                              $row = mysqli_num_rows($result);                              
                               echo $row;
                               ?>
                             </h4>
@@ -521,15 +519,15 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
         <?php
         if (isset($_POST['button'])) {
-          $funcionario = $_POST['funcionario'];
+          $funcionario = $_POST['funcionario'];          
           $query_func = "select * from militares where id = '{$funcionario}' ";
           $result_func = mysqli_query($conexao, $query_func);
           $dado = mysqli_fetch_array($result_func);
           $row = mysqli_num_rows($result_func);
 
           if ($row > 0) {
-            $nome = $dado["nome"];;
-            $perfil = $dado["perfil"];;
+            $nome = $dado["nome"];
+            $perfil = $dado["perfil"];
           }
 
           $usuario = $_POST['txtusuario'];
@@ -624,7 +622,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 $row_verificar = mysqli_num_rows($result_verificar);
 
                 if ($row_verificar > 0) {
-                  echo "<script language='javascript'> window.alert('Usuário já Cadastrado!'); </script>";
+                  echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
                   exit();
                 }
               }

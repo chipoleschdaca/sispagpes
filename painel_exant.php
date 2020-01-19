@@ -1,8 +1,7 @@
 <?php
-
+include('conexao.php');
 session_start();
 include('verificar_login.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +11,7 @@ include('verificar_login.php');
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="dist/img/gapls.png">
-  <title>SISPAGPES</title>
+  <title>SISPAGPES | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -36,21 +35,14 @@ include('verificar_login.php');
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-        </li>
-
+        </li>                
       </ul>
-
-
       <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
           <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" aria-label="Search">
@@ -61,8 +53,6 @@ include('verificar_login.php');
           </div>
         </div>
       </form>
-
-      <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
@@ -183,21 +173,15 @@ include('verificar_login.php');
           </div>
         </li>
       </ul>
-    </nav>
-
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
+    </nav>   
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">     
       <a href="painel_funcionario.php" class="brand-link" style="heigh:50px;">
         <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
-      </a>
-
-
-      <div class="sidebar">
-
+      </a>      
+      <div class="sidebar">               
         <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                        
            <li class="nav-item">
             <a href="painel_funcionario.php" class="nav-link active">
               <i class="nav-icon fas fa-home"></i>
@@ -207,7 +191,7 @@ include('verificar_login.php');
             </a>
           </li>
           <li class="nav-item">
-            <a href="requerentes_orc.php" class="nav-link">
+            <a href="requerentes.php" class="nav-link">
               <i class="nav-icon fas fa-user-friends"></i>
               <p>
                 Requerentes
@@ -216,31 +200,19 @@ include('verificar_login.php');
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-folder-open"></i>
               <p>
-                Orçamentos
+                Processos
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="abrir_orcamentos.php" class="nav-link">
+                <a href="processos_exant.php" class="nav-link">
                   <i class="far fa-hand-point-right nav-icon"></i>
-                  <p>Abrir Orçamento</p>
+                  <p>Abrir Processo</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="fechar_orcamentos.php" class="nav-link">
-                  <i class="far fa-hand-point-right nav-icon"></i>
-                  <p>Fechar Orçamento</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="rel_orcamentos.php" class="nav-link">
-                  <i class="far fa-hand-point-right nav-icon"></i>
-                  <p>Relatórios</p>
-                </a>
-              </li>
+              </li>              
             </ul>
           </li>
           <li class="nav-item has-treeview">

@@ -42,14 +42,19 @@ if ($row > 0){
 		exit();
 	}
 
-	//if ($_SESSION['perfil_usuario'] == 'Funcionario'){
-		header('Location: painel_funcionario.php'); // --> Faz com que qualquer login que não seja com perfil de Administrador ou Tesoureiro caia na página painel_funcionario.
-	//	exit();
-	//}
+	if ($_SESSION['perfil_usuario'] == 'EXANT'){
+		header('Location: painel_exant.php');
+		exit();
+	}
 	
+	if ($_SESSION['perfil_usuario'] == 'Funcionário'){
+		header('Location: painel_funcionario.php');
+		exit();
+	}
+
 	exit();
 }else{
-	$_SESSION['nao_autenticado'] = true; //Essa variável 'nao_autenticado' não está especificada em lugar nenhum
+	$_SESSION['nao_autenticado'] = true; 
 	header('Location: index.php');
 	exit();
 }

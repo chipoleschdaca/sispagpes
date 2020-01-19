@@ -335,8 +335,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 <!-- /.col -->
               </div>              
               <br>
-              <div class="row">
-                <div class="col-md-12">
+              <div class="row" style="align-content: center;">
+                <div class="col-md-3">                  
+                </div>
+                <div class="col-md-6">
                   <div class="card">
                     <div class="card-header" style="text-align: center;">
                       <h4 class="" style="text-align:center;"><strong>TABELA DE PERFIS</strong></h4>
@@ -352,9 +354,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                         <?php
                         if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                           $nome = '%' . $_GET['txtpesquisar'] . '%';
-                          $query = "select * from perfis where perfil LIKE '$nome' order by perfil asc";
+                          $query = "select * from perfis where perfil LIKE '$nome' order by id asc";
                         } else {
-                          $query = "select * from perfis order by perfil asc";
+                          $query = "select * from perfis order by id asc";
                         }
                         $result = mysqli_query($conexao, $query);
                                         //$dado = mysqli_fetch_array($result);
@@ -399,6 +401,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     </div>
                   </div>
                 </div>
+                <div class="col-md-3">                  
+                </div>
               </div>
               <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -423,6 +427,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                             <option value="Gerente">Gerente</option>
                             <option value="Tesoureiro">Tesoureiro</option>
                             <option value="Funcionário">Funcionário</option>
+                            <option value="EXANT">Exercício Anterior</option>
+                            <option value="PENSAL">Pensão Alimentícia</option>
                           </select>
                         </div>
                         <div class="modal-footer">
@@ -518,7 +524,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     $row_verificar = mysqli_num_rows($result_verificar);
 
     if ($row_verificar > 0) {
-      echo "<script language='javascript'> window.alert('perfil já Cadastrado!'); </script>";
+      echo "<script language='javascript'> window.alert('Perfil já cadastrado!'); </script>";
       exit();
     }
 

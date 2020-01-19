@@ -379,9 +379,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                           if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
 
                             $nome = '%' . $_GET['txtpesquisar'] . '%';
-                            $query = "select * from militares where nome LIKE '$nome' order by nome asc";
+                            $query = "select * from militares where nome LIKE '$nome' order by id asc";
                           } else {
-                            $query = "select * from militares order by nome asc";
+                            $query = "select * from militares order by id asc";
                           }
 
                           $result = mysqli_query($conexao, $query);
@@ -396,6 +396,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
                           <table class="table table-sm table-bordered table-striped">
                             <thead class="text-primary align-middle">
+                              <th class="align-middle">#</th>
                               <th class="align-middle">Saram</th>
                               <th class="align-middle">CPF</th>
                               <th class="align-middle">Posto</th>
@@ -420,6 +421,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                                 $data = $res_1['data'];                                
                                 ?>
                                 <tr>
+                                  <td class="align-middle"><?php echo $id; ?></td>
                                   <td class="align-middle"><?php echo $saram; ?></td>
                                   <td class="align-middle"><?php echo $cpf; ?></td>
                                   <td class="align-middle"><?php echo $posto; ?></td>
@@ -454,19 +456,18 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                                     if ($status == 'Aprovado') { ?>
                                       <a class="btn btn-success btn-sm disabled" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
                                       <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i>
+                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
                                      <?php 
                                     } elseif ($status == 'Aguardando') { ?>
                                       <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
                                       <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></
+                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
                                     <?php 
                                     }else { ?>
-                                      <a class="btn btn-success btn-sm disabled" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                      <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
                                       <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt">
-                                    <?php } ?>
-                                    </a>
+                                      <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
+                                    <?php } ?>                                    
                                   </td>
                                 </tr>
                                 <?php
@@ -653,7 +654,8 @@ if (isset($_POST['button'])) {
 <?php
 if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
-  $query = "DELETE FROM militares where id = '$id'";
+  $query = "UPDATE militares set status = 'Rejeitado' where id = '$id'";
+  //$query = "DELETE FROM militares where id = '$id'";
   mysqli_query($conexao, $query);
   echo "<script language='javascript'> window.location='militares.php'; </script>";
 }

@@ -175,7 +175,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="requerentes.php" class="nav-link">
+          <a href="requerentes_orc.php" class="nav-link">
             <i class="nav-icon fas fa-user-friends"></i>
             <p>
               Requerentes
@@ -576,7 +576,7 @@
             <div class="modal-body">
               <form method="POST" action="">
                 <div class="form-group">
-                  <label for="fornecedor">CPF</label>
+                  <label for="fornecedor">CPF do Requerente</label>
                   <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
                 </div>
                 <div class="form-group">
