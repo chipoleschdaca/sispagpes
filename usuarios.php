@@ -218,21 +218,20 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               <a href="militares.php" class="nav-link">
                 <i class="nav-icon fas fa-fingerprint"></i>
                 <p>
-                  Militares <?php
-                  $query = "SELECT * FROM militares where status = 'Aguardando'";
-                  $result = mysqli_query($conexao, $query);
-                  $res = mysqli_fetch_array($result);
-                  $row = mysqli_num_rows($result);
-                  if ($row > 0) {
-                    echo "($row)"; ?>
-                  <?php } else {                                   
-                  }                                 
-                  ?>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="usuarios.php" class="nav-link active">
+                 Militares                
+                 <?php
+                 $query = "SELECT * FROM militares where status = 'Aguardando'";
+                 $result = mysqli_query($conexao, $query);
+                 $res = mysqli_fetch_array($result);
+                 $row = mysqli_num_rows($result);
+                 if ($row > 0) {
+                  echo '<span class="badge badge-warning right">'.$row.'</span>' ?>
+                <?php } else { } ?>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="usuarios.php" class="nav-link active">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Usuários
@@ -245,6 +244,29 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       Perfis
                     </p>
                   </a>
+                </li>
+                <li class="nav-item has-treeview">              
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-chart-pie"></i>
+                    <p>
+                      Exercício Anterior
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="secoes_exant.php" class="nav-link">
+                        <i class="far fa-hand-point-right nav-icon"></i>
+                        <p>Seções</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="direitos_exant.php" class="nav-link">
+                        <i class="far fa-hand-point-right nav-icon"></i>
+                        <p>Direito Pleiteado</p>
+                      </a>
+                    </li>                
+                  </ul>
                 </li>
               </div>
               <!--/.sidebar -->

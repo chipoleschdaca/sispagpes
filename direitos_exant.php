@@ -210,51 +210,50 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <a href="militares.php" class="nav-link">
               <i class="nav-icon fas fa-fingerprint"></i>
               <p>
-                Militares                
-                <?php
-                $query = "SELECT * FROM militares where status = 'Aguardando'";
-                $result = mysqli_query($conexao, $query);
-                $res = mysqli_fetch_array($result);
-                $row = mysqli_num_rows($result);
-                if ($row > 0) {
-                  echo '<span class="badge badge-warning right">'.$row.'</span>' ?>
-                <?php } else { } ?>
-              </span>
+               Militares                
+               <?php
+               $query = "SELECT * FROM militares where status = 'Aguardando'";
+               $result = mysqli_query($conexao, $query);
+               $res = mysqli_fetch_array($result);
+               $row = mysqli_num_rows($result);
+               if ($row > 0) {
+                echo '<span class="badge badge-warning right">'.$row.'</span>' ?>
+              <?php } else { } ?>
             </p>
           </a>
         </li>
         <li class="nav-item">
           <a href="usuarios.php" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Usuários
-            </p>
-          </a>
-          <li class="nav-item">
-            <a href="perfis.php" class="nav-link active">
-              <i class="nav-icon fas fa-sitemap"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Perfis
+                Usuários
               </p>
             </a>
-          </li>
-          <li class="nav-item has-treeview">              
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Exercício Anterior
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="secoes_exant.php" class="nav-link">
-                  <i class="far fa-hand-point-right nav-icon"></i>
+            <li class="nav-item">
+              <a href="perfis.php" class="nav-link">
+                <i class="nav-icon fas fa-sitemap"></i>
+                <p>
+                  Perfis
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview menu-open">              
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Exercício Anterior
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="secoes_exant.php" class="nav-link">
+                    <i class="far fa-hand-point-right nav-icon"></i>
                     <p>Seções</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="direitos_exant.php" class="nav-link">
+                  <a href="direitos_exant.php" class="nav-link active">
                     <i class="far fa-hand-point-right nav-icon"></i>
                     <p>Direito Pleiteado</p>
                   </a>
@@ -357,9 +356,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               </div>              
               <br>
               <div class="row" style="align-content: center;">
-                <div class="col-md-4">                  
+                <div class="col-md-3">                  
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="card">
                     <div class="card-header" style="text-align: center;">
                       <h4 class="" style="text-align:center;"><strong>TABELA DE PERFIS</strong></h4>
@@ -422,7 +421,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">                  
+                <div class="col-md-3">                  
                 </div>
               </div>
               <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -435,7 +434,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title">Inserir novo PERFIL</h4>
+                      <h4 class="modal-title">perfis</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">

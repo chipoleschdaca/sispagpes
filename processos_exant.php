@@ -252,7 +252,7 @@ include('verificar_login.php');
                   <div class="info-box mb-3">
                     <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-dollar-sign"></i></span>
                     <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">TOTAL DE ORÇAMENTOS</span>
+                      <span class="info-box-text">TOTAL DE PROCESSOS</span>
                       <span class="info-box-number">
                         <h4>
                           <?php
@@ -271,7 +271,7 @@ include('verificar_login.php');
                   <div class="info-box">
                     <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
                     <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">ORÇAMENTOS ABERTOS</span>
+                      <span class="info-box-text">PROCESSOS ABERTOS</span>
                       <span class="info-box-number">
                         <h4>
                           <?php
@@ -290,7 +290,7 @@ include('verificar_login.php');
                   <div class="info-box mb-3">
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cogs"></i></span>
                     <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">ORÇAMENTOS AGUARDANDO</span>
+                      <span class="info-box-text">PROCESSOS AGUARDANDO</span>
                       <span class="info-box-number">
                         <h4>
                           <?php
@@ -310,7 +310,7 @@ include('verificar_login.php');
                   <div class="info-box mb-3">
                     <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
                     <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">ORÇAMENTOS APROVADOS</span>
+                      <span class="info-box-text">PROCESSOS APROVADOS</span>
                       <span class="info-box-number">
                         <h4>
                           <?php
@@ -330,7 +330,7 @@ include('verificar_login.php');
                   <div class="info-box mb-3">
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
                     <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">ORÇAMENTOS CANCELADOS</span>
+                      <span class="info-box-text">PROCESSOS CANCELADOS</span>
                       <span class="info-box-number">
                         <h4>
                           <?php
@@ -427,23 +427,37 @@ include('verificar_login.php');
                       $query = "select e.id, e.requerente, e.sacador, e.direito_pleiteado, e.status, c.nome as req_nome, f.nome as func_nome from exercicioanterior as e INNER JOIN requerentes as c on e.requerente = c.cpf INNER JOIN militares as f on e.tecnico = f.id where data_abertura = '$data' order by id asc";
 
                     } else {
-                      $query = "select * from exercicioanterior INNER JOIN requerentes ON exercicioanterior.requerente = requerentes.cpf INNER JOIN militares exercicioanterior.tecnico = militares.id order by exercicioanterior.id asc";
+                      //$query = "select * from exercicioanterior as e order by id asc";
+
+                      $query = "select e.id, e.saram, e.cpf, e.posto, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.data_entrada, e.data_saida, e.status, e.secao_atual, r.nome as req_nome, m.nome as mil_nome from exercicioanterior as e INNER JOIN requerentes as r on e.requerente = r.cpf INNER JOIN militares as m on e.sacador = m.id order by id asc";
+
+                      //$query2 = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
                     }
 
                     $result = mysqli_query($conexao, $query);
-              //$dado = mysqli_fetch_array($result);
+                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
+
+                    function data($data){
+                      return date("d/m/Y", strtotime($data));
+                    }
 
                     ?>
 
                     <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
+                        <th class="align-middle">#</th>
                         <th class="align-middle">Requerente</th>
                         <th class="align-middle">Sacador</th>
-                        <th class="align-middle">Produto</th>
-                        <th class="align-middle">Valor Total</th>
+                        <th class="align-middle">NUP</th>
+                        <th class="align-middle">Prioridade</th>
+                        <th class="align-middle">Dt. Criação</th>
+                        <th class="align-middle">Direito Pleiteado</th>
+                        <th class="align-middle">Seção de Origem</th>
+                        <th class="align-middle">Dt. Entrada</th>
+                        <th class="align-middle">Dt. Saída</th>
                         <th class="align-middle">Status</th>
-                        <th class="align-middle">Data de Abertura</th>
+                        <th class="align-middle">Seção Atual</th>
                         <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
@@ -451,22 +465,36 @@ include('verificar_login.php');
                         <?php
 
                         while ($res_1 = mysqli_fetch_array($result)) {
-                          //$requerente = $res_1["req_nome"];
-                          //$tecnico = $res_1["func_nome"];
+                          $id = $res_1["id"];
+                          $saram = $res_1["saram"];
+                          $cpf = $res_1["cpf"];
+                          $posto = $res_1["posto"];
+                          $situacao = $res_1["situacao"];
+                          $requerente = $res_1["req_nome"];
+                          $sacador = $res_1["mil_nome"];
+                          $nup = $res_1["nup"];
+                          $prioridade = $res_1["prioridade"];
+                          $data_criacao = $res_1["data_criacao"];
                           $direito_pleiteado = $res_1["direito_pleiteado"];
-                          //$valor_total = $res_1["valor_total"];
-                          $status = $res_1["status"];
-                          $data_criacao = $res_1['data_criacao'];
-                          $id = $res_1['id'];
-                          $data2 = implode('/', array_reverse(explode('-', $data_criacao)));
+                          $secao_origem = $res_1["secao_origem"];
+                          $data_entrada = $res_1['data_entrada'];
+                          $data_saida = $res_1["data_saida"];
+                          $status = $res_1["status"];                          
+                          $secao_atual = $res_1['secao_atual'];                          
 
                           ?>
 
                           <tr>
-                            <!--<td class="align-middle"><?php echo $requerente; ?></td>
-                            <td class="align-middle"><?php echo $tecnico; ?></td>-->
+                            <td class="align-middle"><?php echo $id; ?></td>                            
+                            <td class="align-middle"><?php echo $requerente; ?></td>
+                            <td class="align-middle"><?php echo $sacador; ?></td>
+                            <td class="align-middle"><?php echo $nup; ?></td>
+                            <td class="align-middle"><?php echo $prioridade; ?></td>
+                            <td class="align-middle"><?php echo data($data_criacao); ?></td>
                             <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
-                            <!--<td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.') ?></td>-->
+                            <td class="align-middle"><?php echo $secao_origem ?></td>
+                            <td class="align-middle"><?php echo data($data_entrada); ?></td>
+                            <td class="align-middle"><?php echo data($data_saida); ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aberto') { ?>
@@ -494,30 +522,30 @@ include('verificar_login.php');
                               }
                               ?>
                             </td>
-                            <td class="align-middle"><?php echo $data2; ?></td>
+                            <td class="align-middle"><?php echo $secao_atual; ?></td>
 
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aberto') { ?>
-                                <a class="btn btn-dark btn-sm" href="abrir_orcamentos.php?func=fecha&id=<?php echo $id; ?>"><i class="fas fa-save"></i></a>
-                                <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                                <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-dark btn-xs" style="width: 24px;" href="processos_exant.php?func=fecha&id=<?php echo $id; ?>"><i class="fas fa-save"></i></a>
+                                <a class="btn btn-success btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
+                                <a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                                 <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
-                                <a class="btn btn-success btn-sm" href="abrir_orcamentos.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-primary btn-sm disabled" href="#" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                                <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-secondary btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-save"></i></a>
+                                <a class="btn btn-success btn-xs" style="width: 24px;" href="processos_exant.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
+                                <a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                                 <?php
                               } elseif ($status == 'Aprovado') { ?>
-                                <a class="btn btn-secondary btn-sm disabled" href="#"><i class="fas fa-save"></i></a>
-                                <a class="btn btn-success btn-sm disabled" href="#"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-primary btn-sm" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener” style="width: 33px;"><i class="fas fa-print"></i></a>
-                                <a class="btn btn-warning btn-sm" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                <a class="btn btn-danger btn-sm" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-secondary btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-save"></i></a>
+                                <a class="btn btn-success btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-primary btn-xs" style="width: 24px;" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
+                                <a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                                 <?php
                               } elseif ($status == 'Cancelado') { ?>
                                 <span class="badge badge-danger">
@@ -548,7 +576,6 @@ include('verificar_login.php');
               </div>
             </div>
           </div>
-
           <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
           <div id="modalExemplo" class="modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered">   
@@ -568,10 +595,8 @@ include('verificar_login.php');
                       <select class="form-control select2" id="category" name="funcionario">
                         <option value="" disabled selected hidden>Escolha um sacador...</option>
                         <?php
-
-                        $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
+                        $query = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";
                         $result = mysqli_query($conexao, $query);
-
                         if (count($result)) {
                           while ($res_1 = mysqli_fetch_array($result)) {
                             ?>
@@ -580,20 +605,78 @@ include('verificar_login.php');
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="quantidade">Produto</label>
-                        <input type="text" class="form-control mr-2" name="txtproduto" placeholder="Produto" required>
+                        <label for="quantidade">NUP</label>
+                        <input type="text" class="form-control mr-2" id="txtnup" name="txtnup" placeholder="00000.000000/0000-00" required>
                       </div>
-
                       <div class="form-group">
-                        <label for="quantidade">Nº de Série</label>
+                        <label for="quantidade">Direito Pleiteado</label>
+                        <input type="text" class="form-control mr-2" name="txtdireitopleiteado" placeholder="Produto" required>
+                      </div>
+                      <div class="form-group">                        
+                        <input type="checkbox" id="my-checkbox" name="my-checkbox" checked data-bootstrap-switch>
+                        <label for="my-checkbox" style="margin-left: 20px;">Prioridade Lei nº 10.741 (Estatuto do Idoso)</label>
+                      </div>
+                      <div class="form-group">
+                        <label for="quantidade">Data de Abertura</label>
+                        <input type="date" class="form-control" name="txtdataabertura" placeholder="Data de Abertura" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Direito Pleiteado</label>
+                        <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado">
+                          <option value="" disabled selected hidden>Direito Pleiteado</option>
+                          <option value="ADC MILITAR">ADICIONAL MILITAR</option>
+                          <option value="COMPENSAÇÃO ORGÂNICA">ADICIONAL DE COMPENSAÇÃO ORGÂNICA</option>
+                          <option value="HABILITAÇÃO">HABILITAÇÃO</option>
+                          <option value="TEMPO DE SERVIÇO">TEMPO DE SERVIÇO</option>
+                          <option value="NATALINO">NATALINO</option>
+                          <option value="DISP MILITAR">DISPONIBILIDADE MILITAR</option>
+                          <option value="AJUDA DE CUSTO">AJUDA DE CUSTO</option>
+                          <option value="COTA-PARTE">COTA-PARTE</option>
+                          <option value="AUX FARDAMENTO">AUXÍLIO FARDAMENTO</option>
+                          <option value="AUX FUNERAL">AUXÍLIO FUNERAL</option>
+                          <option value="AUX INVALIDEZ">AUXÍLIO INVALIDEZ</option>
+                          <option value="AUX NATALIDADE">AUXÍLIO NATALIDADE</option>
+                          <option value="AUX PRÉ-ESCOLAR">AUXÍLIO PRÉ-ESCOLAR</option>
+                          <option value="DIF ADC PERMANÊNCIA">DIFERENÇA DE ADICIONAL DE PERMANÊNCIA</option>
+                          <option value="DIF ADC TP DE SERVIÇO">Direito Pleiteado</option>
+                          <option value="DIF ADC MILITAR">DIFERENÇA DE ADICIONAL MILITAR</option>
+                          <option value="DIF AUX FUNERAL">DIFERENÇA DE AUXÍLIO FUNERAL</option>
+                          <option value="DIF COTA-PARTE">DIFERENÇA DE COTA-PARTE</option>
+                          <option value="DIF PENSÃO MILITAR">DIFERENÇA DE PENSÃO MILITAR</option>
+                          <option value="DIF PROVENTOS">DIFERENÇA DE PROVENTOS</option>
+                          <option value="DIF REMUNERAÇÃO">DIFERENÇA DE REMUNERAÇÃO</option>
+                          <option value="PENSÃO MILITAR">PENSÃO MILITAR</option>
+                          <option value="PROVENTOS">PROVENTOS</option>
+                          <option value="REMUNERAÇÃO">REMUNERAÇÃO</option>
+                          <option value="REPARAÇÃO ECONÔMICA">REPARAÇÃO ECONÔMICA</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Seção de Origem</label>
+                        <select class="form-control select2" id="txtsecaoorigem" name="txtsecaoorigem">
+                          <option value="" disabled selected hidden>Seção de Origem</option>
+                          <option value="DP-1">DP-1</option>
+                          <option value="COMPENSAÇÃO ORGÂNICA">ADICIONAL DE COMPENSAÇÃO ORGÂNICA</option>
+                          <option value="HABILITAÇÃO">HABILITAÇÃO</option>
+                          <option value="TEMPO DE SERVIÇO">TEMPO DE SERVIÇO</option>
+                          <option value="NATALINO">NATALINO</option>
+                          <option value="DISP MILITAR">DISPONIBILIDADE MILITAR</option>
+DP-3                          
+ACI-1
+
+DP-4
+ES-LS
+SDPP
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Nº de Série</label>
                         <input type="text" class="form-control mr-2" name="txtserie" placeholder="Nº de Série" required>
                       </div>
-
                       <div class="form-group">
                         <label for="quantidade">Defeito</label>
                         <input type="text" class="form-control mr-2" name="txtdefeito" placeholder="Defeito" required>
                       </div>
-
                       <div class="form-group">
                         <label for="quantidade">Observações</label>
                         <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" required>
@@ -653,6 +736,8 @@ include('verificar_login.php');
       <script src="plugins/daterangepicker/daterangepicker.js"></script>
       <!-- Tempusdominus Bootstrap 4 -->
       <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+      <!-- Bootstrap Switch -->
+      <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
       <!-- Summernote -->
       <script src="plugins/summernote/summernote-bs4.min.js"></script>
       <!-- overlayScrollbars -->
@@ -742,7 +827,8 @@ include('verificar_login.php');
     if (isset($_POST['button'])) {
       $nome = $_POST['txtcpf'];
       $tecnico = $_POST['funcionario'];
-      $produto = $_POST['txtproduto'];
+      $nup = $_POST['txtnup'];
+      $produto = $_POST['txtdireitopleiteado'];
       $serie = $_POST['txtserie'];
       $defeito = $_POST['txtdefeito'];
       $obs = $_POST['txtobs'];
@@ -757,6 +843,15 @@ include('verificar_login.php');
         echo "<script language='javascript'> window.alert('O Requerente já está cadastrado!'); </script>";
         exit();
       }
+// Verificar se o NUP já está cadastrado
+      $query_nup = "select * from exercicioanterior where nup = '$nup'";
+      $result_nup = mysqli_query($conexao, $query_nup);
+      $row_nup = mysqli_num_rows($result_nup);
+
+      if ($row_nup <= 0) {
+        echo "<script language='javascript'> window.alert('O NUP já está cadastrado!'); </script>";
+        exit();
+      }
 
       $query = "INSERT into orcamentos (requerente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
 
@@ -765,8 +860,8 @@ include('verificar_login.php');
       if ($result == '') {
         echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
       } else {
-        echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+        echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
+        echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
       }
     }
     ?>
@@ -778,7 +873,7 @@ include('verificar_login.php');
       $id = $_GET['id'];
       $query = "DELETE FROM orcamentos where id = '$id'";
       mysqli_query($conexao, $query);
-      echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+      echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
     }
     ?>
 
@@ -827,7 +922,7 @@ include('verificar_login.php');
                   </div>
                   <div class="form-group">
                     <label for="quantidade">Produto</label>
-                    <input type="text" class="form-control mr-2" name="txtproduto" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" required>
+                    <input type="text" class="form-control mr-2" name="txtdireitopleiteado" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" required>
                   </div>
 
                   <div class="form-group">
@@ -865,7 +960,7 @@ include('verificar_login.php');
         if (isset($_POST['buttonEditar'])) {
 
           $tecnico = $_POST['funcionario'];
-          $produto = $_POST['txtproduto'];
+          $produto = $_POST['txtdireitopleiteado'];
           $serie = $_POST['txtserie'];
           $defeito = $_POST['txtdefeito'];
           $obs = $_POST['txtobs'];
@@ -878,7 +973,7 @@ include('verificar_login.php');
             echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
           } else {
             echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-            echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+            echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
           }
         }
         ?>
@@ -923,7 +1018,7 @@ include('verificar_login.php');
             </div>-->
             <div class="form-group">
               <label for="quantidade">Produto</label>
-              <input type="text" class="form-control mr-2" name="txtproduto" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" readonly>
+              <input type="text" class="form-control mr-2" name="txtdireitopleiteado" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" readonly>
             </div>
 
             <div class="form-group">
@@ -993,7 +1088,7 @@ include('verificar_login.php');
       echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
     } else {
       echo "<script language='javascript'> window.alert('Orçamento fechado com sucesso!'); </script>";
-      echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+      echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
     }
   }
   ?>
@@ -1065,7 +1160,7 @@ include('verificar_login.php');
       echo "<script language='javascript'> window.alert('Ocorreu um erro ao aprovar!'); </script>";
     } else {
       echo "<script language='javascript'> window.alert('Orçamento aprovado e OS criada com sucesso!'); </script>";
-      echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+      echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
     }
   }
 } ?>
@@ -1081,11 +1176,21 @@ include('verificar_login.php');
     $('#txtsaram').mask('000.000-0', {
       reverse: true
     });
+    $('#txtnup').mask('00000.000000/0000-00', {
+      reverse: true
+    });
     $('#txtcpf2').mask('000.000.000-00', {
       reverse: true
     });
     $('#txtsaram2').mask('000.000-0', {
       reverse: true
     });
+    $('#txtnup2').mask('00000.000000/0000-00', {
+      reverse: true
+    });
+  });
+
+  $("input[data-bootstrap-switch]").each(function(){
+     $(this).bootstrapSwitch('state', $(this).prop('checked'));
   });
 </script>
