@@ -1,11 +1,10 @@
 <?php
-include('conexao.php');
 session_start();
+include('conexao.php');
 include('verificar_login.php');
-
 if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
-    header('Location: index.php');
-    exit();
+  header('Location: index.php');
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -239,28 +238,64 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             </a>
           </li>
           <li class="nav-item has-treeview">              
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Exercício Anterior
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="secoes_exant.php" class="nav-link">
-                  <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Seções</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="direitos_exant.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Direito Pleiteado</p>
-                  </a>
-                </li>                
-              </ul>
-            </li>
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Exercício Anterior
+                    <?php
+                    $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
+                    $result = mysqli_query($conexao, $query);
+                    $res = mysqli_fetch_array($result);
+                    $row = mysqli_num_rows($result);
+                    $query2 = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
+                    $result2 = mysqli_query($conexao, $query2);
+                    $res2 = mysqli_fetch_array($result2);
+                    $row2 = mysqli_num_rows($result2);
+                    $row_sum = $row + $row2;
+                    if ($row_sum > 0) {
+                      echo '<i class="right fas fa-angle-left"></i>';
+                      echo '<span class="badge badge-warning right">'.$row_sum.'</span>';
+                    } else {
+                      echo '<i class="right fas fa-angle-left"></i>';
+                    }
+                    ?>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="secoes_exant.php" class="nav-link">
+                      <i class="far fa-hand-point-right nav-icon"></i>
+                      <p>
+                        Seções                
+                        <?php
+                        $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
+                        $result = mysqli_query($conexao, $query);
+                        $res = mysqli_fetch_array($result);
+                        $row = mysqli_num_rows($result);
+                        if ($row > 0) {
+                          echo '<span class="badge badge-warning right">'.$row.'</span>';
+                        } else { } ?>
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="direitos_exant.php" class="nav-link">
+                      <i class="far fa-hand-point-right nav-icon"></i>
+                      <p>
+                        Direito Pleiteado
+                        <?php
+                        $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
+                        $result = mysqli_query($conexao, $query);
+                        $res = mysqli_fetch_array($result);
+                        $row = mysqli_num_rows($result);
+                        if ($row > 0) {
+                          echo '<span class="badge badge-warning right">'.$row.'</span>';
+                        } else { } ?>                      
+                      </p>
+                    </a>
+                  </li>                
+                </ul>
+              </li>
           </div>            
         </aside>
         <!-- Content Wrapper. Contains page content -->
@@ -390,9 +425,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                         <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
                           <thead class="text-primary" style="text-align: center;">
 
-                            <th>#</th>
-                            <th>Perfil</th>
-                            <th>Ações</th>
+                            <th class="align-middle">#</th>
+                            <th class="align-middle">Perfil</th>
+                            <th class="align-middle">Ações</th>
                           </thead>
                           <tbody>
                             <?php
@@ -401,9 +436,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                               $id = $res_1["id"];
                               ?>
                               <tr style="text-align: center;">
-                                <td><?php echo $id; ?></td>
-                                <td><?php echo $nome; ?></td>
-                                <td>
+                                <td class="align-middle"><?php echo $id; ?></td>
+                                <td class="align-middle"><?php echo $nome; ?></td>
+                                <td class="align-middle">
                                   <a class="btn btn-warning btn-sm" href="perfis.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
                                   <a class="btn btn-danger btn-sm" href="perfis.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                                 </td>

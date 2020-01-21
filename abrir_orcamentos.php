@@ -445,8 +445,7 @@ include('verificar_login.php');
                       $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
                     }
 
-                    $result = mysqli_query($conexao, $query);
-              //$dado = mysqli_fetch_array($result);
+                    $result = mysqli_query($conexao, $query);                    
                     $row = mysqli_num_rows($result);
 
                     ?>

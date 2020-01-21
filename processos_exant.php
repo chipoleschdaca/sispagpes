@@ -1,7 +1,11 @@
 <?php
-include('conexao.php');
 session_start();
 include('verificar_login.php');
+include('conexao.php');
+if ($_SESSION['perfil_usuario'] != 'EXANT') {
+  header('Location: index.php');
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -429,7 +433,7 @@ include('verificar_login.php');
                     } else {
                       //$query = "select * from exercicioanterior as e order by id asc";
 
-                      $query = "select e.id, e.saram, e.cpf, e.posto, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.data_entrada, e.data_saida, e.status, e.secao_atual, r.nome as req_nome, m.nome as mil_nome from exercicioanterior as e INNER JOIN requerentes as r on e.requerente = r.cpf INNER JOIN militares as m on e.sacador = m.id order by id asc";
+                      $query = "select e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.data_entrada, e.data_saida, e.status, e.secao_atual, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem from exercicioanterior as e INNER JOIN requerentes as r on e.requerente = r.cpf INNER JOIN militares as m on e.sacador = m.id INNER JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id order by id asc";
 
                       //$query2 = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
                     }
@@ -447,15 +451,13 @@ include('verificar_login.php');
                     <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
                         <th class="align-middle">#</th>
-                        <th class="align-middle">Requerente</th>
-                        <th class="align-middle">Sacador</th>
+                        <th class="align-middle">CPF</th>
+                        <th class="align-middle">Requerente</th>                        
                         <th class="align-middle">NUP</th>
                         <th class="align-middle">Prioridade</th>
                         <th class="align-middle">Dt. Criação</th>
                         <th class="align-middle">Direito Pleiteado</th>
-                        <th class="align-middle">Seção de Origem</th>
-                        <th class="align-middle">Dt. Entrada</th>
-                        <th class="align-middle">Dt. Saída</th>
+                        <th class="align-middle">Seção de Origem</th>                        
                         <th class="align-middle">Status</th>
                         <th class="align-middle">Seção Atual</th>
                         <th class="align-middle">Ações</th>
@@ -475,9 +477,9 @@ include('verificar_login.php');
                           $nup = $res_1["nup"];
                           $prioridade = $res_1["prioridade"];
                           $data_criacao = $res_1["data_criacao"];
-                          $direito_pleiteado = $res_1["direito_pleiteado"];
-                          $secao_origem = $res_1["secao_origem"];
-                          $data_entrada = $res_1['data_entrada'];
+                          $direito_pleiteado = $res_1["dir_direito"];
+                          $secao_origem = $res_1["sec_origem"];
+                          $data_entrada = $res_1["data_entrada"];
                           $data_saida = $res_1["data_saida"];
                           $status = $res_1["status"];                          
                           $secao_atual = $res_1['secao_atual'];                          
@@ -485,16 +487,23 @@ include('verificar_login.php');
                           ?>
 
                           <tr>
-                            <td class="align-middle"><?php echo $id; ?></td>                            
-                            <td class="align-middle"><?php echo $requerente; ?></td>
-                            <td class="align-middle"><?php echo $sacador; ?></td>
+                            <td class="align-middle"><?php echo $id; ?></td>
+                            <td class="align-middle"><?php echo $cpf; ?></td>
+                            <td class="align-middle"><?php echo $requerente; ?></td>                            
                             <td class="align-middle"><?php echo $nup; ?></td>
-                            <td class="align-middle"><?php echo $prioridade; ?></td>
+                            <td class="align-middle">
+                              <?php 
+                              if ($prioridade == 'SIM') {
+                                echo '<i class="fas fa-check"></i>';
+                            } else if ($prioridade == 'NÃO') {                              
+                                echo '<i class="fas fa-times"></i>';
+                            } else {
+                              echo $prioridade;                              
+                            } ?>                                
+                            </td>
                             <td class="align-middle"><?php echo data($data_criacao); ?></td>
                             <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
-                            <td class="align-middle"><?php echo $secao_origem ?></td>
-                            <td class="align-middle"><?php echo data($data_entrada); ?></td>
-                            <td class="align-middle"><?php echo data($data_saida); ?></td>
+                            <td class="align-middle"><?php echo $secao_origem ?></td>                            
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aberto') { ?>
@@ -523,7 +532,6 @@ include('verificar_login.php');
                               ?>
                             </td>
                             <td class="align-middle"><?php echo $secao_atual; ?></td>
-
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aberto') { ?>
@@ -552,8 +560,13 @@ include('verificar_login.php');
                                   <?php echo $status; ?>
                                 </span>
                                 <?php
-                              } else {
-                                echo $status;
+                              } else { ?>
+                                <a class="btn btn-secondary btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-save"></i></a>
+                                <a class="btn btn-success btn-xs" style="width: 24px;" href="processos_exant.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
+                                <a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                              <?php  
                               } ?>                        
                             </td>
                           </tr>
@@ -578,139 +591,133 @@ include('verificar_login.php');
           </div>
           <!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
           <div id="modalExemplo" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">   
+            <div class="modal-dialog modal-dialog-centered modal-lg">   
               <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">Novo Orçamento</h4>
+                <div class="modal-header">                  
+                  <h4 class="modal-title"><i class="far fa-folder-open"></i> Inserir novo Processo</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                  <form method="POST" action="">
-                    <div class="form-group">
-                      <label for="fornecedor">CPF do Requerente</label>
-                      <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="fornecedor">Sacador</label>
-                      <select class="form-control select2" id="category" name="funcionario">
-                        <option value="" disabled selected hidden>Escolha um sacador...</option>
-                        <?php
-                        $query = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";
-                        $result = mysqli_query($conexao, $query);
-                        if (count($result)) {
-                          while ($res_1 = mysqli_fetch_array($result)) {
-                            ?>
-                            <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
-                          <?php } } ?>
-                        </select>
+                  <form method="POST" action="">                    
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="fornecedor">CPF do Requerente</label>
+                        <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
                       </div>
-                      <div class="form-group">
-                        <label for="quantidade">NUP</label>
-                        <input type="text" class="form-control mr-2" id="txtnup" name="txtnup" placeholder="00000.000000/0000-00" required>
+                      <div class="form-group col-sm-6">
+                        <label for="fornecedor">Sacador</label>
+                        <select class="form-control select2" id="category" name="funcionario">
+                          <option value="" disabled selected hidden>Escolha um sacador...</option>
+                          <?php
+                          $query = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";
+                          $result = mysqli_query($conexao, $query);
+                          if (count($result)) {
+                            while ($res_1 = mysqli_fetch_array($result)) {
+                              ?>
+                              <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
+                            <?php } } ?>
+                          </select>
+                        </div>
                       </div>
-                      <div class="form-group">
-                        <label for="quantidade">Direito Pleiteado</label>
-                        <input type="text" class="form-control mr-2" name="txtdireitopleiteado" placeholder="Produto" required>
-                      </div>
-                      <div class="form-group">                        
-                        <input type="checkbox" id="my-checkbox" name="my-checkbox" checked data-bootstrap-switch>
-                        <label for="my-checkbox" style="margin-left: 20px;">Prioridade Lei nº 10.741 (Estatuto do Idoso)</label>
-                      </div>
-                      <div class="form-group">
+                      <br>                      
+                      <div class="row">                    
+                        <div class="form-group col-sm-3">
+                          <label for="quantidade">NUP</label>
+                          <input type="text" class="form-control mr-2" id="txtnup" name="txtnup" placeholder="00000.000000/0000-00" required>
+                        </div>
+                        <div class="col-sm-2"></div>                   
+                        <div class="form-group col-sm-7">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-10">                            
+                            <label class="" for="txtprioridade" style="margin-left: 20px; text-align: center;">Prioridade Lei nº 10.741 (Estatuto do Idoso)</label>
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-4">
+                              <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="customRadio1" name="txtprioridade" value="SIM">
+                                <label for="customRadio1" class="custom-control-label">SIM</label>
+                              </div>
+                              <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="customRadio2" name="txtprioridade" value="NÃO">
+                                <label for="customRadio2" class="custom-control-label">NÃO</label>
+                              </div>
+                            </div>
+                            <!--<select class="form-control select2" name="txtprioridade" id="txtprioridade">
+                             <option value="SIM">SIM</option>
+                             <option value="NÃO">NÃO</option>
+                           </select>-->
+                         </div>                         
+                       </div>
+                     </div>
+                     <br>
+                     <div class="row">
+                      <div class="form-group col-sm-5">
                         <label for="quantidade">Data de Abertura</label>
-                        <input type="date" class="form-control" name="txtdataabertura" placeholder="Data de Abertura" required>
+                        <input type="date" class="form-control" name="txtdatacriacao" placeholder="Data de Abertura" required>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group col-sm-7">
                         <label>Direito Pleiteado</label>
                         <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado">
                           <option value="" disabled selected hidden>Direito Pleiteado</option>
-                          <option value="ADC MILITAR">ADICIONAL MILITAR</option>
-                          <option value="COMPENSAÇÃO ORGÂNICA">ADICIONAL DE COMPENSAÇÃO ORGÂNICA</option>
-                          <option value="HABILITAÇÃO">HABILITAÇÃO</option>
-                          <option value="TEMPO DE SERVIÇO">TEMPO DE SERVIÇO</option>
-                          <option value="NATALINO">NATALINO</option>
-                          <option value="DISP MILITAR">DISPONIBILIDADE MILITAR</option>
-                          <option value="AJUDA DE CUSTO">AJUDA DE CUSTO</option>
-                          <option value="COTA-PARTE">COTA-PARTE</option>
-                          <option value="AUX FARDAMENTO">AUXÍLIO FARDAMENTO</option>
-                          <option value="AUX FUNERAL">AUXÍLIO FUNERAL</option>
-                          <option value="AUX INVALIDEZ">AUXÍLIO INVALIDEZ</option>
-                          <option value="AUX NATALIDADE">AUXÍLIO NATALIDADE</option>
-                          <option value="AUX PRÉ-ESCOLAR">AUXÍLIO PRÉ-ESCOLAR</option>
-                          <option value="DIF ADC PERMANÊNCIA">DIFERENÇA DE ADICIONAL DE PERMANÊNCIA</option>
-                          <option value="DIF ADC TP DE SERVIÇO">Direito Pleiteado</option>
-                          <option value="DIF ADC MILITAR">DIFERENÇA DE ADICIONAL MILITAR</option>
-                          <option value="DIF AUX FUNERAL">DIFERENÇA DE AUXÍLIO FUNERAL</option>
-                          <option value="DIF COTA-PARTE">DIFERENÇA DE COTA-PARTE</option>
-                          <option value="DIF PENSÃO MILITAR">DIFERENÇA DE PENSÃO MILITAR</option>
-                          <option value="DIF PROVENTOS">DIFERENÇA DE PROVENTOS</option>
-                          <option value="DIF REMUNERAÇÃO">DIFERENÇA DE REMUNERAÇÃO</option>
-                          <option value="PENSÃO MILITAR">PENSÃO MILITAR</option>
-                          <option value="PROVENTOS">PROVENTOS</option>
-                          <option value="REMUNERAÇÃO">REMUNERAÇÃO</option>
-                          <option value="REPARAÇÃO ECONÔMICA">REPARAÇÃO ECONÔMICA</option>
-                        </select>
+                          <?php                            
+                          $query_direito = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado'";
+                          $result_direito = mysqli_query($conexao, $query_direito);                            
+                          if (count($result_direito)) {
+                            while ($res_dir = mysqli_fetch_array($result_direito)) {
+                              $id = $res_dir['id'];
+                              $direito = $res_dir['direito'];                                
+                              ?>
+                              <option value="<?php echo $id ?>"><?php echo $direito ?></option>
+                            <?php } } ?>
+                          </select>
+                        </div>
                       </div>
+                      <br>
                       <div class="form-group">
                         <label>Seção de Origem</label>
                         <select class="form-control select2" id="txtsecaoorigem" name="txtsecaoorigem">
-                          <option value="" disabled selected hidden>Seção de Origem</option>
-                          <option value="DP-1">DP-1</option>
-                          <option value="COMPENSAÇÃO ORGÂNICA">ADICIONAL DE COMPENSAÇÃO ORGÂNICA</option>
-                          <option value="HABILITAÇÃO">HABILITAÇÃO</option>
-                          <option value="TEMPO DE SERVIÇO">TEMPO DE SERVIÇO</option>
-                          <option value="NATALINO">NATALINO</option>
-                          <option value="DISP MILITAR">DISPONIBILIDADE MILITAR</option>
-DP-3                          
-ACI-1
-
-DP-4
-ES-LS
-SDPP
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>Nº de Série</label>
-                        <input type="text" class="form-control mr-2" name="txtserie" placeholder="Nº de Série" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="quantidade">Defeito</label>
-                        <input type="text" class="form-control mr-2" name="txtdefeito" placeholder="Defeito" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="quantidade">Observações</label>
-                        <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" required>
+                          <option value="" disabled selected hidden>Escolha a seção onde o processo foi criado...</option>
+                          <?php                            
+                          $query_secao = "SELECT * FROM tb_secoes_exant where status = 'Aprovado'";
+                          $result_secao = mysqli_query($conexao, $query_secao);                            
+                          if (count($result_secao)) {
+                            while ($res_2 = mysqli_fetch_array($result_secao)) {
+                                $id = $res_2['id'];
+                                $secao = $res_2['secao'];                                
+                                ?>
+                                <option value="<?php echo $id ?>"><?php echo $secao ?></option>
+                              <?php } } ?>
+                            </select>
+                          </div>                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                        </form>
                       </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                      <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-                    </form>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="info-box">
+                    <button class="info-box-icon bg-success"><i class="fas fa-thumbs-up"></i></button>
+                  </div>       
+                  <button class="btn btn-app">
+                    <i class="fas fa-save"></i> Salvar
+                  </button>
+                </div>
+              </section>
+            </div>
+            <footer class="main-footer">
+              <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+              Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+              <div class="float-right d-none d-sm-inline-block">
+                <b>Versão</b> 1.0.0
               </div>
-            </div>
-            <div class="row">
-              <div class="info-box">
-                <button class="info-box-icon bg-success"><i class="fas fa-thumbs-up"></i></button>
-              </div>       
-              <button class="btn btn-app">
-                <i class="fas fa-save"></i> Salvar
-              </button>
-            </div>
-          </section>
-        </div>
-        <footer class="main-footer">
-          <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-          Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-          <div class="float-right d-none d-sm-inline-block">
-            <b>Versão</b> 1.0.0
+            </footer>
+            <aside class="control-sidebar control-sidebar-dark">
+            </aside>
           </div>
-        </footer>
-        <aside class="control-sidebar control-sidebar-dark">
-        </aside>
-      </div>
-      <!-- jQuery -->
+          <!-- jQuery -->
       <script src="plugins/jquery/jquery.min.js"></script>
       <!-- jQuery Mask -->
       <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
@@ -825,17 +832,17 @@ SDPP
 
     <?php
     if (isset($_POST['button'])) {
-      $nome = $_POST['txtcpf'];
-      $tecnico = $_POST['funcionario'];
+      $cpf = $_POST['txtcpf'];
+      $sacador = $_POST['funcionario'];
       $nup = $_POST['txtnup'];
-      $produto = $_POST['txtdireitopleiteado'];
-      $serie = $_POST['txtserie'];
-      $defeito = $_POST['txtdefeito'];
-      $obs = $_POST['txtobs'];
+      $prioridade = $_POST['txtprioridade'];
+      $data_criacao = $_POST['txtdatacriacao'];
+      $direito = $_POST['txtdireitopleiteado'];
+      $secao_origem = $_POST['txtsecaoorigem'];    
 
 
 //VERIFICAR SE O requerente JÁ ESTÁ CADASTRADO
-      $query_verificar = "select * from requerentes where cpf = '$nome'";
+      $query_verificar = "select * from requerentes where cpf = '$cpf'";
       $result_verificar = mysqli_query($conexao, $query_verificar);
       $row_verificar = mysqli_num_rows($result_verificar);
 
@@ -848,17 +855,19 @@ SDPP
       $result_nup = mysqli_query($conexao, $query_nup);
       $row_nup = mysqli_num_rows($result_nup);
 
-      if ($row_nup <= 0) {
+      if ($row_nup > 0) {
         echo "<script language='javascript'> window.alert('O NUP já está cadastrado!'); </script>";
         exit();
       }
 
-      $query = "INSERT into orcamentos (requerente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
+      $query = "INSERT into exercicioanterior (cpf, requerente, sacador, nup, prioridade, data_criacao, direito_pleiteado, secao_origem, status) VALUES ('$cpf', '$cpf', '$sacador', '$nup', '$prioridade', '$data_criacao', '$direito', '$secao_origem', 'Criado')";
+
+      //$query = "INSERT into orcamentos (requerente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
 
       $result = mysqli_query($conexao, $query);
 
       if ($result == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
       } else {
         echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
         echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
@@ -894,22 +903,17 @@ SDPP
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
-
                 <h4 class="modal-title">Editar Orçamento</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
                 <form method="POST" action="">
-
                   <div class="form-group">
                     <label for="fornecedor">Sacador</label>
-
                     <select class="form-control mr-2" id="category" name="funcionario">
                       <?php
-
                       $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
                       $result = mysqli_query($conexao, $query);
-
                       if (count($result)) {
                         while ($res_2 = mysqli_fetch_array($result)) {
                           ?>                      
@@ -924,24 +928,19 @@ SDPP
                     <label for="quantidade">Produto</label>
                     <input type="text" class="form-control mr-2" name="txtdireitopleiteado" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" required>
                   </div>
-
                   <div class="form-group">
                     <label for="quantidade">Nº de Série</label>
                     <input type="text" class="form-control mr-2" name="txtserie" placeholder="Número de Série" value="<?php echo $res_1['serie']; ?>" required>
                   </div>
-
                   <div class="form-group">
                     <label for="quantidade">Defeito</label>
                     <input type="text" class="form-control mr-2" name="txtdefeito" value="<?php echo $res_1['problema']; ?>" placeholder="Defeito" required>
                   </div>
-
                   <div class="form-group">
                     <label for="quantidade">Observações</label>
                     <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" value="<?php echo $res_1['obs']; ?>" required>
                   </div>
-
                 </div>
-
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
                   <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
