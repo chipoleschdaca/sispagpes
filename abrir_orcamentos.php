@@ -1,7 +1,11 @@
 <?php
-include('conexao.php');
 session_start();
 include('verificar_login.php');
+include('conexao.php');
+if ($_SESSION['perfil_usuario'] != 'Funcionário') {
+  header('Location: index.php');
+  exit();
+}
 ?>
 
 <!DOCTYPE html>

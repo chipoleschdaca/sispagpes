@@ -171,7 +171,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="painel_funcionario.php" class="nav-link">
+              <a href="painel_exant.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
                   Página Inicial
@@ -433,7 +433,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                     } else {
                       //$query = "select * from exercicioanterior as e order by id asc";
 
-                      $query = "select e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.data_entrada, e.data_saida, e.status, e.secao_atual, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem from exercicioanterior as e INNER JOIN requerentes as r on e.requerente = r.cpf INNER JOIN militares as m on e.sacador = m.id INNER JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id order by id asc";
+                      $query = "select e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.data_entrada, e.data_saida, e.status, e.secao_atual, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem from exercicioanterior as e INNER JOIN requerentes as r on e.saram = r.id INNER JOIN militares as m on e.sacador = m.id INNER JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id order by id asc";
 
                       //$query2 = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data_abertura, o.status, c.nome as req_nome, f.nome as func_nome from orcamentos as o INNER JOIN requerentes as c on o.requerente = c.cpf INNER JOIN militares as f on o.tecnico = f.id order by id asc";
                     }
@@ -451,13 +451,13 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                     <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
                         <th class="align-middle">#</th>
-                        <th class="align-middle">CPF</th>
+                        <th class="align-middle">SARAM</th>
                         <th class="align-middle">Requerente</th>                        
                         <th class="align-middle">NUP</th>
                         <th class="align-middle">Prioridade</th>
                         <th class="align-middle">Dt. Criação</th>
                         <th class="align-middle">Direito Pleiteado</th>
-                        <th class="align-middle">Seção de Origem</th>                        
+                        <th class="align-middle">Origem</th>                        
                         <th class="align-middle">Status</th>
                         <th class="align-middle">Seção Atual</th>
                         <th class="align-middle">Ações</th>
@@ -468,7 +468,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 
                         while ($res_1 = mysqli_fetch_array($result)) {
                           $id = $res_1["id"];
-                          $saram = $res_1["saram"];
+                          $saram = $res_1["req_saram"];
                           $cpf = $res_1["cpf"];
                           $posto = $res_1["posto"];
                           $situacao = $res_1["situacao"];
@@ -488,7 +488,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 
                           <tr>
                             <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $cpf; ?></td>
+                            <td class="align-middle"><?php echo $saram; ?></td>
                             <td class="align-middle"><?php echo $requerente; ?></td>                            
                             <td class="align-middle"><?php echo $nup; ?></td>
                             <td class="align-middle">
@@ -601,8 +601,18 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                   <form method="POST" action="">                    
                     <div class="row">
                       <div class="form-group col-sm-6">
-                        <label for="fornecedor">CPF do Requerente</label>
-                        <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
+                        <label for="">Requerente</label>
+                        <select class="form-control select2" id="category" name="txtcpf">
+                          <option value="" disabled selected hidden>selecione o requerente...</option>
+                          <?php
+                          $query = "SELECT * FROM requerentes ORDER BY nome asc";
+                          $result = mysqli_query($conexao, $query);
+                          if (count($result)) {
+                            while ($res_1 = mysqli_fetch_array($result)) {
+                              ?>
+                              <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['saram'];?> | <?php echo $res_1['nome'];?></option>
+                            <?php } } ?>
+                          </select>
                       </div>
                       <div class="form-group col-sm-6">
                         <label for="fornecedor">Sacador</label>
@@ -640,11 +650,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                                 <input class="custom-control-input" type="radio" id="customRadio2" name="txtprioridade" value="NÃO">
                                 <label for="customRadio2" class="custom-control-label">NÃO</label>
                               </div>
-                            </div>
-                            <!--<select class="form-control select2" name="txtprioridade" id="txtprioridade">
-                             <option value="SIM">SIM</option>
-                             <option value="NÃO">NÃO</option>
-                           </select>-->
+                            </div>                            
                          </div>                         
                        </div>
                      </div>
@@ -838,15 +844,14 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       $prioridade = $_POST['txtprioridade'];
       $data_criacao = $_POST['txtdatacriacao'];
       $direito = $_POST['txtdireitopleiteado'];
-      $secao_origem = $_POST['txtsecaoorigem'];    
-
+      $secao_origem = $_POST['txtsecaoorigem'];
 
 //VERIFICAR SE O requerente JÁ ESTÁ CADASTRADO
       $query_verificar = "select * from requerentes where cpf = '$cpf'";
       $result_verificar = mysqli_query($conexao, $query_verificar);
       $row_verificar = mysqli_num_rows($result_verificar);
 
-      if ($row_verificar <= 0) {
+      if ($row_verificar > 0) {
         echo "<script language='javascript'> window.alert('O Requerente já está cadastrado!'); </script>";
         exit();
       }
@@ -860,10 +865,8 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         exit();
       }
 
-      $query = "INSERT into exercicioanterior (cpf, requerente, sacador, nup, prioridade, data_criacao, direito_pleiteado, secao_origem, status) VALUES ('$cpf', '$cpf', '$sacador', '$nup', '$prioridade', '$data_criacao', '$direito', '$secao_origem', 'Criado')";
-
-      //$query = "INSERT into orcamentos (requerente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
-
+      $query = "INSERT into exercicioanterior (saram, cpf, requerente, sacador, nup, prioridade, data_criacao, direito_pleiteado, secao_origem, status) VALUES ('$cpf', '$cpf', '$cpf', '$sacador', '$nup', '$prioridade', '$data_criacao', '$direito', '$secao_origem', 'Criado')";
+      
       $result = mysqli_query($conexao, $query);
 
       if ($result == '') {
@@ -875,80 +878,173 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     }
     ?>
 
-
     <!--EXCLUIR -->
     <?php
     if (@$_GET['func'] == 'deleta') {
       $id = $_GET['id'];
-      $query = "DELETE FROM orcamentos where id = '$id'";
+      $query = "DELETE FROM exercicioanterior where id = '$id'";
       mysqli_query($conexao, $query);
       echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
     }
     ?>
 
-
     <!--EDITAR -->
     <?php
     if (@$_GET['func'] == 'edita') {
-      $id = $_GET['id'];
-      $query = "select * from orcamentos where id = '$id'";
+      $id = $_GET['id'];      
+      $query = "select e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.data_entrada, e.data_saida, e.status, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem from exercicioanterior as e INNER JOIN requerentes as r on e.saram = r.id INNER JOIN militares as m on e.sacador = m.id INNER JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id where e.id = '$id'";
+      $id_req = $res_1["id_req"];
+      $id_mil = $res_1["id_mil"];
+      $id_dir = $res_1["id_dir"];
+      $id_sec = $res_1["id_sec"];
+      $saram = $res_1['req_saram'];
+      $cpf = $res_1["cpf"];
+      $posto = $res_1["req_posto"];
+      $situacao = $res_1["req_situacao"];
+      $requerente = $res_1["req_nome"];
+      $sacador = $res_1["mil_nome"];
+      $nup = $res_1["nup"];
+      $prioridade = $res_1["prioridade"];
+      $data_criacao = $res_1["data_criacao"];
+      $direito_pleiteado = $res_1["dir_direito"];
+      $secao_origem = $res_1["sec_origem"];
+      $data_entrada = $res_1["data_entrada"];
+      $data_saida = $res_1["data_saida"];
+      $status = $res_1["status"];                          
+      $secao_atual = $res_1['secao_atual'];
+
       $result = mysqli_query($conexao, $query);
       while ($res_1 = mysqli_fetch_array($result)) {
-
         ?>
-
         <!-- Modal -->
         <div id="modalEditar" class="modal fade" role="dialog">
-          <div class="modal-dialog modal-dialog-centered">
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Editar Orçamento</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" action="">
-                  <div class="form-group">
-                    <label for="fornecedor">Sacador</label>
-                    <select class="form-control mr-2" id="category" name="funcionario">
-                      <?php
-                      $query = "SELECT * FROM militares where perfil = 'Funcionário' ORDER BY nome asc";
-                      $result = mysqli_query($conexao, $query);
-                      if (count($result)) {
-                        while ($res_2 = mysqli_fetch_array($result)) {
-                          ?>                      
-                          <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['nome']; ?></option>
-                          <?php
-                        }
-                      }
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="quantidade">Produto</label>
-                    <input type="text" class="form-control mr-2" name="txtdireitopleiteado" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="quantidade">Nº de Série</label>
-                    <input type="text" class="form-control mr-2" name="txtserie" placeholder="Número de Série" value="<?php echo $res_1['serie']; ?>" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="quantidade">Defeito</label>
-                    <input type="text" class="form-control mr-2" name="txtdefeito" value="<?php echo $res_1['problema']; ?>" placeholder="Defeito" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="quantidade">Observações</label>
-                    <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" value="<?php echo $res_1['obs']; ?>" required>
-                  </div>
+            <div class="modal-dialog modal-dialog-centered modal-lg">   
+              <div class="modal-content">
+                <div class="modal-header">                  
+                <h4 class="modal-title" style="text-align:center; width: 100%;">DADOS DO(A): <strong><?php echo $res_1["req_posto"]," ", $res_1["req_situacao"]," ", $res_1["req_nome"]?></strong></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                  
                 </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                  <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-                </form>
-              </div>
+                <div class="modal-body">
+                  <form method="POST" action="">                    
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="">Requerente</label>
+                        <select class="form-control select2" id="category" name="txtcpf" required>
+                          <option value="" disabled selected hidden><?php echo $res_1["req_saram"];?> | <?php echo $res_1["req_nome"];?></option>
+                          <?php
+                          $query = "SELECT * FROM requerentes ORDER BY nome asc";
+                          $result = mysqli_query($conexao, $query);
+                          if (count($result)) {
+                            while ($res_2 = mysqli_fetch_array($result)) {
+                              ?>
+                              <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['saram'];?> | <?php echo $res_2['nome'];?></option>
+                            <?php } } ?>
+                          </select>
+                      </div>
+                      <div class="form-group col-sm-6">
+                        <label for="fornecedor">Sacador</label>
+                        <select class="form-control select2" id="category" name="funcionario" required>
+                          <option value="" disabled selected hidden><?php echo $res_1["mil_nome"];?></option>
+                          <?php
+                          $query = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";
+                          $result = mysqli_query($conexao, $query);
+                          if (count($result)) {
+                            while ($res_3 = mysqli_fetch_array($result)) {
+                              ?>
+                              <option value="<?php echo $res_3['id']; ?>"><?php echo $res_3['nome']; ?></option>
+                            <?php } } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <br>                      
+                      <div class="row">                    
+                        <div class="form-group col-sm-3">
+                          <label for="quantidade">NUP</label>
+                          <input type="text" class="form-control mr-2" id="txtnup" name="txtnup" placeholder="00000.000000/0000-00" value="<?php echo $res_1["nup"];?>" required>
+                        </div>
+                        <div class="col-sm-2"></div>                   
+                        <div class="form-group col-sm-7">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-10">                            
+                            <label class="" for="txtprioridade" style="margin-left: 20px; text-align: center;">Prioridade Lei nº 10.741 (Estatuto do Idoso)</label>
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-4">
+                              <?php 
+                                if ($res_1["prioridade"] == 'SIM') {?>
+                                  <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="customRadio1" name="txtprioridade" value="SIM" checked>
+                                    <label for="customRadio1" class="custom-control-label">SIM</label>
+                                  </div>
+                                  <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="customRadio2" name="txtprioridade" value="NÃO">
+                                    <label for="customRadio2" class="custom-control-label">NÃO</label>
+                                  </div>
+                                <?php 
+                                } else { ?>
+                                  <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="customRadio1" name="txtprioridade" value="SIM">
+                                    <label for="customRadio1" class="custom-control-label">SIM</label>
+                                  </div>
+                                  <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="customRadio2" name="txtprioridade" value="NÃO" checked>
+                                    <label for="customRadio2" class="custom-control-label">NÃO</label>
+                                  </div>
+                                <?php } ?>
+                            </div>                            
+                         </div>                         
+                       </div>
+                     </div>
+                     <br>
+                     <div class="row">
+                      <div class="form-group col-sm-5">
+                        <label for="quantidade">Data de Abertura</label>
+                        <input type="date" class="form-control" name="txtdatacriacao" placeholder="Data de Abertura" value="<?php echo $res_1['data_criacao'];?>" required>
+                      </div>
+                      <div class="form-group col-sm-7">
+                        <label>Direito Pleiteado</label>
+                        <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" required>
+                          <option value="" disabled selected hidden><?php echo $res_1["dir_direito"]; ?></option>
+                          <?php                            
+                          $query_direito = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado'";
+                          $result_direito = mysqli_query($conexao, $query_direito);                            
+                          if (count($result_direito)) {
+                            while ($res_dir = mysqli_fetch_array($result_direito)) {
+                              $id = $res_dir['id'];
+                              $direito = $res_dir['direito'];                                
+                              ?>
+                              <option value="<?php echo $id ?>"><?php echo $direito ?></option>
+                            <?php } } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <label>Seção de Origem</label>
+                        <select class="form-control select2" id="txtsecaoorigem" name="txtsecaoorigem" required>
+                          <option value="" disabled selected hidden><?php echo $res_1['sec_origem']; ?></option>
+                          <?php                            
+                          $query_secao = "SELECT * FROM tb_secoes_exant where status = 'Aprovado'";
+                          $result_secao = mysqli_query($conexao, $query_secao);                            
+                          if (count($result_secao)) {
+                            while ($res_secao = mysqli_fetch_array($result_secao)) {
+                                $id = $res_secao['id'];
+                                $secao = $res_secao['secao'];
+                                ?>
+                                <option value="<?php echo $id ?>"><?php echo $secao ?></option>
+                              <?php } } ?>
+                            </select>
+                          </div>                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>                
+              </section>
             </div>
-          </div>
-        </div>
 
         <script>
           $("#modalEditar").modal("show");
@@ -957,14 +1053,15 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         <!--Comando para editar os dados UPDATE -->
         <?php
         if (isset($_POST['buttonEditar'])) {
+          $cpf = $_POST['txtcpf'];
+          $sacador = $_POST['funcionario'];
+          $nup = $_POST['txtnup'];
+          $prioridade = $_POST['txtprioridade'];
+          $data_criacao = $_POST['txtdatacriacao'];
+          $direito = $_POST['txtdireitopleiteado'];
+          $secao_origem = $_POST['txtsecaoorigem'];
 
-          $tecnico = $_POST['funcionario'];
-          $produto = $_POST['txtdireitopleiteado'];
-          $serie = $_POST['txtserie'];
-          $defeito = $_POST['txtdefeito'];
-          $obs = $_POST['txtobs'];
-
-          $query_editar = "UPDATE orcamentos set tecnico = '$tecnico', produto = '$produto', serie = '$serie', problema = '$defeito', obs = '$obs' where id = '$id' ";
+          $query_editar = "UPDATE exercicioanterior set saram = '$cpf', cpf = '$cpf', requerente = '$cpf', sacador = '$sacador', nup = '$nup', prioridade = '$prioridade', data_criacao = '$data_criacao', direito_pleiteado = '$direito', secao_origem = '$secao_origem' where id = '$id' ";
 
           $result_editar = mysqli_query($conexao, $query_editar);
 

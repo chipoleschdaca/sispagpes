@@ -1,7 +1,11 @@
 <?php
-include('conexao.php');
 session_start();
 include('verificar_login.php');
+include('conexao.php');
+if ($_SESSION['perfil_usuario'] != 'EXANT') {
+  header('Location: index.php');
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +15,7 @@ include('verificar_login.php');
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="dist/img/gapls.png">
-  <title>SISPAGPES | Dashboard</title>
+  <title>SISPAGPES</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -327,7 +331,6 @@ include('verificar_login.php');
               <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
                   <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
                   <div class="info-box-content">
                     <span class="info-box-text">New Members</span>
                     <span class="info-box-number">
