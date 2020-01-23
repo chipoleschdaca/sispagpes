@@ -182,4 +182,3 @@ $query = "select o.id, o.requerente, o.tecnico, o.produto, o.valor_total, o.data
 	<div class="footer">
 		<p style="font-size:12px;" align="center">Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int - GAP-LS</p>
 	</div>
-<?php } ?>

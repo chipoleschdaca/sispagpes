@@ -249,7 +249,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   $result2 = mysqli_query($conexao, $query2);
                   $res2 = mysqli_fetch_array($result2);
                   $row2 = mysqli_num_rows($result2);
-                  $query3 = "SELECT * FROM tb_status_exant where status = 'Aguardando'";
+                  $query3 = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
                   $result3 = mysqli_query($conexao, $query3);
                   $res3 = mysqli_fetch_array($result3);
                   $row3 = mysqli_num_rows($result3);
@@ -297,12 +297,12 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="status_exant.php" class="nav-link active">
+                  <a href="estado_exant.php" class="nav-link active">
                     <i class="far fa-hand-point-right nav-icon"></i>
                     <p>
-                      Status
+                      Estado
                       <?php
-                      $query = "SELECT * FROM tb_status_exant where status = 'Aguardando'";
+                      $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
@@ -348,7 +348,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       <span class="info-box-number">
                         <h4>
                           <?php
-                          $query = "SELECT * FROM tb_status_exant";
+                          $query = "SELECT * FROM tb_estado_exant";
                           $result = mysqli_query($conexao, $query);                          
                           $row = mysqli_num_rows($result);                          
                           echo $row;
@@ -366,7 +366,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       <span class="info-box-number">
                         <h4>
                           <?php
-                          $query = "SELECT * FROM tb_status_exant where status = 'Aprovado'";
+                          $query = "SELECT * FROM tb_estado_exant where status = 'Aprovado'";
                           $result = mysqli_query($conexao, $query);                          
                           $row = mysqli_num_rows($result);                          
                           echo $row;
@@ -387,7 +387,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       <span class="info-box-number">
                         <h4>
                           <?php
-                          $query = "SELECT * FROM tb_status_exant where status = 'Aguardando'";
+                          $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
                           $result = mysqli_query($conexao, $query);                          
                           $row = mysqli_num_rows($result);                          
                           echo $row;
@@ -405,7 +405,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       <span class="info-box-number">
                         <h4>
                           <?php
-                          $query = "SELECT * FROM tb_status_exant where status = 'Excluído'";
+                          $query = "SELECT * FROM tb_estado_exant where status = 'Excluído'";
                           $result = mysqli_query($conexao, $query);                          
                           $row = mysqli_num_rows($result);                          
                           echo $row;
@@ -423,21 +423,21 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 <div class="col-md-6">
                   <div class="card">
                     <div class="card-header" style="text-align: center;">
-                      <h4 class="" style="text-align:center;"><strong>TABELA DE DIREITOS PLEITEADOS</strong></h4>
+                      <h4 class="" style="text-align:center;"><strong>TABELA DE ESTADOS</strong></h4>
                     </div>
                     <div class="card-body">
                       <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
                         <i class="fas fa-user-plus"></i> Inserir Novo
                       </button>
                       <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                        <!----------------------LISTAR TODOS OS DIREITOS-------------------------->
+                        <!----------------------LISTAR TODOS OS ESTADOS-------------------------->
 
                         <?php
                         if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                           $nome = '%' . $_GET['txtpesquisar'] . '%';
-                          $query = "select * from tb_status_exant where perfil LIKE '$nome' order by nome asc";
+                          $query = "select * from tb_estado_exant where estado LIKE '$nome' order by estado asc";
                         } else {
-                          $query = "select * from tb_status_exant where status <> 'Excluído' order by nome asc";
+                          $query = "select * from tb_estado_exant where status <> 'Excluído' order by estado asc";
                         }
                         $result = mysqli_query($conexao, $query);
                         //$dado = mysqli_fetch_array($result);
@@ -455,7 +455,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                             <?php
                             while ($res_1 = mysqli_fetch_array($result)) {
                               $id = $res_1["id"];
-                              $nome = $res_1["nome"];
+                              $nome = $res_1["estado"];
                               $status = $res_1["status"];                              
                               ?>
                               <tr style="text-align: center;">
@@ -488,20 +488,20 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                                  if ($status == 'Aprovado') { ?>                                      
                                   <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                   <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                  <a class="btn btn-warning btn-xs" href="status_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                  <a class="btn btn-danger btn-xs" href="status_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                  <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                  <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                   <?php
                                 } elseif ($status == 'Aguardando') { ?>                                     
-                                  <a class="btn btn-success btn-xs" href="status_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                  <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                   <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                  <a class="btn btn-warning btn-xs" href="status_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                  <a class="btn btn-danger btn-xs" href="status_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                  <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                  <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                   <?php                                      
                                 } elseif ($status == 'Excluído') { ?>
-                                  <a class="btn btn-success btn-xs" href="status_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                  <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                   <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                  <a class="btn btn-warning btn-xs disabled" href="status_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                  <a class="btn btn-danger btn-xs disabled" href="status_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                  <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                  <a class="btn btn-danger btn-xs disabled" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                   <?php
                                 } else {
                                   echo $status;
@@ -532,7 +532,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               <div class="col-md-6">
                 <div class="card collapsed-card">
                   <div class="card-header" style="text-align: center; align-items: center;">
-                    <h3 class="card-title">STATUS EXCLUÍDOS</h3>
+                    <h3 class="card-title">ESTADOS EXCLUÍDOS</h3>
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-plus"></i>
@@ -546,9 +546,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       <?php
                       if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                         $nome = '%' . $_GET['txtpesquisar'] . '%';
-                        $query = "select * from tb_status_exant where perfil LIKE '$nome' order by id asc";
+                        $query = "select * from tb_estado_exant where estado LIKE '$nome' order by id asc";
                       } else {
-                        $query = "select * from tb_status_exant where status = 'Excluído' order by id asc";
+                        $query = "select * from tb_estado_exant where status = 'Excluído' order by id asc";
                       }
                       $result = mysqli_query($conexao, $query);                        
                       $row = mysqli_num_rows($result);
@@ -559,7 +559,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
                         <thead class="text-primary" style="text-align: center;">
                           <th class="align-middle"  style="width: 4%;">#</th>
-                          <th class="align-middle" style="width: 65%;">Nome do Status</th>
+                          <th class="align-middle" style="width: 65%;">Estados</th>
                           <th class="align-middle">Status</th>
                           <th class="align-middle">Ações</th>
                         </thead>
@@ -567,7 +567,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                           <?php
                           while ($res_1 = mysqli_fetch_array($result)) {
                             $id = $res_1["id"];
-                            $nome = $res_1["nome"];
+                            $nome = $res_1["estado"];
                             $status = $res_1["status"];                              
                             ?>
                             <tr style="text-align: center;">
@@ -600,20 +600,20 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                                if ($status == 'Aprovado') { ?>                                 
                                 <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="status_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs" href="status_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                 <?php
                               } elseif ($status == 'Aguardando') { ?>                                     
-                                <a class="btn btn-success btn-xs" href="status_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="status_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs" href="status_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                 <?php                                      
                               } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="status_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o status?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o status?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="status_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="status_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs disabled" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                 <?php
                               } else {
                                 echo $status;
@@ -640,13 +640,13 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Inserir novo Status</h4>
+                  <h4 class="modal-title">Inserir novo ESTADO</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                   <form method="POST" action="">
                     <div class="form-group">
-                      <label for="id_produto">Status</label>
+                      <label for="id_produto">Estado do Processo</label>
                       <input type="text" class="form-control mr-2" name="txtnome" placeholder="Digite um novo status" autocomplete="off" required>
                     </div>
                     <div class="modal-footer">
@@ -733,7 +733,7 @@ if (isset($_POST['button'])) {
 
     //Verificar se a SEÇÃO já está cadastrado
 
-    $query_verificar = "select * from tb_status_exant where nome = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+    $query_verificar = "select * from tb_estado_exant where estado = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
     $result_verificar = mysqli_query($conexao, $query_verificar);
     $dado_verificar = mysqli_fetch_array($result_verificar);
     $row_verificar = mysqli_num_rows($result_verificar);
@@ -743,16 +743,16 @@ if (isset($_POST['button'])) {
       exit();
     }
 
-    $query = "INSERT into tb_status_exant (nome, status) VALUES ('$nome', '$status')";
+    $query = "INSERT into tb_estado_exant (estado, status) VALUES ('$nome', '$status')";
 
     $result = mysqli_query($conexao, $query);
 
     if ($result == '') {
       echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-      echo "<script language='javascript'> window.location='status_exant.php'; </script>";
+      echo "<script language='javascript'> window.location='estado_exant.php'; </script>";
     } else {
       echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-      echo "<script language='javascript'> window.location='status_exant.php'; </script>";
+      echo "<script language='javascript'> window.location='estado_exant.php'; </script>";
     }
   }
 
@@ -763,9 +763,9 @@ if (isset($_POST['button'])) {
   <?php
   if (@$_GET['func'] == 'deleta') {
     $id = $_GET['id'];
-    $query = "UPDATE tb_status_exant set status = 'Excluído' where id = '$id'";
+    $query = "UPDATE tb_estado_exant set status = 'Excluído' where id = '$id'";
     mysqli_query($conexao, $query);
-    echo "<script language='javascript'> window.location='status_exant.php'; </script>";
+    echo "<script language='javascript'> window.location='estado_exant.php'; </script>";
   }
   ?>
   <!------------------------------------------------------------------------------->
@@ -775,7 +775,7 @@ if (isset($_POST['button'])) {
   <?php
   if (@$_GET['func'] == 'edita') {
     $id = $_GET['id'];
-    $query = "select * from tb_status_exant where id = '$id'";
+    $query = "select * from tb_estado_exant where id = '$id'";
     $result = mysqli_query($conexao, $query);
     while ($res_1 = mysqli_fetch_array($result)) {
       ?>
@@ -784,14 +784,14 @@ if (isset($_POST['button'])) {
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Editar STATUS</h4>
+              <h4 class="modal-title">Editar Estado</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <form method="POST" action="">
                 <div class="form-group">
-                  <label for="id_produto">Status</label>
-                  <input type="text" class="form-control mr-2" name="txtnome2" value="<?php echo $res_1['nome']; ?>" placeholder="Direito" autocomplete="off">
+                  <label for="id_produto">Estado</label>
+                  <input type="text" class="form-control mr-2" name="txtnome2" value="<?php echo $res_1['estado']; ?>" placeholder="Digite o estado..." autocomplete="off">
                 </div>
               </div>
               <div class="modal-footer">
@@ -813,7 +813,7 @@ if (isset($_POST['button'])) {
     <?php
     if (isset($_POST['buttonEditar'])) {
       $nome2 = strtoupper($_POST['txtnome2']);
-      $query_verificar = "select * from tb_status_exant where nome = '$nome2'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+      $query_verificar = "select * from tb_estado_exant where estado = '$nome2'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
       $result_verificar = mysqli_query($conexao, $query_verificar);
       $row_verificar = mysqli_num_rows($result_verificar);
 
@@ -822,14 +822,14 @@ if (isset($_POST['button'])) {
         exit();
       }
 
-      $query_editar = "UPDATE tb_status_exant set nome = '$nome2' where id = '$id'";
+      $query_editar = "UPDATE tb_estado_exant set estado = '$nome2' where id = '$id'";
       $result_editar = mysqli_query($conexao, $query_editar);
       if ($result_editar == '') {
         echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='status_exant.php'; </script>";
+        echo "<script language='javascript'> window.location='estado_exant.php'; </script>";
       } else {
         echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='status_exant.php'; </script>";
+        echo "<script language='javascript'> window.location='estado_exant.php'; </script>";
       }
     }
   }
@@ -839,8 +839,8 @@ if (isset($_POST['button'])) {
 
 if (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
-  $query = "UPDATE tb_status_exant set status = 'Aprovado' where id = '$id'";
+  $query = "UPDATE tb_estado_exant set status = 'Aprovado' where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='status_exant.php'; </script>";
+  echo "<script language='javascript'> window.location='estado_exant.php'; </script>";
 }  
 ?>

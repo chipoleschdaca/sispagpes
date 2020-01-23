@@ -171,7 +171,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
+      <a href="painel_exant.php" class="brand-link" style="heigh:50px;">
         <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
@@ -187,27 +187,25 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="requerentes.php" class="nav-link active">
-              <i class="nav-icon fas fa-user-friends"></i>
-              <p>
-                Requerentes
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-folder-open"></i>
-              <p>
-                Processos
-                <i class="right fas fa-angle-left"></i>
-              </p>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-folder-open nav-icon"></i>
+                <p>Exercício Anterior</p>
+              <i class="right fas fa-angle-left"></i>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="requerentes.php" class="nav-link active">
+                  <i class="far fa-hand-point-right nav-icon"></i>
+                  <p>
+                    Requerentes
+                  </p>
+                </a>
+              </li>            
+              <li class="nav-item">
                 <a href="processos_exant.php" class="nav-link">
                   <i class="far fa-hand-point-right nav-icon"></i>
-                  <p>Abrir Processo</p>
+                  <p>Processos</p>
                 </a>
               </li>              
             </ul>
@@ -1039,7 +1037,7 @@ if (@$_GET['func'] == 'edita') {
               </div>
             </div>
             <form method="POST" action="">              
-              <div class="modal-footer">                
+              <div class="modal-footer">               
                 <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
               </div>
             </form>

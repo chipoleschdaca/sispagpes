@@ -179,42 +179,40 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       </ul>
     </nav>   
     <aside class="main-sidebar sidebar-dark-primary elevation-4">     
-      <a href="painel_funcionario.php" class="brand-link" style="heigh:50px;">
+      <a href="painel_exant.php" class="brand-link" style="heigh:50px;">
         <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>      
-      <div class="sidebar">               
+      <div class="sidebar">              
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                        
            <li class="nav-item">
-            <a href="painel_funcionario.php" class="nav-link active">
+            <a href="painel_exant.php" class="nav-link active">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Página Inicial
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="requerentes.php" class="nav-link">
-              <i class="nav-icon fas fa-user-friends"></i>
-              <p>
-                Requerentes
-              </p>
-            </a>
-          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-folder-open"></i>
-              <p>
-                Processos
-                <i class="right fas fa-angle-left"></i>
-              </p>
+              <i class="fas fa-folder-open nav-icon"></i>
+                <p>Exercício Anterior</p>
+              <i class="right fas fa-angle-left"></i>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="requerentes.php" class="nav-link">
+                  <i class="far fa-hand-point-right nav-icon"></i>
+                  <p>
+                    Requerentes
+                  </p>
+                </a>
+              </li>            
+              <li class="nav-item">
                 <a href="processos_exant.php" class="nav-link">
                   <i class="far fa-hand-point-right nav-icon"></i>
-                  <p>Abrir Processo</p>
+                  <p>Processos</p>
                 </a>
               </li>              
             </ul>
@@ -259,7 +257,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Dashboard</h1>
+                <h1 class="m-0 text-dark">Exercício Anterior</h1>
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">

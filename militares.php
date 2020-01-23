@@ -255,7 +255,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   $result2 = mysqli_query($conexao, $query2);
                   $res2 = mysqli_fetch_array($result2);
                   $row2 = mysqli_num_rows($result2);
-                  $query3 = "SELECT * FROM tb_status_exant where status = 'Aguardando'";
+                  $query3 = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
                   $result3 = mysqli_query($conexao, $query3);
                   $res3 = mysqli_fetch_array($result3);
                   $row3 = mysqli_num_rows($result3);
@@ -303,12 +303,12 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="status_exant.php" class="nav-link">
+                  <a href="estado_exant.php" class="nav-link">
                     <i class="far fa-hand-point-right nav-icon"></i>
                     <p>
-                      Status
+                      Estado
                       <?php
-                      $query = "SELECT * FROM tb_status_exant where status = 'Aguardando'";
+                      $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
