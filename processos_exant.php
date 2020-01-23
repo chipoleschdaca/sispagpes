@@ -178,28 +178,28 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
               </a>
             </li>
             <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="fas fa-folder-open nav-icon"></i>
+              <a href="#" class="nav-link active">
+                <i class="fas fa-folder-open nav-icon"></i>
                 <p>Exercício Anterior</p>
-              <i class="right fas fa-angle-left"></i>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="requerentes.php" class="nav-link">
-                  <i class="far fa-hand-point-right nav-icon"></i>
-                  <p>
-                    Requerentes
-                  </p>
-                </a>
-              </li>            
-              <li class="nav-item">
-                <a href="processos_exant.php" class="nav-link active">
-                  <i class="far fa-hand-point-right nav-icon"></i>
-                  <p>Processos</p>
-                </a>
-              </li>              
-            </ul>
-          </li>
+                <i class="right fas fa-angle-left"></i>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="requerentes.php" class="nav-link">
+                    <i class="far fa-hand-point-right nav-icon"></i>
+                    <p>
+                      Requerentes
+                    </p>
+                  </a>
+                </li>            
+                <li class="nav-item">
+                  <a href="processos_exant.php" class="nav-link active">
+                    <i class="far fa-hand-point-right nav-icon"></i>
+                    <p>Processos</p>
+                  </a>
+                </li>              
+              </ul>
+            </li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-list-ul"></i>
@@ -694,12 +694,12 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                               <div class="form-group col-sm-6">
                                 <label for="quantidade">Estado do Processo após criação</label>
                                 <?php 
-                                  $query_estado = "SELECT * FROM tb_estado_exant where estado = 'Criado'";
-                                  $result_estado = mysqli_query($conexao, $query_estado);
-                                  $res_estado = mysqli_fetch_array($result_estado);
-                                  $id_estado = $res_estado['id'];
-                                  $estado_estado = $res_estado['estado'];
-                                 ?>
+                                $query_estado = "SELECT * FROM tb_estado_exant where estado = 'Criado'";
+                                $result_estado = mysqli_query($conexao, $query_estado);
+                                $res_estado = mysqli_fetch_array($result_estado);
+                                $id_estado = $res_estado['id'];
+                                $estado_estado = $res_estado['estado'];
+                                ?>
                                 <input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?php echo $res_estado["estado"];?>" disabled>
                               </div>
                             </div>                         
@@ -711,15 +711,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="info-box">
-                      <button class="info-box-icon bg-success"><i class="fas fa-thumbs-up"></i></button>
-                    </div>       
-                    <button class="btn btn-app">
-                      <i class="fas fa-save"></i> Salvar
-                    </button>
-                  </div>
+                  </div>                  
                 </section>
               </div>
               <footer class="main-footer">
@@ -1065,107 +1057,107 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                       $("#modalEditar").modal("show");
                     </script>
 
-                  <!--Comando para editar os dados UPDATE -->
-                  <?php
-                  if (isset($_POST['buttonEditar'])) {
-                    $cpf = $_POST['txtcpf'];
-                    $sacador = $_POST['funcionario'];
-                    $nup = $_POST['txtnup'];
-                    $prioridade = $_POST['txtprioridade'];
-                    $data_criacao = $_POST['txtdatacriacao'];
-                    $direito = $_POST['txtdireitopleiteado'];
-                    $secao_origem = $_POST['txtsecaoorigem'];
+                    <!--Comando para editar os dados UPDATE -->
+                    <?php
+                    if (isset($_POST['buttonEditar'])) {
+                      $cpf = $_POST['txtcpf'];
+                      $sacador = $_POST['funcionario'];
+                      $nup = $_POST['txtnup'];
+                      $prioridade = $_POST['txtprioridade'];
+                      $data_criacao = $_POST['txtdatacriacao'];
+                      $direito = $_POST['txtdireitopleiteado'];
+                      $secao_origem = $_POST['txtsecaoorigem'];
 
-                    $query_editar = "UPDATE exercicioanterior set saram = '$cpf', cpf = '$cpf', requerente = '$cpf', sacador = '$sacador', nup = '$nup', prioridade = '$prioridade', data_criacao = '$data_criacao', direito_pleiteado = '$direito', secao_origem = '$secao_origem' where id = '$id' ";
+                      $query_editar = "UPDATE exercicioanterior set saram = '$cpf', cpf = '$cpf', requerente = '$cpf', sacador = '$sacador', nup = '$nup', prioridade = '$prioridade', data_criacao = '$data_criacao', direito_pleiteado = '$direito', secao_origem = '$secao_origem' where id = '$id' ";
 
-                    $result_editar = mysqli_query($conexao, $query_editar);
+                      $result_editar = mysqli_query($conexao, $query_editar);
 
-                    if ($result_editar == '') {
-                      echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-                    } else {
-                      echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-                      echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
+                      if ($result_editar == '') {
+                        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
+                      } else {
+                        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
+                        echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
+                      }
                     }
                   }
-                }
 
 // Função para alterar estado do processo.
 
-              } elseif (@$_GET['func'] == 'estado') {
-                $id = $_GET['id'];      
-                $query = "select e.id, e.secao_origem, e.data_entrada, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
-                $id_req = $res_1["id_req"];
-                $id_mil = $res_1["id_mil"];
-                $id_dir = $res_1["id_dir"];
-                $id_sec = $res_1["id_sec"];
-                $id_est = $res_1["id_est"];
-                $saram = $res_1['req_saram'];
-                $cpf = $res_1["cpf"];
-                $posto = $res_1["req_posto"];
-                $situacao = $res_1["req_situacao"];
-                $requerente = $res_1["req_nome"];
-                $sacador = $res_1["mil_nome"];
-                $nup = $res_1["nup"];
-                $prioridade = $res_1["prioridade"];
-                $data_criacao = $res_1["data_criacao"];
-                $direito_pleiteado = $res_1["dir_direito"];
-                $secao_origem = $res_1["sec_origem"];
-                $data_entrada = $res_1["data_entrada"];
-                $data_saida = $res_1["data_saida"];
-                $estado = $res_1["est_estado"];                         
-                $secao_atual = $res_1['secao_atual'];
-                $result = mysqli_query($conexao, $query);
-                while ($res_1 = mysqli_fetch_array($result)) {
-                  ?>
-                  <!-- Modal -->
-                  <div id="modalEstado" class="modal fade" role="dialog">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title"><i class="far fa-folder-open"></i>Alterar ESTADO do Processo</h4>
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                          <form method="POST" action="">
-                            <div class="row"><div class="form-group col-sm-5">
-                              <label for="quantidade">Estado Atual</label>                                    
-                              <input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?php echo $res_1["est_estado"];?>" disabled>
-                            </div>
-                            <div class="col-sm-2" style="text-align: center;">
-                              <label for=""></label>
-                              <h1><i class="fas fa-angle-double-right"></i></h1>
-                            </div>
-                            <div class="form-group col-sm-5">
-                              <label>Estado do Processo</label>
-                              <select class="form-control select2" id="txtnovoestado" name="txtnovoestado" required>
-                                <option value="" disabled selected hidden>Selecione o novo estado do Processo...</option>
-                                <?php                            
-                                $query_est = "SELECT * FROM tb_estado_exant where status = 'Aprovado'";
-                                $result_est = mysqli_query($conexao, $query_est);                            
-                                if (count($result_est)) {
-                                  while ($res_est = mysqli_fetch_array($result_est)) {
-                                    $id_est_2 = $res_est['id'];
-                                    $estado_est = $res_est['estado'];
-                                    ?>
-                                    <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
-                                  <?php } } ?>
-                                </select>
-                              </div>                                                       
-                            </div>
+                } elseif (@$_GET['func'] == 'estado') {
+                  $id = $_GET['id'];      
+                  $query = "select e.id, e.secao_origem, e.data_entrada, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
+                  $id_req = $res_1["id_req"];
+                  $id_mil = $res_1["id_mil"];
+                  $id_dir = $res_1["id_dir"];
+                  $id_sec = $res_1["id_sec"];
+                  $id_est = $res_1["id_est"];
+                  $saram = $res_1['req_saram'];
+                  $cpf = $res_1["cpf"];
+                  $posto = $res_1["req_posto"];
+                  $situacao = $res_1["req_situacao"];
+                  $requerente = $res_1["req_nome"];
+                  $sacador = $res_1["mil_nome"];
+                  $nup = $res_1["nup"];
+                  $prioridade = $res_1["prioridade"];
+                  $data_criacao = $res_1["data_criacao"];
+                  $direito_pleiteado = $res_1["dir_direito"];
+                  $secao_origem = $res_1["sec_origem"];
+                  $data_entrada = $res_1["data_entrada"];
+                  $data_saida = $res_1["data_saida"];
+                  $estado = $res_1["est_estado"];                         
+                  $secao_atual = $res_1['secao_atual'];
+                  $result = mysqli_query($conexao, $query);
+                  while ($res_1 = mysqli_fetch_array($result)) {
+                    ?>
+                    <!-- Modal -->
+                    <div id="modalEstado" class="modal fade" role="dialog">
+                      <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title"><i class="far fa-folder-open"></i>Alterar ESTADO do Processo</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
-                          <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-                          </form>
+                          <div class="modal-body">
+                            <form method="POST" action="">
+                              <div class="row"><div class="form-group col-sm-5">
+                                <label for="quantidade">Estado Atual</label>                                    
+                                <input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?php echo $res_1["est_estado"];?>" disabled>
+                              </div>
+                              <div class="col-sm-2" style="text-align: center;">
+                                <label for=""></label>
+                                <h1><i class="fas fa-angle-double-right"></i></h1>
+                              </div>
+                              <div class="form-group col-sm-5">
+                                <label>Estado do Processo</label>
+                                <select class="form-control select2" id="txtnovoestado" name="txtnovoestado" required>
+                                  <option value="" disabled selected hidden>Selecione o novo estado do Processo...</option>
+                                  <?php                            
+                                  $query_est = "SELECT * FROM tb_estado_exant where status = 'Aprovado'";
+                                  $result_est = mysqli_query($conexao, $query_est);                            
+                                  if (count($result_est)) {
+                                    while ($res_est = mysqli_fetch_array($result_est)) {
+                                      $id_est_2 = $res_est['id'];
+                                      $estado_est = $res_est['estado'];
+                                      ?>
+                                      <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
+                                    <?php } } ?>
+                                  </select>
+                                </div>                                                       
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                              <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                            </form>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <script>
-                    $("#modalEstado").modal("show");
-                  </script>
-                  <!-- COMANDO PARA ALTERAR ESTADO DO PROCESSO -->
+                    <script>
+                      $("#modalEstado").modal("show");
+                    </script>
+                    <!-- COMANDO PARA ALTERAR ESTADO DO PROCESSO -->
                     <?php
                     if (isset($_POST['buttonEstado'])) {
 
