@@ -40,6 +40,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <!-- Navbar -->
@@ -200,13 +201,13 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <!-- Sidebar -->
-      <div class="sidebar">        
+      <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-             <li class="nav-item">
+            <li class="nav-item">
               <a href="painel_admin.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
@@ -218,34 +219,35 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               <a href="militares.php" class="nav-link">
                 <i class="nav-icon fas fa-fingerprint"></i>
                 <p>
-                 Militares                
-                 <?php
-                 $query = "SELECT * FROM militares where status = 'Aguardando'";
-                 $result = mysqli_query($conexao, $query);
-                 $res = mysqli_fetch_array($result);
-                 $row = mysqli_num_rows($result);
-                 if ($row > 0) {
-                  echo '<span class="badge badge-warning right">'.$row.'</span>' ?>
-                <?php } else { } ?>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="usuarios.php" class="nav-link active">
+                  Militares
+                  <?php
+                  $query = "SELECT * FROM militares where status = 'Aguardando'";
+                  $result = mysqli_query($conexao, $query);
+                  $res = mysqli_fetch_array($result);
+                  $row = mysqli_num_rows($result);
+                  if ($row > 0) {
+                    echo '<span class="badge badge-warning right">' . $row . '</span>' ?>
+                  <?php } else {
+                  } ?>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="usuarios.php" class="nav-link active">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Usuários
-                  </p>
-                </a>
-                <li class="nav-item">
-                  <a href="perfis.php" class="nav-link">
-                    <i class="nav-icon fas fa-sitemap"></i>
-                    <p>
-                      Perfis
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item has-treeview">              
+                </p>
+              </a>
+            <li class="nav-item">
+              <a href="perfis.php" class="nav-link">
+                <i class="nav-icon fas fa-sitemap"></i>
+                <p>
+                  Perfis
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
@@ -266,7 +268,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   $row_sum = $row + $row2 + $row3;
                   if ($row_sum > 0) {
                     echo '<i class="right fas fa-angle-left"></i>';
-                    echo '<span class="badge badge-warning right">'.$row_sum.'</span>';
+                    echo '<span class="badge badge-warning right">' . $row_sum . '</span>';
                   } else {
                     echo '<i class="right fas fa-angle-left"></i>';
                   }
@@ -278,15 +280,16 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   <a href="secoes_exant.php" class="nav-link">
                     <i class="far fa-hand-point-right nav-icon"></i>
                     <p>
-                      Seções                
+                      Seções
                       <?php
                       $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       if ($row > 0) {
-                        echo '<span class="badge badge-warning right">'.$row.'</span>';
-                      } else { } ?>
+                        echo '<span class="badge badge-warning right">' . $row . '</span>';
+                      } else {
+                      } ?>
                     </p>
                   </a>
                 </li>
@@ -301,8 +304,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       if ($row > 0) {
-                        echo '<span class="badge badge-warning right">'.$row.'</span>';
-                      } else { } ?>                      
+                        echo '<span class="badge badge-warning right">' . $row . '</span>';
+                      } else {
+                      } ?>
                     </p>
                   </a>
                 </li>
@@ -317,420 +321,423 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       if ($row > 0) {
-                        echo '<span class="badge badge-warning right">'.$row.'</span>';
-                      } else { } ?>                      
+                        echo '<span class="badge badge-warning right">' . $row . '</span>';
+                      } else {
+                      } ?>
                     </p>
                   </a>
                 </li>
-                </ul>
-              </li>
-              </div>
-              <!--/.sidebar -->
-            </aside>
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-              <!-- Content Header (Page header) -->
-              <div class="content-header">
-                <div class="container-fluid">
-                  <div class="row mb-2">
-                    <div class="col-sm-6">
-                      <h1 class="m-0 text-dark">Dashboard</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
-                      </ol>
-                    </div><!-- /.col -->
-                  </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-              </div>
-              <section class="content">
-                <div class="container-fluid">
-                  <!-- Small boxes (Stat box) -->
-                  <div class="row">
-                    <div class="col-12 col-sm-6 col-md-3">
-                      <div class="info-box">
-                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-                        <div class="info-box-content" style="text-align:center;">
-                          <span class="info-box-text">TOTAL DE REGISTROS</span>
-                          <span class="info-box-number">
-                            <h4>
-                              <?php
-                              $query = "SELECT * FROM usuarios";
-                              $result = mysqli_query($conexao, $query);
-                              //$res = mysqli_fetch_array($result);
-                              $row = mysqli_num_rows($result);                              
-                              echo $row;
-                              ?>
-                            </h4>
-                          </span>
-                        </div>
-                        <!-- /.info-box-content -->
-                      </div>
-                      <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-12 col-sm-6 col-md-3">
-                      <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                        <div class="info-box-content">
-                          <span class="info-box-text">Likes</span>
-                          <span class="info-box-number">
-                            <h4>41,410</h4>
-                          </span>
-                        </div>
-                        <!-- /.info-box-content -->
-                      </div>
-                      <!-- /.info-box -->
-                    </div>            
-                    <div class="clearfix hidden-md-up"></div>
-                    <div class="col-12 col-sm-6 col-md-3">
-                      <div class="info-box mb-3">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-                        <div class="info-box-content">
-                          <span class="info-box-text">Sales</span>
-                          <span class="info-box-number">
-                            <h4>760</h4>
-                          </span>
-                        </div>
-                        <!-- /.info-box-content -->
-                      </div>
-                      <!-- /.info-box -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-12 col-sm-6 col-md-3">
-                      <div class="info-box mb-3">
-                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-                        <div class="info-box-content">
-                          <span class="info-box-text">New Members</span>
-                          <span class="info-box-number">
-                            <h4>2,000</h4>
-                          </span>
-                        </div>                
-                      </div>              
-                    </div>            
-                  </div>          
-                  <br>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="card">
-                        <div class="card-header" style="text-align: center;">
-                          <h4 class="" style="text-align:center;"><strong>TABELA DE USUÁRIOS</strong></h4>
-                        </div>
-                        <div class="card-body">
-                          <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                            <i class="fas fa-user-plus"></i> Inserir Novo
-                          </button>
-                          <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
-                            <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
-
-                            <?php
-
-                            if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                              $nome = $_GET['txtpesquisar'] . '%';
-                              $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id where u.nome LIKE '$nome' order by u.nome asc";
-                            } else {
-                              $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id order by u.nome asc";
-                            }
-
-                            $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
-                            $row = mysqli_num_rows($result);
-
-                            ?>
-
-                            <!----------------------------------------------------------------------->
-
-                            <table class="table table-sm table-bordered table-striped">
-                              <thead class=" text-primary">
-                                <th class="align-middle">Nome</th>
-                                <th class="align-middle">Usuário</th>
-                                <th class="align-middle">Senha</th>
-                                <th class="align-middle">Perfil</th>
-                                <th class="align-middle">Posto</th>
-                                <th class="align-middle">Ações</th>
-                              </thead>
-                              <tbody>
-
-                                <?php
-                                while ($res_1 = mysqli_fetch_array($result)) {
-                                  $nome = $res_1["nome"];
-                                  $posto = $res_1["posto"];
-                                  $senha = $res_1["senha"];
-                                  $usuario = $res_1["usuario"];
-                                  $perfil = $res_1["perfil"];
-                                  $id = $res_1["id"];
-                                  ?>
-                                  <tr>
-                                    <td class="align-middle"><?php echo $nome; ?></td>
-                                    <td class="align-middle"><?php echo $usuario; ?></td>
-                                    <td class="align-middle"><?php echo $senha; ?></td>
-                                    <td class="align-middle"><?php echo $perfil; ?></td>
-                                    <td class="align-middle"><?php echo $posto; ?></td>
-                                    <td class="align-middle">
-                                      <a class="btn btn-warning btn-sm" href="usuarios.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
-                                      <a class="btn btn-danger btn-sm" href="usuarios.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-                                    </td>
-                                  </tr>
-                                  <?php
-                                }
-                                ?>
-                              </tbody>
-                            </table>
-                            <?php
-                            if ($row == '') {
-                              echo "<h3>Não existem dados para consulta</h3>";
-                            } else { }
-                            ?>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>          
-                  <!---Modal Exemplo--->
-                  <div id="modalExemplo" class="modal fade" role="dialog">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title">Inserir novo usuário</h4>
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                          <form method="POST" action="">
-                            <div class="form-group">
-                              <label for="id_produto">Usuário</label>
-                              <input type="text" class="form-control mr-2" name="txtusuario" placeholder="Usuário" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="fornecedor">Senha</label>
-                              <input type="text" class="form-control mr-2" name="txtsenha" placeholder="Senha" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="fornecedor">Militar</label>
-                              <select class="form-control mr-2" id="category" name="funcionario">
-                                <option value="" disabled selected hidden>Nome</option>
-                                <?php
-                                $query = "SELECT * FROM militares where status = 'Aprovado' ORDER BY nome asc";
-                                $result = mysqli_query($conexao, $query);
-                                if (count($result)) {
-                                  while ($res_1 = mysqli_fetch_array($result)) {
-                                    ?>
-                                    <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
-                                    <?php
-                                  }
-                                }
-                                ?>
-                              </select>
-                            </div>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                          <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>                          
-                        </div>
-                      </div>
-                    </div>
-                  </div>            
+              </ul>
+            </li>
+      </div>
+      <!--/.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE REGISTROS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM usuarios";
+                      $result = mysqli_query($conexao, $query);
+                      //$res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
                 </div>
-              </section>
-            </div>    
-            <footer class="main-footer">
-              <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-              Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-              <div class="float-right d-none d-sm-inline-block">
-                <b>Versão</b> 1.0.0
+                <!-- /.info-box-content -->
               </div>
-            </footer>
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-              <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Likes</span>
+                  <span class="info-box-number">
+                    <h4>41,410</h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <div class="clearfix hidden-md-up"></div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Sales</span>
+                  <span class="info-box-number">
+                    <h4>760</h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">New Members</span>
+                  <span class="info-box-number">
+                    <h4>2,000</h4>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- jQuery -->
-          <script src="plugins/jquery/jquery.min.js"></script>
-          <!-- jQuery Mask -->
-          <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
-          <!-- jQuery UI 1.11.4 -->
-          <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-          <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-          <script>
-            $.widget.bridge('uibutton', $.ui.button)
-          </script>
-          <!-- Bootstrap 4 -->
-          <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-          <!-- ChartJS -->
-          <script src="plugins/chart.js/Chart.min.js"></script>
-          <!-- Sparkline -->
-          <script src="plugins/sparklines/sparkline.js"></script>
-          <!-- JQVMap -->
-          <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-          <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-          <!-- jQuery Knob Chart -->
-          <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-          <!-- daterangepicker -->
-          <script src="plugins/moment/moment.min.js"></script>
-          <script src="plugins/daterangepicker/daterangepicker.js"></script>
-          <!-- Tempusdominus Bootstrap 4 -->
-          <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-          <!-- Summernote -->
-          <script src="plugins/summernote/summernote-bs4.min.js"></script>
-          <!-- overlayScrollbars -->
-          <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-          <!-- AdminLTE App -->
-          <script src="dist/js/adminlte.js"></script>
-          <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-          <script src="dist/js/pages/dashboard.js"></script>
-          <!-- AdminLTE for demo purposes -->
-          <script src="dist/js/demo.js"></script>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header" style="text-align: center;">
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE USUÁRIOS</strong></h4>
+                </div>
+                <div class="card-body">
+                  <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
+                    <i class="fas fa-user-plus"></i> Inserir Novo
+                  </button>
+                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
-          <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
+                    <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
 
-          <!---------------------------------------------------------------------------------------------->
-        </body>
-        </html>
-        <!---------------------------------CADASTRAR-------------------------------------------->
+                    <?php
 
-        <?php
-        if (isset($_POST['button'])) {
-          $funcionario = $_POST['funcionario'];          
-          $query_func = "select * from militares where id = '{$funcionario}' ";
-          $result_func = mysqli_query($conexao, $query_func);
-          $dado = mysqli_fetch_array($result_func);
-          $row = mysqli_num_rows($result_func);
+                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                      $nome = $_GET['txtpesquisar'] . '%';
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id where u.nome LIKE '$nome' order by u.nome asc";
+                    } else {
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id order by u.nome asc";
+                    }
 
-          if ($row > 0) {
-            $nome = $dado["nome"];
-            $perfil = $dado["perfil"];
-          }
+                    $result = mysqli_query($conexao, $query);
+                    //$dado = mysqli_fetch_array($result);
+                    $row = mysqli_num_rows($result);
 
-          $usuario = $_POST['txtusuario'];
-          $senha = $_POST['txtsenha'];
+                    ?>
 
-          //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
-          $query_verificar = "select * from usuarios where usuario = '$usuario' ";
-          $result_verificar = mysqli_query($conexao, $query_verificar);
-          $row_verificar = mysqli_num_rows($result_verificar);
+                    <!----------------------------------------------------------------------->
 
-          if ($row_verificar > 0) {
-            echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
-            exit();
-          }
-          $query = "INSERT into usuarios (nome, usuario, senha, perfil, id_militar) VALUES ('$nome', '$usuario', '$senha', '$perfil', '$funcionario' )";
-          $result = mysqli_query($conexao, $query);
-          if ($result == '') {
-            echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-          } else {
-            echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-            echo "<script language='javascript'> window.location='usuarios.php'; </script>";
-          }
-        }
-        ?>
+                    <table class="table table-sm table-bordered table-striped">
+                      <thead class=" text-primary">
+                        <th class="align-middle">Nome</th>
+                        <th class="align-middle">Usuário</th>
+                        <th class="align-middle">Senha</th>
+                        <th class="align-middle">Perfil</th>
+                        <th class="align-middle">Posto</th>
+                        <th class="align-middle">Ações</th>
+                      </thead>
+                      <tbody>
 
-
-        <!--------------------------------------EXCLUIR---------------------------------->
-        <?php
-        if (@$_GET['func'] == 'deleta') {
-          $id = $_GET['id'];
-          $query = "DELETE FROM usuarios where id = '$id'";
-          mysqli_query($conexao, $query);
-          echo "<script language='javascript'> window.location='usuarios.php'; </script>";
-        }
-        ?>
-        <!------------------------------------------------------------------------------->
-
-
-        <!----------------------------EDITAR------------------------------>
-        <?php
-        if (@$_GET['func'] == 'edita') {
-          $id = $_GET['id'];
-          $query = "select * from usuarios where id = '$id'";
-          $result = mysqli_query($conexao, $query);
-          while ($res_1 = mysqli_fetch_array($result)) {
-            ?>
-            <!--------Modal---------------->
-            <div id="modalEditar" class="modal fade" role="dialog">
-              <div class="modal-dialog modal-dialog-centered">
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Usuários</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-                  <div class="modal-body">
-                    <form method="POST" action="">
-                      <div class="form-group">
-                        <label for="id_produto">Usuário</label>
-                        <input type="text" class="form-control mr-2" name="txtusuario" placeholder="Usuário" value="<?php echo $res_1['usuario']; ?>" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="fornecedor">Senha</label>
-                        <input type="text" class="form-control mr-2" name="txtsenha" placeholder="Senha" value="<?php echo $res_1['senha']; ?>" required>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                      <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-                    </form>
+                        <?php
+                        while ($res_1 = mysqli_fetch_array($result)) {
+                          $nome = $res_1["nome"];
+                          $posto = $res_1["posto"];
+                          $senha = $res_1["senha"];
+                          $usuario = $res_1["usuario"];
+                          $perfil = $res_1["perfil"];
+                          $id = $res_1["id"];
+                        ?>
+                          <tr>
+                            <td class="align-middle"><?php echo $nome; ?></td>
+                            <td class="align-middle"><?php echo $usuario; ?></td>
+                            <td class="align-middle"><?php echo $senha; ?></td>
+                            <td class="align-middle"><?php echo $perfil; ?></td>
+                            <td class="align-middle"><?php echo $posto; ?></td>
+                            <td class="align-middle">
+                              <a class="btn btn-warning btn-sm" href="usuarios.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
+                              <a class="btn btn-danger btn-sm" href="usuarios.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                          </tr>
+                        <?php
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                    <?php
+                    if ($row == '') {
+                      echo "<h3>Não existem dados para consulta</h3>";
+                    } else {
+                    }
+                    ?>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <!---Modal Exemplo--->
+          <div id="modalExemplo" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Inserir novo usuário</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" action="">
+                    <div class="form-group">
+                      <label for="id_produto">Usuário</label>
+                      <input type="text" class="form-control mr-2" name="txtusuario" placeholder="Usuário" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="fornecedor">Senha</label>
+                      <input type="text" class="form-control mr-2" name="txtsenha" placeholder="Senha" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="fornecedor">Militar</label>
+                      <select class="form-control mr-2" id="category" name="funcionario">
+                        <option value="" disabled selected hidden>Nome</option>
+                        <?php
+                        $query = "SELECT * FROM militares where status = 'Aprovado' ORDER BY nome asc";
+                        $result = mysqli_query($conexao, $query);
+                        if (count($result)) {
+                          while ($res_1 = mysqli_fetch_array($result)) {
+                        ?>
+                            <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
+                        <?php
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                  <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Versão</b> 1.0.0
+      </div>
+    </footer>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery Mask -->
+  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="plugins/chart.js/Chart.min.js"></script>
+  <!-- Sparkline -->
+  <script src="plugins/sparklines/sparkline.js"></script>
+  <!-- JQVMap -->
+  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="plugins/moment/moment.min.js"></script>
+  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="dist/js/pages/dashboard.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="dist/js/demo.js"></script>
 
-            <script>
-              $("#modalEditar").modal("show");
-            </script>
-            <!-------------------------------------------------------------------------------------------------------------------------------------------->
+  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
-            <!--Comando para editar os dados UPDATE -->
-            <?php
-            if (isset($_POST['buttonEditar'])) {
-              $usuario = $_POST['txtusuario'];
-              $senha = $_POST['txtsenha'];
-              if ($res_1['usuario'] != $usuario) {
+  <!---------------------------------------------------------------------------------------------->
+</body>
 
-            //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
-                $query_verificar = "select * from usuarios where usuario = '$usuario' ";
+</html>
+<!---------------------------------CADASTRAR-------------------------------------------->
 
-                $result_verificar = mysqli_query($conexao, $query_verificar);
-                $row_verificar = mysqli_num_rows($result_verificar);
+<?php
+if (isset($_POST['button'])) {
+  $funcionario = $_POST['funcionario'];
+  $query_func = "select * from militares where id = '{$funcionario}' ";
+  $result_func = mysqli_query($conexao, $query_func);
+  $dado = mysqli_fetch_array($result_func);
+  $row = mysqli_num_rows($result_func);
 
-                if ($row_verificar > 0) {
-                  echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
-                  exit();
-                }
-              }
-              $query_editar = "UPDATE usuarios set usuario = '$usuario', senha = '$senha' where id = '$id' ";
-              $result_editar = mysqli_query($conexao, $query_editar);
-              if ($result_editar == '') {
-                echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-              } else {
-                echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-                echo "<script language='javascript'> window.location='usuarios.php'; </script>";
-              }
-            }
-          }
-        } ?>
-        <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  if ($row > 0) {
+    $nome = $dado["nome"];
+    $perfil = $dado["perfil"];
+  }
 
-        <!--Máscaras-->
-        <script>
-          $(document).ready(function() {
-            $('#txtcpf').mask('000.000.000-00', {
-              reverse: true
-            });
-            $('#txtsaram').mask('000.000-0', {
-              reverse: true
-            });
-            $('#txtcpf2').mask('000.000.000-00', {
-              reverse: true
-            });
-            $('#txtsaram2').mask('000.000-0', {
-              reverse: true
-            });
-          });
-        </script>
+  $usuario = $_POST['txtusuario'];
+  $senha = $_POST['txtsenha'];
+
+  //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
+  $query_verificar = "select * from usuarios where usuario = '$usuario' ";
+  $result_verificar = mysqli_query($conexao, $query_verificar);
+  $row_verificar = mysqli_num_rows($result_verificar);
+
+  if ($row_verificar > 0) {
+    echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
+    exit();
+  }
+  $query = "INSERT into usuarios (nome, usuario, senha, perfil, id_militar) VALUES ('$nome', '$usuario', '$senha', '$perfil', '$funcionario' )";
+  $result = mysqli_query($conexao, $query);
+  if ($result == '') {
+    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
+  } else {
+    echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
+    echo "<script language='javascript'> window.location='usuarios.php'; </script>";
+  }
+}
+?>
+
+
+<!--------------------------------------EXCLUIR---------------------------------->
+<?php
+if (@$_GET['func'] == 'deleta') {
+  $id = $_GET['id'];
+  $query = "DELETE FROM usuarios where id = '$id'";
+  mysqli_query($conexao, $query);
+  echo "<script language='javascript'> window.location='usuarios.php'; </script>";
+}
+?>
+<!------------------------------------------------------------------------------->
+
+
+<!----------------------------EDITAR------------------------------>
+<?php
+if (@$_GET['func'] == 'edita') {
+  $id = $_GET['id'];
+  $query = "select * from usuarios where id = '$id'";
+  $result = mysqli_query($conexao, $query);
+  while ($res_1 = mysqli_fetch_array($result)) {
+?>
+    <!--------Modal---------------->
+    <div id="modalEditar" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Usuários</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="">
+              <div class="form-group">
+                <label for="id_produto">Usuário</label>
+                <input type="text" class="form-control mr-2" name="txtusuario" placeholder="Usuário" value="<?php echo $res_1['usuario']; ?>" required>
+              </div>
+              <div class="form-group">
+                <label for="fornecedor">Senha</label>
+                <input type="text" class="form-control mr-2" name="txtsenha" placeholder="Senha" value="<?php echo $res_1['senha']; ?>" required>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $("#modalEditar").modal("show");
+    </script>
+    <!-------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <!--Comando para editar os dados UPDATE -->
+<?php
+    if (isset($_POST['buttonEditar'])) {
+      $usuario = $_POST['txtusuario'];
+      $senha = $_POST['txtsenha'];
+      if ($res_1['usuario'] != $usuario) {
+
+        //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
+        $query_verificar = "select * from usuarios where usuario = '$usuario' ";
+
+        $result_verificar = mysqli_query($conexao, $query_verificar);
+        $row_verificar = mysqli_num_rows($result_verificar);
+
+        if ($row_verificar > 0) {
+          echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
+          exit();
+        }
+      }
+      $query_editar = "UPDATE usuarios set usuario = '$usuario', senha = '$senha' where id = '$id' ";
+      $result_editar = mysqli_query($conexao, $query_editar);
+      if ($result_editar == '') {
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
+      } else {
+        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
+        echo "<script language='javascript'> window.location='usuarios.php'; </script>";
+      }
+    }
+  }
+} ?>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!--Máscaras-->
+<script>
+  $(document).ready(function() {
+    $('#txtcpf').mask('000.000.000-00', {
+      reverse: true
+    });
+    $('#txtsaram').mask('000.000-0', {
+      reverse: true
+    });
+    $('#txtcpf2').mask('000.000.000-00', {
+      reverse: true
+    });
+    $('#txtsaram2').mask('000.000-0', {
+      reverse: true
+    });
+  });
+</script>

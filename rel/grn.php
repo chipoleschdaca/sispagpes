@@ -31,13 +31,15 @@ $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
 
 //Se eu coloco o $id como res_1 ele pega sempre o primeiro id da lista, mas se eu coloco como $_GET, ele pega o id correto, mas traz os dados somente do primeiro id.
 
-function data($data){
-    return date("d/m/Y", strtotime($data));
+function data($data)
+{
+  return date("d/m/Y", strtotime($data));
 }
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head lang="pt-br">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,170 +58,171 @@ function data($data){
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+
 <body>
-<div class="wrapper" style="border: 2px solid #000; padding: 10px;">
-  <!-- Main content -->
-  <section class="invoice">
-    <!-- title row -->
-    <div class="row">
-      <div class="col-12">
-        <h2 class="page-header">
-          <i class="fas fa-globe"></i> AdminLTE, Inc.          
-          <small class="float-right">Data: <?php echo data($data_abertura) ?></small>
-        </h2>
+  <div class="wrapper" style="border: 2px solid #000; padding: 10px;">
+    <!-- Main content -->
+    <section class="invoice">
+      <!-- title row -->
+      <div class="row">
+        <div class="col-12">
+          <h2 class="page-header">
+            <i class="fas fa-globe"></i> AdminLTE, Inc.
+            <small class="float-right">Data: <?php echo data($data_abertura) ?></small>
+          </h2>
+        </div>
+        <!-- /.col -->
       </div>
-      <!-- /.col -->
-    </div>
-    <!-- info row -->
-    <div class="row invoice-info">
-      <div class="col-3 invoice-col">
-        Requerente:
-        <address>          
-          <strong><?php echo $requerente ?></strong><br>
-          795 Folsom Ave, Suite 600<br>
-          San Francisco, CA 94107<br>
-          Phone: (804) 123-5432<br>
-          Email: info@almasaeedstudio.com
-        </address>
-      </div>      
-      <div class="col-6 invoice-col">
-        Sacador:
-        <address>
-          <strong><?php echo $tecnico ?></strong><br>
-          795 Folsom Ave, Suite 600<br>
-          San Francisco, CA 94107<br>
-          Phone: (555) 539-1037<br>
-          Email: john.doe@example.com
-        </address>
-      </div>
-      <!-- /.col -->
-      <div class="col-3 invoice-col float-right">
-        <b>Invoice #<?php echo $serie ?> </b><br>
-        <br>
-        <?php
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-3 invoice-col">
+          Requerente:
+          <address>
+            <strong><?php echo $requerente ?></strong><br>
+            795 Folsom Ave, Suite 600<br>
+            San Francisco, CA 94107<br>
+            Phone: (804) 123-5432<br>
+            Email: info@almasaeedstudio.com
+          </address>
+        </div>
+        <div class="col-6 invoice-col">
+          Sacador:
+          <address>
+            <strong><?php echo $tecnico ?></strong><br>
+            795 Folsom Ave, Suite 600<br>
+            San Francisco, CA 94107<br>
+            Phone: (555) 539-1037<br>
+            Email: john.doe@example.com
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-3 invoice-col float-right">
+          <b>Invoice #<?php echo $serie ?> </b><br>
+          <br>
+          <?php
           if ($status == 'Aberto') { ?>
             <span class="badge badge-secondary">
               <?php echo $status; ?>
             </span>
-            <?php
+          <?php
           } elseif ($status == 'Aguardando') { ?>
             <span class="badge badge-warning">
               <?php echo $status; ?>
             </span>
-            <?php
+          <?php
           } elseif ($status == 'Aprovado') { ?>
             <span class="badge badge-success">
               <?php echo $status; ?>
             </span>
-            <?php
+          <?php
           } elseif ($status == 'Cancelado') { ?>
             <span class="badge badge-danger">
               <?php echo $status; ?>
             </span>
-            <?php
+          <?php
           } else {
             echo $status;
           }
           ?><br>
-        <b>Order ID:</b> 4F3S8J<br>
-        <b>Payment Due:</b> 2/22/2014<br>
-        <b>Account:</b> 968-34567
+          <b>Order ID:</b> 4F3S8J<br>
+          <b>Payment Due:</b> 2/22/2014<br>
+          <b>Account:</b> 968-34567
+        </div>
+        <!-- /.col -->
       </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-    <!-- Table row -->
-    <div class="row">
-      <div class="col-12 table-responsive">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th>Qty</th>
-            <th>Product</th>
-            <th>Serial #</th>
-            <th>Description</th>
-            <th>Subtotal</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>1</td>
-            <td>Call of Duty</td>
-            <td>455-981-221</td>
-            <td>El snort testosterone trophy driving gloves handsome</td>
-            <td>$64.50</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Need for Speed IV</td>
-            <td>247-925-726</td>
-            <td>Wes Anderson umami biodiesel</td>
-            <td>$50.00</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Monsters DVD</td>
-            <td>735-845-642</td>
-            <td>Terry Richardson helvetica tousled street art master</td>
-            <td>$10.70</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Grown Ups Blue Ray</td>
-            <td>422-568-642</td>
-            <td>Tousled lomo letterpress</td>
-            <td>$25.99</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-    <div class="row">
-      <!-- accepted payments column -->
-      <div class="col-6">
-        <p class="lead">Payment Methods:</p>
-        <img src="../dist/img/credit/visa.png" alt="Visa">
-        <img src="../dist/img/credit/mastercard.png" alt="Mastercard">
-        <img src="../dist/img/credit/american-express.png" alt="American Express">
-        <img src="../dist/img/credit/paypal2.png" alt="Paypal">
-        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-      <!-- /.col -->
-      <div class="col-6">
-        <p class="lead">Valor fechado em <?php echo data($data_aprovacao) ?></p>
-
-        <div class="table-responsive">
-          <table class="table">
-            <tr>
-              <th style="width:50%">Subtotal:</th>
-              <td>R$ <?php echo number_format($total, 2, ',', '.') ?></td>
-            </tr>
-            <tr>
-              <th>Imposto (9.3%):</th>
-              <td>$10.34</td>
-            </tr>
-            <tr>
-              <th>Desconto:</th>
-              <td>R$ <?php echo number_format($desconto, 2, ',', '.') ?></td>
-            </tr>
-            <tr>
-              <th>Total:</th>
-              <td>R$ <?php echo number_format($valor_total, 2, ',', '.')?></td>
-            </tr>
+      <!-- /.row -->
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-12 table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Qty</th>
+                <th>Product</th>
+                <th>Serial #</th>
+                <th>Description</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Call of Duty</td>
+                <td>455-981-221</td>
+                <td>El snort testosterone trophy driving gloves handsome</td>
+                <td>$64.50</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Need for Speed IV</td>
+                <td>247-925-726</td>
+                <td>Wes Anderson umami biodiesel</td>
+                <td>$50.00</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Monsters DVD</td>
+                <td>735-845-642</td>
+                <td>Terry Richardson helvetica tousled street art master</td>
+                <td>$10.70</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Grown Ups Blue Ray</td>
+                <td>422-568-642</td>
+                <td>Tousled lomo letterpress</td>
+                <td>$25.99</td>
+              </tr>
+            </tbody>
           </table>
         </div>
+        <!-- /.col -->
       </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-  </section>
-  <!-- /.content -->
-</div>
-<div class="row no-print" align="center;">
+      <!-- /.row -->
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-6">
+          <p class="lead">Payment Methods:</p>
+          <img src="../dist/img/credit/visa.png" alt="Visa">
+          <img src="../dist/img/credit/mastercard.png" alt="Mastercard">
+          <img src="../dist/img/credit/american-express.png" alt="American Express">
+          <img src="../dist/img/credit/paypal2.png" alt="Paypal">
+          <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+        <!-- /.col -->
+        <div class="col-6">
+          <p class="lead">Valor fechado em <?php echo data($data_aprovacao) ?></p>
+
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th style="width:50%">Subtotal:</th>
+                <td>R$ <?php echo number_format($total, 2, ',', '.') ?></td>
+              </tr>
+              <tr>
+                <th>Imposto (9.3%):</th>
+                <td>$10.34</td>
+              </tr>
+              <tr>
+                <th>Desconto:</th>
+                <td>R$ <?php echo number_format($desconto, 2, ',', '.') ?></td>
+              </tr>
+              <tr>
+                <th>Total:</th>
+                <td>R$ <?php echo number_format($valor_total, 2, ',', '.') ?></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <div class="row no-print" align="center;">
     <div class="col-12">
       <a class="btn btn-default" href="#" onclick="window.print();"><i class="fas fa-print"></i> Imprimir</a>
       <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Enviar Pagamento</button>
@@ -227,4 +230,5 @@ function data($data){
     </div>
   </div>
 </body>
+
 </html>

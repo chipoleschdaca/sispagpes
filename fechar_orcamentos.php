@@ -218,7 +218,7 @@ if ($_SESSION['perfil_usuario'] != 'Funcionário') {
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-             <li class="nav-item">
+            <li class="nav-item">
               <a href="painel_funcionario.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
@@ -234,7 +234,8 @@ if ($_SESSION['perfil_usuario'] != 'Funcionário') {
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview menu-open"> <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
+            <li class="nav-item has-treeview menu-open">
+              <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
@@ -291,51 +292,51 @@ if ($_SESSION['perfil_usuario'] != 'Funcionário') {
                   </a>
                 </li>
               </ul>
-            </li>            
-          </div>
+            </li>
+      </div>
 
-        </aside>
+    </aside>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-          <!-- Content Header (Page header) -->
-          <div class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1 class="m-0 text-dark">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v1</li>
-                  </ol>
-                </div><!-- /.col -->
-              </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-          </div>    
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
 
-          <!-- Main content -->
-          <section class="content">
-            <div class="container-fluid">
-              <!-- Small boxes (Stat box) -->
-              <div class="row">
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-                    <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">TOTAL DE ORÇAMENTOS ABERTOS</span>
-                      <span class="info-box-number">
-                        <h4>
-                          <?php
-                          $query = "SELECT * FROM orcamentos where status = 'Aberto'";
-                          $result = mysqli_query($conexao, $query);
-                          $res = mysqli_fetch_array($result);
-                          $row = mysqli_num_rows($result);                          
-                          echo $row;
-                          ?>
-                        </h4>
-                      </span>
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE ORÇAMENTOS ABERTOS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM orcamentos where status = 'Aberto'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -743,7 +744,7 @@ if (@$_GET['func'] == 'edita') {
     </script>
 
     <!--Comando para editar os dados UPDATE -->
-    <?php
+<?php
     if (isset($_POST['buttonFechar'])) {
 
       $laudo = $_POST['txtlaudo'];
@@ -764,7 +765,10 @@ if (@$_GET['func'] == 'edita') {
       } else {
         echo "<script language='javascript'> window.alert('Orçamento fechado com sucesso!'); </script>";
         echo "<script language='javascript'> window.location='fechar_orcamentos.php'; </script>";
-      }    }     }    }  ?>
+      }
+    }
+  }
+}  ?>
 
 
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->

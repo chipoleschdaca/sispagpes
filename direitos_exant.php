@@ -38,6 +38,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <!-- Navbar -->
@@ -186,7 +187,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           </div>
         </li>
       </ul>
-    </nav>    
+    </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
@@ -194,40 +195,41 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <!-- Sidebar -->
-      <div class="sidebar">                
+      <div class="sidebar">
         <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                        
-           <li class="nav-item">
-            <a href="painel_admin.php" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
-              <p>
-                Página Inicial
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="militares.php" class="nav-link">
-              <i class="nav-icon fas fa-fingerprint"></i>
-              <p>                
-                Militares                
-                <?php
-                $query = "SELECT * FROM militares where status = 'Aguardando'";
-                $result = mysqli_query($conexao, $query);
-                $res = mysqli_fetch_array($result);
-                $row = mysqli_num_rows($result);
-                if ($row > 0) {
-                  echo '<span class="badge badge-warning right">'.$row.'</span>' ?>
-                <?php } else { } ?>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="usuarios.php" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Usuários
-              </p>
-            </a>
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="painel_admin.php" class="nav-link">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                  Página Inicial
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="militares.php" class="nav-link">
+                <i class="nav-icon fas fa-fingerprint"></i>
+                <p>
+                  Militares
+                  <?php
+                  $query = "SELECT * FROM militares where status = 'Aguardando'";
+                  $result = mysqli_query($conexao, $query);
+                  $res = mysqli_fetch_array($result);
+                  $row = mysqli_num_rows($result);
+                  if ($row > 0) {
+                    echo '<span class="badge badge-warning right">' . $row . '</span>' ?>
+                  <?php } else {
+                  } ?>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="usuarios.php" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Usuários
+                </p>
+              </a>
             <li class="nav-item">
               <a href="perfis.php" class="nav-link">
                 <i class="nav-icon fas fa-sitemap"></i>
@@ -236,7 +238,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview menu-open">              
+            <li class="nav-item has-treeview menu-open">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
@@ -257,7 +259,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   $row_sum = $row + $row2 + $row3;
                   if ($row_sum > 0) {
                     echo '<i class="right fas fa-angle-left"></i>';
-                    echo '<span class="badge badge-warning right">'.$row_sum.'</span>';
+                    echo '<span class="badge badge-warning right">' . $row_sum . '</span>';
                   } else {
                     echo '<i class="right fas fa-angle-left"></i>';
                   }
@@ -269,15 +271,16 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   <a href="secoes_exant.php" class="nav-link">
                     <i class="far fa-hand-point-right nav-icon"></i>
                     <p>
-                      Seções                
+                      Seções
                       <?php
                       $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       if ($row > 0) {
-                        echo '<span class="badge badge-warning right">'.$row.'</span>';
-                      } else { } ?>
+                        echo '<span class="badge badge-warning right">' . $row . '</span>';
+                      } else {
+                      } ?>
                     </p>
                   </a>
                 </li>
@@ -292,8 +295,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       if ($row > 0) {
-                        echo '<span class="badge badge-warning right">'.$row.'</span>';
-                      } else { } ?>                      
+                        echo '<span class="badge badge-warning right">' . $row . '</span>';
+                      } else {
+                      } ?>
                     </p>
                   </a>
                 </li>
@@ -308,324 +312,213 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       if ($row > 0) {
-                        echo '<span class="badge badge-warning right">'.$row.'</span>';
-                      } else { } ?>                      
+                        echo '<span class="badge badge-warning right">' . $row . '</span>';
+                      } else {
+                      } ?>
                     </p>
                   </a>
                 </li>
               </ul>
             </li>
-          </div>            
-        </aside>
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-          <!-- Content Header (Page header) -->
-          <div class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1 class="m-0 text-dark">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v1</li>
-                  </ol>
-                </div><!-- /.col -->
-              </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-          </div>
-          <!-- /.content-header -->
-          <!-- Main content -->
-          <section class="content">
-            <div class="container-fluid">
-              <!-- Small boxes (Stat box) -->
-              <div class="row">
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box mb-3">
-                    <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-database"></i></span>
-                    <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">TOTAL DE DIREITOS CADASTRADOS</span>
-                      <span class="info-box-number">
-                        <h4>
-                          <?php
-                          $query = "SELECT * FROM tb_direitoPleiteado_exant";
-                          $result = mysqli_query($conexao, $query);                          
-                          $row = mysqli_num_rows($result);                          
-                          echo $row;
-                          ?>
-                        </h4>
-                      </span>
-                    </div>                    
-                  </div>
-                </div> 
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
-                    <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">TOTAL DE DIREITOS APROVADOS</span>
-                      <span class="info-box-number">
-                        <h4>
-                          <?php
-                          $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado'";
-                          $result = mysqli_query($conexao, $query);                          
-                          $row = mysqli_num_rows($result);                          
-                          echo $row;
-                          ?>
-                        </h4>
-                      </span>
-                    </div>
-                    <!-- /.info-box-content -->
-                  </div>
-                  <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cogs"></i></span>
-                    <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">TOTAL DE DIREITOS AGUARDANDO</span>
-                      <span class="info-box-number">
-                        <h4>
-                          <?php
-                          $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
-                          $result = mysqli_query($conexao, $query);                          
-                          $row = mysqli_num_rows($result);                          
-                          echo $row;
-                          ?>
-                        </h4>
-                      </span>
-                    </div>                    
-                  </div>                 
-                </div>               
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box mb-3">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
-                    <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">TOTAL DE DIREITOS EXCLUÍDOS</span>
-                      <span class="info-box-number">
-                        <h4>
-                          <?php
-                          $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Excluído'";
-                          $result = mysqli_query($conexao, $query);                          
-                          $row = mysqli_num_rows($result);                          
-                          echo $row;
-                          ?>
-                        </h4>
-                      </span>
-                    </div>                    
-                  </div>                 
-                </div>
-              </div>                
-              <br><br>
-              <div class="row" style="align-content: center;">
-                <div class="col-md-3">                  
-                </div>
-                <div class="col-md-6">
-                  <div class="card">
-                    <div class="card-header" style="text-align: center;">
-                      <h4 class="" style="text-align:center;"><strong>TABELA DE DIREITOS PLEITEADOS</strong></h4>
-                    </div>
-                    <div class="card-body">
-                      <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                        <i class="fas fa-user-plus"></i> Inserir Novo
-                      </button>
-                      <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
-                        <!----------------------LISTAR TODOS OS DIREITOS-------------------------->
-
-                        <?php
-                        if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                          $nome = '%' . $_GET['txtpesquisar'] . '%';
-                          $query = "select * from tb_direitoPleiteado_exant where perfil LIKE '$nome' order by direito asc";
-                        } else {
-                          $query = "select * from tb_direitoPleiteado_exant where status <> 'Excluído' order by direito asc";
-                        }
-                        $result = mysqli_query($conexao, $query);
-                                        //$dado = mysqli_fetch_array($result);
-                        $row = mysqli_num_rows($result);
-
-                        ?>
-
-                        <!-------------------------------------------------->
-
-                        <table class="table table-sm table-bordered table-striped">
-                          <thead class="text-primary" style="text-align: center; width: 800px; height: 500px; overflow: auto;">
-                            <th class="align-middle" style="width: 4%;">#</th>
-                            <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
-                            <th class="align-middle">Status</th>
-                            <th class="align-middle">Ações</th>
-                          </thead>
-                          <tbody>
-                            <?php
-                            while ($res_1 = mysqli_fetch_array($result)) {
-                              $id = $res_1["id"];
-                              $direito = $res_1["direito"];
-                              $status = $res_1["status"];                              
-                              ?>
-                              <tr style="text-align: center;">
-                                <td class="align-middle"><?php echo $id; ?></td>
-                                <td class="align-middle"><?php echo $direito; ?></td>
-                                <td class="align-middle">
-                                  <?php
-                                  if ($status == 'Aguardando') {?>
-                                    <span class="badge badge-warning">
-                                      <?php echo $status; ?>
-                                    </span>
-                                    <?php 
-                                  } else if ($status == 'Aprovado') {?>
-                                    <span class="badge badge-success">
-                                      <?php echo $status; ?>
-                                    </span>
-                                    <?php 
-                                  } else if ($status == 'Excluído') {?>
-                                    <span class="badge badge-danger">
-                                      <?php echo $status; ?>
-                                    </span>
-                                    <?php
-                                  } else {
-                                   echo $status;
-                                 }                                      
-                                 ?>
-                               </td>
-                               <td class="align-middle">
-                                 <?php 
-                                 if ($status == 'Aprovado') { ?>                                      
-                                  <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                  <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                  <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                  <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                                  <?php
-                                } elseif ($status == 'Aguardando') { ?>                                     
-                                  <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                  <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                  <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                  <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                                  <?php                                      
-                                } elseif ($status == 'Excluído') { ?>
-                                  <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Direito Pleiteado?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                  <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                  <a class="btn btn-warning btn-xs disabled" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                  <a class="btn btn-danger btn-xs disabled" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                                  <?php
-                                } else {
-                                  echo $status;
-                                } ?>                                                                     
-                              </td>
-                            </tr>
-                            <?php
-                          }
-                          ?>
-                        </tbody>
-                      </table>
+      </div>
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-database"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE DIREITOS CADASTRADOS</span>
+                  <span class="info-box-number">
+                    <h4>
                       <?php
-                      if ($row == '') {
-                        echo "<h3>Não existem dados para consulta</h3>";
-                      } else { }
+                      $query = "SELECT * FROM tb_direitoPleiteado_exant";
+                      $result = mysqli_query($conexao, $query);
+                      $row = mysqli_num_rows($result);
+                      echo $row;
                       ?>
-                    </div>
-                  </div>
+                    </h4>
+                  </span>
                 </div>
-              </div>
-              <div class="col-md-3">                
               </div>
             </div>
-            <br><br>
-            <div class="row">
-              <div class="col-md-3">                
-              </div>          
-              <div class="col-md-6">
-                <div class="card collapsed-card">
-                  <div class="card-header" style="text-align: center; align-items: center;">
-                    <h3 class="card-title">DIREITOS EXCLUÍDOS</h3>
-                    <div class="card-tools">
-                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                      <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
-
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE DIREITOS APROVADOS</span>
+                  <span class="info-box-number">
+                    <h4>
                       <?php
-                      if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                        $nome = '%' . $_GET['txtpesquisar'] . '%';
-                        $query = "select * from tb_direitoPleiteado_exant where perfil LIKE '$nome' order by id asc";
-                      } else {
-                        $query = "select * from tb_direitoPleiteado_exant where status = 'Excluído' order by id asc";
-                      }
-                      $result = mysqli_query($conexao, $query);                        
+                      $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado'";
+                      $result = mysqli_query($conexao, $query);
                       $row = mysqli_num_rows($result);
+                      echo $row;
                       ?>
+                    </h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cogs"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE DIREITOS AGUARDANDO</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
+                      $result = mysqli_query($conexao, $query);
+                      $row = mysqli_num_rows($result);
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE DIREITOS EXCLUÍDOS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Excluído'";
+                      $result = mysqli_query($conexao, $query);
+                      $row = mysqli_num_rows($result);
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div class="row" style="align-content: center;">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header" style="text-align: center;">
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE DIREITOS PLEITEADOS</strong></h4>
+                </div>
+                <div class="card-body">
+                  <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
+                    <i class="fas fa-user-plus"></i> Inserir Novo
+                  </button>
+                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
-                      <!-------------------------------------------------->
+                    <!----------------------LISTAR TODOS OS DIREITOS-------------------------->
 
-                      <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
-                        <thead class="text-primary" style="text-align: center;">
-                          <th class="align-middle"  style="width: 4%;">#</th>
-                          <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
-                          <th class="align-middle">Status</th>
-                          <th class="align-middle">Ações</th>
-                        </thead>
-                        <tbody>
-                          <?php
-                          while ($res_1 = mysqli_fetch_array($result)) {
-                            $id = $res_1["id"];
-                            $direito = $res_1["direito"];
-                            $status = $res_1["status"];                              
-                            ?>
-                            <tr style="text-align: center;">
-                              <td class="align-middle"><?php echo $id; ?></td>
-                              <td class="align-middle"><?php echo $direito; ?></td>
-                              <td class="align-middle">
-                                <?php
-                                if ($status == 'Aguardando') {?>
-                                  <span class="badge badge-warning">
-                                    <?php echo $status; ?>
-                                  </span>
-                                  <?php 
-                                } else if ($status == 'Aprovado') {?>
-                                  <span class="badge badge-success">
-                                    <?php echo $status; ?>
-                                  </span>
-                                  <?php 
-                                } else if ($status == 'Excluído') {?>
-                                  <span class="badge badge-danger">
-                                    <?php echo $status; ?>
-                                  </span>
-                                  <?php
-                                } else {
-                                 echo $status;
-                               }                                      
-                               ?>
-                             </td>
-                             <td class="align-middle">
-                               <?php 
-                               if ($status == 'Aprovado') { ?>                                 
+                    <?php
+                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                      $nome = '%' . $_GET['txtpesquisar'] . '%';
+                      $query = "select * from tb_direitoPleiteado_exant where perfil LIKE '$nome' order by direito asc";
+                    } else {
+                      $query = "select * from tb_direitoPleiteado_exant where status <> 'Excluído' order by direito asc";
+                    }
+                    $result = mysqli_query($conexao, $query);
+                    //$dado = mysqli_fetch_array($result);
+                    $row = mysqli_num_rows($result);
+
+                    ?>
+
+                    <!-------------------------------------------------->
+
+                    <table class="table table-sm table-bordered table-striped">
+                      <thead class="text-primary" style="text-align: center; width: 800px; height: 500px; overflow: auto;">
+                        <th class="align-middle" style="width: 4%;">#</th>
+                        <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
+                        <th class="align-middle">Status</th>
+                        <th class="align-middle">Ações</th>
+                      </thead>
+                      <tbody>
+                        <?php
+                        while ($res_1 = mysqli_fetch_array($result)) {
+                          $id = $res_1["id"];
+                          $direito = $res_1["direito"];
+                          $status = $res_1["status"];
+                        ?>
+                          <tr style="text-align: center;">
+                            <td class="align-middle"><?php echo $id; ?></td>
+                            <td class="align-middle"><?php echo $direito; ?></td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aguardando') { ?>
+                                <span class="badge badge-warning">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else if ($status == 'Aprovado') { ?>
+                                <span class="badge badge-success">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else if ($status == 'Excluído') { ?>
+                                <span class="badge badge-danger">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else {
+                                echo $status;
+                              }
+                              ?>
+                            </td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aprovado') { ?>
                                 <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
                                 <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
                                 <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                                <?php
-                              } elseif ($status == 'Aguardando') { ?>                                     
+                              <?php
+                              } elseif ($status == 'Aguardando') { ?>
                                 <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
                                 <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
                                 <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                                <?php                                      
+                              <?php
                               } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Direito Pleiteado?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
                                 <a class="btn btn-warning btn-xs disabled" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
                                 <a class="btn btn-danger btn-xs disabled" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                                <?php
+                              <?php
                               } else {
                                 echo $status;
-                              } ?>                                                                     
+                              } ?>
                             </td>
                           </tr>
-                          <?php
+                        <?php
                         }
                         ?>
                       </tbody>
@@ -633,13 +526,127 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     <?php
                     if ($row == '') {
                       echo "<h3>Não existem dados para consulta</h3>";
-                    } else { }
-                    ?>                      
+                    } else {
+                    }
+                    ?>
                   </div>
-                </div>                 
-              </div>                
+                </div>
+              </div>
             </div>
-          </div>           
+            <div class="col-md-3">
+            </div>
+          </div>
+          <br><br>
+          <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+              <div class="card collapsed-card">
+                <div class="card-header" style="text-align: center; align-items: center;">
+                  <h3 class="card-title">DIREITOS EXCLUÍDOS</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                    <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
+
+                    <?php
+                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                      $nome = '%' . $_GET['txtpesquisar'] . '%';
+                      $query = "select * from tb_direitoPleiteado_exant where perfil LIKE '$nome' order by id asc";
+                    } else {
+                      $query = "select * from tb_direitoPleiteado_exant where status = 'Excluído' order by id asc";
+                    }
+                    $result = mysqli_query($conexao, $query);
+                    $row = mysqli_num_rows($result);
+                    ?>
+
+                    <!-------------------------------------------------->
+
+                    <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
+                      <thead class="text-primary" style="text-align: center;">
+                        <th class="align-middle" style="width: 4%;">#</th>
+                        <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
+                        <th class="align-middle">Status</th>
+                        <th class="align-middle">Ações</th>
+                      </thead>
+                      <tbody>
+                        <?php
+                        while ($res_1 = mysqli_fetch_array($result)) {
+                          $id = $res_1["id"];
+                          $direito = $res_1["direito"];
+                          $status = $res_1["status"];
+                        ?>
+                          <tr style="text-align: center;">
+                            <td class="align-middle"><?php echo $id; ?></td>
+                            <td class="align-middle"><?php echo $direito; ?></td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aguardando') { ?>
+                                <span class="badge badge-warning">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else if ($status == 'Aprovado') { ?>
+                                <span class="badge badge-success">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else if ($status == 'Excluído') { ?>
+                                <span class="badge badge-danger">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else {
+                                echo $status;
+                              }
+                              ?>
+                            </td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aprovado') { ?>
+                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              <?php
+                              } elseif ($status == 'Aguardando') { ?>
+                                <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              <?php
+                              } elseif ($status == 'Excluído') { ?>
+                                <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs disabled" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs disabled" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              <?php
+                              } else {
+                                echo $status;
+                              } ?>
+                            </td>
+                          </tr>
+                        <?php
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                    <?php
+                    if ($row == '') {
+                      echo "<h3>Não existem dados para consulta</h3>";
+                    } else {
+                    }
+                    ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div id="modalExemplo" class="modal fade" role="dialog">
             <!---Modal Exemplo--->
             <div class="modal-dialog modal-dialog-centered">
@@ -665,7 +672,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           </div>
         </div>
         <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->          
+    </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
@@ -683,49 +690,49 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- jQuery Mask -->
-<script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery Mask -->
+  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="plugins/chart.js/Chart.min.js"></script>
+  <!-- Sparkline -->
+  <script src="plugins/sparklines/sparkline.js"></script>
+  <!-- JQVMap -->
+  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="plugins/moment/moment.min.js"></script>
+  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="dist/js/pages/dashboard.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="dist/js/demo.js"></script>
 
-<!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
+  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
-<!---------------------------------------------------------------------------------------------->
+  <!---------------------------------------------------------------------------------------------->
 </body>
 
 </html>
@@ -737,77 +744,77 @@ if (isset($_POST['button'])) {
   $direito = strtoupper($_POST['txtdireito']);
   $status = 'Aprovado';
 
-    //Verificar se a SEÇÃO já está cadastrado
+  //Verificar se a SEÇÃO já está cadastrado
 
-    $query_verificar = "select * from tb_direitoPleiteado_exant where direito = '$direito'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
-    $result_verificar = mysqli_query($conexao, $query_verificar);
-    $dado_verificar = mysqli_fetch_array($result_verificar);
-    $row_verificar = mysqli_num_rows($result_verificar);
+  $query_verificar = "select * from tb_direitoPleiteado_exant where direito = '$direito'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $result_verificar = mysqli_query($conexao, $query_verificar);
+  $dado_verificar = mysqli_fetch_array($result_verificar);
+  $row_verificar = mysqli_num_rows($result_verificar);
 
-    if ($row_verificar > 0) {
-      echo "<script language='javascript'> window.alert('Direito já está cadastrado!'); </script>";
-      exit();
-    }
-
-    $query = "INSERT into tb_direitoPleiteado_exant (direito, status) VALUES ('$direito', '$status')";
-
-    $result = mysqli_query($conexao, $query);
-
-    if ($result == '') {
-      echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-      echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
-    } else {
-      echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-      echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
-    }
+  if ($row_verificar > 0) {
+    echo "<script language='javascript'> window.alert('Direito já está cadastrado!'); </script>";
+    exit();
   }
 
-  ?>
+  $query = "INSERT into tb_direitoPleiteado_exant (direito, status) VALUES ('$direito', '$status')";
 
+  $result = mysqli_query($conexao, $query);
 
-  <!--------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
-  <?php
-  if (@$_GET['func'] == 'deleta') {
-    $id = $_GET['id'];
-    $query = "UPDATE tb_direitoPleiteado_exant set status = 'Excluído' where id = '$id'";
-    mysqli_query($conexao, $query);
+  if ($result == '') {
+    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
+    echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
+  } else {
+    echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
     echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
   }
-  ?>
-  <!------------------------------------------------------------------------------->
+}
+
+?>
 
 
-  <!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
-  <?php
-  if (@$_GET['func'] == 'edita') {
-    $id = $_GET['id'];
-    $query = "select * from tb_direitoPleiteado_exant where id = '$id'";
-    $result = mysqli_query($conexao, $query);
-    while ($res_1 = mysqli_fetch_array($result)) {
-      ?>
-      <div id="modalEditar" class="modal fade" role="dialog">
-        <!---Modal EDITAR --->
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Editar DIREITO PLEITEADO</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-              <form method="POST" action="">
-                <div class="form-group">
-                  <label for="id_produto">Direito Pleiteado</label>
-                  <input type="text" class="form-control mr-2" name="txtdireito2" value="<?php echo $res_1['direito']; ?>" placeholder="Direito" autocomplete="off">
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-              </div>
-            </form>
+<!--------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
+<?php
+if (@$_GET['func'] == 'deleta') {
+  $id = $_GET['id'];
+  $query = "UPDATE tb_direitoPleiteado_exant set status = 'Excluído' where id = '$id'";
+  mysqli_query($conexao, $query);
+  echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
+}
+?>
+<!------------------------------------------------------------------------------->
+
+
+<!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
+<?php
+if (@$_GET['func'] == 'edita') {
+  $id = $_GET['id'];
+  $query = "select * from tb_direitoPleiteado_exant where id = '$id'";
+  $result = mysqli_query($conexao, $query);
+  while ($res_1 = mysqli_fetch_array($result)) {
+?>
+    <div id="modalEditar" class="modal fade" role="dialog">
+      <!---Modal EDITAR --->
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Editar DIREITO PLEITEADO</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
+          <div class="modal-body">
+            <form method="POST" action="">
+              <div class="form-group">
+                <label for="id_produto">Direito Pleiteado</label>
+                <input type="text" class="form-control mr-2" name="txtdireito2" value="<?php echo $res_1['direito']; ?>" placeholder="Direito" autocomplete="off">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+          </div>
+          </form>
         </div>
       </div>
+    </div>
     </div>
     <script>
       $('#modalEditar').modal("show");
@@ -816,7 +823,7 @@ if (isset($_POST['button'])) {
 
     <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
 
-    <?php
+<?php
     if (isset($_POST['buttonEditar'])) {
       $direito2 = strtoupper($_POST['txtdireito2']);
       $query_verificar = "select * from tb_direitoPleiteado_exant where direito = '$direito2'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
@@ -848,5 +855,5 @@ if (@$_GET['func'] == 'aprova') {
   $query = "UPDATE tb_direitoPleiteado_exant set status = 'Aprovado' where id = '$id'";
   mysqli_query($conexao, $query);
   echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
-}  
+}
 ?>

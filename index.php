@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
   <link rel="stylesheet" href="icons/fontawesome-free-5.11.2-web/css/all.min.css">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -15,6 +16,7 @@ session_start();
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <title>SIGPAGPES</title>
 </head>
+
 <body>
   <div class="wrapper fadeIn" style="position:absolute;">
     <div id="formContent">
@@ -38,7 +40,7 @@ session_start();
         <?php
         if (isset($_SESSION['nao_autenticado'])) : ?>
           <p class="fadeIn fourth"><small>Usuário ou Senha Inválidos!</small></p>
-          <?php
+        <?php
         endif;
         unset($_SESSION['nao_autenticado']);
         ?>
@@ -64,4 +66,5 @@ session_start();
     </div>
   </div>
 </body>
+
 </html>

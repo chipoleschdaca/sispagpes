@@ -12,7 +12,7 @@ while ($res_1 = mysqli_fetch_array($result)) {
 
 	$data2 = implode('/', array_reverse(explode('-', $res_1['data_geracao'])));
 
-	?>
+?>
 
 	<title>
 		Ordem de Serviço nº <?php echo $id ?>

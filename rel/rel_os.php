@@ -9,12 +9,14 @@ $query = "select o.id, o.requerente, o.tecnico, o.produto, o.serie, o.problema, 
 $result = mysqli_query($conexao, $query);
 $res_1 = mysqli_fetch_array($result);
 $data2 = implode('/', array_reverse(explode('-', $res_1['data_geracao'])));
-function data($data){
+function data($data)
+{
 	return date("d/m/Y", strtotime($data));
 }
 ?>
 <!DOCTYPE html>
 <html>
+
 <head lang="pt-br">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +47,7 @@ function data($data){
 	}
 
 	.cabecalho {
-		background-color: #ebebeb;		
+		background-color: #ebebeb;
 		padding-bottom: 15px;
 		margin-bottom: 15px;
 	}
@@ -58,7 +60,7 @@ function data($data){
 		padding: 10px;
 		margin-top: 10px;
 	}
-	
+
 	.titulo {
 		margin: 0;
 	}
@@ -84,21 +86,21 @@ function data($data){
 	.pgto {
 		margin: 1px;
 	}
-
 </style>
+
 <body>
 	<div class="wrapper">
 		<section class="invoice">
 			<div class="cabecalho">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="page-header">          
+						<h2 class="page-header">
 							<h3 class="titulo" style="text-align: center;"><b>SISPAGPES - Exercício Anterior</b></h3>
 							<h6 class="titulo" style="text-align: center;">Av. Brig. Eduardo Gomes, s/nº, Vila Asas, Lagoa Santa - MG - CEP 33400-000</h6>
 						</h2>
 					</div>
 				</div>
-			</div>          
+			</div>
 			<div class="container">
 				<div class="row" style="height: 30px;">
 					<div class="col-sm-5">
@@ -148,7 +150,7 @@ function data($data){
 					</div>
 					<div class="col-sm-6">
 						<p style="font-size:12px">Modelo: XHPER </p>
-					</div>	
+					</div>
 					<div class="col-sm-6">
 						<p style="font-size:12px">Defeito: <?php echo $res_1['problema']; ?> </p>
 					</div>
@@ -177,7 +179,7 @@ function data($data){
 						<td class="align-middle"> 5 </td>
 					</tr>
 				</table>
-				<hr>		
+				<hr>
 				<br>
 				<div class="row">
 					<div class="col-sm-9">
@@ -218,4 +220,5 @@ function data($data){
 		</div>
 	</div>
 </body>
+
 </html>

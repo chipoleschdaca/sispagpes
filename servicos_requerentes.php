@@ -3,9 +3,9 @@ include('conexao.php');
 session_start();
 include('verificar_login.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,6 +34,7 @@ include('verificar_login.php');
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     <!-- Navbar -->
@@ -208,7 +209,7 @@ include('verificar_login.php');
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-             <li class="nav-item">
+            <li class="nav-item">
               <a href="painel_funcionario.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
@@ -224,7 +225,8 @@ include('verificar_login.php');
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview"> <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
+            <li class="nav-item has-treeview">
+              <!--Se quiser deixar o menu aberto, acrescentar menu-open após o treeview-->
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
@@ -281,333 +283,335 @@ include('verificar_login.php');
                   </a>
                 </li>
               </ul>
-            </li>            
-          </div>
-        </aside>
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-          <!-- Content Header (Page header) -->
-          <div class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">
-                <div class="col-sm-6">
-                  <h1 class="m-0 text-dark">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v1</li>
-                  </ol>
-                </div><!-- /.col -->
-              </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-          </div>
-          <!-- Main content -->
-          <section class="content">
-            <div class="container-fluid">
-              <!-- Small boxes (Stat box) -->
-              <div class="row">
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-                    <div class="info-box-content" style="text-align:center;">
-                      <span class="info-box-text">TOTAL DE ORÇAMENTOS ABERTOS</span>
-                      <span class="info-box-number">
-                        <h4>
-                          <?php
-                          $query = "SELECT * FROM orcamentos where status = 'Aberto'";
-                          $result = mysqli_query($conexao, $query);
-                          $res = mysqli_fetch_array($result);
-                          $row = mysqli_num_rows($result);
-                          ?>
-                          <?php
-                          echo $row;
-                          ?>
-                        </h4>
-                      </span>
-                    </div>
-                    <!-- /.info-box-content -->
-                  </div>
-                  <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box mb-3">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                    <div class="info-box-content">
-                      <span class="info-box-text">Likes</span>
-                      <span class="info-box-number">
-                        <h4>41,410</h4>
-                      </span>
-                    </div>
-                    <!-- /.info-box-content -->
-                  </div>
-                  <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <!-- fix for small devices only -->
-                <div class="clearfix hidden-md-up"></div>
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box mb-3">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-                    <div class="info-box-content">
-                      <span class="info-box-text">Sales</span>
-                      <span class="info-box-number">
-                        <h4>760</h4>
-                      </span>
-                    </div>
-                    <!-- /.info-box-content -->
-                  </div>
-                  <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-12 col-sm-6 col-md-3">
-                  <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-                    <div class="info-box-content">
-                      <span class="info-box-text">New Members</span>
-                      <span class="info-box-number">
-                        <h4>2,000</h4>
-                      </span>
-                    </div>
-                    <!-- /.info-box-content -->
-                  </div>
-                  <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-              </div>           
-              <br>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card">
-                    <div class="card-header" style="text-align: center;">
-                      <?php 
-                      $cpf = $_GET['cpf'];
-                      $query = "select * from requerentes where cpf = '$cpf'";
+            </li>
+      </div>
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE ORÇAMENTOS ABERTOS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM orcamentos where status = 'Aberto'";
                       $result = mysqli_query($conexao, $query);
-                      //$dado = mysqli_fetch_array($result);
+                      $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
-                      $res_1 = mysqli_fetch_array($result);                         
-                      $nome = $res_1['nome'];                      
                       ?>
-                      <h4 class="" style="text-align:center;">ORÇAMENTOS DO(A) <strong><?php echo $nome ?></strong></h4>
-                    </div>
-                    <div class="card-body">
-                      <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                      <?php
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
-                        <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+                <div class="info-box-content">
+                  <span class="info-box-text">Likes</span>
+                  <span class="info-box-number">
+                    <h4>41,410</h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Sales</span>
+                  <span class="info-box-number">
+                    <h4>760</h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">New Members</span>
+                  <span class="info-box-number">
+                    <h4>2,000</h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header" style="text-align: center;">
+                  <?php
+                  $cpf = $_GET['cpf'];
+                  $query = "select * from requerentes where cpf = '$cpf'";
+                  $result = mysqli_query($conexao, $query);
+                  //$dado = mysqli_fetch_array($result);
+                  $row = mysqli_num_rows($result);
+                  $res_1 = mysqli_fetch_array($result);
+                  $nome = $res_1['nome'];
+                  ?>
+                  <h4 class="" style="text-align:center;">ORÇAMENTOS DO(A) <strong><?php echo $nome ?></strong></h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
+                    <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+
+                    <?php
+                    $cpf = $_GET['cpf'];
+                    $query = "select * from orcamentos where requerente = '$cpf'";
+                    $result = mysqli_query($conexao, $query);
+                    //$dado = mysqli_fetch_array($result);
+                    $row = mysqli_num_rows($result);
+
+                    ?>
+
+                    <table class="table table-sm table-bordered table-striped">
+                      <thead class="text-primary">
+                        <th class="align-middle">#</th>
+                        <th class="align-middle">Produto</th>
+                        <th class="align-middle">Problema</th>
+                        <th class="align-middle">Valor Total</th>
+                        <th class="align-middle">Data de Abertura</th>
+                        <th class="align-middle">Data de Aprovação</th>
+                        <th class="align-middle">Status</th>
+                      </thead>
+                      <tbody>
                         <?php
-                        $cpf = $_GET['cpf'];
-                        $query = "select * from orcamentos where requerente = '$cpf'";
-                        $result = mysqli_query($conexao, $query);
-                      //$dado = mysqli_fetch_array($result);
-                        $row = mysqli_num_rows($result);
-
+                        function data($data)
+                        {
+                          return date("d/m/Y", strtotime($data));
+                        }
+                        while ($res_1 = mysqli_fetch_array($result)) {
+                          $id = $res_1['id'];
+                          $nome =
+                            $produto = $res_1["produto"];
+                          $defeito = $res_1["problema"];
+                          $valor_total = $res_1["valor_total"];
+                          $status = $res_1["status"];
+                          $data_abertura = $res_1['data_abertura'];
+                          $data_aprovacao = $res_1['data_aprovacao'];
                         ?>
-
-                        <table class="table table-sm table-bordered table-striped">
-                          <thead class="text-primary">
-                            <th class="align-middle">#</th>
-                            <th class="align-middle">Produto</th>
-                            <th class="align-middle">Problema</th>                            
-                            <th class="align-middle">Valor Total</th>                        
-                            <th class="align-middle">Data de Abertura</th>                        
-                            <th class="align-middle">Data de Aprovação</th>
-                            <th class="align-middle">Status</th>                   
-                          </thead>
-                          <tbody>
-                            <?php
-                            function data($data){
-                              return date("d/m/Y", strtotime($data));
-                            }
-                            while ($res_1 = mysqli_fetch_array($result)) {
-                              $id = $res_1['id'];
-                              $nome =                         
-                              $produto = $res_1["produto"];
-                              $defeito = $res_1["problema"];
-                              $valor_total = $res_1["valor_total"];
-                              $status = $res_1["status"];
-                              $data_abertura = $res_1['data_abertura'];
-                              $data_aprovacao = $res_1['data_aprovacao'];                          
-                              ?>
-                              <tr>
-                                <td class="align-middle"><?php echo $id; ?></td>                            
-                                <td class="align-middle"><?php echo $produto; ?></td>
-                                <td class="align-middle"><?php echo $defeito; ?></td>                                
-                                <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
-                                <td class="align-middle"><?php echo data($data_abertura); ?></td>
-                                <td class="align-middle">
-                                  <?php 
-                                    if ($data_aprovacao >= 2019) {
-                                       echo data($data_aprovacao);
-                                      }  else {
-                                        echo "Não há";
-                                      }
-                                  ?>                                    
-                                </td>
-                                <td class="align-middle">
-                                  <?php
-                                  if ($status == 'Aberto') { ?>
-                                    <span class="badge badge-secondary">
-                                      <?php echo $status; ?>
-                                    </span>
-                                    <?php
-                                  } elseif ($status == 'Aguardando') { ?>
-                                    <span class="badge badge-warning">
-                                      <?php echo $status; ?>
-                                    </span>
-                                    <?php
-                                  } elseif ($status == 'Aprovado') { ?>
-                                    <span class="badge badge-success">
-                                      <?php echo $status; ?>
-                                    </span>
-                                    <?php
-                                  } elseif ($status == 'Cancelado') { ?>
-                                    <span class="badge badge-danger">
-                                      <?php echo $status; ?>
-                                    </span>
-                                    <?php
-                                  } else {
-                                    echo $status;
-                                  }
-                                  ?>
-                                </td>
-                              </tr>
-
+                          <tr>
+                            <td class="align-middle"><?php echo $id; ?></td>
+                            <td class="align-middle"><?php echo $produto; ?></td>
+                            <td class="align-middle"><?php echo $defeito; ?></td>
+                            <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
+                            <td class="align-middle"><?php echo data($data_abertura); ?></td>
+                            <td class="align-middle">
                               <?php
-                            }
-                            ?>
-                          </tbody>
-                        </table>
+                              if ($data_aprovacao >= 2019) {
+                                echo data($data_aprovacao);
+                              } else {
+                                echo "Não há";
+                              }
+                              ?>
+                            </td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aberto') { ?>
+                                <span class="badge badge-secondary">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } elseif ($status == 'Aguardando') { ?>
+                                <span class="badge badge-warning">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } elseif ($status == 'Aprovado') { ?>
+                                <span class="badge badge-success">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } elseif ($status == 'Cancelado') { ?>
+                                <span class="badge badge-danger">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else {
+                                echo $status;
+                              }
+                              ?>
+                            </td>
+                          </tr>
+
                         <?php
-                        if ($row == '') {
-                          echo "<h3>Não existem dados cadastrados no banco</h3>";
-                        } ?>
-                      </div>
-                    </div>                                      
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                    <?php
+                    if ($row == '') {
+                      echo "<h3>Não existem dados cadastrados no banco</h3>";
+                    } ?>
                   </div>
                 </div>
               </div>
-              Obs.: A Ordem de Serviço é gerada automaticamente quando o Orçamento é aprovado.              
-              <br>
-              <br>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card">
-                    <div class="card-header" style="text-align: center;">
-                      <?php 
-                      $cpf = $_GET['cpf'];
-                      $query = "select * from requerentes where cpf = '$cpf'";
-                      $result = mysqli_query($conexao, $query);
-                      //$dado = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      $res_1 = mysqli_fetch_array($result);                         
-                      $nome = $res_1['nome'];                      
-                      ?>
-                      <h4 class="" style="text-align:center;">ORDENS DE SERVIÇO DO(A) <strong><?php echo $nome ?></strong></h4>
-                      </div>
-                      <div class="card-body">
-                      <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                        <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+            </div>
+          </div>
+          Obs.: A Ordem de Serviço é gerada automaticamente quando o Orçamento é aprovado.
+          <br>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header" style="text-align: center;">
+                  <?php
+                  $cpf = $_GET['cpf'];
+                  $query = "select * from requerentes where cpf = '$cpf'";
+                  $result = mysqli_query($conexao, $query);
+                  //$dado = mysqli_fetch_array($result);
+                  $row = mysqli_num_rows($result);
+                  $res_1 = mysqli_fetch_array($result);
+                  $nome = $res_1['nome'];
+                  ?>
+                  <h4 class="" style="text-align:center;">ORDENS DE SERVIÇO DO(A) <strong><?php echo $nome ?></strong></h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                    <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+                    <?php
+                    $cpf = $_GET['cpf'];
+                    $query = "select * from os where requerente = '$cpf'";
+                    $result = mysqli_query($conexao, $query);
+                    //$dado = mysqli_fetch_array($result);
+                    $row = mysqli_num_rows($result);
+                    ?>
+                    <table class="table table-sm table-bordered table-striped">
+                      <thead class="text-primary">
+                        <th class="align-middle">#</th>
+                        <th class="align-middle">Produto</th>
+                        <th class="align-middle">Garantia</th>
+                        <th class="align-middle">Valor Total</th>
+                        <th class="align-middle">Data de Abertura</th>
+                        <th class="align-middle">Data de Fechamento</th>
+                        <th class="align-middle">Status</th>
+                      </thead>
+                      <tbody>
                         <?php
-                        $cpf = $_GET['cpf'];
-                        $query = "select * from os where requerente = '$cpf'";
-                        $result = mysqli_query($conexao, $query);
-                      //$dado = mysqli_fetch_array($result);
-                        $row = mysqli_num_rows($result);
+                        while ($res_1 = mysqli_fetch_array($result)) {
+                          $id = $res_1['id'];
+                          $produto = $res_1["produto"];
+                          $defeito = $res_1["problema"];
+                          $valor_total = $res_1["total"];
+                          $status = $res_1["status"];
+                          $garantia = $res_1["garantia"];
+                          $data_abertura = $res_1['data_abertura'];
+                          $data_fechamento = $res_1['data_fechamento'];
                         ?>
-                        <table class="table table-sm table-bordered table-striped">
-                          <thead class="text-primary">
-                            <th class="align-middle">#</th>
-                            <th class="align-middle">Produto</th>                            
-                            <th class="align-middle">Garantia</th>
-                            <th class="align-middle">Valor Total</th>                        
-                            <th class="align-middle">Data de Abertura</th>                        
-                            <th class="align-middle">Data de Fechamento</th>
-                            <th class="align-middle">Status</th>                       
-                          </thead>
-                          <tbody>
-                            <?php
-                            while ($res_1 = mysqli_fetch_array($result)) {
-                              $id = $res_1['id'];                             
-                              $produto = $res_1["produto"];
-                              $defeito = $res_1["problema"];
-                              $valor_total = $res_1["total"];
-                              $status = $res_1["status"];
-                              $garantia = $res_1["garantia"];
-                              $data_abertura = $res_1['data_abertura'];
-                              $data_fechamento = $res_1['data_fechamento'];                          
-                              ?>
-                              <tr>
-                                <td class="align-middle"><?php echo $id; ?></td>                            
-                                <td class="align-middle"><?php echo $produto; ?></td>                                
-                                <td class="align-middle"><?php echo $garantia; ?></td>
-                                <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
-                                <td class="align-middle"><?php echo data($data_abertura); ?></td>
-                                <td class="align-middle">
-                                  <?php 
-                                  if ($data_aprovacao >= 2019) {
-                                     echo data($data_aprovacao);
-                                    }  else {
-                                      echo "Não há";
-                                    }
-                                  ?>                                    
-                                </td>
-                                <td class="align-middle">
-                                  <?php
-                                  if ($status == 'Aberta') { ?>
-                                    <span class="badge badge-secondary">
-                                      <?php echo $status; ?>
-                                    </span>
-                                  <?php                                  
-                                  } elseif ($status == 'Aprovada') { ?>
-                                    <span class="badge badge-success">
-                                      <?php echo $status; ?>
-                                    </span>
-                                  <?php
-                                  } elseif ($status == 'Cancelada') { ?>
-                                    <span class="badge badge-danger">
-                                      <?php echo $status; ?>
-                                    </span>
-                                  <?php
-                                  } else {
-                                    echo $status;
-                                  }
-                                  ?>
-                                </td>
-                              </tr>
+                          <tr>
+                            <td class="align-middle"><?php echo $id; ?></td>
+                            <td class="align-middle"><?php echo $produto; ?></td>
+                            <td class="align-middle"><?php echo $garantia; ?></td>
+                            <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
+                            <td class="align-middle"><?php echo data($data_abertura); ?></td>
+                            <td class="align-middle">
                               <?php
-                                }
+                              if ($data_aprovacao >= 2019) {
+                                echo data($data_aprovacao);
+                              } else {
+                                echo "Não há";
+                              }
                               ?>
-                          </tbody>
-                        </table>
+                            </td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aberta') { ?>
+                                <span class="badge badge-secondary">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } elseif ($status == 'Aprovada') { ?>
+                                <span class="badge badge-success">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } elseif ($status == 'Cancelada') { ?>
+                                <span class="badge badge-danger">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else {
+                                echo $status;
+                              }
+                              ?>
+                            </td>
+                          </tr>
                         <?php
-                        if ($row == '') {
-                          echo "<h3>Não existem dados cadastrados no banco</h3>";
-                        } ?>
-                      </div>
-                  </div>                    
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                    <?php
+                    if ($row == '') {
+                      echo "<h3>Não existem dados cadastrados no banco</h3>";
+                    } ?>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>           
-        </section>           
           </div>
-          <!-- /.content-wrapper -->
-          <footer class="main-footer">
-            <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-            Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-              <b>Versão</b> 1.0.0
-            </div>
-          </footer>
-          <!-- Control Sidebar -->
-          <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-          </aside>
-          <!-- /.control-sidebar -->
-        </div>        
-      </body>
-      </html>    
+        </div>
+      </section>
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Versão</b> 1.0.0
+      </div>
+    </footer>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+</body>
+
+</html>
