@@ -1083,7 +1083,6 @@ if (@$_GET['func'] == 'edita') {
 			$data_criacao = $_POST['txtdatacriacao'];
 			$direito = $_POST['txtdireitopleiteado'];
 			$secao_origem = $_POST['txtsecaoorigem'];
-
 			$query_editar = "UPDATE exercicioanterior set saram = '$cpf', cpf = '$cpf', requerente = '$cpf', sacador = '$sacador', nup = '$nup', prioridade = '$prioridade', data_criacao = '$data_criacao', direito_pleiteado = '$direito', secao_origem = '$secao_origem' where id = '$id' ";
 
 			$result_editar = mysqli_query($conexao, $query_editar);
@@ -1101,7 +1100,7 @@ if (@$_GET['func'] == 'edita') {
 
 } elseif (@$_GET['func'] == 'estado') {
 	$id = $_GET['id'];
-	$query = "select e.id, e.secao_origem, e.data_entrada, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
+	$query = "SELECT e.id, e.secao_origem, e.data_entrada, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, sec.secao as sec_atual, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
 	$id_req = $res_1["id_req"];
 	$id_mil = $res_1["id_mil"];
 	$id_dir = $res_1["id_dir"];
@@ -1121,7 +1120,7 @@ if (@$_GET['func'] == 'edita') {
 	$data_entrada = $res_1["data_entrada"];
 	$data_saida = $res_1["data_saida"];
 	$estado = $res_1["est_estado"];
-	$secao_atual = $res_1['secao_atual'];
+	$secao_atual = $res_1['sec_atual'];
 	$result = mysqli_query($conexao, $query);
 	while ($res_1 = mysqli_fetch_array($result)) {
 		?>
@@ -1138,6 +1137,34 @@ if (@$_GET['func'] == 'edita') {
 						<form method="POST" action="">
 							<div class="row">
 								<div class="form-group col-sm-5">
+									<label for="quantidade">Seção Atual</label>
+									<input type="text" class="form-control mr-2" id="txtsecaoatual" name="txtsecaoatual" value="<?php echo $res_1["sec_atual"]; ?>" disabled>
+								</div>
+								<div class="col-sm-2" style="text-align: center;">
+									<label for=""></label>
+									<h1><i class="fas fa-angle-double-right"></i></h1>
+								</div>
+								<div class="form-group col-sm-5">
+									<label>Seção de Destino</label>
+									<select class="form-control select2" id="txtnovasecao" name="txtnovasecao" required>
+										<option value="" disabled selected hidden>Selecione o novo estado do Processo...
+										</option>
+										<?php
+										$query_sec = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
+										$result_sec = mysqli_query($conexao, $query_sec);
+										if (count($result_sec)) {
+											while ($res_sec = mysqli_fetch_array($result_sec)) {
+												$id_sec_2 = $res_sec['id'];
+												$secao_sec = $res_sec['secao'];
+										?>
+												<option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec ?></option>
+										<?php }
+										} ?>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-5">
 									<label for="quantidade">Estado Atual</label>
 									<input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?php echo $res_1["est_estado"]; ?>" disabled>
 								</div>
@@ -1151,7 +1178,7 @@ if (@$_GET['func'] == 'edita') {
 										<option value="" disabled selected hidden>Selecione o novo estado do Processo...
 										</option>
 										<?php
-										$query_est = "SELECT * FROM tb_estado_exant where status = 'Aprovado'";
+										$query_est = "SELECT * FROM tb_estado_exant WHERE status = 'Aprovado'";
 										$result_est = mysqli_query($conexao, $query_est);
 										if (count($result_est)) {
 											while ($res_est = mysqli_fetch_array($result_est)) {
@@ -1164,10 +1191,9 @@ if (@$_GET['func'] == 'edita') {
 									</select>
 								</div>
 							</div>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-						<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+								<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
 						</form>
 					</div>
 				</div>
@@ -1182,7 +1208,8 @@ if (@$_GET['func'] == 'edita') {
 
 			$novoestado = $_POST['txtnovoestado'];
 			$estadoatual = $_POST['txtestado'];
-			$query_estado = "UPDATE exercicioanterior set estado = '$novoestado' where id = '$id'";
+			$novasecao = $_POST['txtnovasecao'];
+			$query_estado = "UPDATE exercicioanterior set estado = '$novoestado', secao_atual = '$novasecao' where id = '$id'";
 			$result_estado = mysqli_query($conexao, $query_estado);
 
 			if ($result_estado == '') {
