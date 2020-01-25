@@ -270,7 +270,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -295,8 +294,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-
+                	<h3>53<sup style="font-size: 20px">%</sup></h3>
                   <p>Bounce Rate</p>
                 </div>
                 <div class="icon">
@@ -578,7 +576,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                     <i class="ion ion-clipboard mr-1"></i>
                     To Do List
                   </h3>
-
                   <div class="card-tools">
                     <ul class="pagination pagination-sm">
                       <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
@@ -758,7 +755,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                     <i class="fas fa-th mr-1"></i>
                     Sales Graph
                   </h3>
-
                   <div class="card-tools">
                     <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>

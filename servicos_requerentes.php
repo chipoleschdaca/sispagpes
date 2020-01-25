@@ -427,8 +427,7 @@ include('verificar_login.php');
                         }
                         while ($res_1 = mysqli_fetch_array($result)) {
                           $id = $res_1['id'];
-                          $nome =
-                            $produto = $res_1["produto"];
+                          $produto = $res_1["produto"];
                           $defeito = $res_1["problema"];
                           $valor_total = $res_1["valor_total"];
                           $status = $res_1["status"];
