@@ -417,8 +417,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                             <td class="align-middle"><?php echo $cpf; ?></td>
                             <td class="align-middle"><?php echo $posto; ?></td>
                             <td class="align-middle"><?php echo $situacao; ?></td>
-                            <td class="align-middle"><?php echo '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>';
-                                                      echo $nome; ?></td>
+                            <td class="align-middle"><?php echo '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?php echo $nome; ?></td>
                             <td class="align-middle"><?php echo $email; ?></td>
                             <td class="align-middle"><?php echo $data2; ?></td>
                             <td class="align-middle">

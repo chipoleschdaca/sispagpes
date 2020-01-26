@@ -40,7 +40,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
 	<div class="wrapper">
 		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
 			<ul class="navbar-nav">
@@ -168,7 +168,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 				<b><span class="brand-text font-weight-light">SISPAGPES</span></b>
 			</a>
 			<div class="sidebar">
-				<!-- Sidebar Menu -->
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 						<li class="nav-item">
@@ -231,6 +230,8 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 								</li>
 							</ul>
 						</li>
+					</ul>
+				</nav>
 			</div>
 		</aside>
 		<div class="content-wrapper">
@@ -412,7 +413,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 						</div>
 						<div class="table-responsive" style="text-align: center;">
 
-							<!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+							<!-------------LISTAR TODOS OS PROCESSOS-------------->
 
 							<?php
 
@@ -439,6 +440,58 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 							function data($data)
 							{
 								return date("d/m/Y", strtotime($data));
+							}
+
+							function data2($n)
+							{
+								// leitura das datas
+								$dia = date('d');
+								$mes = date('m');
+								$ano = date('Y');
+
+								// configuração mês
+
+								switch ($mes) {
+
+									case 1:
+										$mes = "Janeiro";
+										break;
+									case 2:
+										$mes = "Fevereiro";
+										break;
+									case 3:
+										$mes = "Março";
+										break;
+									case 4:
+										$mes = "Abril";
+										break;
+									case 5:
+										$mes = "Maio";
+										break;
+									case 6:
+										$mes = "Junho";
+										break;
+									case 7:
+										$mes = "Julho";
+										break;
+									case 8:
+										$mes = "Agosto";
+										break;
+									case 9:
+										$mes = "Setembro";
+										break;
+									case 10:
+										$mes = "Outubro";
+										break;
+									case 11:
+										$mes = "Novembro";
+										break;
+									case 12:
+										$mes = "Dezembro";
+										break;
+								}
+								//Agora basta imprimir na tela...
+								print("$dia de $mes de $ano");
 							}
 
 							?>
@@ -531,21 +584,21 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 												<?php
 												if ($status == 'Aberto') { ?>
 													<a class="btn btn-dark btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
-													<a class="btn btn-success btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-thumbs-up"></i></a>
+													<a class="btn btn-info btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-eye"></i></a>
 													<a class="btn btn-primary btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
 													<a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
 													<a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
 												<?php
 												} elseif ($status == 'Aguardando') { ?>
 													<a class="btn btn-secondary btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
-													<a class="btn btn-success btn-xs" style="width: 24px;" href="processos_exant.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+													<a class="btn btn-info btn-xs" style="width: 24px;" href="processos_exant.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-eye"></i></a>
 													<a class="btn btn-primary btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
 													<a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
 													<a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
 												<?php
 												} elseif ($status == 'Aprovado') { ?>
 													<a class="btn btn-secondary btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
-													<a class="btn btn-success btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-thumbs-up"></i></a>
+													<a class="btn btn-info btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-eye"></i></a>
 													<a class="btn btn-primary btn-xs" style="width: 24px;" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
 													<a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
 													<a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
@@ -556,11 +609,11 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 													</span>
 												<?php
 												} else { ?>
-													<a class="btn btn-secondary btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
-													<a class="btn btn-success btn-xs" style="width: 24px;" href="processos_exant.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-													<a class="btn btn-primary btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
-													<a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-													<a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
+													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>"><i class="fas fa-eye"></i></i></a>
+													<a class="btn btn-light btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
+													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
 												<?php
 												} ?>
 											</td>
@@ -769,6 +822,28 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 	<script src="dist/js/pages/dashboard.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#txtcpf').mask('000.000.000-00', {
+				reverse: true
+			});
+			$('#txtsaram').mask('000.000-0', {
+				reverse: true
+			});
+			$('#txtnup').mask('00000.000000/0000-00', {
+				reverse: true
+			});
+			$('#txtcpf2').mask('000.000.000-00', {
+				reverse: true
+			});
+			$('#txtsaram2').mask('000.000-0', {
+				reverse: true
+			});
+			$('#txtnup2').mask('00000.000000/0000-00', {
+				reverse: true
+			});
+		});
+	</script>
 
 	<!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
@@ -1220,52 +1295,132 @@ if (@$_GET['func'] == 'edita') {
 			}
 		}
 	}
-} elseif (@$_GET['func'] == 'aprova') {
+} elseif (@$_GET['func'] == 'historico') {
 	$id            = $_GET['id'];
-	$query         = "select * from orcamentos where id = '$id'";
+	$query         = "SELECT * FROM exercicioanterior where id = '$id'";
 	$result        = mysqli_query($conexao, $query);
-
-	while ($res_1 = mysqli_fetch_array($result)) {
-		$total        = $res_1['total'];
-		$requerente   = $res_1['requerente'];
-		$produto      = $res_1['produto'];
-		$tecnico      = $res_1['tecnico'];
-	}
 	?>
 
 	<!-- Modal -->
-	<div id="modalAprovar" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-dialog-centered">
+	<div id="modalHistorico" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">Aprovar Orçamento</h4>
+					<h4 class="modal-title"><i class="far fa-folder-open"></i> Histórico do(a) Sr(a).</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
 					<form method="POST" action="">
-						<div class="form-group">
-							<label for="fornecedor">Forma de Pagamento</label>
-							<select class="form-control mr-2" id="category" name="pgto">
-								<option value="Dinheiro">Dinheiro</option>
-								<option value="Cartão">Cartão</option>
-							</select>
+						<div class="row">
+							<div class="table-responsive" style="text-align: center;">
+								<?php
+								$query = "SELECT h.id as id_hist, h.data, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY data";
+								$result = mysqli_query($conexao, $query);
+								$row = mysqli_num_rows($result);
+								?>
+								<table class="table table-sm table-bordered table-striped">
+									<thead class="text-primary">
+										<th class="align-middle">#</th>
+										<th class="align-middle">Data</th>
+										<th class="align-middle">Id_Exant</th>
+										<th class="align-middle">Estado Anterior</th>
+										<th class="align-middle">Novo Estado</th>
+										<th class="align-middle">Seção Anterior</th>
+										<th class="align-middle">Nova Seção</th>
+									</thead>
+									<tbody>
+										<?php
+										while ($res_1 = mysqli_fetch_array($result)) {
+											$id_hist = $res_1["id_hist"];
+											$data = $res_1["data"];
+											$id_exant = $res_1["e_nup"];
+											$old_estado = $res_1["es_anterior"];
+											$new_estado = $res_1["est_novo"];
+											$old_secao = $res_1["s_anterior"];
+											$new_secao = $res_1["sec_novo"];
+										?>
+											<tr>
+												<td class="align-middle"><?php echo $id_hist; ?></td>
+												<td class="align-middle"><?php echo data($data); ?></td>
+												<td class="align-middle"><?php echo $id_exant; ?></td>
+												<td class="align-middle"><?php echo $old_estado; ?></td>
+												<td class="align-middle"><?php echo $new_estado; ?></td>
+												<td class="align-middle"><?php echo $old_secao; ?></td>
+												<td class="align-middle"><?php echo $new_secao; ?></td>
+											</tr>
+										<?php } ?>
+									</tbody>
+								</table>
+							</div>
 						</div>
-						<div class="form-group">
-							<label for="quantidade">Desconto</label>
-							<input type="text" class="form-control mr-2" name="txtdesconto" value="<?php echo $res_1['produto']; ?>" placeholder="Desconto" required>
+						<div class="row">
+							<div class="col-md-12">
+								<!-- The time line -->
+								<div class="timeline">
+									<!-- timeline time label -->
+									<?php foreach ($result as $res_1) { ?>
+										<div class="time-label">
+											<span class="bg-red"><?php echo data2($data); ?></span>
+										</div>
+										<!-- /.timeline-label -->
+										<!-- timeline item -->
+										<div>
+											<i class="fas fa-envelope bg-blue"></i>
+											<div class="timeline-item">
+												<span class="time"><i class="fas fa-clock"></i> 12:05</span>
+												<h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+												<div class="timeline-body"><span><?php echo $old_estado; ?></span>
+													Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+													weebly ning heekya handango imeem plugg dopplr jibjab, movity
+													jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+													quora plaxo ideeli hulu weebly balihoo...
+												</div>
+											</div>
+										</div>
+										<!-- END timeline item -->
+										<!-- timeline item -->
+										<div>
+											<i class="fas fa-user bg-green"></i>
+											<div class="timeline-item">
+												<span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+												<h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+											</div>
+										</div>
+										<!-- END timeline item -->
+										<!-- timeline item -->
+										<div>
+											<i class="fas fa-comments bg-yellow"></i>
+											<div class="timeline-item">
+												<span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+												<h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+												<div class="timeline-body">
+													Take me to your leader!
+													Switzerland is small and neutral!
+													We are more like Germany, ambitious and misunderstood!
+												</div>
+											</div>
+										</div>
+										<!-- END timeline item -->
+										<!-- timeline time label -->
+									<?php } ?>
+									<div>
+										<i class="fas fa-clock bg-gray"></i>
+									</div>
+								</div>
+							</div>
+							<!-- /.col -->
 						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-sm" name="buttonAprovar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-					<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+							<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-		$("#modalAprovar").modal("show");
+		$("#modalHistorico").modal("show");
 	</script>
 
 	<!--Comando para editar os dados UPDATE -->
@@ -1290,33 +1445,3 @@ if (@$_GET['func'] == 'edita') {
 		}
 	}
 } ?>
-
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-
-<!--Máscaras-->
-<script>
-	$(document).ready(function() {
-		$('#txtcpf').mask('000.000.000-00', {
-			reverse: true
-		});
-		$('#txtsaram').mask('000.000-0', {
-			reverse: true
-		});
-		$('#txtnup').mask('00000.000000/0000-00', {
-			reverse: true
-		});
-		$('#txtcpf2').mask('000.000.000-00', {
-			reverse: true
-		});
-		$('#txtsaram2').mask('000.000-0', {
-			reverse: true
-		});
-		$('#txtnup2').mask('00000.000000/0000-00', {
-			reverse: true
-		});
-	});
-
-	$("input[data-bootstrap-switch]").each(function() {
-		$(this).bootstrapSwitch('state', $(this).prop('checked'));
-	});
-</script>
