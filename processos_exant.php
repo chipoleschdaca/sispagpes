@@ -1153,7 +1153,6 @@ if (@$_GET['func'] == 'edita') {
 		<script>
 			$("#modalEditar").modal("show");
 		</script>
-
 		<!--Comando para editar os dados UPDATE -->
 		<?php
 		if (isset($_POST['buttonEditar'])) {
@@ -1176,9 +1175,7 @@ if (@$_GET['func'] == 'edita') {
 			}
 		}
 	}
-
 	// Função para alterar estado do processo.
-
 } elseif (@$_GET['func'] == 'estado') {
 	$id = $_GET['id'];
 	$query = "SELECT e.id, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, sec.secao as sec_atual, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
@@ -1287,18 +1284,18 @@ if (@$_GET['func'] == 'edita') {
 								</div>
 							</div>
 							<br>
-							<div class="row">
+							<!--<div class="row">
 								<div class="form-group col-sm-12">
 									<label>Observação</label>
 									<textarea class="textarea" id="textobs" name="txtobs" style="text-align:justify;"></textarea>
 								</div>
-							</div>
-							<!--<div class="row">
+							</div>-->
+							<div class="row">
 								<div class="form-group col-12">
 									<label>Observação</label>
-									<textarea class="form-control " id="textobs" name="txtobs" rows="3" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..."></textarea>
+									<textarea class="form-control" id="textobs" name="txtobs" rows="3" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..."></textarea>
 								</div>
-							</div>-->
+							</div>
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
 								<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
@@ -1332,17 +1329,18 @@ if (@$_GET['func'] == 'edita') {
 		}
 	}
 } elseif (@$_GET['func'] == 'historico') {
-	$id            = $_GET['id'];
-	$query         = "SELECT * FROM exercicioanterior where id = '$id'";
-	$result        = mysqli_query($conexao, $query);
+	$id        = $_GET['id'];
+	$query     = "SELECT * FROM exercicioanterior where id = '$id'";
+	$result    = mysqli_query($conexao, $query);
+	$res_nup   = mysqli_fetch_array($result);
+	$nup       = $res_nup["nup"];
 	?>
-
 	<!-- Modal -->
 	<div id="modalHistorico" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<!-- Modal content-->
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header align-middle">
 					<?php
 					$id_req = $_GET['id_req'];
 					$query = "select * from requerentes where id = '$id_req'";
@@ -1354,10 +1352,23 @@ if (@$_GET['func'] == 'edita') {
 					$posto = $res_1['posto'];
 					$situacao = $res_1["situacao"];
 					?>
-					<h4 class="modal-title"><i class="far fa-folder-open"></i> Histórico do(a) Sr(a). <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $nome ?></strong></h4>
+					<div class="col-sm-0">
+						<h2>
+							<div class="modal-title"><i class="far fa-folder-open"></i></div>
+						</h2>
+					</div>
+					<div class="col-sm-10">
+						<h5>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $nome ?></strong></h5>
+						<h5>Processo nº: <strong><?php echo $nup ?></strong></h5>
+					</div>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12" style="text-align:center;">
+							<h3>Histórico</h3>
+						</div>
+					</div>
 					<form method="POST" action="">
 						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
 							<?php
