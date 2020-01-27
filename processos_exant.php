@@ -914,6 +914,11 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 		border-radius: 50%;
 		background: white;
 	}
+
+	.textarea {
+		text-align: justify;
+		white-space: normal;
+	}
 </style>
 
 </html>
@@ -1282,18 +1287,18 @@ if (@$_GET['func'] == 'edita') {
 								</div>
 							</div>
 							<br>
-							<!--<div class="row">
+							<div class="row">
 								<div class="form-group col-sm-12">
 									<label>Observação</label>
-									<textarea id="textobs" class="textarea" name="txtobs" data-length="120"></textarea>
-								</div>
-									</div>-->
-							<div class="row">
-								<div class="form-group col-12">
-									<label>Observação</label>
-									<textarea class="form-control text-justify" id="textobs" name="txtobs" rows="3" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..."></textarea>
+									<textarea class="textarea" id="textobs" name="txtobs" style="text-align:justify;"></textarea>
 								</div>
 							</div>
+							<!--<div class="row">
+								<div class="form-group col-12">
+									<label>Observação</label>
+									<textarea class="form-control " id="textobs" name="txtobs" rows="3" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..."></textarea>
+								</div>
+							</div>-->
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
 								<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
