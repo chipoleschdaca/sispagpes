@@ -430,7 +430,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 								$statusOrc = $_GET['status'];
 								$query = "select e.id, e.requerente, e.sacador, e.direito_pleiteado, e.status, c.nome as req_nome, f.nome as func_nome from exercicioanterior as e INNER JOIN requerentes as c on e.requerente = c.cpf INNER JOIN militares as f on e.tecnico = f.id where data_abertura = '$data' order by id asc";
 							} else {
-								$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.data_entrada, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by id asc";
+								$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by id asc";
 							}
 
 							$result = mysqli_query($conexao, $query);
@@ -977,7 +977,7 @@ if (@$_GET['func'] == 'deleta') {
 <?php
 if (@$_GET['func'] == 'edita') {
 	$id = $_GET['id'];
-	$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.data_entrada, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN requerentes as r on e.saram = r.id INNER JOIN militares as m on e.sacador = m.id INNER JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
+	$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN requerentes as r on e.saram = r.id INNER JOIN militares as m on e.sacador = m.id INNER JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
 	$id_req = $res_1["id_req"];
 	$id_mil = $res_1["id_mil"];
 	$id_dir = $res_1["id_dir"];
@@ -994,7 +994,7 @@ if (@$_GET['func'] == 'edita') {
 	$data_criacao = $res_1["data_criacao"];
 	$direito_pleiteado = $res_1["dir_direito"];
 	$secao_origem = $res_1["sec_origem"];
-	$data_entrada = $res_1["data_entrada"];
+	$obs = $res_1["obs"];
 	$data_saida = $res_1["data_saida"];
 	$estado = $res_1["est_estado"];
 	$secao_atual = $res_1['secao_atual'];
@@ -1176,7 +1176,7 @@ if (@$_GET['func'] == 'edita') {
 
 } elseif (@$_GET['func'] == 'estado') {
 	$id = $_GET['id'];
-	$query = "SELECT e.id, e.secao_origem, e.data_entrada, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, sec.secao as sec_atual, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
+	$query = "SELECT e.id, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, sec.secao as sec_atual, est.id as id_est, est.estado as est_estado from exercicioanterior as e INNER JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id INNER JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
 	$id_req = $res_1["id_req"];
 	$id_mil = $res_1["id_mil"];
 	$id_dir = $res_1["id_dir"];
@@ -1193,8 +1193,8 @@ if (@$_GET['func'] == 'edita') {
 	$data_criacao = $res_1["data_criacao"];
 	$direito_pleiteado = $res_1["dir_direito"];
 	$secao_origem = $res_1["sec_origem"];
-	$data_entrada = $res_1["data_entrada"];
 	$data_saida = $res_1["data_saida"];
+	$obs = $res_1["obs"];
 	$estado = $res_1["est_estado"];
 	$secao_atual = $res_1['sec_atual'];
 	$result = mysqli_query($conexao, $query);
@@ -1212,12 +1212,19 @@ if (@$_GET['func'] == 'edita') {
 					<div class="modal-body">
 						<form method="POST" action="">
 							<div class="row">
-								<div class="col-sm-4">
+								<div class="form-group col-sm-5">
+									<label for="">Data Anterior</label>
+									<input type="date" class="form-control mr-2" value="<?php echo $res_1["data_saida"]; ?>" disabled>
+								</div>
+								<div class="col-sm-2" style="text-align: center;">
+									<label for=""></label>
+									<h1><i class="fas fa-angle-double-right"></i></h1>
+								</div>
+								<div class="form-group col-sm-5">
 									<label for="">Data</label>
 									<input type="date" class="form-control mr-2" id="txtdataatual" name="txtdataatual" required>
 								</div>
 							</div>
-							<br>
 							<div class="row">
 								<div class="form-group col-sm-5">
 									<label for="quantidade">Seção Atual</label>
@@ -1256,7 +1263,7 @@ if (@$_GET['func'] == 'edita') {
 									<h1><i class="fas fa-angle-double-right"></i></h1>
 								</div>
 								<div class="form-group col-sm-5">
-									<label>Estado do Processo</label>
+									<label>Novo estado do Processo</label>
 									<select class="form-control select2" id="txtnovoestado" name="txtnovoestado" required>
 										<option value="" disabled selected hidden>Selecione o novo estado do Processo...
 										</option>
@@ -1272,6 +1279,19 @@ if (@$_GET['func'] == 'edita') {
 										<?php }
 										} ?>
 									</select>
+								</div>
+							</div>
+							<br>
+							<!--<div class="row">
+								<div class="form-group col-sm-12">
+									<label>Observação</label>
+									<textarea id="textobs" class="textarea" name="txtobs" data-length="120"></textarea>
+								</div>
+									</div>-->
+							<div class="row">
+								<div class="form-group col-12">
+									<label>Observação</label>
+									<textarea class="form-control text-justify" id="textobs" name="txtobs" rows="3" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..."></textarea>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -1294,7 +1314,8 @@ if (@$_GET['func'] == 'edita') {
 			$estadoatual = $_POST['txtestado'];
 			$novasecao = $_POST['txtnovasecao'];
 			$data_atual = $_POST['txtdataatual'];
-			$query_estado = "UPDATE exercicioanterior set estado = '$novoestado', secao_atual = '$novasecao', data_saida = '$data_atual' where id = '$id'";
+			$obs = $_POST['txtobs'];
+			$query_estado = "UPDATE exercicioanterior set obs = '$obs', data_saida = '$data_atual', estado = '$novoestado', secao_atual = '$novasecao' where id = '$id'";
 			$result_estado = mysqli_query($conexao, $query_estado);
 
 			if ($result_estado == '') {
@@ -1328,88 +1349,57 @@ if (@$_GET['func'] == 'edita') {
 					$posto = $res_1['posto'];
 					$situacao = $res_1["situacao"];
 					?>
-
 					<h4 class="modal-title"><i class="far fa-folder-open"></i> Histórico do(a) Sr(a). <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $nome ?></strong></h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
 					<form method="POST" action="">
-						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width:90%;">
+						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
 							<?php
-							$query = "SELECT h.id as id_hist, h.data, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY data";
+							$query = "SELECT h.id as id_hist, h.data, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY data";
 							$result = mysqli_query($conexao, $query);
 							$row = mysqli_num_rows($result);
 							?>
-							<div class="">
-								<table class="table table-sm table-bordered table-striped">
-									<tbody>
-										<?php
-										while ($res_1 = mysqli_fetch_array($result)) {
-											$id_hist = $res_1["id_hist"];
-											$data = $res_1["data"];
-											$id_exant = $res_1["e_nup"];
-											$old_estado = $res_1["es_anterior"];
-											$new_estado = $res_1["est_novo"];
-											$old_secao = $res_1["s_anterior"];
-											$new_secao = $res_1["sec_novo"];
-										?>
-											<tr>
-												<td class="align-middle" style="width: 1%;">
-													<?php echo data($data); ?><br>
-													<?php echo $new_secao; ?>
-												</td>
-												<td class="align-middle">
-													<strong><?php echo $new_estado; ?></strong><br>
-													Obs: Loren ipsilum
-												</td>
-											</tr>
-										<?php } ?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<!--<div class="row">
-							<div class="col-md-12">								
-								<div class="timeline">
+							<table class="table table-sm table-bordered table-striped">
+								<tbody>
 									<?php
-									$query_hist = "SELECT h.id as id_hist, h.data as h_data, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY data";
-
-									$result_hist = mysqli_query($conexao, $query_hist);
-									$row_hist = mysqli_num_rows($result_hist);
-
-									while ($res_h = mysqli_fetch_array($result_hist)) {
-										$id_h = $res_h["id_hist"];
-										$data_h = $res_h["h_data"];
-										$id_exant_h = $res_h["e_nup"];
-										$old_estado_h = $res_h["es_anterior"];
-										$new_estado_h = $res_h["est_novo"];
-										$old_secao_h = $res_h["s_anterior"];
-										$new_secao_h = $res_h["sec_novo"];
+									while ($res_1 = mysqli_fetch_array($result)) {
+										$id_hist = $res_1["id_hist"];
+										$data = $res_1["data"];
+										$id_exant = $res_1["e_nup"];
+										$old_estado = $res_1["es_anterior"];
+										$new_estado = $res_1["est_novo"];
+										$old_secao = $res_1["s_anterior"];
+										$new_secao = $res_1["sec_novo"];
+										$obs_exant = $res_1["obs_exant"];
 									?>
-										<div class="time-label">
-											<span class="bg-red"><?php echo data2($data_h); ?></span>
-										</div>
-										<div>
-											<i class="fas fa-envelope bg-blue"></i>
-											<div class="timeline-item">
-												<span class="time"><i class="fas fa-clock"></i> 12:05</span>
-												<h3 class="timeline-header"><a href="#">Estado Anterior</a></h3>
-												<div class="timeline-body">
-													<?php echo $old_estado_h; ?>
-												</div>
-											</div>
-										</div>
+										<tr>
+											<td class="align-middle" style="width: 12.1%;">
+												<?php echo data($data); ?><br>
+												De: <b> <?php echo $old_secao; ?></b><br>
+												Para: <b><?php echo $new_secao; ?></b>
+											</td>
+											<td class="align-middle">
+												<strong><?php echo $new_estado; ?></strong><br>
+												<?php
+												if ($res_1["obs_exant"] == '') {
+													echo 'Não há';
+												} else { ?>
+													<p style="text-align: justify;"><?php echo $obs_exant; ?> </p>
+												<?php
+												}
+												?>
+											</td>
+										</tr>
 									<?php } ?>
-									<div>
-										<i class="fas fa-clock bg-gray"></i>
-									</div>
-								</div>
-							</div>-->
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+						</div>
+					</form>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-				</div>
-				</form>
 			</div>
 		</div>
 	</div>
