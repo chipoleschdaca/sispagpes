@@ -613,7 +613,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></i></a>
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
-													<a class="btn btn-light btn-xs" style="width: 24px;" href="#"><i class="far fa-file-pdf"></i></a>
+													<a class="btn btn-light btn-xs" style="width: 24px;" href="rel/exemplopdfmake.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="far fa-file-pdf"></i></a>
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
 												<?php
