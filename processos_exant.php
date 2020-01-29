@@ -613,7 +613,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></i></a>
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
-													<a class="btn btn-light btn-xs" style="width: 24px;" href="rel/exemplopdfmake.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="far fa-file-pdf"></i></a>
+													<button class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" onclick="javascript: pdfmake()"><i class="far fa-file-pdf"></i></button>
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
 													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
 												<?php
@@ -1344,14 +1344,14 @@ if (@$_GET['func'] == 'edita') {
 				<div class="modal-header align-middle">
 					<?php
 					$id_req = $_GET['id_req'];
-					$query = "select * from requerentes where id = '$id_req'";
-					$result = mysqli_query($conexao, $query);
+					$query_req = "select * from requerentes where id = '$id_req'";
+					$result_req = mysqli_query($conexao, $query_req);
 					//$dado = mysqli_fetch_array($result);
-					$row = mysqli_num_rows($result);
-					$res_1 = mysqli_fetch_array($result);
-					$nome = $res_1['nome'];
-					$posto = $res_1['posto'];
-					$situacao = $res_1["situacao"];
+					$row_req = mysqli_num_rows($result_req);
+					$res_req = mysqli_fetch_array($result_req);
+					$nome = $res_req['nome'];
+					$posto = $res_req['posto'];
+					$situacao = $res_req["situacao"];
 					?>
 					<div class="col-sm-0">
 						<h2>
@@ -1373,33 +1373,33 @@ if (@$_GET['func'] == 'edita') {
 					<form method="POST" action="">
 						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
 							<?php
-							$query = "SELECT h.id as id_hist, h.data, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY data";
-							$result = mysqli_query($conexao, $query);
-							$row = mysqli_num_rows($result);
+							$query_h = "SELECT h.id as id_hist, h.data, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY data";
+							$result_h = mysqli_query($conexao, $query_h);
+							$row_h = mysqli_num_rows($result_h);
 							?>
 							<table class="table table-sm table-bordered table-striped">
 								<tbody>
 									<?php
-									while ($res_1 = mysqli_fetch_array($result)) {
-										$id_hist = $res_1["id_hist"];
-										$data = $res_1["data"];
-										$id_exant = $res_1["e_nup"];
-										$old_estado = $res_1["es_anterior"];
-										$new_estado = $res_1["est_novo"];
-										$old_secao = $res_1["s_anterior"];
-										$new_secao = $res_1["sec_novo"];
-										$obs_exant = $res_1["obs_exant"];
+									while ($res_h = mysqli_fetch_array($result_h)) {
+										$id_hist = $res_h["id_hist"];
+										$data = data($res_h["data"]);
+										$id_exant = $res_h["e_nup"];
+										$old_estado = $res_h["es_anterior"];
+										$new_estado = $res_h["est_novo"];
+										$old_secao = $res_h["s_anterior"];
+										$new_secao = $res_h["sec_novo"];
+										$obs_exant = $res_h["obs_exant"];
 									?>
 										<tr>
 											<td class="align-middle" style="width: 12.1%;">
-												<?php echo data($data); ?><br>
+												<?php echo $data; ?><br>
 												De: <b> <?php echo $old_secao; ?></b><br>
 												Para: <b><?php echo $new_secao; ?></b>
 											</td>
 											<td class="align-middle">
 												<strong><?php echo $new_estado; ?></strong><br>
 												<?php
-												if ($res_1["obs_exant"] == '') {
+												if ($res_h["obs_exant"] == '') {
 													echo 'Não há';
 												} else { ?>
 													<p style="text-align: justify;"><?php echo $obs_exant; ?> </p>
@@ -1424,3 +1424,31 @@ if (@$_GET['func'] == 'edita') {
 		$("#modalHistorico").modal("show");
 	</script>
 <?php } ?>
+<script src='plugins/pdfmake/pdfmake.min.js'></script>
+<script src='plugins/pdfmake/vfs_fonts.js'></script>
+<script>
+	var docDefinition = {
+		content: [{
+			layout: 'lightHorizontalLines', // optional
+			table: {
+				// headers are automatically repeated if the table spans over multiple pages
+				// you can declare how many rows should be treated as headers
+				headerRows: 1,
+				widths: ['*', 'auto', 100, '*'],
+
+				body: [
+					['ssssssss', 'aaaaaaaaa', 'sdaddsdssd', 'The last one'],
+					['AAAAAAAAAAAAA', '<?php echo $id; ?>', '<?php echo $data; ?>', '<?php echo $data; ?>'],
+					[{
+						text: 'Bold value',
+						bold: true
+					}, 'Val 2', 'Val 3', 'Val 4']
+				]
+			}
+		}]
+	};
+
+	function pdfmake() {
+		pdfMake.createPdf(docDefinition).open();
+	};
+</script>
