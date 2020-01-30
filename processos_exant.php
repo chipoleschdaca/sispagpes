@@ -434,7 +434,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 							}
 
 							$result = mysqli_query($conexao, $query);
-							//$dado = mysqli_fetch_array($result);
 							$row = mysqli_num_rows($result);
 
 							function data($data)
