@@ -581,42 +581,12 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 											</td>
 											<td class="align-middle"><?php echo $secao_atual; ?></td>
 											<td class="align-middle">
-												<?php
-												if ($status == 'Aberto') { ?>
-													<a class="btn btn-dark btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
-													<a class="btn btn-info btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-eye"></i></a>
-													<a class="btn btn-primary btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
-													<a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-													<a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-												<?php
-												} elseif ($status == 'Aguardando') { ?>
-													<a class="btn btn-secondary btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
-													<a class="btn btn-info btn-xs" style="width: 24px;" href="processos_exant.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-eye"></i></a>
-													<a class="btn btn-primary btn-xs disabled" style="width: 24px;" href="#" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
-													<a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-													<a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-												<?php
-												} elseif ($status == 'Aprovado') { ?>
-													<a class="btn btn-secondary btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
-													<a class="btn btn-info btn-xs disabled" style="width: 24px;" href="#"><i class="fas fa-eye"></i></a>
-													<a class="btn btn-primary btn-xs" style="width: 24px;" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
-													<a class="btn btn-warning btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-													<a class="btn btn-danger btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-												<?php
-												} elseif ($status == 'Cancelado') { ?>
-													<span class="badge badge-danger">
-														<?php echo $status; ?>
-													</span>
-												<?php
-												} else { ?>
-													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
-													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></i></a>
-													<a class="btn btn-light btn-xs" style="width: 24px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
-													<button class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" onclick="javascript: pdfmake()"><i class="far fa-file-pdf"></i></button>
-													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-													<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-												<?php
-												} ?>
+												<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
+												<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></i></a>
+												<a class="btn btn-light btn-xs" style="width: 24px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-print"></i></a>
+												<a class="btn btn-light btn-xs" style="width: 24px;" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="far fa-file-pdf"></i></a>
+												<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+												<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
 											</td>
 										</tr>
 									<?php } ?>
@@ -1423,31 +1393,3 @@ if (@$_GET['func'] == 'edita') {
 		$("#modalHistorico").modal("show");
 	</script>
 <?php } ?>
-<script src='plugins/pdfmake/pdfmake.min.js'></script>
-<script src='plugins/pdfmake/vfs_fonts.js'></script>
-<script>
-	var docDefinition = {
-		content: [{
-			layout: 'lightHorizontalLines', // optional
-			table: {
-				// headers are automatically repeated if the table spans over multiple pages
-				// you can declare how many rows should be treated as headers
-				headerRows: 1,
-				widths: ['*', 'auto', 100, '*'],
-
-				body: [
-					['ssssssss', 'aaaaaaaaa', 'sdaddsdssd', 'The last one'],
-					['AAAAAAAAAAAAA', '<?php echo $id; ?>', '<?php echo $data; ?>', '<?php echo $data; ?>'],
-					[{
-						text: 'Bold value',
-						bold: true
-					}, 'Val 2', 'Val 3', 'Val 4']
-				]
-			}
-		}]
-	};
-
-	function pdfmake() {
-		pdfMake.createPdf(docDefinition).open();
-	};
-</script>

@@ -1,11 +1,6 @@
 <?php
-session_start();
-include('../verificar_login.php');
+
 include('../conexao.php');
-if ($_SESSION['perfil_usuario'] != 'EXANT') {
-  header('Location: ../index.php');
-  exit();
-}
 
 $id = $_GET['id'];
 $id_req = $_GET['id_req'];
@@ -18,9 +13,9 @@ $nup       = $res_nup["nup"];
 $id_req = $_GET['id_req'];
 $query_req = "select * from requerentes where id = '$id_req'";
 $result_req = mysqli_query($conexao, $query_req);
-//$dado = mysqli_fetch_array($result);
 $row_req = mysqli_num_rows($result_req);
 $res_1 = mysqli_fetch_array($result_req);
+
 $requerente = $res_1['nome'];
 $posto = $res_1['posto'];
 $situacao = $res_1["situacao"];
@@ -40,37 +35,76 @@ function data($data)
   <title><?php echo $nup ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap 4 -->
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="../plugins/bootstrap3.3.7/css/bootstrap.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+<style>
+  @page {
+    margin: 50px;
+
+  }
+
+  .cabecalho {
+    border: 1px solid #bcbcbc;
+    padding-bottom: 10px;
+    padding-top: 0px;
+    padding-left: 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    background-color: none;
+  }
+
+  .historico {
+    margin: 0;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+    border: 0.5px solid #bcbcbc;
+    border-radius: 5px;
+    padding: 0px;
+  }
+
+  td {
+    vertical-align: middle;
+    display: table-cell;
+  }
+
+  .coluna {
+    vertical-align: middle;
+    display: table-cell;
+
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  p {
+    text-align: justify;
+  }
+</style>
 
 <body>
   <!-- Main content -->
   <div class="wrapper">
     <div class="cabecalho">
+      <h3>Requerente: <span id="cab"><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></span></h3>
+      <h3>Processo nº: <span id="cab"><?php echo $nup ?></span></h3>
+    </div>
+    <div class="container">
       <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8" style="padding: 25px;">
-          <h3>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></strong></h3>
-          <h3>Processo nº: <strong><?php echo $nup ?></strong></h3>
+        <div class="historico">
+          <h3>Histórico</h3>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12" style="text-align:center;">
-        <h4>Histórico</h4>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-2"></div>
-      <div class="table-responsive col-sm-8" style="border-radius: 3px; margin: 20px; width: 95%;">
+      <div class="row">
         <?php
         $query2 = "SELECT h.id as id_hist, h.data, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant as obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY data";
         $result2 = mysqli_query($conexao, $query2);
@@ -90,18 +124,18 @@ function data($data)
               $obs_exant = $res_2["obs_exant"];
             ?>
               <tr>
-                <td class="align-middle" style="width: 4.7%;">
+                <td class="coluna" style="vertical-align: middle;">
                   <?php echo data($data); ?><br>
-                  De: <b> <?php echo $old_secao; ?></b><br>
-                  Para: <b><?php echo $new_secao; ?></b>
+                  De: <span id="cab" style="font-weight: bold;"> <?php echo $old_secao; ?></span><br>
+                  Para: <span id="cab"><?php echo $new_secao; ?></span>
                 </td>
-                <td class="align-middle">
-                  <strong><?php echo $new_estado; ?></strong><br>
+                <td class="coluna" style="vertical-align: middle;">
+                  <span id="cab"><?php echo $new_estado; ?></span><br>
                   <?php
                   if ($res_2["obs_exant"] == '') {
                     echo 'Não há';
                   } else { ?>
-                    <p style="text-align: justify;"><?php echo $obs_exant; ?> </p>
+                    <p><?php echo $obs_exant; ?> </p>
                   <?php
                   }
                   ?>
@@ -113,12 +147,8 @@ function data($data)
       </div>
     </div>
   </div>
-  <div class="row no-print">
-    <div class="col-12" style="text-align:center;">
-      <button class="btn btn-default" href="#" onclick="window.print();"><i class="fas fa-print"></i> Imprimir</button>
-      <a class="btn btn-primary" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" style="margin-right: 5px;"><i class="fas fa-download"></i> Gerar PDF</a>
-    </div>
-  </div>
+  <script src="../plugins/bootstrap3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
