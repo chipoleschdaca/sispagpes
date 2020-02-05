@@ -309,7 +309,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
               <div class="small-box bg-warning">
                 <div class="inner">
                   <h3>44</h3>
-
                   <p>User Registrations</p>
                 </div>
                 <div class="icon">
@@ -390,16 +389,17 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       </div>
     </footer>
     <?php
-
+    $row = mysqli_num_rows($result);
     $id = "";
     $id_req = "";
     $posto = "";
     $direito_pleiteado = "";
     $estado = "";
 
-    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.posto as req_posto, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by id asc";
+    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.posto as req_posto, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.id, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id";
 
     $result = mysqli_query($conexao, $query);
+    $row = mysqli_num_rows($result);
     while ($res_1 = mysqli_fetch_array($result)) {
 
       $id = $id . '"' . $res_1["id"] . '",';
@@ -480,14 +480,14 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
   <script type="text/javascript">
     var ctx = document.getElementById('pieChart2').getContext('2d');
     var myPieChart = new Chart(ctx, {
-      type: 'pie',
+      type: 'bar',
       data: {
-        labels: ['<?php echo $id ?>'],
+        labels: [<?php echo $estado ?>],
         datasets: [{
           label: '2018',
-          data: ['<?php echo $estado ?>'],
-          backgroundcolor: 'transparent',
+          data: [<?php echo $id ?>],
           borderColor: 'rgba(255,99,132)',
+          backgroundColor: 'rgba(255,99,132)',
           borderWidth: 3
         }]
       },
@@ -510,7 +510,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
           display: true,
           position: 'top',
           labels: {
-            fontColor: 'rgb(255,255,255)',
+            fontColor: 'rgb(0,0,0)',
             fontSize: 16
           }
         }
@@ -521,15 +521,10 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
     var donutData = {
       labels: [
-        'Chrome',
-        'IE',
-        'FireFox',
-        'Safari',
-        'Opera',
-        'Navigator',
+        <?php echo $estado ?>
       ],
       datasets: [{
-        data: [700, 500, 400, 600, 300, 100],
+        data: [<?php echo $id ?>],
         backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
       }]
     }
