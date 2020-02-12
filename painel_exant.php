@@ -274,68 +274,32 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       <section class="content">
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h3>150</h3>
-
-                  <p>New Orders</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-                  <p>Bounce Rate</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h3>44</h3>
-                  <p>User Registrations</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>65</h3>
-
-                  <p>Unique Visitors</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-          </div>
           <!-- /.row -->
           <!-- Main row -->
+          <div class="row">
+            <section class="col-lg-12 connectedSortable">
+              <form class="form-inline">
+                <div class="card col-md-12">
+                  <div class="card-body">
+                    <div class="input-group input-group-sm">
+                      <label for="txtpesquisar" style="margin-right: 10px;">Filtrar:
+                      </label>
+                      <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px; margin-right:20px">
+                      <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px; margin-right:20px"">
+                      <input class=" form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px; margin-right:20px"">
+                      <input class=" form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </section>
+            <section class="col-lg-6 connectedSortable">
+              <canvas id="pieChart" style="height:230px; min-height:230px"></canvas>
+            </section>
+            <section class="col-lg-6 connectedSortable">
+              <canvas id="donutChart" style="height:230px; min-height:230px"></canvas>
+            </section>
+          </div>
           <div class="row">
             <section class="col-lg-6 connectedSortable">
               <div class="card card-danger">
@@ -367,7 +331,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                   </div>
                 </div>
                 <div class="card-body">
-                  <canvas id="donutChart" style="height:230px; min-height:230px"></canvas>
+                  <canvas id="donutChart2" style="height:230px; min-height:230px"></canvas>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -395,30 +359,30 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     $posto = "";
     $direito_pleiteado = "";
     $estado = "";
-    $estado2 = "";
-    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.posto as req_posto, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.id, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id";
-    $result = mysqli_query($conexao, $query);
-    while ($res_1 = mysqli_fetch_array($result)) {
+    $count_estado = "";
+    $count_direito = "";
 
-      $id = $id . '"' . $res_1["id"] . '",';
-      $id_req = $id_req . '"' . $res_1["id_req"] . '",';
-      $posto = $posto . '"' . $res_1["req_posto"] . '",';
-      $direito_pleiteado = $direito_pleiteado . '"' . $res_1["dir_direito"] . '",';
-      $estado = $estado . '"' . $res_1["est_estado"] . '",';
 
-      $id = trim($id);
-      $id_req = trim($id_req);
-      $posto =  trim($posto);
-      $direito_pleiteado =  trim($direito_pleiteado);
+    $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id GROUP BY e.estado";
+    $result_estado = mysqli_query($conexao, $query_estado);
+    while ($res_estado = mysqli_fetch_array($result_estado)) {
+
+      $estado = $estado . '"' . $res_estado["estado"] . '",';
+      $count_estado = $count_estado . '"' . $res_estado["COUNT(e.estado)"] . '",';
+
       $estado =  trim($estado);
+      $count_estado =  trim($count_estado);
     }
-    $query2 = "SELECT estado, COUNT(estado) FROM exercicioanterior GROUP BY estado";
-    $result2 = mysqli_query($conexao, $query2);
-    while ($res_2 = mysqli_fetch_array($result2)) {
 
-      $estado2 = $estado2 . '"' . $res_2["COUNT(estado)"] . '",';
+    $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id GROUP BY direito_pleiteado";
+    $result_direito = mysqli_query($conexao, $query_direito);
+    while ($res_direito = mysqli_fetch_array($result_direito)) {
 
-      $estado2 =  trim($estado2);
+      $direito_pleiteado = $direito_pleiteado . '"' . $res_direito["nome_direito"] . '",';
+      $count_direito = $count_direito . '"' . $res_direito["COUNT(e.direito_pleiteado)"] . '",';
+
+      $direito_pleiteado =  trim($direito_pleiteado);
+      $count_direito =  trim($count_direito);
     }
 
 
@@ -484,45 +448,42 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       });
     });
   </script>
-  <script type="text/javascript">
-    var ctx = document.getElementById('pieChart2').getContext('2d');
-    var myPieChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [<?php echo $estado ?>],
-        datasets: [{
-          label: '2018',
-          data: [<?php echo $estado2 ?>],
-          borderColor: 'rgba(255,99,132)',
-          backgroundColor: 'rgba(255,99,132)',
-          borderWidth: 3
-        }]
-      },
+  <script>
+    var donutChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var donutData = {
+      labels: [
+        <?php echo $direito_pleiteado ?>
+      ],
+      datasets: [{
+        data: [<?php echo $count_direito ?>],
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+      }]
+    }
+    var donutOptions = {
+      maintainAspectRatio: false,
+      responsive: true,
+    }
+    var donutChart = new Chart(donutChartCanvas, {
+      type: 'doughnut',
+      data: donutData,
       options: {
-        scales: {
-          scales: {
-            yAxes: [{
-              beginAtZero: false
-            }],
-            xAxes: [{
-              autoskip: true,
-              maxTicketsLimit: 20
-            }]
-          }
-        },
-        tooltips: {
-          mode: 'index'
+        title: {
+          display: true,
+          padding: 20,
+          position: 'top',
+          fontSize: 16,
+          text: 'DIREITO PLEITEADO'
         },
         legend: {
           display: true,
-          position: 'top',
+          position: 'right',
           labels: {
             fontColor: 'rgb(0,0,0)',
             fontSize: 16
           }
         }
       }
-    });
+    })
   </script>
   <script>
     var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
@@ -531,7 +492,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         <?php echo $estado ?>
       ],
       datasets: [{
-        data: [<?php echo $estado2 ?>],
+        data: [<?php echo $count_estado ?>],
         backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
       }]
     }
@@ -539,12 +500,26 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       maintainAspectRatio: false,
       responsive: true,
     }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
     var donutChart = new Chart(donutChartCanvas, {
       type: 'doughnut',
       data: donutData,
-      options: donutOptions
+      options: {
+        title: {
+          display: true,
+          padding: 20,
+          position: 'top',
+          fontSize: 16,
+          text: 'ESTADO DO PROCESSO'
+        },
+        legend: {
+          display: true,
+          position: 'right',
+          labels: {
+            fontColor: 'rgb(0,0,0)',
+            fontSize: 16
+          }
+        }
+      }
     })
   </script>
 </body>
