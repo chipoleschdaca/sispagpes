@@ -283,30 +283,29 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
               </strong>
             </div>
             <div class="card-body">
-              <div class="row">
-                <section class="col-lg-6 connectedSortable">
+              <div class="col-lg-12 connectedSortable">
+                <div class="col-lg-6 connectedSortable">
                   <div class="chart">
                     <canvas id="pieChart" style="height:230px; min-height:230px"></canvas>
                   </div>
-                </section>
-                <section class="col-lg-6 connectedSortable">
-                  <canvas id="donutChart" style="height:230px; min-height:230px"></canvas>
-                </section>
-              </div>
-              <div class="row">
-                <section class="col-lg-6 connectedSortable">
+                </div>
+                <div class="col-lg-6 connectedSortable">
+                  <div class="chart">
+                    <canvas id="donutChart" style="height:230px; min-height:230px"></canvas>
+                  </div>
+                </div>
+                <div class="col-lg-6 connectedSortable">
                   <div class="chart">
                     <canvas id="myChart2" style="height:230px; min-height:230px"></canvas>
                   </div>
-                </section>
-                <section class="col-lg-6 connectedSortable">
+                </div>
+                <div class="col-lg-6 connectedSortable">
                   <div class="chart">
                     <canvas id="myChart" style="height:230px; min-height:230px"></canvas>
                   </div>
-                </section>
+                </div>
               </div>
-              <!-- /.row (main row) -->
-            </div><!-- /.container-fluid -->
+            </div>
           </div>
         </div>
       </section>
@@ -466,8 +465,8 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     })
   </script>
   <script>
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData = {
+    var donutChartCanvas1 = $('#donutChart').get(0).getContext('2d')
+    var donutData1 = {
       labels: [
         <?php echo $estado ?>
       ],
@@ -476,13 +475,13 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
       }]
     }
-    var donutOptions = {
+    var donutOptions1 = {
       maintainAspectRatio: false,
       responsive: true,
     }
-    var donutChart = new Chart(donutChartCanvas, {
+    var donutChart1 = new Chart(donutChartCanvas1, {
       type: 'doughnut',
-      data: donutData,
+      data: donutData1,
       options: {
         title: {
           display: true,
@@ -504,8 +503,8 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     })
   </script>
   <script>
-    var barChartCanvas = $('#myChart').get(0).getContext('2d')
-    var barData = {
+    var barChartCanvas1 = $('#myChart2').get(0).getContext('2d')
+    var barData1 = {
       labels: [
         <?php echo $posto ?>
       ],
@@ -514,13 +513,13 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
       }]
     }
-    var barOptions = {
+    var barOptions1 = {
       maintainAspectRatio: false,
       responsive: true,
     }
-    var barChart = new Chart(barChartCanvas, {
-      type: 'bar',
-      data: barData,
+    var barChart1 = new Chart(barChartCanvas1, {
+      type: 'horizontalBar',
+      data: barData1,
       options: {
         scales: {
           xAxes: [{
@@ -557,7 +556,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     })
   </script>
   <script>
-    var barChartCanvas = $('#myChart2').get(0).getContext('2d')
+    var barChartCanvas = $('#myChart').get(0).getContext('2d')
     var barData = {
       labels: [
         <?php echo $posto ?>
@@ -572,9 +571,12 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       responsive: true,
     }
     var barChart = new Chart(barChartCanvas, {
-      type: 'horizontalBar',
+      type: 'bar',
       data: barData,
       options: {
+        animation: {
+          duration: 2000
+        },
         scales: {
           xAxes: [{
             gridLines: {
