@@ -240,6 +240,8 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                 </li>
               </ul>
             </li>
+          </ul>
+        </nav>
       </div>
       <!--/.sidebar -->
     </aside>
@@ -296,7 +298,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
                 <div class="info-box-content">
                   <span class="info-box-text">Likes</span>
                   <span class="info-box-number">
@@ -308,10 +309,8 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
               <!-- /.info-box -->
             </div>
             <!-- /.col -->
-
             <!-- fix for small devices only -->
             <div class="clearfix hidden-md-up"></div>
-
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
@@ -380,12 +379,11 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from requerentes where nome LIKE '$nome' order by nome asc";
+                      $query = "SELECT r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
                     } else {
-                      $query = "select * from requerentes order by nome asc";
+                      $query = "SELECT r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
                     }
                     $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
                     ?>
                     <table class="table table-sm table-bordered table-striped">
@@ -467,26 +465,18 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                   <div class="form-group">
                     <label for="id_produto">Posto</label>
                     <select class="form-control mr-2" name="txtposto" required>
-                      <option value="" disabled selected hidden>Posto/Grad.</option>
-                      <option value="PM">PM</option>
-                      <option value="TB">TB</option>
-                      <option value="MB">MB</option>
-                      <option value="BR">BR</option>
-                      <option value="CL">CL</option>
-                      <option value="TC">TC</option>
-                      <option value="MJ">MJ</option>
-                      <option value="CP">CP</option>
-                      <option value="1T">1T</option>
-                      <option value="2T">2T</option>
-                      <option value="AP">AP</option>
-                      <option value="SO">SO</option>
-                      <option value="1S">1S</option>
-                      <option value="2S">2S</option>
-                      <option value="3S">3S</option>
-                      <option value="CB">CB</option>
-                      <option value="S1">S1</option>
-                      <option value="S2">S2</option>
-                      <option value="SD">SD</option>
+                      <option value="" disabled selected hidden>Selecione o posto...</option>
+                      <?php
+                      $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
+                      $result_posto = mysqli_query($conexao, $query_posto);
+                      if (count($result_posto)) {
+                        while ($res_p = mysqli_fetch_array($result_posto)) {
+                          $id = $res_p['id'];
+                          $posto = $res_p['posto'];
+                      ?>
+                          <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                      <?php }
+                      } ?>
                     </select>
                   </div>
                   <div class="form-group">
@@ -727,25 +717,18 @@ if (@$_GET['func'] == 'edita') {
                 <label for="id_produto">Posto</label>
                 <select class="form-control mr-2" name="txtposto" required>
                   <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
-                  <option value="PM">PM</option>
-                  <option value="TB">TB</option>
-                  <option value="MB">MB</option>
-                  <option value="BR">BR</option>
-                  <option value="CL">CL</option>
-                  <option value="TC">TC</option>
-                  <option value="MJ">MJ</option>
-                  <option value="CP">CP</option>
-                  <option value="1T">1T</option>
-                  <option value="2T">2T</option>
-                  <option value="AP">AP</option>
-                  <option value="SO">SO</option>
-                  <option value="1S">1S</option>
-                  <option value="2S">2S</option>
-                  <option value="3S">3S</option>
-                  <option value="CB">CB</option>
-                  <option value="S1">S1</option>
-                  <option value="S2">S2</option>
-                  <option value="SD">SD</option>
+                  <option value="" disabled selected hidden>Selecione o posto...</option>
+                  <?php
+                  $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
+                  $result_posto = mysqli_query($conexao, $query_posto);
+                  if (count($result_posto)) {
+                    while ($res_p = mysqli_fetch_array($result_posto)) {
+                      $id = $res_p['id'];
+                      $posto = $res_p['posto'];
+                  ?>
+                      <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                  <?php }
+                  } ?>
                 </select>
               </div>
               <div class="form-group">
@@ -773,7 +756,6 @@ if (@$_GET['func'] == 'edita') {
                 <label for="id_produto">Nome Completo</label>
                 <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
               </div>
-
               <div class="form-group">
                 <label for="fornecedor">E-mail</label>
                 <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" value="<?php echo $res_1['email']; ?>" placeholder="Email">
@@ -848,13 +830,12 @@ if (@$_GET['func'] == 'consulta') {
           <div class="modal-header" style="width: 100%;">
             <?php
             $cpf = $_GET['cpf'];
-            $query = "select * from requerentes where cpf = '$cpf'";
+            $query = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto where cpf = '$cpf'";
             $result = mysqli_query($conexao, $query);
-            //$dado = mysqli_fetch_array($result);
             $row = mysqli_num_rows($result);
             $res_1 = mysqli_fetch_array($result);
             $nome = $res_1['nome'];
-            $posto = $res_1['posto'];
+            $posto = $res_1['nome_posto'];
             $situacao = $res_1['situacao'];
             ?>
             <h4 class="modal-title" style="text-align:center; width: 100%;"> DADOS DO(A): <strong><?php echo $posto, " ", $situacao, " ", $nome ?></strong></h4>
@@ -872,7 +853,6 @@ if (@$_GET['func'] == 'consulta') {
                   $cpf = $_GET['cpf'];
                   $query = "select * from orcamentos where requerente = '$cpf'";
                   $result = mysqli_query($conexao, $query);
-                  //$dado = mysqli_fetch_array($result);
                   $row = mysqli_num_rows($result);
                   ?>
                   <table class="table table-sm table-bordered table-striped">
@@ -965,7 +945,6 @@ if (@$_GET['func'] == 'consulta') {
                   $cpf = $_GET['cpf'];
                   $query = "select * from os where requerente = '$cpf'";
                   $result = mysqli_query($conexao, $query);
-                  //$dado = mysqli_fetch_array($result);
                   $row = mysqli_num_rows($result);
                   ?>
                   <table class="table table-sm table-bordered table-striped">
@@ -1072,7 +1051,7 @@ if (@$_GET['func'] == 'consulta') {
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+          echo "<script language='javascript'> window.alert('CPF já está cadastrado!'); </script>";
           exit();
         }
       }
@@ -1082,10 +1061,10 @@ if (@$_GET['func'] == 'consulta') {
       $result_editar = mysqli_query($conexao, $query_editar);
 
       if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
         echo "<script language='javascript'> window.location='requerentes.php'; </script>";
       } else {
-        echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
         echo "<script language='javascript'> window.location='requerentes.php'; </script>";
       }
     }

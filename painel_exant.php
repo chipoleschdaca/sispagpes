@@ -247,10 +247,11 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                 </li>
               </ul>
             </li>
+          </ul>
+        </nav>
       </div>
       <!--/.sidebar -->
     </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -302,9 +303,9 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
           </div>
           <div class="row">
             <section class="col-lg-6 connectedSortable">
-              <div class="card card-danger">
+              <div class="card card-success">
                 <div class="card-header">
-                  <h3 class="card-title">Pie Chart 2</h3>
+                  <h3 class="card-title">Bar Chart</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                     </button>
@@ -312,7 +313,9 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                   </div>
                 </div>
                 <div class="card-body">
-                  <canvas id="pieChart2" style="height:230px; min-height:230px"></canvas>
+                  <div class="chart">
+                    <canvas id="myChart" style="height:230px; min-height:230px"></canvas>
+                  </div>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -383,6 +386,17 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 
       $direito_pleiteado =  trim($direito_pleiteado);
       $count_direito =  trim($count_direito);
+    }
+
+    $query_posto = "SELECT r.posto, p.posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
+    $result_posto = mysqli_query($conexao, $query_posto);
+    while ($res_posto = mysqli_fetch_array($result_posto)) {
+
+      $posto = $posto . '"' . $res_posto["p.posto"] . '",';
+      $count_posto = $count_posto . '"' . $res_posto["COUNT(r.posto)"] . '",';
+
+      $posto =  trim($posto);
+      $count_posto =  trim($count_posto);
     }
 
 
@@ -521,6 +535,29 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         }
       }
     })
+  </script>
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [<?php echo $posto ?>],
+        datasets: [{
+          label: [<?php echo $posto ?>],
+          data: [<?php echo $count_posto ?>],
+          backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de']
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
   </script>
 </body>
 

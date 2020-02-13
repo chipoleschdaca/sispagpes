@@ -1,13 +1,12 @@
 <?php
-include('conexao.php');
 session_start();
+include('conexao.php');
 include('verificar_login.php');
-
 if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
   header('Location: index.php');
   exit();
-} ?>
-
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -15,7 +14,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="dist/img/gapls.png">
-  <title>SISPAGPES | Dashboard</title>
+  <title>SISPAGPES</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -121,6 +120,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
               </div>
+              <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
@@ -188,8 +188,6 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
         </li>
       </ul>
     </nav>
-    <!-- /.navbar -->
-    <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
@@ -198,11 +196,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
       </a>
       <!-- Sidebar -->
       <div class="sidebar">
-        <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="painel_admin.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
@@ -212,7 +207,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               </a>
             </li>
             <li class="nav-item">
-              <a href="militares.php" class="nav-link active">
+              <a href="militares.php" class="nav-link">
                 <i class="nav-icon fas fa-fingerprint"></i>
                 <p>
                   Militares
@@ -222,8 +217,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   $res = mysqli_fetch_array($result);
                   $row = mysqli_num_rows($result);
                   if ($row > 0) {
-                    echo '<span class="badge badge-warning right">' . $row . '</span>' ?>
-                  <?php } else {
+                    echo '<span class="badge badge-warning right">' . $row . '</span>';
+                  } else {
                   } ?>
                 </p>
               </a>
@@ -243,8 +238,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+            <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Exercício Anterior
@@ -328,8 +323,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="posto.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
+                  <a href="posto.php" class="nav-link active">
+                    <i class="fas fa-hand-point-right nav-icon"></i>
                     <p>
                       Posto
                       <?php
@@ -349,7 +344,6 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           </ul>
         </nav>
       </div>
-      <!--/.sidebar -->
     </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -376,16 +370,33 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-database"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">TOTAL DE POSTOS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM tb_posto";
+                      $result = mysqli_query($conexao, $query);
+                      $row = mysqli_num_rows($result);
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
-                <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-users"></i></span>
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE SOLICITAÇÕES</span>
+                  <span class="info-box-text">POSTOS "APROVADOS"</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM militares";
+                      $query = "SELECT * FROM tb_posto where status = 'Aprovado'";
                       $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       echo $row;
                       ?>
@@ -399,142 +410,89 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-check"></i></span>
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-history"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">SOLICITAÇÕES APROVADAS</span>
+                  <span class="info-box-text">POSTOS "AGUARDANDO"</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM militares where status = 'Aprovado'";
+                      $query = "SELECT * FROM tb_posto where status = 'Aguardando'";
                       $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       echo $row;
                       ?>
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-            <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-user-clock"></i></span>
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">SOLICITAÇÕES AGUARDANDO</span>
+                  <span class="info-box-text">POSTOS "EXCLUÍDOS"</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM militares where status = 'Aguardando'";
+                      $query = "SELECT * FROM tb_posto where status = 'Excluído'";
                       $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       echo $row;
                       ?>
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon badge-danger elevation-1"><i class="fa fa-user-times"></i></span>
-                <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">SOLICITAÇÕES REJEITADAS</span>
-                  <span class="info-box-number">
-                    <h4>
-                      <?php
-                      $query = "SELECT * FROM militares where status = 'Rejeitado'";
-                      $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      echo $row;
-                      ?>
-                    </h4>
-                  </span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
           </div>
-          <br>
-          <div class="row">
-            <div class="col-md-12">
+          <br><br>
+          <div class="row" style="align-content: center;">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE MILITARES CADASTRADOS</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE POSTOS</strong></h4>
                 </div>
                 <div class="card-body">
                   <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                    <i class="fas fa-user-plus"></i> Inserir Novo
+                    <i class="fas fa-plus"></i> Inserir Novo
                   </button>
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
-                    <!-------------LISTAR TODOS OS FUNCIONÁRIOS-------------->
+                    <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
 
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from militares where nome LIKE '$nome' order by id asc";
+                      $query = "select * from tb_posto where perfil LIKE '$nome' and status <> 'Excluído' order by id asc";
                     } else {
-                      $query = "select * from militares order by id asc";
+                      $query = "select * from tb_posto where status <> 'Excluído' order by id asc";
                     }
-
                     $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
-                    function data($data)
-                    {
-                      return date("d/m/Y", strtotime($data));
-                    }
+
                     ?>
 
                     <!-------------------------------------------------->
 
-                    <table class="table table-sm table-bordered table-striped">
-                      <thead class="text-primary align-middle">
+                    <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
+                      <thead class="text-primary" style="text-align: center;">
                         <th class="align-middle">#</th>
-                        <th class="align-middle">Saram</th>
-                        <th class="align-middle">CPF</th>
                         <th class="align-middle">Posto</th>
-                        <th class="align-middle">Nome Completo</th>
-                        <th class="align-middle">Nome de Guerra</th>
-                        <th class="align-middle">Perfil</th>
                         <th class="align-middle">Status</th>
-                        <th class="align-middle">Data</th>
                         <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
                         <?php
                         while ($res_1 = mysqli_fetch_array($result)) {
-                          $id = $res_1['id'];
-                          $saram = $res_1['saram'];
-                          $cpf = $res_1['cpf'];
-                          $posto = $res_1['posto'];
-                          $nome = $res_1['nome'];
-                          $nomeguerra = $res_1['nomeguerra'];
-                          $perfil = $res_1['perfil'];
-                          $status = $res_1['status'];
-                          $data = $res_1['data'];
+                          $id = $res_1["id"];
+                          $posto = $res_1["posto"];
+                          $status = $res_1["status"];
                         ?>
-                          <tr>
+                          <tr style="text-align: center;">
                             <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $saram; ?></td>
-                            <td class="align-middle"><?php echo $cpf; ?></td>
                             <td class="align-middle"><?php echo $posto; ?></td>
-                            <td class="align-middle" style="text-transform:uppercase;"><?php echo $nome; ?></td>
-                            <td class="align-middle" style="text-transform:uppercase;"><?php echo $nomeguerra; ?></td>
-                            <td class="align-middle"><?php echo $perfil; ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aguardando') { ?>
@@ -547,7 +505,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                                   <?php echo $status; ?>
                                 </span>
                               <?php
-                              } else if ($status == 'Rejeitado') { ?>
+                              } else if ($status == 'Excluído') { ?>
                                 <span class="badge badge-danger">
                                   <?php echo $status; ?>
                                 </span>
@@ -557,24 +515,29 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                               }
                               ?>
                             </td>
-                            <td class="align-middle"><?php echo data($data); ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aprovado') { ?>
-                                <a class="btn btn-success btn-sm disabled" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="posto.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs" href="posto.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-success btn-xs" href="posto.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="posto.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs" href="posto.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
-                              } else { ?>
-                                <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
-                              <?php } ?>
+                              } elseif ($status == 'Excluído') { ?>
+                                <a class="btn btn-success btn-xs" href="posto.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Posto?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs disabled" href="posto.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs disabled" href="posto.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              <?php
+                              } else {
+                                echo $status;
+                              } ?>
                             </td>
                           </tr>
                         <?php
@@ -592,95 +555,169 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </div>
               </div>
             </div>
+            <div class="col-md-3">
+            </div>
+          </div>
+          <br><br>
+          <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+              <div class="card collapsed-card">
+                <div class="card-header" style="text-align: center; align-items: center;">
+                  <h3 class="card-title">POSTOS EXCLUÍDOS</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                    <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
+
+                    <?php
+                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                      $nome = '%' . $_GET['txtpesquisar'] . '%';
+                      $query = "select * from tb_posto where perfil LIKE '$nome' and status = 'Excluído' order by id asc";
+                    } else {
+                      $query = "select * from tb_posto where status = 'Excluído' order by id asc";
+                    }
+                    $result = mysqli_query($conexao, $query);
+                    $row = mysqli_num_rows($result);
+
+                    ?>
+
+                    <!-------------------------------------------------->
+
+                    <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
+                      <thead class="text-primary" style="text-align: center;">
+                        <th class="align-middle">#</th>
+                        <th class="align-middle">Posto</th>
+                        <th class="align-middle">Status</th>
+                        <th class="align-middle">Ações</th>
+                      </thead>
+                      <tbody>
+                        <?php
+                        while ($res_1 = mysqli_fetch_array($result)) {
+                          $id = $res_1["id"];
+                          $posto = $res_1["posto"];
+                          $status = $res_1["status"];
+                        ?>
+                          <tr style="text-align: center;">
+                            <td class="align-middle"><?php echo $id; ?></td>
+                            <td class="align-middle"><?php echo $posto; ?></td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aguardando') { ?>
+                                <span class="badge badge-warning">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else if ($status == 'Aprovado') { ?>
+                                <span class="badge badge-success">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else if ($status == 'Excluído') { ?>
+                                <span class="badge badge-danger">
+                                  <?php echo $status; ?>
+                                </span>
+                              <?php
+                              } else {
+                                echo $status;
+                              }
+                              ?>
+                            </td>
+                            <td class="align-middle">
+                              <?php
+                              if ($status == 'Aprovado') { ?>
+                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              <?php
+                              } elseif ($status == 'Aguardando') { ?>
+                                <a class="btn btn-success btn-xs" href="secoes_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              <?php
+                              } elseif ($status == 'Excluído') { ?>
+                                <a class="btn btn-success btn-xs" href="secoes_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Posto?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs disabled" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-danger btn-xs disabled" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              <?php
+                              } else {
+                                echo $status;
+                              } ?>
+                            </td>
+                          </tr>
+                        <?php
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                    <?php
+                    if ($row == '') {
+                      echo "<h3>Não existem dados para consulta</h3>";
+                    } else {
+                    }
+                    ?>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
           </div>
           <div id="modalExemplo" class="modal fade" role="dialog">
             <!---Modal Exemplo--->
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Militares</h4>
+                  <h4 class="modal-title">Inserir novo Posto</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                   <form method="POST" action="">
                     <div class="form-group">
-                      <label for="fornecedor">Saram</label>
-                      <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
+                      <label for="id_produto">Posto</label>
+                      <input type="text" class="form-control mr-2" name="txtposto" placeholder="Ex.: MJ" autocomplete="off" maxlength="2" required>
                     </div>
-                    <div class="form-group">
-                      <label for="fornecedor">CPF</label>
-                      <input type="text" class="form-control mr-2" id="txtcpf" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" required>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                      <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
                     </div>
-                    <div class="form-group">
-                      <label for="id_produto">Posto/Grad.</label>
-                      <select class="form-control mr-2" name="txtposto" required>
-                        <option value="" disabled selected hidden>Posto/Grad.</option>
-                        <option value="PM">PM</option>
-                        <option value="TB">TB</option>
-                        <option value="MB">MB</option>
-                        <option value="BR">BR</option>
-                        <option value="CL">CL</option>
-                        <option value="TC">TC</option>
-                        <option value="MJ">MJ</option>
-                        <option value="CP">CP</option>
-                        <option value="1T">1T</option>
-                        <option value="2T">2T</option>
-                        <option value="AP">AP</option>
-                        <option value="SO">SO</option>
-                        <option value="1S">1S</option>
-                        <option value="2S">2S</option>
-                        <option value="3S">3S</option>
-                        <option value="CB">CB</option>
-                        <option value="S1">S1</option>
-                        <option value="S2">S2</option>
-                        <option value="SD">SD</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="id_produto">Nome Completo</label>
-                      <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="id_produto">Nome de Guerra</label>
-                      <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="id_produto">Perfil</label>
-                      <select name="perfil" class="form-control mr-2" id="category" name="category" required>
-                        <option value="" disabled selected hidden>Perfil</option>
-                        <?php
-                        $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
-                        $result = mysqli_query($conexao, $query);
-                        if (count($result)) {
-                          while ($res_1 = mysqli_fetch_array($result)) {
-                        ?>
-                            <option value="<?php echo $res_1['perfil']; ?>"><?php echo $res_1['perfil']; ?></option>
-                        <?php }
-                        } ?>
-                      </select>
-                    </div>
+                  </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                  <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-                </div>
-                </form>
               </div>
             </div>
           </div>
         </div>
-      </section>
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+    Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Versão</b> 1.0.0
     </div>
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Versão</b> 1.0.0
-      </div>
-    </footer>
-    <aside class="control-sidebar control-sidebar-dark"></aside>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
+
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
   <!-- jQuery Mask -->
@@ -717,6 +754,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
+
+  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
+
+  <!---------------------------------------------------------------------------------------------->
 </body>
 
 </html>
@@ -725,125 +766,71 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
 <?php
 if (isset($_POST['button'])) {
-  $saram = $_POST['txtsaram'];
-  $cpf = $_POST['txtcpf'];
-  $posto = $_POST['txtposto'];
-  $nome = strtoupper($_POST['txtnome']);
-  $nomeguerra = strtoupper($_POST['txtnomeguerra']);
-  $perfil = $_POST['perfil'];
+  $posto = strtoupper($_POST['txtposto']);
   $status = 'Aprovado';
 
-  //Verificar se o CPF já está cadastrado
+  //Verificar se o Posto já está cadastrado
 
-  $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "select * from tb_posto where posto = '$posto'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+    echo "<script language='javascript'> window.alert('Posto já está cadastrado!'); </script>";
     exit();
   }
 
-  $query = "INSERT into militares (saram, cpf, posto, nome, nomeguerra, perfil, status, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$nomeguerra', '$perfil', '$status', curDate() )";
+  $query = "INSERT into tb_posto (posto, status) VALUES ('$posto', '$status')";
 
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
     echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='militares.php'; </script>";
+    echo "<script language='javascript'> window.location='posto.php'; </script>";
   } else {
     echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='militares.php'; </script>";
+    echo "<script language='javascript'> window.location='posto.php'; </script>";
   }
-} ?>
+}
 
-<!---------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
+?>
+
+
+<!--------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
 <?php
 if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
-  $query = "UPDATE militares set status = 'Rejeitado' where id = '$id'";
-  //$query = "DELETE FROM militares where id = '$id'";
+  $query = "UPDATE tb_posto set status = 'Excluído' where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='militares.php'; </script>";
+  echo "<script language='javascript'> window.location='posto.php'; </script>";
 }
 ?>
-<!-------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------->
 
 
 <!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "select * from militares where id = '$id'";
+  $query = "select * from tb_posto where id = '$id'";
   $result = mysqli_query($conexao, $query);
-  while ($res_1 = mysqli_fetch_array($result)) { ?>
+  while ($res_1 = mysqli_fetch_array($result)) {
+?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Militares</h4>
+            <h4 class="modal-title">Editar POSTO</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <form method="POST" action="">
               <div class="form-group">
-                <label for="fornecedor">Saram</label>
-                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="fornecedor">CPF</label>
-                <input type="text" class="form-control mr-2" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Posto/Grad.</label>
-                <select class="form-control mr-2" name="txtposto" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
-                  <option value="PM">PM</option>
-                  <option value="TB">TB</option>
-                  <option value="MB">MB</option>
-                  <option value="BR">BR</option>
-                  <option value="CL">CL</option>
-                  <option value="TC">TC</option>
-                  <option value="MJ">MJ</option>
-                  <option value="CP">CP</option>
-                  <option value="1T">1T</option>
-                  <option value="2T">2T</option>
-                  <option value="AP">AP</option>
-                  <option value="SO">SO</option>
-                  <option value="1S">1S</option>
-                  <option value="2S">2S</option>
-                  <option value="3S">3S</option>
-                  <option value="CB">CB</option>
-                  <option value="S1">S1</option>
-                  <option value="S2">S2</option>
-                  <option value="SD">SD</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Nome Guerra</label>
-                <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" value="<?php echo $res_1['nomeguerra']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Perfil</label>
-                <select name="perfil" class="form-control mr-2" id="category" name="category" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['perfil']; ?></option>
-                  <?php
-                  $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
-                  $result = mysqli_query($conexao, $query);
-                  if (count($result)) {
-                    while ($res_2 = mysqli_fetch_array($result)) {
-                  ?>
-                      <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
-                  <?php }
-                  } ?>
-                </select>
+                <label for="id_produto">Postos</label>
+                <input type="text" class="form-control mr-2" name="txtposto2" value="<?php echo $res_1['posto']; ?>" maxlength="2" autocomplete="off">
               </div>
           </div>
           <div class="modal-footer">
@@ -854,195 +841,45 @@ if (@$_GET['func'] == 'edita') {
         </div>
       </div>
     </div>
+    </div>
     <script>
       $('#modalEditar').modal("show");
     </script>
-
     <!--Modal EDITAR -->
+
+    <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
 
 <?php
     if (isset($_POST['buttonEditar'])) {
-      $saram = $_POST['txtsaram'];
-      $cpf = $_POST['txtcpf'];
-      $posto = $_POST['txtposto'];
-      $nome = strtoupper($_POST['txtnome']);
-      $nomeguerra = strtoupper($_POST['txtnomeguerra']);
-      $perfil = $_POST['perfil'];
+      $posto2 = strtoupper($_POST['txtposto2']);
+      $query_verificar = "select * from tb_posto where posto = '$posto'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+      $result_verificar = mysqli_query($conexao, $query_verificar);
+      $row_verificar = mysqli_num_rows($result_verificar);
 
-      if ($res_1['cpf'] != $cpf) {
-
-        //Verificar se o CPF já está cadastrado
-        $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
-
-        $result_verificar = mysqli_query($conexao, $query_verificar);
-        $dado_verificar = mysqli_fetch_array($result_verificar);
-        $row_verificar = mysqli_num_rows($result_verificar);
-
-        if ($row_verificar > 0) {
-          echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
-          exit();
-        }
+      if ($row_verificar > 1) {
+        echo "<script language='javascript'> window.alert('Posto já está cadastrado!'); </script>";
+        exit();
       }
 
-      $query_editar = "UPDATE militares set saram = '$saram', cpf = '$cpf', posto = '$posto', nome = '$nome', nomeguerra = '$nomeguerra', perfil = '$perfil' where id = '$id'";
-
+      $query_editar = "UPDATE tb_posto set posto = '$posto2' where id = '$id'";
       $result_editar = mysqli_query($conexao, $query_editar);
-
       if ($result_editar == '') {
         echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='militares.php'; </script>";
+        echo "<script language='javascript'> window.location='posto.php'; </script>";
       } else {
         echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='militares.php'; </script>";
+        echo "<script language='javascript'> window.location='posto.php'; </script>";
       }
     }
   }
-} ?>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+}
 
+//<!---------------------------APROVAR NOVA SEÇÃO NA TABELA---------------------------->
 
-<!---------------------------Aprovar REGISTRO DA TABELA---------------------------->
-<?php
 if (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
-  $query = "select * from militares where id = '$id'";
-  $result = mysqli_query($conexao, $query);
-  while ($res_1 = mysqli_fetch_array($result)) { ?>
-    <div id="modalAprovar" class="modal fade" role="dialog">
-      <!---Modal EDITAR --->
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Militares</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <form method="POST" action="">
-              <div class="form-group">
-                <label for="fornecedor">Saram</label>
-                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="fornecedor">CPF</label>
-                <input type="text" class="form-control mr-2" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Posto/Grad.</label>
-                <select class="form-control mr-2" name="txtposto" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
-                  <option value="PM">PM</option>
-                  <option value="TB">TB</option>
-                  <option value="MB">MB</option>
-                  <option value="BR">BR</option>
-                  <option value="CL">CL</option>
-                  <option value="TC">TC</option>
-                  <option value="MJ">MJ</option>
-                  <option value="CP">CP</option>
-                  <option value="1T">1T</option>
-                  <option value="2T">2T</option>
-                  <option value="AP">AP</option>
-                  <option value="SO">SO</option>
-                  <option value="1S">1S</option>
-                  <option value="2S">2S</option>
-                  <option value="3S">3S</option>
-                  <option value="CB">CB</option>
-                  <option value="S1">S1</option>
-                  <option value="S2">S2</option>
-                  <option value="SD">SD</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Nome Guerra</label>
-                <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" value="<?php echo $res_1['nomeguerra']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="id_produto">Perfil</label>
-                <select name="perfil" class="form-control mr-2" id="category" name="category" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['perfil']; ?></option>
-                  <?php
-                  $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
-                  $result = mysqli_query($conexao, $query);
-                  if (count($result)) {
-                    while ($res_2 = mysqli_fetch_array($result)) {
-                  ?>
-                      <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
-                  <?php }
-                  } ?>
-                </select>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success btn-sm" name="buttonAprovar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Aprovar</button>
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <script>
-      $('#modalAprovar').modal("show");
-    </script>
-
-    <!--Modal Aprovar -->
-
-<?php
-    if (isset($_POST['buttonAprovar'])) {
-      $saram = $_POST['txtsaram'];
-      $cpf = $_POST['txtcpf'];
-      $posto = $_POST['txtposto'];
-      $nome = strtoupper($_POST['txtnome']);
-      $nomeguerra = strtoupper($_POST['txtnomeguerra']);
-      $perfil = $_POST['perfil'];
-
-      if ($res_1['cpf'] != $cpf) {
-
-        //Verificar se o CPF já está cadastrado
-        $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
-
-        $result_verificar = mysqli_query($conexao, $query_verificar);
-        $dado_verificar = mysqli_fetch_array($result_verificar);
-        $row_verificar = mysqli_num_rows($result_verificar);
-
-        if ($row_verificar > 0) {
-          echo "<script language='javascript'> window.alert('CPF já cadastrado!'); </script>";
-          exit();
-        }
-      }
-
-      $query_editar = "UPDATE militares set status = 'Aprovado' where id = '$id'";
-
-      $result_editar = mysqli_query($conexao, $query_editar);
-
-      if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao aprovar!'); </script>";
-        echo "<script language='javascript'> window.location='militares.php'; </script>";
-      } else {
-        echo "<script language='javascript'> window.alert('Aprovado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='militares.php'; </script>";
-      }
-    }
-  }
-} ?>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-
-<!--Máscaras-->
-<script>
-  $(document).ready(function() {
-    $('#txtcpf').mask('000.000.000-00', {
-      reverse: true
-    });
-    $('#txtsaram').mask('000.000-0', {
-      reverse: true
-    });
-    $('#txtcpf2').mask('000.000.000-00', {
-      reverse: true
-    });
-    $('#txtsaram2').mask('000.000-0', {
-      reverse: true
-    });
-  });
-</script>
+  $query = "UPDATE tb_posto set status = 'Aprovado' where id = '$id'";
+  mysqli_query($conexao, $query);
+  echo "<script language='javascript'> window.location='posto.php'; </script>";
+}
+?>

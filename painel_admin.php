@@ -261,7 +261,11 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   $result3 = mysqli_query($conexao, $query3);
                   $res3 = mysqli_fetch_array($result3);
                   $row3 = mysqli_num_rows($result3);
-                  $row_sum = $row + $row2 + $row3;
+                  $query4 = "SELECT * FROM tb_posto where status = 'Aguardando'";
+                  $result4 = mysqli_query($conexao, $query4);
+                  $res4 = mysqli_fetch_array($result4);
+                  $row4 = mysqli_num_rows($result4);
+                  $row_sum = $row + $row2 + $row3 + $row4;
                   if ($row_sum > 0) {
                     echo '<i class="right fas fa-angle-left"></i>';
                     echo '<span class="badge badge-warning right">' . $row_sum . '</span>';
@@ -313,6 +317,23 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       Estado
                       <?php
                       $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      if ($row > 0) {
+                        echo '<span class="badge badge-warning right">' . $row . '</span>';
+                      } else {
+                      } ?>
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="posto.php" class="nav-link">
+                    <i class="far fa-hand-point-right nav-icon"></i>
+                    <p>
+                      Posto
+                      <?php
+                      $query = "SELECT * FROM tb_posto where status = 'Aguardando'";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);

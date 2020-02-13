@@ -1313,13 +1313,13 @@ if (@$_GET['func'] == 'edita') {
 				<div class="modal-header align-middle">
 					<?php
 					$id_req = $_GET['id_req'];
-					$query_req = "select * from requerentes where id = '$id_req'";
+					//$query_req = "select * from requerentes where id = '$id_req'";
+					$query_req = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
 					$result_req = mysqli_query($conexao, $query_req);
-					//$dado = mysqli_fetch_array($result);
 					$row_req = mysqli_num_rows($result_req);
 					$res_req = mysqli_fetch_array($result_req);
 					$nome = $res_req['nome'];
-					$posto = $res_req['posto'];
+					$posto = $res_req['nome_posto'];
 					$situacao = $res_req["situacao"];
 					?>
 					<div class="col-sm-0">
@@ -1362,7 +1362,12 @@ if (@$_GET['func'] == 'edita') {
 										<tr>
 											<td class="align-middle" style="width: 12.1%;">
 												<?php echo $data; ?><br>
-												De: <b> <?php echo $old_secao; ?></b><br>
+												De: <b> <?php
+																if ($old_secao == "") {
+																	echo $new_secao;
+																} else {
+																	echo $old_secao;
+																} ?></b><br>
 												Para: <b><?php echo $new_secao; ?></b>
 											</td>
 											<td class="align-middle">

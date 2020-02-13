@@ -256,7 +256,11 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   $result3 = mysqli_query($conexao, $query3);
                   $res3 = mysqli_fetch_array($result3);
                   $row3 = mysqli_num_rows($result3);
-                  $row_sum = $row + $row2 + $row3;
+                  $query4 = "SELECT * FROM tb_posto where status = 'Aguardando'";
+                  $result4 = mysqli_query($conexao, $query4);
+                  $res4 = mysqli_fetch_array($result4);
+                  $row4 = mysqli_num_rows($result4);
+                  $row_sum = $row + $row2 + $row3 + $row4;
                   if ($row_sum > 0) {
                     echo '<i class="right fas fa-angle-left"></i>';
                     echo '<span class="badge badge-warning right">' . $row_sum . '</span>';
@@ -303,7 +307,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </li>
                 <li class="nav-item">
                   <a href="estado_exant.php" class="nav-link active">
-                    <i class="far fa-hand-point-right nav-icon"></i>
+                    <i class="fas fa-hand-point-right nav-icon"></i>
                     <p>
                       Estado
                       <?php
@@ -318,8 +322,27 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     </p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="posto.php" class="nav-link">
+                    <i class="far fa-hand-point-right nav-icon"></i>
+                    <p>
+                      Posto
+                      <?php
+                      $query = "SELECT * FROM tb_posto where status = 'Aguardando'";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      if ($row > 0) {
+                        echo '<span class="badge badge-warning right">' . $row . '</span>';
+                      } else {
+                      } ?>
+                    </p>
+                  </a>
+                </li>
               </ul>
             </li>
+          </ul>
+        </nav>
       </div>
     </aside>
     <!-- Content Wrapper. Contains page content -->
@@ -350,7 +373,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-database"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE STATUS CADASTRADOS</span>
+                  <span class="info-box-text">ESTADOS CADASTRADOS</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
@@ -368,7 +391,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               <div class="info-box">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE STATUS APROVADOS</span>
+                  <span class="info-box-text">ESTADOS "APROVADOS"</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
@@ -387,9 +410,9 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cogs"></i></span>
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-history"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE STATUS AGUARDANDO</span>
+                  <span class="info-box-text">ESTADOS "AGUARDANDO"</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
@@ -407,7 +430,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">TOTAL DE STATUS EXCLUÍDOS</span>
+                  <span class="info-box-text">ESTADOS "EXCLUÍDOS"</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
@@ -433,7 +456,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </div>
                 <div class="card-body">
                   <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                    <i class="fas fa-user-plus"></i> Inserir Novo
+                    <i class="fas fa-plus"></i> Inserir Novo
                   </button>
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
                     <!----------------------LISTAR TODOS OS ESTADOS-------------------------->
