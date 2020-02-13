@@ -91,7 +91,11 @@ function data($data)
               <tr>
                 <td class="align-middle" style="width: 4.7%;">
                   <?php echo data($data); ?><br>
-                  De: <b> <?php echo $old_secao; ?></b><br>
+                  De: <b> <?php if ($old_secao == "") {
+                            echo $new_secao;
+                          } else {
+                            echo $old_secao;
+                          } ?></b><br>
                   Para: <b><?php echo $new_secao; ?></b>
                 </td>
                 <td class="align-middle">

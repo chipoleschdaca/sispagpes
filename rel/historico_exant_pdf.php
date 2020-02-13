@@ -95,13 +95,13 @@ function data($data)
   <!-- Main content -->
   <div class="wrapper">
     <div class="cabecalho">
-      <h3>Requerente: <span id="cab"><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></span></h3>
-      <h3>Processo nº: <span id="cab"><?php echo $nup ?></span></h3>
+      <h4>Requerente: <span id="cab"><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></span></h4>
+      <h4>Processo nº: <span id="cab"><?php echo $nup ?></span></h4>
     </div>
     <div class="container">
       <div class="row">
         <div class="historico">
-          <h3>Histórico</h3>
+          <h4>Histórico</h4>
         </div>
       </div>
       <div class="row">
@@ -126,7 +126,12 @@ function data($data)
               <tr>
                 <td class="coluna" style="vertical-align: middle;">
                   <?php echo data($data); ?><br>
-                  De: <span id="cab" style="font-weight: bold;"> <?php echo $old_secao; ?></span><br>
+                  De: <span id="cab" style="font-weight: bold;">
+                    <?php if ($old_secao == "") {
+                      echo $new_secao;
+                    } else {
+                      echo $old_secao;
+                    } ?></span><br>
                   Para: <span id="cab"><?php echo $new_secao; ?></span>
                 </td>
                 <td class="coluna" style="vertical-align: middle;">

@@ -254,29 +254,10 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Exercício Anterior</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <!-- /.row -->
-          <!-- Main row -->
+          <br>
           <div class="row">
             <section class="col-lg-12 connectedSortable">
               <form class="form-inline">
@@ -294,56 +275,40 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                 </div>
               </form>
             </section>
-            <section class="col-lg-6 connectedSortable">
-              <canvas id="pieChart" style="height:230px; min-height:230px"></canvas>
-            </section>
-            <section class="col-lg-6 connectedSortable">
-              <canvas id="donutChart" style="height:230px; min-height:230px"></canvas>
-            </section>
           </div>
-          <div class="row">
-            <section class="col-lg-6 connectedSortable">
-              <div class="card card-success">
-                <div class="card-header">
-                  <h3 class="card-title">Bar Chart</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          <div class="card">
+            <div class="card-header" style="text-align:center;">
+              <strong>
+                <h3>DASHBOARD</h3>
+              </strong>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <section class="col-lg-6 connectedSortable">
+                  <div class="chart">
+                    <canvas id="pieChart" style="height:230px; min-height:230px"></canvas>
                   </div>
-                </div>
-                <div class="card-body">
+                </section>
+                <section class="col-lg-6 connectedSortable">
+                  <canvas id="donutChart" style="height:230px; min-height:230px"></canvas>
+                </section>
+              </div>
+              <div class="row">
+                <section class="col-lg-6 connectedSortable">
+                  <div class="chart">
+                    <canvas id="myChart2" style="height:230px; min-height:230px"></canvas>
+                  </div>
+                </section>
+                <section class="col-lg-6 connectedSortable">
                   <div class="chart">
                     <canvas id="myChart" style="height:230px; min-height:230px"></canvas>
                   </div>
-                </div>
-                <!-- /.card-body -->
+                </section>
               </div>
-              <!-- /.card -->
-            </section>
-            <!-- /.Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-6 connectedSortable">
-              <div class="card card-danger">
-                <div class="card-header">
-                  <h3 class="card-title">Donut Chart</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <canvas id="donutChart2" style="height:230px; min-height:230px"></canvas>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-            </section>
-            <!-- right col -->
+              <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
           </div>
-          <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
+        </div>
       </section>
       <!-- /.content -->
     </div>
@@ -364,6 +329,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     $estado = "";
     $count_estado = "";
     $count_direito = "";
+    $count_posto = "";
 
 
     $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id GROUP BY e.estado";
@@ -388,11 +354,11 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       $count_direito =  trim($count_direito);
     }
 
-    $query_posto = "SELECT r.posto, p.posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
+    $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
     $result_posto = mysqli_query($conexao, $query_posto);
     while ($res_posto = mysqli_fetch_array($result_posto)) {
 
-      $posto = $posto . '"' . $res_posto["p.posto"] . '",';
+      $posto = $posto . '"' . $res_posto["nome_posto"] . '",';
       $count_posto = $count_posto . '"' . $res_posto["COUNT(r.posto)"] . '",';
 
       $posto =  trim($posto);
@@ -405,7 +371,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       return date("d/m/Y", strtotime($data));
     }
     ?>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
@@ -485,6 +450,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
           display: true,
           padding: 20,
           position: 'top',
+          fontColor: '#000000',
           fontSize: 16,
           text: 'DIREITO PLEITEADO'
         },
@@ -492,7 +458,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
           display: true,
           position: 'right',
           labels: {
-            fontColor: 'rgb(0,0,0)',
+            fontColor: '#000000',
             fontSize: 16
           }
         }
@@ -522,6 +488,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
           display: true,
           padding: 20,
           position: 'top',
+          fontColor: '#000000',
           fontSize: 16,
           text: 'ESTADO DO PROCESSO'
         },
@@ -537,27 +504,110 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     })
   </script>
   <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
+    var barChartCanvas = $('#myChart').get(0).getContext('2d')
+    var barData = {
+      labels: [
+        <?php echo $posto ?>
+      ],
+      datasets: [{
+        data: [<?php echo $count_posto ?>],
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+      }]
+    }
+    var barOptions = {
+      maintainAspectRatio: false,
+      responsive: true,
+    }
+    var barChart = new Chart(barChartCanvas, {
       type: 'bar',
-      data: {
-        labels: [<?php echo $posto ?>],
-        datasets: [{
-          label: [<?php echo $posto ?>],
-          data: [<?php echo $count_posto ?>],
-          backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de']
-        }]
-      },
+      data: barData,
       options: {
         scales: {
+          xAxes: [{
+            gridLines: {
+              drawOnChartArea: false
+            }
+          }],
           yAxes: [{
             ticks: {
               beginAtZero: true
+            },
+            gridLines: {
+              drawOnChartArea: false
             }
           }]
+        },
+        title: {
+          display: true,
+          padding: 20,
+          position: 'top',
+          fontColor: '#000000',
+          fontSize: 16,
+          text: 'QUANTIDADE X POSTO'
+        },
+        legend: {
+          display: false,
+          position: 'right',
+          labels: {
+            fontColor: '#000000',
+            fontSize: 16
+          }
         }
       }
-    });
+    })
+  </script>
+  <script>
+    var barChartCanvas = $('#myChart2').get(0).getContext('2d')
+    var barData = {
+      labels: [
+        <?php echo $posto ?>
+      ],
+      datasets: [{
+        data: [<?php echo $count_posto ?>],
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+      }]
+    }
+    var barOptions = {
+      maintainAspectRatio: false,
+      responsive: true,
+    }
+    var barChart = new Chart(barChartCanvas, {
+      type: 'horizontalBar',
+      data: barData,
+      options: {
+        scales: {
+          xAxes: [{
+            gridLines: {
+              drawOnChartArea: false
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+            gridLines: {
+              drawOnChartArea: false
+            }
+          }]
+        },
+        title: {
+          display: true,
+          padding: 20,
+          position: 'top',
+          fontColor: '#000000',
+          fontSize: 16,
+          text: 'QUANTIDADE X POSTO'
+        },
+        legend: {
+          display: false,
+          position: 'right',
+          labels: {
+            fontColor: '#000000',
+            fontSize: 16
+          }
+        }
+      }
+    })
   </script>
 </body>
 
