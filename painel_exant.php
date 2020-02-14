@@ -282,27 +282,21 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                 <h3>DASHBOARD</h3>
               </strong>
             </div>
-            <div class="card-body">
-              <div class="col-lg-12 connectedSortable">
-                <div class="col-lg-6 connectedSortable">
-                  <div class="chart">
-                    <canvas id="pieChart" style="height:230px; min-height:230px"></canvas>
-                  </div>
+            <div class="card-body col-md-12">
+              <div class="col-md-5">
+                <canvas id="pieChart" style="height:200px; min-height:200px"></canvas>
+              </div>
+              <div class="col-md-5">
+                <canvas id="donutChart" style="height:200px; min-height:200px"></canvas>
+              </div>
+              <div class="col-md-5">
+                <div class="chart">
+                  <canvas id="myChart2" style="height:200px; min-height:200px"></canvas>
                 </div>
-                <div class="col-lg-6 connectedSortable">
-                  <div class="chart">
-                    <canvas id="donutChart" style="height:230px; min-height:230px"></canvas>
-                  </div>
-                </div>
-                <div class="col-lg-6 connectedSortable">
-                  <div class="chart">
-                    <canvas id="myChart2" style="height:230px; min-height:230px"></canvas>
-                  </div>
-                </div>
-                <div class="col-lg-6 connectedSortable">
-                  <div class="chart">
-                    <canvas id="myChart" style="height:230px; min-height:230px"></canvas>
-                  </div>
+              </div>
+              <div class="col-md-5">
+                <div class="chart">
+                  <canvas id="myChart" style="height:200px; min-height:200px"></canvas>
                 </div>
               </div>
             </div>
@@ -323,11 +317,13 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 
     $id = "";
     $id_req = "";
-    $posto = "";
     $direito_pleiteado = "";
     $estado = "";
-    $count_estado = "";
+    $secao = "";
+    $posto = "";
     $count_direito = "";
+    $count_estado = "";
+    $count_secao = "";
     $count_posto = "";
 
 
@@ -351,6 +347,17 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 
       $direito_pleiteado =  trim($direito_pleiteado);
       $count_direito =  trim($count_direito);
+    }
+
+    $query_sec = "SELECT s.secao as nome_secao, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id GROUP BY s.secao";
+    $result_sec = mysqli_query($conexao, $query_sec);
+    while ($res_sec = mysqli_fetch_array($result_sec)) {
+
+      $secao = $secao . '"' . $res_sec["nome_secao"] . '",';
+      $count_secao = $count_secao . '"' . $res_sec["COUNT(s.secao)"] . '",';
+
+      $secao =  trim($secao);
+      $count_secao =  trim($count_secao);
     }
 
     $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
@@ -506,10 +513,10 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     var barChartCanvas1 = $('#myChart2').get(0).getContext('2d')
     var barData1 = {
       labels: [
-        <?php echo $posto ?>
+        <?php echo $secao ?>
       ],
       datasets: [{
-        data: [<?php echo $count_posto ?>],
+        data: [<?php echo $count_secao ?>],
         backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
       }]
     }
@@ -518,11 +525,14 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       responsive: true,
     }
     var barChart1 = new Chart(barChartCanvas1, {
-      type: 'horizontalBar',
+      type: 'bar',
       data: barData1,
       options: {
         scales: {
           xAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
             gridLines: {
               drawOnChartArea: false
             }
@@ -542,7 +552,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
           position: 'top',
           fontColor: '#000000',
           fontSize: 16,
-          text: 'QUANTIDADE X POSTO'
+          text: 'SEÇÃO ATUAL'
         },
         legend: {
           display: false,
@@ -571,7 +581,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       responsive: true,
     }
     var barChart = new Chart(barChartCanvas, {
-      type: 'bar',
+      type: 'horizontalBar',
       data: barData,
       options: {
         animation: {
@@ -579,6 +589,9 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         },
         scales: {
           xAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
             gridLines: {
               drawOnChartArea: false
             }

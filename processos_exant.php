@@ -253,7 +253,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 					<div class="row">
 						<div class="col-12 col-sm-6 col-md-3">
 							<div class="info-box mb-3">
-								<span class="info-box-icon bg-dark elevation-1"><i class="fas fa-folder-open"></i></span>
+								<span class="info-box-icon bg-dark elevation-1"><i class="fas fa-inbox"></i></span>
 								<div class="info-box-content" style="text-align:center;">
 									<span class="info-box-text">TOTAL DE PROCESSOS</span>
 									<span class="info-box-number">
@@ -272,7 +272,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 						</div>
 						<div class="col-12 col-sm-6 col-md-3">
 							<div class="info-box">
-								<span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+								<span class="info-box-icon bg-primary elevation-1"><i class="fas fa-folder-open"></i></span>
 								<div class="info-box-content" style="text-align:center;">
 									<span class="info-box-text">PROCESSOS ABERTOS</span>
 									<span class="info-box-number">
@@ -329,7 +329,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 							</div>
 						</div>
 						<div class="clearfix hidden-md-up"></div>
-						<div class="col-12 col-sm-6 col-md-3">
+						<!--	<dv class="col-12 col-sm-6 col-md-3">
 							<div class="info-box mb-3">
 								<span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
 								<div class="info-box-content" style="text-align:center;">
@@ -347,7 +347,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 									</span>
 								</div>
 							</div>
-						</div>
+						</dv>-->
 					</div>
 					<br>
 					<div class="row">
@@ -1387,7 +1387,8 @@ if (@$_GET['func'] == 'edita') {
 							</table>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+							<a class="btn btn-default btn-sm" type="button" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
+							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
 						</div>
 					</form>
 				</div>
