@@ -276,36 +276,30 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
               </form>
             </section>
           </div>
-          <div class="card">
-            <div class="card-header" style="text-align:center;">
-              <strong>
-                <h3>DASHBOARD</h3>
-              </strong>
-            </div>
-            <div class="card-body col-md-12">
-              <div class="col-md-5">
-                <canvas id="pieChart" style="height:200px; min-height:200px"></canvas>
+          <div class="row">
+            <div class="card">
+              <div class="card-header" style="text-align:center;">
+                <b>
+                  <h3>DASHBOARD</h3>
+                </b>
               </div>
-              <div class="col-md-5">
-                <canvas id="donutChart" style="height:200px; min-height:200px"></canvas>
-              </div>
-              <div class="col-md-5">
-                <div class="chart">
-                  <canvas id="myChart2" style="height:200px; min-height:200px"></canvas>
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="chart">
-                  <canvas id="myChart" style="height:200px; min-height:200px"></canvas>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <canvas id="pieChart" style="height:150px;"></canvas>
+                    <canvas id="myChart2" style="height:150px;"></canvas>
+                  </div>
+                  <div class="col-md-6">
+                    <canvas id="donutChart" style="height:150px;"></canvas>
+                    <canvas id="myChart" style="height:150px;"></canvas>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
     <footer class="main-footer">
       <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
       Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
