@@ -465,12 +465,11 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from tb_direitoPleiteado_exant where perfil LIKE '$nome' order by direito asc";
+                      $query = "select * from tb_direitoPleiteado_exant where direito LIKE '$nome' order by direito asc";
                     } else {
                       $query = "select * from tb_direitoPleiteado_exant where status <> 'Excluído' order by direito asc";
                     }
                     $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
 
                     ?>
@@ -580,7 +579,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from tb_direitoPleiteado_exant where perfil LIKE '$nome' order by id asc";
+                      $query = "select * from tb_direitoPleiteado_exant where direito LIKE '$nome' order by id asc";
                     } else {
                       $query = "select * from tb_direitoPleiteado_exant where status = 'Excluído' order by id asc";
                     }

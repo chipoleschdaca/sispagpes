@@ -1254,12 +1254,6 @@ if (@$_GET['func'] == 'edita') {
 								</div>
 							</div>
 							<br>
-							<!--<div class="row">
-								<div class="form-group col-sm-12">
-									<label>Observação</label>
-									<textarea class="textarea" id="textobs" name="txtobs" style="text-align:justify;"></textarea>
-								</div>
-							</div>-->
 							<div class="row">
 								<div class="form-group col-12">
 									<label>Observação</label>
@@ -1313,7 +1307,6 @@ if (@$_GET['func'] == 'edita') {
 				<div class="modal-header align-middle">
 					<?php
 					$id_req = $_GET['id_req'];
-					//$query_req = "select * from requerentes where id = '$id_req'";
 					$query_req = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
 					$result_req = mysqli_query($conexao, $query_req);
 					$row_req = mysqli_num_rows($result_req);

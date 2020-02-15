@@ -22,6 +22,9 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
@@ -48,16 +51,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
       </ul>
-      <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
@@ -259,17 +252,74 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
         <div class="container-fluid">
           <br>
           <div class="row">
-            <section class="col-lg-12 connectedSortable">
+            <section class="col-md-12 connectedSortable">
               <form class="form-inline">
                 <div class="card col-md-12">
                   <div class="card-body">
                     <div class="input-group input-group-sm">
                       <label for="txtpesquisar" style="margin-right: 10px;">Filtrar:
                       </label>
-                      <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px; margin-right:20px">
-                      <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px; margin-right:20px"">
-                      <input class=" form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px; margin-right:20px"">
-                      <input class=" form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
+                      <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px">
+                        <option value="" selected>POSTO/GRAD.</option>
+                        <?php
+                        $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
+                        $result_posto = mysqli_query($conexao, $query_posto);
+                        if (count($result_posto)) {
+                          while ($res_p = mysqli_fetch_array($result_posto)) {
+                            $id = $res_p['id_posto'];
+                            $posto = $res_p['nome_posto'];
+                        ?>
+                            <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                        <?php }
+                        } ?>
+                      </select>
+                      <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px">>
+                        <option value="">DIREITO PLEITEADO</option>
+                        <?php
+                        $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
+                        $result_direito = mysqli_query($conexao, $query_direito);
+                        if (count($result_direito)) {
+                          while ($res_dir = mysqli_fetch_array($result_direito)) {
+                            $id = $res_dir['id_direito'];
+                            $direito = $res_dir['direito_pleiteado'];
+                            $count_direito = $res_dir['COUNT(e.direito_pleiteado)'];
+                        ?>
+                            <option value="<?php echo $id ?>"><?php echo $direito . " | " . $count_direito ?></option>
+                        <?php }
+                        } ?>
+                      </select>
+                      <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px">
+                        <option value="" selected>ESTADO DO PROCESSO</option>
+                        <?php
+                        $query_est = "SELECT est.id as id_estado, est.estado as estado_processo FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
+                        $result_est = mysqli_query($conexao, $query_est);
+                        if (count($result_est)) {
+                          while ($res_est = mysqli_fetch_array($result_est)) {
+                            $id_est_2 = $res_est['id_estado'];
+                            $estado_est = $res_est['estado_processo'];
+                        ?>
+                            <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
+                        <?php }
+                        } ?>
+                      </select>
+                      <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-right:10px">
+                        <option value="" selected>SEÇÃO ATUAL</option>
+                        <?php
+                        $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
+                        $result_sec = mysqli_query($conexao, $query_sec);
+                        if (count($result_sec)) {
+                          while ($res_sec = mysqli_fetch_array($result_sec)) {
+                            $id_sec_2 = $res_sec['id_secao'];
+                            $secao_sec = $res_sec['secao_atual'];
+                            $count_secao = $res_sec['COUNT(e.secao_atual)'];
+                        ?>
+                            <option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec . " | " . $count_secao ?></option>
+                        <?php }
+                        } ?>
+                      </select>
+                      <button class="btn btn-primary btn-primary-navbar btn-sm" type="submit" name="buttonPesquisar">
+                        <i class="fas fa-search"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -320,49 +370,144 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     $count_secao = "";
     $count_posto = "";
 
+    if (isset($_GET['buttonPesquisar']) and $_GET['txtposto'] != '') {
 
-    $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id GROUP BY e.estado";
-    $result_estado = mysqli_query($conexao, $query_estado);
-    while ($res_estado = mysqli_fetch_array($result_estado)) {
+      $nome = $_GET['txtposto'];
 
-      $estado = $estado . '"' . $res_estado["estado"] . '",';
-      $count_estado = $count_estado . '"' . $res_estado["COUNT(e.estado)"] . '",';
+      $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.posto = '$nome' GROUP BY r.posto";
+      $result_posto = mysqli_query($conexao, $query_posto);
+      while ($res_posto = mysqli_fetch_array($result_posto)) {
 
-      $estado =  trim($estado);
-      $count_estado =  trim($count_estado);
-    }
+        $posto = $posto . '"' . $res_posto["nome_posto"] . '",';
+        $count_posto = $count_posto . '"' . $res_posto["COUNT(r.posto)"] . '",';
 
-    $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id GROUP BY direito_pleiteado";
-    $result_direito = mysqli_query($conexao, $query_direito);
-    while ($res_direito = mysqli_fetch_array($result_direito)) {
+        $posto =  trim($posto);
+        $count_posto =  trim($count_posto);
+      }
 
-      $direito_pleiteado = $direito_pleiteado . '"' . $res_direito["nome_direito"] . '",';
-      $count_direito = $count_direito . '"' . $res_direito["COUNT(e.direito_pleiteado)"] . '",';
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, r.posto, p.posto, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.posto = '$nome' GROUP BY direito_pleiteado";
+      $result_direito = mysqli_query($conexao, $query_direito);
+      while ($res_direito = mysqli_fetch_array($result_direito)) {
 
-      $direito_pleiteado =  trim($direito_pleiteado);
-      $count_direito =  trim($count_direito);
-    }
+        $direito_pleiteado = $direito_pleiteado . '"' . $res_direito["nome_direito"] . '",';
+        $count_direito = $count_direito . '"' . $res_direito["COUNT(e.direito_pleiteado)"] . '",';
 
-    $query_sec = "SELECT s.secao as nome_secao, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id GROUP BY s.secao";
-    $result_sec = mysqli_query($conexao, $query_sec);
-    while ($res_sec = mysqli_fetch_array($result_sec)) {
+        $direito_pleiteado =  trim($direito_pleiteado);
+        $count_direito =  trim($count_direito);
+      }
 
-      $secao = $secao . '"' . $res_sec["nome_secao"] . '",';
-      $count_secao = $count_secao . '"' . $res_sec["COUNT(s.secao)"] . '",';
+      $query_estado = "SELECT e.estado, est.id, est.estado, r.posto, p.posto, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.posto = '$nome' GROUP BY e.estado";
+      $result_estado = mysqli_query($conexao, $query_estado);
+      while ($res_estado = mysqli_fetch_array($result_estado)) {
 
-      $secao =  trim($secao);
-      $count_secao =  trim($count_secao);
-    }
+        $estado = $estado . '"' . $res_estado["estado"] . '",';
+        $count_estado = $count_estado . '"' . $res_estado["COUNT(e.estado)"] . '",';
 
-    $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
-    $result_posto = mysqli_query($conexao, $query_posto);
-    while ($res_posto = mysqli_fetch_array($result_posto)) {
+        $estado =  trim($estado);
+        $count_estado =  trim($count_estado);
+      }
 
-      $posto = $posto . '"' . $res_posto["nome_posto"] . '",';
-      $count_posto = $count_posto . '"' . $res_posto["COUNT(r.posto)"] . '",';
+      $query_sec = "SELECT s.secao as nome_secao, r.posto, p.posto, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.posto = '$nome' GROUP BY s.secao";
+      $result_sec = mysqli_query($conexao, $query_sec);
+      while ($res_sec = mysqli_fetch_array($result_sec)) {
 
-      $posto =  trim($posto);
-      $count_posto =  trim($count_posto);
+        $secao = $secao . '"' . $res_sec["nome_secao"] . '",';
+        $count_secao = $count_secao . '"' . $res_sec["COUNT(s.secao)"] . '",';
+
+        $secao =  trim($secao);
+        $count_secao =  trim($count_secao);
+      }
+    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtdireitopleiteado'] != '') {
+
+      $nome = $_GET['txtdireitopleiteado'];
+
+      $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE direito_pleiteado = '$nome' GROUP BY r.posto";
+      $result_posto = mysqli_query($conexao, $query_posto);
+      while ($res_posto = mysqli_fetch_array($result_posto)) {
+
+        $posto = $posto . '"' . $res_posto["nome_posto"] . '",';
+        $count_posto = $count_posto . '"' . $res_posto["COUNT(r.posto)"] . '",';
+
+        $posto =  trim($posto);
+        $count_posto =  trim($count_posto);
+      }
+
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id WHERE direito_pleiteado = '$nome' GROUP BY direito_pleiteado ";
+      $result_direito = mysqli_query($conexao, $query_direito);
+      while ($res_direito = mysqli_fetch_array($result_direito)) {
+
+        $direito_pleiteado = $direito_pleiteado . '"' . $res_direito["nome_direito"] . '",';
+        $count_direito = $count_direito . '"' . $res_direito["COUNT(e.direito_pleiteado)"] . '",';
+
+        $direito_pleiteado =  trim($direito_pleiteado);
+        $count_direito =  trim($count_direito);
+      }
+
+      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE direito_pleiteado = '$nome' GROUP BY e.estado";
+      $result_estado = mysqli_query($conexao, $query_estado);
+      while ($res_estado = mysqli_fetch_array($result_estado)) {
+
+        $estado = $estado . '"' . $res_estado["estado"] . '",';
+        $count_estado = $count_estado . '"' . $res_estado["COUNT(e.estado)"] . '",';
+
+        $estado =  trim($estado);
+        $count_estado =  trim($count_estado);
+      }
+
+      $query_sec = "SELECT s.secao as nome_secao, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id WHERE direito_pleiteado = '$nome' GROUP BY s.secao";
+      $result_sec = mysqli_query($conexao, $query_sec);
+      while ($res_sec = mysqli_fetch_array($result_sec)) {
+
+        $secao = $secao . '"' . $res_sec["nome_secao"] . '",';
+        $count_secao = $count_secao . '"' . $res_sec["COUNT(s.secao)"] . '",';
+
+        $secao =  trim($secao);
+        $count_secao =  trim($count_secao);
+      }
+    } else {
+      $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
+      $result_posto = mysqli_query($conexao, $query_posto);
+      while ($res_posto = mysqli_fetch_array($result_posto)) {
+
+        $posto = $posto . '"' . $res_posto["nome_posto"] . '",';
+        $count_posto = $count_posto . '"' . $res_posto["COUNT(r.posto)"] . '",';
+
+        $posto =  trim($posto);
+        $count_posto =  trim($count_posto);
+      }
+
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id GROUP BY direito_pleiteado";
+      $result_direito = mysqli_query($conexao, $query_direito);
+      while ($res_direito = mysqli_fetch_array($result_direito)) {
+
+        $direito_pleiteado = $direito_pleiteado . '"' . $res_direito["nome_direito"] . '",';
+        $count_direito = $count_direito . '"' . $res_direito["COUNT(e.direito_pleiteado)"] . '",';
+
+        $direito_pleiteado =  trim($direito_pleiteado);
+        $count_direito =  trim($count_direito);
+      }
+
+      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id GROUP BY e.estado";
+      $result_estado = mysqli_query($conexao, $query_estado);
+      while ($res_estado = mysqli_fetch_array($result_estado)) {
+
+        $estado = $estado . '"' . $res_estado["estado"] . '",';
+        $count_estado = $count_estado . '"' . $res_estado["COUNT(e.estado)"] . '",';
+
+        $estado =  trim($estado);
+        $count_estado =  trim($count_estado);
+      }
+
+      $query_sec = "SELECT s.secao as nome_secao, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id GROUP BY s.secao";
+      $result_sec = mysqli_query($conexao, $query_sec);
+      while ($res_sec = mysqli_fetch_array($result_sec)) {
+
+        $secao = $secao . '"' . $res_sec["nome_secao"] . '",';
+        $count_secao = $count_secao . '"' . $res_sec["COUNT(s.secao)"] . '",';
+
+        $secao =  trim($secao);
+        $count_secao =  trim($count_secao);
+      }
     }
 
 
@@ -389,6 +534,8 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
   <script>
     $.widget.bridge('uibutton', $.ui.button)
   </script>
+  <!-- Select2 -->
+  <script src="plugins/select2/js/select2.full.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
@@ -416,6 +563,17 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
+  <script>
+    $(function() {
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+
+      //Initialize Select2 Elements
+      $('.select2').select2()
+    });
+  </script>
   <!--Máscaras-->
   <script>
     $(document).ready(function() {
@@ -435,7 +593,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       ],
       datasets: [{
         data: [<?php echo $count_direito ?>],
-        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#9C0060'],
       }]
     }
     var donutOptions = {
@@ -473,7 +631,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       ],
       datasets: [{
         data: [<?php echo $count_estado ?>],
-        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#9C0060'],
       }]
     }
     var donutOptions1 = {
@@ -511,7 +669,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       ],
       datasets: [{
         data: [<?php echo $count_secao ?>],
-        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#9C0060'],
       }]
     }
     var barOptions1 = {
@@ -567,7 +725,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
       ],
       datasets: [{
         data: [<?php echo $count_posto ?>],
-        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#9C0060']
       }]
     }
     var barOptions = {
