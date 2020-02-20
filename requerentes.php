@@ -211,41 +211,11 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-list-ul"></i>
-                <p>
-                  Ordens de Serviço
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="os_abertas.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Abertas</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="consultar_os.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Consultar</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="rel_orcamentos.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Relatórios</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
           </ul>
         </nav>
       </div>
       <!--/.sidebar -->
     </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -379,15 +349,16 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "SELECT r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
                     } else {
-                      $query = "SELECT r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
                     }
                     $result = mysqli_query($conexao, $query);
                     $row = mysqli_num_rows($result);
                     ?>
                     <table class="table table-sm table-bordered table-striped">
                       <thead class="text-primary">
+                        <th class="align-middle">#</th>
                         <th class="align-middle">Saram</th>
                         <th class="align-middle">CPF</th>
                         <th class="align-middle">Posto</th>
@@ -400,6 +371,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                       <tbody>
                         <?php
                         while ($res_1 = mysqli_fetch_array($result)) {
+                          $id = $res_1['req_id'];
                           $saram = $res_1['saram'];
                           $cpf = $res_1['cpf'];
                           $posto = $res_1['posto'];
@@ -408,9 +380,9 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                           $email = $res_1['email'];
                           $data = $res_1['data'];
                           $data2 = implode('/', array_reverse(explode('-', $data)));
-                          $id = $res_1['id'];
                         ?>
                           <tr>
+                            <td class="align-middle"><?php echo $id; ?></td>
                             <td class="align-middle"><?php echo $saram; ?></td>
                             <td class="align-middle"><?php echo $cpf; ?></td>
                             <td class="align-middle"><?php echo $posto; ?></td>
@@ -498,7 +470,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                     <label for="id_produto">Nome Completo</label>
                     <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" required>
                   </div>
-
                   <div class="form-group">
                     <label for="fornecedor">E-mail</label>
                     <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" placeholder="Email">
@@ -691,7 +662,7 @@ if (@$_GET['func'] == 'deleta') {
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "select * from requerentes where id = '$id'";
+  $query = "SELECT * from requerentes where id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
 ?>
@@ -707,15 +678,15 @@ if (@$_GET['func'] == 'edita') {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="fornecedor">Saram</label>
-                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram2" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="fornecedor">CPF</label>
-                <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
+                <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf2" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="id_produto">Posto</label>
-                <select class="form-control mr-2" name="txtposto" required>
+                <select class="form-control mr-2" name="txtposto2" required>
                   <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
                   <option value="" disabled selected hidden>Selecione o posto...</option>
                   <?php
@@ -723,10 +694,10 @@ if (@$_GET['func'] == 'edita') {
                   $result_posto = mysqli_query($conexao, $query_posto);
                   if (count($result_posto)) {
                     while ($res_p = mysqli_fetch_array($result_posto)) {
-                      $id = $res_p['id'];
+                      $id_p = $res_p['id'];
                       $posto = $res_p['posto'];
                   ?>
-                      <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                      <option value="<?php echo $id_p ?>"><?php echo $posto ?></option>
                   <?php }
                   } ?>
                 </select>
@@ -735,30 +706,30 @@ if (@$_GET['func'] == 'edita') {
                 <label for="id_produto">Situação</label><br>
                 <div class="custom-control custom-radio">
                   <label class="container">Ativo
-                    <input type="radio" value="AT" name="txtsituacao" required>
+                    <input type="radio" value="AT" name="txtsituacao2">
                     <span class="checkmark"></span>
                   </label>
                 </div>
                 <div class="custom-control custom-radio">
                   <label class="container">Inativo
-                    <input type="radio" value="R1" name="txtsituacao" required>
+                    <input type="radio" value="R1" name="txtsituacao2">
                     <span class="checkmark"></span>
                   </label>
                 </div>
                 <div class="custom-control custom-radio">
                   <label class="container">Pensionista
-                    <input type="radio" value="PM" name="txtsituacao" required>
+                    <input type="radio" value="PM" name="txtsituacao2">
                     <span class="checkmark"></span>
                   </label>
                 </div>
               </div>
               <div class="form-group">
                 <label for="id_produto">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome2" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="fornecedor">E-mail</label>
-                <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" value="<?php echo $res_1['email']; ?>" placeholder="Email">
+                <input type="email" class="form-control mr-2" id="txtemail" name="txtemail2" autocomplete="off" value="<?php echo $res_1['email']; ?>" placeholder="Email">
               </div>
           </div>
           <div class="modal-footer">
@@ -777,12 +748,12 @@ if (@$_GET['func'] == 'edita') {
 
 <?php
     if (isset($_POST['buttonEditar'])) {
-      $posto = $_POST['txtposto'];
-      $situacao = $_POST['txtsituacao'];
-      $nome = strtoupper($_POST['txtnome']);
-      $email = strtolower($_POST['txtemail']);
-      $saram = $_POST['txtsaram'];
-      $cpf = $_POST['txtcpf'];
+      $posto = $_POST['txtposto2'];
+      $situacao = $_POST['txtsituacao2'];
+      $nome = strtoupper($_POST['txtnome2']);
+      $email = strtolower($_POST['txtemail2']);
+      $saram = $_POST['txtsaram2'];
+      $cpf = $_POST['txtcpf2'];
 
       if ($res_1['cpf'] != $cpf) {
 
@@ -794,7 +765,7 @@ if (@$_GET['func'] == 'edita') {
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+          echo "<script language='javascript'> window.alert('CPF já está cadastrado!'); </script>";
           exit();
         }
       }
@@ -804,10 +775,10 @@ if (@$_GET['func'] == 'edita') {
       $result_editar = mysqli_query($conexao, $query_editar);
 
       if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
         echo "<script language='javascript'> window.location='requerentes.php'; </script>";
       } else {
-        echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
         echo "<script language='javascript'> window.location='requerentes.php'; </script>";
       }
     }

@@ -211,35 +211,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-list-ul"></i>
-                <p>
-                  Ordens de Serviço
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="os_abertas.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Abertas</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="consultar_os.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Consultar</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="rel_orcamentos.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Relatórios</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
           </ul>
         </nav>
       </div>
@@ -327,25 +298,56 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             </section>
           </div>
           <div class="row">
-            <div class="card">
-              <div class="card-header" style="text-align:center;">
-                <b>
-                  <h3>DASHBOARD</h3>
-                </b>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <canvas id="pieChart" style="height:150px;"></canvas>
-                    <canvas id="myChart2" style="height:150px;"></canvas>
-                  </div>
-                  <div class="col-md-6">
-                    <canvas id="donutChart" style="height:150px;"></canvas>
-                    <canvas id="myChart" style="height:150px;"></canvas>
-                  </div>
+            <section class="col-md-6 connectedSortable">
+              <div class="card">
+                <div class="card-header" style="text-align:center;">
+                  <b>
+                    <h3>DASHBOARD</h3>
+                  </b>
+                </div>
+                <div class="card-body">
+                  <canvas id="pieChart" style="height:150px;"></canvas>
                 </div>
               </div>
-            </div>
+            </section>
+            <section class="col-md-6 connectedSortable">
+              <div class="card">
+                <div class="card-header" style="text-align:center;">
+                  <b>
+                    <h3>DASHBOARD</h3>
+                  </b>
+                </div>
+                <div class="card-body">
+                  <canvas id="donutChart" style="height:150px;"></canvas>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="row">
+            <section class="col-md-6 connectedSortable">
+              <div class="card">
+                <div class="card-header" style="text-align:center;">
+                  <b>
+                    <h3>DASHBOARD</h3>
+                  </b>
+                </div>
+                <div class="card-body">
+                  <canvas id="myChart2" style="height:150px;"></canvas>
+                </div>
+              </div>
+            </section>
+            <section class="col-md-6 connectedSortable">
+              <div class="card">
+                <div class="card-header" style="text-align:center;">
+                  <b>
+                    <h3>DASHBOARD</h3>
+                  </b>
+                </div>
+                <div class="card-body">
+                  <canvas id="myChart" style="height:150px;"></canvas>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </section>
