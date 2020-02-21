@@ -284,7 +284,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
                 <div class="info-box-content">
                   <span class="info-box-text">Sales</span>
                   <span class="info-box-number">
@@ -311,178 +310,178 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             </div>
             <!-- /.col -->
           </div>
-          <!-- /.row -->
-          <!-- /.row -->
-          <!-- Main row -->
-          <!-- Left col -->
-          <br>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
-                </div>
-                <div class="card-body">
-                  <div class="row" style="margin-bottom: 20px;">
-                    <div class="col-sm-6">
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                        <i class="fas fa-user-plus"></i> Inserir Novo
-                      </button>
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- SEARCH FORM -->
-                      <form class="form-inline">
-                        <label for="">Filtros: </label>
-                        <div class="input-group input-group-sm" style="margin-left: 10px; border-radius: 15px;">
-                          <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Pesquisar" aria-label="Pesquisar" style="border-radius:3px;">
-                          <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
-                              <i class="fas fa-search"></i>
-                            </button>
+          <th>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header" style="text-align: center;">
+                    <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="row" style="margin-bottom: 20px;">
+                      <div class="col-sm-4">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
+                          <i class="fas fa-user-plus"></i> Inserir Novo
+                        </button>
+                      </div>
+                      <div class="col-sm-6">
+                        <!-- SEARCH FORM -->
+                        <form class="form-inline">
+                          <label for="">Filtros: </label>
+                          <div class="input-group input-group-sm" style="margin-left: 10px; border-radius: 15px;">
+                            <input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
+                            <input class="form-control" type="search" id="txtcpf3" name="txtcpf3" placeholder="CPF" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
+                            <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 5px;">
+                            <div class="input-group-append">
+                              <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
+                                <i class="fas fa-search"></i>
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
+                      </div>
                     </div>
-                  </div>
-                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                    <!-------------LISTAR TODOS OS PROCESSOS-------------->
-                    <?php
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                      $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
-                    } else {
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
-                    }
-                    $result = mysqli_query($conexao, $query);
-                    $row = mysqli_num_rows($result);
-                    ?>
-                    <table class="table table-sm table-bordered table-striped">
-                      <thead class="text-primary">
-                        <th class="align-middle">#</th>
-                        <th class="align-middle">Saram</th>
-                        <th class="align-middle">CPF</th>
-                        <th class="align-middle">Posto</th>
-                        <th class="align-middle">Situação</th>
-                        <th class="align-middle">Nome Completo</th>
-                        <th class="align-middle">Email</th>
-                        <th class="align-middle">Data</th>
-                        <th class="align-middle">Ações</th>
-                      </thead>
-                      <tbody>
-                        <?php
-                        while ($res_1 = mysqli_fetch_array($result)) {
-                          $id = $res_1['req_id'];
-                          $saram = $res_1['saram'];
-                          $cpf = $res_1['cpf'];
-                          $posto = $res_1['posto'];
-                          $situacao = $res_1['situacao'];
-                          $nome = $res_1['nome'];
-                          $email = $res_1['email'];
-                          $data = $res_1['data'];
-                          $data2 = implode('/', array_reverse(explode('-', $data)));
-                        ?>
-                          <tr>
-                            <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $saram; ?></td>
-                            <td class="align-middle"><?php echo $cpf; ?></td>
-                            <td class="align-middle"><?php echo $posto; ?></td>
-                            <td class="align-middle"><?php echo $situacao; ?></td>
-                            <td class="align-middle"><?php echo '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?php echo $nome; ?></td>
-                            <td class="align-middle"><?php echo $email; ?></td>
-                            <td class="align-middle"><?php echo $data2; ?></td>
-                            <td class="align-middle">
-                              <a class="btn btn-info btn-sm" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
-                              <a class="btn btn-warning btn-sm" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                              <a class="btn btn-danger btn-sm" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
-                            </td>
-                          </tr>
-                        <?php } ?>
-                      </tbody>
-                    </table>
-                    <?php
-                    if ($row == '') {
-                      echo "<h3>Não existem dados para consulta</h3>";
-                    } ?>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <hr>
-                  <div class="stats">
-                    <i class="fa fa-history"></i>Updated 3 minutes ago
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
-        <div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
-          <!---Modal Exemplo--->
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Requerentes</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" action="">
-                  <div class="form-group">
-                    <label for="fornecedor">Saram</label>
-                    <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="fornecedor">CPF</label>
-                    <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="id_produto">Posto</label>
-                    <select class="form-control mr-2" name="txtposto" required>
-                      <option value="" disabled selected hidden>Selecione o posto...</option>
+                    <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                      <!-------------LISTAR TODOS OS PROCESSOS-------------->
                       <?php
-                      $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
-                      $result_posto = mysqli_query($conexao, $query_posto);
-                      if (count($result_posto)) {
-                        while ($res_p = mysqli_fetch_array($result_posto)) {
-                          $id = $res_p['id'];
-                          $posto = $res_p['posto'];
+                      if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
+                        $nome = '%' . $_GET['txtsaram3'] . '%';
+                        $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE saram LIKE '$nome' order by nome asc";
+                      } else if (isset($_GET['buttonPesquisar']) and $_GET['txtcpf3'] != '') {
+                        $nome = '%' . $_GET['txtcpf3'] . '%';
+                        $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE cpf LIKE '$nome' order by nome asc";
+                      } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                        $nome = '%' . $_GET['txtpesquisar'] . '%';
+                        $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
+                      } else {
+                        $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
+                      }
+                      $result = mysqli_query($conexao, $query);
+                      $row = mysqli_num_rows($result);
                       ?>
-                          <option value="<?php echo $id ?>"><?php echo $posto ?></option>
-                      <?php }
+                      <table class="table table-sm table-bordered table-striped">
+                        <thead class="text-primary">
+                          <th class="align-middle">#</th>
+                          <th class="align-middle">Saram</th>
+                          <th class="align-middle">CPF</th>
+                          <th class="align-middle">Posto</th>
+                          <th class="align-middle">Situação</th>
+                          <th class="align-middle">Nome Completo</th>
+                          <th class="align-middle">Email</th>
+                          <th class="align-middle">Data</th>
+                          <th class="align-middle">Ações</th>
+                        </thead>
+                        <tbody>
+                          <?php
+                          while ($res_1 = mysqli_fetch_array($result)) {
+                            $id = $res_1['req_id'];
+                            $saram = $res_1['saram'];
+                            $cpf = $res_1['cpf'];
+                            $posto = $res_1['posto'];
+                            $situacao = $res_1['situacao'];
+                            $nome = $res_1['nome'];
+                            $email = $res_1['email'];
+                            $data = $res_1['data'];
+                            $data2 = implode('/', array_reverse(explode('-', $data)));
+                          ?>
+                            <tr>
+                              <td class="align-middle"><?php echo $id; ?></td>
+                              <td class="align-middle"><?php echo $saram; ?></td>
+                              <td class="align-middle"><?php echo $cpf; ?></td>
+                              <td class="align-middle"><?php echo $posto; ?></td>
+                              <td class="align-middle"><?php echo $situacao; ?></td>
+                              <td class="align-middle"><?php echo '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?php echo $nome; ?></td>
+                              <td class="align-middle"><?php echo $email; ?></td>
+                              <td class="align-middle"><?php echo $data2; ?></td>
+                              <td class="align-middle">
+                                <a class="btn btn-info btn-sm" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-warning btn-sm" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-danger btn-sm" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                              </td>
+                            </tr>
+                          <?php } ?>
+                        </tbody>
+                      </table>
+                      <?php
+                      if ($row == '') {
+                        echo "<h3>Não existem dados para consulta</h3>";
                       } ?>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="id_produto">Situação</label><br>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
-                      <label class="custom-control-label" style="cursor: pointer; text-align: left;" for="ativo"><span></span>Ativo</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
-                      <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" class="custom-control-input" id="reformado" name="txtsituacao" value="PM" required>
-                      <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="reformado"><span></span>Pensionista</label>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="id_produto">Nome Completo</label>
-                    <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="fornecedor">E-mail</label>
-                    <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" placeholder="Email">
-                  </div>
+                </div>
               </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-              </div>
-              </form>
             </div>
+          </th>
+        </div>
+      </section>
+      <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
+      <div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
+        <!---Modal Exemplo--->
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Requerentes</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="">
+                <div class="form-group">
+                  <label for="fornecedor">Saram</label>
+                  <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
+                </div>
+                <div class="form-group">
+                  <label for="fornecedor">CPF</label>
+                  <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
+                </div>
+                <div class="form-group">
+                  <label for="id_produto">Posto</label>
+                  <select class="form-control mr-2" name="txtposto" required>
+                    <option value="" disabled selected hidden>Selecione o posto...</option>
+                    <?php
+                    $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
+                    $result_posto = mysqli_query($conexao, $query_posto);
+                    if (count($result_posto)) {
+                      while ($res_p = mysqli_fetch_array($result_posto)) {
+                        $id = $res_p['id'];
+                        $posto = $res_p['posto'];
+                    ?>
+                        <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                    <?php }
+                    } ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="id_produto">Situação</label><br>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
+                    <label class="custom-control-label" style="cursor: pointer; text-align: left;" for="ativo"><span></span>Ativo</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
+                    <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" id="reformado" name="txtsituacao" value="PM" required>
+                    <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="reformado"><span></span>Pensionista</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="id_produto">Nome Completo</label>
+                  <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" required>
+                </div>
+                <div class="form-group">
+                  <label for="fornecedor">E-mail</label>
+                  <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" placeholder="Email">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+              <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+            </div>
+            </form>
           </div>
         </div>
+      </div>
       </section>
       <!-- /.content -->
     </div>
@@ -784,9 +783,8 @@ if (@$_GET['func'] == 'edita') {
     }
   }
 } ?>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-<!---------------------------Consultar Orçamentos e Ordens de Serviço---------------------------->
+<!--Consultar Processos-->
 <?php
 if (@$_GET['func'] == 'consulta') {
   $id = $_GET['id'];
@@ -798,7 +796,7 @@ if (@$_GET['func'] == 'consulta') {
       <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
-          <div class="modal-header" style="width: 100%;">
+          <div class="modal-header">
             <?php
             $cpf = $_GET['cpf'];
             $query = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto where cpf = '$cpf'";
@@ -809,185 +807,58 @@ if (@$_GET['func'] == 'consulta') {
             $posto = $res_1['nome_posto'];
             $situacao = $res_1['situacao'];
             ?>
-            <h4 class="modal-title" style="text-align:center; width: 100%;"> DADOS DO(A): <strong><?php echo $posto, " ", $situacao, " ", $nome ?></strong></h4>
+            <h4 class="modal-title" style="text-align:center; width: 100%;">Dados do(a): <strong><?php echo $posto, " ", $situacao, " ", $nome ?></strong></h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <div class="card" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);">
-              <div class="card-header" style="text-align: center;">
-                <h5 class="" style="text-align:center;">ORÇAMENTOS</strong></h5>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                  <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+            <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+              <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
+              <?php
+              $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.requerente = '$id' ORDER BY e.id asc";
+              $result = mysqli_query($conexao, $query);
+              ?>
+              <table class="table table-sm table-bordered table-striped">
+                <thead class="text-primary">
+                  <th class="align-middle">#</th>
+                  <th class="align-middle">Protocolo (NUP)</th>
+                  <th class="align-middle">Dt. Abertura</th>
+                  <th class="align-middle">Direito Pleiteado</th>
+                  <th class="align-middle">Seção de Origem</th>
+                  <th class="align-middle">Estado do Processo</th>
+                  <th class="align-middle">Seção Atual</th>
+                </thead>
+                <tbody>
                   <?php
-                  $cpf = $_GET['cpf'];
-                  $query = "select * from orcamentos where requerente = '$cpf'";
-                  $result = mysqli_query($conexao, $query);
-                  $row = mysqli_num_rows($result);
+                  function data($data)
+                  {
+                    return date("d/m/Y", strtotime($data));
+                  }
+                  while ($res_1 = mysqli_fetch_array($result)) {
+                    $id = $res_1['id'];
+                    $nup = $res_1["nup"];
+                    $data_criacao = $res_1["data_criacao"];
+                    $direito_pleiteado = $res_1["dir_direito"];
+                    $secao_origem = $res_1["sec_origem"];
+                    $estado = $res_1["est_estado"];
+                    $secao_atual = $res_1['sec_atual'];
                   ?>
-                  <table class="table table-sm table-bordered table-striped">
-                    <thead class="text-primary">
-                      <th class="align-middle">#</th>
-                      <th class="align-middle">Produto</th>
-                      <th class="align-middle">Problema</th>
-                      <th class="align-middle">Valor Total</th>
-                      <th class="align-middle">Data de Abertura</th>
-                      <th class="align-middle">Data de Aprovação</th>
-                      <th class="align-middle">Status</th>
-                    </thead>
-                    <tbody>
-                      <?php
-                      function data($data)
-                      {
-                        return date("d/m/Y", strtotime($data));
-                      }
-                      while ($res_1 = mysqli_fetch_array($result)) {
-                        $id = $res_1['id'];
-                        $produto = $res_1["produto"];
-                        $defeito = $res_1["problema"];
-                        $valor_total = $res_1["valor_total"];
-                        $status = $res_1["status"];
-                        $data_abertura = $res_1['data_abertura'];
-                        $data_aprovacao = $res_1['data_aprovacao'];
-                      ?>
-                        <tr>
-                          <td class="align-middle"><?php echo $id; ?></td>
-                          <td class="align-middle"><?php echo $produto; ?></td>
-                          <td class="align-middle"><?php echo $defeito; ?></td>
-                          <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
-                          <td class="align-middle"><?php echo data($data_abertura); ?></td>
-                          <td class="align-middle">
-                            <?php
-                            if ($data_aprovacao >= 2019) {
-                              echo data($data_aprovacao);
-                            } else {
-                              echo "Não há";
-                            }
-                            ?>
-                          </td>
-                          <td class="align-middle">
-                            <?php
-                            if ($status == 'Aberto') { ?>
-                              <span class="badge badge-secondary">
-                                <?php echo $status; ?>
-                              </span>
-                            <?php
-                            } elseif ($status == 'Aguardando') { ?>
-                              <span class="badge badge-warning">
-                                <?php echo $status; ?>
-                              </span>
-                            <?php
-                            } elseif ($status == 'Aprovado') { ?>
-                              <span class="badge badge-success">
-                                <?php echo $status; ?>
-                              </span>
-                            <?php
-                            } elseif ($status == 'Cancelado') { ?>
-                              <span class="badge badge-danger">
-                                <?php echo $status; ?>
-                              </span>
-                            <?php
-                            } else {
-                              echo $status;
-                            }
-                            ?>
-                          </td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                  <?php
-                  if ($row == '') {
-                    echo "<h3>Não existem dados cadastrados no banco</h3>";
-                  } ?>
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="card" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.2);">
-              <div class="card-header" style="text-align: center;">
-                <h5 class="" style="text-align:center;">ORDENS DE SERVIÇO</strong></h5>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                  <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
-                  <?php
-                  $cpf = $_GET['cpf'];
-                  $query = "select * from os where requerente = '$cpf'";
-                  $result = mysqli_query($conexao, $query);
-                  $row = mysqli_num_rows($result);
-                  ?>
-                  <table class="table table-sm table-bordered table-striped">
-                    <thead class="text-primary">
-                      <th class="align-middle">#</th>
-                      <th class="align-middle">Produto</th>
-                      <th class="align-middle">Garantia</th>
-                      <th class="align-middle">Valor Total</th>
-                      <th class="align-middle">Data de Abertura</th>
-                      <th class="align-middle">Data de Fechamento</th>
-                      <th class="align-middle">Status</th>
-                    </thead>
-                    <tbody>
-                      <?php
-                      while ($res_1 = mysqli_fetch_array($result)) {
-                        $id = $res_1['id'];
-                        $produto = $res_1["produto"];
-                        $defeito = $res_1["problema"];
-                        $valor_total = $res_1["total"];
-                        $status = $res_1["status"];
-                        $garantia = $res_1["garantia"];
-                        $data_abertura = $res_1['data_abertura'];
-                        $data_fechamento = $res_1['data_fechamento'];
-                      ?>
-                        <tr>
-                          <td class="align-middle"><?php echo $id; ?></td>
-                          <td class="align-middle"><?php echo $produto; ?></td>
-                          <td class="align-middle"><?php echo $garantia; ?></td>
-                          <td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>
-                          <td class="align-middle"><?php echo data($data_abertura); ?></td>
-                          <td class="align-middle">
-                            <?php
-                            if ($data_aprovacao >= 2019) {
-                              echo data($data_aprovacao);
-                            } else {
-                              echo "Não há";
-                            } ?>
-                          </td>
-                          <td class="align-middle">
-                            <?php
-                            if ($status == 'Aberta') { ?>
-                              <span class="badge badge-secondary">
-                                <?php echo $status; ?>
-                              </span>
-                            <?php
-                            } elseif ($status == 'Aprovada') { ?>
-                              <span class="badge badge-success">
-                                <?php echo $status; ?>
-                              </span>
-                            <?php
-                            } elseif ($status == 'Cancelada') { ?>
-                              <span class="badge badge-danger">
-                                <?php echo $status; ?>
-                              </span>
-                            <?php
-                            } else {
-                              echo $status;
-                            }
-                            ?>
-                          </td>
-                        </tr>
-                      <?php
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                  <?php
-                  if ($row == '') {
-                    echo "<h3>Não existem dados cadastrados no banco</h3>";
-                  } ?>
-                </div>
-              </div>
+                    <tr>
+                      <td class="align-middle"><?php echo $id; ?></td>
+                      <td class="align-middle"><?php echo $nup; ?></td>
+                      <td class="align-middle"><?php echo data($data_criacao); ?></td>
+                      <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
+                      <td class="align-middle"><?php echo $secao_origem; ?></td>
+                      <td class="align-middle"><?php echo $estado; ?></td>
+                      <td class="align-middle"><?php echo $secao_atual; ?></td>
+                      <!--<td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>-->
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+              <?php
+              if ($row == '') {
+                echo "<h3>Não existem dados cadastrados no banco</h3>";
+              } ?>
             </div>
             <form method="POST" action="">
               <div class="modal-footer">
@@ -1000,8 +871,7 @@ if (@$_GET['func'] == 'consulta') {
       <script>
         $('#modalConsultar').modal("show");
       </script>
-      <!--Modal EDITAR -->
-      <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
+      <!--Modal CONSULTAR -->
 
   <?php
     if (isset($_POST['buttonConsultar'])) {
@@ -1055,6 +925,12 @@ if (@$_GET['func'] == 'consulta') {
         reverse: true
       });
       $('#txtsaram2').mask('000.000-0', {
+        reverse: true
+      });
+      $('#txtcpf3').mask('000.000.000-00', {
+        reverse: true
+      });
+      $('#txtsaram3').mask('000.000-0', {
         reverse: true
       });
     });
