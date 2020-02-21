@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 14-Fev-2020 às 19:49
+-- Tempo de geração: 20-Fev-2020 às 23:49
 -- Versão do servidor: 8.0.19-cluster
 -- versão do PHP: 7.2.27-6+ubuntu18.04.1+deb.sury.org+1
 
@@ -167,7 +167,7 @@ CREATE TABLE `requerentes` (
 --
 
 INSERT INTO `requerentes` (`id`, `saram`, `cpf`, `posto`, `situacao`, `nome`, `email`, `data`) VALUES
-(1, '988.653-1', '656.654.546-54', '5', 'AT', 'ANDERSON NEVES PEREIRA', 'nevesanp1@fab.mil.br', '2019-12-15'),
+(1, '988.653-1', '656.654.546-52', '5', 'R1', 'ANDERSON NEVES PEREIRA', 'nevesanp1@fab.mil.br', '2019-12-15'),
 (2, '987.654-3', '986.566.324-54', '6', 'R1', 'CARMEN LUCIA CHIPOLESCH DE ALMEIDA', 'c_luciia@gmail.com', '2019-12-15'),
 (3, '888.888-8', '888.888.888-88', '8', 'AT', 'LORENA CAROLINE VIEIRA BARBOSA', 'lorelove@fab.mil.br', '2020-01-10'),
 (4, '666.666-6', '666.666.666-66', '6', 'AT', 'ISABELA CHIPOLESCH DE ALMEIDA', 'isa123@gmail.com', '2020-01-18'),
