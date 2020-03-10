@@ -1,40 +1,41 @@
 <?php
 session_start();
-include('conexao.php');
-include('verificar_login.php');
+include('../../conexao.php');
+include('../../verificar_login.php');
 if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
-  header('Location: index.php');
+  header('Location: ../../index.php');
   exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="dist/img/gapls.png">
+  <link rel="icon" type="image/png" href="../../dist/img/gapls.png">
   <title>SISPAGPES | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -55,6 +56,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           <a href="#" class="nav-link">Contato</a>
         </li>
       </ul>
+
       <!-- SEARCH FORM -->
       <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
@@ -66,6 +68,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           </div>
         </div>
       </form>
+
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
@@ -78,7 +81,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Brad Diesel
@@ -94,7 +97,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     John Pierce
@@ -110,7 +113,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Nora Silvester
@@ -180,7 +183,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               Atividade
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="logout.php" data-target="#logoutModal">
+            <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
               Sair
             </a>
@@ -188,16 +191,21 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
         </li>
       </ul>
     </nav>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
-        <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+      <a href="painel_admin.php" class="brand-link" style="heigh: 50px;">
+        <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <!-- Sidebar -->
       <div class="sidebar">
+        <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="painel_admin.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
@@ -220,19 +228,18 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     echo '<span class="badge badge-warning right">' . $row . '</span>' ?>
                   <?php } else {
                   } ?>
-                  </span>
                 </p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="usuarios.php" class="nav-link">
+              <a href="usuarios.php" class="nav-link active">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Usuários
                 </p>
               </a>
             <li class="nav-item">
-              <a href="perfis.php" class="nav-link active">
+              <a href="perfis.php" class="nav-link">
                 <i class="nav-icon fas fa-sitemap"></i>
                 <p>
                   Perfis
@@ -345,6 +352,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           </ul>
         </nav>
       </div>
+      <!--/.sidebar -->
     </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -364,8 +372,6 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
-      <!-- /.content-header -->
-      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
@@ -378,7 +384,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM perfis";
+                      $query = "SELECT * FROM usuarios";
                       $result = mysqli_query($conexao, $query);
                       //$res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
@@ -395,6 +401,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
                 <div class="info-box-content">
                   <span class="info-box-text">Likes</span>
                   <span class="info-box-number">
@@ -405,13 +412,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               </div>
               <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-            <!-- fix for small devices only -->
             <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
                 <div class="info-box-content">
                   <span class="info-box-text">Sales</span>
                   <span class="info-box-number">
@@ -432,20 +436,15 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     <h4>2,000</h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
           </div>
           <br>
-          <div class="row" style="align-content: center;">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE PERFIS</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE USUÁRIOS</strong></h4>
                 </div>
                 <div class="card-body">
                   <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
@@ -456,39 +455,51 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
 
                     <?php
+
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                      $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from perfis where perfil LIKE '$nome' order by id asc";
+                      $nome = $_GET['txtpesquisar'] . '%';
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id where u.nome LIKE '$nome' order by u.nome asc";
                     } else {
-                      $query = "select * from perfis order by id asc";
+                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id order by u.nome asc";
                     }
+
                     $result = mysqli_query($conexao, $query);
                     //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
 
                     ?>
 
-                    <!-------------------------------------------------->
+                    <!----------------------------------------------------------------------->
 
-                    <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
-                      <thead class="text-primary" style="text-align: center;">
-
-                        <th class="align-middle">#</th>
+                    <table class="table table-sm table-bordered table-striped">
+                      <thead class=" text-primary">
+                        <th class="align-middle">Nome</th>
+                        <th class="align-middle">Usuário</th>
+                        <th class="align-middle">Senha</th>
                         <th class="align-middle">Perfil</th>
+                        <th class="align-middle">Posto</th>
                         <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
+
                         <?php
                         while ($res_1 = mysqli_fetch_array($result)) {
-                          $nome = $res_1["perfil"];
+                          $nome = $res_1["nome"];
+                          $posto = $res_1["posto"];
+                          $senha = $res_1["senha"];
+                          $usuario = $res_1["usuario"];
+                          $perfil = $res_1["perfil"];
                           $id = $res_1["id"];
                         ?>
-                          <tr style="text-align: center;">
-                            <td class="align-middle"><?php echo $id; ?></td>
+                          <tr>
                             <td class="align-middle"><?php echo $nome; ?></td>
+                            <td class="align-middle"><?php echo $usuario; ?></td>
+                            <td class="align-middle"><?php echo $senha; ?></td>
+                            <td class="align-middle"><?php echo $perfil; ?></td>
+                            <td class="align-middle"><?php echo $posto; ?></td>
                             <td class="align-middle">
-                              <a class="btn btn-warning btn-sm" href="perfis.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
-                              <a class="btn btn-danger btn-sm" href="perfis.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                              <a class="btn btn-warning btn-sm" href="usuarios.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
+                              <a class="btn btn-danger btn-sm" href="usuarios.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
                           </tr>
                         <?php
@@ -506,52 +517,55 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-            </div>
           </div>
-          <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-
-
-          <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
-
+          <!---Modal Exemplo--->
           <div id="modalExemplo" class="modal fade" role="dialog">
-            <!---Modal Exemplo--->
             <div class="modal-dialog modal-dialog-centered">
+              <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Inserir novo PERFIL</h4>
+                  <h4 class="modal-title">Inserir novo usuário</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                   <form method="POST" action="">
                     <div class="form-group">
-                      <label for="id_produto">Perfil</label>
-                      <select class="form-control mr-2" id="txtnome" name="txtnome" required>
-                        <option value="" disabled selected hidden>Perfil</option>
-                        <option value="Administrador">Administrador</option>
-                        <option value="Gerente">Gerente</option>
-                        <option value="Tesoureiro">Tesoureiro</option>
-                        <option value="Funcionário">Funcionário</option>
-                        <option value="EXANT">Exercício Anterior</option>
-                        <option value="PENSAL">Pensão Alimentícia</option>
+                      <label for="id_produto">Usuário</label>
+                      <input type="text" class="form-control mr-2" name="txtusuario" placeholder="Usuário" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="fornecedor">Senha</label>
+                      <input type="text" class="form-control mr-2" name="txtsenha" placeholder="Senha" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="fornecedor">Militar</label>
+                      <select class="form-control mr-2" id="category" name="funcionario">
+                        <option value="" disabled selected hidden>Nome</option>
+                        <?php
+                        $query = "SELECT * FROM militares where status = 'Aprovado' ORDER BY nome asc";
+                        $result = mysqli_query($conexao, $query);
+                        if (count($result)) {
+                          while ($res_1 = mysqli_fetch_array($result)) {
+                        ?>
+                            <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option>
+                        <?php
+                          }
+                        }
+                        ?>
                       </select>
                     </div>
-                    <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-                      <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-                    </div>
                   </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                  <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
                 </div>
               </div>
             </div>
           </div>
-          <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
+        </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
     <footer class="main-footer">
       <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
       Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
@@ -559,51 +573,48 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
         <b>Versão</b> 1.0.0
       </div>
     </footer>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
   </div>
-  <!-- ./wrapper -->
-
   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- jQuery Mask -->
-  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+  <script src="../../plugins/jQuery-Mask/dist/jquery.mask.js"></script>
   <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
-  <script src="plugins/chart.js/Chart.min.js"></script>
+  <script src="../../plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
-  <script src="plugins/sparklines/sparkline.js"></script>
+  <script src="../../plugins/sparklines/sparkline.js"></script>
   <!-- JQVMap -->
-  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
   <!-- jQuery Knob Chart -->
-  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
   <!-- daterangepicker -->
-  <script src="plugins/moment/moment.min.js"></script>
-  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="../../plugins/moment/moment.min.js"></script>
+  <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
   <!-- Tempusdominus Bootstrap 4 -->
-  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <!-- Summernote -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
   <!-- overlayScrollbars -->
-  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="dist/js/pages/dashboard.js"></script>
+  <script src="../../dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
+  <script src="../../dist/js/demo.js"></script>
 
   <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
@@ -611,124 +622,124 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 </body>
 
 </html>
-
 <!---------------------------------CADASTRAR-------------------------------------------->
 
 <?php
 if (isset($_POST['button'])) {
-  $nome = $_POST['txtnome'];
+  $funcionario = $_POST['funcionario'];
+  $query_func = "select * from militares where id = '{$funcionario}' ";
+  $result_func = mysqli_query($conexao, $query_func);
+  $dado = mysqli_fetch_array($result_func);
+  $row = mysqli_num_rows($result_func);
 
-  //Verificar se o perfil já está cadastrado
+  if ($row > 0) {
+    $nome = $dado["nome"];
+    $perfil = $dado["perfil"];
+  }
 
-  $query_verificar = "select * from perfis where perfil = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $usuario = $_POST['txtusuario'];
+  $senha = $_POST['txtsenha'];
 
+  //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
+  $query_verificar = "select * from usuarios where usuario = '$usuario' ";
   $result_verificar = mysqli_query($conexao, $query_verificar);
-  $dado_verificar = mysqli_fetch_array($result_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    echo "<script language='javascript'> window.alert('Perfil já cadastrado!'); </script>";
+    echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
     exit();
   }
-
-  $query = "INSERT into perfis (perfil) VALUES ('$nome')";
-
+  $query = "INSERT into usuarios (nome, usuario, senha, perfil, id_militar) VALUES ('$nome', '$usuario', '$senha', '$perfil', '$funcionario' )";
   $result = mysqli_query($conexao, $query);
-
   if ($result == '') {
     echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='perfis.php'; </script>";
   } else {
     echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='perfis.php'; </script>";
+    echo "<script language='javascript'> window.location='usuarios.php'; </script>";
   }
 }
-
 ?>
 
 
-<!--------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
+<!--------------------------------------EXCLUIR---------------------------------->
 <?php
 if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
-  $query = "DELETE FROM perfis where id = '$id'";
+  $query = "DELETE FROM usuarios where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='perfis.php'; </script>";
+  echo "<script language='javascript'> window.location='usuarios.php'; </script>";
 }
 ?>
 <!------------------------------------------------------------------------------->
 
 
-<!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
+<!----------------------------EDITAR------------------------------>
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "select * from perfis where id = '$id'";
+  $query = "select * from usuarios where id = '$id'";
   $result = mysqli_query($conexao, $query);
-
   while ($res_1 = mysqli_fetch_array($result)) {
-
 ?>
+    <!--------Modal---------------->
     <div id="modalEditar" class="modal fade" role="dialog">
-      <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Perfis</h4>
+            <h4 class="modal-title">Usuários</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <form method="POST" action="">
               <div class="form-group">
-                <label for="id_produto">Perfis</label>
-                <select class="form-control mr-2" id="modalEditar" name="txtnome" required>
-                  <option value="" disabled selected hidden>Perfil</option>
-                  <option value="Administrador">Administrador</option>
-                  <option value="Gerente">Gerente</option>
-                  <option value="Tesoureiro">Tesoureiro</option>
-                  <option value="Funcionário">Funcionário</option>
-                </select>
+                <label for="id_produto">Usuário</label>
+                <input type="text" class="form-control mr-2" name="txtusuario" placeholder="Usuário" value="<?php echo $res_1['usuario']; ?>" required>
               </div>
-
+              <div class="form-group">
+                <label for="fornecedor">Senha</label>
+                <input type="text" class="form-control mr-2" name="txtsenha" placeholder="Senha" value="<?php echo $res_1['senha']; ?>" required>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+            </form>
           </div>
-
-          </form>
         </div>
       </div>
     </div>
-    </div>
 
     <script>
-      $('#modalEditar').modal("show");
+      $("#modalEditar").modal("show");
     </script>
-    <!--Modal EDITAR -->
+    <!-------------------------------------------------------------------------------------------------------------------------------------------->
 
-    <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
-
+    <!--Comando para editar os dados UPDATE -->
 <?php
     if (isset($_POST['buttonEditar'])) {
-      $nome = $_POST['txtnome'];
-      $query_verificar = "select * from perfis where perfil = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
-      $result_verificar = mysqli_query($conexao, $query_verificar);
-      $row_verificar = mysqli_num_rows($result_verificar);
+      $usuario = $_POST['txtusuario'];
+      $senha = $_POST['txtsenha'];
+      if ($res_1['usuario'] != $usuario) {
 
-      if ($row_verificar > 0) {
-        echo "<script language='javascript'> window.alert('perfil já Cadastrado!'); </script>";
-        exit();
+        //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
+        $query_verificar = "select * from usuarios where usuario = '$usuario' ";
+
+        $result_verificar = mysqli_query($conexao, $query_verificar);
+        $row_verificar = mysqli_num_rows($result_verificar);
+
+        if ($row_verificar > 0) {
+          echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
+          exit();
+        }
       }
-
-      $query_editar = "UPDATE perfis set perfil = '$nome' where id = '$id'";
+      $query_editar = "UPDATE usuarios set usuario = '$usuario', senha = '$senha' where id = '$id' ";
       $result_editar = mysqli_query($conexao, $query_editar);
       if ($result_editar == '') {
         echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='perfis.php'; </script>";
       } else {
         echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='perfis.php'; </script>";
+        echo "<script language='javascript'> window.location='usuarios.php'; </script>";
       }
     }
   }

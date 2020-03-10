@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 20-Fev-2020 às 23:49
+-- Tempo de geração: 09-Mar-2020 às 22:22
 -- Versão do servidor: 8.0.19-cluster
 -- versão do PHP: 7.2.27-6+ubuntu18.04.1+deb.sury.org+1
 
@@ -21,6 +21,60 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `sispagpes`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `exercicioanterior`
+--
+
+CREATE TABLE `exercicioanterior` (
+  `id` int NOT NULL,
+  `saram` varchar(10) DEFAULT NULL,
+  `cpf` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `requerente` varchar(75) DEFAULT NULL,
+  `sacador` varchar(75) DEFAULT NULL,
+  `nup` varchar(21) DEFAULT NULL,
+  `prioridade` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `data_criacao` date DEFAULT NULL,
+  `direito_pleiteado` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `secao_origem` varchar(10) DEFAULT NULL,
+  `obs` text,
+  `data_saida` date DEFAULT NULL,
+  `estado` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `secao_atual` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `exercicioanterior`
+--
+
+INSERT INTO `exercicioanterior` (`id`, `saram`, `cpf`, `requerente`, `sacador`, `nup`, `prioridade`, `data_criacao`, `direito_pleiteado`, `secao_origem`, `obs`, `data_saida`, `estado`, `secao_atual`) VALUES
+(4, '1', '1', '1', '2', '79879.654654/3212-00', 'NÃO', '2018-06-12', '7', '2', '<ol style=\"color: rgb(33, 37, 41); background-color: rgba(0, 0, 0, 0.05);\"><li><span style=\"color: rgb(0, 0, 128); font-family: Verdana; font-size: medium; text-align: justify;\">Quando você numera manualmente os itens de uma lista, o Word converte os números digitados em numeração automática.<br></span></li><li>Para criar automaticamente uma lista numerada à medida que digitar, siga estes passos:</li><li>Digite “1 ponto”, “1 traço”, “a traço” ou “a sinal de fecha parênteses”, seguido de um espaço e do texto desejado. Quando você pressionar ENTER para adicionar o item seguinte da lista, o Word inserirá automaticamente o número ou a letra, portanto você só precisa digitar o texto.</li><li>Para concluir a lista, pressione ENTER duas vezes. Você também pode concluir a lista pressionando Backspace para excluir o último número da lista.</li></ol>', '2020-01-24', '9', '6'),
+(5, '1', '1', '1', '2', '89645.679787/2017-98', 'SIM', '2018-02-06', '8', '4', NULL, NULL, '11', '1'),
+(21, '3', '3', '3', '2', '22222.222222/2222-22', 'NÃO', '2018-06-06', '2', '2', '', '2018-10-16', '10', '3'),
+(22, '4', '4', '4', '2', '88888.888888/8888-88', 'NÃO', '2020-01-01', '6', '2', NULL, NULL, '14', '2'),
+(23, '5', '5', '5', '2', '55555.555555/5555-66', 'NÃO', '2018-02-06', '15', '2', NULL, NULL, '14', '2'),
+(24, '2', '2', '2', '2', '99999.999999/9999-99', 'NÃO', '2018-12-17', '15', '4', NULL, NULL, '14', '4'),
+(25, '6', '6', '6', '2', '76532.000738/2018-65', 'NÃO', '2018-06-13', '6', '2', 'Processo criado e enviado para confecção de planilha.', '2020-02-11', '8', '3');
+
+--
+-- Acionadores `exercicioanterior`
+--
+DELIMITER $$
+CREATE TRIGGER `historico_estado_secao_insert` AFTER INSERT ON `exercicioanterior` FOR EACH ROW BEGIN	
+	INSERT INTO tb_historico_exant_estado_secao (data, id_exant, estado_novo, secao_novo) VALUES (NEW.data_criacao, NEW.id, NEW.estado, NEW.secao_atual);	
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `historico_estado_secao_update` AFTER UPDATE ON `exercicioanterior` FOR EACH ROW BEGIN
+	IF NEW.estado <> OLD.estado THEN
+	INSERT INTO tb_historico_exant_estado_secao VALUES (NULL, NEW.data_saida, NEW.id, OLD.estado, NEW.estado, OLD.secao_atual, NEW.secao_atual, NEW.obs);
+	END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -177,6 +231,186 @@ INSERT INTO `requerentes` (`id`, `saram`, `cpf`, `posto`, `situacao`, `nome`, `e
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `tb_direitoPleiteado_exant`
+--
+
+CREATE TABLE `tb_direitoPleiteado_exant` (
+  `id` int NOT NULL,
+  `direito` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `status` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_direitoPleiteado_exant`
+--
+
+INSERT INTO `tb_direitoPleiteado_exant` (`id`, `direito`, `status`) VALUES
+(1, 'ADICIONAL DE COMPENSAÇÃO ORGÂNICA', 'Aprovado'),
+(2, 'ADICIONAL DE HABILITAÇÃO', 'Aprovado'),
+(3, 'ADICIONAL DE TEMPO DE SERVIÇO', 'Aprovado'),
+(4, 'AUXÍLIO FUNERAL', 'Aprovado'),
+(5, 'SOLDO', 'Aprovado'),
+(6, 'AUXÍLIO FARDAMENTO', 'Aprovado'),
+(7, 'ADICIONAL NATALINO', 'Aprovado'),
+(8, 'AJUDA DE CUSTO', 'Aprovado'),
+(9, 'AUXÍLIO INVALIDEZ', 'Aprovado'),
+(10, 'AUXÍLIO NATALIDADE', 'Aprovado'),
+(11, 'AUXÍLIO PRÉ-ESCOLAR', 'Aprovado'),
+(12, 'COTA-PARTE', 'Aprovado'),
+(13, 'ADICIONAL DE PERMANÊNCIA', 'Aprovado'),
+(14, 'ADICIONAL DE DISPONIBILIDADE MILITAR', 'Aprovado'),
+(15, 'ADICIONAL MILITAR', 'Aprovado'),
+(16, 'PENSÃO MILITAR', 'Aprovado'),
+(17, 'PROVENTOS', 'Aprovado'),
+(18, 'REMUNERAÇÃO', 'Aprovado'),
+(19, 'REPARAÇÃO ECONÔMICA', 'Aprovado');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_estado_exant`
+--
+
+CREATE TABLE `tb_estado_exant` (
+  `id` int NOT NULL,
+  `estado` varchar(35) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_estado_exant`
+--
+
+INSERT INTO `tb_estado_exant` (`id`, `estado`, `status`) VALUES
+(1, 'AGUARDANDO PUBLICAÇÃO', 'Aprovado'),
+(2, 'ASSINATURA GESTOR', 'Aprovado'),
+(3, 'AGUARDANDO ARQUIVAMENTO', 'Aprovado'),
+(4, 'APROVADO', 'Aprovado'),
+(5, 'CORRIGINDO PROCESSO', 'Aprovado'),
+(6, 'ALTERANDO PUBLICAÇÃO', 'Aprovado'),
+(7, 'AGUARDANDO MENSAGEM SIAFI', 'Aprovado'),
+(8, 'CONFECCIONANDO PLANILHA', 'Aprovado'),
+(9, 'CONFERÊNCIA SISEX', 'Aprovado'),
+(10, 'CORRIGINDO PLANILHA', 'Aprovado'),
+(11, 'CONFERÊNCIA ACI', 'Aprovado'),
+(13, 'PARA LANÇAMENTO NO SISEX', 'Aprovado'),
+(14, 'CRIADO', 'Aprovado');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_historico_exant_estado_secao`
+--
+
+CREATE TABLE `tb_historico_exant_estado_secao` (
+  `id` int NOT NULL,
+  `data` datetime DEFAULT NULL,
+  `id_exant` int DEFAULT NULL,
+  `estado_anterior` varchar(35) DEFAULT NULL,
+  `estado_novo` varchar(35) DEFAULT NULL,
+  `secao_anterior` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `secao_novo` varchar(10) DEFAULT NULL,
+  `obs_exant` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_historico_exant_estado_secao`
+--
+
+INSERT INTO `tb_historico_exant_estado_secao` (`id`, `data`, `id_exant`, `estado_anterior`, `estado_novo`, `secao_anterior`, `secao_novo`, `obs_exant`) VALUES
+(3, '2020-01-23 19:00:03', 9, '2', '8', '8', '3', NULL),
+(4, '2020-01-25 19:06:43', 5, '14', '11', '2', '1', NULL),
+(6, '2020-01-25 20:35:32', 4, '2', '6', '1', '4', NULL),
+(7, '2020-01-25 20:35:38', 4, '6', '3', '4', '5', NULL),
+(8, '2020-01-25 20:35:45', 4, '3', '11', '5', '1', NULL),
+(9, '2020-01-25 23:58:48', 4, '11', '3', '1', '3', NULL),
+(10, '2020-01-02 00:00:00', 4, '3', '4', '3', '3', NULL),
+(12, '2018-06-06 00:00:00', 21, NULL, '14', NULL, '2', NULL),
+(13, '2018-08-01 00:00:00', 21, '14', '8', '2', '3', NULL),
+(14, '2018-09-12 00:00:00', 21, '8', '11', '3', '1', ''),
+(15, '2018-10-16 00:00:00', 21, '11', '10', '1', '3', ''),
+(16, '2020-01-17 00:00:00', 4, '4', '2', '3', '3', ''),
+(17, '2020-01-15 00:00:00', 4, '2', '11', '3', '1', '<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 12px; text-align: justify;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><br></p>'),
+(18, '2020-01-01 00:00:00', 22, NULL, '14', NULL, '2', NULL),
+(19, '2020-01-16 00:00:00', 4, '11', '13', '1', '3', '<p style=\"text-align: justify; \"><span style=\"font-family: Arial;\">﻿</span><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px;\">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</span><br></p>'),
+(20, '2020-01-18 00:00:00', 4, '13', '9', '3', '6', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum\r\n                        fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut \r\nofficiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic\r\n tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.'),
+(21, '2020-01-19 00:00:00', 4, '9', '10', '6', '3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+(22, '2020-01-20 00:00:00', 4, '10', '9', '3', '6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+(23, '2020-01-21 00:00:00', 4, '9', '10', '6', '3', 'Quando você numera manualmente os itens de uma lista, o Word converte os números digitados em numeração automática.\r\n\r\nPara criar automaticamente uma lista numerada à medida que digitar, siga estes passos:\r\n\r\nDigite “1 ponto”, “1 traço”, “a traço” ou “a sinal de fecha parênteses”, seguido de um espaço e do texto desejado. Quando você pressionar ENTER para adicionar o item seguinte da lista, o Word inserirá automaticamente o número ou a letra, portanto você só precisa digitar o texto.\r\n\r\nPara concluir a lista, pressione ENTER duas vezes. Você também pode concluir a lista pressionando Backspace para excluir o último número da lista.'),
+(24, '2020-01-22 00:00:00', 4, '10', '11', '3', '1', '<ol><li><span style=\"color: rgb(0, 0, 128); font-family: Verdana; font-size: medium; text-align: justify;\">Quando você numera manualmente os itens de uma lista, o Word converte os números digitados em numeração automática.<br></span></li><li>Para criar automaticamente uma lista numerada à medida que digitar, siga estes passos:</li><li>Digite “1 ponto”, “1 traço”, “a traço” ou “a sinal de fecha parênteses”, seguido de um espaço e do texto desejado. Quando você pressionar ENTER para adicionar o item seguinte da lista, o Word inserirá automaticamente o número ou a letra, portanto você só precisa digitar o texto.</li><li>Para concluir a lista, pressione ENTER duas vezes. Você também pode concluir a lista pressionando Backspace para excluir o último número da lista.<br></li></ol>'),
+(25, '2020-01-23 00:00:00', 4, '11', '13', '1', '3', '<ol style=\"color: rgb(33, 37, 41); background-color: rgba(0, 0, 0, 0.05);\"><li><span style=\"color: rgb(0, 0, 128); font-family: Verdana; font-size: medium; text-align: justify;\">Quando você numera manualmente os itens de uma lista, o Word converte os números digitados em numeração automática.<br></span></li><li>Para criar automaticamente uma lista numerada à medida que digitar, siga estes passos:</li><li>Digite “1 ponto”, “1 traço”, “a traço” ou “a sinal de fecha parênteses”, seguido de um espaço e do texto desejado. Quando você pressionar ENTER para adicionar o item seguinte da lista, o Word inserirá automaticamente o número ou a letra, portanto você só precisa digitar o texto.</li><li>Para concluir a lista, pressione ENTER duas vezes. Você também pode concluir a lista pressionando Backspace para excluir o último número da lista.</li></ol>'),
+(26, '2020-01-24 00:00:00', 4, '13', '9', '3', '6', '<ol style=\"color: rgb(33, 37, 41); background-color: rgba(0, 0, 0, 0.05);\"><li><span style=\"color: rgb(0, 0, 128); font-family: Verdana; font-size: medium; text-align: justify;\">Quando você numera manualmente os itens de uma lista, o Word converte os números digitados em numeração automática.<br></span></li><li>Para criar automaticamente uma lista numerada à medida que digitar, siga estes passos:</li><li>Digite “1 ponto”, “1 traço”, “a traço” ou “a sinal de fecha parênteses”, seguido de um espaço e do texto desejado. Quando você pressionar ENTER para adicionar o item seguinte da lista, o Word inserirá automaticamente o número ou a letra, portanto você só precisa digitar o texto.</li><li>Para concluir a lista, pressione ENTER duas vezes. Você também pode concluir a lista pressionando Backspace para excluir o último número da lista.</li></ol>'),
+(27, '2018-02-06 00:00:00', 23, NULL, '14', NULL, '2', NULL),
+(28, '2018-12-17 00:00:00', 24, NULL, '14', NULL, '4', NULL),
+(29, '2018-06-13 00:00:00', 25, NULL, '14', NULL, '2', NULL),
+(30, '2020-02-11 00:00:00', 25, '14', '8', '2', '3', 'Processo criado e enviado para confecção de planilha.');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_posto`
+--
+
+CREATE TABLE `tb_posto` (
+  `id` int NOT NULL,
+  `posto` varchar(10) NOT NULL,
+  `status` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_posto`
+--
+
+INSERT INTO `tb_posto` (`id`, `posto`, `status`) VALUES
+(1, 'TB', 'Aprovado'),
+(2, 'MB', 'Aprovado'),
+(3, 'BR', 'Aprovado'),
+(4, 'CL', 'Aprovado'),
+(5, 'TC', 'Aprovado'),
+(6, 'MJ', 'Aprovado'),
+(7, 'CP', 'Aprovado'),
+(8, '1T', 'Aprovado'),
+(9, '2T', 'Aprovado'),
+(10, 'AP', 'Aprovado'),
+(11, 'SO', 'Aprovado'),
+(12, '1S', 'Aprovado'),
+(13, '2S', 'Aprovado'),
+(14, '3S', 'Aprovado'),
+(15, 'CB', 'Aprovado'),
+(16, 'TM', 'Aprovado'),
+(17, 'S1', 'Aprovado'),
+(18, 'T1', 'Aprovado'),
+(19, 'S2', 'Aprovado'),
+(20, 'T2', 'Aprovado'),
+(21, 'SD', 'Aprovado');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_secoes_exant`
+--
+
+CREATE TABLE `tb_secoes_exant` (
+  `id` int NOT NULL,
+  `secao` varchar(10) NOT NULL,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_secoes_exant`
+--
+
+INSERT INTO `tb_secoes_exant` (`id`, `secao`, `status`) VALUES
+(1, 'ACI-1', 'Aprovado'),
+(2, 'DP-1', 'Aprovado'),
+(3, 'DP-3', 'Aprovado'),
+(4, 'DP-4', 'Aprovado'),
+(5, 'ES-LS', 'Aprovado'),
+(6, 'SDPP', 'Aprovado');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `usuarios`
 --
 
@@ -201,6 +435,12 @@ INSERT INTO `usuarios` (`id`, `nome`, `usuario`, `senha`, `perfil`, `id_militar`
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices para tabela `exercicioanterior`
+--
+ALTER TABLE `exercicioanterior`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `militares`
@@ -233,6 +473,36 @@ ALTER TABLE `requerentes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `tb_direitoPleiteado_exant`
+--
+ALTER TABLE `tb_direitoPleiteado_exant`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `tb_estado_exant`
+--
+ALTER TABLE `tb_estado_exant`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `tb_historico_exant_estado_secao`
+--
+ALTER TABLE `tb_historico_exant_estado_secao`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `tb_posto`
+--
+ALTER TABLE `tb_posto`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `tb_secoes_exant`
+--
+ALTER TABLE `tb_secoes_exant`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -241,6 +511,12 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `exercicioanterior`
+--
+ALTER TABLE `exercicioanterior`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `militares`
@@ -270,6 +546,36 @@ ALTER TABLE `perfis`
 -- AUTO_INCREMENT de tabela `requerentes`
 --
 ALTER TABLE `requerentes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de tabela `tb_direitoPleiteado_exant`
+--
+ALTER TABLE `tb_direitoPleiteado_exant`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de tabela `tb_estado_exant`
+--
+ALTER TABLE `tb_estado_exant`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de tabela `tb_historico_exant_estado_secao`
+--
+ALTER TABLE `tb_historico_exant_estado_secao`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT de tabela `tb_posto`
+--
+ALTER TABLE `tb_posto`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de tabela `tb_secoes_exant`
+--
+ALTER TABLE `tb_secoes_exant`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --

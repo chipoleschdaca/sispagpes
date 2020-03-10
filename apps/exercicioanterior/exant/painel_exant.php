@@ -1,9 +1,9 @@
 <?php
 session_start();
-include('verificar_login.php');
-include('conexao.php');
+include('../../../verificar_login.php');
+include('../../../conexao.php');
 if ($_SESSION['perfil_usuario'] != 'EXANT') {
-  header('Location: index.php');
+  header('Location: ../../../index.php');
   exit();
 }
 ?>
@@ -14,31 +14,31 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="dist/img/gapls.png">
+  <link rel="icon" type="image/png" href="../../../dist/img/gapls.png">
   <title>SISPAGPES</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Select2 -->
-  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="../../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <link rel="stylesheet" href="../../../plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../../dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="../../../plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="../../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -62,7 +62,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="../../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Brad Diesel
@@ -78,7 +78,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="../../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     John Pierce
@@ -94,7 +94,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="../../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Nora Silvester
@@ -164,7 +164,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
               Atividade
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="logout.php" data-target="#logoutModal">
+            <a class="dropdown-item" href="../../../logout.php" data-target="#logoutModal">
               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
               Sair
             </a>
@@ -174,7 +174,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="painel_exant.php" class="brand-link" style="heigh:50px;">
-        <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+        <img src="../../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <div class="sidebar">
@@ -226,70 +226,78 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             <section class="col-md-12 connectedSortable">
               <form class="form-inline">
                 <div class="card col-md-12">
-                  <div class="card-body">
+                  <div class="card-body" style="padding-left: 5px">
                     <div class="input-group input-group-sm">
-                      <label for="txtpesquisar" style="margin-right: 10px;">Filtrar:
+                      <label for="txtpesquisar" style="margin-right: 10px; margin-left:0px">Filtrar:
                       </label>
-                      <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px">
-                        <option value="" selected>POSTO/GRAD.</option>
-                        <?php
-                        $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
-                        $result_posto = mysqli_query($conexao, $query_posto);
-                        if (count($result_posto)) {
-                          while ($res_p = mysqli_fetch_array($result_posto)) {
-                            $id = $res_p['id_posto'];
-                            $posto = $res_p['nome_posto'];
-                        ?>
-                            <option value="<?php echo $id ?>"><?php echo $posto ?></option>
-                        <?php }
-                        } ?>
-                      </select>
-                      <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px">>
-                        <option value="">DIREITO PLEITEADO</option>
-                        <?php
-                        $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
-                        $result_direito = mysqli_query($conexao, $query_direito);
-                        if (count($result_direito)) {
-                          while ($res_dir = mysqli_fetch_array($result_direito)) {
-                            $id = $res_dir['id_direito'];
-                            $direito = $res_dir['direito_pleiteado'];
-                            $count_direito = $res_dir['COUNT(e.direito_pleiteado)'];
-                        ?>
-                            <option value="<?php echo $id ?>"><?php echo $direito . " | " . $count_direito ?></option>
-                        <?php }
-                        } ?>
-                      </select>
-                      <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px">
-                        <option value="" selected>ESTADO DO PROCESSO</option>
-                        <?php
-                        $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
-                        $result_est = mysqli_query($conexao, $query_est);
-                        if (count($result_est)) {
-                          while ($res_est = mysqli_fetch_array($result_est)) {
-                            $id_est_2 = $res_est['id_estado'];
-                            $estado_est = $res_est['estado_processo'];
-                            $count_estado = $res_est['COUNT(e.estado)'];
-                        ?>
-                            <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est . " | " . $count_estado ?></option>
-                        <?php }
-                        } ?>
-                      </select>
-                      <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-right:10px">
-                        <option value="" selected>SEÇÃO ATUAL</option>
-                        <?php
-                        $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
-                        $result_sec = mysqli_query($conexao, $query_sec);
-                        if (count($result_sec)) {
-                          while ($res_sec = mysqli_fetch_array($result_sec)) {
-                            $id_sec_2 = $res_sec['id_secao'];
-                            $secao_sec = $res_sec['secao_atual'];
-                            $count_secao = $res_sec['COUNT(e.secao_atual)'];
-                        ?>
-                            <option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec . " | " . $count_secao ?></option>
-                        <?php }
-                        } ?>
-                      </select>
-                      <button class="btn btn-primary btn-primary-navbar btn-sm" type="submit" name="buttonPesquisar">
+                      <div style="margin-right: 20px">
+                        <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 250px">
+                          <option value="" selected>POSTO/GRAD.</option>
+                          <?php
+                          $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
+                          $result_posto = mysqli_query($conexao, $query_posto);
+                          if (count($result_posto)) {
+                            while ($res_p = mysqli_fetch_array($result_posto)) {
+                              $id = $res_p['id_posto'];
+                              $posto = $res_p['nome_posto'];
+                          ?>
+                              <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                          <?php }
+                          } ?>
+                        </select>
+                      </div>
+                      <div style="margin-right: 20px">
+                        <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px; width: 350px">
+                          <option value="">DIREITO PLEITEADO</option>
+                          <?php
+                          $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
+                          $result_direito = mysqli_query($conexao, $query_direito);
+                          if (count($result_direito)) {
+                            while ($res_dir = mysqli_fetch_array($result_direito)) {
+                              $id = $res_dir['id_direito'];
+                              $direito = $res_dir['direito_pleiteado'];
+                              $count_direito = $res_dir['COUNT(e.direito_pleiteado)'];
+                          ?>
+                              <option value="<?php echo $id ?>"><?php echo $direito . " | " . $count_direito ?></option>
+                          <?php }
+                          } ?>
+                        </select>
+                      </div>
+                      <div style="margin-right: 20px">
+                        <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px; width: 400px;">
+                          <option value="" selected>ESTADO DO PROCESSO</option>
+                          <?php
+                          $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
+                          $result_est = mysqli_query($conexao, $query_est);
+                          if (count($result_est)) {
+                            while ($res_est = mysqli_fetch_array($result_est)) {
+                              $id_est_2 = $res_est['id_estado'];
+                              $estado_est = $res_est['estado_processo'];
+                              $count_estado = $res_est['COUNT(e.estado)'];
+                          ?>
+                              <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est . " | " . $count_estado ?></option>
+                          <?php }
+                          } ?>
+                        </select>
+                      </div>
+                      <div style="margin-right: 20px">
+                        <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-left:10px; padding: 10px; width: 350px">
+                          <option value="" selected>SEÇÃO ATUAL</option>
+                          <?php
+                          $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
+                          $result_sec = mysqli_query($conexao, $query_sec);
+                          if (count($result_sec)) {
+                            while ($res_sec = mysqli_fetch_array($result_sec)) {
+                              $id_sec_2 = $res_sec['id_secao'];
+                              $secao_sec = $res_sec['secao_atual'];
+                              $count_secao = $res_sec['COUNT(e.secao_atual)'];
+                          ?>
+                              <option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec . " | " . $count_secao ?></option>
+                          <?php }
+                          } ?>
+                        </select>
+                      </div>
+                      <button class="btn btn-primary btn-primary-navbar btn-sm" type="submit" name="buttonPesquisar" style="margin-left: 10px">
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
@@ -609,44 +617,44 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="../../../plugins/jquery/jquery.min.js"></script>
   <!-- jQuery Mask -->
-  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+  <script src="../../../plugins/jQuery-Mask/dist/jquery.mask.js"></script>
   <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="../../../plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <!-- Select2 -->
-  <script src="plugins/select2/js/select2.full.min.js"></script>
+  <script src="../../../plugins/select2/js/select2.full.min.js"></script>
   <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
-  <script src="plugins/chart.js/Chart.min.js"></script>
+  <script src="../../../plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
-  <script src="plugins/sparklines/sparkline.js"></script>
+  <script src="../../../plugins/sparklines/sparkline.js"></script>
   <!-- JQVMap -->
-  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <script src="plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
+  <script src="../../../plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="../../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <script src="../../../plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
   <!-- jQuery Knob Chart -->
-  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <script src="../../../plugins/jquery-knob/jquery.knob.min.js"></script>
   <!-- daterangepicker -->
-  <script src="plugins/moment/moment.min.js"></script>
-  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="../../../plugins/moment/moment.min.js"></script>
+  <script src="../../../plugins/daterangepicker/daterangepicker.js"></script>
   <!-- Tempusdominus Bootstrap 4 -->
-  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="../../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <!-- Summernote -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <script src="../../../plugins/summernote/summernote-bs4.min.js"></script>
   <!-- overlayScrollbars -->
-  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
+  <script src="../../../dist/js/adminlte.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="dist/js/pages/dashboard.js"></script>
+  <script src="../../../dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
+  <script src="../../../dist/js/demo.js"></script>
   <script>
     $(function() {
       //Initialize Select2 Elements

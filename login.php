@@ -6,15 +6,15 @@ include('conexao.php');
 
 $query = "SELECT * from orcamentos where status = 'Aguardando'";
 $result = mysqli_query($conexao, $query);
-	while($res_1 = mysqli_fetch_array($result)){
-		$data_geracao = $res_1['data_geracao'];
-		$data_cancelamento = date('Y/m/d', strtotime("-7 days",strtotime(date('Y/m/d'))));
-		$query_editar = "UPDATE orcamentos set status = 'Cancelado' where data_geracao = '$data_cancelamento' and status = 'Aguardando'";
-		$result_editar = mysqli_query($conexao, $query_editar);
-	}
+while ($res_1 = mysqli_fetch_array($result)) {
+	$data_geracao = $res_1['data_geracao'];
+	$data_cancelamento = date('Y/m/d', strtotime("-7 days", strtotime(date('Y/m/d'))));
+	$query_editar = "UPDATE orcamentos set status = 'Cancelado' where data_geracao = '$data_cancelamento' and status = 'Aguardando'";
+	$result_editar = mysqli_query($conexao, $query_editar);
+}
 
 
-if(empty($_POST['usuario']) || empty($_POST['senha'])){
+if (empty($_POST['usuario']) || empty($_POST['senha'])) {
 	header('Location: index.php');
 	exit();
 }
@@ -26,35 +26,35 @@ $result = mysqli_query($conexao, $query);
 $dado = mysqli_fetch_array($result);
 $row = mysqli_num_rows($result);
 
-if ($row > 0){
+if ($row > 0) {
 	$_SESSION['usuario'] = $usuario;
 	$_SESSION['nome_usuario'] = $dado['nome'];
 	$_SESSION['perfil_usuario'] = $dado['perfil'];
-	
 
-	if ($_SESSION['perfil_usuario'] == 'Administrador' || $_SESSION['perfil_usuario'] == 'Gerente'){
-		header('Location: painel_admin.php');
+
+	if ($_SESSION['perfil_usuario'] == 'Administrador' || $_SESSION['perfil_usuario'] == 'Gerente') {
+		header('Location: apps/admin/painel_admin.php');
 		exit();
 	}
 
-	if ($_SESSION['perfil_usuario'] == 'Tesoureiro'){
+	if ($_SESSION['perfil_usuario'] == 'Tesoureiro') {
 		header('Location: painel_tesouraria.php');
 		exit();
 	}
 
-	if ($_SESSION['perfil_usuario'] == 'EXANT'){
-		header('Location: painel_exant.php');
+	if ($_SESSION['perfil_usuario'] == 'EXANT') {
+		header('Location: apps/exercicioanterior/exant/painel_exant.php');
 		exit();
 	}
-	
-	if ($_SESSION['perfil_usuario'] == 'Funcionário'){
+
+	if ($_SESSION['perfil_usuario'] == 'Funcionário') {
 		header('Location: painel_funcionario.php');
 		exit();
 	}
 
 	exit();
-}else{
-	$_SESSION['nao_autenticado'] = true; 
+} else {
+	$_SESSION['nao_autenticado'] = true;
 	header('Location: index.php');
 	exit();
 }

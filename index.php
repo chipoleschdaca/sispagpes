@@ -5,7 +5,7 @@ session_start();
 <html>
 
 <head>
-  <link rel="stylesheet" href="icons/fontawesome-free-5.11.2-web/css/all.min.css">
+  <link rel="stylesheet" href="plugins/fontawesome-free-5.11.2-web/css/all.min.css">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <link href="dist/css/index.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

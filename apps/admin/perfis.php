@@ -1,9 +1,9 @@
 <?php
 session_start();
-include('conexao.php');
-include('verificar_login.php');
+include('../../conexao.php');
+include('../../verificar_login.php');
 if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
-  header('Location: index.php');
+  header('Location: ../../index.php');
   exit();
 }
 ?>
@@ -13,28 +13,28 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="dist/img/gapls.png">
-  <title>SISPAGPES</title>
+  <link rel="icon" type="image/png" href="../../dist/img/gapls.png">
+  <title>SISPAGPES | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -78,7 +78,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Brad Diesel
@@ -94,7 +94,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     John Pierce
@@ -110,7 +110,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Nora Silvester
@@ -180,7 +180,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               Atividade
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="logout.php" data-target="#logoutModal">
+            <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
               <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
               Sair
             </a>
@@ -191,7 +191,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
-        <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+        <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <!-- Sidebar -->
@@ -220,6 +220,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                     echo '<span class="badge badge-warning right">' . $row . '</span>' ?>
                   <?php } else {
                   } ?>
+                  </span>
                 </p>
               </a>
             </li>
@@ -231,15 +232,15 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </p>
               </a>
             <li class="nav-item">
-              <a href="perfis.php" class="nav-link">
+              <a href="perfis.php" class="nav-link active">
                 <i class="nav-icon fas fa-sitemap"></i>
                 <p>
                   Perfis
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview menu-open">
-              <a href="#" class="nav-link active">
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Exercício Anterior
@@ -289,8 +290,8 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="direitos_exant.php" class="nav-link active">
-                    <i class="fas fa-hand-point-right nav-icon"></i>
+                  <a href="direitos_exant.php" class="nav-link">
+                    <i class="far fa-hand-point-right nav-icon"></i>
                     <p>
                       Direito Pleiteado
                       <?php
@@ -370,33 +371,16 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box mb-3">
-                <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-database"></i></span>
-                <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">DIREITOS CADASTRADOS</span>
-                  <span class="info-box-number">
-                    <h4>
-                      <?php
-                      $query = "SELECT * FROM tb_direitoPleiteado_exant";
-                      $result = mysqli_query($conexao, $query);
-                      $row = mysqli_num_rows($result);
-                      echo $row;
-                      ?>
-                    </h4>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">DIREITOS "APROVADOS"</span>
+                  <span class="info-box-text">TOTAL DE REGISTROS</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado'";
+                      $query = "SELECT * FROM perfis";
                       $result = mysqli_query($conexao, $query);
+                      //$res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
                       echo $row;
                       ?>
@@ -410,247 +394,101 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-history"></i></span>
-                <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">DIREITOS "AGUARDANDO"</span>
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Likes</span>
                   <span class="info-box-number">
-                    <h4>
-                      <?php
-                      $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
-                      $result = mysqli_query($conexao, $query);
-                      $row = mysqli_num_rows($result);
-                      echo $row;
-                      ?>
-                    </h4>
+                    <h4>41,410</h4>
                   </span>
                 </div>
+                <!-- /.info-box-content -->
               </div>
+              <!-- /.info-box -->
             </div>
+            <!-- /.col -->
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
-                <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">DIREITOS "EXCLUÍDOS"</span>
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Sales</span>
                   <span class="info-box-number">
-                    <h4>
-                      <?php
-                      $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Excluído'";
-                      $result = mysqli_query($conexao, $query);
-                      $row = mysqli_num_rows($result);
-                      echo $row;
-                      ?>
-                    </h4>
+                    <h4>760</h4>
                   </span>
                 </div>
+                <!-- /.info-box-content -->
               </div>
+              <!-- /.info-box -->
             </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">New Members</span>
+                  <span class="info-box-number">
+                    <h4>2,000</h4>
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
           </div>
-          <br><br>
+          <br>
           <div class="row" style="align-content: center;">
-            <div class="col-md-3">
+            <div class="col-md-4">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="card">
                 <div class="card-header" style="text-align: center;">
-                  <h4 class="" style="text-align:center;"><strong>TABELA DE DIREITOS PLEITEADOS</strong></h4>
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE PERFIS</strong></h4>
                 </div>
                 <div class="card-body">
                   <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                    <i class="fas fa-plus"></i> Inserir Novo
+                    <i class="fas fa-user-plus"></i> Inserir Novo
                   </button>
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
-                    <!----------------------LISTAR TODOS OS DIREITOS-------------------------->
-
-                    <?php
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                      $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from tb_direitoPleiteado_exant where direito LIKE '$nome' order by direito asc";
-                    } else {
-                      $query = "select * from tb_direitoPleiteado_exant where status <> 'Excluído' order by direito asc";
-                    }
-                    $result = mysqli_query($conexao, $query);
-                    $row = mysqli_num_rows($result);
-
-                    ?>
-
-                    <!-------------------------------------------------->
-
-                    <table class="table table-sm table-bordered table-striped">
-                      <thead class="text-primary" style="text-align: center; width: 800px; height: 500px; overflow: auto;">
-                        <th class="align-middle" style="width: 4%;">#</th>
-                        <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
-                        <th class="align-middle">Status</th>
-                        <th class="align-middle">Ações</th>
-                      </thead>
-                      <tbody>
-                        <?php
-                        while ($res_1 = mysqli_fetch_array($result)) {
-                          $id = $res_1["id"];
-                          $direito = $res_1["direito"];
-                          $status = $res_1["status"];
-                        ?>
-                          <tr style="text-align: center;">
-                            <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $direito; ?></td>
-                            <td class="align-middle">
-                              <?php
-                              if ($status == 'Aguardando') { ?>
-                                <span class="badge badge-warning">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                              } else if ($status == 'Aprovado') { ?>
-                                <span class="badge badge-success">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                              } else if ($status == 'Excluído') { ?>
-                                <span class="badge badge-danger">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                              } else {
-                                echo $status;
-                              }
-                              ?>
-                            </td>
-                            <td class="align-middle">
-                              <?php
-                              if ($status == 'Aprovado') { ?>
-                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                              <?php
-                              } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                              <?php
-                              } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Direito Pleiteado?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                              <?php
-                              } else {
-                                echo $status;
-                              } ?>
-                            </td>
-                          </tr>
-                        <?php
-                        }
-                        ?>
-                      </tbody>
-                    </table>
-                    <?php
-                    if ($row == '') {
-                      echo "<h3>Não existem dados para consulta</h3>";
-                    } else {
-                    }
-                    ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-            </div>
-          </div>
-          <br><br>
-          <div class="row">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-6">
-              <div class="card collapsed-card">
-                <div class="card-header" style="text-align: center; align-items: center;">
-                  <h3 class="card-title">DIREITOS EXCLUÍDOS</h3>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
                     <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
 
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from tb_direitoPleiteado_exant where direito LIKE '$nome' order by id asc";
+                      $query = "select * from perfis where perfil LIKE '$nome' order by id asc";
                     } else {
-                      $query = "select * from tb_direitoPleiteado_exant where status = 'Excluído' order by id asc";
+                      $query = "select * from perfis order by id asc";
                     }
                     $result = mysqli_query($conexao, $query);
+                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
+
                     ?>
 
                     <!-------------------------------------------------->
 
                     <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
                       <thead class="text-primary" style="text-align: center;">
-                        <th class="align-middle" style="width: 4%;">#</th>
-                        <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
-                        <th class="align-middle">Status</th>
+
+                        <th class="align-middle">#</th>
+                        <th class="align-middle">Perfil</th>
                         <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
                         <?php
                         while ($res_1 = mysqli_fetch_array($result)) {
+                          $nome = $res_1["perfil"];
                           $id = $res_1["id"];
-                          $direito = $res_1["direito"];
-                          $status = $res_1["status"];
                         ?>
                           <tr style="text-align: center;">
                             <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $direito; ?></td>
+                            <td class="align-middle"><?php echo $nome; ?></td>
                             <td class="align-middle">
-                              <?php
-                              if ($status == 'Aguardando') { ?>
-                                <span class="badge badge-warning">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                              } else if ($status == 'Aprovado') { ?>
-                                <span class="badge badge-success">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                              } else if ($status == 'Excluído') { ?>
-                                <span class="badge badge-danger">
-                                  <?php echo $status; ?>
-                                </span>
-                              <?php
-                              } else {
-                                echo $status;
-                              }
-                              ?>
-                            </td>
-                            <td class="align-middle">
-                              <?php
-                              if ($status == 'Aprovado') { ?>
-                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                              <?php
-                              } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                              <?php
-                              } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="direitos_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
-                              <?php
-                              } else {
-                                echo $status;
-                              } ?>
+                              <a class="btn btn-warning btn-sm" href="perfis.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
+                              <a class="btn btn-danger btn-sm" href="perfis.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
                           </tr>
                         <?php
@@ -668,20 +506,35 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                 </div>
               </div>
             </div>
+            <div class="col-md-4">
+            </div>
           </div>
+          <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+          <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
+
           <div id="modalExemplo" class="modal fade" role="dialog">
             <!---Modal Exemplo--->
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Inserir nova SEÇÃO</h4>
+                  <h4 class="modal-title">Inserir novo PERFIL</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                   <form method="POST" action="">
                     <div class="form-group">
-                      <label for="id_produto">Direito Pleiteado</label>
-                      <input type="text" class="form-control mr-2" name="txtdireito" placeholder="Digite um novo direito" autocomplete="off" required>
+                      <label for="id_produto">Perfil</label>
+                      <select class="form-control mr-2" id="txtnome" name="txtnome" required>
+                        <option value="" disabled selected hidden>Perfil</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="Tesoureiro">Tesoureiro</option>
+                        <option value="Funcionário">Funcionário</option>
+                        <option value="EXANT">Exercício Anterior</option>
+                        <option value="PENSAL">Pensão Alimentícia</option>
+                      </select>
                     </div>
                     <div class="modal-footer">
                       <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
@@ -692,65 +545,65 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
               </div>
             </div>
           </div>
-        </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
-    Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Versão</b> 1.0.0
+          <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
     </div>
-  </footer>
+    <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Versão</b> 1.0.0
+      </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- jQuery Mask -->
-  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+  <script src="../../plugins/jQuery-Mask/dist/jquery.mask.js"></script>
   <!-- jQuery UI 1.11.4 -->
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
-  <script src="plugins/chart.js/Chart.min.js"></script>
+  <script src="../../plugins/chart.js/Chart.min.js"></script>
   <!-- Sparkline -->
-  <script src="plugins/sparklines/sparkline.js"></script>
+  <script src="../../plugins/sparklines/sparkline.js"></script>
   <!-- JQVMap -->
-  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
   <!-- jQuery Knob Chart -->
-  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
   <!-- daterangepicker -->
-  <script src="plugins/moment/moment.min.js"></script>
-  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="../../plugins/moment/moment.min.js"></script>
+  <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
   <!-- Tempusdominus Bootstrap 4 -->
-  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <!-- Summernote -->
-  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
   <!-- overlayScrollbars -->
-  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
+  <script src="../../dist/js/adminlte.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="dist/js/pages/dashboard.js"></script>
+  <script src="../../dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
+  <script src="../../dist/js/demo.js"></script>
 
   <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
@@ -763,31 +616,31 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
 
 <?php
 if (isset($_POST['button'])) {
-  $direito = strtoupper($_POST['txtdireito']);
-  $status = 'Aprovado';
+  $nome = $_POST['txtnome'];
 
-  //Verificar se a SEÇÃO já está cadastrado
+  //Verificar se o perfil já está cadastrado
 
-  $query_verificar = "select * from tb_direitoPleiteado_exant where direito = '$direito'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "select * from perfis where perfil = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    echo "<script language='javascript'> window.alert('Direito já está cadastrado!'); </script>";
+    echo "<script language='javascript'> window.alert('Perfil já cadastrado!'); </script>";
     exit();
   }
 
-  $query = "INSERT into tb_direitoPleiteado_exant (direito, status) VALUES ('$direito', '$status')";
+  $query = "INSERT into perfis (perfil) VALUES ('$nome')";
 
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
     echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
+    echo "<script language='javascript'> window.location='perfis.php'; </script>";
   } else {
     echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
+    echo "<script language='javascript'> window.location='perfis.php'; </script>";
   }
 }
 
@@ -798,9 +651,9 @@ if (isset($_POST['button'])) {
 <?php
 if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
-  $query = "UPDATE tb_direitoPleiteado_exant set status = 'Excluído' where id = '$id'";
+  $query = "DELETE FROM perfis where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
+  echo "<script language='javascript'> window.location='perfis.php'; </script>";
 }
 ?>
 <!------------------------------------------------------------------------------->
@@ -810,34 +663,45 @@ if (@$_GET['func'] == 'deleta') {
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "select * from tb_direitoPleiteado_exant where id = '$id'";
+  $query = "select * from perfis where id = '$id'";
   $result = mysqli_query($conexao, $query);
+
   while ($res_1 = mysqli_fetch_array($result)) {
+
 ?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Editar DIREITO PLEITEADO</h4>
+            <h4 class="modal-title">Perfis</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
             <form method="POST" action="">
               <div class="form-group">
-                <label for="id_produto">Direito Pleiteado</label>
-                <input type="text" class="form-control mr-2" name="txtdireito2" value="<?php echo $res_1['direito']; ?>" placeholder="Direito" autocomplete="off">
+                <label for="id_produto">Perfis</label>
+                <select class="form-control mr-2" id="modalEditar" name="txtnome" required>
+                  <option value="" disabled selected hidden>Perfil</option>
+                  <option value="Administrador">Administrador</option>
+                  <option value="Gerente">Gerente</option>
+                  <option value="Tesoureiro">Tesoureiro</option>
+                  <option value="Funcionário">Funcionário</option>
+                </select>
               </div>
+
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
           </div>
+
           </form>
         </div>
       </div>
     </div>
     </div>
+
     <script>
       $('#modalEditar').modal("show");
     </script>
@@ -847,35 +711,44 @@ if (@$_GET['func'] == 'edita') {
 
 <?php
     if (isset($_POST['buttonEditar'])) {
-      $direito2 = strtoupper($_POST['txtdireito2']);
-      $query_verificar = "select * from tb_direitoPleiteado_exant where direito = '$direito2'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+      $nome = $_POST['txtnome'];
+      $query_verificar = "select * from perfis where perfil = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
       $result_verificar = mysqli_query($conexao, $query_verificar);
       $row_verificar = mysqli_num_rows($result_verificar);
 
-      if ($row_verificar > 1) {
-        echo "<script language='javascript'> window.alert('Direito já está cadastrado!'); </script>";
+      if ($row_verificar > 0) {
+        echo "<script language='javascript'> window.alert('perfil já Cadastrado!'); </script>";
         exit();
       }
 
-      $query_editar = "UPDATE tb_direitoPleiteado_exant set direito = '$direito2' where id = '$id'";
+      $query_editar = "UPDATE perfis set perfil = '$nome' where id = '$id'";
       $result_editar = mysqli_query($conexao, $query_editar);
       if ($result_editar == '') {
         echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
+        echo "<script language='javascript'> window.location='perfis.php'; </script>";
       } else {
         echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
+        echo "<script language='javascript'> window.location='perfis.php'; </script>";
       }
     }
   }
-}
+} ?>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-//<!---------------------------APROVAR NOVA SEÇÃO NA TABELA---------------------------->
-
-if (@$_GET['func'] == 'aprova') {
-  $id = $_GET['id'];
-  $query = "UPDATE tb_direitoPleiteado_exant set status = 'Aprovado' where id = '$id'";
-  mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
-}
-?>
+<!--Máscaras-->
+<script>
+  $(document).ready(function() {
+    $('#txtcpf').mask('000.000.000-00', {
+      reverse: true
+    });
+    $('#txtsaram').mask('000.000-0', {
+      reverse: true
+    });
+    $('#txtcpf2').mask('000.000.000-00', {
+      reverse: true
+    });
+    $('#txtsaram2').mask('000.000-0', {
+      reverse: true
+    });
+  });
+</script>

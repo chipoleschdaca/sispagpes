@@ -1,6 +1,6 @@
 <?php
 
-include('../conexao.php');
+include('../../../../conexao.php');
 
 $id = $_GET['id'];
 $id_req = $_GET['id_req'];
@@ -36,9 +36,9 @@ function data($data)
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../plugins/bootstrap3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../plugins/bootstrap3.3.7/css/bootstrap.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -152,7 +152,7 @@ function data($data)
       </div>
     </div>
   </div>
-  <script src="../plugins/bootstrap3.3.7/js/bootstrap.min.js"></script>
+  <script src="../../../../plugins/bootstrap3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 
