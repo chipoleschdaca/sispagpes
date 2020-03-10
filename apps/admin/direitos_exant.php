@@ -190,7 +190,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
+      <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
