@@ -1,11 +1,7 @@
 <?php
-session_start();
-include('../../../conexao.php');
 
-$id = $_GET['id'];
-$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id'";
-$result = mysqli_query($conexao, $query);
-$res_1 = mysqli_fetch_array($result);
+include('../../../conexao.php');
+$saram = $_GET['txtsaram'];
 ?>
 
 <head>
@@ -38,17 +34,73 @@ $res_1 = mysqli_fetch_array($result);
 </head>
 
 <body>
-  <div class="row">
-    <div class="form-group col-sm-3">
-      <label for="saram">SARAM</label>
-      <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM...">
-    </div>
-  </div>
-  <div>
-    <div>
-      <button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar">
-        <i class="fas fa-search"></i>
-      </button>
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-5"></div>
+      <div class="col-2">
+        <div class="inline-block">
+          <label for="saram">SARAM:</label>
+          <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" placeholder="Digite o SARAM" autocomplete="off">
+          <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <a class="btn btn-info btn-sm" href="consultar_processo.php?func=consulta&id=<?php echo $id; ?>&saram=<?php echo $saram ?>"><i class="fas fa-eye"></i></a>
+        </div>
+      </div>
+      <div class="col-5"></div>
+      <div class="table-responsive" style="text-align: center;">
+        <?php
+        if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram'] != '') {
+          $saram = $_GET['txtsaram'];
+
+          $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.nup, e.direito_pleiteado, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, d.direito as dir_direito, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram = '$saram'";
+        } else {
+          $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.nup, e.direito_pleiteado, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, d.direito as dir_direito, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id ORDER BY e.id";
+        }
+
+        $result = mysqli_query($conexao, $query);
+        $row = mysqli_num_rows($result);
+        ?>
+        <table class="table table-sm table-bordered table-striped">
+          <?php
+          while ($res_1 = mysqli_fetch_array($result)) {
+            $id = $res_1["id"];
+            $id_req = $res_1["id_req"];
+            $requerente = $res_1["req_nome"];
+            $nup = $res_1["nup"];
+            $direito_pleiteado = $res_1["dir_direito"];
+            $estado = $res_1["est_estado"];
+            $secao_atual = $res_1['sec_atual'];
+
+          ?>
+
+
+            <thead class="text-primary">
+              <th class="align-middle">Requerente</th>
+              <th class="align-middle">NUP</th>
+              <th class="align-middle">Direito Pleiteado</th>
+              <th class="align-middle">Estado</th>
+              <th class="align-middle">Seção Atual</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="align-middle"><?php echo $requerente; ?></td>
+                <td class="align-middle"><?php echo $nup; ?></td>
+                <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
+                <td class="align-middle"><?php echo $estado; ?></td>
+                <td class="align-middle"><?php echo $secao_atual; ?></td>
+              </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <?php
+        if ($row == '') {
+          echo "<h3> Sua pesquisa não retornou nenhum resultado! </h3>";
+        }
+        ?>
+      </div>
     </div>
   </div>
   <script src="../../../plugins/jquery/jquery.min.js"></script>
@@ -96,15 +148,29 @@ $res_1 = mysqli_fetch_array($result);
     });
   </script>
   <style>
+    .body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .row {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+    }
+
     .btn {
       display: inline-block;
       width: 70px;
       height: 70px;
       background-color: #f1f1f1;
       margin: 10px;
-      border-radius: 10%;
+      border-radius: 50%;
       box-shadow: 0 5px 15px -5px #00000070;
-      color: #3498db;
+      color: #007bff;
       overflow: hidden;
       position: relative;
     }
@@ -125,7 +191,7 @@ $res_1 = mysqli_fetch_array($result);
       position: absolute;
       width: 130%;
       height: 130%;
-      background: #3498db;
+      background: #007bff;
       transform: rotate(45deg);
       left: -110%;
       top: 90%;

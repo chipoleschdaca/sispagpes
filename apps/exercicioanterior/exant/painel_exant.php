@@ -226,12 +226,12 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
             <section class="col-md-12 connectedSortable">
               <form class="form-inline">
                 <div class="card col-md-12">
-                  <div class="card-body" style="padding-left: 5px">
+                  <div class="card-body" style="padding-left: 5px" style="position: absolute">
                     <div class="input-group input-group-sm">
-                      <label for="txtpesquisar" style="margin-right: 10px; margin-left:0px">Filtrar:
+                      <label for="txtpesquisar" style="margin-right: 10px;">Filtrar:
                       </label>
-                      <div style="margin-right: 20px">
-                        <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 250px">
+                      <div style="margin-right: 20px;">
+                        <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 375px">
                           <option value="" selected>POSTO/GRAD.</option>
                           <?php
                           $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
@@ -247,7 +247,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                         </select>
                       </div>
                       <div style="margin-right: 20px">
-                        <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px; width: 350px">
+                        <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px; width: 375px">
                           <option value="">DIREITO PLEITEADO</option>
                           <?php
                           $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
@@ -264,7 +264,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                         </select>
                       </div>
                       <div style="margin-right: 20px">
-                        <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px; width: 400px;">
+                        <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px; width: 375px;">
                           <option value="" selected>ESTADO DO PROCESSO</option>
                           <?php
                           $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
@@ -281,7 +281,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                         </select>
                       </div>
                       <div style="margin-right: 20px">
-                        <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-left:10px; padding: 10px; width: 350px">
+                        <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-left:10px; padding: 10px; width: 375px">
                           <option value="" selected>SEÇÃO ATUAL</option>
                           <?php
                           $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
@@ -297,9 +297,19 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                           } ?>
                         </select>
                       </div>
-                      <button class="btn btn-primary btn-primary-navbar btn-sm" type="submit" name="buttonPesquisar" style="margin-left: 10px">
-                        <i class="fas fa-search"></i>
+                      <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px; padding: 0px; margin: 0px;">
+                        <i class="fas fa-search" style="padding: 0px; margin:0px;"></i>
                       </button>
+                      <style>
+                        #filter {
+                          position: absolute;
+                          top: 100%;
+                          left: 100%;
+                          transform: translate(-100%, -100%);
+                          width: 100%;
+                          text-align: center;
+                        }
+                      </style>
                     </div>
                   </div>
                 </div>

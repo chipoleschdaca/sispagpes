@@ -1,0 +1,56 @@
+#print_button {
+	position: fixed;
+	top: 97%;
+	transform: translateY(-97%);
+	width: 100%;
+	text-align: right;
+}
+
+.print-btn {
+	display: inline-block;
+	width: 90px;
+	height: 90px;
+	background-color: #f1f1f1;
+	margin: 10px;
+	border-radius: 50%;
+	box-shadow: 0 5px 15px -5px #00000070;
+	color: #007bff;
+	overflow: hidden;
+	position: relative;
+}
+
+.print-btn i {
+	line-height: 90px;
+	font-size: 26px;
+	padding: 0;
+	margin: 0;
+	transition: 0.35s;
+	position: absolute;
+	text-align: center;
+	align-items: center;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.print-btn:hover i {
+	left: 37.5%;
+	transform: scale(1.5);
+	color: #f1f1f1;
+}
+
+.print-btn::before {
+	content: "";
+	position: absolute;
+	width: 150%;
+	height: 150%;
+	background: #007bff;
+	transform: rotate(45deg);
+	left: -130%;
+	top: 120%;
+}
+
+.print-btn:hover::before {
+	animation: aaa 1s 1;
+	top: -10px;
+	left: -10px;
+}

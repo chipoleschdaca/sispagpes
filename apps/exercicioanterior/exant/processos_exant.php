@@ -30,6 +30,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 	<link rel="stylesheet" href="../../../plugins/jqvmap/jqvmap.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="../../../dist/css/adminlte.min.css">
+	<link rel="stylesheet" href="../../../dist/css/style_print_button.css">
 	<!-- overlayScrollbars -->
 	<link rel="stylesheet" href="../../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- Daterange picker -->
@@ -1350,8 +1351,7 @@ if (isset($_POST['button'])) {
 							</table>
 						</div>
 						<div class="modal-footer">
-							<a class="btn btn-default btn-sm" type="button" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
-							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+							<a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
 						</div>
 					</form>
 				</div>

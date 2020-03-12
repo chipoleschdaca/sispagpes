@@ -46,6 +46,7 @@ function data($data)
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../../../dist/css/style_print_button.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -117,9 +118,11 @@ function data($data)
     </div>
   </div>
   <div class="row no-print">
-    <div class="col-12" style="text-align:center;">
-      <button class="btn btn-default" href="#" onclick="window.print();"><i class="fas fa-print"></i> Imprimir</button>
-      <a class="btn btn-primary" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" style="margin-right: 5px;"><i class="fas fa-download"></i> Gerar PDF</a>
+    <div class="col-12" id="print_button">
+      <a class="print-btn" href="#" onclick="js:window.print();"> <i class="fas fa-print"></i> </a>
+      <a class="print-btn" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener">
+        <i class="fas fa-file-pdf"></i>
+      </a>
     </div>
   </div>
 </body>
