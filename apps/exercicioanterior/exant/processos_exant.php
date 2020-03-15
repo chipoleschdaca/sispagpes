@@ -6,6 +6,10 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 	header('Location: ../../../index.php');
 	exit();
 }
+function AnoAtual()
+{
+	echo date("Y") . " ";
+}
 ?>
 
 <!DOCTYPE html>
@@ -41,99 +45,16 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
+		<!-- Navbar -->
 		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+			<!-- Left navbar links -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle="dropdown" href="#">
-						<i class="far fa-comments"></i>
-						<span class="badge badge-danger navbar-badge">3</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<a href="#" class="dropdown-item">
-							<div class="media">
-								<img src="../../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										Brad Diesel
-										<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-									</h3>
-									<p class="text-sm">Call me whenever you can...</p>
-									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-								</div>
-							</div>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<div class="media">
-								<img src="../../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										John Pierce
-										<span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-									</h3>
-									<p class="text-sm">I got your message bro</p>
-									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-								</div>
-							</div>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<!-- Message Start -->
-							<div class="media">
-								<img src="../../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										Nora Silvester
-										<span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-									</h3>
-									<p class="text-sm">The subject goes here</p>
-									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-								</div>
-							</div>
-
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle="dropdown" href="#">
-						<i class="far fa-bell"></i>
-						<span class="badge badge-warning navbar-badge">15</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<span class="dropdown-item dropdown-header">15 Notifications</span>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-envelope mr-2"></i> 4 new messages
-							<span class="float-right text-muted text-sm">3 mins</span>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-users mr-2"></i> 8 friend requests
-							<span class="float-right text-muted text-sm">12 hours</span>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-file mr-2"></i> 3 new reports
-							<span class="float-right text-muted text-sm">2 days</span>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-						<i class="fas fa-th-large"></i>
-					</a>
-				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#">
 						<i class="fas fa-bars"></i>
@@ -164,7 +85,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 			</ul>
 		</nav>
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<a href="painel_exant.php" class="brand-link" style="heigh:50px;">
+			<a href="painel_exant.php" class="brand-link">
 				<img src="../../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
 				<b><span class="brand-text font-weight-light">SISPAGPES</span></b>
 			</a>
@@ -207,21 +128,9 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 			</div>
 		</aside>
 		<div class="content-wrapper">
-			<div class="content-header">
-				<div class="container-fluid">
-					<div class="row mb-2">
-						<div class="col-sm-3">
-						</div>
-						<div class="col-sm-6" style="text-align: center;">
-							<h1 class="m-0 text-dark"></h1>
-						</div>
-						<div class="col-sm-3">
-						</div>
-					</div>
-				</div>
-			</div>
 			<section class="content">
 				<div class="container-fluid">
+					<br>
 					<div class="row">
 						<div class="col-12 col-sm-6 col-md-3">
 							<div class="info-box mb-3">
@@ -334,38 +243,58 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 									<div class="card-body">
 										<form class="form-inline">
 											<div class="input-group input-group-sm">
-												<label for="txtnome" style="margin-right: 10px;">Requerente:
-												</label>
+												<label for="txtnome" style="margin-right: 10px;">SARAM:</label>
+												<input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
+											</div>
+											<div class="input-group input-group-sm">
+												<label for="txtnome" style="margin-right: 10px;">Requerente:</label>
 												<input class="form-control" type="search" id="txtnome" name="txtnome" placeholder="Nome ou parte do nome" aria-label="Pesquisar" style="border-radius:3px;">
 											</div>
-										</form>
-										<br>
-										<form class="form-inline">
+											<br>
 											<div class="input-group input-group-sm">
-												<label for="status" style="margin-right: 10px;">Status: </label>
-												<select class="form-control select2" id="txtstatus" name="txtstatus" style="border-radius:3px;">
-													<option value="" disabled selected hidden>Status</option>
-													<option value="Aberto">Aberto</option>
-													<option value="Aguardando">Aguardando</option>
-													<option value="Aprovado">Aprovado</option>
-													<option value="Cancelado">Cancelado</option>
+												<label for="status" style="margin-right: 10px;">Direito Pleiteado: </label>
+												<select class="form-control select2" id="txtdirpleiteado" name="txtdirpleiteado" style="border-radius:3px; margin-right:20px; width: 375px">
+													<option value="">Selecione o direito pleiteado</option>
+													<?php
+													$query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
+													$result_direito = mysqli_query($conexao, $query_direito);
+													if (count($result_direito)) {
+														while ($res_dir = mysqli_fetch_array($result_direito)) {
+															$id = $res_dir['id_direito'];
+															$direito = $res_dir['direito_pleiteado'];
+
+													?>
+															<option value="<?php echo $id ?>"><?php echo $direito ?></option>
+													<?php }
+													} ?>
 												</select>
 											</div>
-										</form>
-										<br>
-										<form class="form-inline">
 											<div class="input-group input-group-sm">
-												<label for="txtpesquisar2" style="margin-right: 10px;">Data de Abertura:
-												</label>
-												<input class="form-control" type="date" id="txtdata" name="txtdata" aria-label="Pesquisar" style="border-radius:3px;">
+												<label for="status" style="margin-right: 10px;">Estado: </label>
+												<select class="form-control select2" id="txtestadofiltro" name="txtestadofiltro" style="border-radius:3px; margin-right:20px; width: 375px;">
+													<option value="" selected>Selecione o estado do processo</option>
+													<?php
+													$query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
+													$result_est = mysqli_query($conexao, $query_est);
+													if (count($result_est)) {
+														while ($res_est = mysqli_fetch_array($result_est)) {
+															$id_est_2 = $res_est['id_estado'];
+															$estado_est = $res_est['estado_processo'];
+													?>
+															<option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
+													<?php }
+													} ?>
+												</select>
+											</div>
+											<br>
+
+											<br>
+											<div class="input-group-append">
+												<button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar">
+													<i class="fas fa-search"></i>
+												</button>
 											</div>
 										</form>
-										<br>
-										<div class="input-group-append">
-											<button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar">
-												<i class="fas fa-search"></i>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -394,14 +323,16 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 
 										if (isset($_GET['buttonPesquisar']) and $_GET['txtnome'] != '') {
 											$nome = '%' . $_GET['txtnome'] . '%';
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE req_nome LIKE '$nome' order by e.id asc";
-										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != '') {
-											$data = $_GET['txtpesquisar'] . '%';
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
-										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == '') {
-											$data = $_GET['txtpesquisar'] . '%';
-											$statusOrc = $_GET['status'];
-											$query = "select e.id, e.requerente, e.sacador, e.direito_pleiteado, e.status, c.nome as req_nome, f.nome as func_nome from exercicioanterior as e LEFT JOIN requerentes as c on e.requerente = c.cpf LEFT JOIN militares as f on e.tecnico = f.id where data_abertura = '$data' order by id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.nome LIKE '$nome' order by e.id asc";
+										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
+											$saram_filtro = $_GET['txtsaram3'] . '%';
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram_filtro' order by e.id asc";
+										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtdirpleiteado'] != '') {
+											$dir_pleiteado = $_GET['txtdirpleiteado'] . '%';
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE d.id = '$dir_pleiteado' order by e.id asc";
+										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtestadofiltro'] != '') {
+											$estado_filtro = $_GET['txtestadofiltro'];
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE est.id = '$estado_filtro' order by e.id asc";
 										} else {
 											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
 										}
@@ -714,7 +645,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 			</section>
 		</div>
 		<footer class="main-footer">
-			<strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+			<strong>Copyright &copy; 2019-<?php AnoAtual() ?><a href="#">GAP-LS</a>.</strong>
 			Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
 			<div class="float-right d-none d-sm-inline-block">
 				<b>Versão</b> 1.0.0
@@ -779,6 +710,9 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 				reverse: true
 			});
 			$('#txtnup2').mask('00000.000000/0000-00', {
+				reverse: true
+			});
+			$('#txtsaram3').mask('000.000-0', {
 				reverse: true
 			});
 		});
@@ -1103,7 +1037,8 @@ if (isset($_POST['button'])) {
 			$data_criacao_edita = $_POST['txtdatacriacao2'];
 			$direito_edita = $_POST['txtdireitopleiteado2'];
 			$secao_origem_edita = $_POST['txtsecaoorigem2'];
-			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', sacador = '$sacador_edita', nup = '$nup_edita', prioridade = '$prioridade_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id' ";
+
+			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', sacador = '$sacador_edita', nup = '$nup_edita', prioridade = '$prioridade_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
 
 			$result_editar = mysqli_query($conexao, $query_editar);
 

@@ -4,12 +4,12 @@ include('conexao.php');
 
 //CANCELAR ORÇAMENTOS APÓS 5 DIAS
 
-$query = "SELECT * from orcamentos where status = 'Aguardando'";
+$query = "SELECT * FROM orcamentos WHERE status = 'Aguardando'";
 $result = mysqli_query($conexao, $query);
 while ($res_1 = mysqli_fetch_array($result)) {
 	$data_geracao = $res_1['data_geracao'];
 	$data_cancelamento = date('Y/m/d', strtotime("-7 days", strtotime(date('Y/m/d'))));
-	$query_editar = "UPDATE orcamentos set status = 'Cancelado' where data_geracao = '$data_cancelamento' and status = 'Aguardando'";
+	$query_editar = "UPDATE orcamentos SET status = 'Cancelado' WHERE data_geracao = '$data_cancelamento' AND status = 'Aguardando'";
 	$result_editar = mysqli_query($conexao, $query_editar);
 }
 
@@ -21,7 +21,7 @@ if (empty($_POST['usuario']) || empty($_POST['senha'])) {
 
 $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
 $senha = mysqli_real_escape_string($conexao, md5($_POST['senha']));
-$query = "select * from usuarios where usuario = '{$usuario}' and senha = '{$senha}'";
+$query = "SELECT * FROM usuarios WHERE usuario = '{$usuario}' AND senha = '{$senha}'";
 $result = mysqli_query($conexao, $query);
 $dado = mysqli_fetch_array($result);
 $row = mysqli_num_rows($result);

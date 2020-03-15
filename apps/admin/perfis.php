@@ -6,6 +6,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   header('Location: ../../index.php');
   exit();
 }
+function AnoAtual()
+{
+  echo date("Y") . " ";
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -190,7 +194,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
+      <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
@@ -553,7 +557,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+      <strong>Copyright &copy; 2019-<?php AnoAtual() ?><a href="#">GAP-LS</a>.</strong>
       Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
       <div class="float-right d-none d-sm-inline-block">
         <b>Versão</b> 1.0.0

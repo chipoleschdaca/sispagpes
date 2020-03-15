@@ -540,7 +540,7 @@ if ($_SESSION['perfil_usuario'] != 'Funcionário') {
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+      <strong>Copyright &copy; 2019-2020 <a href="#">GAP-LS</a>.</strong>
       Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
       <div class="float-right d-none d-sm-inline-block">
         <b>Versão</b> 1.0.0

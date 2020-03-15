@@ -1,8 +1,8 @@
 <?php
-
 include('../../../conexao.php');
-$saram = $_GET['txtsaram'];
 ?>
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
   <meta charset="utf-8">
@@ -23,6 +23,7 @@ $saram = $_GET['txtsaram'];
   <link rel="stylesheet" href="../../../plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../../dist/css/style_print_button.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="../../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -32,77 +33,85 @@ $saram = $_GET['txtsaram'];
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+<style>
+  .hold-transition {
+    padding: 100px;
+    top: 50%;
+    left: 50%;
+  }
 
-<body>
-  <div class="wrapper">
-    <div class="row">
-      <div class="col-5"></div>
-      <div class="col-2">
-        <div class="inline-block">
-          <label for="saram">SARAM:</label>
-          <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" placeholder="Digite o SARAM" autocomplete="off">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
-              <i class="fas fa-search"></i>
-            </button>
+  .form-control {
+    border-radius: 3%;
+  }
+</style>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <section class="content">
+    <div class="container-fluid">
+      <br>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <form class="form-inline">
+              <div class="input-group input-group-sm">
+                <label for="txtsaram" style="margin-right: 10px">SARAM:</label>
+                <input type="search" class="form-control" id="txtsaram" name="txtsaram" placeholder="Digite o SARAM" style="border-radius: 5%" autocomplete="off">
+                <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <a type="button" class="btn btn-primary btn-sm" href="consultar_processo.php" id="novapesquisa" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Nova Pesquisa</a>
+            </form>
+            <div class="table-responsive" style="text-align: center;">
+              <?php
+              if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram'] != '') {
+                $saram = $_GET['txtsaram'];
+                $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.nup, e.direito_pleiteado, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, d.direito as dir_direito, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram'";
+
+                $result = mysqli_query($conexao, $query);
+                $row = mysqli_num_rows($result);
+              ?>
+                <table class="table table-sm table-bordered table-striped">
+                  <thead class="text-primary">
+                    <th class="align-middle">Requerente</th>
+                    <th class="align-middle">NUP</th>
+                    <th class="align-middle">Direito Pleiteado</th>
+                    <th class="align-middle">Estado</th>
+                    <th class="align-middle">Seção Atual</th>
+                  </thead>
+                  <?php
+                  while ($res_1 = mysqli_fetch_array($result)) {
+                    $id = $res_1["id"];
+                    $id_req = $res_1["id_req"];
+                    $requerente = $res_1["req_nome"];
+                    $nup = $res_1["nup"];
+                    $direito_pleiteado = $res_1["dir_direito"];
+                    $estado = $res_1["est_estado"];
+                    $secao_atual = $res_1['sec_atual'];
+                  ?>
+                    <tbody>
+                      <tr>
+                        <td class="align-middle"><?php echo $requerente; ?></td>
+                        <td class="align-middle"><?php echo $nup; ?></td>
+                        <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
+                        <td class="align-middle"><?php echo $estado; ?></td>
+                        <td class="align-middle"><?php echo $secao_atual; ?></td>
+                      </tr>
+                    </tbody>
+                  <?php } ?>
+                </table>
+              <?php
+              } else if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram'] == '') {
+                echo "<h3> Sua pesquisa não retornou nenhum resultado! </h3>";
+              }
+              ?>
+            </div>
           </div>
-          <a class="btn btn-info btn-sm" href="consultar_processo.php?func=consulta&id=<?php echo $id; ?>&saram=<?php echo $saram ?>"><i class="fas fa-eye"></i></a>
         </div>
       </div>
-      <div class="col-5"></div>
-      <div class="table-responsive" style="text-align: center;">
-        <?php
-        if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram'] != '') {
-          $saram = $_GET['txtsaram'];
-
-          $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.nup, e.direito_pleiteado, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, d.direito as dir_direito, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram = '$saram'";
-        } else {
-          $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.nup, e.direito_pleiteado, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, d.direito as dir_direito, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id ORDER BY e.id";
-        }
-
-        $result = mysqli_query($conexao, $query);
-        $row = mysqli_num_rows($result);
-        ?>
-        <table class="table table-sm table-bordered table-striped">
-          <?php
-          while ($res_1 = mysqli_fetch_array($result)) {
-            $id = $res_1["id"];
-            $id_req = $res_1["id_req"];
-            $requerente = $res_1["req_nome"];
-            $nup = $res_1["nup"];
-            $direito_pleiteado = $res_1["dir_direito"];
-            $estado = $res_1["est_estado"];
-            $secao_atual = $res_1['sec_atual'];
-
-          ?>
-
-
-            <thead class="text-primary">
-              <th class="align-middle">Requerente</th>
-              <th class="align-middle">NUP</th>
-              <th class="align-middle">Direito Pleiteado</th>
-              <th class="align-middle">Estado</th>
-              <th class="align-middle">Seção Atual</th>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="align-middle"><?php echo $requerente; ?></td>
-                <td class="align-middle"><?php echo $nup; ?></td>
-                <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
-                <td class="align-middle"><?php echo $estado; ?></td>
-                <td class="align-middle"><?php echo $secao_atual; ?></td>
-              </tr>
-            <?php } ?>
-            </tbody>
-        </table>
-        <?php
-        if ($row == '') {
-          echo "<h3> Sua pesquisa não retornou nenhum resultado! </h3>";
-        }
-        ?>
-      </div>
     </div>
-  </div>
+  </section>
+  <!-- jQuery -->
   <script src="../../../plugins/jquery/jquery.min.js"></script>
   <!-- jQuery Mask -->
   <script src="../../../plugins/jQuery-Mask/dist/jquery.mask.js"></script>
@@ -112,6 +121,8 @@ $saram = $_GET['txtsaram'];
   <script>
     $.widget.bridge('uibutton', $.ui.button)
   </script>
+  <!-- Select2 -->
+  <script src="../../../plugins/select2/js/select2.full.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
@@ -121,6 +132,7 @@ $saram = $_GET['txtsaram'];
   <!-- JQVMap -->
   <script src="../../../plugins/jqvmap/jquery.vmap.min.js"></script>
   <script src="../../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <script src="../../../plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
   <!-- jQuery Knob Chart -->
   <script src="../../../plugins/jquery-knob/jquery.knob.min.js"></script>
   <!-- daterangepicker -->
@@ -128,8 +140,6 @@ $saram = $_GET['txtsaram'];
   <script src="../../../plugins/daterangepicker/daterangepicker.js"></script>
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="../../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Bootstrap Switch -->
-  <script src="../../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
   <!-- Summernote -->
   <script src="../../../plugins/summernote/summernote-bs4.min.js"></script>
   <!-- overlayScrollbars -->
@@ -147,79 +157,6 @@ $saram = $_GET['txtsaram'];
       });
     });
   </script>
-  <style>
-    .body {
-      margin: 0;
-      padding: 0;
-    }
-
-    .row {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      text-align: center;
-    }
-
-    .btn {
-      display: inline-block;
-      width: 70px;
-      height: 70px;
-      background-color: #f1f1f1;
-      margin: 10px;
-      border-radius: 50%;
-      box-shadow: 0 5px 15px -5px #00000070;
-      color: #007bff;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .btn i {
-      margin: 0px;
-      font-size: 26px;
-      transition: 0.2s linear;
-    }
-
-    .btn:hover i {
-      transform: scale(1.5);
-      color: #f1f1f1;
-    }
-
-    .btn::before {
-      content: "";
-      position: absolute;
-      width: 130%;
-      height: 130%;
-      background: #007bff;
-      transform: rotate(45deg);
-      left: -110%;
-      top: 90%;
-    }
-
-    .btn:hover::before {
-      animation: aaa 1s 1;
-      top: -10px;
-      left: -10px;
-    }
-
-    /*
-    @keyframes aaa {
-      0% {
-        left: -110%;
-        top: 90%;
-      }
-
-      50% {
-        left: 10%;
-        top: -30%;
-      }
-
-      100% {
-        left: -10%;
-        top: -10%;
-      }
-    }
-    */
-  </style>
 </body>
+
+</html>

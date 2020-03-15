@@ -197,7 +197,7 @@ if ($_SESSION['perfil_usuario'] != 'Funcionário') {
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="painel_admin.php" class="brand-link" style="heigh:50px;">
+      <a href="painel_admin.php" class="brand-link" style="height:50px;">
         <img src="dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
@@ -514,7 +514,7 @@ if ($_SESSION['perfil_usuario'] != 'Funcionário') {
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-      <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+      <strong>Copyright &copy; 2019-2020 <a href="#">GAP-LS</a>.</strong>
       Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
       <div class="float-right d-none d-sm-inline-block">
         <b>Versão</b> 1.0.0
