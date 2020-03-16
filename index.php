@@ -57,7 +57,7 @@ session_start();
     </div>
     <div class="footer" style="padding-top:70px; position:relative; color:grey; font-size:small;">
       <footer class="main-footer">
-        <strong>Copyright &copy; 2019 <a href="#">GAP-LS</a>.</strong>
+        <strong>&copy; 2019-<?php echo date("Y") ?> <a href="#">GAP-LS</a>.</strong>
         Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
           <b>Versão</b> 1.0.0
