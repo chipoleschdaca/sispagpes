@@ -1,6 +1,5 @@
 <?php
-
-//CARREGAR DOMPDF
+include '../conexao.php';
 include '../dompdf/autoload.inc.php';
 
 use Dompdf\Dompdf;
@@ -8,7 +7,7 @@ use Dompdf\Dompdf;
 $id = $_GET['id'];
 
 //ALIMENTAR OS DADOS NO RELATÓRIO
-$html = utf8_encode(file_get_contents("http://localhost/sispagpes/rel/rel_orcamentos.php?id=" . $id)); //O problema que em vez de "rel/rel_orcamentos.php?id=".$id" o professor colocou "rel/rel_orcamentos_class.php?id=".$id"
+$html = utf8_encode(file_get_contents($url . "/rel/rel_orcamentos.php?id=" . $id)); //O problema que em vez de "rel/rel_orcamentos.php?id=".$id" o professor colocou "rel/rel_orcamentos_class.php?id=".$id"
 
 //INICIALIZAR A CLASSE DO DOMPDF
 $pdf = new Dompdf();

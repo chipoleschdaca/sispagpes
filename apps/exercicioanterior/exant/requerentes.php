@@ -2,6 +2,7 @@
 session_start();
 include('../../../verificar_login.php');
 include('../../../conexao.php');
+include('../../../dist/php/functions.php');
 if ($_SESSION['perfil_usuario'] != 'EXANT') {
   header('Location: ../../../index.php');
   exit();
@@ -382,11 +383,7 @@ function AnoAtual()
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-      <strong>Copyright &copy; 2019-<?php AnoAtual() ?><a href="#">GAP-LS</a>.</strong>
-      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Versão</b> 1.0.0
-      </div>
+      <?php footer() ?>
     </footer>
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

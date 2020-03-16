@@ -1,6 +1,5 @@
 <?php
-
-//CARREGAR DOMPDF
+include('../../../../conexao.php');
 include('../../../../plugins/dompdf/autoload.inc.php');
 
 use Dompdf\Dompdf;
@@ -8,9 +7,8 @@ use Dompdf\Dompdf;
 $id = $_GET['id'];
 $id_req = $_GET['id_req'];
 
-
 //ALIMENTAR OS DADOS NO RELATÓRIO
-$html = utf8_encode(file_get_contents("http://localhost/sispagpes/apps/exercicioanterior/exant/rel/historico_exant_pdf.php?id=" . $id . "&id_req=" . $id_req));
+$html = utf8_encode(file_get_contents($url . "/apps/exercicioanterior/exant/rel/historico_exant_pdf.php?id=" . $id . "&id_req=" . $id_req));
 
 //INICIALIZAR A CLASSE DO DOMPDF
 $pdf = new Dompdf();
