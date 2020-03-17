@@ -86,7 +86,7 @@ include '../../../dist/php/functions.php';
             <label for="txtsaram" style="margin-right: 10px">
               <h4><b>SARAM:</b></h4>
             </label>
-            <input type="search" class="form-control form-control-lg" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM..." style="border-radius:5%; margin-right: 10px;" autocomplete="off">
+            <input type="search" class="form-control form-control-lg" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM..." style="border-radius:2%; margin-right: 10px;" autocomplete="off">
             <br>
             <button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar"><i class="fas fa-search"></i></button>
           </div>
