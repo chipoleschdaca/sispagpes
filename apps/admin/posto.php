@@ -42,6 +42,11 @@ function AnoAtual()
   <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- SweetAlert2 -->
+  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <!-- Toastr -->
+  <script src="../../plugins/toastr/toastr.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -779,7 +784,7 @@ if (isset($_POST['button'])) {
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    echo "<script language='javascript'> window.alert('Posto já está cadastrado!'); </script>";
+    Alerta("info", "Posto já cadastrado!", false);
     exit();
   }
 
@@ -857,8 +862,8 @@ if (@$_GET['func'] == 'edita') {
       $result_verificar = mysqli_query($conexao, $query_verificar);
       $row_verificar = mysqli_num_rows($result_verificar);
 
-      if ($row_verificar > 1) {
-        echo "<script language='javascript'> window.alert('Posto já está cadastrado!'); </script>";
+      if ($row_verificar > 0) {
+        Alerta("info", "Posto já cadastrado!", false);
         exit();
       }
 

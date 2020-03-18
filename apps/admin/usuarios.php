@@ -43,6 +43,11 @@ function AnoAtual()
   <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- SweetAlert2 -->
+  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <!-- Toastr -->
+  <script src="../../plugins/toastr/toastr.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -463,9 +468,9 @@ function AnoAtual()
 
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = $_GET['txtpesquisar'] . '%';
-                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id where u.nome LIKE '$nome' order by u.nome asc";
+                      $query = "SELECT u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, m.posto, m.nome as mil_nome FROM usuarios as u LEFT JOIN militares as m ON u.id_militar = m.id WHERE u.nome LIKE '$nome' ORDER BY u.nome ASC";
                     } else {
-                      $query = "select u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, f.posto from usuarios as u INNER JOIN militares as f ON u.id_militar = f.id order by u.nome asc";
+                      $query = "SELECT u.id, u.nome, u.usuario, u.senha, u.perfil, u.id_militar, m.posto, m.nome as mil_nome FROM usuarios as u LEFT JOIN militares as m ON u.id_militar = m.id ORDER BY u.nome ASC";
                     }
 
                     $result = mysqli_query($conexao, $query);
@@ -489,7 +494,7 @@ function AnoAtual()
 
                         <?php
                         while ($res_1 = mysqli_fetch_array($result)) {
-                          $nome = $res_1["nome"];
+                          $nome = $res_1["mil_nome"];
                           $posto = $res_1["posto"];
                           $senha = $res_1["senha"];
                           $usuario = $res_1["usuario"];
@@ -628,7 +633,7 @@ function AnoAtual()
 <?php
 if (isset($_POST['button'])) {
   $funcionario = $_POST['funcionario'];
-  $query_func = "select * from militares where id = '{$funcionario}' ";
+  $query_func = "SELECT * FROM militares WHERE id = '{$funcionario}' ";
   $result_func = mysqli_query($conexao, $query_func);
   $dado = mysqli_fetch_array($result_func);
   $row = mysqli_num_rows($result_func);
@@ -642,12 +647,12 @@ if (isset($_POST['button'])) {
   $senha = $_POST['txtsenha'];
 
   //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
-  $query_verificar = "select * from usuarios where usuario = '$usuario' ";
+  $query_verificar = "SELECT * FROM usuarios WHERE usuario = '$usuario' ";
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
+    Alerta("info", "Usuário já cadastrado!", false);
     exit();
   }
   $query = "INSERT into usuarios (nome, usuario, senha, perfil, id_militar) VALUES ('$nome', '$usuario', '$senha', '$perfil', '$funcionario' )";
@@ -730,7 +735,7 @@ if (@$_GET['func'] == 'edita') {
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          echo "<script language='javascript'> window.alert('Usuário já cadastrado!'); </script>";
+          Alerta("info", "Usuário já cadastrado!", false);
           exit();
         }
       }

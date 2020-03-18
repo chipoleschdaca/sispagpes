@@ -748,7 +748,7 @@ if (isset($_POST['button'])) {
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+    Alerta("info", "CPF já cadastrado!", false);
     exit();
   }
 
@@ -885,7 +885,7 @@ if (@$_GET['func'] == 'edita') {
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+          Alerta("info", "CPF já cadastrado!", false);
           exit();
         }
       }
@@ -1014,7 +1014,7 @@ if (@$_GET['func'] == 'aprova') {
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          echo "<script language='javascript'> window.alert('CPF já cadastrado!'); </script>";
+          Alerta("info", "CPF já cadastrado!", false);
           exit();
         }
       }

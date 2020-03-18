@@ -1,7 +1,7 @@
 <?php
 function footer()
 {
-  echo '<strong><a href="#">SISPAGPES </a>&copy; 2019-' . date("Y") . '</strong>. Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. <div class="float-right d-none d-sm-inline-block"><b>Versão</b> 1.0.0</div>';
+  echo '<strong>&copy; 2019-' . date("Y") . '<a href="#"> SISPAGPES</a></strong>. Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. <div class="float-right d-none d-sm-inline-block"><b>Versão</b> 1.0.0</div>';
 }
 function Alerta($type, $title, $msg)
 {
@@ -11,7 +11,7 @@ function Alerta($type, $title, $msg)
           title: '$title',
           text: '$msg',
           showConfirmButton: false,
-          timer: 2000
+          timer: 3000
         });
         </script>";
 }

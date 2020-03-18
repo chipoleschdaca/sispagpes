@@ -44,6 +44,11 @@ function AnoAtual()
 	<link rel="stylesheet" href="../../../plugins/summernote/summernote-bs4.css">
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+	<!-- SweetAlert2 -->
+  <script src="../../../plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <!-- Toastr -->
+  <script src="../../../plugins/toastr/toastr.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -811,20 +816,20 @@ if (isset($_POST['button'])) {
 	$row_verificar = mysqli_num_rows($result_verificar);
 
 	if ($row_verificar > 0) {
-		echo "<script language='javascript'> window.alert('O Requerente já está cadastrado!'); </script>";
+		Alerta("info", "O requerente já está cadastrado!", false);
 		exit();
 	}
 	// Verificar se o NUP já está cadastrado
-	$query_nup = "select * from exercicioanterior where nup = '$nup'";
+	$query_nup = "SELECT * from exercicioanterior WHERE nup = '$nup'";
 	$result_nup = mysqli_query($conexao, $query_nup);
 	$row_nup = mysqli_num_rows($result_nup);
 
 	if ($row_nup > 0) {
-		echo "<script language='javascript'> window.alert('O NUP já está cadastrado!'); </script>";
+		Alerta("info", "O NUP já existe!", false);
 		exit();
 	}
 
-	$query = "INSERT into exercicioanterior (saram, cpf, requerente, sacador, nup, prioridade, data_criacao, direito_pleiteado, secao_origem, estado, secao_atual) VALUES ('$cpf', '$cpf', '$cpf', '$sacador', '$nup', '$prioridade', '$data_criacao', '$direito', '$secao_origem', '$id_estado', '$secao_origem')";
+	$query = "INSERT INTO exercicioanterior (saram, cpf, requerente, sacador, nup, prioridade, data_criacao, direito_pleiteado, secao_origem, estado, secao_atual) VALUES ('$cpf', '$cpf', '$cpf', '$sacador', '$nup', '$prioridade', '$data_criacao', '$direito', '$secao_origem', '$id_estado', '$secao_origem')";
 
 	$result = mysqli_query($conexao, $query);
 
@@ -928,7 +933,7 @@ if (isset($_POST['button'])) {
 							<div class="row">
 								<div class="form-group col-sm-3">
 									<label for="quantidade">NUP</label>
-									<input type="text" class="form-control mr-2" id="txtnup" name="txtnup2" placeholder="00000.000000/0000-00" value="<?php echo $res_1["nup"]; ?>" required>
+									<input type="text" class="form-control mr-2" id="txtnup2" name="txtnup2" placeholder="00000.000000/0000-00" value="<?php echo $res_1["nup"]; ?>" required>
 								</div>
 								<div class="col-sm-2"></div>
 								<div class="form-group col-sm-7">
@@ -1034,6 +1039,17 @@ if (isset($_POST['button'])) {
 			$data_criacao_edita = $_POST['txtdatacriacao2'];
 			$direito_edita = $_POST['txtdireitopleiteado2'];
 			$secao_origem_edita = $_POST['txtsecaoorigem2'];
+
+			$query_verificar = "SELECT * FROM exercicioanterior WHERE nup = '$nup_edita'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+
+			$result_verificar = mysqli_query($conexao, $query_verificar);
+			$dado_verificar = mysqli_fetch_array($result_verificar);
+			$row_verificar = mysqli_num_rows($result_verificar);
+
+			if ($row_verificar > 0) {
+				Alerta("info", "NUP já existe!", false);
+				exit();
+			}
 
 			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', sacador = '$sacador_edita', nup = '$nup_edita', prioridade = '$prioridade_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
 
@@ -1183,7 +1199,7 @@ if (isset($_POST['button'])) {
 			$novasecao = $_POST['txtnovasecao'];
 			$data_atual = $_POST['txtdataatual'];
 			$obs = $_POST['txtobs'];
-			$query_estado = "UPDATE exercicioanterior set obs = '$obs', data_saida = '$data_atual', estado = '$novoestado', secao_atual = '$novasecao' where id = '$id'";
+			$query_estado = "UPDATE exercicioanterior set obs = '$obs', data_saida = '$data_atual', estado = '$novoestado', secao_atual = '$novasecao' WHERE id = '$id'";
 			$result_estado = mysqli_query($conexao, $query_estado);
 
 			if ($result_estado == '') {

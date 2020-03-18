@@ -39,6 +39,11 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- SweetAlert2 -->
+  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <!-- Toastr -->
+  <script src="../../plugins/toastr/toastr.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
