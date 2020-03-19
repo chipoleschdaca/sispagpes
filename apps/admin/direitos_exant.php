@@ -849,8 +849,6 @@ if (@$_GET['func'] == 'edita') {
     </script>
     <!--Modal EDITAR -->
 
-    <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
-
 <?php
     if (isset($_POST['buttonEditar'])) {
       $direito2 = strtoupper($_POST['txtdireito2']);
@@ -869,8 +867,7 @@ if (@$_GET['func'] == 'edita') {
         echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
         echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
       } else {
-        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='direitos_exant.php'; </script>";
+        AlertaLocation("success", "Editado com sucesso!", false, "direitos_exant.php");
       }
     }
   }

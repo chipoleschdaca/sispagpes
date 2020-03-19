@@ -342,11 +342,11 @@ function AnoAtual()
                     $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
                     $result_posto = mysqli_query($conexao, $query_posto);
                     if (count($result_posto)) {
-                      while ($res_p = mysqli_fetch_array($result_posto)) {
-                        $id = $res_p['id'];
-                        $posto = $res_p['posto'];
+                      while ($res_ex = mysqli_fetch_array($result_posto)) {
+                        $id_ex = $res_ex['id'];
+                        $posto_ex = $res_ex['posto'];
                     ?>
-                        <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                        <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
                     <?php }
                     } ?>
                   </select>
@@ -373,7 +373,7 @@ function AnoAtual()
                 <div class="form-group">
                   <label for="fornecedor">E-mail</label>
                   <input type="email" class="form-control mr-2" id="txtemail" name="txtemail" autocomplete="off" placeholder="Email">
-                </div>                
+                </div>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
@@ -534,33 +534,27 @@ if (isset($_POST['button'])) {
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
-    echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
     echo "<script language='javascript'> window.location='requerentes.php'; </script>";
   } else {
-    echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
+    echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
     echo "<script language='javascript'> window.location='requerentes.php'; </script>";
   }
-}
-?>
 
-<!---------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
-<?php
-if (@$_GET['func'] == 'deleta') {
-  $id = $_GET['id'];
-  $query = "DELETE FROM requerentes where id = '$id'";
-  mysqli_query($conexao, $query);
+  //EXCLUIR DADOS DA TABELA
+} else if (@$_GET['func'] == 'deleta') {
+  $id_del = $_GET['id'];
+  $query_del = "DELETE FROM requerentes WHERE id = '$id_del'";
+  mysqli_query($conexao, $query_del);
+  echo "<script language='javascript'> window.alert('Excluído com sucesso!'); </script>";
   echo "<script language='javascript'> window.location='requerentes.php'; </script>";
-}
-?>
-<!-------------------------------------------------------------------------------->
 
-<!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
-<?php
-if (@$_GET['func'] == 'edita') {
-  $id = $_GET['id'];
-  $query = "SELECT * from requerentes where id = '$id'";
-  $result = mysqli_query($conexao, $query);
-  while ($res_1 = mysqli_fetch_array($result)) {
+  // EDITAR REGISTRO
+} else if (@$_GET['func'] == 'edita') {
+  $id_ed = $_GET['id'];
+  $query_ed = "SELECT * FROM requerentes WHERE id = '$id_ed'";
+  $result_ed = mysqli_query($conexao, $query_ed);
+  while ($res_2 = mysqli_fetch_array($result_ed)) {
 ?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
@@ -574,33 +568,39 @@ if (@$_GET['func'] == 'edita') {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="fornecedor">Saram</label>
-                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram2" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram2" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_2['saram']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="fornecedor">CPF</label>
-                <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf2" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
+                <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf2" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_2['cpf']; ?>" required>
               </div>
               <div class="form-group">
-                <label for="id_produto">Posto</label>
-                <select class="form-control mr-2" name="txtposto2" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
+                <label for="">Posto</label>
+                <select class="form-control mr-2" id="txtposto2" name="txtposto2" required>
+                  <!--<option value="" disabled selected hidden><?php echo $res_2['posto']; ?></option>-->
                   <option value="" disabled selected hidden>Selecione o posto...</option>
                   <?php
-                  $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
+                  $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
                   $result_posto = mysqli_query($conexao, $query_posto);
                   if (count($result_posto)) {
                     while ($res_p = mysqli_fetch_array($result_posto)) {
                       $id_p = $res_p['id'];
-                      $posto = $res_p['posto'];
+                      $posto_p = $res_p['posto'];
                   ?>
-                      <option value="<?php echo $id_p ?>"><?php echo $posto ?></option>
+                      <option value="<?php echo $id_p ?>"><?php echo $posto_p ?></option>
                   <?php }
                   } ?>
                 </select>
               </div>
               <div class="form-group">
-                <label for="id_produto">Situação</label><br>
-                <div class="custom-control custom-radio">
+                <label for="">Situação</label><br>
+                <select class="form-control mr-2" id="txtsituacao2" name="txtsituacao2" required>
+                  <option value="" disabled selected hidden>Selecione a situação...</option>
+                  <option value="AT">ATIVO</option>
+                  <option value="R1">VETERANO</option>
+                  <option value="PM">PENSIONISTA</option>
+                </select>
+                <!--<div class="custom-control custom-radio">
                   <label class="container">Ativo
                     <input type="radio" value="AT" name="txtsituacao2">
                     <span class="checkmark"></span>
@@ -617,15 +617,15 @@ if (@$_GET['func'] == 'edita') {
                     <input type="radio" value="PM" name="txtsituacao2">
                     <span class="checkmark"></span>
                   </label>
-                </div>
+                </div>-->
               </div>
               <div class="form-group">
-                <label for="id_produto">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome2" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
+                <label for="">Nome Completo</label>
+                <input type="text" class="form-control mr-2" id="txtnome2" name="txtnome2" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_2['nome']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="fornecedor">E-mail</label>
-                <input type="email" class="form-control mr-2" id="txtemail" name="txtemail2" autocomplete="off" value="<?php echo $res_1['email']; ?>" placeholder="Email">
+                <input type="email" class="form-control mr-2" id="txtemail2" name="txtemail2" autocomplete="off" value="<?php echo $res_2['email']; ?>" placeholder="Email">
               </div>
             </form>
           </div>
@@ -642,31 +642,31 @@ if (@$_GET['func'] == 'edita') {
     </script>
 
     <!--Modal EDITAR -->
-<?php
-    if (isset($_POST['buttonEditar'])) {
-      $posto = $_POST['txtposto2'];
-      $situacao = $_POST['txtsituacao2'];
-      $nome = strtoupper($_POST['txtnome2']);
-      $email = strtolower($_POST['txtemail2']);
-      $saram = $_POST['txtsaram2'];
-      $cpf = $_POST['txtcpf2'];
+    <?php
+    if (isset($_POST['#buttonEditar'])) {
 
-      if ($res_1['cpf'] != $cpf) {
+      $saram_ed = $_POST['txtsaram2'];
+      $cpf_ed = $_POST['txtcpf2'];
+      $posto_ed = $_POST['txtposto2'];
+      $situacao_ed = $_POST['txtsituacao2'];
+      $nome_ed = strtoupper($_POST['txtnome2']);
+      $email_ed = strtolower($_POST['txtemail2']);
 
-        //Verificar se o CPF já está cadastrado
-        $query_verificar = "select * from requerentes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
-        $result_verificar = mysqli_query($conexao, $query_verificar);
-        $dado_verificar = mysqli_fetch_array($result_verificar);
-        $row_verificar = mysqli_num_rows($result_verificar);
+      //if ($res_1['cpf'] != $cpf) {
 
-        if ($row_verificar > 0) {
-          Alerta("info", "CPF já existe!", false);
-          exit();
-        }
+      //VERIFICAR SE O requerente JÁ ESTÁ CADASTRADO
+      $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf_ed'";
+      $result_verificar = mysqli_query($conexao, $query_verificar);
+      $row_verificar = mysqli_num_rows($result_verificar);
+
+      if ($row_verificar > 0) {
+        Alerta("info", "Requerente já cadastrado!", false);
+        exit();
       }
+      //}
 
-      $query_editar = "UPDATE requerentes set posto = '$posto', situacao = '$situacao', nome = '$nome', email = '$email', saram = '$saram', cpf = '$cpf' where id = '$id'";
+      $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
 
       $result_editar = mysqli_query($conexao, $query_editar);
 
@@ -679,16 +679,15 @@ if (@$_GET['func'] == 'edita') {
       }
     }
   }
-} ?>
 
-<!--Consultar Processos-->
-<?php
-if (@$_GET['func'] == 'consulta') {
+  //CONSULTAR PROCESSOS  
+
+} else if (@$_GET['func'] == 'consulta') {
   $id = $_GET['id'];
   $query = "select * from requerentes where id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
-?>
+    ?>
     <div id="modalConsultar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -704,7 +703,7 @@ if (@$_GET['func'] == 'consulta') {
             $posto = $res_1['nome_posto'];
             $situacao = $res_1['situacao'];
             ?>
-            <h4 class="modal-title" style="text-align:center; width: 100%;">Dados do(a): <strong><?php echo $posto, " ", $situacao, " ", $nome ?></strong></h4>
+            <h4 class="modal-title" style="text-align:center; width: 100%;"><i class="fas fa-user"></i> <strong><?php echo $posto, " ", $situacao, " ", $nome ?></strong></h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
@@ -770,41 +769,6 @@ if (@$_GET['func'] == 'consulta') {
       </script>
       <!--Modal CONSULTAR -->
   <?php
-    if (isset($_POST['buttonConsultar'])) {
-      $posto = $_POST['txtposto'];
-      $situacao = $_POST['txtsituacao'];
-      $nome = strtoupper($_POST['txtnome']);
-      $email = strtolower($_POST['txtemail']);
-      $saram = $_POST['txtsaram'];
-      $cpf = $_POST['txtcpf'];
-
-      if ($res_1['cpf'] != $cpf) {
-
-        //Verificar se o CPF já está cadastrado
-        $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
-
-        $result_verificar = mysqli_query($conexao, $query_verificar);
-        $dado_verificar = mysqli_fetch_array($result_verificar);
-        $row_verificar = mysqli_num_rows($result_verificar);
-
-        if ($row_verificar > 0) {
-          Alerta("info", "CPF já existe!", false);
-          exit();
-        }
-      }
-
-      $query_editar = "UPDATE requerentes set posto = '$posto', situacao = '$situacao', nome = '$nome', email = '$email', saram = '$saram', cpf = '$cpf' where id = '$id'";
-
-      $result_editar = mysqli_query($conexao, $query_editar);
-
-      if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='requerentes.php'; </script>";
-      } else {
-        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='requerentes.php'; </script>";
-      }
-    }
   }
 } ?>
 

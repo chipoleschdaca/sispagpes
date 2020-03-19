@@ -45,10 +45,10 @@ function AnoAtual()
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	<!-- SweetAlert2 -->
-  <script src="../../../plugins/sweetalert2/sweetalert2.min.js"></script>
-  <script src="../../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <!-- Toastr -->
-  <script src="../../../plugins/toastr/toastr.min.js"></script>
+	<script src="../../../plugins/sweetalert2/sweetalert2.min.js"></script>
+	<script src="../../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
+	<!-- Toastr -->
+	<script src="../../../plugins/toastr/toastr.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -810,15 +810,6 @@ if (isset($_POST['button'])) {
 	$secao_origem = $_POST['txtsecaoorigem'];
 	$estado = $_POST['txtestado'];
 
-	//VERIFICAR SE O requerente JÁ ESTÁ CADASTRADO
-	$query_verificar = "select * from requerentes where cpf = '$cpf'";
-	$result_verificar = mysqli_query($conexao, $query_verificar);
-	$row_verificar = mysqli_num_rows($result_verificar);
-
-	if ($row_verificar > 0) {
-		Alerta("info", "O requerente já está cadastrado!", false);
-		exit();
-	}
 	// Verificar se o NUP já está cadastrado
 	$query_nup = "SELECT * from exercicioanterior WHERE nup = '$nup'";
 	$result_nup = mysqli_query($conexao, $query_nup);

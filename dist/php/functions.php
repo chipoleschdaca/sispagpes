@@ -11,7 +11,7 @@ function Alerta($type, $title, $msg)
           title: '$title',
           text: '$msg',
           showConfirmButton: false,
-          timer: 3000
+          timer: 2000
         });
         </script>";
 }
@@ -36,4 +36,19 @@ function AlertaExcluir($type, $title, $msg)
         }
       })
       </script>";
+}
+function AlertaLocation($type, $title, $msg, $location)
+{
+  echo "<script type='text/javascript'>
+        Swal.fire({
+          type: '$type',
+          title: '$title',
+          text: '$msg',
+          showConfirmButton: false,          
+          timer: 2000
+        },
+        function (){
+        window.location.href='$location'
+        });
+        </script>";
 }
