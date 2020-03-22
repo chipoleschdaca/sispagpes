@@ -1031,13 +1031,12 @@ if (isset($_POST['button'])) {
 			$direito_edita = $_POST['txtdireitopleiteado2'];
 			$secao_origem_edita = $_POST['txtsecaoorigem2'];
 
-			$query_verificar = "SELECT * FROM exercicioanterior WHERE nup = '$nup_edita'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
-
+			$query_verificar = "SELECT * FROM exercicioanterior WHERE nup = '$nup_edita'";
 			$result_verificar = mysqli_query($conexao, $query_verificar);
 			$dado_verificar = mysqli_fetch_array($result_verificar);
 			$row_verificar = mysqli_num_rows($result_verificar);
 
-			if ($row_verificar > 0) {
+			if ($row_verificar >= 1) {
 				Alerta("info", "NUP já existe!", false);
 				exit();
 			}

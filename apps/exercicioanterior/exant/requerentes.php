@@ -594,13 +594,13 @@ if (isset($_POST['button'])) {
               </div>
               <div class="form-group">
                 <label for="">Situação</label><br>
-                <select class="form-control mr-2" id="txtsituacao2" name="txtsituacao2" required>
+                <!--<select class="form-control mr-2" id="txtsituacao2" name="txtsituacao2" required>
                   <option value="" disabled selected hidden>Selecione a situação...</option>
                   <option value="AT">ATIVO</option>
                   <option value="R1">VETERANO</option>
                   <option value="PM">PENSIONISTA</option>
-                </select>
-                <!--<div class="custom-control custom-radio">
+                </select>-->
+                <div class="custom-control custom-radio">
                   <label class="container">Ativo
                     <input type="radio" value="AT" name="txtsituacao2">
                     <span class="checkmark"></span>
@@ -617,7 +617,7 @@ if (isset($_POST['button'])) {
                     <input type="radio" value="PM" name="txtsituacao2">
                     <span class="checkmark"></span>
                   </label>
-                </div>-->
+                </div>
               </div>
               <div class="form-group">
                 <label for="">Nome Completo</label>
@@ -627,13 +627,12 @@ if (isset($_POST['button'])) {
                 <label for="fornecedor">E-mail</label>
                 <input type="email" class="form-control mr-2" id="txtemail2" name="txtemail2" autocomplete="off" value="<?php echo $res_2['email']; ?>" placeholder="Email">
               </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+              </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-          </div>
-          </form>
         </div>
       </div>
     </div>
@@ -643,8 +642,7 @@ if (isset($_POST['button'])) {
 
     <!--Modal EDITAR -->
     <?php
-    if (isset($_POST['#buttonEditar'])) {
-
+    if (isset($_POST['buttonEditar'])) {
       $saram_ed = $_POST['txtsaram2'];
       $cpf_ed = $_POST['txtcpf2'];
       $posto_ed = $_POST['txtposto2'];
@@ -652,15 +650,14 @@ if (isset($_POST['button'])) {
       $nome_ed = strtoupper($_POST['txtnome2']);
       $email_ed = strtolower($_POST['txtemail2']);
 
-
-      //if ($res_1['cpf'] != $cpf) {
-
-      //VERIFICAR SE O requerente JÁ ESTÁ CADASTRADO
+      //Certifica que o REQUERENTE não será duplicado e permite alterá-lo porque "insere" o mesmo CPF 
+      //if ($res_1['cpf'] != $cpf_ed) {
       $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf_ed'";
       $result_verificar = mysqli_query($conexao, $query_verificar);
+      $dado_verificar = mysqli_fetch_array($result_verificar);
       $row_verificar = mysqli_num_rows($result_verificar);
 
-      if ($row_verificar > 0) {
+      if ($row_verificar >= 1) {
         Alerta("info", "Requerente já cadastrado!", false);
         exit();
       }

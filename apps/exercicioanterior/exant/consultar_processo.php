@@ -86,11 +86,11 @@ include '../../../dist/php/functions.php';
             <label for="txtsaram" style="margin-right: 10px">
               <h4><b>SARAM:</b></h4>
             </label>
-            <input type="search" class="form-control mr-2 form-control-lg" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM..." style="border-radius:2%; margin-right: 10px;" autocomplete="off">
+            <input type="search" class="form-control mr-2 form-control-lg" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM..." style="margin-right: 10px;" autocomplete="off">
             <br>
             <button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar"><i class="fas fa-search"></i></button>
           </div>
-          <a type="button" class="btn btn-outline-primary btn-lg" href="consultar_processo.php" id="novapesquisa" name="button" style="text-transform: capitalize;"><i class="fas fa-redo-alt"></i></a>
+          <a type="button" class="btn btn-outline-info btn-lg" href="consultar_processo.php" id="novapesquisa" name="button" style="text-transform: capitalize;"><i class="fas fa-redo-alt"></i></a>
         </form>
       </div>
       <?php
