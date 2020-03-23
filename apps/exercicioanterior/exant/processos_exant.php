@@ -7,10 +7,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 	header('Location: ../../../index.php');
 	exit();
 }
-function AnoAtual()
-{
-	echo date("Y") . " ";
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -348,68 +345,6 @@ function AnoAtual()
 										$result = mysqli_query($conexao, $query);
 										$row = mysqli_num_rows($result);
 
-										function data($data)
-										{
-											return date("d/m/Y", strtotime($data));
-										}
-
-										function data_db($data)
-										{
-											return date("Y-m-d", strtotime($data));
-										}
-
-										function data2($n)
-										{
-											// leitura das datas
-											$dia = date('d');
-											$mes = date('m');
-											$ano = date('Y');
-
-											// configuração mês
-
-											switch ($mes) {
-
-												case 1:
-													$mes = "Janeiro";
-													break;
-												case 2:
-													$mes = "Fevereiro";
-													break;
-												case 3:
-													$mes = "Março";
-													break;
-												case 4:
-													$mes = "Abril";
-													break;
-												case 5:
-													$mes = "Maio";
-													break;
-												case 6:
-													$mes = "Junho";
-													break;
-												case 7:
-													$mes = "Julho";
-													break;
-												case 8:
-													$mes = "Agosto";
-													break;
-												case 9:
-													$mes = "Setembro";
-													break;
-												case 10:
-													$mes = "Outubro";
-													break;
-												case 11:
-													$mes = "Novembro";
-													break;
-												case 12:
-													$mes = "Dezembro";
-													break;
-											}
-											//Agora basta imprimir na tela...
-											print("$dia de $mes de $ano");
-										}
-
 										?>
 
 										<table class="table table-sm table-bordered table-striped">
@@ -730,7 +665,7 @@ function AnoAtual()
 		$(function() {
 			$("#datepicker").datepicker({
 
-				dateFormat: 'yy/mm/dd',
+				dateFormat: 'dd/mm/yy',
 				dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
 				dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
 				dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
@@ -988,8 +923,8 @@ if (isset($_POST['button'])) {
 							<div class="row">
 								<div class="form-group col-sm-5">
 									<label for="quantidade">Data de Abertura</label>
-									<!--<input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo $res_1['data_criacao']; ?>" required> -->
-									<input class="form-control" type="text" id="datepicker" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo data($res_1['data_criacao']); ?>">
+									<input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo $res_1['data_criacao']; ?>" required>
+									<!--<input class="form-control" type="text" id="datepicker" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php data_show($res_1['data_criacao']); ?>">-->
 								</div>
 								<div class="form-group col-sm-7">
 									<label>Direito Pleiteado</label>
@@ -1048,12 +983,12 @@ if (isset($_POST['button'])) {
 		</script>
 		<!--Comando para editar os dados UPDATE -->
 		<?php
-		if (isset($_POST['buttonEditar'])) {
+		if (isset($_POST['-->buttonEditar'])) {
 			$cpf_edita = $_POST['txtcpf2'];
 			$sacador_edita = $_POST['funcionario2'];
 			$nup_edita = $_POST['txtnup2'];
 			$prioridade_edita = $_POST['txtprioridade2'];
-			$data_criacao_edita = data_db($_POST['txtdatacriacao2']);
+			$data_criacao_edita = $_POST['txtdatacriacao2'];
 			$direito_edita = $_POST['txtdireitopleiteado2'];
 			$secao_origem_edita = $_POST['txtsecaoorigem2'];
 

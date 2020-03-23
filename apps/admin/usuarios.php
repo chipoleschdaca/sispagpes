@@ -7,10 +7,6 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   header('Location: ../../index.php');
   exit();
 }
-function AnoAtual()
-{
-  echo date("Y") . " ";
-}
 ?>
 
 <!DOCTYPE html>

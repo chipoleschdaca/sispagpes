@@ -7,10 +7,6 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
   header('Location: index.php');
   exit();
 }
-function AnoAtual()
-{
-  echo date("Y") . " ";
-}
 ?>
 
 <!DOCTYPE html>
@@ -503,10 +499,6 @@ function AnoAtual()
                     $result = mysqli_query($conexao, $query);
                     //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
-                    function data($data)
-                    {
-                      return date("d/m/Y", strtotime($data));
-                    }
                     ?>
 
                     <!-------------------------------------------------->

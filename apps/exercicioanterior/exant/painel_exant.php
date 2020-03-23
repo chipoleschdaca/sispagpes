@@ -7,10 +7,6 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
   header('Location: ../../../index.php');
   exit();
 }
-function AnoAtual()
-{
-  echo date("Y") . " ";
-}
 ?>
 
 <!DOCTYPE html>
@@ -518,12 +514,6 @@ function AnoAtual()
         $secao =  trim($secao);
         $count_secao =  trim($count_secao);
       }
-    }
-
-
-    function data($data)
-    {
-      return date("d/m/Y", strtotime($data));
     }
     ?>
     <!-- Control Sidebar -->

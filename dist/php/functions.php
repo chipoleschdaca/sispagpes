@@ -15,6 +15,7 @@ function Alerta($type, $title, $msg)
         });
         </script>";
 }
+
 function AlertaExcluir($type, $title, $msg)
 {
   echo "<script type='text/javascript'>
@@ -37,6 +38,7 @@ function AlertaExcluir($type, $title, $msg)
       })
       </script>";
 }
+
 function AlertaLocation($type, $title, $msg, $location)
 {
   echo "<script type='text/javascript'>
@@ -51,4 +53,78 @@ function AlertaLocation($type, $title, $msg, $location)
         window.location.href='$location'
         });
         </script>";
+}
+
+function AnoAtual()
+{
+  echo date("Y") . " ";
+}
+
+function data($data)
+{
+  return date("d/m/Y", strtotime($data));
+}
+
+function data_show($data)
+{
+  $data = implode('/', array_reverse(explode('-', $data)));
+  echo $data;
+}
+
+function data_db($data)
+{
+  $data = implode('-', array_reverse(explode('/', $data)));
+  echo $data;
+}
+
+function data2($n)
+{
+  // leitura das datas
+  $dia = date('d');
+  $mes = date('m');
+  $ano = date('Y');
+
+  // configuração mês
+
+  switch ($mes) {
+
+    case 1:
+      $mes = "Janeiro";
+      break;
+    case 2:
+      $mes = "Fevereiro";
+      break;
+    case 3:
+      $mes = "Março";
+      break;
+    case 4:
+      $mes = "Abril";
+      break;
+    case 5:
+      $mes = "Maio";
+      break;
+    case 6:
+      $mes = "Junho";
+      break;
+    case 7:
+      $mes = "Julho";
+      break;
+    case 8:
+      $mes = "Agosto";
+      break;
+    case 9:
+      $mes = "Setembro";
+      break;
+    case 10:
+      $mes = "Outubro";
+      break;
+    case 11:
+      $mes = "Novembro";
+      break;
+    case 12:
+      $mes = "Dezembro";
+      break;
+  }
+  //Agora basta imprimir na tela...
+  print("$dia de $mes de $ano");
 }

@@ -6,10 +6,6 @@ include('../../dist/php/functions.php');
 if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
   header('Location: ../../index.php');
   exit();
-  function AnoAtual()
-  {
-    echo date("Y") . " ";
-  }
 }
 ?>
 <!DOCTYPE html>
