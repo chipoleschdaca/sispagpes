@@ -651,17 +651,17 @@ if (isset($_POST['button'])) {
       $email_ed = strtolower($_POST['txtemail2']);
 
       //Certifica que o REQUERENTE não será duplicado e permite alterá-lo porque "insere" o mesmo CPF 
-      //if ($res_1['cpf'] != $cpf_ed) {
-      $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf_ed'";
-      $result_verificar = mysqli_query($conexao, $query_verificar);
-      $dado_verificar = mysqli_fetch_array($result_verificar);
-      $row_verificar = mysqli_num_rows($result_verificar);
+      if ($res_2['cpf'] != $cpf_ed) {
+        $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf_ed'";
+        $result_verificar = mysqli_query($conexao, $query_verificar);
+        $dado_verificar = mysqli_fetch_array($result_verificar);
+        $row_verificar = mysqli_num_rows($result_verificar);
 
-      if ($row_verificar >= 1) {
-        Alerta("info", "Requerente já cadastrado!", false);
-        exit();
+        if ($row_verificar > 0) {
+          Alerta("info", "Requerente já cadastrado!", false);
+          exit();
+        }
       }
-      //}
 
       $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
 

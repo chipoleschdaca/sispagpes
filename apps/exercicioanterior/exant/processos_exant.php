@@ -40,6 +40,8 @@ function AnoAtual()
 	<link rel="stylesheet" href="../../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- Daterange picker -->
 	<link rel="stylesheet" href="../../../plugins/daterangepicker/daterangepicker.css">
+	<!-- JQuery UI -->
+	<link rel="stylesheet" href="../../../plugins/jquery-ui/jquery-ui.min.css">
 	<!-- summernote -->
 	<link rel="stylesheet" href="../../../plugins/summernote/summernote-bs4.css">
 	<!-- Google Font: Source Sans Pro -->
@@ -249,16 +251,16 @@ function AnoAtual()
 									<div class="card-body">
 										<form class="form-inline">
 											<div class="input-group input-group-sm">
-												<label for="txtnome" style="margin-right: 10px;">SARAM:</label>
+												<label for="txtnome" style="margin-right: 5px;">SARAM:</label>
 												<input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
 											</div>
 											<div class="input-group input-group-sm">
-												<label for="txtnome" style="margin-right: 10px;">Requerente:</label>
-												<input class="form-control" type="search" id="txtnome" name="txtnome" placeholder="Nome ou parte do nome" aria-label="Pesquisar" style="border-radius:3px;">
+												<label for="txtnome" style="margin-right: 5px;">Requerente:</label>
+												<input class="form-control" type="search" id="txtnome" name="txtnome" placeholder="Nome ou parte do nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
 											</div>
 											<br>
 											<div class="input-group input-group-sm">
-												<label for="status" style="margin-right: 10px;">Direito Pleiteado: </label>
+												<label for="status" style="margin-right: 5px;">Direito Pleiteado: </label>
 												<select class="form-control select2" id="txtdirpleiteado" name="txtdirpleiteado" style="border-radius:3px; margin-right:20px; width: 375px">
 													<option value="">Selecione o direito pleiteado</option>
 													<?php
@@ -276,7 +278,7 @@ function AnoAtual()
 												</select>
 											</div>
 											<div class="input-group input-group-sm">
-												<label for="status" style="margin-right: 10px;">Estado: </label>
+												<label for="status" style="margin-right: 5px;">Estado: </label>
 												<select class="form-control select2" id="txtestadofiltro" name="txtestadofiltro" style="border-radius:3px; margin-right:20px; width: 375px;">
 													<option value="" selected>Selecione o estado do processo</option>
 													<?php
@@ -349,6 +351,11 @@ function AnoAtual()
 										function data($data)
 										{
 											return date("d/m/Y", strtotime($data));
+										}
+
+										function data_db($data)
+										{
+											return date("Y-m-d", strtotime($data));
 										}
 
 										function data2($n)
@@ -434,7 +441,7 @@ function AnoAtual()
 													$sacador = $res_1["mil_nome"];
 													$nup = $res_1["nup"];
 													$prioridade = $res_1["prioridade"];
-													$data_criacao = $res_1["data_criacao"];
+													$data_criacao = data($res_1["data_criacao"]);
 													$direito_pleiteado = $res_1["dir_direito"];
 													$secao_origem = $res_1["sec_origem"];
 													$data_entrada = $res_1["data_entrada"];
@@ -459,7 +466,7 @@ function AnoAtual()
 																echo $prioridade;
 															} ?>
 														</td>
-														<td class="align-middle"><?php echo data($data_criacao); ?></td>
+														<td class="align-middle"><?php echo $data_criacao; ?></td>
 														<td class="align-middle"><?php echo $direito_pleiteado; ?></td>
 														<td class="align-middle"><?php echo $secao_origem ?></td>
 														<td class="align-middle">
@@ -719,7 +726,25 @@ function AnoAtual()
 			});
 		});
 	</script>
+	<script>
+		$(function() {
+			$("#datepicker").datepicker({
 
+				dateFormat: 'yy/mm/dd',
+				dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+				dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+				dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+				monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+				monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+				nextText: 'Próximo',
+				prevText: 'Anterior',
+				changeMonth: true,
+				changeYear: true,
+				showOtherMonths: true,
+				selectOtherMonths: true
+			});
+		});
+	</script>
 	<!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
 	<!---------------------------------------------------------------------------------------------->
@@ -963,7 +988,8 @@ if (isset($_POST['button'])) {
 							<div class="row">
 								<div class="form-group col-sm-5">
 									<label for="quantidade">Data de Abertura</label>
-									<input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo $res_1['data_criacao']; ?>" required>
+									<!--<input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo $res_1['data_criacao']; ?>" required> -->
+									<input class="form-control" type="text" id="datepicker" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo data($res_1['data_criacao']); ?>">
 								</div>
 								<div class="form-group col-sm-7">
 									<label>Direito Pleiteado</label>
@@ -1027,18 +1053,20 @@ if (isset($_POST['button'])) {
 			$sacador_edita = $_POST['funcionario2'];
 			$nup_edita = $_POST['txtnup2'];
 			$prioridade_edita = $_POST['txtprioridade2'];
-			$data_criacao_edita = $_POST['txtdatacriacao2'];
+			$data_criacao_edita = data_db($_POST['txtdatacriacao2']);
 			$direito_edita = $_POST['txtdireitopleiteado2'];
 			$secao_origem_edita = $_POST['txtsecaoorigem2'];
 
-			$query_verificar = "SELECT * FROM exercicioanterior WHERE nup = '$nup_edita'";
-			$result_verificar = mysqli_query($conexao, $query_verificar);
-			$dado_verificar = mysqli_fetch_array($result_verificar);
-			$row_verificar = mysqli_num_rows($result_verificar);
+			if ($res_1['nup'] != $nup_edita) {
+				$query_verificar = "SELECT * FROM exercicioanterior WHERE nup = '$nup_edita'";
+				$result_verificar = mysqli_query($conexao, $query_verificar);
+				$dado_verificar = mysqli_fetch_array($result_verificar);
+				$row_verificar = mysqli_num_rows($result_verificar);
 
-			if ($row_verificar >= 1) {
-				Alerta("info", "NUP já existe!", false);
-				exit();
+				if ($row_verificar > 0) {
+					Alerta("info", "NUP já existe!", false);
+					exit();
+				}
 			}
 
 			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', sacador = '$sacador_edita', nup = '$nup_edita', prioridade = '$prioridade_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
@@ -1226,12 +1254,12 @@ if (isset($_POST['button'])) {
 					?>
 					<div class="col-sm-0">
 						<h2>
-							<div class="modal-title"><i class="far fa-folder-open"></i></div>
+							<div class="modal-title"></div>
 						</h2>
 					</div>
 					<div class="col-sm-10">
-						<h5>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $nome ?></strong></h5>
-						<h5>Processo nº: <strong><?php echo $nup ?></strong></h5>
+						<h5><i class="far fa-user"></i> Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $nome ?></strong></h5>
+						<h5><i class="far fa-folder-open"></i> Processo nº: <strong><?php echo $nup ?></strong></h5>
 					</div>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>

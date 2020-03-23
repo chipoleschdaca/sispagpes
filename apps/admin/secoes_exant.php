@@ -47,6 +47,8 @@ function AnoAtual()
   <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
   <!-- Toastr -->
   <script src="../../plugins/toastr/toastr.min.js"></script>
+  <!-- DataTable -->
+  <link rel="stylesheet" type="text/css" href="../../DataTables/datatables.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -762,10 +764,8 @@ function AnoAtual()
   <script src="../../dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
-
-  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
-
-  <!---------------------------------------------------------------------------------------------->
+  <!-- DataTable -->
+  <script type="text/javascript" charset="utf8" src="../../DataTables/datatables.js"></script>
 </body>
 
 </html>

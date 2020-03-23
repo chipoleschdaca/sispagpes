@@ -726,11 +726,10 @@ if (@$_GET['func'] == 'edita') {
     if (isset($_POST['buttonEditar'])) {
       $usuario = $_POST['txtusuario'];
       $senha = $_POST['txtsenha'];
+
       if ($res_1['usuario'] != $usuario) {
-
         //VERIFICAR SE O USUARIO JÁ ESTÁ CADASTRADO
-        $query_verificar = "select * from usuarios where usuario = '$usuario' ";
-
+        $query_verificar = "select * from usuarios where usuario = '$usuario'";
         $result_verificar = mysqli_query($conexao, $query_verificar);
         $row_verificar = mysqli_num_rows($result_verificar);
 
