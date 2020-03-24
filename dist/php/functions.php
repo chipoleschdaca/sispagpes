@@ -128,3 +128,12 @@ function data2($n)
   //Agora basta imprimir na tela...
   print("$dia de $mes de $ano");
 }
+
+function diferenca($a, $b)
+{
+  if (strtotime($a) - strtotime($b) > 0) {
+    return (strtotime($a) - strtotime($b)) / (60 * 60 * 24);
+  } else {
+    return (strtotime($b) - strtotime($a)) / (60 * 60 * 24);
+  }
+}

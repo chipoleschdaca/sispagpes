@@ -320,7 +320,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 											</button>
 										</div>
 									</div>
-									<div class="table-responsive" style="text-align: center;">
+									<div class="table-responsive" style="text-align: center; font-size: 13px;">
 
 										<!-------------LISTAR TODOS OS PROCESSOS-------------->
 
@@ -353,12 +353,13 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 												<th class="align-middle">SARAM</th>
 												<th class="align-middle">Requerente</th>
 												<th class="align-middle">NUP</th>
-												<th class="align-middle">Prioridade</th>
+												<th class="align-middle">Est. Idoso</th>
 												<th class="align-middle">Dt. Criação</th>
 												<th class="align-middle">Direito Pleiteado</th>
 												<th class="align-middle">Origem</th>
 												<th class="align-middle">Estado</th>
 												<th class="align-middle">Seção Atual</th>
+												<th class="align-middle">Prazo</th>
 												<th class="align-middle">Ações</th>
 											</thead>
 											<tbody>
@@ -370,19 +371,24 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 													$id_req = $res_1["id_req"];
 													$saram = $res_1["req_saram"];
 													$cpf = $res_1["cpf"];
-													$posto = $res_1["posto"];
 													$situacao = $res_1["situacao"];
 													$requerente = $res_1["req_nome"];
 													$sacador = $res_1["mil_nome"];
 													$nup = $res_1["nup"];
 													$prioridade = $res_1["prioridade"];
-													$data_criacao = data($res_1["data_criacao"]);
+													$data_criacao = $res_1["data_criacao"];
 													$direito_pleiteado = $res_1["dir_direito"];
 													$secao_origem = $res_1["sec_origem"];
 													$data_entrada = $res_1["data_entrada"];
 													$data_saida = $res_1["data_saida"];
 													$estado = $res_1["est_estado"];
 													$secao_atual = $res_1['sec_atual'];
+
+													$prazo_pessoal = date('Y-m-d', strtotime('+15 days', strtotime($res_1["data_criacao"])));
+													$prazo_pagpes = date('Y-m-d', strtotime('+25 days', strtotime($res_1["data_criacao"])));
+													$prazo_controle = date('Y-m-d', strtotime('+35 days', strtotime($res_1["data_criacao"])));
+													$prazo_sdpp = date('Y-m-d', strtotime('+150 days', strtotime($res_1["data_criacao"])));
+													$today = date('Y-m-d');
 
 												?>
 
@@ -401,37 +407,38 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 																echo $prioridade;
 															} ?>
 														</td>
-														<td class="align-middle"><?php echo $data_criacao; ?></td>
+														<td class="align-middle"><?php echo data($data_criacao); ?></td>
 														<td class="align-middle"><?php echo $direito_pleiteado; ?></td>
 														<td class="align-middle"><?php echo $secao_origem ?></td>
-														<td class="align-middle">
-															<?php
-															if ($estado == 'Aberto') { ?>
-																<span class="badge badge-secondary">
-																	<?php echo $status; ?>
-																</span>
-															<?php
-															} elseif ($estado == 'Aguardando') { ?>
-																<span class="badge badge-warning">
-																	<?php echo $status; ?>
-																</span>
-															<?php
-															} elseif ($estado == 'Aprovado') { ?>
-																<span class="badge badge-success">
-																	<?php echo $status; ?>
-																</span>
-															<?php
-															} elseif ($estado == 'Cancelado') { ?>
-																<span class="badge badge-danger">
-																	<?php echo $estado; ?>
-																</span>
-															<?php
-															} else {
-																echo $estado;
-															}
-															?>
-														</td>
+														<td class="align-middle"><?php echo $estado; ?></td>
 														<td class="align-middle"><?php echo $secao_atual; ?></td>
+														<?php
+														if ($secao_atual == 'DP-1' or $secao_atual == 'DP-4') {
+															if (diferenca($prazo_pessoal, $today) > 15) {
+																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pessoal) . '</td>';
+															} elseif (diferenca($prazo_pessoal, $today) <= 15 and diferenca($prazo_pessoal, $today) > 5) {
+																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_pessoal) . '</td>';
+															} elseif (diferenca($prazo_pessoal, $today) <= 5 and diferenca($prazo_pessoal, $today) > 0) {
+																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_pessoal) . '</td>';
+															} else {
+																echo '<td class="align-middle">' . data($prazo_pessoal) . '</td>';
+															}
+														} elseif ($secao_atual == 'DP-3') {
+															if (diferenca($prazo_pagpes, $today) > 15) {
+																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pagpes) . '</td>';
+															} elseif (diferenca($prazo_pagpes, $today) <= 15 and diferenca($prazo_pagpes, $today) > 5) {
+																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_pagpes) . '</td>';
+															} elseif (diferenca($prazo_pagpes, $today) <= 5 and diferenca($prazo_pagpes, $today) > 0) {
+																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_pagpes) . '</td>';
+															} else {
+																echo '<td class="align-middle">' . data($prazo_pagpes) . '</td>';
+															}
+														} elseif ($secao_atual == 'ACI-1') {
+															echo '<td class="align-middle" style="background-color: blue;">' . data($prazo_controle) . '</td>';
+														} else {
+															echo '<td class="align-middle" style="background-color: red;">' . data($prazo_sdpp) . '</td>';
+														}
+														?>
 														<td class="align-middle">
 															<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-location-arrow"></i></a>
 															<a class="btn btn-light btn-xs" style="width: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></i></a>
@@ -451,6 +458,11 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 										?>
 									</div>
 								</div>
+								<?php echo data($prazo_pessoal) . '<br>'; ?>
+								<?php echo $prazo_pagpes . '<br>'; ?>
+								<?php echo $prazo_controle . '<br>'; ?>
+								<?php echo diferenca($prazo_pagpes, $today) . '<br>'; ?>
+								<?php echo $today; ?>
 							</div>
 						</div>
 					</div>
@@ -1199,11 +1211,6 @@ if (isset($_POST['button'])) {
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
-					<div class="row">
-						<div class="col-sm-12" style="text-align:center;">
-							<h3>Histórico</h3>
-						</div>
-					</div>
 					<form method="POST" action="">
 						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
 							<?php
@@ -1216,7 +1223,7 @@ if (isset($_POST['button'])) {
 									<?php
 									while ($res_h = mysqli_fetch_array($result_h)) {
 										$id_hist = $res_h["id_hist"];
-										$data = data($res_h["data"]);
+										$data = $res_h["data"];
 										$id_exant = $res_h["e_nup"];
 										$old_estado = $res_h["es_anterior"];
 										$new_estado = $res_h["est_novo"];
@@ -1226,7 +1233,8 @@ if (isset($_POST['button'])) {
 									?>
 										<tr>
 											<td class="align-middle" style="width: 12.1%;">
-												<?php echo $data; ?><br>
+												<?php echo data($data); ?><br>
+												<?php echo $prazo_pessoal; ?><br>
 												De: <b> <?php
 																if ($old_secao == "") {
 																	echo $new_secao;

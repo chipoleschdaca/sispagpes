@@ -57,15 +57,10 @@ function data($data)
     <div class="cabecalho">
       <div class="row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-8" style="padding: 25px;">
+        <div class="col-sm-8" style="padding-left: 25px; margin-top:20px;">
           <h3>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></strong></h3>
           <h3>Processo nº: <strong><?php echo $nup ?></strong></h3>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12" style="text-align:center;">
-        <h4>Histórico</h4>
       </div>
     </div>
     <div class="row">
