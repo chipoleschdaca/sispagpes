@@ -119,7 +119,7 @@ function data($data)
               $obs_exant = $res_2["obs_exant"];
             ?>
               <tr>
-                <td class="coluna" style="vertical-align: middle;">
+                <td class="coluna" style="vertical-align: middle; width: 14%;">
                   <?php echo data($data); ?><br>
                   De: <span id="cab" style="font-weight: bold;">
                     <?php if ($old_secao == "") {
@@ -130,7 +130,9 @@ function data($data)
                   Para: <span id="cab"><?php echo $new_secao; ?></span>
                 </td>
                 <td class="coluna" style="vertical-align: middle;">
-                  <span id="cab"><?php echo $new_estado; ?></span><br>
+                  <b>
+                    <h5 id="cab"><?php echo $new_estado; ?></h5>
+                  </b><br>
                   <?php
                   if ($res_2["obs_exant"] == '') {
                     echo 'Não há';

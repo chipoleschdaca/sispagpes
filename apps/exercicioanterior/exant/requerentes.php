@@ -718,10 +718,6 @@ if (isset($_POST['button'])) {
                 </thead>
                 <tbody>
                   <?php
-                  function data($data)
-                  {
-                    return date("d/m/Y", strtotime($data));
-                  }
                   while ($res_1 = mysqli_fetch_array($result)) {
                     $id = $res_1['id'];
                     $nup = $res_1["nup"];

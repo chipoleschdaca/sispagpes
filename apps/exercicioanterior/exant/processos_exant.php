@@ -416,17 +416,17 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 														if ($secao_atual == 'DP-1' or $secao_atual == 'DP-4') {
 															if (diferenca($prazo_pessoal, $today) > 15) {
 																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pessoal) . '</td>';
-															} elseif (diferenca($prazo_pessoal, $today) <= 15 and diferenca($prazo_pessoal, $today) > 5) {
+															} elseif (diferenca($prazo_pessoal, $today) <= 15 and diferenca($prazo_pessoal, $today) > 10) {
 																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_pessoal) . '</td>';
-															} elseif (diferenca($prazo_pessoal, $today) <= 5 and diferenca($prazo_pessoal, $today) > 0) {
+															} elseif (diferenca($prazo_pessoal, $today) <= 10 and diferenca($prazo_pessoal, $today) > 0) {
 																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_pessoal) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_pessoal) . '</td>';
 															}
 														} elseif ($secao_atual == 'DP-3') {
-															if (diferenca($prazo_pagpes, $today) > 15) {
+															if (diferenca($prazo_pagpes, $today) > 10) {
 																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pagpes) . '</td>';
-															} elseif (diferenca($prazo_pagpes, $today) <= 15 and diferenca($prazo_pagpes, $today) > 5) {
+															} elseif (diferenca($prazo_pagpes, $today) <= 10 and diferenca($prazo_pagpes, $today) > 5) {
 																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_pagpes) . '</td>';
 															} elseif (diferenca($prazo_pagpes, $today) <= 5 and diferenca($prazo_pagpes, $today) > 0) {
 																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_pagpes) . '</td>';
@@ -434,9 +434,25 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 																echo '<td class="align-middle">' . data($prazo_pagpes) . '</td>';
 															}
 														} elseif ($secao_atual == 'ACI-1') {
-															echo '<td class="align-middle" style="background-color: blue;">' . data($prazo_controle) . '</td>';
+															if (diferenca($prazo_controle, $today) > 10) {
+																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_controle) . '</td>';
+															} elseif (diferenca($prazo_controle, $today) <= 10 and diferenca($prazo_controle, $today) > 5) {
+																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_controle) . '</td>';
+															} elseif (diferenca($prazo_controle, $today) <= 5 and diferenca($prazo_controle, $today) > 0) {
+																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_controle) . '</td>';
+															} else {
+																echo '<td class="align-middle">' . data($prazo_controle) . '</td>';
+															}
 														} else {
-															echo '<td class="align-middle" style="background-color: red;">' . data($prazo_sdpp) . '</td>';
+															if (diferenca($prazo_sdpp, $today) > 120) {
+																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_sdpp) . '</td>';
+															} elseif (diferenca($prazo_sdpp, $today) <= 120 and diferenca($prazo_sdpp, $today) > 90) {
+																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_controle) . '</td>';
+															} elseif (diferenca($prazo_sdpp, $today) <= 90 and diferenca($prazo_sdpp, $today) > 0) {
+																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_sdpp) . '</td>';
+															} else {
+																echo '<td class="align-middle">' . data($prazo_sdpp) . '</td>';
+															}
 														}
 														?>
 														<td class="align-middle">
@@ -458,16 +474,10 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 										?>
 									</div>
 								</div>
-								<?php echo data($prazo_pessoal) . '<br>'; ?>
-								<?php echo $prazo_pagpes . '<br>'; ?>
-								<?php echo $prazo_controle . '<br>'; ?>
-								<?php echo diferenca($prazo_pagpes, $today) . '<br>'; ?>
-								<?php echo $today; ?>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------->
 				<div id="modalExemplo" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-dialog-centered modal-lg">
 						<div class="modal-content">
@@ -1233,8 +1243,7 @@ if (isset($_POST['button'])) {
 									?>
 										<tr>
 											<td class="align-middle" style="width: 12.1%;">
-												<?php echo data($data); ?><br>
-												<?php echo $prazo_pessoal; ?><br>
+												<b><?php echo data($data); ?></b><br>
 												De: <b> <?php
 																if ($old_secao == "") {
 																	echo $new_secao;
@@ -1253,6 +1262,9 @@ if (isset($_POST['button'])) {
 												<?php
 												}
 												?>
+											</td>
+											<td class="align-middle" style="width: 12.1%;">
+												<?php echo $prazo_pessoal; ?><br>
 											</td>
 										</tr>
 									<?php } ?>
