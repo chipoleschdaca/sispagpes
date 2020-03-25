@@ -77,7 +77,7 @@ function data_db($data)
   echo $data;
 }
 
-function data2($n)
+function data2()
 {
   // leitura das datas
   $dia = date('d');
@@ -89,40 +89,40 @@ function data2($n)
   switch ($mes) {
 
     case 1:
-      $mes = "Janeiro";
+      $mes = "janeiro";
       break;
     case 2:
-      $mes = "Fevereiro";
+      $mes = "fevereiro";
       break;
     case 3:
-      $mes = "Março";
+      $mes = "março";
       break;
     case 4:
-      $mes = "Abril";
+      $mes = "abril";
       break;
     case 5:
-      $mes = "Maio";
+      $mes = "maio";
       break;
     case 6:
-      $mes = "Junho";
+      $mes = "junho";
       break;
     case 7:
-      $mes = "Julho";
+      $mes = "julho";
       break;
     case 8:
-      $mes = "Agosto";
+      $mes = "agosto";
       break;
     case 9:
-      $mes = "Setembro";
+      $mes = "setembro";
       break;
     case 10:
-      $mes = "Outubro";
+      $mes = "outubro";
       break;
     case 11:
-      $mes = "Novembro";
+      $mes = "novembro";
       break;
     case 12:
-      $mes = "Dezembro";
+      $mes = "dezembro";
       break;
   }
   //Agora basta imprimir na tela...

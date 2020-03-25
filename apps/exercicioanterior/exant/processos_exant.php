@@ -413,7 +413,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
 														<td class="align-middle"><?php echo $estado; ?></td>
 														<td class="align-middle"><?php echo $secao_atual; ?></td>
 														<?php
-														if ($secao_atual == 'DP-1' or $secao_atual == 'DP-4') {
+														if ($secao_atual == 'DP-1' or $secao_atual == 'DP-4' or $secao_atual == 'ES-LS') {
 															if (diferenca($prazo_pessoal, $today) > 15) {
 																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pessoal) . '</td>';
 															} elseif (diferenca($prazo_pessoal, $today) <= 15 and diferenca($prazo_pessoal, $today) > 10) {
@@ -1196,7 +1196,7 @@ if (isset($_POST['button'])) {
 	?>
 	<!-- Modal -->
 	<div id="modalHistorico" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header align-middle">
@@ -1225,10 +1225,17 @@ if (isset($_POST['button'])) {
 						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
 							<?php
 							$query_h = "SELECT h.id as id_hist, h.data, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY data";
+							"SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id' order by e.id asc";
 							$result_h = mysqli_query($conexao, $query_h);
 							$row_h = mysqli_num_rows($result_h);
 							?>
 							<table class="table table-sm table-bordered table-striped">
+								<thead class="text-primary" style="text-align: center;">
+									<th class="align-middle">Movimento</th>
+									<th class="align-middle">Observação</th>
+									<th class="align-middle">Prazo</th>
+									<th class="align-middle">Meta</th>
+								</thead>
 								<tbody>
 									<?php
 									while ($res_h = mysqli_fetch_array($result_h)) {
@@ -1240,17 +1247,28 @@ if (isset($_POST['button'])) {
 										$old_secao = $res_h["s_anterior"];
 										$new_secao = $res_h["sec_novo"];
 										$obs_exant = $res_h["obs_exant"];
+
+										//$data_criacao_cons = $res_h["data_criacao"];
+
+										$prazo_pessoal_cons = date('Y-m-d', strtotime('+15 days', strtotime($data = $res_h["data"])));
+										$prazo_pagpes_cons = date('Y-m-d', strtotime('+10 days', strtotime($data = $res_h["data"])));
+										$prazo_controle_cons = date('Y-m-d', strtotime('+10 days', strtotime($data = $res_h["data"])));
+										$prazo_sdpp_cons = date('Y-m-d', strtotime('+120 days', strtotime($data = $res_h["data"])));
+										$today_cons = date('Y-m-d');
 									?>
 										<tr>
+
 											<td class="align-middle" style="width: 12.1%;">
-												<b><?php echo data($data); ?></b><br>
-												De: <b> <?php
-																if ($old_secao == "") {
-																	echo $new_secao;
-																} else {
-																	echo $old_secao;
-																} ?></b><br>
-												Para: <b><?php echo $new_secao; ?></b>
+												<b><?php echo data($data) . '<br>'; ?></b>
+												<?php
+												if ($old_secao == "") {
+													echo 'Criado na: ' . '<br>';
+													echo '<b>' . $new_secao . '</b>';
+												} else {
+													echo 'De: ' . '<b>' . $old_secao . '</b><br>';
+													echo 'Para: ' . '<b>' . $new_secao . '</b>';
+												} ?>
+
 											</td>
 											<td class="align-middle">
 												<strong><?php echo $new_estado; ?></strong><br>
@@ -1263,9 +1281,71 @@ if (isset($_POST['button'])) {
 												}
 												?>
 											</td>
-											<td class="align-middle" style="width: 12.1%;">
-												<?php echo $prazo_pessoal; ?><br>
-											</td>
+											<?php
+											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
+												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
+											} elseif ($old_secao == 'DP-3') {
+												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pagpes_cons) . '</td>';
+											} elseif ($old_secao == 'ACI-1') {
+												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_controle_cons) . '</td>';
+											} elseif ($old_secao == 'SDPP') {
+												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_sdpp_cons) . '</td>';
+											} else {
+												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
+											}
+
+											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
+												if (diferenca($prazo_pessoal_cons, $today_cons) > 15) {
+													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . diferenca($prazo_pessoal_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_pessoal_cons, $today_cons) <= 15 and diferenca($prazo_pessoal_cons, $today_cons) > 10) {
+													echo '<td class="align-middle" style="background-color: yellow; text-align:center;">' . diferenca($prazo_pessoal_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_pessoal_cons, $today_cons) <= 10 and diferenca($prazo_pessoal_cons, $today_cons) > 0) {
+													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . diferenca($prazo_pessoal_cons, $today_cons) . '</td>';
+												} else {
+													echo '<td class="align-middle" style="text-align:center;">' . diferenca($prazo_pessoal_cons, $today_cons) . '</td>';
+												}
+											} elseif ($old_secao == 'DP-3') {
+												if (diferenca($prazo_pagpes_cons, $today_cons) > 10) {
+													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . diferenca($prazo_pagpes_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_pagpes_cons, $today_cons) <= 10 and diferenca($prazo_pagpes_cons, $today_cons) > 5) {
+													echo '<td class="align-middle" style="background-color: yellow; text-align:center;">' . diferenca($prazo_pagpes_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_pagpes_cons, $today_cons) <= 5 and diferenca($prazo_pagpes_cons, $today_cons) > 0) {
+													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . diferenca($prazo_pagpes_cons, $today_cons) . '</td>';
+												} else {
+													echo '<td class="align-middle" style="text-align:center;">' . diferenca($prazo_pagpes_cons, $today_cons) . '</td>';
+												}
+											} elseif ($old_secao == 'ACI-1') {
+												if (diferenca($prazo_controle_cons, $today_cons) > 10) {
+													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . diferenca($prazo_controle_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_controle_cons, $today_cons) <= 10 and diferenca($prazo_controle_cons, $today_cons) > 5) {
+													echo '<td class="align-middle" style="background-color: yellow; text-align:center;">' . diferenca($prazo_controle_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_controle_cons, $today_cons) <= 5 and diferenca($prazo_controle_cons, $today_cons) > 0) {
+													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . diferenca($prazo_controle_cons, $today_cons) . '</td>';
+												} else {
+													echo '<td class="align-middle" style="text-align:center;">' . diferenca($prazo_controle_cons, $today_cons) . '</td>';
+												}
+											} elseif ($old_secao == 'SDPP') {
+												if (diferenca($prazo_sdpp_cons, $today_cons) > 120) {
+													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . diferenca($prazo_sdpp_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_sdpp_cons, $today_cons) <= 120 and diferenca($prazo_sdpp_cons, $today_cons) > 90) {
+													echo '<td class="align-middle" style="background-color: yellow; text-align:center;">' . diferenca($prazo_sdpp_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_sdpp_cons, $today_cons) <= 90 and diferenca($prazo_sdpp_cons, $today_cons) > 0) {
+													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . diferenca($prazo_sdpp_cons, $today_cons) . '</td>';
+												} else {
+													echo '<td class="align-middle" style="text-align:center;">' . diferenca($prazo_sdpp_cons, $today_cons) . '</td>';
+												}
+											} else {
+												if (diferenca($prazo_pessoal_cons, $today_cons) > 15) {
+													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . diferenca($prazo_pessoal_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_pessoal_cons, $today_cons) <= 15 and diferenca($prazo_pessoal_cons, $today_cons) > 10) {
+													echo '<td class="align-middle" style="background-color: yellow; text-align:center;">' . diferenca($prazo_pessoal_cons, $today_cons) . '</td>';
+												} elseif (diferenca($prazo_pessoal_cons, $today_cons) <= 10 and diferenca($prazo_pessoal_cons, $today_cons) > 0) {
+													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . diferenca($prazo_pessoal_cons, $today_cons) . '</td>';
+												} else {
+													echo '<td class="align-middle" style="text-align:center;">' . diferenca($prazo_pessoal_cons, $today_cons) . '</td>';
+												}
+											}
+											?>
 										</tr>
 									<?php } ?>
 								</tbody>

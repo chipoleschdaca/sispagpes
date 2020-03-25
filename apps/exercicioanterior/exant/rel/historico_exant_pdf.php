@@ -1,7 +1,7 @@
 <?php
 
 include('../../../../conexao.php');
-
+include('../../../../dist/php/functions.php');
 $id = $_GET['id'];
 $id_req = $_GET['id_req'];
 
@@ -20,10 +20,6 @@ $requerente = $res_1['nome'];
 $posto = $res_1['nome_posto'];
 $situacao = $res_1["situacao"];
 
-function data($data)
-{
-  return date("d/m/Y", strtotime($data));
-}
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +44,10 @@ function data($data)
 
   }
 
+  .body {
+    margin: 2cm;
+  }
+
   .cabecalho {
     border: 1px solid #bcbcbc;
     padding-bottom: 10px;
@@ -56,6 +56,17 @@ function data($data)
     border-radius: 3px;
     margin-bottom: 10px;
     background-color: none;
+  }
+
+  footer {
+    padding: 0;
+    margin: 0;
+    position: auto;
+    bottom: 0cm;
+    left: 0cm;
+    right: 0cm;
+    height: 2cm;
+    text-align: right;
   }
 
   .historico {
@@ -145,11 +156,15 @@ function data($data)
               </tr>
             <?php } ?>
           </tbody>
+          <footer class="main-footer">
+            <?php echo data2(); ?>
+          </footer>
         </table>
       </div>
     </div>
   </div>
-  <script src="../../../../plugins/bootstrap3.3.7/js/bootstrap.min.js"></script>
+  <script src="../../../../plugins/bootstrap3.3.7/js/bootstrap.min.js">
+  </script>
 
 </body>
 

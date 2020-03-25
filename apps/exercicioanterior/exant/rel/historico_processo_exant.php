@@ -2,6 +2,7 @@
 session_start();
 include('../../../../verificar_login.php');
 include('../../../../conexao.php');
+include('../../../../dist/php/functions.php');
 if ($_SESSION['perfil_usuario'] != 'EXANT') {
   header('Location: ../../../../index.php');
   exit();
@@ -24,10 +25,6 @@ $requerente = $res_1['nome'];
 $posto = $res_1['nome_posto'];
 $situacao = $res_1["situacao"];
 
-function data($data)
-{
-  return date("d/m/Y", strtotime($data));
-}
 ?>
 
 <!DOCTYPE html>

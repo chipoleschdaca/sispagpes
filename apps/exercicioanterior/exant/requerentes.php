@@ -265,7 +265,7 @@ if ($_SESSION['perfil_usuario'] != 'EXANT') {
                           <th class="align-middle">Situação</th>
                           <th class="align-middle">Nome Completo</th>
                           <th class="align-middle">Email</th>
-                          <th class="align-middle">Data</th>
+                          <th class="align-middle">Dt. Inclusão</th>
                           <th class="align-middle">Ações</th>
                         </thead>
                         <tbody>
