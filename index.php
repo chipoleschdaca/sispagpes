@@ -5,7 +5,7 @@ session_start();
 <html>
 
 <head>
-  <link rel="stylesheet" href="plugins/fontawesome-free-5.11.2-web/css/all.min.css">
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <link href="dist/css/index.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -14,6 +14,7 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
   <title>SISPAGPES</title>
 </head>
 
@@ -28,7 +29,7 @@ session_start();
       <!-- Login Form -->
       <form method="POST" class="form-container" action="login.php">
         <div class="form-group">
-          <input type="text" id="usuario" class="fadeIn" name="usuario" placeholder="Usuário" required><br>
+          <input type="text" id="txtcpf" class="fadeIn" name="usuario" placeholder="CPF" required><br>
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
@@ -66,5 +67,12 @@ session_start();
     </div>
   </div>
 </body>
+<script>
+  $(document).ready(function() {
+    $('#txtcpf').mask('000.000.000-00', {
+      reverse: true
+    });
+  });
+</script>
 
 </html>
