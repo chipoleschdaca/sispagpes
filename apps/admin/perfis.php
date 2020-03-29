@@ -522,15 +522,7 @@ login('ADMIN', '../../');
                   <form method="POST" action="">
                     <div class="form-group">
                       <label for="id_produto">Perfil</label>
-                      <select class="form-control mr-2" id="txtnome" name="txtnome" required>
-                        <option value="" disabled selected hidden>Perfil</option>
-                        <option value="Administrador">Administrador</option>
-                        <option value="Gerente">Gerente</option>
-                        <option value="Tesoureiro">Tesoureiro</option>
-                        <option value="Funcionário">Funcionário</option>
-                        <option value="EXANT">Exercício Anterior</option>
-                        <option value="PENSAL">Pensão Alimentícia</option>
-                      </select>
+                      <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" required>
                     </div>
                     <div class="modal-footer">
                       <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
@@ -608,18 +600,18 @@ login('ADMIN', '../../');
 
 <?php
 if (isset($_POST['button'])) {
-  $nome = $_POST['txtnome'];
+  $nome = strtoupper($_POST['txtnome']);
 
   //Verificar se o perfil já está cadastrado
 
-  $query_verificar = "select * from perfis where perfil = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "SELECT * FROM perfis WHERE perfil = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    Alerta("info", "Perfil já cadastrado!", false);
+    Alerta("info", "Perfil já cadastrado!", false, "perfis.php");
     exit();
   }
 
@@ -628,11 +620,9 @@ if (isset($_POST['button'])) {
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
-    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='perfis.php'; </script>";
+    Alerta("error", "Não foi possível cadastrar!", false, "perfis.php");
   } else {
-    echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='perfis.php'; </script>";
+    Alerta("success", "Salvo com sucesso!", false, "perfis.php");
   }
 }
 
@@ -645,7 +635,7 @@ if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
   $query = "DELETE FROM perfis where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='perfis.php'; </script>";
+  Alerta("success", "Excluído com sucesso", false, "perfis.php");
 }
 ?>
 <!------------------------------------------------------------------------------->
@@ -655,11 +645,11 @@ if (@$_GET['func'] == 'deleta') {
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "select * from perfis where id = '$id'";
+  $query = "SELECT * FROM perfis WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
 
   while ($res_1 = mysqli_fetch_array($result)) {
-
+    $perfil = $res_1['perfil'];
 ?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
@@ -673,60 +663,44 @@ if (@$_GET['func'] == 'edita') {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="id_produto">Perfis</label>
-                <select class="form-control mr-2" id="modalEditar" name="txtnome" required>
-                  <option value="" disabled selected hidden>Perfil</option>
-                  <option value="ADMIN">ADMIN</option>
-                  <option value="Gerente">Gerente</option>
-                  <option value="Tesoureiro">Tesoureiro</option>
-                  <option value="Funcionário">Funcionário</option>
-                  <option value="PENSAL">PENSAL</option>
-                </select>
+                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" value="<?php echo $perfil; ?>" required>
               </div>
-
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+              </div>
+            </form>
           </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-          </div>
-
-          </form>
         </div>
       </div>
     </div>
     </div>
-
     <script>
       $('#modalEditar').modal("show");
     </script>
     <!--Modal EDITAR -->
-
-    <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
-
 <?php
     if (isset($_POST['buttonEditar'])) {
-      $nome = $_POST['txtnome'];
-      $query_verificar = "select * from perfis where perfil = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+      $nome = strtoupper($_POST['txtnome']);
+      $query_verificar = "SELECT * FROM perfis WHERE perfil = '$nome'";
       $result_verificar = mysqli_query($conexao, $query_verificar);
       $row_verificar = mysqli_num_rows($result_verificar);
 
       if ($row_verificar > 0) {
-        Alerta("info", "Perfil já cadastrado!", false);
+        Alerta("info", "Perfil já cadastrado!", false, "perfis.php");
         exit();
       }
 
       $query_editar = "UPDATE perfis set perfil = '$nome' where id = '$id'";
       $result_editar = mysqli_query($conexao, $query_editar);
       if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='perfis.php'; </script>";
+        Alerta("error", "Não foi possível editar!", false, "perfis.php");
       } else {
-        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='perfis.php'; </script>";
+        Alerta("success", "Editado com sucesso!", false, "perfis.php");
       }
     }
   }
 } ?>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <!--Máscaras-->
 <script>

@@ -13,7 +13,7 @@ login('ADMIN', '../../');
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="../../dist/img/gapls.png">
-  <title>SISPAGPES | Dashboard</title>
+  <title>SISPAGPES</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -735,7 +735,7 @@ if (isset($_POST['button'])) {
   $status = 'Aprovado';
 
   if ($senha != $senha2) {
-    Alerta("info", "Senhas não conferem!", false);
+    Alerta("info", "Senhas não conferem!", false, "militares.php");
     exit();
   }
   $query_verificar = "SELECT * FROM militares WHERE saram = '$saram' OR cpf = '$cpf'";
@@ -744,7 +744,8 @@ if (isset($_POST['button'])) {
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    Alerta("info", "Militar já cadastrado!", false);
+    Alerta("info", "Militar já cadastrado!", false, "militares.php");
+    exit();
   }
 
   $query = "INSERT INTO militares (saram, cpf, posto, nome, nomeguerra, senha, perfil, status, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$nomeguerra', '$senha','$perfil', '$status', curDate() )";
@@ -752,11 +753,9 @@ if (isset($_POST['button'])) {
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
-    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='militares.php'; </script>";
+    Alerta("error", "Ocorreu algum erro ao cadastrar!", false, "militares.php");
   } else {
-    echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='militares.php'; </script>";
+    Alerta("success", "Salvo com sucesso", false, "militares.php");
   }
 
   //EXCLUIR REGISTRO DA TABELA
@@ -764,8 +763,7 @@ if (isset($_POST['button'])) {
   $id = $_GET['id'];
   $query = "UPDATE militares SET status = 'Rejeitado' WHERE id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.alert('Excluído com sucesso!'); </script>";
-  echo "<script language='javascript'> window.location='militares.php'; </script>";
+  Alerta("success", "Excluído com sucesso", false, "militares.php");
 
   //ALTERAR SENHA
 } elseif (@$_GET['func'] == 'senha') {
@@ -785,7 +783,7 @@ if (isset($_POST['button'])) {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="fornecedor">Senha</label>
-                <input type="text" class="form-control mr-2" id="txtsenhaatual" name="txtsenhaatual" autocomplete="off" value="<?php echo md5($res_1['senha']); ?>" disabled>
+                <input type="text" class="form-control mr-2" id="txtsenhaatual" name="txtsenhaatual" autocomplete="off" value="<?php echo $res_1['senha']; ?>" disabled>
               </div>
               <div class="form-group">
                 <label for="fornecedor">Nova Senha</label>
@@ -815,18 +813,16 @@ if (isset($_POST['button'])) {
       $novasenha2 = md5($_POST['txtnovasenha2']);
 
       if ($novasenha1 != $novasenha2) {
-        Alerta("info", "Senhas não conferem!", false);
+        Alerta("info", "Senhas não conferem!", false, "militares.php");
       } else {
         $query_editar = "UPDATE militares set senha = '$novasenha1' WHERE id = '$id'";
 
         $result_editar = mysqli_query($conexao, $query_editar);
 
         if ($result_editar == '') {
-          echo "<script language='javascript'> window.alert('Ocorreu um erro ao alterar!'); </script>";
-          echo "<script language='javascript'> window.location='militares.php'; </script>";
+          Alerta("error", "Não foi possível alterar!", false, "militares.php");
         } else {
-          echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-          echo "<script language='javascript'> window.location='militares.php'; </script>";
+          Alerta("success", "Editado com sucesso!", false, "militares.php");
         }
       }
     }
@@ -938,7 +934,7 @@ if (isset($_POST['button'])) {
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          Alerta("info", "Militar já cadastrado!", false);
+          Alerta("info", "Militar já cadastrado!", false, "militares.php");
           exit();
         }
       }
@@ -948,11 +944,9 @@ if (isset($_POST['button'])) {
       $result_editar = mysqli_query($conexao, $query_editar);
 
       if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='militares.php'; </script>";
+        Alerta("error", "Não foi possível editar", false, "militares.php");
       } else {
-        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='militares.php'; </script>";
+        Alerta("success", "Editado com sucesso", false, "militares.php");
       }
     }
   }
@@ -1061,7 +1055,7 @@ if (isset($_POST['button'])) {
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          Alerta("info", "CPF já cadastrado!", false);
+          Alerta("info", "CPF já cadastrado!", false, "militares.php");
           exit();
         }
       }
@@ -1071,11 +1065,9 @@ if (isset($_POST['button'])) {
       $result_editar = mysqli_query($conexao, $query_editar);
 
       if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao aprovar!'); </script>";
-        echo "<script language='javascript'> window.location='militares.php'; </script>";
+        Alerta("error", "Não foi possível alterar", false, "militares.php");
       } else {
-        echo "<script language='javascript'> window.alert('Aprovado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='militares.php'; </script>";
+        Alerta("success", "Aprovado com sucesso!", false, "militares.php");
       }
     }
   }

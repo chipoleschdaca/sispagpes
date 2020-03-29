@@ -518,7 +518,7 @@ if (isset($_POST['button'])) {
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    Alerta("info", "CPF já existe!", false);
+    Alerta("info", "CPF já existe!", false, "requerentes.php");
     exit();
   }
 
@@ -527,11 +527,9 @@ if (isset($_POST['button'])) {
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
-    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+    Alerta("error", "Não foi possível cadastrar!", false, "requerentes.php");
   } else {
-    echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+    Alerta("success", "Salvo com sucesso!", false, "requerentes.php");
   }
 
   //EXCLUIR DADOS DA TABELA
@@ -539,8 +537,7 @@ if (isset($_POST['button'])) {
   $id_del = $_GET['id'];
   $query_del = "DELETE FROM requerentes WHERE id = '$id_del'";
   mysqli_query($conexao, $query_del);
-  echo "<script language='javascript'> window.alert('Excluído com sucesso!'); </script>";
-  echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+  Alerta("success", "Excluído com sucesso!", false, "requerentes.php");
 
   // EDITAR REGISTRO
 } else if (@$_GET['func'] == 'edita') {
@@ -651,7 +648,7 @@ if (isset($_POST['button'])) {
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          Alerta("info", "Requerente já cadastrado!", false);
+          Alerta("info", "Requerente já cadastrado!", false, "requerentes.php");
           exit();
         }
       }
@@ -661,11 +658,9 @@ if (isset($_POST['button'])) {
       $result_editar = mysqli_query($conexao, $query_editar);
 
       if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+        Alerta("error", "Não foi possível editar!", false, "requerentes.php");
       } else {
-        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='requerentes.php'; </script>";
+        Alerta("success", "Editado com sucesso!", false, "requerentes.php");
       }
     }
   }

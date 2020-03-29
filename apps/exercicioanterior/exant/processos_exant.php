@@ -791,12 +791,12 @@ if (isset($_POST['button'])) {
 	$estado = $_POST['txtestado'];
 
 	// Verificar se o NUP já está cadastrado
-	$query_nup = "SELECT * from exercicioanterior WHERE nup = '$nup'";
+	$query_nup = "SELECT * FROM exercicioanterior WHERE nup = '$nup'";
 	$result_nup = mysqli_query($conexao, $query_nup);
 	$row_nup = mysqli_num_rows($result_nup);
 
 	if ($row_nup > 0) {
-		Alerta("info", "O NUP já existe!", false);
+		Alerta("info", "O NUP já existe!", false, "processos_exant.php");
 		exit();
 	}
 
@@ -805,10 +805,9 @@ if (isset($_POST['button'])) {
 	$result = mysqli_query($conexao, $query);
 
 	if ($result == '') {
-		echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
+		Alerta("error", "Não foi possível cadastrar!", false, "processos_exant.php");
 	} else {
-		echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-		echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
+		Alerta("success", "Salvo com sucesso!", false, "processos_exant.php");
 	}
 
 	//Função para EXCLUIR o registro
@@ -816,7 +815,7 @@ if (isset($_POST['button'])) {
 	$id = $_GET['id'];
 	$query = "DELETE FROM exercicioanterior where id = '$id'";
 	mysqli_query($conexao, $query);
-	echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
+	Alerta("success", "Excluído com sucesso!", false, "processos_exant.php");
 
 	//Função para EDITAR o registro
 } else if (@$_GET['func'] == 'edita') {
@@ -1019,7 +1018,7 @@ if (isset($_POST['button'])) {
 				$row_verificar = mysqli_num_rows($result_verificar);
 
 				if ($row_verificar > 0) {
-					Alerta("info", "NUP já existe!", false);
+					Alerta("info", "NUP já existe!", false, "processos_exant.php");
 					exit();
 				}
 			}
@@ -1029,10 +1028,9 @@ if (isset($_POST['button'])) {
 			$result_editar = mysqli_query($conexao, $query_editar);
 
 			if ($result_editar == '') {
-				echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
+				Alerta("error", "Não foi possível editar!", false, "processos_exant.php");
 			} else {
-				echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-				echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
+				Alerta("success", "Editado com sucesso!", false, "processos_exant.php");
 			}
 		}
 	}
@@ -1176,10 +1174,9 @@ if (isset($_POST['button'])) {
 			$result_estado = mysqli_query($conexao, $query_estado);
 
 			if ($result_estado == '') {
-				echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
+				Alerta("error", "Não foi possível editar", false, "processos_exant.php");
 			} else {
-				echo "<script language='javascript'> window.alert('Estado alterado com sucesso!'); </script>";
-				echo "<script language='javascript'> window.location='processos_exant.php'; </script>";
+				Alerta("success", "Alterado com sucesso!", false, "processos_exant.php");
 			}
 		}
 	}

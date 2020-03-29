@@ -772,7 +772,7 @@ if (isset($_POST['button'])) {
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    Alerta("info", "Seção já cadastrada!", false);
+    Alerta("info", "Seção já cadastrada!", false, "secoes_exant.php");
     exit();
   }
 
@@ -781,11 +781,9 @@ if (isset($_POST['button'])) {
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
-    echo "<script language='javascript'> window.alert('Ocorreu um erro ao cadastrar!'); </script>";
-    echo "<script language='javascript'> window.location='secoes_exant.php'; </script>";
+    Alerta("error", "Não foi possível cadastrar!", false, "secoes_exant.php");
   } else {
-    echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='secoes_exant.php'; </script>";
+    Alerta("success", "Salvo com sucesso!", false, "secoes_exant.php");
   }
 }
 
@@ -798,7 +796,7 @@ if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
   $query = "UPDATE tb_secoes_exant set status = 'Excluído' where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='secoes_exant.php'; </script>";
+  Alerta("success", "Excluído com sucesso!", false, "secoes_exant.php");
 }
 ?>
 <!------------------------------------------------------------------------------->
@@ -851,18 +849,16 @@ if (@$_GET['func'] == 'edita') {
       $row_verificar = mysqli_num_rows($result_verificar);
 
       if ($row_verificar > 0) {
-        Alerta("info", "Seção já cadastrada!", false);
+        Alerta("info", "Seção já cadastrada!", false, "secoes_exant.php");
         exit();
       }
 
       $query_editar = "UPDATE tb_secoes_exant set secao = '$secao2' where id = '$id'";
       $result_editar = mysqli_query($conexao, $query_editar);
       if ($result_editar == '') {
-        echo "<script language='javascript'> window.alert('Ocorreu um erro ao editar!'); </script>";
-        echo "<script language='javascript'> window.location='secoes_exant.php'; </script>";
+        Alerta("error", "Não foi possível editar!", false, "secoes_exant.php");
       } else {
-        echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
-        echo "<script language='javascript'> window.location='secoes_exant.php'; </script>";
+        Alerta("success", "Editado com sucesso!", false, "secoes_exant.php");
       }
     }
   }
@@ -874,6 +870,6 @@ if (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
   $query = "UPDATE tb_secoes_exant set status = 'Aprovado' where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='secoes_exant.php'; </script>";
+  Alerta("success", "Aprovado com sucesso!", false, "secoes_exant.php");
 }
 ?>

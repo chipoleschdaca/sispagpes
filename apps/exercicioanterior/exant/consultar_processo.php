@@ -102,9 +102,9 @@ include '../../../dist/php/functions.php';
         $row = mysqli_num_rows($result);
 
         if ($row == 0) {
-          Alerta("error", "Processo não encontrado!", false);
+          Alerta("error", "Processo não encontrado!", false, "consultar_processo.php");
         } else {
-          Alerta("success", "Processo encontrado!", false);
+          Alerta("success", "Processo encontrado!", false, "consultar_processo.php");
       ?>
           <div class="row">
             <div class="table-responsive" style="text-align: center;">
@@ -141,7 +141,7 @@ include '../../../dist/php/functions.php';
               </table>
             <?php
           } else if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram'] == '') {
-            Alerta("error", "Processo não encontrado!", false);
+            Alerta("error", "Processo não encontrado!", false, "consultar_processo.php");
           }
             ?>
             </div>

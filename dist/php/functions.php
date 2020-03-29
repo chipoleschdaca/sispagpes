@@ -3,7 +3,7 @@ function footer()
 {
   echo '<strong>&copy; 2019-' . date("Y") . '<a href="#"> SISPAGPES</a></strong>. Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. <div class="float-right d-none d-sm-inline-block"><b>Versão</b> 1.0.0</div>';
 }
-function Alerta($type, $title, $msg)
+function Alerta($type, $title, $msg, $location)
 {
   echo "<script type='text/javascript'>
         Swal.fire({
@@ -13,16 +13,19 @@ function Alerta($type, $title, $msg)
           showConfirmButton: false,
           timer: 2000
         });
+        setTimeout(function() {          
+          window.location='$location';
+        }, 2000);
         </script>";
 }
 
-function AlertaExcluir($type, $title, $msg)
+function AlertaExcluir($type, $title, $msg, $location)
 {
   echo "<script type='text/javascript'>
         Swal.fire({
-        title: 'Tem certeza?',
-        text: 'You wont be able to revert this!',
-        icon: 'warning',
+        title: '$title',
+        text: '$msg',
+        icon: '$type',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
@@ -35,7 +38,9 @@ function AlertaExcluir($type, $title, $msg)
             'success'
           )
         }
-      })
+      },
+       window.location='$location'
+    )      
       </script>";
 }
 
@@ -135,13 +140,5 @@ function diferenca($a, $b)
     return (strtotime($a) - strtotime($b)) / (60 * 60 * 24);
   } else {
     return (strtotime($b) - strtotime($a)) / (60 * 60 * 24);
-  }
-}
-
-function login($a, $b)
-{
-  if ($_SESSION['perfil_usuario'] != $a) {
-    header('Location: ' . $b . 'index.php');
-    exit();
   }
 }
