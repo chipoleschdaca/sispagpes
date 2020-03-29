@@ -3,11 +3,7 @@ session_start();
 include('../../../verificar_login.php');
 include('../../../conexao.php');
 include('../../../dist/php/functions.php');
-if ($_SESSION['perfil_usuario'] != 'EXANT') {
-	header('Location: ../../../index.php');
-	exit();
-}
-
+login('EXANT', '../../../');
 ?>
 
 <!DOCTYPE html>
@@ -1227,7 +1223,6 @@ if (isset($_POST['button'])) {
 						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
 							<?php
 							$query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY h.data_novo";
-							"SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id' order by e.id asc";
 							$result_h = mysqli_query($conexao, $query_h);
 							$row_h = mysqli_num_rows($result_h);
 							?>
@@ -1260,7 +1255,6 @@ if (isset($_POST['button'])) {
 										$today_cons = date('Y-m-d');
 									?>
 										<tr>
-
 											<td class="align-middle" style="width: 12.1%;">
 												<b><?php echo data($data_novo) . '<br>'; ?></b>
 												<?php
@@ -1271,7 +1265,6 @@ if (isset($_POST['button'])) {
 													echo 'De: ' . '<b>' . $old_secao . '</b><br>';
 													echo 'Para: ' . '<b>' . $new_secao . '</b>';
 												} ?>
-
 											</td>
 											<td class="align-middle">
 												<strong><?php echo $new_estado; ?></strong><br>

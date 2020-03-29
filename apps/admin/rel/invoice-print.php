@@ -1,6 +1,6 @@
 <?php
-include('../../../conexao.php');
 session_start();
+include('../../../conexao.php');
 
 $id = $_GET['id'];
 

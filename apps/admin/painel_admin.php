@@ -3,10 +3,7 @@ session_start();
 include('../../verificar_login.php');
 include('../../conexao.php');
 include('../../dist/php/functions.php');
-if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
-  header('Location: ../../index.php');
-  exit();
-}
+login('ADMIN', '../../');
 ?>
 
 <!DOCTYPE html>

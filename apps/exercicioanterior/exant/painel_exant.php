@@ -3,10 +3,7 @@ session_start();
 include('../../../verificar_login.php');
 include('../../../conexao.php');
 include('../../../dist/php/functions.php');
-if ($_SESSION['perfil_usuario'] != 'EXANT') {
-  header('Location: ../../../index.php');
-  exit();
-}
+login('EXANT', '../../../');
 ?>
 
 <!DOCTYPE html>

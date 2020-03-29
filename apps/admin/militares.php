@@ -3,10 +3,7 @@ session_start();
 include('../../conexao.php');
 include('../../verificar_login.php');
 include('../../dist/php/functions.php');
-if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
-  header('Location: index.php');
-  exit();
-}
+login('ADMIN', '../../');
 ?>
 
 <!DOCTYPE html>
@@ -564,6 +561,7 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                               <?php
                               if ($status == 'Aprovado') { ?>
                                 <a class="btn btn-success btn-sm disabled" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
                                 <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
                                 <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
                               <?php
@@ -647,6 +645,10 @@ if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'
                       <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" required>
                     </div>
                     <div class="form-group">
+                      <label for="id_produto">Senha</label>
+                      <input type="password" class="form-control mr-2" id="txtsenha" name="txtsenha" autocomplete="off" placeholder="Senha" required>
+                    </div>
+                    <div class="form-group">
                       <label for="id_produto">Perfil</label>
                       <select name="perfil" class="form-control mr-2" id="category" name="category" required>
                         <option value="" disabled selected hidden>Perfil</option>
@@ -728,23 +730,24 @@ if (isset($_POST['button'])) {
   $posto = $_POST['txtposto'];
   $nome = strtoupper($_POST['txtnome']);
   $nomeguerra = strtoupper($_POST['txtnomeguerra']);
+  $senha = md5($_POST['txtsenha']);
   $perfil = $_POST['perfil'];
   $status = 'Aprovado';
 
   //Verificar se o CPF já está cadastrado
 
-  $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "SELECT * FROM militares WHERE saram = '$saram' OR cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
-    Alerta("info", "CPF já cadastrado!", false);
+    Alerta("info", "Militar já cadastrado!", false);
     exit();
   }
 
-  $query = "INSERT into militares (saram, cpf, posto, nome, nomeguerra, perfil, status, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$nomeguerra', '$perfil', '$status', curDate() )";
+  $query = "INSERT INTO militares (saram, cpf, posto, nome, nomeguerra, senha, perfil, status, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$nomeguerra', '$senha','$perfil', '$status', curDate() )";
 
   $result = mysqli_query($conexao, $query);
 
@@ -761,10 +764,75 @@ if (isset($_POST['button'])) {
 <?php
 if (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
-  $query = "UPDATE militares set status = 'Rejeitado' where id = '$id'";
+  $query = "UPDATE militares SET status = 'Rejeitado' WHERE id = '$id'";
   mysqli_query($conexao, $query);
   echo "<script language='javascript'> window.alert('Excluído com sucesso!'); </script>";
   echo "<script language='javascript'> window.location='militares.php'; </script>";
+
+  //Função alterar senha do usuário
+} elseif (@$_GET['func'] == 'senha') {
+  $id = $_GET['id'];
+  $query = "SELECT * FROM militares WHERE id = '$id'";
+  $result = mysqli_query($conexao, $query);
+  while ($res_1 = mysqli_fetch_array($result)) { ?>
+    <div id="modalSenha" class="modal fade" role="dialog">
+      <!---Modal EDITAR --->
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Militares</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="">
+              <div class="form-group">
+                <label for="fornecedor">Senha</label>
+                <input type="text" class="form-control mr-2" id="txtsenhaatual" name="txtsenhaatual" autocomplete="off" value="<?php echo md5($res_1['senha']); ?>" disabled>
+              </div>
+              <div class="form-group">
+                <label for="fornecedor">Nova Senha</label>
+                <input type="password" class="form-control mr-2" id="txtnovasenha1" name="txtnovasenha1" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label for="fornecedor">Repita a Senha</label>
+                <input type="password" class="form-control mr-2" id="txtnovasenha2" name="txtnovasenha2" autocomplete="off">
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm" name="buttonSenha" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $('#modalSenha').modal("show");
+    </script>
+    <!--Modal SENHA -->
+<?php
+    if (isset($_POST['buttonSenha'])) {
+      $senhaatual = $_POST['txtsenhaatual'];
+      $novasenha1 = $_POST['txtnovasenha1'];
+      $novasenha2 = $_POST['txtnovasenha2'];
+
+      if ($novasenha1 != $novasenha2) {
+        Alerta("info", "Senhas não conferem!", false);
+      } else {
+        $query_editar = "UPDATE militares set senha = '$novasenha1' WHERE id = '$id'";
+
+        $result_editar = mysqli_query($conexao, $query_editar);
+
+        if ($result_editar == '') {
+          echo "<script language='javascript'> window.alert('Ocorreu um erro ao alterar!'); </script>";
+          echo "<script language='javascript'> window.location='militares.php'; </script>";
+        } else {
+          echo "<script language='javascript'> window.alert('Editado com sucesso!'); </script>";
+          echo "<script language='javascript'> window.location='militares.php'; </script>";
+        }
+      }
+    }
+  }
 }
 ?>
 <!-------------------------------------------------------------------------------->
@@ -774,7 +842,7 @@ if (@$_GET['func'] == 'deleta') {
 <?php
 if (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "select * from militares where id = '$id'";
+  $query = "SELECT * FROM militares WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) { ?>
     <div id="modalEditar" class="modal fade" role="dialog">
@@ -870,14 +938,14 @@ if (@$_GET['func'] == 'edita') {
       if ($res_1['cpf'] != $cpf) {
 
         //Verificar se o CPF já está cadastrado
-        $query_verificar = "select * from militares where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+        $query_verificar = "SELECT * FROM militares WHERE saram = '$saram' OR cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
         $result_verificar = mysqli_query($conexao, $query_verificar);
         $dado_verificar = mysqli_fetch_array($result_verificar);
         $row_verificar = mysqli_num_rows($result_verificar);
 
         if ($row_verificar > 0) {
-          Alerta("info", "CPF já cadastrado!", false);
+          Alerta("info", "Militar já cadastrado!", false);
           exit();
         }
       }

@@ -137,3 +137,11 @@ function diferenca($a, $b)
     return (strtotime($b) - strtotime($a)) / (60 * 60 * 24);
   }
 }
+
+function login($a, $b)
+{
+  if ($_SESSION['perfil_usuario'] != $a) {
+    header('Location: ' . $b . 'index.php');
+    exit();
+  }
+}

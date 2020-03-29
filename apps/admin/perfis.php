@@ -3,10 +3,7 @@ session_start();
 include('../../conexao.php');
 include('../../verificar_login.php');
 include('../../dist/php/functions.php');
-if ($_SESSION['perfil_usuario'] != 'Administrador' && $_SESSION['perfil_usuario'] != 'Gerente') {
-  header('Location: ../../index.php');
-  exit();
-}
+login('ADMIN', '../../');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -685,10 +682,11 @@ if (@$_GET['func'] == 'edita') {
                 <label for="id_produto">Perfis</label>
                 <select class="form-control mr-2" id="modalEditar" name="txtnome" required>
                   <option value="" disabled selected hidden>Perfil</option>
-                  <option value="Administrador">Administrador</option>
+                  <option value="ADMIN">ADMIN</option>
                   <option value="Gerente">Gerente</option>
                   <option value="Tesoureiro">Tesoureiro</option>
                   <option value="Funcionário">Funcionário</option>
+                  <option value="PENSAL">PENSAL</option>
                 </select>
               </div>
 
