@@ -232,15 +232,8 @@ login('ADMIN', '../../');
               </a>
             </li>
             <li class="nav-item">
-              <a href="usuarios.php" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Usuários
-                </p>
-              </a>
-            <li class="nav-item">
               <a href="perfis.php" class="nav-link">
-                <i class="nav-icon fas fa-sitemap"></i>
+                <i class="nav-icon fas fa-users"></i>
                 <p>
                   Perfis
                 </p>
@@ -567,13 +560,15 @@ login('ADMIN', '../../');
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
                                 <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
                                 <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
                                 <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
                               <?php
                               } else { ?>
                                 <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
+                                <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
                                 <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
-                                <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-danger btn-sm disabled" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
                               <?php } ?>
                             </td>
                           </tr>
@@ -647,6 +642,10 @@ login('ADMIN', '../../');
                     <div class="form-group">
                       <label for="id_produto">Senha</label>
                       <input type="password" class="form-control mr-2" id="txtsenha" name="txtsenha" autocomplete="off" placeholder="Senha" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="id_produto">Repita a senha</label>
+                      <input type="password" class="form-control mr-2" id="txtsenha" name="txtsenha2" autocomplete="off" placeholder="Senha" required>
                     </div>
                     <div class="form-group">
                       <label for="id_produto">Perfil</label>
@@ -731,20 +730,21 @@ if (isset($_POST['button'])) {
   $nome = strtoupper($_POST['txtnome']);
   $nomeguerra = strtoupper($_POST['txtnomeguerra']);
   $senha = md5($_POST['txtsenha']);
+  $senha2 = md5($_POST['txtsenha2']);
   $perfil = $_POST['perfil'];
   $status = 'Aprovado';
 
-  //Verificar se o CPF já está cadastrado
-
-  $query_verificar = "SELECT * FROM militares WHERE saram = '$saram' OR cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
-
+  if ($senha != $senha2) {
+    Alerta("info", "Senhas não conferem!", false);
+    exit();
+  }
+  $query_verificar = "SELECT * FROM militares WHERE saram = '$saram' OR cpf = '$cpf'";
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if ($row_verificar > 0) {
     Alerta("info", "Militar já cadastrado!", false);
-    exit();
   }
 
   $query = "INSERT INTO militares (saram, cpf, posto, nome, nomeguerra, senha, perfil, status, data) VALUES ('$saram', '$cpf', '$posto', '$nome', '$nomeguerra', '$senha','$perfil', '$status', curDate() )";
@@ -758,18 +758,16 @@ if (isset($_POST['button'])) {
     echo "<script language='javascript'> window.alert('Salvo com sucesso!'); </script>";
     echo "<script language='javascript'> window.location='militares.php'; </script>";
   }
-} ?>
 
-<!---------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
-<?php
-if (@$_GET['func'] == 'deleta') {
+  //EXCLUIR REGISTRO DA TABELA
+} elseif (@$_GET['func'] == 'deleta') {
   $id = $_GET['id'];
   $query = "UPDATE militares SET status = 'Rejeitado' WHERE id = '$id'";
   mysqli_query($conexao, $query);
   echo "<script language='javascript'> window.alert('Excluído com sucesso!'); </script>";
   echo "<script language='javascript'> window.location='militares.php'; </script>";
 
-  //Função alterar senha do usuário
+  //ALTERAR SENHA
 } elseif (@$_GET['func'] == 'senha') {
   $id = $_GET['id'];
   $query = "SELECT * FROM militares WHERE id = '$id'";
@@ -810,11 +808,11 @@ if (@$_GET['func'] == 'deleta') {
       $('#modalSenha').modal("show");
     </script>
     <!--Modal SENHA -->
-<?php
+    <?php
     if (isset($_POST['buttonSenha'])) {
       $senhaatual = $_POST['txtsenhaatual'];
-      $novasenha1 = $_POST['txtnovasenha1'];
-      $novasenha2 = $_POST['txtnovasenha2'];
+      $novasenha1 = md5($_POST['txtnovasenha1']);
+      $novasenha2 = md5($_POST['txtnovasenha2']);
 
       if ($novasenha1 != $novasenha2) {
         Alerta("info", "Senhas não conferem!", false);
@@ -833,14 +831,9 @@ if (@$_GET['func'] == 'deleta') {
       }
     }
   }
-}
-?>
-<!-------------------------------------------------------------------------------->
 
-
-<!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
-<?php
-if (@$_GET['func'] == 'edita') {
+  //EDITAR REGISTRO DA TABELA
+} elseif (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
   $query = "SELECT * FROM militares WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
@@ -926,7 +919,7 @@ if (@$_GET['func'] == 'edita') {
 
     <!--Modal EDITAR -->
 
-<?php
+    <?php
     if (isset($_POST['buttonEditar'])) {
       $saram = $_POST['txtsaram'];
       $cpf = $_POST['txtcpf'];
@@ -963,13 +956,9 @@ if (@$_GET['func'] == 'edita') {
       }
     }
   }
-} ?>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-
-<!---------------------------Aprovar REGISTRO DA TABELA---------------------------->
-<?php
-if (@$_GET['func'] == 'aprova') {
+  // APROVAR NOVA SOLICITAÇÃO
+} elseif (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
   $query = "select * from militares where id = '$id'";
   $result = mysqli_query($conexao, $query);
@@ -1052,9 +1041,7 @@ if (@$_GET['func'] == 'aprova') {
     <script>
       $('#modalAprovar').modal("show");
     </script>
-
     <!--Modal Aprovar -->
-
 <?php
     if (isset($_POST['buttonAprovar'])) {
       $saram = $_POST['txtsaram'];
@@ -1093,7 +1080,6 @@ if (@$_GET['func'] == 'aprova') {
     }
   }
 } ?>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 <!--Máscaras-->
 <script>

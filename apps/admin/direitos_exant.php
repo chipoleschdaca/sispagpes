@@ -227,15 +227,8 @@ login('ADMIN', '../../');
               </a>
             </li>
             <li class="nav-item">
-              <a href="usuarios.php" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Usuários
-                </p>
-              </a>
-            <li class="nav-item">
               <a href="perfis.php" class="nav-link">
-                <i class="nav-icon fas fa-sitemap"></i>
+                <i class="nav-icon fas fas fa-users"></i>
                 <p>
                   Perfis
                 </p>
