@@ -10,12 +10,24 @@ function Alerta($type, $title, $msg, $location)
           type: '$type',
           title: '$title',
           text: '$msg',
-          showConfirmButton: false,
-          timer: 2000
+          showConfirmButton: false,          
         });
         setTimeout(function() {          
           window.location='$location';
         }, 2000);
+        </script>";
+}
+
+function AlertaConsulta($type, $title, $msg)
+{
+  echo "<script type='text/javascript'>
+        Swal.fire({
+          type: '$type',
+          title: '$title',
+          text: '$msg',
+          showConfirmButton: false,
+          timer: 2000          
+        });        
         </script>";
 }
 
