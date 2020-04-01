@@ -46,7 +46,21 @@ include '../../../dist/php/functions.php';
 <style>
   .body {
     position: absolute;
-    padding: 20px;
+  }
+
+  body {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 50%;
+  }
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.07;
   }
 
   .row2 {
@@ -63,7 +77,7 @@ include '../../../dist/php/functions.php';
   }
 
   .form-control {
-    border-radius: 3%;
+    border-radius: 0;
   }
 
   .table-responsive {
@@ -71,8 +85,8 @@ include '../../../dist/php/functions.php';
     position: absolute;
     width: 80%;
     left: 50%;
-    top: 15%;
-    transform: translate(-50%, -15%);
+    top: 9%;
+    transform: translate(-50%, -9%);
   }
 </style>
 
@@ -80,31 +94,35 @@ include '../../../dist/php/functions.php';
   <section class="content">
     <div class="container-fluid">
       <br>
+      <div>
+        <img src="../../../dist/img/gapls1.png" />
+      </div>
       <div class="row2">
         <form class="form-inline">
-          <div class="input-group input-group-lg" style="margin-right:10px">
-            <label for="txtsaram" style="margin-right: 10px">
+          <div class="row">
+            <label for="txtsaram" style="margin-right: 10px;">
               <h4><b>SARAM:</b></h4>
             </label>
-            <input type="search" class="form-control mr-2 form-control-lg" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM..." style="margin-right: 10px;" autocomplete="off">
-            <br>
+          </div>
+          <div class="input-group input-group-lg" style="margin-right:10px;">
+            <input type="search" class="form-control form-control-lg" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM..." style="margin-right: 10px;" autocomplete="off">
+
             <button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar"><i class="fas fa-search"></i></button>
           </div>
-          <a type="button" class="btn btn-outline-info btn-lg" href="consultar_processo.php" id="novapesquisa" name="button" style="text-transform: capitalize;"><i class="fas fa-redo-alt"></i></a>
+          <a type="button" class="btn btn-outline-dark btn-lg" href="consultar_processo.php" id="novapesquisa" name="button" style="text-transform: capitalize;"><i class="fas fa-redo-alt"></i></a>
         </form>
       </div>
       <?php
       if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram'] != '') {
 
         $saram = $_GET['txtsaram'];
-        $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.nup, e.direito_pleiteado, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, d.direito as dir_direito, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram = '$saram'";
+        $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.nup, e.direito_pleiteado, e.estado, e.secao_atual as id_sec_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, d.direito as dir_direito, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram = '$saram'";
         $result = mysqli_query($conexao, $query);
         $row = mysqli_num_rows($result);
 
         if ($row == 0) {
           Alerta("error", "Processo não encontrado!", false, "consultar_processo.php");
         } else {
-          Alerta("success", "Processo encontrado!", false, "consultar_processo.php");
       ?>
           <div class="row">
             <div class="table-responsive" style="text-align: center;">
@@ -124,6 +142,7 @@ include '../../../dist/php/functions.php';
                   $nup = $res_1["nup"];
                   $direito_pleiteado = $res_1["dir_direito"];
                   $estado = $res_1["est_estado"];
+                  $id_sec_atual = $res_1['id_sec_atual'];
                   $secao_atual = $res_1['sec_atual'];
                 ?>
                   <tbody>
@@ -131,12 +150,21 @@ include '../../../dist/php/functions.php';
                       <td class="align-middle"><?php echo $requerente; ?></td>
                       <td class="align-middle"><?php echo $nup; ?></td>
                       <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
-                      <td class="align-middle"><?php echo $estado; ?></td>
+                      <td class="align-middle">
+                        <?php
+                        if ($id_sec_atual == 6 || $secao_atual == 'SDPP') {
+                          echo "Em conferência na SDPP";
+                        } else {
+                          echo 'Em trâmite no GAP-LS';
+                        }
+                        ?>
+                      </td>
                       <td class="align-middle"><?php echo $secao_atual; ?></td>
                     </tr>
                   </tbody>
               <?php
                 }
+                AlertaConsulta("success", "Processo encontrado!", false);
               } ?>
               </table>
             <?php
