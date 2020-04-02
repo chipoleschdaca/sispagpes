@@ -36,6 +36,9 @@ login('EXANT', '../../../');
   <link rel="stylesheet" href="../../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Material Design-->
+  <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- SweetAlert2 -->
   <script src="../../../plugins/sweetalert2/sweetalert2.min.js"></script>
   <script src="../../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
@@ -289,7 +292,7 @@ login('EXANT', '../../../');
                               <td class="align-middle"><?php echo $data2; ?></td>
                               <td class="align-middle">
                                 <a class="btn btn-dark btn-sm" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-sm" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-warning btn-sm" style="width: 32px; height: 30px; text-align:center;" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><span class="material-icons" style="font-size: 18px; padding: 0; margin-right: 3px; vertical-align:middle;">build</span></a>
                                 <a class="btn btn-danger btn-sm" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                               </td>
                             </tr>
@@ -426,6 +429,10 @@ login('EXANT', '../../../');
   <script src="../../../dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../../dist/js/demo.js"></script>
+  <!-- Material Design-->
+  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+  <!--IonIcon-->
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
   <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 

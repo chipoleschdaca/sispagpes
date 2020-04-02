@@ -131,12 +131,12 @@ login('EXANT', '../../../');
             <section class="col-md-12 connectedSortable">
               <form class="form-inline">
                 <div class="card col-md-12">
-                  <div class="card-body" style="padding-left: 5px" style="position: absolute">
+                  <div class="card-body" style="padding-left: 5px" style="position: absolute;">
                     <div class="input-group input-group-sm">
                       <label for="txtpesquisar" style="margin-right: 10px;">Filtrar:
                       </label>
-                      <div style="margin-right: 20px; position:relative;">
-                        <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 392px">
+                      <div style="margin-right: 20px; position:relative; width: 22%;">
+                        <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="" selected>POSTO/GRAD.</option>
                           <?php
                           $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
@@ -151,8 +151,8 @@ login('EXANT', '../../../');
                           } ?>
                         </select>
                       </div>
-                      <div style="margin-right: 15px; position:relative;">
-                        <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px;">
+                      <div style="margin-right: 15px; position:relative; width: 22%;">
+                        <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="">DIREITO PLEITEADO</option>
                           <?php
                           $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
@@ -168,8 +168,8 @@ login('EXANT', '../../../');
                           } ?>
                         </select>
                       </div>
-                      <div style="margin-right: 20px; position:relative;">
-                        <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px;">
+                      <div style="margin-right: 20px; position:relative; width: 22%;">
+                        <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="" selected>ESTADO DO PROCESSO</option>
                           <?php
                           $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
@@ -185,8 +185,8 @@ login('EXANT', '../../../');
                           } ?>
                         </select>
                       </div>
-                      <div style="margin-right: 20px; position:relative;">
-                        <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-left:10px;">
+                      <div style="margin-right: 20px; position:relative; width: 22%;">
+                        <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-left:10px; width: 100%;">
                           <option value="" selected>SEÇÃO ATUAL</option>
                           <?php
                           $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
