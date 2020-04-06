@@ -26,6 +26,6 @@ $pdf->render();
 
 //NOMINAR PDF GERADO
 $pdf->stream(
-  $nup2 . '.pdf',
+  'Histórico do Processo nº ' . $nup2 . '.pdf',
   array("Attachment" => false) //Se quiser que a página faça o download automaticamente, basta alterar para true.
 );
