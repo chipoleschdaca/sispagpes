@@ -460,7 +460,7 @@ login('EXANT', '../../../');
 															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px; padding: 0px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">local_shipping</span></a>
 															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></i></a>
 															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px; padding: 0px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>
-															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
+															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
 															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><span class="material-icons" style="font-size: 16px; padding: 0; margin-bottom: 2px; vertical-align:middle;">build</span></a>
 															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
 														</td>
@@ -1009,7 +1009,7 @@ if (isset($_POST['button'])) {
 		</script>
 		<!--Comando para editar os dados UPDATE -->
 		<?php
-		if (isset($_POST['-->buttonEditar'])) {
+		if (isset($_POST['buttonEditar'])) {
 			$cpf_edita = $_POST['txtcpf2'];
 			$sacador_edita = $_POST['funcionario2'];
 			$nup_edita = $_POST['txtnup2'];
@@ -1232,10 +1232,12 @@ if (isset($_POST['button'])) {
 							?>
 							<table class="table table-sm table-bordered table-striped">
 								<thead class="text-primary" style="text-align: center;">
-									<th class="align-middle">Movimento</th>
-									<th class="align-middle">Observação</th>
-									<th class="align-middle">Prazo</th>
-									<th class="align-middle">Meta</th>
+									<tr>
+										<th class="align-middle">Movimento</th>
+										<th class="align-middle">Observação</th>
+										<th class="align-middle">Prazo</th>
+										<th class="align-middle">Meta</th>
+									</tr>
 								</thead>
 								<tbody>
 									<?php

@@ -79,6 +79,7 @@ $situacao = $res_1["situacao"];
     border: 0.5px solid #bcbcbc;
     border-radius: 5px;
     padding: 0px;
+    vertical-align: middle;
   }
 
   td {
@@ -115,25 +116,33 @@ $situacao = $res_1["situacao"];
         $row2 = mysqli_num_rows($result2);
         ?>
         <table class="table table-sm table-bordered table-striped">
-          <tbody>
-            <?php
-            while ($res_2 = mysqli_fetch_array($result2)) {
-              $id_hist = $res_2["id_hist"];
-              $data_anterior = $res_2["data_anterior"];
-              $data_novo = $res_2["data_novo"];
-              $id_exant = $res_2["e_nup"];
-              $old_estado = $res_2["es_anterior"];
-              $new_estado = $res_2["est_novo"];
-              $old_secao = $res_2["s_anterior"];
-              $new_secao = $res_2["sec_novo"];
-              $obs_exant = $res_2["obs_exant"];
+          <thead class="text-primary" style="text-align: center;">
+            <tr>
+              <th class="align-middle">Movimento</th>
+              <th class="align-middle">Observação</th>
+              <th class="align-middle">Prazo</th>
+              <th class="align-middle">Meta</th>
+            </tr>
+          </thead>
+          <?php
+          while ($res_2 = mysqli_fetch_array($result2)) {
+            $id_hist = $res_2["id_hist"];
+            $data_anterior = $res_2["data_anterior"];
+            $data_novo = $res_2["data_novo"];
+            $id_exant = $res_2["e_nup"];
+            $old_estado = $res_2["es_anterior"];
+            $new_estado = $res_2["est_novo"];
+            $old_secao = $res_2["s_anterior"];
+            $new_secao = $res_2["sec_novo"];
+            $obs_exant = $res_2["obs_exant"];
 
-              $prazo_pessoal_cons = date('Y-m-d', strtotime('+15 days', strtotime($data_anterior = $res_2["data_anterior"])));
-              $prazo_pagpes_cons = date('Y-m-d', strtotime('+10 days', strtotime($data_anterior = $res_2["data_anterior"])));
-              $prazo_controle_cons = date('Y-m-d', strtotime('+10 days', strtotime($data_anterior = $res_2["data_anterior"])));
-              $prazo_sdpp_cons = date('Y-m-d', strtotime('+120 days', strtotime($data_anterior = $res_2["data_anterior"])));
-              $today_cons = date('Y-m-d');
-            ?>
+            $prazo_pessoal_cons = date('Y-m-d', strtotime('+15 days', strtotime($data_anterior = $res_2["data_anterior"])));
+            $prazo_pagpes_cons = date('Y-m-d', strtotime('+10 days', strtotime($data_anterior = $res_2["data_anterior"])));
+            $prazo_controle_cons = date('Y-m-d', strtotime('+10 days', strtotime($data_anterior = $res_2["data_anterior"])));
+            $prazo_sdpp_cons = date('Y-m-d', strtotime('+120 days', strtotime($data_anterior = $res_2["data_anterior"])));
+            $today_cons = date('Y-m-d');
+          ?>
+            <tbody>
               <tr>
                 <td class="align-middle" style="width: 5%;">
                   <b><?php echo data($data_novo) . '<br>'; ?></b>
@@ -175,7 +184,7 @@ $situacao = $res_1["situacao"];
                 <?php
                 if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
                   if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-                    echo '<td class="align-middle" style="background-color: red; text-align:center;">- ' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+                    echo '<td class="align-middle" style="background-color: red; text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
                   } elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
                     echo '<td class="align-middle" style="background-color: green; text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
                   } else {
@@ -183,7 +192,7 @@ $situacao = $res_1["situacao"];
                   }
                 } elseif ($old_secao == 'DP-3') {
                   if ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-                    echo '<td class="align-middle" style="background-color: red; text-align:center;">- ' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+                    echo '<td class="align-middle" style="background-color: red; text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
                   } elseif ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
                     echo '<td class="align-middle" style="background-color: green; text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
                   } else {
@@ -199,7 +208,7 @@ $situacao = $res_1["situacao"];
                   }
                 } elseif ($old_secao == 'SDPP') {
                   if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) > 0) {
-                    echo '<td class="align-middle" style="background-color: red; text-align:center;">- ' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+                    echo '<td class="align-middle" style="background-color: red; text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
                   } elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
                     echo '<td class="align-middle" style="background-color: green; text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
                   } else {
@@ -207,7 +216,7 @@ $situacao = $res_1["situacao"];
                   }
                 } else {
                   if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-                    echo '<td class="align-middle" style="background-color: red; text-align:center;">- ' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+                    echo '<td class="align-middle" style="background-color: red; text-align:center;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
                   } elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
                     echo '<td class="align-middle" style="background-color: green; text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
                   } else {
@@ -217,7 +226,7 @@ $situacao = $res_1["situacao"];
                 ?>
               </tr>
             <?php } ?>
-          </tbody>
+            </tbody>
         </table>
         <footer class="main-footer">
           <?php echo data2(); ?>
