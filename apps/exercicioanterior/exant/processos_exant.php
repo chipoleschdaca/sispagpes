@@ -1312,17 +1312,17 @@ if (isset($_POST['button'])) {
 												}
 											} elseif ($old_secao == 'ACI-1') {
 												if ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . diferenca($prazo_controle_cons, $data_novo) . '</td>';
+													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . diferenca($prazo_controle_cons, $data_novo) . '</td>';
+													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} elseif ($old_secao == 'SDPP') {
 												if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) > 0) {
-													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . diferenca($prazo_sdpp_cons, $data_novo) . '</td>';
+													echo '<td class="align-middle" style="background-color: red; text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . diferenca($prazo_sdpp_cons, $data_novo) . '</td>';
+													echo '<td class="align-middle" style="background-color: green; text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
