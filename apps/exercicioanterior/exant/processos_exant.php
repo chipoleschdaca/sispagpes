@@ -369,7 +369,6 @@ login('EXANT', '../../../');
 													$id_req = $res_1["id_req"];
 													$saram = $res_1["req_saram"];
 													$cpf = $res_1["cpf"];
-													$situacao = $res_1["situacao"];
 													$requerente = $res_1["req_nome"];
 													$sacador = $res_1["mil_nome"];
 													$nup = $res_1["nup"];
@@ -1344,7 +1343,7 @@ if (isset($_POST['button'])) {
 							</table>
 						</div>
 						<div class="modal-footer">
-							<a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
+							<a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
 						</div>
 					</form>
 				</div>
