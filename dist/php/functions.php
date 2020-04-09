@@ -3,6 +3,7 @@ function footer()
 {
   echo '<strong>&copy; 2019-' . date("Y") . '<a href="#"> SISPAGPES</a></strong>. Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. <div class="float-right d-none d-sm-inline-block"><b>Versão</b> 1.0.0</div>';
 }
+
 function Alerta($type, $title, $msg, $location)
 {
   echo "<script type='text/javascript'>
@@ -148,9 +149,5 @@ function data2()
 
 function diferenca($a, $b)
 {
-  if (strtotime($a) - strtotime($b) > 0) {
-    return (strtotime($a) - strtotime($b)) / (60 * 60 * 24);
-  } else {
-    return (strtotime($b) - strtotime($a)) / (60 * 60 * 24);
-  }
+  return (strtotime($a) - strtotime($b)) / (60 * 60 * 24);
 }

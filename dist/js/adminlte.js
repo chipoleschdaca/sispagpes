@@ -3,13 +3,13 @@
  * Copyright 2014-2019 Colorlib <http://colorlib.com>
  * Licensed under MIT (https://github.com/almasaeed2010/AdminLTE/blob/master/LICENSE)
  */
-(function(global, factory) {
+(function (global, factory) {
 	typeof exports === "object" && typeof module !== "undefined"
 		? factory(exports)
 		: typeof define === "function" && define.amd
 		? define(["exports"], factory)
 		: ((global = global || self), factory((global.adminlte = {})));
-})(this, function(exports) {
+})(this, function (exports) {
 	"use strict";
 
 	/**
@@ -18,7 +18,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var ControlSidebar = (function($) {
+	var ControlSidebar = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -29,7 +29,7 @@
 		var JQUERY_NO_CONFLICT = $.fn[NAME];
 		var Event = {
 			COLLAPSED: "collapsed" + EVENT_KEY,
-			EXPANDED: "expanded" + EVENT_KEY
+			EXPANDED: "expanded" + EVENT_KEY,
 		};
 		var Selector = {
 			CONTROL_SIDEBAR: ".control-sidebar",
@@ -37,7 +37,7 @@
 			DATA_TOGGLE: '[data-widget="control-sidebar"]',
 			CONTENT: ".content-wrapper",
 			HEADER: ".main-header",
-			FOOTER: ".main-footer"
+			FOOTER: ".main-footer",
 		};
 		var ClassName = {
 			CONTROL_SIDEBAR_ANIMATE: "control-sidebar-animate",
@@ -53,7 +53,7 @@
 			FOOTER_SM_FIXED: "layout-sm-footer-fixed",
 			FOOTER_MD_FIXED: "layout-md-footer-fixed",
 			FOOTER_LG_FIXED: "layout-lg-footer-fixed",
-			FOOTER_XL_FIXED: "layout-xl-footer-fixed"
+			FOOTER_XL_FIXED: "layout-xl-footer-fixed",
 		};
 		/**
 		 * Class Definition
@@ -62,7 +62,7 @@
 
 		var ControlSidebar =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function ControlSidebar(element, config) {
 					this._element = element;
 					this._config = config;
@@ -79,7 +79,7 @@
 						$("body")
 							.removeClass(ClassName.CONTROL_SIDEBAR_SLIDE)
 							.delay(300)
-							.queue(function() {
+							.queue(function () {
 								$(Selector.CONTROL_SIDEBAR).hide();
 								$("html").removeClass(ClassName.CONTROL_SIDEBAR_ANIMATE);
 								$(this).dequeue();
@@ -99,11 +99,11 @@
 						$(Selector.CONTROL_SIDEBAR)
 							.show()
 							.delay(10)
-							.queue(function() {
+							.queue(function () {
 								$("body")
 									.addClass(ClassName.CONTROL_SIDEBAR_SLIDE)
 									.delay(300)
-									.queue(function() {
+									.queue(function () {
 										$("html").removeClass(ClassName.CONTROL_SIDEBAR_ANIMATE);
 										$(this).dequeue();
 									});
@@ -138,12 +138,12 @@
 
 					this._fixScrollHeight();
 
-					$(window).resize(function() {
+					$(window).resize(function () {
 						_this._fixHeight();
 
 						_this._fixScrollHeight();
 					});
-					$(window).scroll(function() {
+					$(window).scroll(function () {
 						if (
 							$("body").hasClass(ClassName.CONTROL_SIDEBAR_OPEN) ||
 							$("body").hasClass(ClassName.CONTROL_SIDEBAR_SLIDE)
@@ -158,13 +158,13 @@
 						scroll: $(document).height(),
 						window: $(window).height(),
 						header: $(Selector.HEADER).outerHeight(),
-						footer: $(Selector.FOOTER).outerHeight()
+						footer: $(Selector.FOOTER).outerHeight(),
 					};
 					var positions = {
 						bottom: Math.abs(
 							heights.window + $(window).scrollTop() - heights.scroll
 						),
-						top: $(window).scrollTop()
+						top: $(window).scrollTop(),
 					};
 					var navbarFixed = false;
 					var footerFixed = false;
@@ -266,7 +266,7 @@
 					var heights = {
 						window: $(window).height(),
 						header: $(Selector.HEADER).outerHeight(),
-						footer: $(Selector.FOOTER).outerHeight()
+						footer: $(Selector.FOOTER).outerHeight(),
 					};
 
 					if ($("body").hasClass(ClassName.LAYOUT_FIXED)) {
@@ -299,15 +299,15 @@
 								sizeAutoCapable: true,
 								scrollbars: {
 									autoHide: this._config.scrollbarAutoHide,
-									clickScrolling: true
-								}
+									clickScrolling: true,
+								},
 							});
 						}
 					}
 				}; // Static
 
 				ControlSidebar._jQueryInterface = function _jQueryInterface(operation) {
-					return this.each(function() {
+					return this.each(function () {
 						var data = $(this).data(DATA_KEY);
 
 						if (!data) {
@@ -331,7 +331,7 @@
 		 * ====================================================
 		 */
 
-		$(document).on("click", Selector.DATA_TOGGLE, function(event) {
+		$(document).on("click", Selector.DATA_TOGGLE, function (event) {
 			event.preventDefault();
 
 			ControlSidebar._jQueryInterface.call($(this), "toggle");
@@ -344,7 +344,7 @@
 		$.fn[NAME] = ControlSidebar._jQueryInterface;
 		$.fn[NAME].Constructor = ControlSidebar;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return ControlSidebar._jQueryInterface;
 		};
@@ -358,7 +358,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var Layout = (function($) {
+	var Layout = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -378,7 +378,7 @@
 			LAYOUT_FIXED: ".layout-fixed",
 			FOOTER: ".main-footer",
 			LOGIN_BOX: ".login-box",
-			REGISTER_BOX: ".register-box"
+			REGISTER_BOX: ".register-box",
 		};
 		var ClassName = {
 			HOLD: "hold-transition",
@@ -389,11 +389,11 @@
 			NAVBAR_FIXED: "layout-navbar-fixed",
 			FOOTER_FIXED: "layout-footer-fixed",
 			LOGIN_PAGE: "login-page",
-			REGISTER_PAGE: "register-page"
+			REGISTER_PAGE: "register-page",
 		};
 		var Default = {
 			scrollbarTheme: "os-theme-light",
-			scrollbarAutoHide: "l"
+			scrollbarAutoHide: "l",
 		};
 		/**
 		 * Class Definition
@@ -402,7 +402,7 @@
 
 		var Layout =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function Layout(element, config) {
 					this._config = config;
 					this._element = element;
@@ -426,7 +426,7 @@
 						sidebar:
 							$(Selector.SIDEBAR).length !== 0
 								? $(Selector.SIDEBAR).height()
-								: 0
+								: 0,
 					};
 
 					var max = this._max(heights);
@@ -452,8 +452,8 @@
 								sizeAutoCapable: true,
 								scrollbars: {
 									autoHide: this._config.scrollbarAutoHide,
-									clickScrolling: true
-								}
+									clickScrolling: true,
+								},
 							});
 						}
 					}
@@ -466,11 +466,11 @@
 					this.fixLayoutHeight();
 					$(Selector.SIDEBAR).on(
 						"collapsed.lte.treeview expanded.lte.treeview collapsed.lte.pushmenu expanded.lte.pushmenu",
-						function() {
+						function () {
 							_this.fixLayoutHeight();
 						}
 					);
-					$(window).resize(function() {
+					$(window).resize(function () {
 						_this.fixLayoutHeight();
 					});
 
@@ -495,7 +495,7 @@
 				_proto._max = function _max(numbers) {
 					// Calculate the maximum number in a list
 					var max = 0;
-					Object.keys(numbers).forEach(function(key) {
+					Object.keys(numbers).forEach(function (key) {
 						if (numbers[key] > max) {
 							max = numbers[key];
 						}
@@ -504,7 +504,7 @@
 				}; // Static
 
 				Layout._jQueryInterface = function _jQueryInterface(config) {
-					return this.each(function() {
+					return this.each(function () {
 						var data = $(this).data(DATA_KEY);
 
 						var _config = $.extend({}, Default, $(this).data());
@@ -527,13 +527,13 @@
 		 * ====================================================
 		 */
 
-		$(window).on("load", function() {
+		$(window).on("load", function () {
 			Layout._jQueryInterface.call($("body"));
 		});
-		$(Selector.SIDEBAR + " a").on("focusin", function() {
+		$(Selector.SIDEBAR + " a").on("focusin", function () {
 			$(Selector.MAIN_SIDEBAR).addClass(ClassName.SIDEBAR_FOCUSED);
 		});
-		$(Selector.SIDEBAR + " a").on("focusout", function() {
+		$(Selector.SIDEBAR + " a").on("focusout", function () {
 			$(Selector.MAIN_SIDEBAR).removeClass(ClassName.SIDEBAR_FOCUSED);
 		});
 		/**
@@ -544,7 +544,7 @@
 		$.fn[NAME] = Layout._jQueryInterface;
 		$.fn[NAME].Constructor = Layout;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return Layout._jQueryInterface;
 		};
@@ -558,7 +558,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var PushMenu = (function($) {
+	var PushMenu = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -569,12 +569,12 @@
 		var JQUERY_NO_CONFLICT = $.fn[NAME];
 		var Event = {
 			COLLAPSED: "collapsed" + EVENT_KEY,
-			SHOWN: "shown" + EVENT_KEY
+			SHOWN: "shown" + EVENT_KEY,
 		};
 		var Default = {
 			autoCollapseSize: 992,
 			enableRemember: false,
-			noTransitionAfterReload: true
+			noTransitionAfterReload: true,
 		};
 		var Selector = {
 			TOGGLE_BUTTON: '[data-widget="pushmenu"]',
@@ -582,12 +582,12 @@
 			SIDEBAR_COLLAPSED: ".sidebar-collapse",
 			BODY: "body",
 			OVERLAY: "#sidebar-overlay",
-			WRAPPER: ".wrapper"
+			WRAPPER: ".wrapper",
 		};
 		var ClassName = {
 			SIDEBAR_OPEN: "sidebar-open",
 			COLLAPSED: "sidebar-collapse",
-			OPEN: "sidebar-open"
+			OPEN: "sidebar-open",
 		};
 		/**
 		 * Class Definition
@@ -596,7 +596,7 @@
 
 		var PushMenu =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function PushMenu(element, options) {
 					this._element = element;
 					this._options = $.extend({}, Default, options);
@@ -678,7 +678,7 @@
 									.addClass("hold-transition")
 									.addClass(ClassName.COLLAPSED)
 									.delay(50)
-									.queue(function() {
+									.queue(function () {
 										$(this).removeClass("hold-transition");
 										$(this).dequeue();
 									});
@@ -691,7 +691,7 @@
 									.addClass("hold-transition")
 									.removeClass(ClassName.COLLAPSED)
 									.delay(50)
-									.queue(function() {
+									.queue(function () {
 										$(this).removeClass("hold-transition");
 										$(this).dequeue();
 									});
@@ -707,7 +707,7 @@
 
 					this.remember();
 					this.autoCollapse();
-					$(window).resize(function() {
+					$(window).resize(function () {
 						_this.autoCollapse();
 					});
 				};
@@ -716,16 +716,16 @@
 					var _this2 = this;
 
 					var overlay = $("<div />", {
-						id: "sidebar-overlay"
+						id: "sidebar-overlay",
 					});
-					overlay.on("click", function() {
+					overlay.on("click", function () {
 						_this2.collapse();
 					});
 					$(Selector.WRAPPER).append(overlay);
 				}; // Static
 
 				PushMenu._jQueryInterface = function _jQueryInterface(operation) {
-					return this.each(function() {
+					return this.each(function () {
 						var data = $(this).data(DATA_KEY);
 
 						var _options = $.extend({}, Default, $(this).data());
@@ -748,7 +748,7 @@
 		 * ====================================================
 		 */
 
-		$(document).on("click", Selector.TOGGLE_BUTTON, function(event) {
+		$(document).on("click", Selector.TOGGLE_BUTTON, function (event) {
 			event.preventDefault();
 			var button = event.currentTarget;
 
@@ -758,7 +758,7 @@
 
 			PushMenu._jQueryInterface.call($(button), "toggle");
 		});
-		$(window).on("load", function() {
+		$(window).on("load", function () {
 			PushMenu._jQueryInterface.call($(Selector.TOGGLE_BUTTON));
 		});
 		/**
@@ -769,7 +769,7 @@
 		$.fn[NAME] = PushMenu._jQueryInterface;
 		$.fn[NAME].Constructor = PushMenu;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return PushMenu._jQueryInterface;
 		};
@@ -783,7 +783,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var Treeview = (function($) {
+	var Treeview = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -796,25 +796,25 @@
 			SELECTED: "selected" + EVENT_KEY,
 			EXPANDED: "expanded" + EVENT_KEY,
 			COLLAPSED: "collapsed" + EVENT_KEY,
-			LOAD_DATA_API: "load" + EVENT_KEY
+			LOAD_DATA_API: "load" + EVENT_KEY,
 		};
 		var Selector = {
 			LI: ".nav-item",
 			LINK: ".nav-link",
 			TREEVIEW_MENU: ".nav-treeview",
 			OPEN: ".menu-open",
-			DATA_WIDGET: '[data-widget="treeview"]'
+			DATA_WIDGET: '[data-widget="treeview"]',
 		};
 		var ClassName = {
 			LI: "nav-item",
 			LINK: "nav-link",
 			TREEVIEW_MENU: "nav-treeview",
-			OPEN: "menu-open"
+			OPEN: "menu-open",
 		};
 		var Default = {
 			trigger: Selector.DATA_WIDGET + " " + Selector.LINK,
 			animationSpeed: 300,
-			accordion: true
+			accordion: true,
 		};
 		/**
 		 * Class Definition
@@ -823,7 +823,7 @@
 
 		var Treeview =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function Treeview(element, config) {
 					this._config = config;
 					this._element = element;
@@ -848,7 +848,7 @@
 
 					treeviewMenu
 						.stop()
-						.slideDown(this._config.animationSpeed, function() {
+						.slideDown(this._config.animationSpeed, function () {
 							parentLi.addClass(ClassName.OPEN);
 							$(_this._element).trigger(expandedEvent);
 						});
@@ -858,7 +858,7 @@
 					var _this2 = this;
 
 					var collapsedEvent = $.Event(Event.COLLAPSED);
-					treeviewMenu.stop().slideUp(this._config.animationSpeed, function() {
+					treeviewMenu.stop().slideUp(this._config.animationSpeed, function () {
 						parentLi.removeClass(ClassName.OPEN);
 						$(_this2._element).trigger(collapsedEvent);
 						treeviewMenu
@@ -899,13 +899,13 @@
 				_proto._setupListeners = function _setupListeners() {
 					var _this3 = this;
 
-					$(document).on("click", this._config.trigger, function(event) {
+					$(document).on("click", this._config.trigger, function (event) {
 						_this3.toggle(event);
 					});
 				}; // Static
 
 				Treeview._jQueryInterface = function _jQueryInterface(config) {
-					return this.each(function() {
+					return this.each(function () {
 						var data = $(this).data(DATA_KEY);
 
 						var _config = $.extend({}, Default, $(this).data());
@@ -928,8 +928,8 @@
 		 * ====================================================
 		 */
 
-		$(window).on(Event.LOAD_DATA_API, function() {
-			$(Selector.DATA_WIDGET).each(function() {
+		$(window).on(Event.LOAD_DATA_API, function () {
+			$(Selector.DATA_WIDGET).each(function () {
 				Treeview._jQueryInterface.call($(this), "init");
 			});
 		});
@@ -941,7 +941,7 @@
 		$.fn[NAME] = Treeview._jQueryInterface;
 		$.fn[NAME].Constructor = Treeview;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return Treeview._jQueryInterface;
 		};
@@ -955,7 +955,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var DirectChat = (function($) {
+	var DirectChat = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -964,14 +964,14 @@
 		var DATA_KEY = "lte.directchat";
 		var JQUERY_NO_CONFLICT = $.fn[NAME];
 		var Event = {
-			TOGGLED: "toggled{EVENT_KEY}"
+			TOGGLED: "toggled{EVENT_KEY}",
 		};
 		var Selector = {
 			DATA_TOGGLE: '[data-widget="chat-pane-toggle"]',
-			DIRECT_CHAT: ".direct-chat"
+			DIRECT_CHAT: ".direct-chat",
 		};
 		var ClassName = {
-			DIRECT_CHAT_OPEN: "direct-chat-contacts-open"
+			DIRECT_CHAT_OPEN: "direct-chat-contacts-open",
 		};
 		/**
 		 * Class Definition
@@ -980,7 +980,7 @@
 
 		var DirectChat =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function DirectChat(element, config) {
 					this._element = element;
 				}
@@ -997,7 +997,7 @@
 				}; // Static
 
 				DirectChat._jQueryInterface = function _jQueryInterface(config) {
-					return this.each(function() {
+					return this.each(function () {
 						var data = $(this).data(DATA_KEY);
 
 						if (!data) {
@@ -1017,7 +1017,7 @@
 		 * ====================================================
 		 */
 
-		$(document).on("click", Selector.DATA_TOGGLE, function(event) {
+		$(document).on("click", Selector.DATA_TOGGLE, function (event) {
 			if (event) event.preventDefault();
 
 			DirectChat._jQueryInterface.call($(this), "toggle");
@@ -1030,7 +1030,7 @@
 		$.fn[NAME] = DirectChat._jQueryInterface;
 		$.fn[NAME].Constructor = DirectChat;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return DirectChat._jQueryInterface;
 		};
@@ -1044,7 +1044,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var TodoList = (function($) {
+	var TodoList = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -1053,10 +1053,10 @@
 		var DATA_KEY = "lte.todolist";
 		var JQUERY_NO_CONFLICT = $.fn[NAME];
 		var Selector = {
-			DATA_TOGGLE: '[data-widget="todo-list"]'
+			DATA_TOGGLE: '[data-widget="todo-list"]',
 		};
 		var ClassName = {
-			TODO_LIST_DONE: "done"
+			TODO_LIST_DONE: "done",
 		};
 		var Default = {
 			onCheck: function onCheck(item) {
@@ -1064,7 +1064,7 @@
 			},
 			onUnCheck: function onUnCheck(item) {
 				return item;
-			}
+			},
 		};
 		/**
 		 * Class Definition
@@ -1073,7 +1073,7 @@
 
 		var TodoList =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function TodoList(element, config) {
 					this._config = config;
 					this._element = element;
@@ -1108,7 +1108,7 @@
 						.find("input:checkbox:checked")
 						.parents("li")
 						.toggleClass(ClassName.TODO_LIST_DONE);
-					$(Selector.DATA_TOGGLE).on("change", "input:checkbox", function(
+					$(Selector.DATA_TOGGLE).on("change", "input:checkbox", function (
 						event
 					) {
 						that.toggle($(event.target));
@@ -1116,7 +1116,7 @@
 				}; // Static
 
 				TodoList._jQueryInterface = function _jQueryInterface(config) {
-					return this.each(function() {
+					return this.each(function () {
 						var data = $(this).data(DATA_KEY);
 
 						var _config = $.extend({}, Default, $(this).data());
@@ -1139,7 +1139,7 @@
 		 * ====================================================
 		 */
 
-		$(window).on("load", function() {
+		$(window).on("load", function () {
 			TodoList._jQueryInterface.call($(Selector.DATA_TOGGLE));
 		});
 		/**
@@ -1150,7 +1150,7 @@
 		$.fn[NAME] = TodoList._jQueryInterface;
 		$.fn[NAME].Constructor = TodoList;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return TodoList._jQueryInterface;
 		};
@@ -1164,7 +1164,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var CardWidget = (function($) {
+	var CardWidget = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -1178,13 +1178,13 @@
 			COLLAPSED: "collapsed" + EVENT_KEY,
 			MAXIMIZED: "maximized" + EVENT_KEY,
 			MINIMIZED: "minimized" + EVENT_KEY,
-			REMOVED: "removed" + EVENT_KEY
+			REMOVED: "removed" + EVENT_KEY,
 		};
 		var ClassName = {
 			CARD: "card",
 			COLLAPSED: "collapsed-card",
 			WAS_COLLAPSED: "was-collapsed",
-			MAXIMIZED: "maximized-card"
+			MAXIMIZED: "maximized-card",
 		};
 		var Selector = {
 			DATA_REMOVE: '[data-card-widget="remove"]',
@@ -1194,7 +1194,7 @@
 			CARD_HEADER: ".card-header",
 			CARD_BODY: ".card-body",
 			CARD_FOOTER: ".card-footer",
-			COLLAPSED: "." + ClassName.COLLAPSED
+			COLLAPSED: "." + ClassName.COLLAPSED,
 		};
 		var Default = {
 			animationSpeed: "normal",
@@ -1204,12 +1204,12 @@
 			collapseIcon: "fa-minus",
 			expandIcon: "fa-plus",
 			maximizeIcon: "fa-expand",
-			minimizeIcon: "fa-compress"
+			minimizeIcon: "fa-compress",
 		};
 
 		var CardWidget =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function CardWidget(element, settings) {
 					this._element = element;
 					this._parent = element.parents(Selector.CARD).first();
@@ -1228,7 +1228,7 @@
 
 					this._parent
 						.children(Selector.CARD_BODY + ", " + Selector.CARD_FOOTER)
-						.slideUp(this._settings.animationSpeed, function() {
+						.slideUp(this._settings.animationSpeed, function () {
 							_this._parent.addClass(ClassName.COLLAPSED);
 						});
 
@@ -1251,7 +1251,7 @@
 
 					this._parent
 						.children(Selector.CARD_BODY + ", " + Selector.CARD_FOOTER)
-						.slideDown(this._settings.animationSpeed, function() {
+						.slideDown(this._settings.animationSpeed, function () {
 							_this2._parent.removeClass(ClassName.COLLAPSED);
 						});
 
@@ -1298,10 +1298,10 @@
 						.css({
 							height: this._parent.height(),
 							width: this._parent.width(),
-							transition: "all .15s"
+							transition: "all .15s",
 						})
 						.delay(150)
-						.queue(function() {
+						.queue(function () {
 							$(this).addClass(ClassName.MAXIMIZED);
 							$("html").addClass(ClassName.MAXIMIZED);
 
@@ -1338,12 +1338,12 @@
 								" !important; transition: all .15s;"
 						)
 						.delay(10)
-						.queue(function() {
+						.queue(function () {
 							$(this).removeClass(ClassName.MAXIMIZED);
 							$("html").removeClass(ClassName.MAXIMIZED);
 							$(this).css({
 								height: "inherit",
-								width: "inherit"
+								width: "inherit",
 							});
 
 							if ($(this).hasClass(ClassName.WAS_COLLAPSED)) {
@@ -1373,17 +1373,17 @@
 					this._parent = card;
 					$(this)
 						.find(this._settings.collapseTrigger)
-						.click(function() {
+						.click(function () {
 							_this3.toggle();
 						});
 					$(this)
 						.find(this._settings.maximizeTrigger)
-						.click(function() {
+						.click(function () {
 							_this3.toggleMaximize();
 						});
 					$(this)
 						.find(this._settings.removeTrigger)
-						.click(function() {
+						.click(function () {
 							_this3.remove();
 						});
 				}; // Static
@@ -1415,21 +1415,21 @@
 		 * ====================================================
 		 */
 
-		$(document).on("click", Selector.DATA_COLLAPSE, function(event) {
+		$(document).on("click", Selector.DATA_COLLAPSE, function (event) {
 			if (event) {
 				event.preventDefault();
 			}
 
 			CardWidget._jQueryInterface.call($(this), "toggle");
 		});
-		$(document).on("click", Selector.DATA_REMOVE, function(event) {
+		$(document).on("click", Selector.DATA_REMOVE, function (event) {
 			if (event) {
 				event.preventDefault();
 			}
 
 			CardWidget._jQueryInterface.call($(this), "remove");
 		});
-		$(document).on("click", Selector.DATA_MAXIMIZE, function(event) {
+		$(document).on("click", Selector.DATA_MAXIMIZE, function (event) {
 			if (event) {
 				event.preventDefault();
 			}
@@ -1444,7 +1444,7 @@
 		$.fn[NAME] = CardWidget._jQueryInterface;
 		$.fn[NAME].Constructor = CardWidget;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return CardWidget._jQueryInterface;
 		};
@@ -1458,7 +1458,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var CardRefresh = (function($) {
+	var CardRefresh = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -1470,14 +1470,14 @@
 		var Event = {
 			LOADED: "loaded" + EVENT_KEY,
 			OVERLAY_ADDED: "overlay.added" + EVENT_KEY,
-			OVERLAY_REMOVED: "overlay.removed" + EVENT_KEY
+			OVERLAY_REMOVED: "overlay.removed" + EVENT_KEY,
 		};
 		var ClassName = {
-			CARD: "card"
+			CARD: "card",
 		};
 		var Selector = {
 			CARD: "." + ClassName.CARD,
-			DATA_REFRESH: '[data-card-widget="card-refresh"]'
+			DATA_REFRESH: '[data-card-widget="card-refresh"]',
 		};
 		var Default = {
 			source: "",
@@ -1493,12 +1493,12 @@
 			onLoadStart: function onLoadStart() {},
 			onLoadDone: function onLoadDone(response) {
 				return response;
-			}
+			},
 		};
 
 		var CardRefresh =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function CardRefresh(element, settings) {
 					this._element = element;
 					this._parent = element.parents(Selector.CARD).first();
@@ -1532,7 +1532,7 @@
 					$.get(
 						this._settings.source,
 						this._settings.params,
-						function(response) {
+						function (response) {
 							if (this._settings.loadInContent) {
 								if (this._settings.sourceSelector != "") {
 									response = $(response)
@@ -1573,7 +1573,7 @@
 
 					$(this)
 						.find(this._settings.trigger)
-						.on("click", function() {
+						.on("click", function () {
 							_this.load();
 						});
 				}; // Static
@@ -1601,7 +1601,7 @@
 		 * ====================================================
 		 */
 
-		$(document).on("click", Selector.DATA_REFRESH, function(event) {
+		$(document).on("click", Selector.DATA_REFRESH, function (event) {
 			if (event) {
 				event.preventDefault();
 			}
@@ -1616,7 +1616,7 @@
 		$.fn[NAME] = CardRefresh._jQueryInterface;
 		$.fn[NAME].Constructor = CardRefresh;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return CardRefresh._jQueryInterface;
 		};
@@ -1630,7 +1630,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var Dropdown = (function($) {
+	var Dropdown = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -1640,7 +1640,7 @@
 		var JQUERY_NO_CONFLICT = $.fn[NAME];
 		var Selector = {
 			DROPDOWN_MENU: "ul.dropdown-menu",
-			DROPDOWN_TOGGLE: '[data-toggle="dropdown"]'
+			DROPDOWN_TOGGLE: '[data-toggle="dropdown"]',
 		};
 		var Default = {};
 		/**
@@ -1650,7 +1650,7 @@
 
 		var Dropdown =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function Dropdown(element, config) {
 					this._config = config;
 					this._element = element;
@@ -1659,10 +1659,7 @@
 				var _proto = Dropdown.prototype;
 
 				_proto.toggleSubmenu = function toggleSubmenu() {
-					this._element
-						.siblings()
-						.show()
-						.toggleClass("show");
+					this._element.siblings().show().toggleClass("show");
 
 					if (!this._element.next().hasClass("show")) {
 						this._element
@@ -1675,15 +1672,13 @@
 
 					this._element
 						.parents("li.nav-item.dropdown.show")
-						.on("hidden.bs.dropdown", function(e) {
-							$(".dropdown-submenu .show")
-								.removeClass("show")
-								.hide();
+						.on("hidden.bs.dropdown", function (e) {
+							$(".dropdown-submenu .show").removeClass("show").hide();
 						});
 				}; // Static
 
 				Dropdown._jQueryInterface = function _jQueryInterface(config) {
-					return this.each(function() {
+					return this.each(function () {
 						var data = $(this).data(DATA_KEY);
 
 						var _config = $.extend({}, Default, $(this).data());
@@ -1708,7 +1703,7 @@
 
 		$(Selector.DROPDOWN_MENU + " " + Selector.DROPDOWN_TOGGLE).on(
 			"click",
-			function(event) {
+			function (event) {
 				event.preventDefault();
 				event.stopPropagation();
 
@@ -1729,7 +1724,7 @@
 		$.fn[NAME] = Dropdown._jQueryInterface;
 		$.fn[NAME].Constructor = Dropdown;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return Dropdown._jQueryInterface;
 		};
@@ -1743,7 +1738,7 @@
 	 * License MIT
 	 * --------------------------------------------
 	 */
-	var Toasts = (function($) {
+	var Toasts = (function ($) {
 		/**
 		 * Constants
 		 * ====================================================
@@ -1755,27 +1750,27 @@
 		var Event = {
 			INIT: "init" + EVENT_KEY,
 			CREATED: "created" + EVENT_KEY,
-			REMOVED: "removed" + EVENT_KEY
+			REMOVED: "removed" + EVENT_KEY,
 		};
 		var Selector = {
 			BODY: "toast-body",
 			CONTAINER_TOP_RIGHT: "#toastsContainerTopRight",
 			CONTAINER_TOP_LEFT: "#toastsContainerTopLeft",
 			CONTAINER_BOTTOM_RIGHT: "#toastsContainerBottomRight",
-			CONTAINER_BOTTOM_LEFT: "#toastsContainerBottomLeft"
+			CONTAINER_BOTTOM_LEFT: "#toastsContainerBottomLeft",
 		};
 		var ClassName = {
 			TOP_RIGHT: "toasts-top-right",
 			TOP_LEFT: "toasts-top-left",
 			BOTTOM_RIGHT: "toasts-bottom-right",
 			BOTTOM_LEFT: "toasts-bottom-left",
-			FADE: "fade"
+			FADE: "fade",
 		};
 		var Position = {
 			TOP_RIGHT: "topRight",
 			TOP_LEFT: "topLeft",
 			BOTTOM_RIGHT: "bottomRight",
-			BOTTOM_LEFT: "bottomLeft"
+			BOTTOM_LEFT: "bottomLeft",
 		};
 		var Default = {
 			position: Position.TOP_RIGHT,
@@ -1792,7 +1787,7 @@
 			subtitle: null,
 			close: true,
 			body: null,
-			class: null
+			class: null,
 		};
 		/**
 		 * Class Definition
@@ -1801,7 +1796,7 @@
 
 		var Toasts =
 			/*#__PURE__*/
-			(function() {
+			(function () {
 				function Toasts(element, config) {
 					this._config = config;
 
@@ -1845,17 +1840,13 @@
 
 					if (this._config.icon != null) {
 						toast_header.append(
-							$("<i />")
-								.addClass("mr-2")
-								.addClass(this._config.icon)
+							$("<i />").addClass("mr-2").addClass(this._config.icon)
 						);
 					}
 
 					if (this._config.title != null) {
 						toast_header.append(
-							$("<strong />")
-								.addClass("mr-auto")
-								.html(this._config.title)
+							$("<strong />").addClass("mr-auto").html(this._config.title)
 						);
 					}
 
@@ -1891,10 +1882,8 @@
 					toast.toast("show");
 
 					if (this._config.autoremove) {
-						toast.on("hidden.bs.toast", function() {
-							$(this)
-								.delay(200)
-								.remove();
+						toast.on("hidden.bs.toast", function () {
+							$(this).delay(200).remove();
 							var removedEvent = $.Event(Event.REMOVED);
 							$("body").trigger(removedEvent);
 						});
@@ -1941,7 +1930,7 @@
 				}; // Static
 
 				Toasts._jQueryInterface = function _jQueryInterface(option, config) {
-					return this.each(function() {
+					return this.each(function () {
 						var _config = $.extend({}, Default, config);
 
 						var toast = new Toasts($(this), _config);
@@ -1962,7 +1951,7 @@
 		$.fn[NAME] = Toasts._jQueryInterface;
 		$.fn[NAME].Constructor = Toasts;
 
-		$.fn[NAME].noConflict = function() {
+		$.fn[NAME].noConflict = function () {
 			$.fn[NAME] = JQUERY_NO_CONFLICT;
 			return Toasts._jQueryInterface;
 		};

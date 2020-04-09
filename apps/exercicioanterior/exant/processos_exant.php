@@ -415,53 +415,53 @@ login('EXANT', '../../../');
 														<?php
 														if ($secao_atual == 'DP-1' or $secao_atual == 'DP-4' or $secao_atual == 'ES-LS') {
 															if (diferenca($prazo_pessoal, $today) > 15) {
-																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pessoal) . '</td>';
+																echo '<td class="align-middle" style="background-color: gree;">' . data($prazo_pessoal) . '</td>';
 															} elseif (diferenca($prazo_pessoal, $today) <= 15 and diferenca($prazo_pessoal, $today) > 10) {
 																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_pessoal) . '</td>';
-															} elseif (diferenca($prazo_pessoal, $today) <= 10 and diferenca($prazo_pessoal, $today) > 0) {
-																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_pessoal) . '</td>';
+															} elseif (diferenca($prazo_pessoal, $today) <= 10) {
+																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pessoal) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_pessoal) . '</td>';
 															}
 														} elseif ($secao_atual == 'DP-3') {
 															if (diferenca($prazo_pagpes, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pagpes) . '</td>';
+																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_pagpes) . '</td>';
 															} elseif (diferenca($prazo_pagpes, $today) <= 10 and diferenca($prazo_pagpes, $today) > 5) {
 																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_pagpes) . '</td>';
-															} elseif (diferenca($prazo_pagpes, $today) <= 5 and diferenca($prazo_pagpes, $today) > 0) {
-																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_pagpes) . '</td>';
+															} elseif (diferenca($prazo_pagpes, $today) <= 5) {
+																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_pagpes) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_pagpes) . '</td>';
 															}
 														} elseif ($secao_atual == 'ACI-1') {
 															if (diferenca($prazo_controle, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_controle) . '</td>';
 															} elseif (diferenca($prazo_controle, $today) <= 10 and diferenca($prazo_controle, $today) > 5) {
 																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_controle) . '</td>';
-															} elseif (diferenca($prazo_controle, $today) <= 5 and diferenca($prazo_controle, $today) > 0) {
-																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_controle) . '</td>';
+															} elseif (diferenca($prazo_controle, $today) <= 5) {
+																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_controle) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_controle) . '</td>';
 															}
 														} else {
 															if (diferenca($prazo_sdpp, $today) > 120) {
-																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_sdpp) . '</td>';
+																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_sdpp) . '</td>';
 															} elseif (diferenca($prazo_sdpp, $today) <= 120 and diferenca($prazo_sdpp, $today) > 90) {
 																echo '<td class="align-middle" style="background-color: yellow;">' . data($prazo_controle) . '</td>';
 															} elseif (diferenca($prazo_sdpp, $today) <= 90 and diferenca($prazo_sdpp, $today) > 0) {
-																echo '<td class="align-middle" style="background-color: green;">' . data($prazo_sdpp) . '</td>';
+																echo '<td class="align-middle" style="background-color: red;">' . data($prazo_sdpp) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_sdpp) . '</td>';
 															}
 														}
 														?>
 														<td class="align-middle inline-block">
-															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px; padding: 0px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">local_shipping</span></a>
-															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></i></a>
-															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px; padding: 0px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>
-															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
-															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><span class="material-icons" style="font-size: 16px; padding: 0; margin-bottom: 2px; vertical-align:middle;">build</span></a>
-															<a class="btn btn-light btn-xs" style="width: 24px; height: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
+															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 24px; height: 24px; padding: 0px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">local_shipping</span></a>
+															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Histórico" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></i></a>
+															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 24px; height: 24px; padding: 0px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>
+															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="PDF" style="width: 24px; height: 24px;" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
+															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Editar" style="width: 24px; height: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><span class="material-icons" style="font-size: 16px; padding: 0; margin-bottom: 2px; vertical-align:middle;">build</span></a>
+															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Excluir" style="width: 24px; height: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
 														</td>
 													</tr>
 												<?php } ?>
@@ -704,6 +704,12 @@ login('EXANT', '../../../');
 				showOtherMonths: true,
 				selectOtherMonths: true
 			});
+		});
+	</script>
+	<script>
+		$('[data-toggle="popover"]').popover({
+			placement: 'top',
+			trigger: 'hover'
 		});
 	</script>
 	<!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
