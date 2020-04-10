@@ -6,25 +6,27 @@ session_start();
 
 <head>
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <link href="dist/css/index.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="plugins/jQuery-Mask/dist/jquery.mask.js"></script>
+  <script src="plugins/jquery-mask/dist/jquery.mask.js"></script>
   <title>SISPAGPES</title>
 </head>
 
 <body>
-  <div class="wrapper fadeIn" style="position:absolute;">
+  <div class="wrapper fadeIn">
     <div id="formContent">
       <!-- Tabs Titles -->
       <!-- Icon -->
-      <div class="fadeIn">
-        <img src="dist/img/gapls1.png" id="icon" alt="User Icon" style="padding: 50px" />
+      <div class="fadeIn" id="img">
+        <img src="dist/img/gapls1.png" id="icon" alt="User Icon" />
+      </div>
+      <div>
+        <h1><strong>SISPAGPES</strong></h1>
       </div>
       <!-- Login Form -->
       <form method="POST" class="form-container" action="login.php">
@@ -56,15 +58,15 @@ session_start();
         <small><a class="underlineHover" href="solicitar_acesso.php">Registre-se</a></small>
       </div>
     </div>
-    <div class="footer" style="padding-top:70px; position:relative; color:grey; font-size:small;">
-      <footer class="main-footer">
-        <strong>&copy; 2019-<?php echo date("Y") ?> <a href="#">GAP-LS</a>.</strong>
-        Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-          <b>Versão</b> 1.0.0
-        </div>
-      </footer>
-    </div>
+
+    <footer class="main-footer">
+      <strong>&copy; 2019-<?php echo date("Y") ?> <a href="#">GAP-LS</a>.</strong>
+      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
+      <div class="float-right d-none d-sm-inline-block">
+        <b>Versão</b> 1.0.0
+      </div>
+    </footer>
+
   </div>
 </body>
 <script>
