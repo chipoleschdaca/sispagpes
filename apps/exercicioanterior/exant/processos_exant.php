@@ -1110,7 +1110,7 @@ if (isset($_POST['button'])) {
 								<div class="form-group col-sm-5">
 									<label>Seção de Destino</label>
 									<select class="form-control select2" id="txtnovasecao" name="txtnovasecao" required>
-										<option value="" disabled selected hidden>Selecione o novo estado do Processo...
+										<option value="" disabled selected hidden>Selecione a nova Seção...
 										</option>
 										<?php
 										$query_sec = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
