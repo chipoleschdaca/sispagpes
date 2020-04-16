@@ -19,19 +19,18 @@ if ($row > 0) {
 	$_SESSION['nome_usuario'] = $dado['nome'];
 	$_SESSION['perfil_usuario'] = $dado['perfil'];
 
+	if ($_SESSION['perfil_usuario'] == 'TESOU') {
+		header('Location: apps/tesoureiro/painel_tesouraria.php');
+		exit();
+	}
 
 	if ($_SESSION['perfil_usuario'] == 'ADMIN' || $_SESSION['perfil_usuario'] == 'Gerente') {
 		header('Location: apps/admin/painel_admin.php');
 		exit();
 	}
 
-	if ($_SESSION['perfil_usuario'] == 'Tesoureiro') {
-		header('Location: painel_tesouraria.php');
-		exit();
-	}
-
 	if ($_SESSION['perfil_usuario'] == 'EXANT') {
-		header('Location: apps/exercicioanterior/exant/painel_exant.php');
+		header('Location: apps/exercicioanterior/painel_exant.php');
 		exit();
 	}
 
