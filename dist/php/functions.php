@@ -11,7 +11,7 @@ function Alerta($type, $title, $msg, $location)
           type: '$type',
           title: '$title',
           text: '$msg',
-          showConfirmButton: false,          
+          showConfirmButton: false          
         });
         setTimeout(function() {          
           window.location='$location';
@@ -71,6 +71,24 @@ function AlertaLocation($type, $title, $msg, $location)
         window.location.href='$location'
         });
         </script>";
+}
+
+function Toast($type, $title)
+{
+  echo "<script>  
+    $(function() {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+      });     
+      Toast.fire({
+        type: '$type',
+        title: '$title'
+      })
+    });  
+</script>";
 }
 
 function AnoAtual()
