@@ -10,7 +10,7 @@ $nup = implode('_', array_reverse(explode('/', $_GET['nup'])));
 $nup2 = implode('_', array_reverse(explode('_', $nup)));
 
 //ALIMENTAR OS DADOS NO RELATÓRIO
-$html = utf8_encode(file_get_contents($url . "/apps/exercicioanterior/exant/rel/historico_exant_pdf.php?id=" . $id . "&id_req=" . $id_req . "&nup=" . $nup));
+$html = utf8_encode(file_get_contents($url . "/apps/exercicioanterior/rel/historico_exant_pdf.php?id=" . $id . "&id_req=" . $id_req . "&nup=" . $nup));
 
 //INICIALIZAR A CLASSE DO DOMPDF
 $pdf = new Dompdf();
