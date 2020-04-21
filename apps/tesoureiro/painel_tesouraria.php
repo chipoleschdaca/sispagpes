@@ -39,6 +39,9 @@ login('TESOU', '../../');
   <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Material Design-->
+  <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
@@ -81,7 +84,7 @@ login('TESOU', '../../');
       </ul>
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <a href="painel_exant.php" class="brand-link">
+      <a href="painel_tesouraria.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
@@ -89,10 +92,10 @@ login('TESOU', '../../');
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="painel_exant.php" class="nav-link active">
-                <i class="nav-icon fas fa-home"></i>
+              <a href="painel_tesouraria.php" class="nav-link active">
+                <i class="nav-icon far fa-chart-bar"></i>
                 <p>
-                  Página Inicial
+                  Painel de Controle
                 </p>
               </a>
             </li>
@@ -128,126 +131,252 @@ login('TESOU', '../../');
         <div class="container-fluid">
           <br>
           <div class="row">
-            <section class="col-md-12 connectedSortable">
-              <form class="form-inline">
-                <div class="card col-md-12">
-                  <div class="card-body" style="padding-left: 5px" style="position: absolute;">
-                    <div class="input-group input-group-sm">
-                      <label for="txtpesquisar" style="margin-right: 10px;">Filtrar:
-                      </label>
-                      <div style="margin-right: 20px; position:relative; width: 22%;">
-                        <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 100%;">
-                          <option value="" selected>POSTO/GRAD.</option>
-                          <?php
-                          $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
-                          $result_posto = mysqli_query($conexao, $query_posto);
-                          if (count($result_posto)) {
-                            while ($res_p = mysqli_fetch_array($result_posto)) {
-                              $id = $res_p['id_posto'];
-                              $posto = $res_p['nome_posto'];
-                          ?>
-                              <option value="<?php echo $id ?>"><?php echo $posto ?></option>
-                          <?php }
-                          } ?>
-                        </select>
+            <div class="col-12" style="display: inline">
+              <img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:4rem; height:4rem;">
+              <h1 style="display: inline; vertical-align:middle; margin-left: 15px;">Painel de Controle</h1>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-primary card-outline card-outline-tabs">
+                <div class="card-header p-0 border-bottom-0">
+                  <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true"><i class="far fa-folder-open"></i> Exercício Anterior</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false"><i class="fas fa-users"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false"><i class="far fa-comment-dots"></i> Messages</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false"><i class="fas fa-tools"></i> Settings</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content" id="custom-tabs-three-tabContent">
+                    <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                      <div class="row">
+                        <section class="col-md-12 connectedSortable">
+                          <form class="form-inline">
+                            <div class="col-md-12" id="tabcharts">
+                              <label for="txtpesquisar">Filtrar:
+                              </label>
+                              <div style="position:relative; width: 22%;">
+                                <select class="form-control select2" name="txtposto" style="border-radius:3px; width: 100%;">
+                                  <option value="" selected>POSTO/GRAD.</option>
+                                  <?php
+                                  $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
+                                  $result_posto = mysqli_query($conexao, $query_posto);
+                                  if (count($result_posto)) {
+                                    while ($res_p = mysqli_fetch_array($result_posto)) {
+                                      $id = $res_p['id_posto'];
+                                      $posto = $res_p['nome_posto'];
+                                  ?>
+                                      <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                                  <?php }
+                                  } ?>
+                                </select>
+                              </div>
+                              <div style="position:relative; width: 22%;">
+                                <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; width: 100%;">
+                                  <option value="">DIREITO PLEITEADO</option>
+                                  <?php
+                                  $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
+                                  $result_direito = mysqli_query($conexao, $query_direito);
+                                  if (count($result_direito)) {
+                                    while ($res_dir = mysqli_fetch_array($result_direito)) {
+                                      $id = $res_dir['id_direito'];
+                                      $direito = $res_dir['direito_pleiteado'];
+                                      $count_direito = $res_dir['COUNT(e.direito_pleiteado)'];
+                                  ?>
+                                      <option value="<?php echo $id ?>"><?php echo $direito . " | " . $count_direito ?></option>
+                                  <?php }
+                                  } ?>
+                                </select>
+                              </div>
+                              <div style="position:relative; width: 22%;">
+                                <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; width: 100%;">
+                                  <option value="" selected>ESTADO DO PROCESSO</option>
+                                  <?php
+                                  $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
+                                  $result_est = mysqli_query($conexao, $query_est);
+                                  if (count($result_est)) {
+                                    while ($res_est = mysqli_fetch_array($result_est)) {
+                                      $id_est_2 = $res_est['id_estado'];
+                                      $estado_est = $res_est['estado_processo'];
+                                      $count_estado = $res_est['COUNT(e.estado)'];
+                                  ?>
+                                      <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est . " | " . $count_estado ?></option>
+                                  <?php }
+                                  } ?>
+                                </select>
+                              </div>
+                              <div style="position:relative; width: 22%;">
+                                <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px;width: 100%;">
+                                  <option value="" selected>SEÇÃO ATUAL</option>
+                                  <?php
+                                  $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
+                                  $result_sec = mysqli_query($conexao, $query_sec);
+                                  if (count($result_sec)) {
+                                    while ($res_sec = mysqli_fetch_array($result_sec)) {
+                                      $id_sec_2 = $res_sec['id_secao'];
+                                      $secao_sec = $res_sec['secao_atual'];
+                                      $count_secao = $res_sec['COUNT(e.secao_atual)'];
+                                  ?>
+                                      <option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec . " | " . $count_secao ?></option>
+                                  <?php }
+                                  } ?>
+                                </select>
+                              </div>
+                              <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px; padding: 0px; margin: 0px;">
+                                <i class="fas fa-search" style="padding: 0px; margin:0px;"></i>
+                              </button>
+                            </div>
+                          </form>
+                          <hr />
+                        </section>
                       </div>
-                      <div style="margin-right: 15px; position:relative; width: 22%;">
-                        <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px; width: 100%;">
-                          <option value="">DIREITO PLEITEADO</option>
-                          <?php
-                          $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
-                          $result_direito = mysqli_query($conexao, $query_direito);
-                          if (count($result_direito)) {
-                            while ($res_dir = mysqli_fetch_array($result_direito)) {
-                              $id = $res_dir['id_direito'];
-                              $direito = $res_dir['direito_pleiteado'];
-                              $count_direito = $res_dir['COUNT(e.direito_pleiteado)'];
-                          ?>
-                              <option value="<?php echo $id ?>"><?php echo $direito . " | " . $count_direito ?></option>
-                          <?php }
-                          } ?>
-                        </select>
-                      </div>
-                      <div style="margin-right: 20px; position:relative; width: 22%;">
-                        <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px; width: 100%;">
-                          <option value="" selected>ESTADO DO PROCESSO</option>
-                          <?php
-                          $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
-                          $result_est = mysqli_query($conexao, $query_est);
-                          if (count($result_est)) {
-                            while ($res_est = mysqli_fetch_array($result_est)) {
-                              $id_est_2 = $res_est['id_estado'];
-                              $estado_est = $res_est['estado_processo'];
-                              $count_estado = $res_est['COUNT(e.estado)'];
-                          ?>
-                              <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est . " | " . $count_estado ?></option>
-                          <?php }
-                          } ?>
-                        </select>
-                      </div>
-                      <div style="margin-right: 20px; position:relative; width: 22%;">
-                        <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-left:10px; width: 100%;">
-                          <option value="" selected>SEÇÃO ATUAL</option>
-                          <?php
-                          $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
-                          $result_sec = mysqli_query($conexao, $query_sec);
-                          if (count($result_sec)) {
-                            while ($res_sec = mysqli_fetch_array($result_sec)) {
-                              $id_sec_2 = $res_sec['id_secao'];
-                              $secao_sec = $res_sec['secao_atual'];
-                              $count_secao = $res_sec['COUNT(e.secao_atual)'];
-                          ?>
-                              <option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec . " | " . $count_secao ?></option>
-                          <?php }
-                          } ?>
-                        </select>
-                      </div>
-                      <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px; padding: 0px; margin: 0px;">
-                        <i class="fas fa-search" style="padding: 0px; margin:0px;"></i>
-                      </button>
                       <style>
+                        #tabcharts {
+                          display: flex;
+                          justify-content: space-between
+                        }
+
                         #filter {
                           position: relative;
                           text-align: center;
                         }
                       </style>
+                      <div class="row">
+                        <div class="col-9">
+                          <div class="row">
+                            <section class="col-md-6 connectedSortable">
+                              <div>
+                                <canvas id="pieChart" style="height:150px; width: 400px;"></canvas>
+                              </div>
+                            </section>
+                            <section class="col-md-6 connectedSortable">
+                              <div>
+                                <canvas id="donutChart" style="height:150px; width: 400px;"></canvas>
+                              </div>
+                            </section>
+                          </div>
+                          <br>
+                          <div class="row">
+                            <section class="col-md-6 connectedSortable">
+                              <div>
+                                <canvas id="myChart2" style="height:150px; width: 400px;"></canvas>
+                              </div>
+                            </section>
+                            <section class="col-md-6 connectedSortable">
+                              <canvas id="myChart" style="height:150px; width: 400px;"></canvas>
+                            </section>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="card card-warning" style="text-align: center">
+                            <div class="card-header">
+                              <h5><strong>Prestação de Contas</strong></h5>
+                            </div>
+                            <div class="card-body">
+                              <table class="table table-sm table-bordered table-striped">
+                                <thead style="text-align: center;">
+                                  <tr>
+                                    <th class="align-middle">Seção</th>
+                                    <th class="align-middle">Quantidade</th>
+                                  </tr>
+                                </thead>
+                                <tbody style="text-align: center;">
+                                  <tr>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                    <td class="align-middle">
+                                      DP-1
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <button class="btn btn-danger btn-block"> Prestação de Contas</button>
+                          <br>
+                          <button class="btn btn-primary" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data1.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
+                          <button class="btn btn-secondary" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
+                          <button class="btn btn-warning" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
+                          <!--<div class="small-box bg-warning">
+                            <div class="inner">
+                              <h3>150</h3>
+                              <p>New Orders</p>
+                            </div>
+                            <div class="icon">
+                              <i class="ion ion-bag"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                          </div>
+                          <div class="small-box bg-success">
+                            <div class="inner">
+                              <h3>53<sup style="font-size: 20px">%</sup></h3>
+                              <p>Bounce Rate</p>
+                            </div>
+                            <div class="icon">
+                              <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                          </div>-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                      Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
+                      Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-three-settings" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
+                      Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
                     </div>
                   </div>
                 </div>
-              </form>
-            </section>
-          </div>
-          <div class="row">
-            <section class="col-md-6 connectedSortable">
-              <div class="card">
-                <div class="card-body">
-                  <canvas id="pieChart" style="height:150px; width: 400px;"></canvas>
-                </div>
+                <!-- /.card -->
               </div>
-            </section>
-            <section class="col-md-6 connectedSortable">
-              <div class="card">
-                <div class="card-body">
-                  <canvas id="donutChart" style="height:150px; width: 400px;"></canvas>
-                </div>
-              </div>
-            </section>
-          </div>
-          <div class="row">
-            <section class="col-md-6 connectedSortable">
-              <div class="card">
-                <div class="card-body">
-                  <canvas id="myChart2" style="height:150px; width: 400px;"></canvas>
-                </div>
-              </div>
-            </section>
-            <section class="col-md-6 connectedSortable">
-              <div class="card">
-                <div class="card-body">
-                  <canvas id="myChart" style="height:150px; width: 400px;"></canvas>
-                </div>
-              </div>
-            </section>
+            </div>
           </div>
         </div>
       </section>
@@ -556,6 +685,9 @@ login('TESOU', '../../');
   <script src="../../dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <!-- Material Design-->
+  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
   <script>
     $(function() {
       //Initialize Select2 Elements
