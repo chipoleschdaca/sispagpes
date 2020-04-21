@@ -132,10 +132,10 @@ login('EXANT', '../../');
               <form class="form-inline">
                 <div class="card col-md-12">
                   <div class="card-body" style="padding-left: 5px" style="position: absolute;">
-                    <div class="input-group input-group-sm">
-                      <label for="txtpesquisar" style="margin-right: 10px;">Filtrar:
+                    <div class="input-group input-group-sm" id="tabcharts">
+                      <label for="txtpesquisar">Filtrar:
                       </label>
-                      <div style="margin-right: 20px; position:relative; width: 22%;">
+                      <div style="width: 22%;">
                         <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="" selected>POSTO/GRAD.</option>
                           <?php
@@ -151,7 +151,7 @@ login('EXANT', '../../');
                           } ?>
                         </select>
                       </div>
-                      <div style="margin-right: 15px; position:relative; width: 22%;">
+                      <div style="width: 22%;">
                         <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="">DIREITO PLEITEADO</option>
                           <?php
@@ -168,7 +168,7 @@ login('EXANT', '../../');
                           } ?>
                         </select>
                       </div>
-                      <div style="margin-right: 20px; position:relative; width: 22%;">
+                      <div style="width: 22%;">
                         <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="" selected>ESTADO DO PROCESSO</option>
                           <?php
@@ -185,7 +185,7 @@ login('EXANT', '../../');
                           } ?>
                         </select>
                       </div>
-                      <div style="margin-right: 20px; position:relative; width: 22%;">
+                      <div style="width: 22%;">
                         <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-left:10px; width: 100%;">
                           <option value="" selected>SEÇÃO ATUAL</option>
                           <?php
@@ -202,21 +202,26 @@ login('EXANT', '../../');
                           } ?>
                         </select>
                       </div>
-                      <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px; padding: 0px; margin: 0px;">
+                      <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px;">
                         <i class="fas fa-search" style="padding: 0px; margin:0px;"></i>
                       </button>
-                      <style>
-                        #filter {
-                          position: relative;
-                          text-align: center;
-                        }
-                      </style>
                     </div>
                   </div>
                 </div>
               </form>
             </section>
           </div>
+          <style>
+            #tabcharts {
+              display: flex;
+              justify-content: space-between
+            }
+
+            #filter {
+              position: relative;
+              text-align: center;
+            }
+          </style>
           <div class="row">
             <section class="col-md-6 connectedSortable">
               <div class="card">

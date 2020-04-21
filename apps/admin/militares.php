@@ -430,19 +430,19 @@ login('ADMIN', '../../');
                               if ($status == 'Aprovado') { ?>
                                 <a class="btn btn-success btn-sm disabled" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
                                 <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
                                 <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
                                 <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
                               <?php
                               } else { ?>
                                 <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
                                 <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog"></i></a>
+                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-sm disabled" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
                               <?php } ?>
                             </td>

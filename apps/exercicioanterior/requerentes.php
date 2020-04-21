@@ -294,7 +294,7 @@ login('EXANT', '../../');
                               <td class="align-middle"><?php echo $data2; ?></td>
                               <td class="align-middle">
                                 <a class="btn btn-dark btn-sm" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-sm" data-toggle="popover" data-content="Editar" style="width: 32px; height: 30px; text-align:center;" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><span class="material-icons" style="font-size: 18px; padding: 0; margin-right: 3px; vertical-align:middle;">build</span></a>
+                                <a class="btn btn-warning btn-sm" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-sm" data-toggle="popover" data-content="Excluir" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                               </td>
                             </tr>

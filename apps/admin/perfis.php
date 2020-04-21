@@ -356,7 +356,7 @@ login('ADMIN', '../../');
                             <td class="align-middle"><?php echo $id; ?></td>
                             <td class="align-middle"><?php echo $nome; ?></td>
                             <td class="align-middle">
-                              <a class="btn btn-warning btn-sm" href="perfis.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 15px; height: 15px;"></i></a>
+                              <a class="btn btn-warning btn-sm" href="perfis.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                               <a class="btn btn-danger btn-sm" href="perfis.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                             </td>
                           </tr>

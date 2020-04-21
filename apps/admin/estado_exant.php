@@ -387,19 +387,19 @@ login('ADMIN', '../../');
                               if ($status == 'Aprovado') { ?>
                                 <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
                                 <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Excluído') { ?>
                                 <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-xs disabled" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } else {
@@ -500,19 +500,19 @@ login('ADMIN', '../../');
                               if ($status == 'Aprovado') { ?>
                                 <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
                                 <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Excluído') { ?>
                                 <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o status?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-cog" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
                                 <a class="btn btn-danger btn-xs disabled" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } else {
