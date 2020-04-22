@@ -10,43 +10,7 @@ login('EXANT', '../../');
 <html lang="pt-br">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="icon" type="image/png" href="../../dist/img/gapls.png">
-	<title>SISPAGPES</title>
-	<!-- Tell the browser to be responsive to screen width -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-	<!-- Ionicons -->
-	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<!-- Tempusdominus Bbootstrap 4 -->
-	<link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-	<!-- iCheck -->
-	<link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-	<!-- JQVMap -->
-	<link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
-	<!-- Theme style -->
-	<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-	<link rel="stylesheet" href="../../dist/css/style_print_button.css">
-	<!-- overlayScrollbars -->
-	<link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-	<!-- Daterange picker -->
-	<link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-	<!-- JQuery UI -->
-	<link rel="stylesheet" href="../../plugins/jquery-ui/jquery-ui.min.css">
-	<!-- summernote -->
-	<link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
-	<!-- Google Font: Source Sans Pro -->
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-	<!-- Material Design-->
-	<link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<!-- SweetAlert2 -->
-	<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-	<script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
-	<!-- Toastr -->
-	<script src="../../plugins/toastr/toastr.min.js"></script>
+	<?php head('../../') ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -714,7 +678,7 @@ login('EXANT', '../../');
 	</script>
 	<script>
 		$('[data-toggle="popover"]').popover({
-			placement: 'top',
+			placement: 'auto',
 			trigger: 'hover'
 		});
 	</script>

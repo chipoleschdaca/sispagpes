@@ -10,38 +10,7 @@ login('TESOU', '../../');
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="../../dist/img/gapls.png">
-  <title>SISPAGPES</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- Material Design-->
-  <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <?php head('../../') ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
@@ -154,105 +123,106 @@ login('TESOU', '../../');
                     <li class="nav-item">
                       <a class="nav-link" id="custom-tabs-three-settings-tab" data-toggle="pill" href="#custom-tabs-three-settings" role="tab" aria-controls="custom-tabs-three-settings" aria-selected="false"><i class="fas fa-tools"></i> Settings</a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-three-accountability-tab" data-toggle="pill" href="#custom-tabs-three-accountability" role="tab" aria-controls="custom-tabs-three-accountability" aria-selected="false"><i class="fas fa-cash-register"></i> Prestação de Contas</a>
+                    </li>
                   </ul>
                 </div>
                 <div class="card-body">
                   <div class="tab-content" id="custom-tabs-three-tabContent">
                     <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
                       <div class="row">
-                        <section class="col-md-12 connectedSortable">
-                          <form class="form-inline">
-                            <div class="col-md-12" id="tabcharts">
-                              <label for="txtpesquisar">Filtrar:
-                              </label>
-                              <div style="position:relative; width: 22%;">
-                                <select class="form-control select2" name="txtposto" style="border-radius:3px; width: 100%;">
-                                  <option value="" selected>POSTO/GRAD.</option>
-                                  <?php
-                                  $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
-                                  $result_posto = mysqli_query($conexao, $query_posto);
-                                  if (count($result_posto)) {
-                                    while ($res_p = mysqli_fetch_array($result_posto)) {
-                                      $id = $res_p['id_posto'];
-                                      $posto = $res_p['nome_posto'];
-                                  ?>
-                                      <option value="<?php echo $id ?>"><?php echo $posto ?></option>
-                                  <?php }
-                                  } ?>
-                                </select>
-                              </div>
-                              <div style="position:relative; width: 22%;">
-                                <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; width: 100%;">
-                                  <option value="">DIREITO PLEITEADO</option>
-                                  <?php
-                                  $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
-                                  $result_direito = mysqli_query($conexao, $query_direito);
-                                  if (count($result_direito)) {
-                                    while ($res_dir = mysqli_fetch_array($result_direito)) {
-                                      $id = $res_dir['id_direito'];
-                                      $direito = $res_dir['direito_pleiteado'];
-                                      $count_direito = $res_dir['COUNT(e.direito_pleiteado)'];
-                                  ?>
-                                      <option value="<?php echo $id ?>"><?php echo $direito . " | " . $count_direito ?></option>
-                                  <?php }
-                                  } ?>
-                                </select>
-                              </div>
-                              <div style="position:relative; width: 22%;">
-                                <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; width: 100%;">
-                                  <option value="" selected>ESTADO DO PROCESSO</option>
-                                  <?php
-                                  $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
-                                  $result_est = mysqli_query($conexao, $query_est);
-                                  if (count($result_est)) {
-                                    while ($res_est = mysqli_fetch_array($result_est)) {
-                                      $id_est_2 = $res_est['id_estado'];
-                                      $estado_est = $res_est['estado_processo'];
-                                      $count_estado = $res_est['COUNT(e.estado)'];
-                                  ?>
-                                      <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est . " | " . $count_estado ?></option>
-                                  <?php }
-                                  } ?>
-                                </select>
-                              </div>
-                              <div style="position:relative; width: 22%;">
-                                <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px;width: 100%;">
-                                  <option value="" selected>SEÇÃO ATUAL</option>
-                                  <?php
-                                  $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
-                                  $result_sec = mysqli_query($conexao, $query_sec);
-                                  if (count($result_sec)) {
-                                    while ($res_sec = mysqli_fetch_array($result_sec)) {
-                                      $id_sec_2 = $res_sec['id_secao'];
-                                      $secao_sec = $res_sec['secao_atual'];
-                                      $count_secao = $res_sec['COUNT(e.secao_atual)'];
-                                  ?>
-                                      <option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec . " | " . $count_secao ?></option>
-                                  <?php }
-                                  } ?>
-                                </select>
-                              </div>
-                              <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px; padding: 0px; margin: 0px;">
-                                <i class="fas fa-search" style="padding: 0px; margin:0px;"></i>
-                              </button>
-                            </div>
-                          </form>
-                          <hr />
-                        </section>
-                      </div>
-                      <style>
-                        #tabcharts {
-                          display: flex;
-                          justify-content: space-between
-                        }
-
-                        #filter {
-                          position: relative;
-                          text-align: center;
-                        }
-                      </style>
-                      <div class="row">
                         <div class="col-9">
+                          <section class="connectedSortable">
+                            <form class="form-inline">
+                              <div class="col-md-12" id="tabcharts">
+                                <label for="txtpesquisar">Filtrar:
+                                </label>
+                                <div style="position:relative; width: 22%;">
+                                  <select class="form-control select2" name="txtposto" style="border-radius:3px; width: 100%;">
+                                    <option value="" selected>POSTO/GRAD.</option>
+                                    <?php
+                                    $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto";
+                                    $result_posto = mysqli_query($conexao, $query_posto);
+                                    if (count($result_posto)) {
+                                      while ($res_p = mysqli_fetch_array($result_posto)) {
+                                        $id = $res_p['id_posto'];
+                                        $posto = $res_p['nome_posto'];
+                                    ?>
+                                        <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                                    <?php }
+                                    } ?>
+                                  </select>
+                                </div>
+                                <div style="position:relative; width: 22%;">
+                                  <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; width: 100%;">
+                                    <option value="">DIREITO PLEITEADO</option>
+                                    <?php
+                                    $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
+                                    $result_direito = mysqli_query($conexao, $query_direito);
+                                    if (count($result_direito)) {
+                                      while ($res_dir = mysqli_fetch_array($result_direito)) {
+                                        $id = $res_dir['id_direito'];
+                                        $direito = $res_dir['direito_pleiteado'];
+                                        $count_direito = $res_dir['COUNT(e.direito_pleiteado)'];
+                                    ?>
+                                        <option value="<?php echo $id ?>"><?php echo $direito . " | " . $count_direito ?></option>
+                                    <?php }
+                                    } ?>
+                                  </select>
+                                </div>
+                                <div style="position:relative; width: 22%;">
+                                  <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; width: 100%;">
+                                    <option value="" selected>ESTADO DO PROCESSO</option>
+                                    <?php
+                                    $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
+                                    $result_est = mysqli_query($conexao, $query_est);
+                                    if (count($result_est)) {
+                                      while ($res_est = mysqli_fetch_array($result_est)) {
+                                        $id_est_2 = $res_est['id_estado'];
+                                        $estado_est = $res_est['estado_processo'];
+                                        $count_estado = $res_est['COUNT(e.estado)'];
+                                    ?>
+                                        <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est . " | " . $count_estado ?></option>
+                                    <?php }
+                                    } ?>
+                                  </select>
+                                </div>
+                                <div style="position:relative; width: 22%;">
+                                  <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px;width: 100%;">
+                                    <option value="" selected>SEÇÃO ATUAL</option>
+                                    <?php
+                                    $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
+                                    $result_sec = mysqli_query($conexao, $query_sec);
+                                    if (count($result_sec)) {
+                                      while ($res_sec = mysqli_fetch_array($result_sec)) {
+                                        $id_sec_2 = $res_sec['id_secao'];
+                                        $secao_sec = $res_sec['secao_atual'];
+                                        $count_secao = $res_sec['COUNT(e.secao_atual)'];
+                                    ?>
+                                        <option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec . " | " . $count_secao ?></option>
+                                    <?php }
+                                    } ?>
+                                  </select>
+                                </div>
+                                <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px; padding: 0px; margin: 0px;">
+                                  <i class="fas fa-search" style="padding: 0px; margin:0px;"></i>
+                                </button>
+                              </div>
+                            </form>
+                            <hr />
+                          </section>
+                          <style>
+                            #tabcharts {
+                              display: flex;
+                              justify-content: space-between
+                            }
+
+                            #filter {
+                              position: relative;
+                              text-align: center;
+                            }
+                          </style>
                           <div class="row">
                             <section class="col-md-6 connectedSortable">
                               <div>
@@ -340,26 +310,6 @@ login('TESOU', '../../');
                           <button class="btn btn-primary" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data1.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
                           <button class="btn btn-secondary" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
                           <button class="btn btn-warning" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
-                          <!--<div class="small-box bg-warning">
-                            <div class="inner">
-                              <h3>150</h3>
-                              <p>New Orders</p>
-                            </div>
-                            <div class="icon">
-                              <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                          </div>
-                          <div class="small-box bg-success">
-                            <div class="inner">
-                              <h3>53<sup style="font-size: 20px">%</sup></h3>
-                              <p>Bounce Rate</p>
-                            </div>
-                            <div class="icon">
-                              <i class="ion ion-stats-bars"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                          </div>-->
                         </div>
                       </div>
                     </div>
@@ -372,9 +322,14 @@ login('TESOU', '../../');
                     <div class="tab-pane fade" id="custom-tabs-three-settings" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
                       Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
                     </div>
+                    <div class="tab-pane fade" id="custom-tabs-three-accountability" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
+                      <button class="general-btn" href="#" data-toggle="popover" data-content="Encaminhar processo"><img src="../../dist/icons/folder_full-colored.svg"></button>
+                      <button class="general-btn" href="#" data-toggle="popover" data-content="Encaminhar processo"><img src="../../dist/icons/pdf_file-colored.svg"></button>
+                      <button class="general-btn" href="#" data-toggle="popover" data-content="Encaminhar processo"><img src="../../dist/icons/accept_page.svg"></button>
+                      <button class="general-btn" href="#" data-toggle="popover" data-content="Encaminhar processo"><img src="../../dist/icons/calendar-colored.svg"></button>
+                    </div>
                   </div>
                 </div>
-                <!-- /.card -->
               </div>
             </div>
           </div>
@@ -689,6 +644,12 @@ login('TESOU', '../../');
   <!-- Material Design-->
   <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
   <script>
+    $('[data-toggle="popover"]').popover({
+      placement: 'auto',
+      trigger: 'hover'
+    });
+  </script>
+  <script>
     $(function() {
       //Initialize Select2 Elements
       $('.select2bs4').select2({
@@ -718,7 +679,7 @@ login('TESOU', '../../');
       ],
       datasets: [{
         data: [<?php echo $count_direito ?>],
-        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#9C0060'],
+        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
       }]
     }
     var donutOptions = {
@@ -756,7 +717,7 @@ login('TESOU', '../../');
       ],
       datasets: [{
         data: [<?php echo $count_estado ?>],
-        backgroundColor: ['#9C0060', '#d2d6de', '#f56954', '#f39c12', '#00c0ef', '#00a65a', '#3c8dbc'],
+        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
       }]
     }
     var donutOptions1 = {
@@ -794,7 +755,7 @@ login('TESOU', '../../');
       ],
       datasets: [{
         data: [<?php echo $count_secao ?>],
-        backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd'],
+        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
       }]
     }
     var barOptions1 = {
@@ -850,7 +811,7 @@ login('TESOU', '../../');
       ],
       datasets: [{
         data: [<?php echo $count_posto ?>],
-        backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd']
+        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
       }]
     }
     var barOptions = {
