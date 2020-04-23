@@ -125,8 +125,33 @@ login('ADMIN', '../../');
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="secoes_exant.php" class="nav-link active">
+                <i class="nav-icon fas fa-door-open"></i>
+                <p>
+                  Seções
+                  <?php
+                  $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
+                  $result = mysqli_query($conexao, $query);
+                  $res = mysqli_fetch_array($result);
+                  $row = mysqli_num_rows($result);
+                  if ($row > 0) {
+                    echo '<span class="badge badge-warning right">' . $row . '</span>';
+                  } else {
+                  } ?>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="exercicio_anterior.php" class="nav-link">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Exercício Anterior
+                </p>
+              </a>
+            </li>
             <li class="nav-item has-treeview menu-open">
-              <a href="#" class="nav-link active">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Exercício Anterior
@@ -159,7 +184,7 @@ login('ADMIN', '../../');
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="secoes_exant.php" class="nav-link active">
+                  <a href="secoes_exant.php" class="nav-link">
                     <i class="fas fa-hand-point-right nav-icon"></i>
                     <p>
                       Seções
@@ -352,6 +377,7 @@ login('ADMIN', '../../');
                       <thead class="text-primary" style="text-align: center;">
                         <th class="align-middle">#</th>
                         <th class="align-middle">Seção</th>
+                        <th class="align-middle">Prazo Exercício Anterior (dias)</th>
                         <th class="align-middle">Status</th>
                         <th class="align-middle">Ações</th>
                       </thead>
@@ -360,11 +386,13 @@ login('ADMIN', '../../');
                         while ($res_1 = mysqli_fetch_array($result)) {
                           $id = $res_1["id"];
                           $secao = $res_1["secao"];
+                          $prazo_exant = $res_1["prazo_exant"];
                           $status = $res_1["status"];
                         ?>
                           <tr style="text-align: center;">
                             <td class="align-middle"><?php echo $id; ?></td>
                             <td class="align-middle"><?php echo $secao; ?></td>
+                            <td class="align-middle"><?php echo $prazo_exant; ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aguardando') { ?>
@@ -446,19 +474,18 @@ login('ADMIN', '../../');
                 </div>
                 <div class="card-body">
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                    <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
 
+
+                    <!----------------------LISTAR TODOS AS SEÇÕES-------------------------->
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from tb_secoes_exant where perfil LIKE '$nome' and status = 'Excluído' order by id asc";
+                      $query = "SELECT * FROM tb_secoes_exant WHERE perfil LIKE '$nome' AND status = 'Excluído' ORDER BY id ASC";
                     } else {
-                      $query = "select * from tb_secoes_exant where status = 'Excluído' order by id asc";
+                      $query = "SELECT * FROM tb_secoes_exant WHERE status = 'Excluído' ORDER BY id ASC";
                     }
                     $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
-
                     ?>
 
                     <!-------------------------------------------------->
@@ -467,6 +494,7 @@ login('ADMIN', '../../');
                       <thead class="text-primary" style="text-align: center;">
                         <th class="align-middle">#</th>
                         <th class="align-middle">Seção</th>
+                        <th class="align-middle">Prazo Exercício Anterior (dias)</th>
                         <th class="align-middle">Status</th>
                         <th class="align-middle">Ações</th>
                       </thead>
@@ -475,11 +503,13 @@ login('ADMIN', '../../');
                         while ($res_1 = mysqli_fetch_array($result)) {
                           $id = $res_1["id"];
                           $secao = $res_1["secao"];
+                          $prazo_exant = $res_1["prazo_exant"];
                           $status = $res_1["status"];
                         ?>
                           <tr style="text-align: center;">
                             <td class="align-middle"><?php echo $id; ?></td>
                             <td class="align-middle"><?php echo $secao; ?></td>
+                            <td class="align-middle"><?php echo $prazo_exant ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aguardando') { ?>
@@ -540,9 +570,7 @@ login('ADMIN', '../../');
                     ?>
                   </div>
                 </div>
-                <!-- /.card-body -->
               </div>
-              <!-- /.card -->
             </div>
           </div>
           <div id="modalExemplo" class="modal fade" role="dialog">
@@ -558,6 +586,10 @@ login('ADMIN', '../../');
                     <div class="form-group">
                       <label for="id_produto">Seção</label>
                       <input type="text" class="form-control mr-2" name="txtsecao" placeholder="Digite a sigla da nova seção" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="id_produto">Prazo Exercício Anterior (dias)</label>
+                      <input type="text" class="form-control mr-2" name="txtprazoexant" placeholder="Digite o prazo para despachar um processo de Exercício Anterior" autocomplete="off" required>
                     </div>
                     <div class="modal-footer">
                       <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
@@ -634,11 +666,12 @@ login('ADMIN', '../../');
 <?php
 if (isset($_POST['button'])) {
   $secao = strtoupper($_POST['txtsecao']);
+  $prazo_exant = $_POST['txtprazoexant'];
   $status = 'Aprovado';
 
   //Verificar se a SEÇÃO já está cadastrado
 
-  $query_verificar = "select * from tb_secoes_exant where secao = '$secao'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "SELECT * FROM tb_secoes_exant WHERE secao = '$secao'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
@@ -649,7 +682,7 @@ if (isset($_POST['button'])) {
     exit();
   }
 
-  $query = "INSERT into tb_secoes_exant (secao, status) VALUES ('$secao', '$status')";
+  $query = "INSERT INTO tb_secoes_exant (secao, prazo_exant, status) VALUES ('$secao', '$prazo_exant', '$status')";
 
   $result = mysqli_query($conexao, $query);
 
@@ -660,26 +693,11 @@ if (isset($_POST['button'])) {
   }
 }
 
-?>
+//<!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
 
-
-<!--------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
-<?php
-if (@$_GET['func'] == 'deleta') {
+elseif (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "UPDATE tb_secoes_exant set status = 'Excluído' where id = '$id'";
-  mysqli_query($conexao, $query);
-  Alerta("success", "Excluído com sucesso!", false, "secoes_exant.php");
-}
-?>
-<!------------------------------------------------------------------------------->
-
-
-<!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
-<?php
-if (@$_GET['func'] == 'edita') {
-  $id = $_GET['id'];
-  $query = "select * from tb_secoes_exant where id = '$id'";
+  $query = "SELECT * FROM tb_secoes_exant WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
 ?>
@@ -687,21 +705,25 @@ if (@$_GET['func'] == 'edita') {
       <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Editar SEÇÃO</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <form method="POST" action="">
+          <form method="POST" action="">
+            <div class="modal-header">
+              <h4 class="modal-title">Editar SEÇÃO</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
               <div class="form-group">
-                <label for="id_produto">Perfis</label>
-                <input type="text" class="form-control mr-2" name="txtsecao2" value="<?php echo $res_1['secao']; ?>" placeholder="Seção" autocomplete="off">
+                <label for="id_produto">Seção</label>
+                <input type="text" class="form-control mr-2" name="txtsecao2" value="<?php echo $res_1['secao']; ?>" autocomplete="off">
               </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-          </div>
+              <div class="form-group">
+                <label for="id_produto">Prazo Exercício Anterior</label>
+                <input type="text" class="form-control mr-2" name="txtprazoexant2" value="<?php echo $res_1['prazo_exant']; ?>" autocomplete="off">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+              <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+            </div>
           </form>
         </div>
       </div>
@@ -716,17 +738,18 @@ if (@$_GET['func'] == 'edita') {
 
 <?php
     if (isset($_POST['buttonEditar'])) {
-      $secao2 = $_POST['txtsecao2'];
-      $query_verificar = "select * from tb_secoes_exant where secao = '$secao'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+      $secao2 = strtoupper($_POST['txtsecao2']);
+      $prazo_exant2 = $_POST['txtprazoexant2'];
+      $query_verificar = "SELECT * FROM tb_secoes_exant WHERE secao = '$secao'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
       $result_verificar = mysqli_query($conexao, $query_verificar);
       $row_verificar = mysqli_num_rows($result_verificar);
 
-      if ($row_verificar > 0) {
+      if (($secao2 != $res_1['secao']) and $row_verificar > 0) {
         Alerta("info", "Seção já cadastrada!", false, "secoes_exant.php");
         exit();
       }
 
-      $query_editar = "UPDATE tb_secoes_exant set secao = '$secao2' where id = '$id'";
+      $query_editar = "UPDATE tb_secoes_exant SET secao = '$secao2', prazo_exant = '$prazo_exant2' WHERE id = '$id'";
       $result_editar = mysqli_query($conexao, $query_editar);
       if ($result_editar == '') {
         Alerta("error", "Não foi possível editar!", false, "secoes_exant.php");
@@ -738,11 +761,19 @@ if (@$_GET['func'] == 'edita') {
 }
 
 //<!---------------------------APROVAR NOVA SEÇÃO NA TABELA---------------------------->
-
-if (@$_GET['func'] == 'aprova') {
+elseif (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
-  $query = "UPDATE tb_secoes_exant set status = 'Aprovado' where id = '$id'";
+  $query = "UPDATE tb_secoes_exant SET status = 'Aprovado' WHERE id = '$id'";
   mysqli_query($conexao, $query);
   Alerta("success", "Aprovado com sucesso!", false, "secoes_exant.php");
 }
+
+//<!--------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
+elseif (@$_GET['func'] == 'deleta') {
+  $id = $_GET['id'];
+  $query = "UPDATE tb_secoes_exant SET status = 'Excluído' WHERE id = '$id'";
+  mysqli_query($conexao, $query);
+  Alerta("success", "Excluído com sucesso!", false, "secoes_exant.php");
+}
 ?>
+<!------------------------------------------------------------------------------->
