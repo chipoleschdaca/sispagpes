@@ -48,7 +48,7 @@ login('ADMIN', '../../');
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <ul class="navbar-nav ml-left" style="margin-left:8px;">
-        <a class="btn btn-danger" type="button" href="../../backup.php" onclick="return confirm('Deseja mesmo fazer o backup do Banco de Dados?');"><i class="fas fa-database"></i> Backup</a>
+        <a class="btn btn-danger" type="button" href="../../backup.php" data-toggle="popover" data-content="Backup do Banco de Dados" onclick="return confirm('Deseja mesmo fazer o backup do Banco de Dados?');"><i class="fas fa-database"></i> Backup</a>
       </ul>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
@@ -126,6 +126,23 @@ login('ADMIN', '../../');
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Perfis
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="secoes_exant.php" class="nav-link">
+                <i class="nav-icon fas fa-door-open"></i>
+                <p>
+                  Seções
+                  <?php
+                  $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
+                  $result = mysqli_query($conexao, $query);
+                  $res = mysqli_fetch_array($result);
+                  $row = mysqli_num_rows($result);
+                  if ($row > 0) {
+                    echo '<span class="badge badge-warning right">' . $row . '</span>';
+                  } else {
+                  } ?>
                 </p>
               </a>
             </li>
@@ -285,7 +302,6 @@ login('ADMIN', '../../');
               <div class="small-box bg-warning">
                 <div class="inner">
                   <h3>44</h3>
-
                   <p>User Registrations</p>
                 </div>
                 <div class="icon">
@@ -310,8 +326,6 @@ login('ADMIN', '../../');
             </div>
             <!-- ./col -->
           </div>
-          <!-- /.row -->
-          <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->
@@ -327,7 +341,6 @@ login('ADMIN', '../../');
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-
   <!-- jQuery -->
   <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- jQuery Mask -->
@@ -365,17 +378,23 @@ login('ADMIN', '../../');
   <script src="../../dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
+  <script>
+    $('[data-toggle="popover"]').popover({
+      placement: 'auto',
+      trigger: 'hover'
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#txtcpf').mask('000.000.000-00', {
+        reverse: true
+      });
+      $('#txtsaram').mask('000.000-0', {
+        reverse: true
+      });
+    });
+  </script>
 </body>
 
 </html>
 <!--Máscaras-->
-<script>
-  $(document).ready(function() {
-    $('#txtcpf').mask('000.000.000-00', {
-      reverse: true
-    });
-    $('#txtsaram').mask('000.000-0', {
-      reverse: true
-    });
-  });
-</script>
