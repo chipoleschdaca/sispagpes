@@ -25370,7 +25370,6 @@ html.maximized-card {
 .projects img.table-avatar {
 	border-radius: 50%;
 	display: inline;
-	width: 2.5rem;
 }
 
 .projects .project-state {
@@ -34778,11 +34777,13 @@ a.text-muted:hover {
 	margin-bottom: 10px;
 	text-align: center;
 	border-radius: 5px;
+	cursor: pointer;
 	border: 2px solid #d6d8db;
 	box-shadow: 5px 5px -5px -5px #00000070;
 }
 
 .general-btn img {
+	vertical-align: middle;
 	width: 4rem;
 	height: 4rem;
 	margin: 0;
