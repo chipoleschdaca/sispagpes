@@ -41,6 +41,12 @@ login('ADMIN', '../../');
   <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
   <!-- Toastr -->
   <script src="../../plugins/toastr/toastr.min.js"></script>
+  <script>
+    $('[data-toggle="popover"]').popover({
+      placement: 'auto',
+      trigger: 'hover'
+    });
+  </script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -127,6 +133,23 @@ login('ADMIN', '../../');
               </a>
             </li>
             <li class="nav-item">
+              <a href="secoes_exant.php" class="nav-link">
+                <i class="nav-icon fas fa-door-open"></i>
+                <p>
+                  Seções
+                  <?php
+                  $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
+                  $result = mysqli_query($conexao, $query);
+                  $res = mysqli_fetch_array($result);
+                  $row = mysqli_num_rows($result);
+                  if ($row > 0) {
+                    echo '<span class="badge badge-warning right">' . $row . '</span>';
+                  } else {
+                  } ?>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="exercicio_anterior.php" class="nav-link active">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
@@ -202,7 +225,7 @@ login('ADMIN', '../../');
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="estado_exant.php" class="nav-link">
+                  <a href="exercicio_anterior.php" class="nav-link">
                     <i class="far fa-hand-point-right nav-icon"></i>
                     <p>
                       Estado
@@ -259,10 +282,10 @@ login('ADMIN', '../../');
                 <div class="card-header p-0 border-bottom-0">
                   <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true"><i class="far fa-folder-open"></i> Direito Pleiteado</a>
+                      <a class="nav-link active" id="custom-tabs-three-direito-tab" data-toggle="pill" href="#custom-tabs-three-direito" role="tab" aria-controls="custom-tabs-three-direito" aria-selected="true"><i class="far fa-folder-open"></i> Direito Pleiteado</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false"><i class="fas fa-users"></i> Profile</a>
+                      <a class="nav-link" id="custom-tabs-three-estado-tab" data-toggle="pill" href="#custom-tabs-three-estado" role="tab" aria-controls="custom-tabs-three-estado" aria-selected="false"><i class="fas fa-users"></i> Estado do Processo</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false"><i class="far fa-comment-dots"></i> Messages</a>
@@ -277,7 +300,7 @@ login('ADMIN', '../../');
                 </div>
                 <div class="card-body">
                   <div class="tab-content" id="custom-tabs-three-tabContent">
-                    <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                    <div class="tab-pane fade show active" id="custom-tabs-three-direito" role="tabpanel" aria-labelledby="custom-tabs-three-direito-tab">
                       <div class="row">
                         <div class="col-12 col-sm-6 col-md-3">
                           <div class="info-box mb-3">
@@ -357,6 +380,7 @@ login('ADMIN', '../../');
                       </div>
                       <div class="row">
                         <div class="col-8">
+                          <h3 style="text-align: center">Direitos Pleiteados</h3>
                           <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
                             <!----------------------LISTAR TODOS OS DIREITOS-------------------------->
@@ -420,19 +444,19 @@ login('ADMIN', '../../');
                                         <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                         <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
                                         <a class="btn btn-warning btn-xs" href="exercicio_anterior.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deletaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                       <?php
                                       } elseif ($status == 'Aguardando') { ?>
-                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprovaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                         <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
                                         <a class="btn btn-warning btn-xs" href="exercicio_anterior.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deletaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                       <?php
                                       } elseif ($status == 'Excluído') { ?>
-                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Direito Pleiteado?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprovaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Direito Pleiteado?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                         <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
                                         <a class="btn btn-warning btn-xs disabled" href="exercicio_anterior.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                        <a class="btn btn-danger btn-xs disabled" href="exercicio_anterior.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                        <a class="btn btn-danger btn-xs disabled" href="exercicio_anterior.php?func=deletaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                       <?php
                                       } else {
                                         echo $status;
@@ -452,7 +476,7 @@ login('ADMIN', '../../');
                             ?>
                           </div>
                         </div>
-                        <div id="modalExemplo" class="modal fade" role="dialog">
+                        <div id="modalDireito" class="modal fade" role="dialog">
                           <!---Modal Exemplo--->
                           <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -464,7 +488,7 @@ login('ADMIN', '../../');
                                 <form method="POST" action="">
                                   <div class="form-group">
                                     <label for="id_produto">Direito Pleiteado</label>
-                                    <input type="text" class="form-control mr-2" name="txtdireito" placeholder="Digite um novo direito" autocomplete="off" required>
+                                    <input type="text" class="form-control mr-2" name="txtdireito" placeholder="Digite um novo Direito" autocomplete="off" required>
                                   </div>
                                   <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary btn-sm" name="buttonDireito" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
@@ -480,9 +504,9 @@ login('ADMIN', '../../');
                         <?php
                         if (isset($_POST['buttonDireito'])) {
                           $direito = strtoupper($_POST['txtdireito']);
-                          $status = 'Aprovado';
+                          $status_direito = 'Aprovado';
 
-                          //Verificar se a SEÇÃO já está cadastrado
+                          //Verificar se o DIREITO já está cadastrado
 
                           $query_verificar = "select * from tb_direitoPleiteado_exant where direito = '$direito'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
                           $result_verificar = mysqli_query($conexao, $query_verificar);
@@ -494,11 +518,11 @@ login('ADMIN', '../../');
                             exit();
                           }
 
-                          $query = "INSERT into tb_direitoPleiteado_exant (direito, status) VALUES ('$direito', '$status')";
+                          $query_direito = "INSERT into tb_direitoPleiteado_exant (direito, status) VALUES ('$direito', '$status_direito')";
 
-                          $result = mysqli_query($conexao, $query);
+                          $result_direito = mysqli_query($conexao, $query_direito);
 
-                          if ($result == '') {
+                          if ($result_direito == '') {
                             Alerta("error", "Não foi possível cadastrar!", false, "exercicio_anterior.php");
                           } else {
                             Alerta("success", "Salvo com sucesso!", false, "exercicio_anterior.php");
@@ -506,6 +530,8 @@ login('ADMIN', '../../');
                         }
                         ?>
                         <div class="col-4">
+                          <button class="general-btn" href="#" data-toggle="modal" data-target="#modalDireito"><img src="../../dist/icons/add-folder-colored.svg">Adicionar Direito</button>
+                          <h3 style="text-align: center">Direitos Excluídos</h3>
                           <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
                             <!---------------------- LISTAR TODOS DIREITOS EXCLUÍDOS -------------------------->
@@ -566,20 +592,20 @@ login('ADMIN', '../../');
                                       if ($status == 'Aprovado') { ?>
                                         <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                         <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                        <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                        <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs" href="exercicio_anterior.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deletaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                       <?php
                                       } elseif ($status == 'Aguardando') { ?>
-                                        <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprovaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                         <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                        <a class="btn btn-warning btn-xs" href="direitos_exant.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                        <a class="btn btn-danger btn-xs" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs" href="exercicio_anterior.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deletaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                       <?php
                                       } elseif ($status == 'Excluído') { ?>
-                                        <a class="btn btn-success btn-xs" href="direitos_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprovaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                         <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                        <a class="btn btn-warning btn-xs disabled" href="direitos_exant.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                        <a class="btn btn-danger btn-xs disabled" href="direitos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs disabled" href="exercicio_anterior.php?func=editaDireito&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs disabled" href="exercicio_anterior.php?func=deletaDireito&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                                       <?php
                                       } else {
                                         echo $status;
@@ -599,12 +625,329 @@ login('ADMIN', '../../');
                             ?>
                           </div>
                           <hr />
-                          <button class="general-btn" href="#" data-toggle="modal" data-target="#modalExemplo"><img src="../../dist/icons/add-folder-colored.svg"></button>
                         </div>
                       </div>
                     </div>
-                    <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                      Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                    <div class="tab-pane fade" id="custom-tabs-three-estado" role="tabpanel" aria-labelledby="custom-tabs-three-estado-tab">
+                      <div class="row">
+                        <div class="col-12 col-sm-6 col-md-3">
+                          <div class="info-box mb-3">
+                            <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-database"></i></span>
+                            <div class="info-box-content" style="text-align:center;">
+                              <span class="info-box-text">ESTADOS CADASTRADOS</span>
+                              <span class="info-box-number">
+                                <h4>
+                                  <?php
+                                  $query = "SELECT * FROM tb_estado_exant";
+                                  $result = mysqli_query($conexao, $query);
+                                  $row = mysqli_num_rows($result);
+                                  echo $row;
+                                  ?>
+                                </h4>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                          <div class="info-box">
+                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                            <div class="info-box-content" style="text-align:center;">
+                              <span class="info-box-text">ESTADOS "APROVADOS"</span>
+                              <span class="info-box-number">
+                                <h4>
+                                  <?php
+                                  $query = "SELECT * FROM tb_estado_exant where status = 'Aprovado'";
+                                  $result = mysqli_query($conexao, $query);
+                                  $row = mysqli_num_rows($result);
+                                  echo $row;
+                                  ?>
+                                </h4>
+                              </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                          </div>
+                          <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-12 col-sm-6 col-md-3">
+                          <div class="info-box mb-3">
+                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-history"></i></span>
+                            <div class="info-box-content" style="text-align:center;">
+                              <span class="info-box-text">ESTADOS "AGUARDANDO"</span>
+                              <span class="info-box-number">
+                                <h4>
+                                  <?php
+                                  $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
+                                  $result = mysqli_query($conexao, $query);
+                                  $row = mysqli_num_rows($result);
+                                  echo $row;
+                                  ?>
+                                </h4>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                          <div class="info-box mb-3">
+                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
+                            <div class="info-box-content" style="text-align:center;">
+                              <span class="info-box-text">ESTADOS "EXCLUÍDOS"</span>
+                              <span class="info-box-number">
+                                <h4>
+                                  <?php
+                                  $query = "SELECT * FROM tb_estado_exant where status = 'Excluído'";
+                                  $result = mysqli_query($conexao, $query);
+                                  $row = mysqli_num_rows($result);
+                                  echo $row;
+                                  ?>
+                                </h4>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-8">
+                          <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                            <!----------------------LISTAR TODOS OS ESTADOS-------------------------->
+
+                            <?php
+                            if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                              $nome = '%' . $_GET['txtpesquisar'] . '%';
+                              $query = "SELECT * FROM tb_estado_exant WHERE estado LIKE '$nome' ORDER BY estado asc";
+                            } else {
+                              $query = "SELECT * FROM tb_estado_exant WHERE status <> 'Excluído' ORDER BY estado asc";
+                            }
+                            $result = mysqli_query($conexao, $query);
+                            $row = mysqli_num_rows($result);
+                            ?>
+                            <!-------------------------------------------------->
+                            <table class="table table-sm table-bordered table-striped">
+                              <thead class="text-primary" style="text-align: center; width: 800px; height: 500px; overflow: auto;">
+                                <th class="align-middle" style="width: 4%;">#</th>
+                                <th class="align-middle" style="width: 65%;">Nome do Status</th>
+                                <th class="align-middle">Status</th>
+                                <th class="align-middle">Ações</th>
+                              </thead>
+                              <tbody>
+                                <?php
+                                while ($res_1 = mysqli_fetch_array($result)) {
+                                  $id = $res_1["id"];
+                                  $nome = $res_1["estado"];
+                                  $status = $res_1["status"];
+                                ?>
+                                  <tr style="text-align: center;">
+                                    <td class="align-middle"><?php echo $id; ?></td>
+                                    <td class="align-middle"><?php echo $nome; ?></td>
+                                    <td class="align-middle">
+                                      <?php
+                                      if ($status == 'Aguardando') { ?>
+                                        <span class="badge badge-warning">
+                                          <?php echo $status; ?>
+                                        </span>
+                                      <?php
+                                      } else if ($status == 'Aprovado') { ?>
+                                        <span class="badge badge-success">
+                                          <?php echo $status; ?>
+                                        </span>
+                                      <?php
+                                      } else if ($status == 'Excluído') { ?>
+                                        <span class="badge badge-danger">
+                                          <?php echo $status; ?>
+                                        </span>
+                                      <?php
+                                      } else {
+                                        echo $status;
+                                      }
+                                      ?>
+                                    </td>
+                                    <td class="align-middle">
+                                      <?php
+                                      if ($status == 'Aprovado') { ?>
+                                        <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs" href="exercicio_anterior.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                      <?php
+                                      } elseif ($status == 'Aguardando') { ?>
+                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprovaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs" href="exercicio_anterior.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                      <?php
+                                      } elseif ($status == 'Excluído') { ?>
+                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprovaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs disabled" href="exercicio_anterior.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs disabled" href="exercicio_anterior.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                      <?php
+                                      } else {
+                                        echo $status;
+                                      } ?>
+                                    </td>
+                                  </tr>
+                                <?php
+                                }
+                                ?>
+                              </tbody>
+                            </table>
+                            <?php
+                            if ($row == '') {
+                              echo "<h3>Não existem dados para consulta</h3>";
+                            } else {
+                            }
+                            ?>
+                          </div>
+                        </div>
+                        <div id="modalEstado" class="modal fade" role="dialog">
+                          <!---Modal Exemplo--->
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Inserir novo ESTADO</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                              <div class="modal-body">
+                                <form method="POST" action="">
+                                  <div class="form-group">
+                                    <label for="id_produto">Estado do Processo</label>
+                                    <input type="text" class="form-control mr-2" name="txtnome" placeholder="Digite um novo Estado" autocomplete="off" required>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                                    <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <?php
+                        if (isset($_POST['buttonEstado'])) {
+                          $nome = strtoupper($_POST['txtnome']);
+                          $status_estado = 'Aprovado';
+
+                          //Verificar se a SEÇÃO já está cadastrado
+
+                          $query_verificar_estado = "SELECT * FROM tb_estado_exant WHERE estado = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+                          $result_verificar_estado = mysqli_query($conexao, $query_verificar_estado);
+                          $dado_verificar_estado = mysqli_fetch_array($result_verificar_estado);
+                          $row_verificar_estado = mysqli_num_rows($result_verificar_estado);
+
+                          if ($row_verificar_estado > 0) {
+                            Alerta("info", "Estado já cadastrado!", false, "exercicio_anterior.php");
+                            exit();
+                          }
+
+                          $query_estado = "INSERT into tb_estado_exant (estado, status) VALUES ('$nome', '$status_estado')";
+
+                          $result_estado = mysqli_query($conexao, $query_estado);
+
+                          if ($result_estado == '') {
+                            Alerta("error", "Não foi possível cadastrar", false, "exercicio_anterior.php");
+                          } else {
+                            Alerta("success", "Salvo com sucesso!", false, "exercicio_anterior.php");
+                          }
+                        }
+
+                        ?>
+                        <div class="col-4">
+                          <button type="button" class="general-btn" href="#" data-toggle="modal" data-target="#modalEstado"><img src="../../dist/icons/add-folder-colored.svg">Adicionar Estado</button>
+                          <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+
+                            <!----------------------LISTAR TODOS OS ESTADOS EXCLUÍDOS-------------------------->
+
+                            <?php
+                            if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                              $nome = '%' . $_GET['txtpesquisar'] . '%';
+                              $query = "SELECT * FROM tb_estado_exant WHERE estado LIKE '$nome' ORDER BY id asc";
+                            } else {
+                              $query = "SELECT * FROM tb_estado_exant WHERE status = 'Excluído' ORDER BY id asc";
+                            }
+                            $result = mysqli_query($conexao, $query);
+                            $row = mysqli_num_rows($result);
+                            ?>
+
+                            <!-------------------------------------------------->
+
+                            <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
+                              <thead class="text-primary" style="text-align: center;">
+                                <th class="align-middle" style="width: 4%;">#</th>
+                                <th class="align-middle" style="width: 65%;">Estados</th>
+                                <th class="align-middle">Status</th>
+                                <th class="align-middle">Ações</th>
+                              </thead>
+                              <tbody>
+                                <?php
+                                while ($res_1 = mysqli_fetch_array($result)) {
+                                  $id = $res_1["id"];
+                                  $nome = $res_1["estado"];
+                                  $status = $res_1["status"];
+                                ?>
+                                  <tr style="text-align: center;">
+                                    <td class="align-middle"><?php echo $id; ?></td>
+                                    <td class="align-middle"><?php echo $nome; ?></td>
+                                    <td class="align-middle">
+                                      <?php
+                                      if ($status == 'Aguardando') { ?>
+                                        <span class="badge badge-warning">
+                                          <?php echo $status; ?>
+                                        </span>
+                                      <?php
+                                      } else if ($status == 'Aprovado') { ?>
+                                        <span class="badge badge-success">
+                                          <?php echo $status; ?>
+                                        </span>
+                                      <?php
+                                      } else if ($status == 'Excluído') { ?>
+                                        <span class="badge badge-danger">
+                                          <?php echo $status; ?>
+                                        </span>
+                                      <?php
+                                      } else {
+                                        echo $status;
+                                      }
+                                      ?>
+                                    </td>
+                                    <td class="align-middle">
+                                      <?php
+                                      if ($status == 'Aprovado') { ?>
+                                        <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs" href="exercicio_anterior.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                      <?php
+                                      } elseif ($status == 'Aguardando') { ?>
+                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprovaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs" href="exercicio_anterior.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="exercicio_anterior.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                      <?php
+                                      } elseif ($status == 'Excluído') { ?>
+                                        <a class="btn btn-success btn-xs" href="exercicio_anterior.php?func=aprovaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o status?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                        <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
+                                        <a class="btn btn-warning btn-xs disabled" href="exercicio_anterior.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                        <a class="btn btn-danger btn-xs disabled" href="exercicio_anterior.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                      <?php
+                                      } else {
+                                        echo $status;
+                                      } ?>
+                                    </td>
+                                  </tr>
+                                <?php
+                                }
+                                ?>
+                              </tbody>
+                            </table>
+                            <?php
+                            if ($row == '') {
+                              echo "<h3>Não existem dados para consulta</h3>";
+                            } else {
+                            }
+                            ?>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
                       Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
@@ -739,21 +1082,101 @@ if (@$_GET['func'] == 'editaDireito') {
 }
 
 // APROVAR NOVO DIREITO NA TABELA
-elseif (@$_GET['func'] == 'aprova') {
+elseif (@$_GET['func'] == 'aprovaDireito') {
   $id = $_GET['id'];
-  $query = "UPDATE tb_direitoPleiteado_exant set status = 'Aprovado' where id = '$id'";
+  $query = "UPDATE tb_direitoPleiteado_exant SET status = 'Aprovado' WHERE id = '$id'";
   mysqli_query($conexao, $query);
   Alerta("success", "Aprovado com sucesso!", false, "exercicio_anterior.php");
 }
 
 // EXCLUIR DIREITO DA TABELA
-elseif (@$_GET['func'] == 'deleta') {
-  $id = $_GET['id'];
-  $query = "UPDATE tb_direitoPleiteado_exant set status = 'Excluído' where id = '$id'";
-  mysqli_query($conexao, $query);
+elseif (@$_GET['func'] == 'deletaDireito') {
+  $id_direito = $_GET['id'];
+  $query_deleta_direito = "UPDATE tb_direitoPleiteado_exant SET status = 'Excluído' WHERE id = '$id_direito'";
+  mysqli_query($conexao, $query_deleta_direito);
   Alerta("success", "Excluído com sucesso!", false, "exercicio_anterior.php");
 }
 ?>
+
+<!--------------------------- EDITAR ESTADO ---------------------------->
+<?php
+if (@$_GET['func'] == 'editaEstado') {
+  $id_estado = $_GET['id'];
+  $query_select_estado = "SELECT * FROM tb_estado_exant WHERE id = '$id_estado'";
+  $result_select_estado = mysqli_query($conexao, $query_select_estado);
+  while ($res_select_estado = mysqli_fetch_array($result_select_estado)) {
+?>
+    <div id="modalEditar" class="modal fade" role="dialog">
+      <!---Modal EDITAR --->
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Editar Estado</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="">
+              <div class="form-group">
+                <label for="id_produto">Estado</label>
+                <input type="text" class="form-control mr-2" name="txtnome2" value="<?php echo $res_select_estado['estado']; ?>" placeholder="Digite o estado..." autocomplete="off">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditarEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script>
+      $('#modalEditar').modal("show");
+    </script>
+    <!--Modal EDITAR -->
+
+    <!-------------------------------------------------------------- Comando para alterar os dados da tabela ------------------------------------------------------------->
+
+<?php
+    if (isset($_POST['buttonEditarEstado'])) {
+      $nome2 = strtoupper($_POST['txtnome2']);
+      $query_verificar_estado = "SELECT * FROM tb_estado_exant WHERE estado = '$nome2'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+      $result_verificar_estado = mysqli_query($conexao, $query_verificar_estado);
+      $row_verificar_estado = mysqli_num_rows($result_verificar_estado);
+
+      if ($row_verificar > 0) {
+        Alerta("info", "Estado já cadastrado!", false, "exercicio_anterior.php");
+        exit();
+      }
+
+      $query_editar_estado = "UPDATE tb_estado_exant SET estado = '$nome2' WHERE id = '$id_estado'";
+      $result_editar_estado = mysqli_query($conexao, $query_editar_estado);
+      if ($result_editar_estado == '') {
+        Alerta("error", "Não foi possível editar!", false, "exercicio_anterior.php");
+      } else {
+        Alerta("success", "Editado com sucesso!", false, "exercicio_anterior.php");
+      }
+    }
+  }
+}
+
+// APROVAR ESTADO
+elseif (@$_GET['func'] == 'aprovaEstado') {
+  $id_estado = $_GET['id'];
+  $query_aprova_estado = "UPDATE tb_estado_exant SET status = 'Aprovado' WHERE id = '$id_estado'";
+  mysqli_query($conexao, $query_aprova_estado);
+  Alerta("success", "Aprovado com sucesso!", false, "exercicio_anterior.php");
+}
+
+//EXCLUIR ESTADO
+elseif (@$_GET['func'] == 'deletaEstado') {
+  $id_estado = $_GET['id'];
+  $query_excluir_estado = "UPDATE tb_estado_exant SET status = 'Excluído' WHERE id = '$id_estado'";
+  mysqli_query($conexao, $query_excluir_estado);
+  Alerta("success", "Excluído com sucesso!", false, "exercicio_anterior.php");
+}
+?>
+
 <!--Máscaras-->
 <script>
   $(document).ready(function() {

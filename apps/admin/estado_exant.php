@@ -325,7 +325,7 @@ login('ADMIN', '../../');
                   <h4 class="" style="text-align:center;"><strong>TABELA DE ESTADOS</strong></h4>
                 </div>
                 <div class="card-body">
-                  <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
+                  <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:20px;" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalEstado">
                     <i class="fas fa-plus"></i> Inserir Novo
                   </button>
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
@@ -334,12 +334,11 @@ login('ADMIN', '../../');
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from tb_estado_exant where estado LIKE '$nome' order by estado asc";
+                      $query = "SELECT * FROM tb_estado_exant WHERE estado LIKE '$nome' ORDER BY estado asc";
                     } else {
-                      $query = "select * from tb_estado_exant where status <> 'Excluído' order by estado asc";
+                      $query = "SELECT * FROM tb_estado_exant WHERE status <> 'Excluído' ORDER BY estado asc";
                     }
                     $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
                     ?>
                     <!-------------------------------------------------->
@@ -387,20 +386,20 @@ login('ADMIN', '../../');
                               if ($status == 'Aprovado') { ?>
                                 <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprovaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprovaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR O Estado?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                <a class="btn btn-danger btn-xs disabled" href="estado_exant.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } else {
                                 echo $status;
@@ -500,20 +499,20 @@ login('ADMIN', '../../');
                               if ($status == 'Aprovado') { ?>
                                 <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprovaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs" href="estado_exant.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                <a class="btn btn-danger btn-xs" href="estado_exant.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o status?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
+                                <a class="btn btn-success btn-xs" href="estado_exant.php?func=aprovaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o status?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
                                 <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="estado_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a class="btn btn-warning btn-xs disabled" href="estado_exant.php?func=editaEstado&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                <a class="btn btn-danger btn-xs disabled" href="estado_exant.php?func=deletaEstado&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
                               <?php
                               } else {
                                 echo $status;
@@ -536,7 +535,7 @@ login('ADMIN', '../../');
               </div>
             </div>
           </div>
-          <div id="modalExemplo" class="modal fade" role="dialog">
+          <div id="modalEstado" class="modal fade" role="dialog">
             <!---Modal Exemplo--->
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -551,7 +550,7 @@ login('ADMIN', '../../');
                       <input type="text" class="form-control mr-2" name="txtnome" placeholder="Digite um novo status" autocomplete="off" required>
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                      <button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
                       <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
                     </div>
                   </form>
@@ -622,16 +621,16 @@ login('ADMIN', '../../');
 
 </html>
 
-<!---------------------------------CADASTRAR-------------------------------------------->
+<!---------------------------------CADASTRAR ESTADO-------------------------------------------->
 
 <?php
-if (isset($_POST['button'])) {
+if (isset($_POST['buttonEstado'])) {
   $nome = strtoupper($_POST['txtnome']);
   $status = 'Aprovado';
 
   //Verificar se a SEÇÃO já está cadastrado
 
-  $query_verificar = "select * from tb_estado_exant where estado = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "SELECT * FROM tb_estado_exant WHERE estado = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
@@ -655,9 +654,9 @@ if (isset($_POST['button'])) {
 ?>
 
 
-<!--------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
+<!--------------------------EXCLUIR ESTADO NA TABELA--------------------------->
 <?php
-if (@$_GET['func'] == 'deleta') {
+if (@$_GET['func'] == 'deletaEstado') {
   $id = $_GET['id'];
   $query = "UPDATE tb_estado_exant set status = 'Excluído' where id = '$id'";
   mysqli_query($conexao, $query);
@@ -667,9 +666,9 @@ if (@$_GET['func'] == 'deleta') {
 <!------------------------------------------------------------------------------->
 
 
-<!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
+<!---------------------------EDITAR ESTADO NA TABELA---------------------------->
 <?php
-if (@$_GET['func'] == 'edita') {
+if (@$_GET['func'] == 'editaEstado') {
   $id = $_GET['id'];
   $query = "select * from tb_estado_exant where id = '$id'";
   $result = mysqli_query($conexao, $query);
@@ -691,7 +690,7 @@ if (@$_GET['func'] == 'edita') {
               </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+            <button type="submit" class="btn btn-primary btn-sm" name="buttonEditarEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
           </div>
           </form>
@@ -704,10 +703,10 @@ if (@$_GET['func'] == 'edita') {
     </script>
     <!--Modal EDITAR -->
 
-    <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------- Comando para alterar os dados da tabela ------------------------------------------------------------->
 
 <?php
-    if (isset($_POST['buttonEditar'])) {
+    if (isset($_POST['buttonEditarEstado'])) {
       $nome2 = strtoupper($_POST['txtnome2']);
       $query_verificar = "select * from tb_estado_exant where estado = '$nome2'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
       $result_verificar = mysqli_query($conexao, $query_verificar);
@@ -731,7 +730,7 @@ if (@$_GET['func'] == 'edita') {
 
 //<!---------------------------APROVAR NOVO ESTADO NA TABELA---------------------------->
 
-if (@$_GET['func'] == 'aprova') {
+if (@$_GET['func'] == 'aprovaEstado') {
   $id = $_GET['id'];
   $query = "UPDATE tb_estado_exant set status = 'Aprovado' where id = '$id'";
   mysqli_query($conexao, $query);

@@ -125,6 +125,23 @@ login('ADMIN', '../../');
               </a>
             </li>
             <li class="nav-item">
+              <a href="secoes_exant.php" class="nav-link">
+                <i class="nav-icon fas fa-door-open"></i>
+                <p>
+                  Seções
+                  <?php
+                  $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
+                  $result = mysqli_query($conexao, $query);
+                  $res = mysqli_fetch_array($result);
+                  $row = mysqli_num_rows($result);
+                  if ($row > 0) {
+                    echo '<span class="badge badge-warning right">' . $row . '</span>';
+                  } else {
+                  } ?>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="exercicio_anterior.php" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
