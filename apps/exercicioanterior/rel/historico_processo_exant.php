@@ -181,10 +181,12 @@ $situacao = $res_1["situacao"];
   </div>
   <div class="row no-print">
     <div class="col-12" id="print_button">
-      <a class="print-btn" href="#" onclick="js:window.print();"><i class="fas fa-print"></i></a>
+      <a class="print-btn2" href="#" onclick="js:window.print();"><img src="../../../dist/icons/printer-colored.svg"></a>
+      <a class="print-btn2" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener"><img src="../../../dist/icons/pdf_file-colored.svg"></a>
+      <!--<a class="print-btn" href="#" onclick="js:window.print();"><i class="fas fa-print"></i></a>
       <a class="print-btn" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener">
         <i class="fas fa-file-pdf"></i>
-      </a>
+      </a>-->
     </div>
   </div>
 </body>
