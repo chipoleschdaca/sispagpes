@@ -717,7 +717,7 @@ elseif (@$_GET['func'] == 'edita') {
               </div>
               <div class="form-group">
                 <label for="id_produto">Prazo Exercício Anterior</label>
-                <input type="text" class="form-control mr-2" name="txtprazoexant2" value="<?php echo $res_1['prazo_exant']; ?>" autocomplete="off">
+                <input type="text" class="form-control mr-2" name="txtprazoexant2" value="<?php echo $res_1['prazo_exant']; ?>" autocomplete="off" disabled>
               </div>
             </div>
             <div class="modal-footer">
