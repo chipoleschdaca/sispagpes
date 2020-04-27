@@ -222,12 +222,12 @@ login('TESOU', '../../');
                           <div class="row">
                             <section class="col-md-6 connectedSortable">
                               <div>
-                                <canvas id="pieChart" style="height:150px; width: 400px;"></canvas>
+                                <canvas id="pieChart" style="height:200px; width: 400px;"></canvas>
                               </div>
                             </section>
                             <section class="col-md-6 connectedSortable">
                               <div>
-                                <canvas id="donutChart" style="height:150px; width: 400px;"></canvas>
+                                <canvas id="donutChart" style="height:200px; width: 400px;"></canvas>
                               </div>
                             </section>
                           </div>
@@ -235,11 +235,11 @@ login('TESOU', '../../');
                           <div class="row">
                             <section class="col-md-6 connectedSortable">
                               <div>
-                                <canvas id="myChart2" style="height:150px; width: 400px;"></canvas>
+                                <canvas id="myChart2" style="height:200px; width: 400px;"></canvas>
                               </div>
                             </section>
                             <section class="col-md-6 connectedSortable">
-                              <canvas id="myChart" style="height:150px; width: 400px;"></canvas>
+                              <canvas id="myChart" style="height:200px; width: 400px;"></canvas>
                             </section>
                           </div>
                         </div>
@@ -258,61 +258,67 @@ login('TESOU', '../../');
                                 </thead>
                                 <tbody style="text-align: center;">
                                   <?php
-                                  $query_account = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual";
+                                  $query_account = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual ORDER BY s.secao ASC";
                                   $result_account = mysqli_query($conexao, $query_account);
                                   while ($res_account = mysqli_fetch_array($result_account)) {
-                                    # code...
+                                    $id_account = $res_account['id_secao'];
+                                    $secao_account = $res_account['secao_atual'];
+                                    $count_secao2 = $res_account['COUNT(e.secao_atual)']; ?>
+                                    <tr>
+                                      <td class="align-middle">
+                                        <?php echo $secao_account ?>
+                                      </td>
+                                      <td class="align-middle">
+                                        <?php echo $count_secao2 ?>
+                                      </td>
+                                    </tr>
+                                  <?php
                                   }
                                   ?>
-                                  <tr>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                    <td class="align-middle">
-                                      DP-1
-                                    </td>
-                                  </tr>
                                 </tbody>
                               </table>
                             </div>
                           </div>
-                          <button class="btn btn-danger btn-block"> Prestação de Contas</button>
                           <br>
-                          <button class="btn btn-primary" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data1.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
-                          <button class="btn btn-secondary" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
-                          <button class="btn btn-warning" style="padding: 0px; margin: 0; width: 100px; height: 100px; text-align:center;"><img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:3rem; height:3rem; padding: 0; margin: 0; display:flexbox;"></button>
+                          <div class="card card-warning" style="text-align: center">
+                            <div class="card-header">
+                              <h5><strong>Prestação de Contas</strong></h5>
+                            </div>
+                            <div class="card-body">
+                              <table class="table table-sm table-bordered table-striped">
+                                <thead style="text-align: center;">
+                                  <tr>
+                                    <th class="align-middle">Seção</th>
+                                    <th class="align-middle">Prazo Exercício Anterior (dias)</th>
+                                    <th class="align-middle">Ações</th>
+                                  </tr>
+                                </thead>
+                                <tbody style="text-align: center;">
+                                  <?php
+                                  $query_prazo = "SELECT id, secao, prazo_exant FROM tb_secoes_exant WHERE status = 'Aprovado' ORDER BY secao ASC";
+                                  $result_prazo = mysqli_query($conexao, $query_prazo);
+                                  while ($res_prazo = mysqli_fetch_array($result_prazo)) {
+                                    $id_prazo = $res_prazo['id'];
+                                    $secao_prazo = $res_prazo['secao'];
+                                    $count_prazo = $res_prazo['prazo_exant']; ?>
+                                    <tr>
+                                      <td class="align-middle">
+                                        <?php echo $secao_prazo ?>
+                                      </td>
+                                      <td class="align-middle">
+                                        <?php echo $count_prazo ?>
+                                      </td>
+                                      <td class="align-middle">
+                                        <a data-toggle="popover" data-content="Alterar prazo" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-tools"></i></a>
+                                      </td>
+                                    </tr>
+                                  <?php
+                                  }
+                                  ?> </tbody>
+                              </table>
+                            </div>
+                          </div> <button class="btn btn-danger btn-block"> Prestação de Contas</button>
+                          <br>
                         </div>
                       </div>
                     </div>
@@ -326,10 +332,7 @@ login('TESOU', '../../');
                       Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-accountability" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
-                      <button class="general-btn" href="#" data-toggle="popover" data-content="Encaminhar processo"><img src="../../dist/icons/folder_full-colored.svg"></button>
-                      <button class="general-btn" href="#" data-toggle="popover" data-content="Encaminhar processo"><img src="../../dist/icons/pdf_file-colored.svg"></button>
-                      <button class="general-btn" href="#" data-toggle="popover" data-content="Encaminhar processo"><img src="../../dist/icons/accept_page.svg"></button>
-                      <button class="general-btn" href="#" data-toggle="popover" data-content="Encaminhar processo"><img src="../../dist/icons/calendar-colored.svg"></button>
+                      ABCAJAFKJADSFÇJASDFKDSJÇFAKSDJFASKDJFÇAJD
                     </div>
                   </div>
                 </div>
