@@ -857,11 +857,10 @@ if (isset($_POST['button'])) {
 										<?php
 										$query_consulta_requerente = "SELECT * FROM requerentes ORDER BY nome asc";
 										$result_consulta_requerente = mysqli_query($conexao, $query_consulta_requerente);
-										if (count($result_consulta_requerente)) {
-											while ($res_consulta_requerente = mysqli_fetch_array($result_consulta_requerente)) {
+										while ($res_consulta_requerente = mysqli_fetch_array($result_consulta_requerente)) {
 										?>
-												<option value="<?php echo $res_consulta_requerente['id']; ?>"><?php echo $res_consulta_requerente['saram'] . " | " . $res_consulta_requerente['nome']; ?></option>
-										<?php }
+											<option value="<?php echo $res_consulta_requerente['id']; ?>"><?php echo $res_consulta_requerente['saram'] . " | " . $res_consulta_requerente['nome']; ?></option>
+										<?php
 										} ?>
 									</select>
 								</div>
@@ -872,11 +871,10 @@ if (isset($_POST['button'])) {
 										<?php
 										$query_mil = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";
 										$result_mil = mysqli_query($conexao, $query_mil);
-										if (count($result_mil)) {
-											while ($res_mil = mysqli_fetch_array($result_mil)) {
+										while ($res_mil = mysqli_fetch_array($result_mil)) {
 										?>
-												<option value="<?php echo $res_mil['id']; ?>"><?php echo $res_mil['nome']; ?></option>
-										<?php }
+											<option value="<?php echo $res_mil['id']; ?>"><?php echo $res_mil['nome']; ?></option>
+										<?php
 										} ?>
 									</select>
 								</div>
@@ -934,13 +932,12 @@ if (isset($_POST['button'])) {
 										<?php
 										$query_direito = "SELECT * FROM tb_direitoPleiteado_exant WHERE status = 'Aprovado' ORDER BY direito ASC";
 										$result_direito = mysqli_query($conexao, $query_direito);
-										if (count($result_direito)) {
-											while ($res_dir = mysqli_fetch_array($result_direito)) {
-												$id_direito = $res_dir['id'];
-												$direito_direito = $res_dir['direito'];
+										while ($res_dir = mysqli_fetch_array($result_direito)) {
+											$id_direito = $res_dir['id'];
+											$direito_direito = $res_dir['direito'];
 										?>
-												<option value="<?php echo $id_direito ?>"><?php echo $direito_direito ?></option>
-										<?php }
+											<option value="<?php echo $id_direito ?>"><?php echo $direito_direito ?></option>
+										<?php
 										} ?>
 									</select>
 								</div>
@@ -954,13 +951,12 @@ if (isset($_POST['button'])) {
 										<?php
 										$query_secao = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
 										$result_secao = mysqli_query($conexao, $query_secao);
-										if (count($result_secao)) {
-											while ($res_secao = mysqli_fetch_array($result_secao)) {
-												$id_secao = $res_secao['id'];
-												$secao_secao = $res_secao['secao'];
+										while ($res_secao = mysqli_fetch_array($result_secao)) {
+											$id_secao = $res_secao['id'];
+											$secao_secao = $res_secao['secao'];
 										?>
-												<option value="<?php echo $id_secao ?>"><?php echo $secao_secao ?></option>
-										<?php }
+											<option value="<?php echo $id_secao ?>"><?php echo $secao_secao ?></option>
+										<?php
 										} ?>
 									</select>
 								</div>
@@ -1085,13 +1081,12 @@ if (isset($_POST['button'])) {
 										<?php
 										$query_sec = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
 										$result_sec = mysqli_query($conexao, $query_sec);
-										if (count($result_sec)) {
-											while ($res_sec = mysqli_fetch_array($result_sec)) {
-												$id_sec_2 = $res_sec['id'];
-												$secao_sec = $res_sec['secao'];
+										while ($res_sec = mysqli_fetch_array($result_sec)) {
+											$id_sec_2 = $res_sec['id'];
+											$secao_sec = $res_sec['secao'];
 										?>
-												<option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec ?></option>
-										<?php }
+											<option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec ?></option>
+										<?php
 										} ?>
 									</select>
 								</div>
@@ -1113,13 +1108,12 @@ if (isset($_POST['button'])) {
 										<?php
 										$query_est = "SELECT * FROM tb_estado_exant WHERE status = 'Aprovado' ORDER BY estado ASC";
 										$result_est = mysqli_query($conexao, $query_est);
-										if (count($result_est)) {
-											while ($res_est = mysqli_fetch_array($result_est)) {
-												$id_est_2 = $res_est['id'];
-												$estado_est = $res_est['estado'];
+										while ($res_est = mysqli_fetch_array($result_est)) {
+											$id_est_2 = $res_est['id'];
+											$estado_est = $res_est['estado'];
 										?>
-												<option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
-										<?php }
+											<option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
+										<?php
 										} ?>
 									</select>
 								</div>
