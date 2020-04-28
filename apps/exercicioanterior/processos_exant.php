@@ -11,6 +11,8 @@ login('EXANT', '../../');
 
 <head>
 	<?php head('../../') ?>
+	<!-- DataTables -->
+	<link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -282,7 +284,7 @@ login('EXANT', '../../');
 											</button>
 										</div>
 									</div>
-									<div class="table-responsive" style="text-align: center; font-size: 13px;">
+									<div class="table-responsive" style="text-align: center; font-size: 12px;">
 
 										<!-------------LISTAR TODOS OS PROCESSOS-------------->
 
@@ -307,9 +309,11 @@ login('EXANT', '../../');
 										$result = mysqli_query($conexao, $query);
 										$row = mysqli_num_rows($result);
 
+
+
 										?>
 
-										<table class="table table-sm table-bordered table-striped">
+										<table class="table table-sm table-bordered table-striped" id="example1" style="width:100%">
 											<thead class="text-primary">
 												<th class="align-middle">#</th>
 												<th class="align-middle">SARAM</th>
@@ -344,14 +348,19 @@ login('EXANT', '../../');
 													$estado = $res_1["est_estado"];
 													$secao_atual = $res_1['sec_atual'];
 
+													$query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$secao_atual'";
+													$result_prazo = mysqli_query($conexao, $query_prazo);
+													$res_prazo = mysqli_fetch_array($result_prazo);
+													$prazo_secao = $res_prazo['prazo_exant'];
+
 													if ($data_saida != "") {
-														$prazo_pessoal = date('Y-m-d', strtotime('+15 days', strtotime($res_1["data_saida"])));
+														$prazo_pessoal = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
 													} else {
-														$prazo_pessoal = date('Y-m-d', strtotime('+15 days', strtotime($res_1["data_criacao"])));
+														$prazo_pessoal = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_criacao"])));
 													}
-													$prazo_pagpes = date('Y-m-d', strtotime('+25 days', strtotime($res_1["data_saida"])));
-													$prazo_controle = date('Y-m-d', strtotime('+35 days', strtotime($res_1["data_saida"])));
-													$prazo_sdpp = date('Y-m-d', strtotime('+150 days', strtotime($res_1["data_saida"])));
+													$prazo_pagpes = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
+													$prazo_controle = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
+													$prazo_sdpp = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
 													$today = date('Y-m-d');
 
 												?>
@@ -437,6 +446,16 @@ login('EXANT', '../../');
 										}
 										?>
 									</div>
+								</div>
+								<div class="card-footer clearfix" style="font-size: 12px;">
+									Prazo de cada seção:
+									<?php
+									$query_prazo2 = "SELECT * FROM tb_secoes_exant";
+									$result_prazo2 = mysqli_query($conexao, $query_prazo2);
+									while ($res_prazo2 = mysqli_fetch_array($result_prazo2)) {
+										echo $res_prazo2['secao'] . ': ' . $res_prazo2['prazo_exant'] . ' dias' . ' / ';
+									}
+									?>
 								</div>
 							</div>
 						</div>
@@ -632,6 +651,31 @@ login('EXANT', '../../');
 	<script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
 	<!--IonIcon-->
 	<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+	<script type="text/javascript" charset="utf8" src="../../plugins/datatables/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf8" src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$("#example1").DataTable();
+			$('#example2').DataTable({
+				"language": {
+					"select": {
+						"rows": {
+							"_": "Selecionado %d linhas",
+							"0": "Nenhuma linha selecionada",
+							"1": "Selecionado 1 linha"
+						}
+					}
+				},
+				"paging": true,
+				"lengthChange": false,
+				"searching": false,
+				"ordering": true,
+				"info": true,
+				"autoWidth": false,
+			});
+		});
+	</script>
 	<script>
 		$(document).ready(function() {
 			$('#txtcpf').mask('000.000.000-00', {
@@ -1195,7 +1239,7 @@ if (isset($_POST['button'])) {
 					<form method="POST" action="">
 						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
 							<?php
-							$query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY h.data_novo";
+							$query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_id_anterior, s.secao as s_anterior, s.prazo_exant as prazo_secao_exant, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY h.data_novo";
 							$result_h = mysqli_query($conexao, $query_h);
 							$row_h = mysqli_num_rows($result_h);
 							?>
@@ -1204,7 +1248,8 @@ if (isset($_POST['button'])) {
 									<tr>
 										<th class="align-middle">Movimento</th>
 										<th class="align-middle">Observação</th>
-										<th class="align-middle">Prazo</th>
+										<th class="align-middle">Dt. Prazo</th>
+										<th class="align-middle">Dt. Movimento</th>
 										<th class="align-middle">Meta</th>
 									</tr>
 								</thead>
@@ -1221,23 +1266,26 @@ if (isset($_POST['button'])) {
 										$new_secao = $res_h["sec_novo"];
 										$obs_exant = $res_h["obs_exant"];
 
-										//$data_criacao_cons = $res_h["data_criacao"];
 
-										$prazo_pessoal_cons = date('Y-m-d', strtotime('+15 days', strtotime($data_anterior = $res_h["data_anterior"])));
-										$prazo_pagpes_cons = date('Y-m-d', strtotime('+10 days', strtotime($data_anterior = $res_h["data_anterior"])));
-										$prazo_controle_cons = date('Y-m-d', strtotime('+10 days', strtotime($data_anterior = $res_h["data_anterior"])));
-										$prazo_sdpp_cons = date('Y-m-d', strtotime('+120 days', strtotime($data_anterior = $res_h["data_anterior"])));
+										$query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$secao_atual'";
+										$result_prazo = mysqli_query($conexao, $query_prazo);
+										$res_prazo = mysqli_fetch_array($result_prazo);
+										$prazo_secao = $res_prazo['prazo_exant'];
+
+										$prazo_pessoal_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
+										$prazo_pagpes_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
+										$prazo_controle_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
+										$prazo_sdpp_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
 										$today_cons = date('Y-m-d');
 									?>
 										<tr>
 											<td class="align-middle" style="width: 12.1%;">
-												<b><?php echo data($data_novo) . '<br>'; ?></b>
 												<?php
 												if ($old_secao == "") {
 													echo 'Criado na: ' . '<br>';
 													echo '<b>' . $new_secao . '</b>';
 												} else {
-													echo 'De: ' . '<b>' . $old_secao . '</b><br>';
+													echo 'De:   ' . '<b>' . $old_secao . '</b><br>';
 													echo 'Para: ' . '<b>' . $new_secao . '</b>';
 												} ?>
 											</td>
@@ -1263,8 +1311,11 @@ if (isset($_POST['button'])) {
 												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_sdpp_cons) . '</td>';
 											} else {
 												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
-											}
-
+											} ?>
+											<td class="align-middle" style="text-align: center;">
+												<?php echo data($data_novo) ?>
+											</td>
+											<?php
 											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
 													echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';

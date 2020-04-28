@@ -50,17 +50,20 @@ $situacao = $res_1["situacao"];
 
 <body>
   <!-- Main content -->
-  <div class="wrapper">
+  <div class="wrapper" id="tudo">
     <div class="cabecalho">
       <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8" style="padding-left: 25px; margin-top:20px;">
+          <div style="text-align: center; ">
+            <img src="../../../dist/icons/brasao-do-brasil-republica.png" style="width:125px; height: 125px;">
+          </div>
           <h4>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></strong></h4>
           <h4>Processo nº: <strong><?php echo $nup ?></strong></h4>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" id="mytable">
       <div class="col-sm-2"></div>
       <div class="table-responsive col-sm-8" style="border-radius: 3px; margin: 20px; width: 95%;">
         <?php
@@ -182,8 +185,9 @@ $situacao = $res_1["situacao"];
   <div class="row no-print">
     <div class="col-12" id="print_button">
       <a class="print-btn2" href="#" onclick="js:window.print();"><img src="../../../dist/icons/printer-colored.svg"></a>
-      <a class="print-btn2" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener"><img src="../../../dist/icons/pdf_file-colored.svg"></a>
-      <!--<a class="print-btn" href="#" onclick="js:window.print();"><i class="fas fa-print"></i></a>
+      <a class="print-btn2" id="exportpdf" type="button" onclick="js:genPDF()"><img src="../../../dist/icons/pdf_file-colored.svg"></a>
+      <!--<a class="print-btn2" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener"><img src="../../../dist/icons/pdf_file-colored.svg"></a>
+      <a class="print-btn" href="#" onclick="js:window.print();"><i class="fas fa-print"></i></a>
       <a class="print-btn" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener">
         <i class="fas fa-file-pdf"></i>
       </a>-->
@@ -191,5 +195,22 @@ $situacao = $res_1["situacao"];
   </div>
 </body>
 <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+<!-- jsPDF -->
+<script src="../../../plugins/jspdf/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<script type="text/javascript">
+  function genPDF() {
+    html2canvas(document.getElementById('tudo'), {
+      onrendered: function(canvas) {
+        var img = canvas.toDataURL("image/png");
+        var doc = new jsPDF();
+        doc.addImage(img, 'PNG', 20, 20);
+        doc.save("mypdf.pdf");
+      }
+    });
+
+  };
+</script>
 
 </html>
