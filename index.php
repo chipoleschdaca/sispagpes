@@ -45,8 +45,7 @@ include('dist/php/functions.php');
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
         <?php
-        if (isset($_SESSION['nao_autenticado'])) {
-          //AlertaConsulta('error', 'ERRO', 'CPF ou SENHA inválidos');        
+        if (isset($_SESSION['nao_autenticado'])) {               
           Toast('error', 'CPF ou SENHA inválidos!');
         }
         unset($_SESSION['nao_autenticado']);
