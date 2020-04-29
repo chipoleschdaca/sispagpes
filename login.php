@@ -18,22 +18,28 @@ if ($row > 0) {
 	$_SESSION['usuario'] = $usuario;
 	$_SESSION['nome_usuario'] = $dado['nome'];
 	$_SESSION['perfil_usuario'] = $dado['perfil'];
+	$_SESSION['status'] = $dado['status'];
 
-	if ($_SESSION['perfil_usuario'] == 'TESOU') {
-		header('Location: apps/tesoureiro/painel_tesouraria.php');
+	if ($_SESSION['status'] == 'Aprovado'){
+
+		if ($_SESSION['perfil_usuario'] == 'TESOU') {
+			header('Location: apps/tesoureiro/painel_tesouraria.php');
+			exit();
+		}
+
+		if ($_SESSION['perfil_usuario'] == 'ADMIN') {
+			header('Location: apps/admin/painel_admin.php');
+			exit();
+		}
+
+		if ($_SESSION['perfil_usuario'] == 'EXANT') {
+			header('Location: apps/exercicioanterior/painel_exant.php');
+			exit();
+		}
+	} elseif ($_SESSION['status'] != 'Aprovado') {		
+		header('Location: index.php');
 		exit();
 	}
-
-	if ($_SESSION['perfil_usuario'] == 'ADMIN' || $_SESSION['perfil_usuario'] == 'Gerente') {
-		header('Location: apps/admin/painel_admin.php');
-		exit();
-	}
-
-	if ($_SESSION['perfil_usuario'] == 'EXANT') {
-		header('Location: apps/exercicioanterior/painel_exant.php');
-		exit();
-	}
-
 	exit();
 } else {
 	$_SESSION['nao_autenticado'] = true;
