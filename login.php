@@ -9,7 +9,7 @@ if (empty($_POST['usuario']) || empty($_POST['senha'])) {
 
 $usuario = mysqli_real_escape_string($conexao, $_POST['usuario']);
 $senha = mysqli_real_escape_string($conexao, md5($_POST['senha']));
-$query = "SELECT * FROM militares WHERE cpf = '{$usuario}' AND senha = '{$senha}'";
+$query = "SELECT * FROM militares WHERE cpf = '{$usuario}' AND senha = '{$senha}' AND status = 'Aprovado'";
 $result = mysqli_query($conexao, $query);
 $dado = mysqli_fetch_array($result);
 $row = mysqli_num_rows($result);
