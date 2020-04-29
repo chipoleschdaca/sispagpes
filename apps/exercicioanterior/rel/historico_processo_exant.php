@@ -40,7 +40,7 @@ $situacao = $res_1["situacao"];
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="../../../dist/css/style_print_button.css">
+  <link rel="stylesheet" href="../../../dist/css/html_print.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Material Design-->
@@ -48,22 +48,31 @@ $situacao = $res_1["situacao"];
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
+<style>
+  body {
+    font-size: 12px;
+  }
+</style>
+
 <body>
   <!-- Main content -->
-  <div class="wrapper" id="tudo">
+  <div class="wrapper" id="geraPDF">
     <div class="cabecalho">
       <div class="row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-8" style="padding-left: 25px; margin-top:20px;">
-          <div style="text-align: center; ">
-            <img src="../../../dist/icons/brasao-do-brasil-republica.png" style="width:125px; height: 125px;">
+        <div class="col-sm-8" style="padding-left: 25px;">
+          <div style="text-align: center; margin-bottom:20px">
+            <img src="../../../dist/icons/brasao-do-brasil-republica.png" style="width:70px; height: 70px; margin:10px;"><br>
+            <h5><b>MINISTÉRIO DA DEFESA</b></h5>
+            <h5 style="text-decoration: underline">COMANDO DA AERONÁUTICA</h5>
+            <h5>GRUPAMENTO DE APOIO DE LAGOA SANTA</h5>
           </div>
-          <h4>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></strong></h4>
-          <h4>Processo nº: <strong><?php echo $nup ?></strong></h4>
+          <h6>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></strong></h6>
+          <h6>Processo nº: <strong><?php echo $nup ?></strong></h6>
         </div>
       </div>
     </div>
-    <div class="row" id="mytable">
+    <div class=" row">
       <div class="col-sm-2"></div>
       <div class="table-responsive col-sm-8" style="border-radius: 3px; margin: 20px; width: 95%;">
         <?php
@@ -71,7 +80,7 @@ $situacao = $res_1["situacao"];
         $result2 = mysqli_query($conexao, $query2);
         $row2 = mysqli_num_rows($result2);
         ?>
-        <table class="table table-sm table-bordered table-striped">
+        <table class="table table-sm table-bordered table-striped" id="mytable">
           <thead class="text-primary" style="text-align: center;">
             <th class="align-middle">MOVIMENTO</th>
             <th class="align-middle">OBSERVAÇÃO</th>
@@ -91,14 +100,19 @@ $situacao = $res_1["situacao"];
               $new_secao = $res_2["sec_novo"];
               $obs_exant = $res_2["obs_exant"];
 
-              $prazo_pessoal_cons = date('Y-m-d', strtotime('+15 days', strtotime($data_anterior = $res_2["data_anterior"])));
-              $prazo_pagpes_cons = date('Y-m-d', strtotime('+10 days', strtotime($data_anterior = $res_2["data_anterior"])));
-              $prazo_controle_cons = date('Y-m-d', strtotime('+10 days', strtotime($data_anterior = $res_2["data_anterior"])));
-              $prazo_sdpp_cons = date('Y-m-d', strtotime('+120 days', strtotime($data_anterior = $res_2["data_anterior"])));
+              $query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$new_secao'";
+              $result_prazo = mysqli_query($conexao, $query_prazo);
+              $res_prazo = mysqli_fetch_array($result_prazo);
+              $prazo_secao = $res_prazo['prazo_exant'];
+
+              $prazo_pessoal_cons = date('Y-m-d', strtotime('+' . $prazo_secao . 'days', strtotime($res_2["data_anterior"])));
+              $prazo_pagpes_cons = date('Y-m-d', strtotime('+' . $prazo_secao . 'days', strtotime($res_2["data_anterior"])));
+              $prazo_controle_cons = date('Y-m-d', strtotime('+' . $prazo_secao . 'days', strtotime($res_2["data_anterior"])));
+              $prazo_sdpp_cons = date('Y-m-d', strtotime('+' . $prazo_secao . 'days', strtotime($res_2["data_anterior"])));
               $today_cons = date('Y-m-d');
             ?>
               <tr>
-                <td class="align-middle" style="width: 4.7%;">
+                <td class="align-middle">
                   <b><?php echo data($data_novo) . '<br>'; ?></b>
                   <?php
                   if ($old_secao == "") {
@@ -122,15 +136,15 @@ $situacao = $res_1["situacao"];
                 </td>
                 <?php
                 if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
-                  echo '<td class="align-middle" style="text-align:center; width: 5%;">' . data($prazo_pessoal_cons) . '</td>';
+                  echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
                 } elseif ($old_secao == 'DP-3') {
-                  echo '<td class="align-middle" style="text-align:center; width: 5%;">' . data($prazo_pagpes_cons) . '</td>';
+                  echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pagpes_cons) . '</td>';
                 } elseif ($old_secao == 'ACI-1') {
-                  echo '<td class="align-middle" style="text-align:center; width: 5%;">' . data($prazo_controle_cons) . '</td>';
+                  echo '<td class="align-middle" style="text-align:center;">' . data($prazo_controle_cons) . '</td>';
                 } elseif ($old_secao == 'SDPP') {
-                  echo '<td class="align-middle" style="text-align:center; width: 5%;">' . data($prazo_sdpp_cons) . '</td>';
+                  echo '<td class="align-middle" style="text-align:center;">' . data($prazo_sdpp_cons) . '</td>';
                 } else {
-                  echo '<td class="align-middle" style="text-align:center; width: 5%;">' . data($prazo_pessoal_cons) . '</td>';
+                  echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
                 }
 
                 if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
@@ -182,10 +196,11 @@ $situacao = $res_1["situacao"];
       </div>
     </div>
   </div>
+  <div id="editor"></div>
   <div class="row no-print">
     <div class="col-12" id="print_button">
-      <a class="print-btn2" href="#" onclick="js:window.print();"><img src="../../../dist/icons/printer-colored.svg"></a>
-      <a class="print-btn2" id="exportpdf" type="button" onclick="js:genPDF()"><img src="../../../dist/icons/pdf_file-colored.svg"></a>
+      <button class="print-btn2" onclick="js:window.print();"><img src="../../../dist/icons/printer-colored.svg"></button>
+      <button class="print-btn2" id="exportpdf" type="button"><img src="../../../dist/icons/pdf_file-colored.svg"></button>
       <!--<a class="print-btn2" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener"><img src="../../../dist/icons/pdf_file-colored.svg"></a>
       <a class="print-btn" href="#" onclick="js:window.print();"><i class="fas fa-print"></i></a>
       <a class="print-btn" type="button" href="historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener">
@@ -195,22 +210,39 @@ $situacao = $res_1["situacao"];
   </div>
 </body>
 <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+<!-- jQuery -->
+<script src="../../../plugins/jquery/jquery.min.js"></script>
 <!-- jsPDF -->
 <script src="../../../plugins/jspdf/jspdf.min.js"></script>
+<script src="../../../plugins/jspdf/jspdf.plugin.autotable.js"></script>
+<script src="../../../plugins/jspdf/tableHTMLExport.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
 <script type="text/javascript">
-  function genPDF() {
-    html2canvas(document.getElementById('tudo'), {
-      onrendered: function(canvas) {
-        var img = canvas.toDataURL("image/png");
-        var doc = new jsPDF();
-        doc.addImage(img, 'PNG', 20, 20);
-        doc.save("mypdf.pdf");
-      }
+  $(document).ready(function() {
+    $('#exportpdf').click(function() {
+      savePDF(document.querySelector('#geraPDF'));
     });
+  });
 
-  };
+  function savePDF(codigoHTML) {
+    var doc = new jsPDF('portrait', 'pt', 'a4'),
+      data = new Date();
+    margins = {
+      top: 40,
+      bottom: 40,
+      left: 40,
+      right: 40
+    };
+    doc.fromHTML(codigoHTML,
+      margins.left, // x coord
+      margins.top, {
+        pagesplit: true
+      },
+      function(dispose) {
+        doc.save("Relatorio - " + data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear() + ".pdf");
+      });
+  }
 </script>
 
 </html>

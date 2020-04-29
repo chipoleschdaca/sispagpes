@@ -1,6 +1,7 @@
 <?php
 include('../../../conexao.php');
 include('../../../dist/php/functions.php');
+
 $id = $_GET['id'];
 $id_req = $_GET['id_req'];
 
@@ -104,9 +105,15 @@ $situacao = $res_1["situacao"];
 <body>
   <!-- Main content -->
   <div class="wrapper">
+    <div style="text-align: center; margin-bottom:20px; font-size:10;">
+      <img src="sispagpes/dist/icons/brasao-do-brasil-republica.png" style="width:70px; height: 70px;" /><br>
+      <h6><strong>MINISTÉRIO DA DEFESA</strong></h6>
+      <h6 style="text-decoration: underline">COMANDO DA AERONÁUTICA</h6>
+      <h6>GRUPAMENTO DE APOIO DE LAGOA SANTA</h6>
+    </div>
     <div class="cabecalho">
-      <h4>Requerente: <span id="cab"><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></span></h4>
-      <h4>Processo nº: <span id="cab"><?php echo $nup ?></span></h4>
+      <h6>Requerente: <b id="cab"><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></b></h6>
+      <h6>Processo nº: <b id="cab"><?php echo $nup ?></b></h6>
     </div>
     <div class="container">
       <div class="row">
