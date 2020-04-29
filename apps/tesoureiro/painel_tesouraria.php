@@ -68,7 +68,7 @@ login('TESOU', '../../');
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview">
+            <!--<li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="fas fa-folder-open nav-icon"></i>
                 <p>Exercício Anterior</p>
@@ -90,7 +90,7 @@ login('TESOU', '../../');
                   </a>
                 </li>
               </ul>
-            </li>
+            </li>-->
           </ul>
         </nav>
       </div>
@@ -317,7 +317,7 @@ login('TESOU', '../../');
                                   ?> </tbody>
                               </table>
                             </div>
-                          </div> <button class="btn btn-danger btn-block"> Prestação de Contas</button>
+                          </div>
                           <br>
                         </div>
                       </div>
@@ -332,7 +332,7 @@ login('TESOU', '../../');
                       Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-accountability" role="tabpanel" aria-labelledby="custom-tabs-three-settings-tab">
-                      ABCAJAFKJADSFÇJASDFKDSJÇFAKSDJFASKDJFÇAJD
+                      Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
                     </div>
                   </div>
                 </div>
