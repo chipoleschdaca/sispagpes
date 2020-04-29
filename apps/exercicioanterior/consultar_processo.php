@@ -20,7 +20,7 @@ include '../../dist/php/functions.php';
     background-position-x: 50%;
   }
 
-  img {
+  #backgroundimage {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -41,8 +41,13 @@ include '../../dist/php/functions.php';
     margin: 0px;
   }
 
-  .form-control {
-    border-radius: 0;
+  #txtsaram {
+    background-color: transparent;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 4rem;
   }
 
   .table-responsive {
@@ -53,6 +58,31 @@ include '../../dist/php/functions.php';
     top: 9%;
     transform: translate(-50%, -9%);
   }
+
+  .general-btn2 {
+    background-color: transparent;
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 0px solid #d6d8db;
+    box-shadow: 5px 5px -5px -5px #00000070;
+  }
+
+  .general-btn2 img {
+    vertical-align: middle;
+    width: 4rem;
+    height: 4rem;
+    margin: 0;
+  }
+
+  .general-btn2:hover img {
+    transform: scale(1.3);
+  }
 </style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -60,21 +90,16 @@ include '../../dist/php/functions.php';
     <div class="container-fluid">
       <br>
       <div>
-        <img src="../../dist/img/gapls1.png" />
+        <img id="backgroundimage" src="../../dist/img/gapls1.png" />
       </div>
       <div class="row2">
         <form class="form-inline">
-          <div class="row">
-            <label for="txtsaram" style="margin-right: 10px;">
-              <h4><b>SARAM:</b></h4>
-            </label>
-          </div>
-          <div class="input-group input-group-lg" style="margin-right:10px;">
-            <input type="search" class="form-control form-control-lg" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM..." style="margin-right: 10px;" autocomplete="off">
-
-            <button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar"><i class="fas fa-search"></i></button>
-          </div>
-          <a type="button" class="btn btn-outline-dark btn-lg" href="consultar_processo.php" id="novapesquisa" name="button" style="text-transform: capitalize;"><i class="fas fa-redo-alt"></i></a>
+          <label for="txtsaram" style="margin-right: 10px;">
+            <h4><b>SARAM:</b></h4>
+          </label>
+          <input type="search" class="form-control form-control-lg" id="txtsaram" name="txtsaram" placeholder="Digite o seu SARAM..." autocomplete="off">
+          <button class="general-btn2" type="submit" name="buttonPesquisar"><img src="../../dist/icons/search-colored.svg"></button>
+          <button class="general-btn2" type="button" onclick="window.location.href='consultar_processo.php';" id="novapesquisa" name="button"><img src="../../dist/icons/delete-colored.svg"></button>
         </form>
       </div>
       <?php
