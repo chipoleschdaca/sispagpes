@@ -314,7 +314,7 @@ login('ADMIN', '../../');
                             <!-------------------------------------------------->
 
                             <table class="table table-sm table-bordered table-striped">
-                              <thead class="text-primary" style="text-align: center; width: 800px; height: 500px; overflow: auto;">
+                              <thead class="text-primary" style="text-align: center; overflow: auto;">
                                 <th class="align-middle" style="width: 4%;">#</th>
                                 <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
                                 <th class="align-middle">Status</th>
@@ -637,7 +637,7 @@ login('ADMIN', '../../');
                             ?>
                             <!-------------------------------------------------->
                             <table class="table table-sm table-bordered table-striped">
-                              <thead class="text-primary" style="text-align: center; width: 800px; height: 500px; overflow: auto;">
+                              <thead class="text-primary" style="text-align: center; overflow: auto;">
                                 <th class="align-middle" style="width: 4%;">#</th>
                                 <th class="align-middle" style="width: 65%;">Nome do Status</th>
                                 <th class="align-middle">Status</th>
