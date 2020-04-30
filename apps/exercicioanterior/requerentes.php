@@ -174,56 +174,56 @@ login('EXANT', '../../');
             </div>
             <!-- /.col -->
           </div>
-          <th>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header" style="text-align: center;">
-                    <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="row" style="margin-bottom: 20px;">
-                      <div class="col-sm-4">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-                          <i class="fas fa-user-plus"></i> Inserir Novo
-                        </button>
-                      </div>
-                      <div class="col-sm-6">
-                        <!-- SEARCH FORM -->
-                        <form class="form-inline">
-                          <label for="">Filtros: </label>
-                          <div class="input-group input-group-sm" style="margin-left: 10px; border-radius: 15px;">
-                            <input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-                            <input class="form-control" type="search" id="txtcpf3" name="txtcpf3" placeholder="CPF" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-                            <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 5px;">
-                            <div class="input-group-append">
-                              <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
-                                <i class="fas fa-search"></i>
-                              </button>
-                            </div>
+          <div>
+            <button type="button" class="general-btn" data-toggle="modal" data-target="#modalExemplo" data-tt="tooltip" title="Inserir Requerente" style="background-color: white;">
+              <img src="../../dist/icons/add_business_user.svg" />
+            </button>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header" style="text-align: center;">
+                  <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
+                </div>
+                <div class="card-body">
+                  <div class="row" style="margin-bottom: 20px;">
+                    <div class="col-sm-6">
+                      <!-- SEARCH FORM -->
+                      <form class="form-inline">
+                        <label for="">Filtros: </label>
+                        <div class="input-group input-group-sm" style="margin-left: 10px; border-radius: 15px;">
+                          <input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
+                          <input class="form-control" type="search" id="txtcpf3" name="txtcpf3" placeholder="CPF" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
+                          <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 5px;">
+                          <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
+                              <i class="fas fa-search"></i>
+                            </button>
                           </div>
-                        </form>
-                      </div>
+                        </div>
+                      </form>
                     </div>
-                    <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                      <!-------------LISTAR TODOS OS PROCESSOS-------------->
-                      <?php
-                      if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
-                        $nome = '%' . $_GET['txtsaram3'] . '%';
-                        $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE saram LIKE '$nome' order by nome asc";
-                      } else if (isset($_GET['buttonPesquisar']) and $_GET['txtcpf3'] != '') {
-                        $nome = '%' . $_GET['txtcpf3'] . '%';
-                        $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE cpf LIKE '$nome' order by nome asc";
-                      } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                        $nome = '%' . $_GET['txtpesquisar'] . '%';
-                        $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
-                      } else {
-                        $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
-                      }
-                      $result = mysqli_query($conexao, $query);
-                      $row = mysqli_num_rows($result);
-                      ?>
-                      <table class="table table-sm table-bordered table-striped">
+                  </div>
+                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                    <!-------------LISTAR TODOS OS PROCESSOS-------------->
+                    <?php
+                    if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
+                      $nome = '%' . $_GET['txtsaram3'] . '%';
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE saram LIKE '$nome' order by nome asc";
+                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtcpf3'] != '') {
+                      $nome = '%' . $_GET['txtcpf3'] . '%';
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE cpf LIKE '$nome' order by nome asc";
+                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
+                      $nome = '%' . $_GET['txtpesquisar'] . '%';
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
+                    } else {
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
+                    }
+                    $result = mysqli_query($conexao, $query);
+                    $row = mysqli_num_rows($result);
+                    if ($row > 0) {
+                    ?>
+                      <table class="table table-sm table-borderless table-striped">
                         <thead class="text-primary">
                           <th class="align-middle">#</th>
                           <th class="align-middle">Saram</th>
@@ -258,24 +258,23 @@ login('EXANT', '../../');
                               <td class="align-middle"><?php echo $email; ?></td>
                               <td class="align-middle"><?php echo $data2; ?></td>
                               <td class="align-middle">
-                                <a class="btn btn-dark btn-sm" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-sm" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-sm" data-toggle="popover" data-content="Excluir" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
+                                <a class="btn btn-danger btn-xs" data-toggle="popover" data-content="Excluir" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                               </td>
                             </tr>
                           <?php } ?>
                         </tbody>
                       </table>
-                      <?php
-                      if ($row == '') {
-                        echo "<h3>Não existem dados para consulta</h3>";
-                      } ?>
-                    </div>
+                    <?php
+                    } elseif ($row == 0) {
+                      echo "<h5>Não existem dados para consulta</h5>";
+                    } ?>
                   </div>
                 </div>
               </div>
             </div>
-          </th>
+          </div>
         </div>
       </section>
       <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
@@ -404,6 +403,11 @@ login('EXANT', '../../');
     $('[data-toggle="popover"]').popover({
       placement: 'auto',
       trigger: 'hover'
+    });
+  </script>
+  <script>
+    $("[data-tt=tooltip]").tooltip({
+      placement: 'auto'
     });
   </script>
 
@@ -677,44 +681,46 @@ if (isset($_POST['button'])) {
               <?php
               $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.requerente = '$id' ORDER BY e.id asc";
               $result = mysqli_query($conexao, $query);
+              $row = mysqli_num_rows($result);
+              if ($row > 0) {
               ?>
-              <table class="table table-sm table-bordered table-striped">
-                <thead class="text-primary">
-                  <th class="align-middle">#</th>
-                  <th class="align-middle">Protocolo (NUP)</th>
-                  <th class="align-middle">Dt. Abertura</th>
-                  <th class="align-middle">Direito Pleiteado</th>
-                  <th class="align-middle">Seção de Origem</th>
-                  <th class="align-middle">Estado do Processo</th>
-                  <th class="align-middle">Seção Atual</th>
-                </thead>
-                <tbody>
-                  <?php
-                  while ($res_1 = mysqli_fetch_array($result)) {
-                    $id = $res_1['id'];
-                    $nup = $res_1["nup"];
-                    $data_criacao = $res_1["data_criacao"];
-                    $direito_pleiteado = $res_1["dir_direito"];
-                    $secao_origem = $res_1["sec_origem"];
-                    $estado = $res_1["est_estado"];
-                    $secao_atual = $res_1['sec_atual'];
-                  ?>
-                    <tr>
-                      <td class="align-middle"><?php echo $id; ?></td>
-                      <td class="align-middle"><?php echo $nup; ?></td>
-                      <td class="align-middle"><?php echo data($data_criacao); ?></td>
-                      <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
-                      <td class="align-middle"><?php echo $secao_origem; ?></td>
-                      <td class="align-middle"><?php echo $estado; ?></td>
-                      <td class="align-middle"><?php echo $secao_atual; ?></td>
-                      <!--<td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>-->
-                    </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+                <table class="table table-sm table-borderless table-striped">
+                  <thead class="text-primary">
+                    <th class="align-middle">#</th>
+                    <th class="align-middle">Protocolo (NUP)</th>
+                    <th class="align-middle">Dt. Abertura</th>
+                    <th class="align-middle">Direito Pleiteado</th>
+                    <th class="align-middle">Seção de Origem</th>
+                    <th class="align-middle">Estado do Processo</th>
+                    <th class="align-middle">Seção Atual</th>
+                  </thead>
+                  <tbody>
+                    <?php
+                    while ($res_1 = mysqli_fetch_array($result)) {
+                      $id = $res_1['id'];
+                      $nup = $res_1["nup"];
+                      $data_criacao = $res_1["data_criacao"];
+                      $direito_pleiteado = $res_1["dir_direito"];
+                      $secao_origem = $res_1["sec_origem"];
+                      $estado = $res_1["est_estado"];
+                      $secao_atual = $res_1['sec_atual'];
+                    ?>
+                      <tr>
+                        <td class="align-middle"><?php echo $id; ?></td>
+                        <td class="align-middle"><?php echo $nup; ?></td>
+                        <td class="align-middle"><?php echo data($data_criacao); ?></td>
+                        <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
+                        <td class="align-middle"><?php echo $secao_origem; ?></td>
+                        <td class="align-middle"><?php echo $estado; ?></td>
+                        <td class="align-middle"><?php echo $secao_atual; ?></td>
+                        <!--<td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>-->
+                      </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
               <?php
-              if ($row == '') {
-                echo "<h3>Não existem dados cadastrados no banco</h3>";
+              } elseif ($row == 0) {
+                echo "<h5>Não existem dados cadastrados no banco</h5>";
               } ?>
             </div>
             <form method="POST" action="">

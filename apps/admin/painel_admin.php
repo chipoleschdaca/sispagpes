@@ -48,7 +48,7 @@ login('ADMIN', '../../');
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <ul class="navbar-nav ml-left" style="margin-left:8px;">
-        <a class="btn btn-danger" type="button" href="../../backup.php" data-toggle="popover" data-content="Backup do Banco de Dados" onclick="return confirm('Deseja mesmo fazer o backup do Banco de Dados?');"><i class="fas fa-database"></i> Backup</a>
+
       </ul>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
@@ -240,7 +240,14 @@ login('ADMIN', '../../');
             </div>
             <!-- ./col -->
           </div>
-        </div><!-- /.container-fluid -->
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="general-btn" data-tt="tooltip" title="Backup do Bando de Dados" onclick="window.location.href='../../backup.php'" style="background-color: white;">
+                <img src="../../dist/icons/download_database.svg" />
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
       <!-- /.content -->
     </div>
@@ -296,6 +303,11 @@ login('ADMIN', '../../');
     $('[data-toggle="popover"]').popover({
       placement: 'auto',
       trigger: 'hover'
+    });
+  </script>
+  <script>
+    $("[data-tt=tooltip]").tooltip({
+      placement: 'auto'
     });
   </script>
   <script>

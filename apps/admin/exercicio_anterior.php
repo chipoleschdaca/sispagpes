@@ -444,7 +444,7 @@ login('ADMIN', '../../');
                         }
                         ?>
                         <div class="col-4">
-                          <button class="general-btn" href="#" data-toggle="modal" data-target="#modalDireito"><img src="../../dist/icons/add-folder-colored.svg">Adicionar Direito</button>
+                          <button class="general-btn" href="#" data-toggle="modal" data-target="#modalDireito" data-tt="tooltip" title="Adicionar Direito"><img src="../../dist/icons/add-folder-colored.svg"></button>
                           <h3 style="text-align: center">Direitos Excluídos</h3>
                           <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
@@ -766,7 +766,7 @@ login('ADMIN', '../../');
 
                         ?>
                         <div class="col-4">
-                          <button type="button" class="general-btn" href="#" data-toggle="modal" data-target="#modalEstado"><img src="../../dist/icons/add-folder-colored.svg">Adicionar Estado</button>
+                          <button type="button" class="general-btn" href="#" data-toggle="modal" data-target="#modalEstado" data-tt="tooltip" title="Adicionar Estado"><img src="../../dist/icons/add-folder-colored.svg"></button>
                           <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
                             <!----------------------LISTAR TODOS OS ESTADOS EXCLUÍDOS-------------------------->
@@ -932,6 +932,11 @@ login('ADMIN', '../../');
   <script src="../../dist/js/pages/dashboard.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
+  <script>
+    $("[data-tt=tooltip]").tooltip({
+      placement: 'auto'
+    });
+  </script>
 </body>
 
 </html>

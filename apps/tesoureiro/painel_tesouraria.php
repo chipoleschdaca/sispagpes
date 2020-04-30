@@ -68,29 +68,6 @@ login('TESOU', '../../');
                 </p>
               </a>
             </li>
-            <!--<li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="fas fa-folder-open nav-icon"></i>
-                <p>Exercício Anterior</p>
-                <i class="right fas fa-angle-left"></i>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="requerentes.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>
-                      Requerentes
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="processos_exant.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>Processos</p>
-                  </a>
-                </li>
-              </ul>
-            </li>-->
           </ul>
         </nav>
       </div>
@@ -244,81 +221,74 @@ login('TESOU', '../../');
                           </div>
                         </div>
                         <div class="col-3">
-                          <div class="card card-warning" style="text-align: center">
-                            <div class="card-header">
-                              <h5><strong>Prestação de Contas</strong></h5>
-                            </div>
-                            <div class="card-body">
-                              <table class="table table-sm table-bordered table-striped">
-                                <thead style="text-align: center;">
+                          <blockquote style="margin-top: 0;">
+                            <h3>PRESTAÇÃO DE CONTAS</h3>
+                            <br>
+                            <table class="table table-sm table-borderless table-striped">
+                              <thead style="text-align: center;">
+                                <tr>
+                                  <th class="align-middle">Seção</th>
+                                  <th class="align-middle">Quantidade</th>
+                                </tr>
+                              </thead>
+                              <tbody style="text-align: center;">
+                                <?php
+                                $query_account = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual ORDER BY s.secao ASC";
+                                $result_account = mysqli_query($conexao, $query_account);
+                                while ($res_account = mysqli_fetch_array($result_account)) {
+                                  $id_account = $res_account['id_secao'];
+                                  $secao_account = $res_account['secao_atual'];
+                                  $count_secao2 = $res_account['COUNT(e.secao_atual)']; ?>
                                   <tr>
-                                    <th class="align-middle">Seção</th>
-                                    <th class="align-middle">Quantidade</th>
+                                    <td class="align-middle">
+                                      <?php echo $secao_account ?>
+                                    </td>
+                                    <td class="align-middle">
+                                      <?php echo $count_secao2 ?>
+                                    </td>
                                   </tr>
-                                </thead>
-                                <tbody style="text-align: center;">
-                                  <?php
-                                  $query_account = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual GROUP BY e.secao_atual ORDER BY s.secao ASC";
-                                  $result_account = mysqli_query($conexao, $query_account);
-                                  while ($res_account = mysqli_fetch_array($result_account)) {
-                                    $id_account = $res_account['id_secao'];
-                                    $secao_account = $res_account['secao_atual'];
-                                    $count_secao2 = $res_account['COUNT(e.secao_atual)']; ?>
-                                    <tr>
-                                      <td class="align-middle">
-                                        <?php echo $secao_account ?>
-                                      </td>
-                                      <td class="align-middle">
-                                        <?php echo $count_secao2 ?>
-                                      </td>
-                                    </tr>
-                                  <?php
-                                  }
-                                  ?>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                          <br>
-                          <div class="card card-warning" style="text-align: center">
-                            <div class="card-header">
-                              <h5><strong>Prestação de Contas</strong></h5>
-                            </div>
-                            <div class="card-body">
-                              <table class="table table-sm table-bordered table-striped">
-                                <thead style="text-align: center;">
+                                <?php
+                                }
+                                ?>
+                              </tbody>
+                            </table>
+                          </blockquote>
+                          <blockquote class="quote-danger">
+                            <h3>PRAZO DAS SEÇÕES</h3>
+                            <br>
+                            <table class="table table-sm table-borderless table-striped">
+                              <thead style="text-align: center;">
+                                <tr>
+                                  <th class="align-middle">Seção</th>
+                                  <th class="align-middle">Prazo Ex. Ant. (dias)</th>
+                                  <th class="align-middle">Ações</th>
+                                </tr>
+                              </thead>
+                              <tbody style="text-align: center;">
+                                <?php
+                                $query_prazo = "SELECT id, secao, prazo_exant FROM tb_secoes_exant WHERE status = 'Aprovado' ORDER BY secao ASC";
+                                $result_prazo = mysqli_query($conexao, $query_prazo);
+                                while ($res_prazo = mysqli_fetch_array($result_prazo)) {
+                                  $id_prazo = $res_prazo['id'];
+                                  $secao_prazo = $res_prazo['secao'];
+                                  $count_prazo = $res_prazo['prazo_exant']; ?>
                                   <tr>
-                                    <th class="align-middle">Seção</th>
-                                    <th class="align-middle">Prazo Exercício Anterior (dias)</th>
-                                    <th class="align-middle">Ações</th>
+                                    <td class="align-middle">
+                                      <?php echo $secao_prazo ?>
+                                    </td>
+                                    <td class="align-middle" id="tdprazo">
+                                      <?php echo $count_prazo ?>
+                                    </td>
+                                    <td class="align-middle">
+                                      <a data-toggle="popover" data-content="Alterar prazo" style="width: 24px; height: 24px;" href="#"><i class="fas fa-tools"></i></a>
+                                    </td>
                                   </tr>
-                                </thead>
-                                <tbody style="text-align: center;">
-                                  <?php
-                                  $query_prazo = "SELECT id, secao, prazo_exant FROM tb_secoes_exant WHERE status = 'Aprovado' ORDER BY secao ASC";
-                                  $result_prazo = mysqli_query($conexao, $query_prazo);
-                                  while ($res_prazo = mysqli_fetch_array($result_prazo)) {
-                                    $id_prazo = $res_prazo['id'];
-                                    $secao_prazo = $res_prazo['secao'];
-                                    $count_prazo = $res_prazo['prazo_exant']; ?>
-                                    <tr>
-                                      <td class="align-middle">
-                                        <?php echo $secao_prazo ?>
-                                      </td>
-                                      <td class="align-middle">
-                                        <?php echo $count_prazo ?>
-                                      </td>
-                                      <td class="align-middle">
-                                        <a data-toggle="popover" data-content="Alterar prazo" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-tools"></i></a>
-                                      </td>
-                                    </tr>
-                                  <?php
-                                  }
-                                  ?> </tbody>
-                              </table>
-                            </div>
-                          </div>
-                          <br>
+                                <?php
+                                }
+                                ?>
+                              </tbody>
+                            </table>
+                          </blockquote>
                         </div>
                       </div>
                     </div>

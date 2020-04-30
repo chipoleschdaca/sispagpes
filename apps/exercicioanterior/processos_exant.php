@@ -269,6 +269,11 @@ login('EXANT', '../../');
 							</div>
 						</div>
 					</div>
+					<div>
+						<button type="button" class="general-btn" data-toggle="modal" data-target="#modalExemplo" data-tt="tooltip" title="Inserir Processo" style="background-color: white;">
+							<img src="../../dist/icons/add_to_open_folder.svg" />
+						</button>
+					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
@@ -277,13 +282,6 @@ login('EXANT', '../../');
 									</h4>
 								</div>
 								<div class="card-body">
-									<div class="row" style="margin-bottom: 20px;">
-										<div class="col-sm-6">
-											<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" style="text-transform: capitalize;" data-target="#modalExemplo">
-												<i class="far fa-folder-open"></i> Inserir Novo
-											</button>
-										</div>
-									</div>
 									<div class="table-responsive" style="text-align: center; font-size: 12px;">
 
 										<!-------------LISTAR TODOS OS PROCESSOS-------------->
@@ -309,11 +307,9 @@ login('EXANT', '../../');
 										$result = mysqli_query($conexao, $query);
 										$row = mysqli_num_rows($result);
 
-
-
 										?>
 
-										<table class="table table-sm table-bordered table-striped" id="example1" style="width:100%">
+										<table class="table table-sm table-borderless table-striped" id="example1" style="width:100%">
 											<thead class="text-primary">
 												<th class="align-middle">#</th>
 												<th class="align-middle">SARAM</th>
@@ -373,9 +369,9 @@ login('EXANT', '../../');
 														<td class="align-middle">
 															<?php
 															if ($prioridade == 'SIM') {
-																echo '<i class="fas fa-check-square"></i>';
+																echo '<img src="../../dist/icons/accept-colored.svg" style="height: 20px; width:20px;"/>';
 															} else if ($prioridade == 'NÃO') {
-																echo '<i class="far fa-square"></i>';
+																echo '<img src="../../dist/icons/delete-colored.svg" style="height: 20px; width:20px;"/>';
 															} else {
 																echo $prioridade;
 															} ?>
@@ -428,7 +424,7 @@ login('EXANT', '../../');
 															}
 														}
 														?>
-														<td class="align-middle inline-block" id="actionbuttons">
+														<td class="align-middle inline-block" id="actionbuttons" style="text-align: center">
 															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 24px; height: 24px; padding: 0px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">local_shipping</span></a>
 															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Histórico" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></a>
 															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 24px; height: 24px; padding: 0px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>
@@ -656,9 +652,10 @@ login('EXANT', '../../');
 
 	<script>
 		$(document).ready(function() {
-			$("#example1").DataTable();
-			$('#example2').DataTable({
+			$("#example1").DataTable({
 				"language": {
+					"decimal": ",",
+					"thousands": ".",
 					"select": {
 						"rows": {
 							"_": "Selecionado %d linhas",
@@ -668,11 +665,11 @@ login('EXANT', '../../');
 					}
 				},
 				"paging": true,
-				"lengthChange": false,
-				"searching": false,
+				"lengthChange": true,
+				"searching": true,
 				"ordering": true,
 				"info": true,
-				"autoWidth": false,
+				"autoWidth": true,
 			});
 		});
 	</script>
@@ -724,6 +721,11 @@ login('EXANT', '../../');
 		$('[data-toggle="popover"]').popover({
 			placement: 'auto',
 			trigger: 'hover'
+		});
+	</script>
+	<script>
+		$("[data-tt=tooltip]").tooltip({
+			placement: 'auto'
 		});
 	</script>
 	<!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
@@ -1243,7 +1245,7 @@ if (isset($_POST['button'])) {
 							$result_h = mysqli_query($conexao, $query_h);
 							$row_h = mysqli_num_rows($result_h);
 							?>
-							<table class="table table-sm table-bordered table-striped">
+							<table class="table table-sm table-borderless table-striped">
 								<thead class="text-primary" style="text-align: center;">
 									<tr>
 										<th class="align-middle">Movimento</th>
