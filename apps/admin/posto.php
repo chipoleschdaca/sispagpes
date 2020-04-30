@@ -139,108 +139,30 @@ login('ADMIN', '../../');
                 </p>
               </a>
             </li>
-            <li class="nav-item has-treeview menu-open">
-              <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-chart-pie"></i>
+            <li class="nav-item">
+              <a href="posto.php" class="nav-link active">
+                <i class="nav-icon fas fa-medal"></i>
                 <p>
-                  Exercício Anterior
+                  Posto
                   <?php
-                  $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
+                  $query = "SELECT * FROM tb_posto where status = 'Aguardando'";
                   $result = mysqli_query($conexao, $query);
                   $res = mysqli_fetch_array($result);
                   $row = mysqli_num_rows($result);
-                  $query2 = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
-                  $result2 = mysqli_query($conexao, $query2);
-                  $res2 = mysqli_fetch_array($result2);
-                  $row2 = mysqli_num_rows($result2);
-                  $query3 = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
-                  $result3 = mysqli_query($conexao, $query3);
-                  $res3 = mysqli_fetch_array($result3);
-                  $row3 = mysqli_num_rows($result3);
-                  $query4 = "SELECT * FROM tb_posto where status = 'Aguardando'";
-                  $result4 = mysqli_query($conexao, $query4);
-                  $res4 = mysqli_fetch_array($result4);
-                  $row4 = mysqli_num_rows($result4);
-                  $row_sum = $row + $row2 + $row3 + $row4;
-                  if ($row_sum > 0) {
-                    echo '<i class="right fas fa-angle-left"></i>';
-                    echo '<span class="badge badge-warning right">' . $row_sum . '</span>';
+                  if ($row > 0) {
+                    echo '<span class="badge badge-warning right">' . $row . '</span>';
                   } else {
-                    echo '<i class="right fas fa-angle-left"></i>';
-                  }
-                  ?>
+                  } ?>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="secoes_exant.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>
-                      Seções
-                      <?php
-                      $query = "SELECT * FROM tb_secoes_exant where status = 'Aguardando'";
-                      $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      if ($row > 0) {
-                        echo '<span class="badge badge-warning right">' . $row . '</span>';
-                      } else {
-                      } ?>
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="direitos_exant.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>
-                      Direito Pleiteado
-                      <?php
-                      $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
-                      $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      if ($row > 0) {
-                        echo '<span class="badge badge-warning right">' . $row . '</span>';
-                      } else {
-                      } ?>
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="estado_exant.php" class="nav-link">
-                    <i class="far fa-hand-point-right nav-icon"></i>
-                    <p>
-                      Estado
-                      <?php
-                      $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
-                      $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      if ($row > 0) {
-                        echo '<span class="badge badge-warning right">' . $row . '</span>';
-                      } else {
-                      } ?>
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="posto.php" class="nav-link active">
-                    <i class="fas fa-hand-point-right nav-icon"></i>
-                    <p>
-                      Posto
-                      <?php
-                      $query = "SELECT * FROM tb_posto where status = 'Aguardando'";
-                      $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      if ($row > 0) {
-                        echo '<span class="badge badge-warning right">' . $row . '</span>';
-                      } else {
-                      } ?>
-                    </p>
-                  </a>
-                </li>
-              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="exercicio_anterior.php" class="nav-link">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Exercício Anterior
+                </p>
+              </a>
             </li>
           </ul>
         </nav>
