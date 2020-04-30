@@ -45,10 +45,13 @@ include('dist/php/functions.php');
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
         <?php
-        if (isset($_SESSION['nao_autenticado'])) {               
+        if (isset($_SESSION['status'])) {
+          Toast('error', 'Usuário não autorizado!');
+          unset($_SESSION['status']);
+        } elseif (isset($_SESSION['nao_autenticado'])) {
           Toast('error', 'CPF ou SENHA inválidos!');
+          unset($_SESSION['nao_autenticado']);
         }
-        unset($_SESSION['nao_autenticado']);
         ?>
         <div style="padding-bottom:15px;">
           <button type="submit" class="btn btn-primary btn-lg" value="Entrar" style="width:200px;">Entrar</button>

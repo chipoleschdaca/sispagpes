@@ -20,7 +20,7 @@ if ($row > 0) {
 	$_SESSION['perfil_usuario'] = $dado['perfil'];
 	$_SESSION['status'] = $dado['status'];
 
-	if ($_SESSION['status'] == 'Aprovado'){
+	if ($_SESSION['status'] == 'Aprovado') {
 
 		if ($_SESSION['perfil_usuario'] == 'TESOU') {
 			header('Location: apps/tesoureiro/painel_tesouraria.php');
@@ -36,10 +36,15 @@ if ($row > 0) {
 			header('Location: apps/exercicioanterior/painel_exant.php');
 			exit();
 		}
-	} elseif ($_SESSION['status'] != 'Aprovado') {		
+	} elseif ($_SESSION['status'] != 'Aprovado') {
+		$_SESSION['status'] = true;
 		header('Location: index.php');
 		exit();
 	}
+	exit();
+} elseif ($_SESSION['status'] != 'Aprovado') {
+	$_SESSION['status'] = true;
+	header('Location: index.php');
 	exit();
 } else {
 	$_SESSION['nao_autenticado'] = true;
