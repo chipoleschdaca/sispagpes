@@ -1,52 +1,179 @@
 <?php
-function head($a)
-{
-  echo '
+function head($diretorio)
+{ ?>
+
   <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="icon" type="image/png" href="' . $a . 'dist/img/gapls.png">
-	<title>SISPAGPES</title>
-	<!-- Tell the browser to be responsive to screen width -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="' . $a . 'plugins/fontawesome-free/css/all.min.css">
-	<!-- Ionicons -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/png" href="<?php echo $diretorio ?>dist/img/gapls.png">
+  <title>SISPAGPES</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Select2 -->
-  <link rel="stylesheet" href="' . $a . 'plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="' . $a . 'plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-	<!-- Tempusdominus Bbootstrap 4 -->
-	<link rel="stylesheet" href="' . $a . 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-	<!-- iCheck -->
-	<link rel="stylesheet" href="' . $a . 'plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-	<!-- JQVMap -->
-	<link rel="stylesheet" href="' . $a . 'plugins/jqvmap/jqvmap.min.css">
-	<!-- Theme style -->
-	<link rel="stylesheet" href="' . $a . 'dist/css/adminlte.min.css">
-	<link rel="stylesheet" href="' . $a . 'dist/css/style_print_button.css">
-	<!-- overlayScrollbars -->
-	<link rel="stylesheet" href="' . $a . 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-	<!-- Daterange picker -->
-	<link rel="stylesheet" href="' . $a . 'plugins/daterangepicker/daterangepicker.css">
-	<!-- JQuery UI -->
-	<link rel="stylesheet" href="' . $a . 'plugins/jquery-ui/jquery-ui.min.css">
-	<!-- summernote -->
-	<link rel="stylesheet" href="' . $a . 'plugins/summernote/summernote-bs4.css">
-	<!-- Google Font: Source Sans Pro -->
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-	<!-- Material Design-->
-	<link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<!-- SweetAlert2 -->
-	<script src="' . $a . 'plugins/sweetalert2/sweetalert2.min.js"></script>
-	<script src="' . $a . 'plugins/sweetalert2/sweetalert2.all.min.js"></script>
-	<!-- Toastr -->
-  <script src="' . $a . 'plugins/toastr/toastr.min.js"></script>';
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?php echo $diretorio ?>dist/css/style_print_button.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/daterangepicker/daterangepicker.css">
+  <!-- JQuery UI -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/jquery-ui/jquery-ui.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Material Design-->
+  <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- SweetAlert2 -->
+  <script src="<?php echo $diretorio ?>plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="<?php echo $diretorio ?>plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <!-- Toastr -->
+  <script src="<?php echo $diretorio ?>plugins/toastr/toastr.min.js"></script>
+
+<?php
 }
 
 function footer()
-{
-  echo '<strong>&copy; 2019-' . date("Y") . '<a href="#"> SISPAGPES</a></strong>. Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. <div class="float-right d-none d-sm-inline-block"><b>Versão</b> 1.0.0</div>';
+{ ?>
+  <strong>&copy; 2019-<?php echo date("Y") ?> <a href="#"> SISPAGPES</a></strong>. Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. <div class="float-right d-none d-sm-inline-block"><b>Versão</b> 1.0.0</div>
+<?php
+}
+
+function javascript($diretorio)
+{ ?>
+
+  <!-- jQuery -->
+  <script src="<?php echo $diretorio ?>plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery Mask -->
+  <script src="<?php echo $diretorio ?>plugins/jquery-mask/dist/jquery.mask.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="<?php echo $diretorio ?>plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Select2 -->
+  <script src="<?php echo $diretorio ?>plugins/select2/js/select2.full.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="<?php echo $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="<?php echo $diretorio ?>plugins/chart.js/Chart.min.js"></script>
+  <!-- Sparkline -->
+  <script src="<?php echo $diretorio ?>plugins/sparklines/sparkline.js"></script>
+  <!-- JQVMap -->
+  <script src="<?php echo $diretorio ?>plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="<?php echo $diretorio ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <script src="<?php echo $diretorio ?>plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="<?php echo $diretorio ?>plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="<?php echo $diretorio ?>plugins/moment/moment.min.js"></script>
+  <script src="<?php echo $diretorio ?>plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="<?php echo $diretorio ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="<?php echo $diretorio ?>plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="<?php echo $diretorio ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="<?php echo $diretorio ?>dist/js/adminlte.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="<?php echo $diretorio ?>dist/js/pages/dashboard.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="<?php echo $diretorio ?>dist/js/demo.js"></script>
+  <!-- Material Design-->
+  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+  <!--IonIcon-->
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <!--DataTables-->
+  <script type="text/javascript" charset="utf8" src="<?php echo $diretorio ?>plugins/datatables/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="<?php echo $diretorio ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+  <!-- Funções gerais em javascript -->
+  <script src="<?php echo $diretorio ?>dist/js/functions.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#txtsaram').mask('000.000-0', {
+        reverse: true
+      });
+      $('#txtcpf').mask('000.000.000-00', {
+        reverse: true
+      });
+      $('#txtnup').mask('00000.000000/0000-00', {
+        reverse: true
+      });
+      $('#txtsaram2').mask('000.000-0', {
+        reverse: true
+      });
+      $('#txtcpf2').mask('000.000.000-00', {
+        reverse: true
+      });
+      $('#txtnup2').mask('00000.000000/0000-00', {
+        reverse: true
+      });
+      $('#txtsaram3').mask('000.000-0', {
+        reverse: true
+      });
+      $('#txtcpf3').mask('000.000.000-00', {
+        reverse: true
+      });
+    });
+  </script>
+  <script>
+    $(function() {
+      $("#datepicker").datepicker({
+
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        nextText: 'Próximo',
+        prevText: 'Anterior',
+        changeMonth: true,
+        changeYear: true,
+        showOtherMonths: true,
+        selectOtherMonths: true
+      });
+    });
+  </script>
+  <script>
+    $('[data-toggle="popover"]').popover({
+      placement: 'auto',
+      trigger: 'hover'
+    });
+  </script>
+  <script>
+    $("[data-tt=tooltip]").tooltip({
+      placement: 'auto'
+    });
+  </script>
+  <script>
+    $(function() {
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+
+      //Initialize Select2 Elements
+      $('.select2').select2()
+    });
+  </script>
+<?php
 }
 
 function Alerta($type, $title, $msg, $location)
