@@ -295,19 +295,18 @@ login('ADMIN', '../../');
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
 
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "select * from militares where nome LIKE '$nome' order by id asc";
+                      $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id WHERE nome LIKE '$nome' ORDER BY m.id ASC";
                     } else {
-                      $query = "select * from militares order by id asc";
+                      $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id ORDER BY m.id ASC";
                     }
 
                     $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
                     ?>
 
                     <!-------------------------------------------------->
 
-                    <table class="table table-sm table-bordered table-striped">
+                    <table class="table table-sm table-borderless table-striped">
                       <thead class="text-primary align-middle">
                         <th class="align-middle">#</th>
                         <th class="align-middle">Saram</th>
@@ -323,10 +322,10 @@ login('ADMIN', '../../');
                       <tbody>
                         <?php
                         while ($res_1 = mysqli_fetch_array($result)) {
-                          $id = $res_1['id'];
+                          $id = $res_1['id_militar'];
                           $saram = $res_1['saram'];
                           $cpf = $res_1['cpf'];
-                          $posto = $res_1['posto'];
+                          $posto = $res_1['nome_posto'];
                           $nome = $res_1['nome'];
                           $nomeguerra = $res_1['nomeguerra'];
                           $perfil = $res_1['perfil'];
@@ -423,26 +422,18 @@ login('ADMIN', '../../');
                     <div class="form-group">
                       <label for="id_produto">Posto/Grad.</label>
                       <select class="form-control mr-2" name="txtposto" required>
-                        <option value="" disabled selected hidden>Posto/Grad.</option>
-                        <option value="PM">PM</option>
-                        <option value="TB">TB</option>
-                        <option value="MB">MB</option>
-                        <option value="BR">BR</option>
-                        <option value="CL">CL</option>
-                        <option value="TC">TC</option>
-                        <option value="MJ">MJ</option>
-                        <option value="CP">CP</option>
-                        <option value="1T">1T</option>
-                        <option value="2T">2T</option>
-                        <option value="AP">AP</option>
-                        <option value="SO">SO</option>
-                        <option value="1S">1S</option>
-                        <option value="2S">2S</option>
-                        <option value="3S">3S</option>
-                        <option value="CB">CB</option>
-                        <option value="S1">S1</option>
-                        <option value="S2">S2</option>
-                        <option value="SD">SD</option>
+                        <option value="" disabled selected hidden>Selecione o posto...</option>
+                        <?php
+                        $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
+                        $result_posto = mysqli_query($conexao, $query_posto);
+                        while ($res_ex = mysqli_fetch_array($result_posto)) {
+                          $id_ex = $res_ex['id'];
+                          $posto_ex = $res_ex['posto'];
+                        ?>
+                          <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                        <?php
+                        }
+                        ?>
                       </select>
                     </div>
                     <div class="form-group">
@@ -468,12 +459,12 @@ login('ADMIN', '../../');
                         <?php
                         $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
                         $result = mysqli_query($conexao, $query);
-                        if (count($result)) {
-                          while ($res_1 = mysqli_fetch_array($result)) {
+                        while ($res_1 = mysqli_fetch_array($result)) {
                         ?>
-                            <option value="<?php echo $res_1['perfil']; ?>"><?php echo $res_1['perfil']; ?></option>
-                        <?php }
-                        } ?>
+                          <option value="<?php echo $res_1['perfil']; ?>"><?php echo $res_1['perfil']; ?></option>
+                        <?php
+                        }
+                        ?>
                       </select>
                     </div>
                 </div>
@@ -630,7 +621,6 @@ if (isset($_POST['button'])) {
         Alerta("info", "Senhas não conferem!", false, "militares.php");
       } else {
         $query_editar = "UPDATE militares set senha = '$novasenha1' WHERE id = '$id'";
-
         $result_editar = mysqli_query($conexao, $query_editar);
 
         if ($result_editar == '') {
@@ -669,26 +659,18 @@ if (isset($_POST['button'])) {
               <div class="form-group">
                 <label for="id_produto">Posto/Grad.</label>
                 <select class="form-control mr-2" name="txtposto" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
-                  <option value="PM">PM</option>
-                  <option value="TB">TB</option>
-                  <option value="MB">MB</option>
-                  <option value="BR">BR</option>
-                  <option value="CL">CL</option>
-                  <option value="TC">TC</option>
-                  <option value="MJ">MJ</option>
-                  <option value="CP">CP</option>
-                  <option value="1T">1T</option>
-                  <option value="2T">2T</option>
-                  <option value="AP">AP</option>
-                  <option value="SO">SO</option>
-                  <option value="1S">1S</option>
-                  <option value="2S">2S</option>
-                  <option value="3S">3S</option>
-                  <option value="CB">CB</option>
-                  <option value="S1">S1</option>
-                  <option value="S2">S2</option>
-                  <option value="SD">SD</option>
+                  <option value="" disabled selected hidden>Selecione o posto...</option>
+                  <?php
+                  $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
+                  $result_posto = mysqli_query($conexao, $query_posto);
+                  while ($res_ex = mysqli_fetch_array($result_posto)) {
+                    $id_ex = $res_ex['id'];
+                    $posto_ex = $res_ex['posto'];
+                  ?>
+                    <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                  <?php
+                  }
+                  ?>
                 </select>
               </div>
               <div class="form-group">
@@ -706,12 +688,12 @@ if (isset($_POST['button'])) {
                   <?php
                   $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
                   $result = mysqli_query($conexao, $query);
-                  if (count($result)) {
-                    while ($res_2 = mysqli_fetch_array($result)) {
+                  while ($res_2 = mysqli_fetch_array($result)) {
                   ?>
-                      <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
-                  <?php }
-                  } ?>
+                    <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
+                  <?php
+                  }
+                  ?>
                 </select>
               </div>
           </div>
@@ -792,26 +774,18 @@ if (isset($_POST['button'])) {
               <div class="form-group">
                 <label for="id_produto">Posto/Grad.</label>
                 <select class="form-control mr-2" name="txtposto" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['posto']; ?></option>
-                  <option value="PM">PM</option>
-                  <option value="TB">TB</option>
-                  <option value="MB">MB</option>
-                  <option value="BR">BR</option>
-                  <option value="CL">CL</option>
-                  <option value="TC">TC</option>
-                  <option value="MJ">MJ</option>
-                  <option value="CP">CP</option>
-                  <option value="1T">1T</option>
-                  <option value="2T">2T</option>
-                  <option value="AP">AP</option>
-                  <option value="SO">SO</option>
-                  <option value="1S">1S</option>
-                  <option value="2S">2S</option>
-                  <option value="3S">3S</option>
-                  <option value="CB">CB</option>
-                  <option value="S1">S1</option>
-                  <option value="S2">S2</option>
-                  <option value="SD">SD</option>
+                  <option value="" disabled selected hidden>Selecione o posto...</option>
+                  <?php
+                  $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
+                  $result_posto = mysqli_query($conexao, $query_posto);
+                  while ($res_ex = mysqli_fetch_array($result_posto)) {
+                    $id_ex = $res_ex['id'];
+                    $posto_ex = $res_ex['posto'];
+                  ?>
+                    <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                  <?php
+                  }
+                  ?>
                 </select>
               </div>
               <div class="form-group">
@@ -829,12 +803,11 @@ if (isset($_POST['button'])) {
                   <?php
                   $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
                   $result = mysqli_query($conexao, $query);
-                  if (count($result)) {
-                    while ($res_2 = mysqli_fetch_array($result)) {
+                  while ($res_2 = mysqli_fetch_array($result)) {
                   ?>
-                      <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
+                    <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
                   <?php }
-                  } ?>
+                  ?>
                 </select>
               </div>
           </div>

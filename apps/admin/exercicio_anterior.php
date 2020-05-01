@@ -313,7 +313,7 @@ login('ADMIN', '../../');
 
                             <!-------------------------------------------------->
 
-                            <table class="table table-sm table-bordered table-striped">
+                            <table class="table table-sm table-borderless table-striped">
                               <thead class="text-primary" style="text-align: center; overflow: auto;">
                                 <th class="align-middle" style="width: 4%;">#</th>
                                 <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
@@ -462,7 +462,7 @@ login('ADMIN', '../../');
 
                             <!-------------------------------------------------->
 
-                            <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
+                            <table class="table table-sm table-borderless table-striped" style="table-layout: fixed;">
                               <thead class="text-primary" style="text-align: center;">
                                 <th class="align-middle" style="width: 4%;">#</th>
                                 <th class="align-middle" style="width: 65%;">Direito Pleiteado</th>
@@ -636,7 +636,7 @@ login('ADMIN', '../../');
                             $row = mysqli_num_rows($result);
                             ?>
                             <!-------------------------------------------------->
-                            <table class="table table-sm table-bordered table-striped">
+                            <table class="table table-sm table-borderless table-striped">
                               <thead class="text-primary" style="text-align: center; overflow: auto;">
                                 <th class="align-middle" style="width: 4%;">#</th>
                                 <th class="align-middle" style="width: 65%;">Nome do Status</th>
@@ -784,7 +784,7 @@ login('ADMIN', '../../');
 
                             <!-------------------------------------------------->
 
-                            <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
+                            <table class="table table-sm table-borderless table-striped" style="table-layout: fixed;">
                               <thead class="text-primary" style="text-align: center;">
                                 <th class="align-middle" style="width: 4%;">#</th>
                                 <th class="align-middle" style="width: 65%;">Estados</th>

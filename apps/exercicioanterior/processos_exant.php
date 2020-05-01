@@ -180,94 +180,6 @@ login('EXANT', '../../');
 							</div>
 						</div>
 						<div class="clearfix hidden-md-up"></div>
-						<!--	<dv class="col-12 col-sm-6 col-md-3">
-							<div class="info-box mb-3">
-								<span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
-								<div class="info-box-content" style="text-align:center;">
-									<span class="info-box-text">PROCESSOS CANCELADOS</span>
-									<span class="info-box-number">
-										<h4>
-											<?php
-											$query = "SELECT * FROM exercicioanterior where estado = 'Cancelado'";
-											$result = mysqli_query($conexao, $query);
-											$res = mysqli_fetch_array($result);
-											$row = mysqli_num_rows($result);
-											echo $row;
-											?>
-										</h4>
-									</span>
-								</div>
-							</div>
-						</dv>-->
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-12">
-							<p>
-								<a class="btn btn-outline-dark btn-sm" style="font-style: arial;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
-									<i class="fa fa-plus"></i> Filtrar
-								</a>
-							</p>
-							<div class="collapse" id="collapseExample" style="width: 100%;" aria-expanded="true">
-								<div class="card">
-									<div class="card-body">
-										<form class="form-inline">
-											<div class="input-group input-group-sm">
-												<label for="txtnome" style="margin-right: 5px;">SARAM:</label>
-												<input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-											</div>
-											<div class="input-group input-group-sm">
-												<label for="txtnome" style="margin-right: 5px;">Requerente:</label>
-												<input class="form-control" type="search" id="txtnome" name="txtnome" placeholder="Nome ou parte do nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-											</div>
-											<br>
-											<div class="input-group input-group-sm">
-												<label for="status" style="margin-right: 5px;">Direito Pleiteado: </label>
-												<select class="form-control select2" id="txtdirpleiteado" name="txtdirpleiteado" style="border-radius:3px; margin-right:20px; width: 375px">
-													<option value="">Selecione o direito pleiteado</option>
-													<?php
-													$query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
-													$result_direito = mysqli_query($conexao, $query_direito);
-													if (count($result_direito)) {
-														while ($res_dir = mysqli_fetch_array($result_direito)) {
-															$id = $res_dir['id_direito'];
-															$direito = $res_dir['direito_pleiteado'];
-
-													?>
-															<option value="<?php echo $id ?>"><?php echo $direito ?></option>
-													<?php }
-													} ?>
-												</select>
-											</div>
-											<div class="input-group input-group-sm">
-												<label for="status" style="margin-right: 5px;">Estado: </label>
-												<select class="form-control select2" id="txtestadofiltro" name="txtestadofiltro" style="border-radius:3px; margin-right:20px; width: 375px;">
-													<option value="" selected>Selecione o estado do processo</option>
-													<?php
-													$query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
-													$result_est = mysqli_query($conexao, $query_est);
-													if (count($result_est)) {
-														while ($res_est = mysqli_fetch_array($result_est)) {
-															$id_est_2 = $res_est['id_estado'];
-															$estado_est = $res_est['estado_processo'];
-													?>
-															<option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
-													<?php }
-													} ?>
-												</select>
-											</div>
-											<br>
-											<br>
-											<div class="input-group-append">
-												<button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar">
-													<i class="fas fa-search"></i>
-												</button>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 					<div>
 						<button type="button" class="general-btn" data-toggle="modal" data-target="#modalExemplo" data-tt="tooltip" title="Inserir Processo" style="background-color: white;">
@@ -282,6 +194,59 @@ login('EXANT', '../../');
 									</h4>
 								</div>
 								<div class="card-body">
+									<form class="form-inline">
+										<div class="input-group input-group-sm">
+											<label for="txtnome" style="margin-right: 5px;">SARAM:</label>
+											<input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
+										</div>
+										<div class="input-group input-group-sm">
+											<label for="txtnome" style="margin-right: 5px;">Requerente:</label>
+											<input class="form-control" type="search" id="txtnome" name="txtnome" placeholder="Nome ou parte do nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
+										</div>
+										<br>
+										<div class="input-group input-group-sm">
+											<label for="status" style="margin-right: 5px;">Direito Pleiteado: </label>
+											<select class="form-control" id="txtdirpleiteado" name="txtdirpleiteado" style="border-radius:3px; margin-right:20px;">
+												<option value="">Selecione o direito pleiteado</option>
+												<?php
+												$query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
+												$result_direito = mysqli_query($conexao, $query_direito);
+												while ($res_dir = mysqli_fetch_array($result_direito)) {
+													$id = $res_dir['id_direito'];
+													$direito = $res_dir['direito_pleiteado'];
+												?>
+													<option value="<?php echo $id ?>"><?php echo $direito ?></option>
+												<?php
+												}
+												?>
+											</select>
+										</div>
+										<div class="input-group input-group-sm">
+											<label for="status" style="margin-right: 5px;">Estado: </label>
+											<select class="form-control" id="txtestadofiltro" name="txtestadofiltro" style="border-radius:3px; margin-right:20px;">
+												<option value="" selected>Selecione o estado do processo</option>
+												<?php
+												$query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
+												$result_est = mysqli_query($conexao, $query_est);
+												while ($res_est = mysqli_fetch_array($result_est)) {
+													$id_est_2 = $res_est['id_estado'];
+													$estado_est = $res_est['estado_processo'];
+												?>
+													<option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
+												<?php
+												}
+												?>
+											</select>
+										</div>
+										<br>
+										<br>
+										<div class="input-group-append">
+											<button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar" data-tt="tooltip" title="Filtrar Tabela">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
+									</form>
+									<br>
 									<div class="table-responsive" style="text-align: center; font-size: 12px;">
 
 										<!-------------LISTAR TODOS OS PROCESSOS-------------->
@@ -309,7 +274,7 @@ login('EXANT', '../../');
 
 										?>
 
-										<table class="table table-sm table-borderless table-striped" id="example1" style="width:100%">
+										<table class="table table-sm table-borderless table-striped" id="example1">
 											<thead class="text-primary">
 												<th class="align-middle">#</th>
 												<th class="align-middle">SARAM</th>
@@ -473,36 +438,35 @@ login('EXANT', '../../');
 							<div class="modal-body">
 								<form method="POST" action="">
 									<div class="row">
-										<div class="form-group col-sm-6">
+										<div class="form-group col-sm-7">
 											<label for="">Requerente</label>
-											<select class="form-control select2" id="category" name="txtcpf">
-												<option value="" disabled selected hidden>selecione o requerente...</option>
+											<select class="form-control select2" name="txtcpf">
+												<option value="" disabled selected hidden>Selecione o requerente...</option>
 												<?php
 												$query = "SELECT * FROM requerentes ORDER BY nome asc";
 												$result = mysqli_query($conexao, $query);
-												if (count($result)) {
-													while ($res_1 = mysqli_fetch_array($result)) {
+												while ($res_1 = mysqli_fetch_array($result)) {
 												?>
-														<option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['saram']; ?> |
-															<?php echo $res_1['nome']; ?></option>
-												<?php }
-												} ?>
+													<option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['saram']; ?> | <?php echo $res_1['nome']; ?></option>
+												<?php
+												}
+												?>
 											</select>
 										</div>
-										<div class="form-group col-sm-6">
-											<label for="fornecedor">Sacador</label>
-											<select class="form-control select2" id="category" name="funcionario">
-												<option value="" disabled selected hidden>Escolha um sacador...</option>
+										<div class="form-group col-sm-5">
+											<label for="fornecedor">Usuário</label>
+											<select class="form-control" name="funcionario">
+												<option value="" disabled selected hidden>Escolha um usuário</option>
 												<?php
-												$query = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";
+												$query = "SELECT * FROM militares WHERE perfil = 'EXANT' ORDER BY nome asc";
 												$result = mysqli_query($conexao, $query);
-												if (count($result)) {
-													while ($res_1 = mysqli_fetch_array($result)) {
+												while ($res_1 = mysqli_fetch_array($result)) {
 												?>
-														<option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?>
-														</option>
-												<?php }
-												} ?>
+													<option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?>
+													</option>
+												<?php
+												}
+												?>
 											</select>
 										</div>
 									</div>
@@ -545,14 +509,14 @@ login('EXANT', '../../');
 												<?php
 												$query_direito = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado' ORDER BY direito";
 												$result_direito = mysqli_query($conexao, $query_direito);
-												if (count($result_direito)) {
-													while ($res_dir = mysqli_fetch_array($result_direito)) {
-														$id = $res_dir['id'];
-														$direito = $res_dir['direito'];
+												while ($res_dir = mysqli_fetch_array($result_direito)) {
+													$id = $res_dir['id'];
+													$direito = $res_dir['direito'];
 												?>
-														<option value="<?php echo $id ?>"><?php echo $direito ?></option>
-												<?php }
-												} ?>
+													<option value="<?php echo $id ?>"><?php echo $direito ?></option>
+												<?php
+												}
+												?>
 											</select>
 										</div>
 									</div>
@@ -561,19 +525,18 @@ login('EXANT', '../../');
 										<div class="form-group col-sm-6">
 											<label>Seção de Origem</label>
 											<select class="form-control select2" id="txtsecaoorigem" name="txtsecaoorigem">
-												<option value="" disabled selected hidden>Escolha a seção onde o processo
-													foi criado...</option>
+												<option value="" disabled selected hidden>Escolha a seção onde o processo foi criado...</option>
 												<?php
 												$query_secao = "SELECT * FROM tb_secoes_exant where status = 'Aprovado'";
 												$result_secao = mysqli_query($conexao, $query_secao);
-												if (count($result_secao)) {
-													while ($res_2 = mysqli_fetch_array($result_secao)) {
-														$id = $res_2['id'];
-														$secao = $res_2['secao'];
+												while ($res_2 = mysqli_fetch_array($result_secao)) {
+													$id = $res_2['id'];
+													$secao = $res_2['secao'];
 												?>
-														<option value="<?php echo $id ?>"><?php echo $secao ?></option>
-												<?php }
-												} ?>
+													<option value="<?php echo $id ?>"><?php echo $secao ?></option>
+												<?php
+												}
+												?>
 											</select>
 										</div>
 										<div class="form-group col-sm-6">
@@ -605,51 +568,7 @@ login('EXANT', '../../');
 		<aside class="control-sidebar control-sidebar-dark">
 		</aside>
 	</div>
-	<!-- jQuery -->
-	<script src="../../plugins/jquery/jquery.min.js"></script>
-	<!-- jQuery Mask -->
-	<script src="../../plugins/jquery-mask/dist/jquery.mask.js"></script>
-	<!-- jQuery UI 1.11.4 -->
-	<script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
-	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-	<script>
-		$.widget.bridge('uibutton', $.ui.button)
-	</script>
-	<!-- Bootstrap 4 -->
-	<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- ChartJS -->
-	<script src="../../plugins/chart.js/Chart.min.js"></script>
-	<!-- Sparkline -->
-	<script src="../../plugins/sparklines/sparkline.js"></script>
-	<!-- JQVMap -->
-	<script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
-	<script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-	<!-- jQuery Knob Chart -->
-	<script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
-	<!-- daterangepicker -->
-	<script src="../../plugins/moment/moment.min.js"></script>
-	<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-	<!-- Tempusdominus Bootstrap 4 -->
-	<script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-	<!-- Bootstrap Switch -->
-	<script src="../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-	<!-- Summernote -->
-	<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
-	<!-- overlayScrollbars -->
-	<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="../../dist/js/adminlte.js"></script>
-	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-	<script src="../../dist/js/pages/dashboard.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="../../dist/js/demo.js"></script>
-	<!-- Material Design-->
-	<script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
-	<!--IonIcon-->
-	<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-	<script type="text/javascript" charset="utf8" src="../../plugins/datatables/jquery.dataTables.js"></script>
-	<script type="text/javascript" charset="utf8" src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-
+	<?php echo javascript('../../') ?>
 	<script>
 		$(document).ready(function() {
 			$("#example1").DataTable({
@@ -673,64 +592,7 @@ login('EXANT', '../../');
 			});
 		});
 	</script>
-	<script>
-		$(document).ready(function() {
-			$('#txtcpf').mask('000.000.000-00', {
-				reverse: true
-			});
-			$('#txtsaram').mask('000.000-0', {
-				reverse: true
-			});
-			$('#txtnup').mask('00000.000000/0000-00', {
-				reverse: true
-			});
-			$('#txtcpf2').mask('000.000.000-00', {
-				reverse: true
-			});
-			$('#txtsaram2').mask('000.000-0', {
-				reverse: true
-			});
-			$('#txtnup2').mask('00000.000000/0000-00', {
-				reverse: true
-			});
-			$('#txtsaram3').mask('000.000-0', {
-				reverse: true
-			});
-		});
-	</script>
-	<script>
-		$(function() {
-			$("#datepicker").datepicker({
 
-				dateFormat: 'dd/mm/yy',
-				dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-				dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-				dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-				monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-				monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-				nextText: 'Próximo',
-				prevText: 'Anterior',
-				changeMonth: true,
-				changeYear: true,
-				showOtherMonths: true,
-				selectOtherMonths: true
-			});
-		});
-	</script>
-	<script>
-		$('[data-toggle="popover"]').popover({
-			placement: 'auto',
-			trigger: 'hover'
-		});
-	</script>
-	<script>
-		$("[data-tt=tooltip]").tooltip({
-			placement: 'auto'
-		});
-	</script>
-	<!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
-
-	<!---------------------------------------------------------------------------------------------->
 </body>
 <style>
 	/* The container */
@@ -895,9 +757,9 @@ if (isset($_POST['button'])) {
 					<div class="modal-body">
 						<form method="POST" action="">
 							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-7">
 									<label for="">Requerente</label>
-									<select class="form-control select2" id="category" name="txtcpf2" required>
+									<select class="form-control select2" name="txtcpf2" required>
 										<option value="" disabled selected hidden><?php echo $res_1["req_saram"]; ?> |
 											<?php echo $res_1["req_nome"]; ?></option>
 										<?php
@@ -910,9 +772,9 @@ if (isset($_POST['button'])) {
 										} ?>
 									</select>
 								</div>
-								<div class="form-group col-sm-6">
-									<label for="fornecedor">Sacador</label>
-									<select class="form-control select2" id="category" name="funcionario2" required>
+								<div class="form-group col-sm-5">
+									<label for="fornecedor">Usuário</label>
+									<select class="form-control" name="funcionario2" required>
 										<option value="" disabled selected hidden><?php echo $res_1["mil_nome"]; ?></option>
 										<?php
 										$query_mil = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";

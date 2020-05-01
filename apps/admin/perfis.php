@@ -278,7 +278,7 @@ login('ADMIN', '../../');
 
                     <!-------------------------------------------------->
 
-                    <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
+                    <table class="table table-sm table-borderless table-striped" style="table-layout: fixed;">
                       <thead class="text-primary" style="text-align: center;">
 
                         <th class="align-middle">#</th>

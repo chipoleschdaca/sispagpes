@@ -303,14 +303,14 @@ login('EXANT', '../../');
                     <?php
                     $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
                     $result_posto = mysqli_query($conexao, $query_posto);
-                    if (count($result_posto)) {
-                      while ($res_ex = mysqli_fetch_array($result_posto)) {
-                        $id_ex = $res_ex['id'];
-                        $posto_ex = $res_ex['posto'];
+                    while ($res_ex = mysqli_fetch_array($result_posto)) {
+                      $id_ex = $res_ex['id'];
+                      $posto_ex = $res_ex['posto'];
                     ?>
-                        <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
-                    <?php }
-                    } ?>
+                      <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                    <?php
+                    }
+                    ?>
                   </select>
                 </div>
                 <div class="form-group">
@@ -359,57 +359,7 @@ login('EXANT', '../../');
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="../../plugins/jquery-mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="../../plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="../../plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="../../plugins/moment/moment.min.js"></script>
-  <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="../../dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
-  <!-- Material Design-->
-  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
-  <!--IonIcon-->
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-  <script>
-    $('[data-toggle="popover"]').popover({
-      placement: 'auto',
-      trigger: 'hover'
-    });
-  </script>
-  <script>
-    $("[data-tt=tooltip]").tooltip({
-      placement: 'auto'
-    });
-  </script>
+  <?php echo javascript('../../') ?>
 
   <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
 
@@ -556,24 +506,18 @@ if (isset($_POST['button'])) {
                   <?php
                   $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
                   $result_posto = mysqli_query($conexao, $query_posto);
-                  if (count($result_posto)) {
-                    while ($res_p = mysqli_fetch_array($result_posto)) {
-                      $id_p = $res_p['id'];
-                      $posto_p = $res_p['posto'];
+                  while ($res_p = mysqli_fetch_array($result_posto)) {
+                    $id_p = $res_p['id'];
+                    $posto_p = $res_p['posto'];
                   ?>
-                      <option value="<?php echo $id_p ?>"><?php echo $posto_p ?></option>
-                  <?php }
-                  } ?>
+                    <option value="<?php echo $id_p ?>"><?php echo $posto_p ?></option>
+                  <?php
+                  }
+                  ?>
                 </select>
               </div>
               <div class="form-group">
                 <label for="">Situação</label><br>
-                <!--<select class="form-control mr-2" id="txtsituacao2" name="txtsituacao2" required>
-                  <option value="" disabled selected hidden>Selecione a situação...</option>
-                  <option value="AT">ATIVO</option>
-                  <option value="R1">VETERANO</option>
-                  <option value="PM">PENSIONISTA</option>
-                </select>-->
                 <div class="custom-control custom-radio">
                   <label class="container">Ativo
                     <input type="radio" value="AT" name="txtsituacao2">
@@ -737,27 +681,5 @@ if (isset($_POST['button'])) {
       <!--Modal CONSULTAR -->
   <?php
   }
-} ?>
-
-  <script>
-    $(document).ready(function() {
-      $('#txtcpf').mask('000.000.000-00', {
-        reverse: true
-      });
-      $('#txtsaram').mask('000.000-0', {
-        reverse: true
-      });
-      $('#txtcpf2').mask('000.000.000-00', {
-        reverse: true
-      });
-      $('#txtsaram2').mask('000.000-0', {
-        reverse: true
-      });
-      $('#txtcpf3').mask('000.000.000-00', {
-        reverse: true
-      });
-      $('#txtsaram3').mask('000.000-0', {
-        reverse: true
-      });
-    });
-  </script>
+}
+  ?>
