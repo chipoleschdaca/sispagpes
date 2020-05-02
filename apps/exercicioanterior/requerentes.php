@@ -280,7 +280,7 @@ login('EXANT', '../../');
       <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
       <div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
         <!---Modal Exemplo--->
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-md">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title"><i class="fas fa-user-plus"></i> Inserir novo Requerente</h4>
@@ -288,44 +288,54 @@ login('EXANT', '../../');
             </div>
             <div class="modal-body">
               <form method="POST" action="">
-                <div class="form-group">
-                  <label for="fornecedor">Saram</label>
-                  <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
-                </div>
-                <div class="form-group">
-                  <label for="fornecedor">CPF</label>
-                  <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
-                </div>
-                <div class="form-group">
-                  <label for="id_produto">Posto</label>
-                  <select class="form-control mr-2" name="txtposto" required>
-                    <option value="" disabled selected hidden>Selecione o posto...</option>
-                    <?php
-                    $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
-                    $result_posto = mysqli_query($conexao, $query_posto);
-                    while ($res_ex = mysqli_fetch_array($result_posto)) {
-                      $id_ex = $res_ex['id'];
-                      $posto_ex = $res_ex['posto'];
-                    ?>
-                      <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
-                    <?php
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="id_produto">Situação</label><br>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
-                    <label class="custom-control-label" style="cursor: pointer; text-align: left;" for="ativo"><span></span>Ativo</label>
+                <div class="row">
+                  <div class="form-group col-4">
+                    <label for="fornecedor">Saram</label>
+                    <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
                   </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
-                    <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
+                  <div class="form-group col-5">
+                    <label for="fornecedor">CPF</label>
+                    <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
                   </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="reformado" name="txtsituacao" value="PM" required>
-                    <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="reformado"><span></span>Pensionista</label>
+                  <div class="form-group col-3">
+                    <label for="id_produto">Posto</label>
+                    <select class="form-control mr-2" name="txtposto" required>
+                      <option value="" disabled selected hidden>Posto</option>
+                      <?php
+                      $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
+                      $result_posto = mysqli_query($conexao, $query_posto);
+                      while ($res_ex = mysqli_fetch_array($result_posto)) {
+                        $id_ex = $res_ex['id'];
+                        $posto_ex = $res_ex['posto'];
+                      ?>
+                        <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="form-group">
+                    <label for="id_produto">Situação</label><br>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
+                      <label class="custom-control-label" style="cursor: pointer; text-align: left;" for="ativo"><span></span>Ativo</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
+                      <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="pensionista" name="txtsituacao" value="PM" required>
+                      <label class="custom-control-label" style="cursor: pointer; text-align: right;" for="pensionista"><span></span>Pensionista</label>
+                    </div>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="form-group col-4" id="dtNascimento">
+                    <label for="">Dt. Nascimento</label>
+                    <input type="text" class="form-control mr-2" id="txtdtnascimento" name="txtdtnascimento" placeholder="__/__/____" autocomplete="off" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -361,9 +371,22 @@ login('EXANT', '../../');
   <!-- ./wrapper -->
   <?php echo javascript('../../') ?>
 
-  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
-
-  <!---------------------------------------------------------------------------------------------->
+  <script>
+    $(document).ready(function() {
+      $("#dtNascimento").hide();
+      $("input[name$='txtsituacao']").click(function() {
+        var test = $(this).val();
+        if (test == 'R1') {
+          $("#dtNascimento").show();
+        } else if (test == 'R1') {
+          $("#dtNascimento").show();
+        } else {
+          $("#dtNascimento").hide();
+          $("#txtdtnascimento").removeAttr("required");
+        }
+      });
+    });
+  </script>
 </body>
 <style>
   /* The container */
@@ -445,7 +468,7 @@ if (isset($_POST['button'])) {
 
   //Verificar se o CPF já está cadastrado
 
-  $query_verificar = "select * from requerentes where cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
