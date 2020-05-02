@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Sao_paulo');
+
 function head($diretorio)
 { ?>
 
@@ -130,6 +132,9 @@ function javascript($diretorio)
       $('#txtcpf3').mask('000.000.000-00', {
         reverse: true
       });
+      $('#txtdtnascimento').mask('00/00/0000', {
+        reverse: true
+      });
     });
   </script>
   <script>
@@ -187,7 +192,7 @@ function Alerta($type, $title, $msg, $location)
         });
         setTimeout(function() {          
           window.location='$location';
-        }, 2000);
+        }, 1500);
         </script>";
 }
 
@@ -199,7 +204,7 @@ function AlertaConsulta($type, $title, $msg)
           title: '$title',
           text: '$msg',
           showConfirmButton: false,
-          timer: 2000          
+          timer: 1500          
         });        
         </script>";
 }
@@ -237,7 +242,7 @@ function AlertaLocation($type, $title, $msg, $location)
           title: '$title',
           text: '$msg',
           showConfirmButton: false,          
-          timer: 2000
+          timer: 1500
         },
         function (){
         window.location.href='$location'
@@ -253,7 +258,7 @@ function Toast($type, $title)
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000
+        timer: 2000
       });     
       Toast.fire({
         type: '$type',
@@ -265,7 +270,7 @@ function Toast($type, $title)
 
 function AnoAtual()
 {
-  echo date("Y") . " ";
+  return date("Y") . " ";
 }
 
 function data($data)
@@ -276,13 +281,13 @@ function data($data)
 function data_show($data)
 {
   $data = implode('/', array_reverse(explode('-', $data)));
-  echo $data;
+  return $data;
 }
 
 function data_db($data)
 {
   $data = implode('-', array_reverse(explode('/', $data)));
-  echo $data;
+  return $data;
 }
 
 function data2()
@@ -340,4 +345,13 @@ function data2()
 function diferenca($a, $b)
 {
   return (strtotime($a) - strtotime($b)) / (60 * 60 * 24);
+}
+
+function descobrirIdade($dataNascimento)
+{
+  $dn = new DateTime($dataNascimento);
+  $agora = new DateTime();
+
+  $idade = date_diff($agora, $dn);
+  return $idade->y;
 }
