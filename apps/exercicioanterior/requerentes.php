@@ -209,15 +209,15 @@ login('EXANT', '../../');
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
                       $nome = '%' . $_GET['txtsaram3'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE saram LIKE '$nome' order by nome asc";
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE saram LIKE '$nome' order by nome asc";
                     } else if (isset($_GET['buttonPesquisar']) and $_GET['txtcpf3'] != '') {
                       $nome = '%' . $_GET['txtcpf3'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE cpf LIKE '$nome' order by nome asc";
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE cpf LIKE '$nome' order by nome asc";
                     } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
                     } else {
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
+                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
                     }
                     $result = mysqli_query($conexao, $query);
                     $row = mysqli_num_rows($result);
@@ -231,6 +231,7 @@ login('EXANT', '../../');
                           <th class="align-middle">Posto</th>
                           <th class="align-middle">Situação</th>
                           <th class="align-middle">Nome Completo</th>
+                          <th class="align-middle">Est. Idoso</th>
                           <th class="align-middle">Email</th>
                           <th class="align-middle">Dt. Inclusão</th>
                           <th class="align-middle">Ações</th>
@@ -244,9 +245,9 @@ login('EXANT', '../../');
                             $posto = $res_1['posto'];
                             $situacao = $res_1['situacao'];
                             $nome = $res_1['nome'];
+                            $dt_nascimento = $res_1['dt_nascimento'];
                             $email = $res_1['email'];
-                            $data = $res_1['data'];
-                            $data2 = implode('/', array_reverse(explode('-', $data)));
+                            $data = data_show($res_1['data']);
                           ?>
                             <tr>
                               <td class="align-middle"><?php echo $id; ?></td>
@@ -255,8 +256,16 @@ login('EXANT', '../../');
                               <td class="align-middle"><?php echo $posto; ?></td>
                               <td class="align-middle"><?php echo $situacao; ?></td>
                               <td class="align-middle"><?php echo '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?php echo $nome; ?></td>
+                              <td class="align-middle">
+                                <?php
+                                if (descobrirIdade($dt_nascimento) >= 60) {
+                                  echo '<img src="../../dist/icons/accept-colored.svg" style="height: 30px; width:30px;"/>';
+                                } else {
+                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+                                } ?>
+                              </td>
                               <td class="align-middle"><?php echo $email; ?></td>
-                              <td class="align-middle"><?php echo $data2; ?></td>
+                              <td class="align-middle"><?php echo $data; ?></td>
                               <td class="align-middle">
                                 <a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
                                 <a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
@@ -325,7 +334,7 @@ login('EXANT', '../../');
                     </div>
                     <div class="custom-control custom-radio">
                       <input type="radio" class="custom-control-input" id="inativo" name="txtsituacao" value="R1" required>
-                      <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Inativo</label>
+                      <label class="custom-control-label" style="cursor: pointer;" for="inativo"><span></span>Veterano</label>
                     </div>
                     <div class="custom-control custom-radio">
                       <input type="radio" class="custom-control-input" id="pensionista" name="txtsituacao" value="PM" required>
@@ -335,7 +344,7 @@ login('EXANT', '../../');
                   <div class="col-2"></div>
                   <div class="form-group col-4" id="dtNascimento">
                     <label for="">Dt. Nascimento</label>
-                    <input type="text" class="form-control mr-2" id="txtdtnascimento" name="txtdtnascimento" placeholder="__/__/____" autocomplete="off" required>
+                    <input type="text" class="form-control mr-2" id="txtdtnascimento" name="txtdtnascimento" placeholder="00/00/0000" autocomplete="off" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -356,21 +365,14 @@ login('EXANT', '../../');
         </div>
       </div>
       </section>
-      <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
     <footer class="main-footer">
       <?php footer() ?>
     </footer>
-    <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
     </aside>
-    <!-- /.control-sidebar -->
   </div>
-  <!-- ./wrapper -->
   <?php echo javascript('../../') ?>
-
   <script>
     $(document).ready(function() {
       $("#dtNascimento").hide();
@@ -378,7 +380,7 @@ login('EXANT', '../../');
         var test = $(this).val();
         if (test == 'R1') {
           $("#dtNascimento").show();
-        } else if (test == 'R1') {
+        } else if (test == 'PM') {
           $("#dtNascimento").show();
         } else {
           $("#dtNascimento").hide();
@@ -458,12 +460,14 @@ login('EXANT', '../../');
 <!------------CADASTRAR------------>
 <?php
 if (isset($_POST['button'])) {
+  $saram = $_POST['txtsaram'];
+  $cpf = $_POST['txtcpf'];
   $posto = $_POST['txtposto'];
   $situacao = $_POST['txtsituacao'];
   $nome = strtoupper($_POST['txtnome']);
+  $dtnascimento = data_db($_POST['txtdtnascimento']);
   $email = strtolower($_POST['txtemail']);
-  $saram = $_POST['txtsaram'];
-  $cpf = $_POST['txtcpf'];
+
 
 
   //Verificar se o CPF já está cadastrado
@@ -479,7 +483,7 @@ if (isset($_POST['button'])) {
     exit();
   }
 
-  $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$email', curDate() )";
+  $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, dt_nascimento, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$dtnascimento','$email', curDate() )";
 
   $result = mysqli_query($conexao, $query);
 
@@ -505,7 +509,7 @@ if (isset($_POST['button'])) {
 ?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title">Requerentes</h4>
@@ -513,51 +517,55 @@ if (isset($_POST['button'])) {
           </div>
           <div class="modal-body">
             <form method="POST" action="">
-              <div class="form-group">
-                <label for="fornecedor">Saram</label>
-                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram2" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_2['saram']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="fornecedor">CPF</label>
-                <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf2" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_2['cpf']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="">Posto</label>
-                <select class="form-control mr-2" id="txtposto2" name="txtposto2" required>
-                  <!--<option value="" disabled selected hidden><?php echo $res_2['posto']; ?></option>-->
-                  <option value="" disabled selected hidden>Selecione o posto...</option>
-                  <?php
-                  $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
-                  $result_posto = mysqli_query($conexao, $query_posto);
-                  while ($res_p = mysqli_fetch_array($result_posto)) {
-                    $id_p = $res_p['id'];
-                    $posto_p = $res_p['posto'];
-                  ?>
-                    <option value="<?php echo $id_p ?>"><?php echo $posto_p ?></option>
-                  <?php
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="">Situação</label><br>
-                <div class="custom-control custom-radio">
-                  <label class="container">Ativo
-                    <input type="radio" value="AT" name="txtsituacao2">
-                    <span class="checkmark"></span>
-                  </label>
+              <div class="row">
+                <div class="form-group col-4">
+                  <label for="fornecedor">Saram</label>
+                  <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram2" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_2['saram']; ?>" required>
                 </div>
-                <div class="custom-control custom-radio">
-                  <label class="container">Inativo
-                    <input type="radio" value="R1" name="txtsituacao2">
-                    <span class="checkmark"></span>
-                  </label>
+                <div class="form-group col-4">
+                  <label for="fornecedor">CPF</label>
+                  <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf2" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_2['cpf']; ?>" required>
                 </div>
-                <div class="custom-control custom-radio">
-                  <label class="container">Pensionista
-                    <input type="radio" value="PM" name="txtsituacao2">
-                    <span class="checkmark"></span>
-                  </label>
+                <div class="form-group col-4">
+                  <label for="">Posto</label>
+                  <select class="form-control mr-2" id="txtposto2" name="txtposto2" required>
+                    <!--<option value="" disabled selected hidden><?php echo $res_2['posto']; ?></option>-->
+                    <option value="" disabled selected hidden>Selecione o posto...</option>
+                    <?php
+                    $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
+                    $result_posto = mysqli_query($conexao, $query_posto);
+                    while ($res_p = mysqli_fetch_array($result_posto)) {
+                      $id_p = $res_p['id'];
+                      $posto_p = $res_p['posto'];
+                    ?>
+                      <option value="<?php echo $id_p ?>"><?php echo $posto_p ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <label for="">Situação</label><br>
+                  <div class="custom-control custom-radio col-4">
+                    <label class="container">Ativo
+                      <input type="radio" value="AT" name="txtsituacao2">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="custom-control custom-radio col-4">
+                    <label class="container">Veterano
+                      <input type="radio" value="R1" name="txtsituacao2">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="custom-control custom-radio col-4">
+                    <label class="container">Pensionista
+                      <input type="radio" value="PM" name="txtsituacao2">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
                 </div>
               </div>
               <div class="form-group">
@@ -615,8 +623,7 @@ if (isset($_POST['button'])) {
       }
     }
   }
-
-  //CONSULTAR PROCESSOS  
+  //CONSULTAR PROCESSOS
 
 } else if (@$_GET['func'] == 'consulta') {
   $id = $_GET['id'];

@@ -255,18 +255,18 @@ login('EXANT', '../../');
 
 										if (isset($_GET['buttonPesquisar']) and $_GET['txtnome'] != '') {
 											$nome = '%' . $_GET['txtnome'] . '%';
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.nome LIKE '$nome' order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.nome LIKE '$nome' order by e.id asc";
 										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
 											$saram_filtro = $_GET['txtsaram3'] . '%';
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram_filtro' order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram_filtro' order by e.id asc";
 										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtdirpleiteado'] != '') {
 											$dir_pleiteado = $_GET['txtdirpleiteado'] . '%';
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE d.id = '$dir_pleiteado' order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE d.id = '$dir_pleiteado' order by e.id asc";
 										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtestadofiltro'] != '') {
 											$estado_filtro = $_GET['txtestadofiltro'];
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE est.id = '$estado_filtro' order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE est.id = '$estado_filtro' order by e.id asc";
 										} else {
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
 										}
 
 										$result = mysqli_query($conexao, $query);
@@ -301,7 +301,7 @@ login('EXANT', '../../');
 													$requerente = $res_1["req_nome"];
 													$sacador = $res_1["mil_nome"];
 													$nup = $res_1["nup"];
-													$prioridade = $res_1["prioridade"];
+													$dt_nascimento = $res_1["data_nascimento"];
 													$data_criacao = $res_1["data_criacao"];
 													$direito_pleiteado = $res_1["dir_direito"];
 													$secao_origem = $res_1["sec_origem"];
@@ -333,12 +333,10 @@ login('EXANT', '../../');
 														<td class="align-middle"><?php echo $nup; ?></td>
 														<td class="align-middle">
 															<?php
-															if ($prioridade == 'SIM') {
-																echo '<img src="../../dist/icons/accept-colored.svg" style="height: 20px; width:20px;"/>';
-															} else if ($prioridade == 'NÃO') {
-																echo '<img src="../../dist/icons/delete-colored.svg" style="height: 20px; width:20px;"/>';
+															if (descobrirIdade($dt_nascimento) >= 60) {
+																echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width:25px;"/>';
 															} else {
-																echo $prioridade;
+																echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width:25px;"/>';
 															} ?>
 														</td>
 														<td class="align-middle"><?php echo data($data_criacao); ?></td>
@@ -477,24 +475,6 @@ login('EXANT', '../../');
 											<input type="text" class="form-control mr-2" id="txtnup" name="txtnup" placeholder="00000.000000/0000-00" autocomplete="off" required>
 										</div>
 										<div class="col-sm-2"></div>
-										<div class="form-group col-sm-7">
-											<div class="col-sm-2"></div>
-											<div class="col-sm-10">
-												<label class="" for="txtprioridade" style="margin-left: 20px; text-align: center;">Prioridade Lei nº 10.741
-													(Estatuto do Idoso)</label>
-												<div class="col-sm-5"></div>
-												<div class="col-sm-4">
-													<div class="custom-control custom-radio">
-														<input class="custom-control-input" type="radio" id="customRadio1" name="txtprioridade" value="SIM">
-														<label for="customRadio1" class="custom-control-label">SIM</label>
-													</div>
-													<div class="custom-control custom-radio">
-														<input class="custom-control-input" type="radio" id="customRadio2" name="txtprioridade" value="NÃO">
-														<label for="customRadio2" class="custom-control-label">NÃO</label>
-													</div>
-												</div>
-											</div>
-										</div>
 									</div>
 									<br>
 									<div class="row">
@@ -690,7 +670,7 @@ if (isset($_POST['button'])) {
 		exit();
 	}
 
-	$query = "INSERT INTO exercicioanterior (saram, cpf, requerente, sacador, nup, prioridade, data_criacao, direito_pleiteado, secao_origem, data_saida, estado, secao_atual) VALUES ('$cpf', '$cpf', '$cpf', '$sacador', '$nup', '$prioridade', '$data_criacao', '$direito', '$secao_origem','$data_criacao', '$id_estado', '$secao_origem')";
+	$query = "INSERT INTO exercicioanterior (saram, cpf, requerente, sacador, nup, data_criacao, direito_pleiteado, secao_origem, data_saida, estado, secao_atual) VALUES ('$cpf', '$cpf', '$cpf', '$sacador', '$nup', '$data_criacao', '$direito', '$secao_origem','$data_criacao', '$id_estado', '$secao_origem')";
 
 	$result = mysqli_query($conexao, $query);
 
@@ -703,14 +683,14 @@ if (isset($_POST['button'])) {
 	//Função para EXCLUIR o registro
 } else if (@$_GET['func'] == 'deleta') {
 	$id = $_GET['id'];
-	$query = "DELETE FROM exercicioanterior where id = '$id'";
+	$query = "DELETE FROM exercicioanterior WHERE id = '$id'";
 	mysqli_query($conexao, $query);
 	Alerta("success", "Excluído com sucesso!", false, "processos_exant.php");
 
 	//Função para EDITAR o registro
 } else if (@$_GET['func'] == 'edita') {
 	$id_ed = $_GET['id'];
-	$query_ed = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id_ed'";
+	$query_ed = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id_ed'";
 
 	$result_ed = mysqli_query($conexao, $query_ed);
 	while ($res_1 = mysqli_fetch_array($result_ed)) {
@@ -796,34 +776,6 @@ if (isset($_POST['button'])) {
 								<div class="col-sm-2"></div>
 								<div class="form-group col-sm-7">
 									<div class="col-sm-2"></div>
-									<div class="col-sm-10">
-										<label class="" for="txtprioridade" style="margin-left: 20px; text-align: center;">Prioridade Lei nº 10.741 (Estatuto do
-											Idoso)</label>
-										<div class="col-sm-5"></div>
-										<div class="col-sm-4">
-											<?php
-											if ($res_1["prioridade"] == 'SIM') { ?>
-												<div class="custom-control custom-radio">
-													<input class="custom-control-input" type="radio" id="customRadio3" name="txtprioridade2" value="SIM" checked>
-													<label for="customRadio3" class="custom-control-label">SIM</label>
-												</div>
-												<div class="custom-control custom-radio">
-													<input class="custom-control-input" type="radio" id="customRadio4" name="txtprioridade2" value="NÃO">
-													<label for="customRadio4" class="custom-control-label">NÃO</label>
-												</div>
-											<?php
-											} else { ?>
-												<div class="custom-control custom-radio">
-													<input class="custom-control-input" type="radio" id="customRadio3" name="txtprioridade2" value="SIM">
-													<label for="customRadio3" class="custom-control-label">SIM</label>
-												</div>
-												<div class="custom-control custom-radio">
-													<input class="custom-control-input" type="radio" id="customRadio4" name="txtprioridade2" value="NÃO" checked>
-													<label for="customRadio4" class="custom-control-label">NÃO</label>
-												</div>
-											<?php } ?>
-										</div>
-									</div>
 								</div>
 							</div>
 							<br>
@@ -892,7 +844,6 @@ if (isset($_POST['button'])) {
 			$cpf_edita = $_POST['txtcpf2'];
 			$sacador_edita = $_POST['funcionario2'];
 			$nup_edita = $_POST['txtnup2'];
-			$prioridade_edita = $_POST['txtprioridade2'];
 			$data_criacao_edita = $_POST['txtdatacriacao2'];
 			$direito_edita = $_POST['txtdireitopleiteado2'];
 			$secao_origem_edita = $_POST['txtsecaoorigem2'];
@@ -909,7 +860,7 @@ if (isset($_POST['button'])) {
 				}
 			}
 
-			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', sacador = '$sacador_edita', nup = '$nup_edita', prioridade = '$prioridade_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
+			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', sacador = '$sacador_edita', nup = '$nup_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
 
 			$result_editar = mysqli_query($conexao, $query_editar);
 
