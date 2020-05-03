@@ -295,9 +295,9 @@ login('ADMIN', '../../');
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
 
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id WHERE nome LIKE '$nome' ORDER BY m.id ASC";
+                      $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE nome LIKE '$nome' ORDER BY m.id ASC";
                     } else {
-                      $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id ORDER BY m.id ASC";
+                      $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id ORDER BY m.id ASC";
                     }
 
                     $result = mysqli_query($conexao, $query);
@@ -328,7 +328,7 @@ login('ADMIN', '../../');
                           $posto = $res_1['nome_posto'];
                           $nome = $res_1['nome'];
                           $nomeguerra = $res_1['nomeguerra'];
-                          $perfil = $res_1['perfil'];
+                          $perfil = $res_1['nome_perfil'];
                           $status = $res_1['status'];
                           $data = $res_1['data'];
                         ?>
@@ -424,7 +424,7 @@ login('ADMIN', '../../');
                       <select class="form-control mr-2" name="txtposto" required>
                         <option value="" disabled selected hidden>Selecione o posto...</option>
                         <?php
-                        $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
+                        $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
                         $result_posto = mysqli_query($conexao, $query_posto);
                         while ($res_ex = mysqli_fetch_array($result_posto)) {
                           $id_ex = $res_ex['id'];
@@ -635,9 +635,14 @@ if (isset($_POST['button'])) {
   //EDITAR REGISTRO DA TABELA
 } elseif (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
-  $query = "SELECT * FROM militares WHERE id = '$id'";
+  $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id as id_posto, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id as id_perfil, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE m.id = '$id'";
   $result = mysqli_query($conexao, $query);
-  while ($res_1 = mysqli_fetch_array($result)) { ?>
+  while ($res_1 = mysqli_fetch_array($result)) {
+      $id_posto = $res_1['id_posto'];
+      $id_perfil = $res_1['id_perfil'];
+      $posto = $res_1['nome_posto'];
+      $perfil = $res_1['nome_perfil'];
+      ?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered">
@@ -659,7 +664,7 @@ if (isset($_POST['button'])) {
               <div class="form-group">
                 <label for="id_produto">Posto/Grad.</label>
                 <select class="form-control mr-2" name="txtposto" required>
-                  <option value="" disabled selected hidden>Selecione o posto...</option>
+                  <option value="<?php echo $id_posto ?>" selected><?php echo $posto ?></option>
                   <?php
                   $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
                   $result_posto = mysqli_query($conexao, $query_posto);
@@ -684,7 +689,7 @@ if (isset($_POST['button'])) {
               <div class="form-group">
                 <label for="id_produto">Perfil</label>
                 <select name="perfil" class="form-control mr-2" id="category" name="category" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['perfil']; ?></option>
+                  <option value="<?php echo $id_perfil; ?>" selected><?php echo $perfil; ?></option>
                   <?php
                   $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
                   $result = mysqli_query($conexao, $query);

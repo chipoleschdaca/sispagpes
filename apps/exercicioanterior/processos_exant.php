@@ -740,7 +740,7 @@ if (isset($_POST['button'])) {
 								<div class="form-group col-sm-7">
 									<label for="">Requerente</label>
 									<select class="form-control select2" name="txtcpf2" required>
-										<option value="" disabled selected hidden><?php echo $res_1["req_saram"]; ?> |
+										<option value="<?php echo $res_1["id_req"]; ?>" selected><?php echo $res_1["req_saram"]; ?> |
 											<?php echo $res_1["req_nome"]; ?></option>
 										<?php
 										$query_consulta_requerente = "SELECT * FROM requerentes ORDER BY nome asc";
@@ -755,7 +755,7 @@ if (isset($_POST['button'])) {
 								<div class="form-group col-sm-5">
 									<label for="fornecedor">Usuário</label>
 									<select class="form-control" name="funcionario2" required>
-										<option value="" disabled selected hidden><?php echo $res_1["mil_nome"]; ?></option>
+										<option value="<?php echo $res_1["id_mil"]; ?>"selected><?php echo $res_1["mil_nome"]; ?></option>
 										<?php
 										$query_mil = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";
 										$result_mil = mysqli_query($conexao, $query_mil);
@@ -788,7 +788,7 @@ if (isset($_POST['button'])) {
 								<div class="form-group col-sm-7">
 									<label>Direito Pleiteado</label>
 									<select class="form-control select2" id="txtdireitopleiteado2" name="txtdireitopleiteado2" required>
-										<option value="" disabled selected hidden><?php echo $res_1["dir_direito"]; ?></option>
+										<option value="<?php echo $res_1["id_dir"]; ?>" selected><?php echo $res_1["dir_direito"]; ?></option>
 										<?php
 										$query_direito = "SELECT * FROM tb_direitoPleiteado_exant WHERE status = 'Aprovado' ORDER BY direito ASC";
 										$result_direito = mysqli_query($conexao, $query_direito);
@@ -807,7 +807,7 @@ if (isset($_POST['button'])) {
 								<div class="form-group col-sm-6">
 									<label>Seção de Origem</label>
 									<select class="form-control select2" id="txtsecaoorigem2" name="txtsecaoorigem2" required>
-										<option value="" disabled selected hidden><?php echo $res_1['sec_origem']; ?></option>
+										<option value="<?php echo $res_1['id_sec']; ?>" selected><?php echo $res_1['sec_origem']; ?></option>
 										<?php
 										$query_secao = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
 										$result_secao = mysqli_query($conexao, $query_secao);

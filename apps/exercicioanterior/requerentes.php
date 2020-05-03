@@ -497,8 +497,6 @@ if (isset($_POST['button'])) {
   $dtnascimento = data_db($_POST['txtdtnascimento']);
   $email = strtolower($_POST['txtemail']);
 
-
-
   //Verificar se o CPF já está cadastrado
 
   $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
