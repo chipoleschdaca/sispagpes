@@ -389,6 +389,35 @@ login('EXANT', '../../');
       });
     });
   </script>
+  <script>
+    $(document).ready(function() {
+      $("#dtNascimento2").hide();
+      $("input[name$='txtsituacao2']").click(function() {
+        var test = $(this).val();
+        if (test == 'R1') {
+          $("#dtNascimento2").show();
+        } else if (test == 'PM') {
+          $("#dtNascimento2").show();
+        } else {
+          $("#dtNascimento2").hide();
+          $("#txtdtnascimento2").removeAttr("required");
+        }
+      });
+    });
+  </script>
+  <script>
+    $("input[name$='txtsituacao2']").ready(function() {
+      var test2 = $("input[name$='txtsituacao2']:checked").val();
+      if (test2 == 'R1') {
+        $("#dtNascimento2").show();
+      } else if (test2 == 'PM') {
+        $("#dtNascimento2").show();
+      } else {
+        $("#dtNascimento2").hide();
+        $("#txtdtnascimento2").removeAttr("required");
+      }
+    });
+  </script>
 </body>
 <style>
   /* The container */
@@ -503,7 +532,7 @@ if (isset($_POST['button'])) {
   // EDITAR REGISTRO
 } else if (@$_GET['func'] == 'edita') {
   $id_ed = $_GET['id'];
-  $query_ed = "SELECT * FROM requerentes WHERE id = '$id_ed'";
+  $query_ed = "SELECT r.id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, p.id as id_posto, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE r.id = '$id_ed'";
   $result_ed = mysqli_query($conexao, $query_ed);
   while ($res_2 = mysqli_fetch_array($result_ed)) {
 ?>
@@ -529,8 +558,7 @@ if (isset($_POST['button'])) {
                 <div class="form-group col-4">
                   <label for="">Posto</label>
                   <select class="form-control mr-2" id="txtposto2" name="txtposto2" required>
-                    <!--<option value="" disabled selected hidden><?php echo $res_2['posto']; ?></option>-->
-                    <option value="" disabled selected hidden>Selecione o posto...</option>
+                    <option value="<?php echo $res_2['id_posto']; ?>" selected><?php echo $res_2['nome_posto']; ?></option>
                     <?php
                     $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
                     $result_posto = mysqli_query($conexao, $query_posto);
@@ -546,26 +574,79 @@ if (isset($_POST['button'])) {
                 </div>
               </div>
               <div class="row">
-                <div class="form-group">
-                  <label for="">Situação</label><br>
-                  <div class="custom-control custom-radio col-4">
-                    <label class="container">Ativo
-                      <input type="radio" value="AT" name="txtsituacao2">
-                      <span class="checkmark"></span>
-                    </label>
+                <?php if ($res_2['situacao'] == 'AT') { ?>
+                  <div class="form-group">
+                    <label for="">Situação</label><br>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Ativo
+                        <input type="radio" value="AT" name="txtsituacao2" checked>
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Veterano
+                        <input type="radio" value="R1" name="txtsituacao2">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Pensionista
+                        <input type="radio" value="PM" name="txtsituacao2">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
                   </div>
-                  <div class="custom-control custom-radio col-4">
-                    <label class="container">Veterano
-                      <input type="radio" value="R1" name="txtsituacao2">
-                      <span class="checkmark"></span>
-                    </label>
+                <?php
+                } elseif ($res_2['situacao'] == 'R1') { ?>
+                  <div class="form-group">
+                    <label for="">Situação</label><br>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Ativo
+                        <input type="radio" value="AT" name="txtsituacao2">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Veterano
+                        <input type="radio" value="R1" name="txtsituacao2" checked>
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Pensionista
+                        <input type="radio" value="PM" name="txtsituacao2">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
                   </div>
-                  <div class="custom-control custom-radio col-4">
-                    <label class="container">Pensionista
-                      <input type="radio" value="PM" name="txtsituacao2">
-                      <span class="checkmark"></span>
-                    </label>
+                <?php
+                } elseif ($res_2['situacao'] == 'PM') { ?>
+                  <div class="form-group">
+                    <label for="">Situação</label><br>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Ativo
+                        <input type="radio" value="AT" name="txtsituacao2">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Veterano
+                        <input type="radio" value="R1" name="txtsituacao2">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio col-4">
+                      <label class="container">Pensionista
+                        <input type="radio" value="PM" name="txtsituacao2" checked>
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
                   </div>
+                <?php } ?>
+                <div class="col-2"></div>
+                <div class="form-group col-4" id="dtNascimento2">
+                  <label for="">Dt. Nascimento</label>
+                  <input type="text" class="form-control mr-2" id="txtdtnascimento2" name="txtdtnascimento2" value="<?php echo data_show($res_2['dt_nascimento']); ?>" autocomplete="off" required>
                 </div>
               </div>
               <div class="form-group">
@@ -596,6 +677,7 @@ if (isset($_POST['button'])) {
       $cpf_ed = $_POST['txtcpf2'];
       $posto_ed = $_POST['txtposto2'];
       $situacao_ed = $_POST['txtsituacao2'];
+      $dtnascimento2 = data_db($_POST['txtdtnascimento2']);
       $nome_ed = strtoupper($_POST['txtnome2']);
       $email_ed = strtolower($_POST['txtemail2']);
 
@@ -612,7 +694,7 @@ if (isset($_POST['button'])) {
         }
       }
 
-      $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
+      $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', dt_nascimento = '$dtnascimento2',nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
 
       $result_editar = mysqli_query($conexao, $query_editar);
 
@@ -627,7 +709,7 @@ if (isset($_POST['button'])) {
 
 } else if (@$_GET['func'] == 'consulta') {
   $id = $_GET['id'];
-  $query = "select * from requerentes where id = '$id'";
+  $query = "SELECT * FROM requerentes WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
     ?>
@@ -653,7 +735,7 @@ if (isset($_POST['button'])) {
             <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
               <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
               <?php
-              $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.prioridade, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.requerente = '$id' ORDER BY e.id asc";
+              $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.requerente = '$id' ORDER BY e.id asc";
               $result = mysqli_query($conexao, $query);
               $row = mysqli_num_rows($result);
               if ($row > 0) {
