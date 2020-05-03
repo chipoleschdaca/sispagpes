@@ -14,67 +14,45 @@ $res_nup   = mysqli_fetch_array($result);
 $nup       = $res_nup["nup"];
 
 $id_req = $_GET['id_req'];
-$query_req = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
+$query_req = "SELECT r.posto, r.situacao, r.nome, r.dt_nascimento, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
 $result_req = mysqli_query($conexao, $query_req);
 $row_req = mysqli_num_rows($result_req);
 $res_1 = mysqli_fetch_array($result_req);
 $requerente = $res_1['nome'];
 $posto = $res_1['nome_posto'];
 $situacao = $res_1["situacao"];
-
+$dtNascimento = $res_1['dt_nascimento'];
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head lang="pt-br">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?php echo $nup ?></title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap 4 -->
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../../dist/css/page_a4.css">
+  <?php head('../../../') ?>
   <link rel="stylesheet" href="../../../dist/css/html_print.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- Material Design-->
-  <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-
-<style>
-  body {
-    font-size: 12px;
-  }
-</style>
 
 <body>
   <!-- Main content -->
-  <div class="wrapper" id="geraPDF">
-    <div class="cabecalho">
-      <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8" style="padding-left: 25px;">
-          <div style="text-align: center; margin-bottom:20px">
-            <img src="../../../dist/icons/brasao-do-brasil-republica.png" style="width:70px; height: 70px; margin:10px;"><br>
-            <h5><b>MINISTÉRIO DA DEFESA</b></h5>
-            <h5 style="text-decoration: underline">COMANDO DA AERONÁUTICA</h5>
-            <h5>GRUPAMENTO DE APOIO DE LAGOA SANTA</h5>
-          </div>
-          <h6>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></strong></h6>
-          <h6>Processo nº: <strong><?php echo $nup ?></strong></h6>
-        </div>
+  <div class="page" id="geraPDF">
+    <div class="subpage">
+      <div class="col-sm-12" align="right" style="margin: 0">
+        <?php
+        if (descobrirIdade($dtNascimento) >= 60) {
+          echo '<h1><span class="badge badge-danger" style="border: none;">PRIORIDADE</span></h1>';
+        } else {
+          echo '';
+        } ?> </div>
+      <div style="text-align: center; margin-bottom:15px">
+        <img src="../../../dist/icons/brasao-do-brasil-republica.png" style="width:2cm; height: 2cm; margin:10px;"><br>
+        <h5><b>MINISTÉRIO DA DEFESA</b></h5>
+        <h5 style="text-decoration: underline">COMANDO DA AERONÁUTICA</h5>
+        <h5>GRUPAMENTO DE APOIO DE LAGOA SANTA</h5>
       </div>
-    </div>
-    <div class=" row">
-      <div class="col-sm-2"></div>
-      <div class="table-responsive col-sm-8" style="border-radius: 3px; margin: 20px; width: 95%;">
+      <h6>Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $requerente ?></strong></h6>
+      <h6>Processo nº: <strong><?php echo $nup ?></strong></h6>
+      <div class="table-responsive" style="border-radius: 3px;" align="middle">
         <?php
         $query2 = "SELECT h.id as id_hist, h.data_anterior,h.data_novo, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant as obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_anterior, s.secao as s_anterior, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY h.data_novo";
         $result2 = mysqli_query($conexao, $query2);
@@ -173,7 +151,7 @@ $situacao = $res_1["situacao"];
                   }
                 } elseif ($old_secao == 'SDPP') {
                   if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) > 0) {
-                    echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . diferenca($prazo_sdpp_cons, $data_novo) . '</td>';
+                    echo '<td class="align-middle" style="background-color: rgba(255,0,0,0.5); text-align:center;">' . diferenca($prazo_sdpp_cons, $data_novo) . '</td>';
                   } elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
                     echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . diferenca($prazo_sdpp_cons, $data_novo) . '</td>';
                   } else {
@@ -197,7 +175,7 @@ $situacao = $res_1["situacao"];
     </div>
   </div>
   <div id="editor"></div>
-  <div class="row no-print">
+  <div class="row no-print" style="visibility: visible">
     <div class="col-12" id="print_button">
       <button class="print-btn2" onclick="js:window.print();"><img src="../../../dist/icons/printer-colored.svg"></button>
       <button class="print-btn2" id="exportpdf" type="button"><img src="../../../dist/icons/pdf_file-colored.svg"></button>
