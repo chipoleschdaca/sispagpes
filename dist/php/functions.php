@@ -103,8 +103,6 @@ function javascript($diretorio)
   <!--DataTables-->
   <script type="text/javascript" charset="utf8" src="<?php echo $diretorio ?>plugins/datatables/jquery.dataTables.js"></script>
   <script type="text/javascript" charset="utf8" src="<?php echo $diretorio ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-  <!-- Funções gerais em javascript -->
-  <script src="<?php echo $diretorio ?>dist/js/functions.js"></script>
 
   <script>
     $(document).ready(function() {

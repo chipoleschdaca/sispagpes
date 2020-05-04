@@ -692,7 +692,7 @@ if (isset($_POST['button'])) {
         }
       }
 
-      $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', dt_nascimento = '$dtnascimento2',nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
+      $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', dt_nascimento = '$dtnascimento2', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
 
       $result_editar = mysqli_query($conexao, $query_editar);
 
