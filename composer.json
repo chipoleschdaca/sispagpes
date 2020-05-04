@@ -1,0 +1,13 @@
+{
+    "name": "danielchipolesch/sispagpes",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Chipolesch",
+            "email": "danielchipolesch@gmail.com"
+        }
+    ],
+    "require": {
+        "mpdf/mpdf": "^8.0"
+    }
+}
