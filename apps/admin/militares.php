@@ -457,11 +457,11 @@ login('ADMIN', '../../');
                       <select name="perfil" class="form-control mr-2" id="category" name="category" required>
                         <option value="" disabled selected hidden>Perfil</option>
                         <?php
-                        $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
+                        $query = "SELECT * FROM perfis ORDER BY perfil asc";
                         $result = mysqli_query($conexao, $query);
                         while ($res_1 = mysqli_fetch_array($result)) {
                         ?>
-                          <option value="<?php echo $res_1['perfil']; ?>"><?php echo $res_1['perfil']; ?></option>
+                          <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['perfil']; ?></option>
                         <?php
                         }
                         ?>
@@ -691,11 +691,11 @@ if (isset($_POST['button'])) {
                 <select name="perfil" class="form-control mr-2" id="category" name="category" required>
                   <option value="<?php echo $id_perfil; ?>" selected><?php echo $perfil; ?></option>
                   <?php
-                  $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
+                  $query = "SELECT * FROM perfis ORDER BY perfil asc";
                   $result = mysqli_query($conexao, $query);
                   while ($res_2 = mysqli_fetch_array($result)) {
                   ?>
-                    <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
+                    <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['perfil']; ?></option>
                   <?php
                   }
                   ?>

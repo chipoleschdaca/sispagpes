@@ -456,7 +456,7 @@ login('EXANT', '../../');
 											<select class="form-control" name="funcionario">
 												<option value="" disabled selected hidden>Escolha um usuário</option>
 												<?php
-												$query = "SELECT * FROM militares WHERE perfil = 'EXANT' ORDER BY nome asc";
+												$query = "SELECT * FROM militares WHERE perfil = '5' ORDER BY nome asc";
 												$result = mysqli_query($conexao, $query);
 												while ($res_1 = mysqli_fetch_array($result)) {
 												?>
@@ -757,7 +757,7 @@ if (isset($_POST['button'])) {
 									<select class="form-control" name="funcionario2" required>
 										<option value="<?php echo $res_1["id_mil"]; ?>"selected><?php echo $res_1["mil_nome"]; ?></option>
 										<?php
-										$query_mil = "SELECT * FROM militares where perfil = 'EXANT' ORDER BY nome asc";
+										$query_mil = "SELECT * FROM militares where perfil = '5' ORDER BY nome asc";
 										$result_mil = mysqli_query($conexao, $query_mil);
 										while ($res_mil = mysqli_fetch_array($result_mil)) {
 										?>
