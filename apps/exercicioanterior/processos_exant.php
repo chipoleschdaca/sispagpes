@@ -453,19 +453,14 @@ login('EXANT', '../../');
 										</div>
 										<div class="form-group col-sm-5">
 											<label for="fornecedor">Usuário</label>
-											<select class="form-control" name="funcionario">
-												<option value="" disabled selected hidden>Escolha um usuário</option>
-												<?php
-												$query = "SELECT * FROM militares WHERE perfil = '5' ORDER BY nome asc";
-												$result = mysqli_query($conexao, $query);
-												while ($res_1 = mysqli_fetch_array($result)) {
-												?>
-													<option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?>
-													</option>
-												<?php
-												}
-												?>
-											</select>
+											<?php
+											$id_perfil = $_SESSION['id_perfil'];
+											$id_militar = $_SESSION['id_militar'];
+											$query = "SELECT * FROM militares WHERE id = '$id_militar' AND perfil = '$id_perfil'";
+											$result = mysqli_query($conexao, $query);
+											$res_1 = mysqli_fetch_array($result);
+											?>
+											<input type="text" class="form-control mr-2" name="funcionario" value="<?php echo $_SESSION['nome_usuario'] ?>" disabled>
 										</div>
 									</div>
 									<br>
@@ -654,7 +649,6 @@ if (isset($_POST['button'])) {
 	$cpf = $_POST['txtcpf'];
 	$sacador = $_POST['funcionario'];
 	$nup = $_POST['txtnup'];
-	$prioridade = $_POST['txtprioridade'];
 	$data_criacao = $_POST['txtdatacriacao'];
 	$direito = $_POST['txtdireitopleiteado'];
 	$secao_origem = $_POST['txtsecaoorigem'];
@@ -670,7 +664,7 @@ if (isset($_POST['button'])) {
 		exit();
 	}
 
-	$query = "INSERT INTO exercicioanterior (saram, cpf, requerente, sacador, nup, data_criacao, direito_pleiteado, secao_origem, data_saida, estado, secao_atual) VALUES ('$cpf', '$cpf', '$cpf', '$sacador', '$nup', '$data_criacao', '$direito', '$secao_origem','$data_criacao', '$id_estado', '$secao_origem')";
+	$query = "INSERT INTO exercicioanterior (saram, cpf, requerente, sacador, nup, data_criacao, direito_pleiteado, secao_origem, data_saida, estado, secao_atual) VALUES ('$cpf', '$cpf', '$cpf', '$id_militar', '$nup', '$data_criacao', '$direito', '$secao_origem','$data_criacao', '$id_estado', '$secao_origem')";
 
 	$result = mysqli_query($conexao, $query);
 
@@ -690,7 +684,7 @@ if (isset($_POST['button'])) {
 	//Função para EDITAR o registro
 } else if (@$_GET['func'] == 'edita') {
 	$id_ed = $_GET['id'];
-	$query_ed = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id_ed'";
+	$query_ed = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r ON e.saram = r.id LEFT JOIN militares as m ON e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id_ed'";
 
 	$result_ed = mysqli_query($conexao, $query_ed);
 	while ($res_1 = mysqli_fetch_array($result_ed)) {
@@ -706,7 +700,6 @@ if (isset($_POST['button'])) {
 		$requerente = $res_1["req_nome"];
 		$sacador = $res_1["mil_nome"];
 		$nup = $res_1["nup"];
-		$prioridade = $res_1["prioridade"];
 		$data_criacao = $res_1["data_criacao"];
 		$direito_pleiteado = $res_1["dir_direito"];
 		$secao_origem = $res_1["sec_origem"];
@@ -754,17 +747,14 @@ if (isset($_POST['button'])) {
 								</div>
 								<div class="form-group col-sm-5">
 									<label for="fornecedor">Usuário</label>
-									<select class="form-control" name="funcionario2" required>
-										<option value="<?php echo $res_1["id_mil"]; ?>"selected><?php echo $res_1["mil_nome"]; ?></option>
-										<?php
-										$query_mil = "SELECT * FROM militares where perfil = '5' ORDER BY nome asc";
-										$result_mil = mysqli_query($conexao, $query_mil);
-										while ($res_mil = mysqli_fetch_array($result_mil)) {
-										?>
-											<option value="<?php echo $res_mil['id']; ?>"><?php echo $res_mil['nome']; ?></option>
-										<?php
-										} ?>
-									</select>
+									<?php
+									$id_perfil2 = $_SESSION['id_perfil'];
+									$id_militar2 = $_SESSION['id_militar'];
+									$query = "SELECT * FROM militares WHERE id = '$id_militar2' AND perfil = '$id_perfil2'";
+									$result = mysqli_query($conexao, $query);
+									$res_row = mysqli_fetch_array($result);
+									?>
+									<input type="text" class="form-control mr-2" name="funcionario2" value="<?php echo $_SESSION['nome_usuario'] ?>" disabled>
 								</div>
 							</div>
 							<br>
@@ -860,7 +850,7 @@ if (isset($_POST['button'])) {
 				}
 			}
 
-			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', sacador = '$sacador_edita', nup = '$nup_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
+			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', nup = '$nup_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
 
 			$result_editar = mysqli_query($conexao, $query_editar);
 
@@ -909,6 +899,19 @@ if (isset($_POST['button'])) {
 					</div>
 					<div class="modal-body">
 						<form method="POST" action="">
+							<div class="row">
+								<div class="form-group col-sm-5">
+									<label for="fornecedor">Responsável</label>
+									<?php
+									$id_perfil3 = $_SESSION['id_perfil'];
+									$id_militar3 = $_SESSION['id_militar'];
+									$query = "SELECT * FROM militares WHERE id = '$id_militar3' AND perfil = '$id_perfil3'";
+									$result = mysqli_query($conexao, $query);
+									$res_row = mysqli_fetch_array($result);
+									?>
+									<input type="text" class="form-control mr-2" name="funcionario3" value="<?php echo $_SESSION['nome_usuario'] ?>" disabled>
+								</div>
+							</div>
 							<div class="row">
 								<div class="form-group col-sm-5">
 									<label for="">Data Anterior</label>
@@ -1005,7 +1008,7 @@ if (isset($_POST['button'])) {
 			$novasecao = $_POST['txtnovasecao'];
 			$data_atual = $_POST['txtdataatual'];
 			$obs = $_POST['txtobs'];
-			$query_estado = "UPDATE exercicioanterior set obs = '$obs', data_saida = '$data_atual', estado = '$novoestado', secao_atual = '$novasecao' WHERE id = '$id'";
+			$query_estado = "UPDATE exercicioanterior set sacador = '$id_militar3', obs = '$obs', data_saida = '$data_atual', estado = '$novoestado', secao_atual = '$novasecao' WHERE id = '$id'";
 			$result_estado = mysqli_query($conexao, $query_estado);
 
 			if ($result_estado == '') {
@@ -1054,7 +1057,7 @@ if (isset($_POST['button'])) {
 					<form method="POST" action="">
 						<div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
 							<?php
-							$query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_id_anterior, s.secao as s_anterior, s.prazo_exant as prazo_secao_exant, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id WHERE id_exant = '$id' ORDER BY h.data_novo";
+							$query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.responsavel, m.id as id_militar, m.nome as nome_militar, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_id_anterior, s.secao as s_anterior, s.prazo_exant as prazo_secao_exant, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id LEFT JOIN militares as m ON h.responsavel = m.id WHERE id_exant = '$id' ORDER BY h.data_novo";
 							$result_h = mysqli_query($conexao, $query_h);
 							$row_h = mysqli_num_rows($result_h);
 							?>
@@ -1062,9 +1065,10 @@ if (isset($_POST['button'])) {
 								<thead class="text-primary" style="text-align: center;">
 									<tr>
 										<th class="align-middle">Movimento</th>
+										<th class="align-middle">Responsável</th>
 										<th class="align-middle">Observação</th>
-										<th class="align-middle">Dt. Prazo</th>
 										<th class="align-middle">Dt. Movimento</th>
+										<th class="align-middle">Dt. Prazo</th>
 										<th class="align-middle">Meta</th>
 									</tr>
 								</thead>
@@ -1075,6 +1079,7 @@ if (isset($_POST['button'])) {
 										$data_anterior = $res_h["data_anterior"];
 										$data_novo = $res_h["data_novo"];
 										$id_exant = $res_h["e_nup"];
+										$nome_sacador = $res_h["nome_militar"];
 										$old_estado = $res_h["es_anterior"];
 										$new_estado = $res_h["est_novo"];
 										$old_secao = $res_h["s_anterior"];
@@ -1104,6 +1109,9 @@ if (isset($_POST['button'])) {
 													echo 'Para: ' . '<b>' . $new_secao . '</b>';
 												} ?>
 											</td>
+											<td class="align-middle" style="text-align: center;">
+												<?php echo $nome_sacador; ?>
+											</td>
 											<td class="align-middle">
 												<strong><?php echo $new_estado; ?></strong><br>
 												<?php
@@ -1114,6 +1122,9 @@ if (isset($_POST['button'])) {
 												<?php
 												}
 												?>
+											</td>
+											<td class="align-middle" style="text-align: center;">
+												<?php echo data($data_novo); ?>
 											</td>
 											<?php
 											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
@@ -1126,11 +1137,7 @@ if (isset($_POST['button'])) {
 												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_sdpp_cons) . '</td>';
 											} else {
 												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
-											} ?>
-											<td class="align-middle" style="text-align: center;">
-												<?php echo data($data_novo) ?>
-											</td>
-											<?php
+											}
 											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
 													echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
