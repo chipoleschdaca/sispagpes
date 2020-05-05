@@ -510,7 +510,12 @@ if (isset($_POST['button'])) {
     exit();
   }
 
-  $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, dt_nascimento, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$dtnascimento','$email', curDate() )";
+  if ($dtnascimento != '') {
+    $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, dt_nascimento, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$dtnascimento','$email', curDate() )";
+  } else {
+    $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$email', curDate() )";
+  }
+
 
   $result = mysqli_query($conexao, $query);
 
@@ -692,7 +697,12 @@ if (isset($_POST['button'])) {
         }
       }
 
-      $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', dt_nascimento = '$dtnascimento2', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
+      if ($dtnascimento2 != '') {
+        $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', dt_nascimento = '$dtnascimento2', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
+      } else {
+        $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
+      }
+
 
       $result_editar = mysqli_query($conexao, $query_editar);
 
