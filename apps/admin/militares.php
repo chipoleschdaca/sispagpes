@@ -316,7 +316,7 @@ login('ADMIN', '../../');
                         <th class="align-middle">Nome de Guerra</th>
                         <th class="align-middle">Perfil</th>
                         <th class="align-middle">Status</th>
-                        <th class="align-middle">Data</th>
+                        <th class="align-middle">Dt. Inclusão</th>
                         <th class="align-middle">Ações</th>
                       </thead>
                       <tbody>
@@ -638,11 +638,11 @@ if (isset($_POST['button'])) {
   $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id as id_posto, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id as id_perfil, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE m.id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
-      $id_posto = $res_1['id_posto'];
-      $id_perfil = $res_1['id_perfil'];
-      $posto = $res_1['nome_posto'];
-      $perfil = $res_1['nome_perfil'];
-      ?>
+    $id_posto = $res_1['id_posto'];
+    $id_perfil = $res_1['id_perfil'];
+    $posto = $res_1['nome_posto'];
+    $perfil = $res_1['nome_perfil'];
+    ?>
     <div id="modalEditar" class="modal fade" role="dialog">
       <!---Modal EDITAR --->
       <div class="modal-dialog modal-dialog-centered">
@@ -755,7 +755,7 @@ if (isset($_POST['button'])) {
   // APROVAR NOVA SOLICITAÇÃO
 } elseif (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
-  $query = "select * from militares where id = '$id'";
+  $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id as id_posto, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id as id_perfil, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE m.id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) { ?>
     <div id="modalAprovar" class="modal fade" role="dialog">
@@ -779,7 +779,7 @@ if (isset($_POST['button'])) {
               <div class="form-group">
                 <label for="id_produto">Posto/Grad.</label>
                 <select class="form-control mr-2" name="txtposto" required>
-                  <option value="" disabled selected hidden>Selecione o posto...</option>
+                  <option value="<?php echo $res_1['id_posto']; ?>" selected><?php echo $res_1['nome_posto']; ?></option>
                   <?php
                   $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
                   $result_posto = mysqli_query($conexao, $query_posto);
@@ -804,13 +804,13 @@ if (isset($_POST['button'])) {
               <div class="form-group">
                 <label for="id_produto">Perfil</label>
                 <select name="perfil" class="form-control mr-2" id="category" name="category" required>
-                  <option value="" disabled selected hidden><?php echo $res_1['perfil']; ?></option>
+                  <option value="<?php echo $res_1['id_perfil']; ?>" selected><?php echo $res_1['nome_perfil']; ?></option>
                   <?php
-                  $query = "SELECT perfil FROM perfis ORDER BY perfil asc";
+                  $query = "SELECT * FROM perfis ORDER BY perfil asc";
                   $result = mysqli_query($conexao, $query);
                   while ($res_2 = mysqli_fetch_array($result)) {
                   ?>
-                    <option value="<?php echo $res_2['perfil']; ?>"><?php echo $res_2['perfil']; ?></option>
+                    <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['perfil']; ?></option>
                   <?php }
                   ?>
                 </select>
