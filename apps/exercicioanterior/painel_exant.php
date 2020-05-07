@@ -498,7 +498,7 @@ login('EXANT', '../../');
       ],
       datasets: [{
         data: [<?php echo $count_direito ?>],
-        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#9C0060'],
+        backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
     }
     var donutOptions = {
@@ -515,14 +515,15 @@ login('EXANT', '../../');
           position: 'top',
           fontColor: '#000000',
           fontSize: 16,
-          text: 'DIREITO PLEITEADO'
+          text: 'QUANTIDADE vs. DIREITO PLEITEADO'
         },
         legend: {
           display: true,
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 10,
+            boxWidth: 40
           }
         }
       }
@@ -553,14 +554,15 @@ login('EXANT', '../../');
           position: 'top',
           fontColor: '#000000',
           fontSize: 16,
-          text: 'ESTADO DO PROCESSO'
+          text: 'QUATIDADE vs. ESTADO'
         },
         legend: {
           display: true,
           position: 'right',
           labels: {
             fontColor: 'rgb(0,0,0)',
-            fontSize: 16
+            fontSize: 10,
+            boxWidth: 40
           }
         }
       }
@@ -582,7 +584,7 @@ login('EXANT', '../../');
       responsive: true,
     }
     var barChart1 = new Chart(barChartCanvas1, {
-      type: 'bar',
+      type: 'horizontalBar',
       data: barData1,
       options: {
         scales: {
@@ -638,7 +640,7 @@ login('EXANT', '../../');
       responsive: true,
     }
     var barChart = new Chart(barChartCanvas, {
-      type: 'horizontalBar',
+      type: 'bar',
       data: barData,
       options: {
         animation: {
@@ -668,7 +670,7 @@ login('EXANT', '../../');
           position: 'top',
           fontColor: '#000000',
           fontSize: 16,
-          text: 'QUANTIDADE X POSTO'
+          text: 'QUANTIDADE vs. POSTO'
         },
         legend: {
           display: false,
