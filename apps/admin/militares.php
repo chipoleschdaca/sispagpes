@@ -803,7 +803,7 @@ if (isset($_POST['button'])) {
               </div>
               <div class="form-group">
                 <label for="id_produto">Perfil</label>
-                <select name="perfil" class="form-control mr-2" id="category" name="category" required>
+                <select class="form-control mr-2" id="txtperfil2" name="txtperfil2" required>
                   <option value="<?php echo $res_1['id_perfil']; ?>" selected><?php echo $res_1['nome_perfil']; ?></option>
                   <?php
                   $query = "SELECT * FROM perfis ORDER BY perfil asc";
@@ -835,7 +835,7 @@ if (isset($_POST['button'])) {
       $posto = $_POST['txtposto'];
       $nome = strtoupper($_POST['txtnome']);
       $nomeguerra = strtoupper($_POST['txtnomeguerra']);
-      $perfil = $_POST['perfil'];
+      $perfil2 = $_POST['txtperfil2'];
 
       if ($res_1['cpf'] != $cpf) {
 
@@ -852,7 +852,7 @@ if (isset($_POST['button'])) {
         }
       }
 
-      $query_editar = "UPDATE militares set status = 'Aprovado' where id = '$id'";
+      $query_editar = "UPDATE militares set perfil = '$perfil2', status = 'Aprovado' where id = '$id'";
 
       $result_editar = mysqli_query($conexao, $query_editar);
 
