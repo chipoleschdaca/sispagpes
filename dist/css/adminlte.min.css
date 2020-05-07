@@ -34770,8 +34770,8 @@ a.text-muted:hover {
 /* Buttons */
 .general-btn {
 	background-color: transparent;
-	width: 124px;
-	height: 124px;
+	width: 100px;
+	height: 100px;
 	padding: 0;
 	margin-right: 10px;
 	margin-bottom: 10px;

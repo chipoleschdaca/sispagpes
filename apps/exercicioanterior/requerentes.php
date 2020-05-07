@@ -186,7 +186,7 @@ login('EXANT', '../../');
                   <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
                 </div>
                 <div class="card-body">
-                  <div class="row" style="margin-bottom: 20px;">
+                  <div class="row" style="margin-bottom: 10px;">
                     <div class="col-sm-6">
                       <!-- SEARCH FORM -->
                       <form class="form-inline">
@@ -204,7 +204,7 @@ login('EXANT', '../../');
                       </form>
                     </div>
                   </div>
-                  <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
+                  <div class="table-responsive" style="text-align: center; overflow-x: hidden;">
                     <!-------------LISTAR TODOS OS PROCESSOS-------------->
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
@@ -223,7 +223,7 @@ login('EXANT', '../../');
                     $row = mysqli_num_rows($result);
                     if ($row > 0) {
                     ?>
-                      <table class="table table-sm table-borderless table-striped">
+                      <table class="table table-sm table-borderless table-striped" id="example1">
                         <thead class="text-primary">
                           <th class="align-middle">#</th>
                           <th class="align-middle">Saram</th>
@@ -249,7 +249,7 @@ login('EXANT', '../../');
                             $email = $res_1['email'];
                             $data = data_show($res_1['data']);
                           ?>
-                            <tr>
+                            <tr style="height: 40px;">
                               <td class="align-middle"><?php echo $id; ?></td>
                               <td class="align-middle"><?php echo $saram; ?></td>
                               <td class="align-middle"><?php echo $cpf; ?></td>
@@ -258,7 +258,9 @@ login('EXANT', '../../');
                               <td class="align-middle"><?php echo '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?php echo $nome; ?></td>
                               <td class="align-middle">
                                 <?php
-                                if (descobrirIdade($dt_nascimento) >= 60) {
+                                if (($dt_nascimento) == '0000-00-00'){
+                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+                                } else if(descobrirIdade($dt_nascimento) >= 60) {
                                   echo '<img src="../../dist/icons/accept-colored.svg" style="height: 30px; width:30px;"/>';
                                 } else {
                                   echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
@@ -269,7 +271,7 @@ login('EXANT', '../../');
                               <td class="align-middle">
                                 <a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
                                 <a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" data-toggle="popover" data-content="Excluir" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-danger btn-xs" data-toggle="popover" style="width: 23px;" data-content="Excluir" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                               </td>
                             </tr>
                           <?php } ?>
@@ -373,6 +375,20 @@ login('EXANT', '../../');
     </aside>
   </div>
   <?php echo javascript('../../') ?>
+  <script>
+      $(document).ready(function() {
+          $("#example1").DataTable({
+              "scrollX": false,
+              "scrollY": "350px",
+              "paging": false,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": false,
+              "autoWidth": false,
+          });
+      });
+  </script>
   <script>
     $(document).ready(function() {
       $("#dtNascimento").hide();
@@ -494,7 +510,11 @@ if (isset($_POST['button'])) {
   $posto = $_POST['txtposto'];
   $situacao = $_POST['txtsituacao'];
   $nome = strtoupper($_POST['txtnome']);
-  $dtnascimento = data_db($_POST['txtdtnascimento']);
+  if ($_POST['txtdtnascimento'] == ''){
+    $dtnascimento = data_db('00/00/0000');
+  }else{
+    $dtnascimento = data_db($_POST['txtdtnascimento']);
+  }
   $email = strtolower($_POST['txtemail']);
 
   //Verificar se o CPF já está cadastrado
@@ -509,14 +529,9 @@ if (isset($_POST['button'])) {
     Alerta("info", "CPF já existe!", false, "requerentes.php");
     exit();
   }
-
-  if ($dtnascimento != '') {
-    $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, dt_nascimento, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$dtnascimento','$email', curDate() )";
-  } else {
-    $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$email', curDate() )";
-  }
-
-
+  
+  $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, dt_nascimento, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$dtnascimento','$email', curDate() )";
+  
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
@@ -680,7 +695,11 @@ if (isset($_POST['button'])) {
       $cpf_ed = $_POST['txtcpf2'];
       $posto_ed = $_POST['txtposto2'];
       $situacao_ed = $_POST['txtsituacao2'];
-      $dtnascimento2 = data_db($_POST['txtdtnascimento2']);
+      if ($_POST['txtdtnascimento2'] == ''){
+        $dtnascimento2 = data_db('00/00/0000');
+      } else {
+        $dtnascimento2 = data_db($_POST['txtdtnascimento2']);
+      }
       $nome_ed = strtoupper($_POST['txtnome2']);
       $email_ed = strtolower($_POST['txtemail2']);
 
@@ -696,14 +715,9 @@ if (isset($_POST['button'])) {
           exit();
         }
       }
-
-      if ($dtnascimento2 != '') {
-        $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', dt_nascimento = '$dtnascimento2', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
-      } else {
-        $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
-      }
-
-
+      
+      $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', dt_nascimento = '$dtnascimento2', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
+      
       $result_editar = mysqli_query($conexao, $query_editar);
 
       if ($result_editar == '') {

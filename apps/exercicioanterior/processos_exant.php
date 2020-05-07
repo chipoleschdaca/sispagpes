@@ -10,9 +10,10 @@ login('EXANT', '../../');
 <html lang="pt-br">
 
 <head>
-	<?php head('../../') ?>
 	<!-- DataTables -->
 	<link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+	<?php head('../../') ?>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -189,64 +190,10 @@ login('EXANT', '../../');
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
-								<div class="card-header" style="text-align: center;">
-									<h4 class="align-middle" style="text-align:center;"><strong>EXERCÍCIOS ANTERIORES</strong>
-									</h4>
+								<div class="card-header" style="text-align: center; height: 55px;">
+									<h4 class="align-middle" style="text-align:center;"><strong>EXERCÍCIOS ANTERIORES</strong></h4>
 								</div>
 								<div class="card-body">
-									<form class="form-inline">
-										<div class="input-group input-group-sm">
-											<label for="txtnome" style="margin-right: 5px;">SARAM:</label>
-											<input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-										</div>
-										<div class="input-group input-group-sm">
-											<label for="txtnome" style="margin-right: 5px;">Requerente:</label>
-											<input class="form-control" type="search" id="txtnome" name="txtnome" placeholder="Nome ou parte do nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-										</div>
-										<br>
-										<div class="input-group input-group-sm">
-											<label for="status" style="margin-right: 5px;">Direito Pleiteado: </label>
-											<select class="form-control" id="txtdirpleiteado" name="txtdirpleiteado" style="border-radius:3px; margin-right:20px;">
-												<option value="">Selecione o direito pleiteado</option>
-												<?php
-												$query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado GROUP BY e.direito_pleiteado";
-												$result_direito = mysqli_query($conexao, $query_direito);
-												while ($res_dir = mysqli_fetch_array($result_direito)) {
-													$id = $res_dir['id_direito'];
-													$direito = $res_dir['direito_pleiteado'];
-												?>
-													<option value="<?php echo $id ?>"><?php echo $direito ?></option>
-												<?php
-												}
-												?>
-											</select>
-										</div>
-										<div class="input-group input-group-sm">
-											<label for="status" style="margin-right: 5px;">Estado: </label>
-											<select class="form-control" id="txtestadofiltro" name="txtestadofiltro" style="border-radius:3px; margin-right:20px;">
-												<option value="" selected>Selecione o estado do processo</option>
-												<?php
-												$query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado GROUP BY e.estado";
-												$result_est = mysqli_query($conexao, $query_est);
-												while ($res_est = mysqli_fetch_array($result_est)) {
-													$id_est_2 = $res_est['id_estado'];
-													$estado_est = $res_est['estado_processo'];
-												?>
-													<option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
-												<?php
-												}
-												?>
-											</select>
-										</div>
-										<br>
-										<br>
-										<div class="input-group-append">
-											<button class="btn btn-primary btn-lg" type="submit" name="buttonPesquisar" data-tt="tooltip" title="Filtrar Tabela">
-												<i class="fas fa-search"></i>
-											</button>
-										</div>
-									</form>
-									<br>
 									<div class="table-responsive" style="text-align: center; font-size: 12px;">
 
 										<!-------------LISTAR TODOS OS PROCESSOS-------------->
@@ -333,10 +280,12 @@ login('EXANT', '../../');
 														<td class="align-middle"><?php echo $nup; ?></td>
 														<td class="align-middle">
 															<?php
-															if (descobrirIdade($dt_nascimento) >= 60) {
-																echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width:25px;"/>';
+															if (($dt_nascimento) == '0000-00-00') {
+																echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+															} else if (descobrirIdade($dt_nascimento) >= 60) {
+																echo '<img src="../../dist/icons/accept-colored.svg" style="height: 30px; width:30px;"/>';
 															} else {
-																echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width:25px;"/>';
+																echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
 															} ?>
 														</td>
 														<td class="align-middle"><?php echo data($data_criacao); ?></td>
@@ -388,9 +337,9 @@ login('EXANT', '../../');
 														}
 														?>
 														<td class="align-middle inline-block" id="actionbuttons" style="text-align: center">
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 24px; height: 24px; padding: 0px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">local_shipping</span></a>
+															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 24px; height: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-truck"></i></a>
 															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Histórico" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 24px; height: 24px; padding: 0px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>
+															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 24px; height: 24px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>
 															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="PDF" style="width: 24px; height: 24px;" href="rel/historico_exant_pdf_class.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
 															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Editar" style="width: 24px; height: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-tools"></i></a>
 															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Excluir" style="width: 24px; height: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
@@ -558,12 +507,13 @@ login('EXANT', '../../');
 						}
 					}
 				},
-				"paging": true,
-				"lengthChange": true,
+				"scrollY": "350px",
+				"paging": false,
+				"lengthChange": false,
 				"searching": true,
 				"ordering": true,
-				"info": true,
-				"autoWidth": true,
+				"info": false,
+				"autoWidth": false,
 			});
 		});
 	</script>
@@ -687,178 +637,176 @@ if (isset($_POST['button'])) {
 	$query_ed = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r ON e.saram = r.id LEFT JOIN militares as m ON e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id_ed'";
 
 	$result_ed = mysqli_query($conexao, $query_ed);
-	while ($res_1 = mysqli_fetch_array($result_ed)) {
-		$id_req = $res_1["id_req"];
-		$id_mil = $res_1["id_mil"];
-		$id_dir = $res_1["id_dir"];
-		$id_sec = $res_1["id_sec"];
-		$id_est = $res_1["id_est"];
-		$saram = $res_1['req_saram'];
-		$cpf = $res_1["cpf"];
-		$posto = $res_1["req_posto"];
-		$situacao = $res_1["req_situacao"];
-		$requerente = $res_1["req_nome"];
-		$sacador = $res_1["mil_nome"];
-		$nup = $res_1["nup"];
-		$data_criacao = $res_1["data_criacao"];
-		$direito_pleiteado = $res_1["dir_direito"];
-		$secao_origem = $res_1["sec_origem"];
-		$obs = $res_1["obs"];
-		$data_saida = $res_1["data_saida"];
-		$estado = $res_1["est_estado"];
-		$secao_atual = $res_1['secao_atual'];
+	$res_1 = mysqli_fetch_array($result_ed);
+	$id_req = $res_1["id_req"];
+	$id_mil = $res_1["id_mil"];
+	$id_dir = $res_1["id_dir"];
+	$id_sec = $res_1["id_sec"];
+	$id_est = $res_1["id_est"];
+	$saram = $res_1['req_saram'];
+	$cpf = $res_1["cpf"];
+	$posto = $res_1["req_posto"];
+	$situacao = $res_1["req_situacao"];
+	$requerente = $res_1["req_nome"];
+	$sacador = $res_1["mil_nome"];
+	$nup = $res_1["nup"];
+	$data_criacao = $res_1["data_criacao"];
+	$direito_pleiteado = $res_1["dir_direito"];
+	$secao_origem = $res_1["sec_origem"];
+	$obs = $res_1["obs"];
+	$data_saida = $res_1["data_saida"];
+	$estado = $res_1["est_estado"];
+	$secao_atual = $res_1['secao_atual'];
 ?>
-		<!-- Modal -->
-		<div id="modalEditar" class="modal fade" role="dialog">
-			<div class="modal-dialog modal-dialog-centered modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<?php
-						$id_req = $_GET['id_req'];
-						$query_req = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
-						$result_req = mysqli_query($conexao, $query_req);
-						$res_req = mysqli_fetch_array($result_req);
-						$nome = $res_req['nome'];
-						$posto = $res_req['nome_posto'];
-						$situacao = $res_req["situacao"];
-						?>
-						<h4 class="modal-title" style="text-align:center; width: 100%;">Dados do(a):
-							<strong><?php echo $res_req["nome_posto"], " ", $res_req["situacao"], " ", $res_req["nome"] ?></strong>
-						</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body">
-						<form method="POST" action="">
-							<div class="row">
-								<div class="form-group col-sm-7">
-									<label for="">Requerente</label>
-									<select class="form-control select2" name="txtcpf2" required>
-										<option value="<?php echo $res_1["id_req"]; ?>" selected><?php echo $res_1["req_saram"]; ?> |
-											<?php echo $res_1["req_nome"]; ?></option>
-										<?php
-										$query_consulta_requerente = "SELECT * FROM requerentes ORDER BY nome asc";
-										$result_consulta_requerente = mysqli_query($conexao, $query_consulta_requerente);
-										while ($res_consulta_requerente = mysqli_fetch_array($result_consulta_requerente)) {
-										?>
-											<option value="<?php echo $res_consulta_requerente['id']; ?>"><?php echo $res_consulta_requerente['saram'] . " | " . $res_consulta_requerente['nome']; ?></option>
-										<?php
-										} ?>
-									</select>
-								</div>
-								<div class="form-group col-sm-5">
-									<label for="fornecedor">Usuário</label>
+	<!-- Modal -->
+	<div id="modalEditar" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<?php
+					$id_req = $_GET['id_req'];
+					$query_req = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
+					$result_req = mysqli_query($conexao, $query_req);
+					$res_req = mysqli_fetch_array($result_req);
+					$nome = $res_req['nome'];
+					$posto = $res_req['nome_posto'];
+					$situacao = $res_req["situacao"];
+					?>
+					<h4 class="modal-title" style="text-align:center; width: 100%;">Dados do(a):
+						<strong><?php echo $res_req["nome_posto"], " ", $res_req["situacao"], " ", $res_req["nome"] ?></strong>
+					</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form method="POST" action="">
+						<div class="row">
+							<div class="form-group col-sm-7">
+								<label for="">Requerente</label>
+								<select class="form-control select2" name="txtcpf2" required>
+									<option value="<?php echo $res_1["id_req"]; ?>" selected><?php echo $res_1["req_saram"]; ?> |
+										<?php echo $res_1["req_nome"]; ?></option>
 									<?php
-									$id_perfil2 = $_SESSION['id_perfil'];
-									$id_militar2 = $_SESSION['id_militar'];
-									$query = "SELECT * FROM militares WHERE id = '$id_militar2' AND perfil = '$id_perfil2'";
-									$result = mysqli_query($conexao, $query);
-									$res_row = mysqli_fetch_array($result);
+									$query_consulta_requerente = "SELECT * FROM requerentes ORDER BY nome asc";
+									$result_consulta_requerente = mysqli_query($conexao, $query_consulta_requerente);
+									while ($res_consulta_requerente = mysqli_fetch_array($result_consulta_requerente)) {
 									?>
-									<input type="text" class="form-control mr-2" name="funcionario2" value="<?php echo $_SESSION['nome_usuario'] ?>" disabled>
-								</div>
+										<option value="<?php echo $res_consulta_requerente['id']; ?>"><?php echo $res_consulta_requerente['saram'] . " | " . $res_consulta_requerente['nome']; ?></option>
+									<?php
+									} ?>
+								</select>
 							</div>
-							<br>
-							<div class="row">
-								<div class="form-group col-sm-3">
-									<label for="quantidade">NUP</label>
-									<input type="text" class="form-control mr-2" id="txtnup2" name="txtnup2" placeholder="00000.000000/0000-00" value="<?php echo $res_1["nup"]; ?>" required>
-								</div>
+							<div class="form-group col-sm-5">
+								<label for="fornecedor">Usuário</label>
+								<?php
+								$id_perfil2 = $_SESSION['id_perfil'];
+								$id_militar2 = $_SESSION['id_militar'];
+								$query = "SELECT * FROM militares WHERE id = '$id_militar2' AND perfil = '$id_perfil2'";
+								$result = mysqli_query($conexao, $query);
+								$res_row = mysqli_fetch_array($result);
+								?>
+								<input type="text" class="form-control mr-2" name="funcionario2" value="<?php echo $_SESSION['nome_usuario'] ?>" disabled>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="quantidade">NUP</label>
+								<input type="text" class="form-control mr-2" id="txtnup2" name="txtnup2" placeholder="00000.000000/0000-00" value="<?php echo $res_1["nup"]; ?>" required>
+							</div>
+							<div class="col-sm-2"></div>
+							<div class="form-group col-sm-7">
 								<div class="col-sm-2"></div>
-								<div class="form-group col-sm-7">
-									<div class="col-sm-2"></div>
-								</div>
 							</div>
-							<br>
-							<div class="row">
-								<div class="form-group col-sm-5">
-									<label for="quantidade">Data de Abertura</label>
-									<input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo $res_1['data_criacao']; ?>" required>
-									<!--<input class="form-control" type="text" id="datepicker" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php data_show($res_1['data_criacao']); ?>">-->
-								</div>
-								<div class="form-group col-sm-7">
-									<label>Direito Pleiteado</label>
-									<select class="form-control select2" id="txtdireitopleiteado2" name="txtdireitopleiteado2" required>
-										<option value="<?php echo $res_1["id_dir"]; ?>" selected><?php echo $res_1["dir_direito"]; ?></option>
-										<?php
-										$query_direito = "SELECT * FROM tb_direitoPleiteado_exant WHERE status = 'Aprovado' ORDER BY direito ASC";
-										$result_direito = mysqli_query($conexao, $query_direito);
-										while ($res_dir = mysqli_fetch_array($result_direito)) {
-											$id_direito = $res_dir['id'];
-											$direito_direito = $res_dir['direito'];
-										?>
-											<option value="<?php echo $id_direito ?>"><?php echo $direito_direito ?></option>
-										<?php
-										} ?>
-									</select>
-								</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="form-group col-sm-5">
+								<label for="quantidade">Data de Abertura</label>
+								<input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo $res_1['data_criacao']; ?>" required>
+								<!--<input class="form-control" type="text" id="datepicker" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php data_show($res_1['data_criacao']); ?>">-->
 							</div>
-							<br>
-							<div class="row">
-								<div class="form-group col-sm-6">
-									<label>Seção de Origem</label>
-									<select class="form-control select2" id="txtsecaoorigem2" name="txtsecaoorigem2" required>
-										<option value="<?php echo $res_1['id_sec']; ?>" selected><?php echo $res_1['sec_origem']; ?></option>
-										<?php
-										$query_secao = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
-										$result_secao = mysqli_query($conexao, $query_secao);
-										while ($res_secao = mysqli_fetch_array($result_secao)) {
-											$id_secao = $res_secao['id'];
-											$secao_secao = $res_secao['secao'];
-										?>
-											<option value="<?php echo $id_secao ?>"><?php echo $secao_secao ?></option>
-										<?php
-										} ?>
-									</select>
-								</div>
-								<div class="form-group col-sm-6">
-									<label for="quantidade">Estado do Processo</label>
-									<input type="text" class="form-control mr-2" id="txtestado2" name="txtestado2" value="<?php echo $res_1["est_estado"]; ?>" disabled>
-								</div>
+							<div class="form-group col-sm-7">
+								<label>Direito Pleiteado</label>
+								<select class="form-control select2" id="txtdireitopleiteado2" name="txtdireitopleiteado2" required>
+									<option value="<?php echo $res_1["id_dir"]; ?>" selected><?php echo $res_1["dir_direito"]; ?></option>
+									<?php
+									$query_direito = "SELECT * FROM tb_direitoPleiteado_exant WHERE status = 'Aprovado' ORDER BY direito ASC";
+									$result_direito = mysqli_query($conexao, $query_direito);
+									while ($res_dir = mysqli_fetch_array($result_direito)) {
+										$id_direito = $res_dir['id'];
+										$direito_direito = $res_dir['direito'];
+									?>
+										<option value="<?php echo $id_direito ?>"><?php echo $direito_direito ?></option>
+									<?php
+									} ?>
+								</select>
 							</div>
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
-								<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
-						</form>
-					</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<label>Seção de Origem</label>
+								<select class="form-control select2" id="txtsecaoorigem2" name="txtsecaoorigem2" required>
+									<option value="<?php echo $res_1['id_sec']; ?>" selected><?php echo $res_1['sec_origem']; ?></option>
+									<?php
+									$query_secao = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
+									$result_secao = mysqli_query($conexao, $query_secao);
+									while ($res_secao = mysqli_fetch_array($result_secao)) {
+										$id_secao = $res_secao['id'];
+										$secao_secao = $res_secao['secao'];
+									?>
+										<option value="<?php echo $id_secao ?>"><?php echo $secao_secao ?></option>
+									<?php
+									} ?>
+								</select>
+							</div>
+							<div class="form-group col-sm-6">
+								<label for="quantidade">Estado do Processo</label>
+								<input type="text" class="form-control mr-2" id="txtestado2" name="txtestado2" value="<?php echo $res_1["est_estado"]; ?>" disabled>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary btn-sm" id="buttonEditar" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+							<button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
+					</form>
 				</div>
 			</div>
 		</div>
-		</section>
-		</div>
-		<script>
-			$("#modalEditar").modal("show");
-		</script>
-		<!--Comando para editar os dados UPDATE -->
-		<?php
-		if (isset($_POST['buttonEditar'])) {
-			$cpf_edita = $_POST['txtcpf2'];
-			$sacador_edita = $_POST['funcionario2'];
-			$nup_edita = $_POST['txtnup2'];
-			$data_criacao_edita = $_POST['txtdatacriacao2'];
-			$direito_edita = $_POST['txtdireitopleiteado2'];
-			$secao_origem_edita = $_POST['txtsecaoorigem2'];
+	</div>
+	</div>
+	<script>
+		$("#modalEditar").modal("show");
+	</script>
+	<!--Comando para editar os dados UPDATE -->
+	<?php
+	if (isset($_POST['buttonEditar'])) {
+		$cpf_edita = $_POST['txtcpf2'];
+		$sacador_edita = $_POST['funcionario2'];
+		$nup_edita = $_POST['txtnup2'];
+		$data_criacao_edita = $_POST['txtdatacriacao2'];
+		$direito_edita = $_POST['txtdireitopleiteado2'];
+		$secao_origem_edita = $_POST['txtsecaoorigem2'];
 
-			if ($res_1['nup'] != $nup_edita) {
-				$query_verificar = "SELECT * FROM exercicioanterior WHERE nup = '$nup_edita'";
-				$result_verificar = mysqli_query($conexao, $query_verificar);
-				$dado_verificar = mysqli_fetch_array($result_verificar);
-				$row_verificar = mysqli_num_rows($result_verificar);
+		if ($res_1['nup'] != $nup_edita) {
+			$query_verificar = "SELECT * FROM exercicioanterior WHERE nup = '$nup_edita'";
+			$result_verificar = mysqli_query($conexao, $query_verificar);
+			$dado_verificar = mysqli_fetch_array($result_verificar);
+			$row_verificar = mysqli_num_rows($result_verificar);
 
-				if ($row_verificar > 0) {
-					Alerta("info", "NUP já existe!", false, "processos_exant.php");
-					exit();
-				}
+			if ($row_verificar > 0) {
+				Alerta("info", "NUP já existe!", false, "processos_exant.php");
+				exit();
 			}
+		}
 
-			$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', nup = '$nup_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
+		$query_editar = "UPDATE exercicioanterior set saram = '$cpf_edita', cpf = '$cpf_edita', requerente = '$cpf_edita', nup = '$nup_edita', data_criacao = '$data_criacao_edita', direito_pleiteado = '$direito_edita', secao_origem = '$secao_origem_edita' where id = '$id_ed'";
 
-			$result_editar = mysqli_query($conexao, $query_editar);
+		$result_editar = mysqli_query($conexao, $query_editar);
 
-			if ($result_editar == '') {
-				Alerta("error", "Não foi possível editar!", false, "processos_exant.php");
-			} else {
-				Alerta("success", "Editado com sucesso!", false, "processos_exant.php");
-			}
+		if ($result_editar == '') {
+			Alerta("error", "Não foi possível editar!", false, "processos_exant.php");
+		} else {
+			Alerta("success", "Editado com sucesso!", false, "processos_exant.php");
 		}
 	}
 	// Função para ALTERAR ESTADO do processo.
@@ -887,7 +835,7 @@ if (isset($_POST['button'])) {
 	$secao_atual = $res_1['sec_atual'];
 	$result = mysqli_query($conexao, $query);
 	while ($res_1 = mysqli_fetch_array($result)) {
-		?>
+	?>
 		<!-- Modal -->
 		<div id="modalEstado" class="modal fade" role="dialog">
 			<div class="modal-dialog modal-dialog-centered modal-lg">
@@ -1065,11 +1013,11 @@ if (isset($_POST['button'])) {
 								<thead class="text-primary" style="text-align: center;">
 									<tr>
 										<th class="align-middle">Movimento</th>
-										<th class="align-middle">Responsável</th>
 										<th class="align-middle">Observação</th>
 										<th class="align-middle">Dt. Movimento</th>
 										<th class="align-middle">Dt. Prazo</th>
 										<th class="align-middle">Meta</th>
+										<th class="align-middle">Responsável</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -1108,9 +1056,6 @@ if (isset($_POST['button'])) {
 													echo 'De:   ' . '<b>' . $old_secao . '</b><br>';
 													echo 'Para: ' . '<b>' . $new_secao . '</b>';
 												} ?>
-											</td>
-											<td class="align-middle" style="text-align: center;">
-												<?php echo $nome_sacador; ?>
 											</td>
 											<td class="align-middle">
 												<strong><?php echo $new_estado; ?></strong><br>
@@ -1180,6 +1125,9 @@ if (isset($_POST['button'])) {
 												}
 											}
 											?>
+											<td class="align-middle" style="text-align: center;">
+												<?php echo $nome_sacador; ?>
+											</td>
 										</tr>
 									<?php } ?>
 								</tbody>

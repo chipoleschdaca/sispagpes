@@ -191,7 +191,7 @@ function Alerta($type, $title, $msg, $location)
           text: '$msg',
           showConfirmButton: false          
         });
-        setTimeout(function() {          
+        setTimeout(function() {
           window.location='$location';
         }, 1500);
         </script>";
