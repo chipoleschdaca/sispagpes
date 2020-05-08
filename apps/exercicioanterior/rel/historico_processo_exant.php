@@ -37,13 +37,16 @@ $dtNascimento = $res_1['dt_nascimento'];
   <!-- Main content -->
   <div class="page" id="geraPDF">
     <div class="subpage">
-      <div class="col-sm-12" align="right" style="margin: 0">
+      <div class="col-sm-12" align="right" style="margin: 0">        
         <?php
-        if (descobrirIdade($dtNascimento) >= 60) {
+        if (($dt_nascimento) == '0000-00-00'){
+          echo '';
+        } else if(descobrirIdade($dt_nascimento) >= 60) {
           echo '<h1><span class="badge badge-danger" style="border: none;">PRIORIDADE</span></h1>';
         } else {
           echo '';
-        } ?> </div>
+        } ?>
+      </div>
       <div style="text-align: center; margin-bottom:15px">
         <img src="../../../dist/icons/brasao-do-brasil-republica.png" style="width:2cm; height: 2cm; margin:10px;"><br>
         <h5><b>MINISTÉRIO DA DEFESA</b></h5>
