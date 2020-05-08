@@ -1073,58 +1073,59 @@ if (isset($_POST['button'])) {
 											</td>
 											<?php
 											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
+											echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
 											} elseif ($old_secao == 'DP-3') {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pagpes_cons) . '</td>';
+											echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pagpes_cons) . '</td>';
 											} elseif ($old_secao == 'ACI-1') {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_controle_cons) . '</td>';
+											echo '<td class="align-middle" style="text-align:center;">' . data($prazo_controle_cons) . '</td>';
 											} elseif ($old_secao == 'SDPP') {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_sdpp_cons) . '</td>';
+											echo '<td class="align-middle" style="text-align:center;">' . data($prazo_sdpp_cons) . '</td>';
 											} else {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
-											}
+											echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
+											}?>
+											<?php
 											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
-											} elseif ($old_secao == 'DP-3') {
+											  } elseif ($old_secao == 'DP-3') {
 												if ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
-											} elseif ($old_secao == 'ACI-1') {
+											  } elseif ($old_secao == 'ACI-1') {
 												if ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . diferenca($prazo_controle_cons, $data_novo) . '</td>';
 												} elseif ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . diferenca($prazo_controle_cons, $data_novo) . '</td>';
 												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
-											} elseif ($old_secao == 'SDPP') {
+											  } elseif ($old_secao == 'SDPP') {
 												if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) > 0) {
-													echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgba(255,0,0,0.5); text-align:center;">' . diferenca($prazo_sdpp_cons, $data_novo) . '</td>';
 												} elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . diferenca($prazo_sdpp_cons, $data_novo) . '</td>';
 												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
-											} else {
+											  } else {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="background-color: rgb(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+												  echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
-											}
-											?>
+											  }
+											  ?>
 											<td class="align-middle" style="text-align: center;">
 												<?php echo $nome_sacador; ?>
 											</td>
