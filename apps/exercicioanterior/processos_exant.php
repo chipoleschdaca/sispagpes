@@ -1035,7 +1035,7 @@ if (isset($_POST['button'])) {
 										$obs_exant = $res_h["obs_exant"];
 
 
-										$query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$secao_atual'";
+										$query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$new_secao'";
 										$result_prazo = mysqli_query($conexao, $query_prazo);
 										$res_prazo = mysqli_fetch_array($result_prazo);
 										$prazo_secao = $res_prazo['prazo_exant'];
