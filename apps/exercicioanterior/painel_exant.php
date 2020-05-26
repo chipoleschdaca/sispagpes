@@ -240,7 +240,6 @@ login('EXANT', '../../');
     $count_secao = "";
     $count_posto = "";
 
-
     // Filtro para POSTO
     if (isset($_GET['buttonPesquisar']) and $_GET['txtposto'] != '') {
 
@@ -489,8 +488,9 @@ login('EXANT', '../../');
   </div>
   <!-- ./wrapper -->
   <?= javascript('../../') ?>
+  <script src="../../dist/js/functions.js"></script>
   <script>
-    var donutChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var donutChartCanvas = document.getElementById('pieChart');
     var donutData = {
       labels: [
         <?= $direito_pleiteado ?>
@@ -499,10 +499,6 @@ login('EXANT', '../../');
         data: [<?= $count_direito ?>],
         backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
-    }
-    var donutOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var donutChart = new Chart(donutChartCanvas, {
       type: 'doughnut',
@@ -518,12 +514,11 @@ login('EXANT', '../../');
             },
             afterLabel: function(tooltipItem, data) {
               var dataset = data['datasets'][0];
-              var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+              var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100);
               return '(' + percent + '%)';
             }
           },
           //backgroundColor: '#FFF',
-
           cornerRadius: 5,
           titleFontSize: 12,
           titleFontColor: '#FFF',
@@ -552,7 +547,7 @@ login('EXANT', '../../');
     })
   </script>
   <script>
-    var donutChartCanvas1 = $('#donutChart').get(0).getContext('2d')
+    var donutChartCanvas1 = document.getElementById('donutChart');
     var donutData1 = {
       labels: [
         <?= $estado ?>
@@ -561,10 +556,6 @@ login('EXANT', '../../');
         data: [<?= $count_estado ?>],
         backgroundColor: ['#9C0060', '#d2d6de', '#f56954', '#f39c12', '#00c0ef', '#00a65a', '#3c8dbc'],
       }]
-    }
-    var donutOptions1 = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var donutChart1 = new Chart(donutChartCanvas1, {
       type: 'doughnut',
@@ -591,7 +582,7 @@ login('EXANT', '../../');
     })
   </script>
   <script>
-    var barChartCanvas1 = $('#myChart2').get(0).getContext('2d')
+    var barChartCanvas1 = document.getElementById('myChart2');
     var barData1 = {
       labels: [
         <?= $secao ?>
@@ -600,10 +591,6 @@ login('EXANT', '../../');
         data: [<?= $count_secao ?>],
         backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd'],
       }]
-    }
-    var barOptions1 = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var barChart1 = new Chart(barChartCanvas1, {
       type: 'horizontalBar',
@@ -647,7 +634,7 @@ login('EXANT', '../../');
     })
   </script>
   <script>
-    var barChartCanvas = $('#myChart').get(0).getContext('2d')
+    var barChartCanvas = document.getElementById('myChart');
     var barData = {
       labels: [
         <?= $posto ?>
@@ -656,10 +643,6 @@ login('EXANT', '../../');
         data: [<?= $count_posto ?>],
         backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd']
       }]
-    }
-    var barOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var barChart = new Chart(barChartCanvas, {
       type: 'bar',
