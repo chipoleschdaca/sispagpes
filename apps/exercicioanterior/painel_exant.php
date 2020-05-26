@@ -12,7 +12,17 @@ login('EXANT', '../../');
 <head>
   <?php head('../../') ?>
 </head>
+<style>
+    #tabcharts {
+        display: flex;
+        justify-content: space-between
+    }
 
+    #filter {
+        position: relative;
+        text-align: center;
+    }
+</style>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
   <div class="wrapper">
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -103,7 +113,7 @@ login('EXANT', '../../');
             <section class="col-md-12 connectedSortable">
               <form class="form-inline">
                 <div class="card col-md-12">
-                  <div class="card-body" style="padding-left: 5px" style="position: absolute;">
+                  <div class="card-body" style="padding-left: 5px">
                     <div class="input-group input-group-sm" id="tabcharts">
                       <label for="txtpesquisar">Filtrar:
                       </label>
@@ -179,17 +189,6 @@ login('EXANT', '../../');
               </form>
             </section>
           </div>
-          <style>
-            #tabcharts {
-              display: flex;
-              justify-content: space-between
-            }
-
-            #filter {
-              position: relative;
-              text-align: center;
-            }
-          </style>
           <div class="row">
             <section class="col-md-6 connectedSortable">
               <div class="card">
@@ -524,7 +523,7 @@ login('EXANT', '../../');
             }
           },
           //backgroundColor: '#FFF',
-          beforeBody: 'VTNC',
+
           cornerRadius: 5,
           titleFontSize: 12,
           titleFontColor: '#FFF',
