@@ -302,53 +302,53 @@ login('EXANT', '../../');
 														<?php
 														if ($secao_atual == 'DP-1' or $secao_atual == 'DP-4' or $secao_atual == 'ES-LS') {
 															if (diferenca($prazo_pessoal, $today) > 15) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5);">' . data($prazo_pessoal) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_pessoal) . '</td>';
 															} elseif (diferenca($prazo_pessoal, $today) <= 15 and diferenca($prazo_pessoal, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.5);">' . data($prazo_pessoal) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_pessoal) . '</td>';
 															} elseif (diferenca($prazo_pessoal, $today) <= 10) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5);">' . data($prazo_pessoal) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_pessoal) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_pessoal) . '</td>';
 															}
 														} elseif ($secao_atual == 'DP-3') {
 															if (diferenca($prazo_pagpes, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5);">' . data($prazo_pagpes) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_pagpes) . '</td>';
 															} elseif (diferenca($prazo_pagpes, $today) <= 10 and diferenca($prazo_pagpes, $today) > 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.5);">' . data($prazo_pagpes) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_pagpes) . '</td>';
 															} elseif (diferenca($prazo_pagpes, $today) <= 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5);">' . data($prazo_pagpes) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_pagpes) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_pagpes) . '</td>';
 															}
 														} elseif ($secao_atual == 'ACI-1') {
 															if (diferenca($prazo_controle, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_controle) . '</td>';
 															} elseif (diferenca($prazo_controle, $today) <= 10 and diferenca($prazo_controle, $today) > 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.5);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_controle) . '</td>';
 															} elseif (diferenca($prazo_controle, $today) <= 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_controle) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_controle) . '</td>';
 															}
 														} else {
 															if (diferenca($prazo_sdpp, $today) > 120) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5);">' . data($prazo_sdpp) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_sdpp) . '</td>';
 															} elseif (diferenca($prazo_sdpp, $today) <= 120 and diferenca($prazo_sdpp, $today) > 90) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.5);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_controle) . '</td>';
 															} elseif (diferenca($prazo_sdpp, $today) <= 90 and diferenca($prazo_sdpp, $today) > 0) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5);">' . data($prazo_sdpp) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_sdpp) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_sdpp) . '</td>';
 															}
 														}
 														?>
 														<td class="align-middle inline-block" id="actionbuttons" style="text-align: center">
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 24px; height: 24px;" href="processos_exant.php?func=estado&id=<?= $id; ?>"><i class="fas fa-truck"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Histórico" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><i class="fas fa-eye"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 24px; height: 24px;" href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="PDF" style="width: 24px; height: 24px;" href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Editar" style="width: 24px; height: 24px;" href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><i class="fas fa-tools"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Excluir" style="width: 24px; height: 24px;" href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
+															<a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 25px; height: 25px;" href="processos_exant.php?func=estado&id=<?= $id; ?>"><i class="fas fa-truck"></i></a>
+															<a class="btn btn-info btn-xs" data-toggle="popover" data-content="Histórico" style="width: 25px; height: 25px;" href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><i class="fas fa-eye"></i></a>
+															<!--<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 25px; height: 25px;" href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>-->
+															<a class="btn btn-primary btn-xs" data-toggle="popover" data-content="PDF" style="width: 25px; height: 25px;" href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
+															<a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" style="width: 25px; height: 25px;" href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><i class="fas fa-tools"></i></a>
+															<a class="btn btn-danger btn-xs" data-toggle="popover" data-content="Excluir" style="width: 25px; height: 25px;" href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
 														</td>
 													</tr>
 												<?php } ?>
@@ -1085,41 +1085,41 @@ if (isset($_POST['button'])) {
 											}
 											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} elseif ($old_secao == 'DP-3') {
 												if ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} elseif ($old_secao == 'ACI-1') {
 												if ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} elseif ($old_secao == 'SDPP') {
 												if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) > 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} else {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}

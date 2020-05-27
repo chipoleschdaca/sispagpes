@@ -107,7 +107,7 @@ login('EXANT', '../../');
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-user"></i></span>
                 <div class="info-box-content" style="text-align:center;">
                   <span class="info-box-text">TOTAL DE REGISTROS</span>
                   <span class="info-box-number">
@@ -115,27 +115,28 @@ login('EXANT', '../../');
                       <?php
                       $query = "SELECT * FROM requerentes";
                       $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
                       echo $row;
                       ?>
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-            <!--<div class="col-12 col-sm-6 col-md-3">
+            <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Likes</span>
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-check"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">ATIVOS</span>
                   <span class="info-box-number">
-                    <h4>41,410</h4>
+                    <h4>
+                       <?php
+                        $queryAtivo = "SELECT * FROM requerentes WHERE situacao = 'AT'";
+                        $resultAtivo = mysqli_query($conexao, $queryAtivo);
+                        $rowAtivo = mysqli_num_rows($resultAtivo);
+                        echo $rowAtivo;
+                        ?>
+                    </h4>
                   </span>
                 </div>                
               </div>              
@@ -143,26 +144,40 @@ login('EXANT', '../../');
             <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Sales</span>
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-user-injured"></i></span>
+                <div class="info-box-content" style="text-align: center">
+                  <span class="info-box-text">VETERANOS</span>
                   <span class="info-box-number">
-                    <h4>760</h4>
+                    <h4>
+                        <?php
+                        $queryVeterano = "SELECT * FROM requerentes WHERE situacao = 'R1'";
+                        $resultVeterano = mysqli_query($conexao, $queryVeterano);
+                        $rowVeterano = mysqli_num_rows($resultVeterano);
+                        echo $rowVeterano;
+                        ?>
+                    </h4>
                   </span>
                 </div>               
               </div>             
             </div>            
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">New Members</span>
+                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-user-tag"></i></span>
+                <div class="info-box-content" style="text-align: center">
+                  <span class="info-box-text">PENSIONISTAS</span>
                   <span class="info-box-number">
-                    <h4>2,000</h4>
+                    <h4>
+                        <?php
+                        $queryReformado = "SELECT * FROM requerentes WHERE situacao = 'PM'";
+                        $resultReformado = mysqli_query($conexao, $queryReformado);
+                        $rowReformado = mysqli_num_rows($resultReformado);
+                        echo $rowReformado;
+                        ?>
+                    </h4>
                   </span>
                 </div>
               </div>              
-            </div>-->
+            </div>
           </div>
           <div>
             <button type="button" class="general-btn" data-toggle="modal" data-target="#modalExemplo" data-tt="tooltip" title="Inserir Requerente" style="background-color: white;">
