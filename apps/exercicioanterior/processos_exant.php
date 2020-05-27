@@ -16,10 +16,78 @@ login('EXANT', '../../');
 
 </head>
 <style>
-	#actionbuttons {
-		display: flex;
-		justify-content: space-between;
-	}
+    /* The container */
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked~.checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked~.checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+        top: 7px;
+        left: 7px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .textarea {
+        text-align: justify;
+        white-space: normal;
+    }
+    #actionbuttons {
+        display: flex;
+        justify-content: space-between;
+    }
 </style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -200,7 +268,7 @@ login('EXANT', '../../');
 									<h4 class="align-middle" style="text-align:center;"><strong>EXERCÍCIOS ANTERIORES</strong></h4>
 								</div>
 								<div class="card-body">
-									<div class="table-responsive" style="text-align: center; font-size: 12px;">
+									<div class="table-responsive" style="text-align: center; font-size: 12px; height: 430px;">
 
 										<!-------------LISTAR TODOS OS PROCESSOS-------------->
 
@@ -227,7 +295,7 @@ login('EXANT', '../../');
 
 										?>
 
-										<table class="table table-sm table-borderless table-striped" id="example1">
+										<table class="table table-sm table-borderless table-striped" id="example1" style="height: 350px;">
 											<thead class="text-primary">
 												<th class="align-middle">#</th>
 												<th class="align-middle">SARAM</th>
@@ -489,8 +557,8 @@ login('EXANT', '../../');
 		<footer class="main-footer">
 			<?php footer() ?>
 		</footer>
-		<aside class="control-sidebar control-sidebar-dark">
-		</aside>
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
 	</div>
 	<?= javascript('../../') ?>
 	<script>
@@ -517,79 +585,7 @@ login('EXANT', '../../');
 			});
 		});
 	</script>
-
 </body>
-<style>
-	/* The container */
-	.container {
-		display: block;
-		position: relative;
-		padding-left: 35px;
-		margin-bottom: 12px;
-		cursor: pointer;
-		font-size: 16px;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-
-	/* Hide the browser's default radio button */
-	.container input {
-		position: absolute;
-		opacity: 0;
-		cursor: pointer;
-	}
-
-	/* Create a custom radio button */
-	.checkmark {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 20px;
-		width: 20px;
-		background-color: #eee;
-		border-radius: 50%;
-	}
-
-	/* On mouse-over, add a grey background color */
-	.container:hover input~.checkmark {
-		background-color: #ccc;
-	}
-
-	/* When the radio button is checked, add a blue background */
-	.container input:checked~.checkmark {
-		background-color: #2196F3;
-	}
-
-	/* Create the indicator (the dot/circle - hidden when not checked) */
-	.checkmark:after {
-		content: "";
-		position: absolute;
-		display: none;
-	}
-
-	/* Show the indicator (dot/circle) when checked */
-	.container input:checked~.checkmark:after {
-		display: block;
-	}
-
-	/* Style the indicator (dot/circle) */
-	.container .checkmark:after {
-		top: 7px;
-		left: 7px;
-		width: 6px;
-		height: 6px;
-		border-radius: 50%;
-		background: white;
-	}
-
-	.textarea {
-		text-align: justify;
-		white-space: normal;
-	}
-</style>
-
 </html>
 
 <!--CADASTRAR -->

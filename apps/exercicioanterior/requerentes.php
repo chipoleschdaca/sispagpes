@@ -209,7 +209,7 @@ login('EXANT', '../../');
                       </form>
                     </div>
                   </div>
-                  <div class="table-responsive" style="text-align: center; overflow-x: hidden;">
+                  <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 430px;">
                     <!-------------LISTAR TODOS OS PROCESSOS-------------->
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
@@ -376,8 +376,7 @@ login('EXANT', '../../');
     <footer class="main-footer">
       <?php footer() ?>
     </footer>
-    <aside class="control-sidebar control-sidebar-dark">
-    </aside>
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
   <?= javascript('../../') ?>
   <script>

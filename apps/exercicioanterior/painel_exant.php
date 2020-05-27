@@ -481,8 +481,7 @@ login('EXANT', '../../');
       }
     }
     ?>
-    <aside class="control-sidebar control-sidebar-dark">
-    </aside>
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
   <?= javascript('../../') ?>
   <script src="../../dist/js/functions.js"></script>
