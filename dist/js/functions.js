@@ -1,74 +1,62 @@
-function Alerta(tipo, titulo, msg, location) {
-  Swal.fire({
-    type: 'tipo',
-    title: 'titulo',
-    text: 'msg',
-    showConfirmButton: false
-  });
-  setTimeout(function () {
-    window.location = 'location';
-  }, 2000);
-}
+function grafico(phpDireito, countDireito) {
+  var donutChartCanvas = document.getElementById('pieChart');
+  var donutData = {
+    //<?= $direito_pleiteado ?>
+    labels: [phpDireito],
+  datasets: [{
+      //<?= $count_direito ?>
+    data: [countDireito],
+      backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
+}]
+};
+  var donutOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+  };
+  var donutChart = new Chart(donutChartCanvas, {
+    type: 'doughnut',
+    data: donutData,
+    options: {
+      tooltips: {
+        callbacks: {
+          title: function(tooltipItem, data) {
+            return data['labels'][tooltipItem[0]['index']];
+          },
+          label: function(tooltipItem, data) {
+            return data['datasets'][0]['data'][tooltipItem['index']];
+          },
+          afterLabel: function(tooltipItem, data) {
+            var dataset = data['datasets'][0];
+            var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100);
+            return '(' + percent + '%)';
+          }
+        },
+        //backgroundColor: '#FFF',
 
-function AlertaConsulta(tipo, titulo, msg) {
-
-  Swal.fire({
-    type: 'tipo',
-    title: 'titulo',
-    text: 'msg',
-    showConfirmButton: false,
-    timer: 2000
-  });
-
-}
-
-function AlertaExcluir(tipo, titulo, msg, location) {
-
-  Swal.fire({
-    title: 'titulo',
-    text: 'msg',
-    icon: 'tipo',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then((result) => {
-      if (result.value) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        );
+        cornerRadius: 5,
+        titleFontSize: 12,
+        titleFontColor: '#FFF',
+        bodyFontColor: '#FFF',
+        bodyFontSize: 10,
+        displayColors: false
+      },
+      title: {
+        display: true,
+        padding: 20,
+        position: 'top',
+        fontColor: '#000000',
+        fontSize: 16,
+        text: 'QUANTIDADE vs. DIREITO PLEITEADO'
+      },
+      legend: {
+        display: true,
+        position: 'right',
+        labels: {
+          fontColor: '#000000',
+          fontSize: 10,
+          boxWidth: 40
+        }
       }
-    },
-    window.location = 'location'
-  )
-}
-
-function AlertaLocation(tipo, titulo, msg, location) {
-  Swal.fire({
-      type: 'tipo',
-      title: 'titulo',
-      text: 'msg',
-      showConfirmButton: false,
-      timer: 2000
-    },
-    function () {
-      window.location.href = 'location';
-    });
-}
-
-function Toast(tipo, titulo) {
-  $(function () {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
-    Toast.fire({
-      type: 'tipo',
-      title: 'titulo'
-    });
+    }
   });
 }

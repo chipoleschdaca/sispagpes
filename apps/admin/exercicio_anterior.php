@@ -24,8 +24,6 @@ login('ADMIN', '../../');
   <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
@@ -51,19 +49,14 @@ login('ADMIN', '../../');
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <!-- Messages Dropdown Menu -->
-        <!-- Este é a tag que faz aparecer o nome aparece no menu direito superior. -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-bars"></i>
             <?php echo $_SESSION['nome_usuario'] ?>
             <span class="d-lg-none d-md-block">Some Actions</span>
           </a>
-          <!-- Dropdown - User Information -->
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <a class="dropdown-item" href="#">
               <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -86,10 +79,7 @@ login('ADMIN', '../../');
         </li>
       </ul>
     </nav>
-    <!-- /.navbar -->
-    <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
@@ -97,8 +87,6 @@ login('ADMIN', '../../');
       <div class="sidebar">
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="painel_admin.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
@@ -178,7 +166,6 @@ login('ADMIN', '../../');
         </nav>
       </div>
     </aside>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <section class="content">
         <div class="container-fluid">
@@ -216,79 +203,80 @@ login('ADMIN', '../../');
                   <div class="tab-content" id="custom-tabs-three-tabContent">
                     <div class="tab-pane fade show active" id="custom-tabs-three-direito" role="tabpanel" aria-labelledby="custom-tabs-three-direito-tab">
                       <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
-                          <div class="info-box mb-3">
-                            <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-database"></i></span>
-                            <div class="info-box-content" style="text-align:center;">
-                              <span class="info-box-text">DIREITOS CADASTRADOS</span>
-                              <span class="info-box-number">
-                                <h4>
-                                  <?php
-                                  $query = "SELECT * FROM tb_direitoPleiteado_exant";
-                                  $result = mysqli_query($conexao, $query);
-                                  $row = mysqli_num_rows($result);
-                                  echo $row;
-                                  ?>
-                                </h4>
-                              </span>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-dark">
+                            <div class="inner">
+                              <h3>
+                                <?php
+                                $query = "SELECT * FROM tb_direitoPleiteado_exant";
+                                $result = mysqli_query($conexao, $query);
+                                $row = mysqli_num_rows($result);
+                                echo $row;
+                                ?>
+                              </h3>
+                              <p>DIREITOS CADASTRADOS</p>
                             </div>
+                            <div class="icon">
+                              <i class="fas fa-database"></i>
+                            </div>
+                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
-                          <div class="info-box">
-                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
-                            <div class="info-box-content" style="text-align:center;">
-                              <span class="info-box-text">DIREITOS "APROVADOS"</span>
-                              <span class="info-box-number">
-                                <h4>
-                                  <?php
-                                  $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado'";
-                                  $result = mysqli_query($conexao, $query);
-                                  $row = mysqli_num_rows($result);
-                                  echo $row;
-                                  ?>
-                                </h4>
-                              </span>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-success">
+                            <div class="inner">
+                              <h3>
+                                <?php
+                                $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado'";
+                                $result = mysqli_query($conexao, $query);
+                                $row = mysqli_num_rows($result);
+                                echo $row;
+                                ?>
+                              </h3>
+                              <p>DIREITOS "APROVADOS"</p>
                             </div>
-                            <!-- /.info-box-content -->
-                          </div>
-                          <!-- /.info-box -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-12 col-sm-6 col-md-3">
-                          <div class="info-box mb-3">
-                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-history"></i></span>
-                            <div class="info-box-content" style="text-align:center;">
-                              <span class="info-box-text">DIREITOS "AGUARDANDO"</span>
-                              <span class="info-box-number">
-                                <h4>
-                                  <?php
-                                  $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
-                                  $result = mysqli_query($conexao, $query);
-                                  $row = mysqli_num_rows($result);
-                                  echo $row;
-                                  ?>
-                                </h4>
-                              </span>
+                            <div class="icon">
+                              <i class="fas fa-thumbs-up"></i>
                             </div>
+                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
-                          <div class="info-box mb-3">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
-                            <div class="info-box-content" style="text-align:center;">
-                              <span class="info-box-text">DIREITOS "EXCLUÍDOS"</span>
-                              <span class="info-box-number">
-                                <h4>
-                                  <?php
-                                  $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Excluído'";
-                                  $result = mysqli_query($conexao, $query);
-                                  $row = mysqli_num_rows($result);
-                                  echo $row;
-                                  ?>
-                                </h4>
-                              </span>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-warning">
+                            <div class="inner">
+                              <h3>
+                                <?php
+                                $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aguardando'";
+                                $result = mysqli_query($conexao, $query);
+                                $row = mysqli_num_rows($result);
+                                echo $row;
+                                ?>
+                              </h3>
+                              <p>DIREITOS "AGUARDANDO"</p>
                             </div>
+                            <div class="icon">
+                              <i class="fas fa-history"></i>
+                            </div>
+                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-danger">
+                            <div class="inner">
+                              <h3>
+                                <?php
+                                $query = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Excluído'";
+                                $result = mysqli_query($conexao, $query);
+                                $row = mysqli_num_rows($result);
+                                echo $row;
+                                ?>
+                              </h3>
+                              <p>DIREITOS "EXCLUÍDOS"</p>
+                            </div>
+                            <div class="icon">
+                              <i class="fas fa-thumbs-down"></i>
+                            </div>
+                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
                       </div>
@@ -544,79 +532,80 @@ login('ADMIN', '../../');
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-estado" role="tabpanel" aria-labelledby="custom-tabs-three-estado-tab">
                       <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
-                          <div class="info-box mb-3">
-                            <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-database"></i></span>
-                            <div class="info-box-content" style="text-align:center;">
-                              <span class="info-box-text">ESTADOS CADASTRADOS</span>
-                              <span class="info-box-number">
-                                <h4>
-                                  <?php
-                                  $query = "SELECT * FROM tb_estado_exant";
-                                  $result = mysqli_query($conexao, $query);
-                                  $row = mysqli_num_rows($result);
-                                  echo $row;
-                                  ?>
-                                </h4>
-                              </span>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-dark">
+                            <div class="inner">
+                              <h3>
+                                <?php
+                                $query = "SELECT * FROM tb_estado_exant";
+                                $result = mysqli_query($conexao, $query);
+                                $row = mysqli_num_rows($result);
+                                echo $row;
+                                ?>
+                              </h3>
+                              <p>ESTADOS CADASTRADOS</p>
                             </div>
+                            <div class="icon">
+                              <i class="fas fa-database"></i>
+                            </div>
+                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
-                          <div class="info-box">
-                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
-                            <div class="info-box-content" style="text-align:center;">
-                              <span class="info-box-text">ESTADOS "APROVADOS"</span>
-                              <span class="info-box-number">
-                                <h4>
-                                  <?php
-                                  $query = "SELECT * FROM tb_estado_exant where status = 'Aprovado'";
-                                  $result = mysqli_query($conexao, $query);
-                                  $row = mysqli_num_rows($result);
-                                  echo $row;
-                                  ?>
-                                </h4>
-                              </span>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-success">
+                            <div class="inner">
+                              <h3>
+                                <?php
+                                $query = "SELECT * FROM tb_estado_exant where status = 'Aprovado'";
+                                $result = mysqli_query($conexao, $query);
+                                $row = mysqli_num_rows($result);
+                                echo $row;
+                                ?>
+                              </h3>
+                              <p>ESTADOS APROVADOS</p>
                             </div>
-                            <!-- /.info-box-content -->
-                          </div>
-                          <!-- /.info-box -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-12 col-sm-6 col-md-3">
-                          <div class="info-box mb-3">
-                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-history"></i></span>
-                            <div class="info-box-content" style="text-align:center;">
-                              <span class="info-box-text">ESTADOS "AGUARDANDO"</span>
-                              <span class="info-box-number">
-                                <h4>
-                                  <?php
-                                  $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
-                                  $result = mysqli_query($conexao, $query);
-                                  $row = mysqli_num_rows($result);
-                                  echo $row;
-                                  ?>
-                                </h4>
-                              </span>
+                            <div class="icon">
+                              <i class="fas fa-thumbs-up"></i>
                             </div>
+                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-3">
-                          <div class="info-box mb-3">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-down"></i></span>
-                            <div class="info-box-content" style="text-align:center;">
-                              <span class="info-box-text">ESTADOS "EXCLUÍDOS"</span>
-                              <span class="info-box-number">
-                                <h4>
-                                  <?php
-                                  $query = "SELECT * FROM tb_estado_exant where status = 'Excluído'";
-                                  $result = mysqli_query($conexao, $query);
-                                  $row = mysqli_num_rows($result);
-                                  echo $row;
-                                  ?>
-                                </h4>
-                              </span>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-warning">
+                            <div class="inner">
+                              <h3>
+                                <?php
+                                $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
+                                $result = mysqli_query($conexao, $query);
+                                $row = mysqli_num_rows($result);
+                                echo $row;
+                                ?>
+                              </h3>
+                              <p>ESTADOS AGUARDANDO</p>
                             </div>
+                            <div class="icon">
+                              <i class="fas fa-history"></i>
+                            </div>
+                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-danger">
+                            <div class="inner">
+                              <h3>
+                                <?php
+                                $query = "SELECT * FROM tb_estado_exant where status = 'Excluído'";
+                                $result = mysqli_query($conexao, $query);
+                                $row = mysqli_num_rows($result);
+                                echo $row;
+                                ?>
+                              </h3>
+                              <p>ESTADOS EXCLUÍDOS</p>
+                            </div>
+                            <div class="icon">
+                              <i class="fas fa-thumbs-down"></i>
+                            </div>
+                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
                       </div>
@@ -883,18 +872,12 @@ login('ADMIN', '../../');
         </div>
       </section>
     </div>
-    <!-- /.content-wrapper -->
     <footer class="main-footer">
       <?php footer() ?>
     </footer>
-    <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
     </aside>
-    <!-- /.control-sidebar -->
   </div>
-  <!-- ./wrapper -->
-
   <!-- jQuery -->
   <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- jQuery Mask -->

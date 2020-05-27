@@ -12,6 +12,17 @@ login('EXANT', '../../');
 <head>
   <?php head('../../') ?>
 </head>
+<style>
+  #tabcharts {
+    display: flex;
+    justify-content: space-between
+  }
+
+  #filter {
+    position: relative;
+    text-align: center;
+  }
+</style>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
   <div class="wrapper">
@@ -26,7 +37,7 @@ login('EXANT', '../../');
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
+            <?= $_SESSION['nome_usuario'] ?>
             <span class="d-lg-none d-md-block">Some Actions</span>
           </a>
           <!-- Dropdown - User Information -->
@@ -103,7 +114,7 @@ login('EXANT', '../../');
             <section class="col-md-12 connectedSortable">
               <form class="form-inline">
                 <div class="card col-md-12">
-                  <div class="card-body" style="padding-left: 5px" style="position: absolute;">
+                  <div class="card-body" style="padding-left: 5px">
                     <div class="input-group input-group-sm" id="tabcharts">
                       <label for="txtpesquisar">Filtrar:
                       </label>
@@ -117,7 +128,7 @@ login('EXANT', '../../');
                             $id = $res_p['id_posto'];
                             $posto = $res_p['nome_posto'];
                           ?>
-                            <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                            <option value="<?= $id ?>"><?= $posto ?></option>
                           <?php }
                           ?>
                         </select>
@@ -133,7 +144,7 @@ login('EXANT', '../../');
                             $direito = $res_dir['direito_pleiteado'];
                             $count_direito = $res_dir['COUNT(e.direito_pleiteado)'];
                           ?>
-                            <option value="<?php echo $id ?>"><?php echo $direito . " | " . $count_direito ?></option>
+                            <option value="<?= $id ?>"><?= $direito . " | " . $count_direito ?></option>
                           <?php }
                           ?>
                         </select>
@@ -149,7 +160,7 @@ login('EXANT', '../../');
                             $estado_est = $res_est['estado_processo'];
                             $count_estado = $res_est['COUNT(e.estado)'];
                           ?>
-                            <option value="<?php echo $id_est_2 ?>"><?php echo $estado_est . " | " . $count_estado ?></option>
+                            <option value="<?= $id_est_2 ?>"><?= $estado_est . " | " . $count_estado ?></option>
                           <?php }
                           ?>
                         </select>
@@ -165,7 +176,7 @@ login('EXANT', '../../');
                             $secao_sec = $res_sec['secao_atual'];
                             $count_secao = $res_sec['COUNT(e.secao_atual)'];
                           ?>
-                            <option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec . " | " . $count_secao ?></option>
+                            <option value="<?= $id_sec_2 ?>"><?= $secao_sec . " | " . $count_secao ?></option>
                           <?php }
                           ?>
                         </select>
@@ -179,17 +190,6 @@ login('EXANT', '../../');
               </form>
             </section>
           </div>
-          <style>
-            #tabcharts {
-              display: flex;
-              justify-content: space-between
-            }
-
-            #filter {
-              position: relative;
-              text-align: center;
-            }
-          </style>
           <div class="row">
             <section class="col-md-6 connectedSortable">
               <div class="card">
@@ -240,7 +240,6 @@ login('EXANT', '../../');
     $count_estado = "";
     $count_secao = "";
     $count_posto = "";
-
 
     // Filtro para POSTO
     if (isset($_GET['buttonPesquisar']) and $_GET['txtposto'] != '') {
@@ -482,33 +481,47 @@ login('EXANT', '../../');
       }
     }
     ?>
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <!-- ./wrapper -->
-  <?php echo javascript('../../') ?>
+  <?= javascript('../../') ?>
+  <script src="../../dist/js/functions.js"></script>
   <script>
-    var donutChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var donutChartCanvas = document.getElementById('pieChart');
     var donutData = {
       labels: [
-        <?php echo $direito_pleiteado ?>
+        <?= $direito_pleiteado ?>
       ],
       datasets: [{
-        data: [<?php echo $count_direito ?>],
+        data: [<?= $count_direito ?>],
         backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
-    }
-    var donutOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var donutChart = new Chart(donutChartCanvas, {
       type: 'doughnut',
       data: donutData,
       options: {
+        tooltips: {
+          callbacks: {
+            title: function(tooltipItem, data) {
+              return data['labels'][tooltipItem[0]['index']];
+            },
+            label: function(tooltipItem, data) {
+              return data['datasets'][0]['data'][tooltipItem['index']];
+            },
+            afterLabel: function(tooltipItem, data) {
+              var dataset = data['datasets'][0];
+              var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100);
+              return '(' + percent + '%)';
+            }
+          },
+          //backgroundColor: '#FFF',
+          cornerRadius: 5,
+          titleFontSize: 12,
+          titleFontColor: '#FFF',
+          bodyFontColor: '#FFF',
+          bodyFontSize: 10,
+          displayColors: false
+        },
         title: {
           display: true,
           padding: 20,
@@ -530,19 +543,15 @@ login('EXANT', '../../');
     })
   </script>
   <script>
-    var donutChartCanvas1 = $('#donutChart').get(0).getContext('2d')
+    var donutChartCanvas1 = document.getElementById('donutChart');
     var donutData1 = {
       labels: [
-        <?php echo $estado ?>
+        <?= $estado ?>
       ],
       datasets: [{
-        data: [<?php echo $count_estado ?>],
+        data: [<?= $count_estado ?>],
         backgroundColor: ['#9C0060', '#d2d6de', '#f56954', '#f39c12', '#00c0ef', '#00a65a', '#3c8dbc'],
       }]
-    }
-    var donutOptions1 = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var donutChart1 = new Chart(donutChartCanvas1, {
       type: 'doughnut',
@@ -569,19 +578,15 @@ login('EXANT', '../../');
     })
   </script>
   <script>
-    var barChartCanvas1 = $('#myChart2').get(0).getContext('2d')
+    var barChartCanvas1 = document.getElementById('myChart2');
     var barData1 = {
       labels: [
-        <?php echo $secao ?>
+        <?= $secao ?>
       ],
       datasets: [{
-        data: [<?php echo $count_secao ?>],
+        data: [<?= $count_secao ?>],
         backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd'],
       }]
-    }
-    var barOptions1 = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var barChart1 = new Chart(barChartCanvas1, {
       type: 'horizontalBar',
@@ -625,19 +630,15 @@ login('EXANT', '../../');
     })
   </script>
   <script>
-    var barChartCanvas = $('#myChart').get(0).getContext('2d')
+    var barChartCanvas = document.getElementById('myChart');
     var barData = {
       labels: [
-        <?php echo $posto ?>
+        <?= $posto ?>
       ],
       datasets: [{
-        data: [<?php echo $count_posto ?>],
+        data: [<?= $count_posto ?>],
         backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd']
       }]
-    }
-    var barOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var barChart = new Chart(barChartCanvas, {
       type: 'bar',

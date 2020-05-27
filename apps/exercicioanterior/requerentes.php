@@ -27,7 +27,7 @@ login('EXANT', '../../');
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
+            <?= $_SESSION['nome_usuario'] ?>
             <span class="d-lg-none d-md-block">Some Actions</span>
           </a>
           <!-- Dropdown - User Information -->
@@ -107,7 +107,7 @@ login('EXANT', '../../');
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-user"></i></span>
                 <div class="info-box-content" style="text-align:center;">
                   <span class="info-box-text">TOTAL DE REGISTROS</span>
                   <span class="info-box-number">
@@ -115,64 +115,69 @@ login('EXANT', '../../');
                       <?php
                       $query = "SELECT * FROM requerentes";
                       $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
-                      ?>
-                      <?php
                       echo $row;
                       ?>
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Likes</span>
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-check"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">ATIVOS</span>
                   <span class="info-box-number">
-                    <h4>41,410</h4>
+                    <h4>
+                      <?php
+                      $queryAtivo = "SELECT * FROM requerentes WHERE situacao = 'AT'";
+                      $resultAtivo = mysqli_query($conexao, $queryAtivo);
+                      $rowAtivo = mysqli_num_rows($resultAtivo);
+                      echo $rowAtivo;
+                      ?>
+                    </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-            <!-- fix for small devices only -->
             <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Sales</span>
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-user-injured"></i></span>
+                <div class="info-box-content" style="text-align: center">
+                  <span class="info-box-text">VETERANOS</span>
                   <span class="info-box-number">
-                    <h4>760</h4>
+                    <h4>
+                      <?php
+                      $queryVeterano = "SELECT * FROM requerentes WHERE situacao = 'R1'";
+                      $resultVeterano = mysqli_query($conexao, $queryVeterano);
+                      $rowVeterano = mysqli_num_rows($resultVeterano);
+                      echo $rowVeterano;
+                      ?>
+                    </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">New Members</span>
+                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-user-tag"></i></span>
+                <div class="info-box-content" style="text-align: center">
+                  <span class="info-box-text">PENSIONISTAS</span>
                   <span class="info-box-number">
-                    <h4>2,000</h4>
+                    <h4>
+                      <?php
+                      $queryReformado = "SELECT * FROM requerentes WHERE situacao = 'PM'";
+                      $resultReformado = mysqli_query($conexao, $queryReformado);
+                      $rowReformado = mysqli_num_rows($resultReformado);
+                      echo $rowReformado;
+                      ?>
+                    </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
           </div>
           <div>
             <button type="button" class="general-btn" data-toggle="modal" data-target="#modalExemplo" data-tt="tooltip" title="Inserir Requerente" style="background-color: white;">
@@ -204,7 +209,7 @@ login('EXANT', '../../');
                       </form>
                     </div>
                   </div>
-                  <div class="table-responsive" style="text-align: center; overflow-x: hidden;">
+                  <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 430px;">
                     <!-------------LISTAR TODOS OS PROCESSOS-------------->
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
@@ -250,28 +255,28 @@ login('EXANT', '../../');
                             $data = data_show($res_1['data']);
                           ?>
                             <tr style="height: 40px;">
-                              <td class="align-middle"><?php echo $id; ?></td>
-                              <td class="align-middle"><?php echo $saram; ?></td>
-                              <td class="align-middle"><?php echo $cpf; ?></td>
-                              <td class="align-middle"><?php echo $posto; ?></td>
-                              <td class="align-middle"><?php echo $situacao; ?></td>
-                              <td class="align-middle"><?php echo '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?php echo $nome; ?></td>
+                              <td class="align-middle"><?= $id; ?></td>
+                              <td class="align-middle"><?= $saram; ?></td>
+                              <td class="align-middle"><?= $cpf; ?></td>
+                              <td class="align-middle"><?= $posto; ?></td>
+                              <td class="align-middle"><?= $situacao; ?></td>
+                              <td class="align-middle"><?= '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?= $nome; ?></td>
                               <td class="align-middle">
                                 <?php
-                                if (($dt_nascimento) == '0000-00-00'){
+                                if (($dt_nascimento) == '0000-00-00') {
                                   echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
-                                } else if(descobrirIdade($dt_nascimento) >= 60) {
+                                } else if (descobrirIdade($dt_nascimento) >= 60) {
                                   echo '<img src="../../dist/icons/accept-colored.svg" style="height: 30px; width:30px;"/>';
                                 } else {
                                   echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
                                 } ?>
                               </td>
-                              <td class="align-middle"><?php echo $email; ?></td>
-                              <td class="align-middle"><?php echo $data; ?></td>
+                              <td class="align-middle"><?= $email; ?></td>
+                              <td class="align-middle"><?= $data; ?></td>
                               <td class="align-middle">
-                                <a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?php echo $id; ?>&cpf=<?php echo $cpf ?>"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" data-toggle="popover" style="width: 23px;" data-content="Excluir" href="requerentes.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                <a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?= $id; ?>&cpf=<?= $cpf ?>"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?= $id; ?>"><i class="fas fa-tools"></i></a>
+                                <a class="btn btn-danger btn-xs" data-toggle="popover" style="width: 23px;" data-content="Excluir" href="requerentes.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
                               </td>
                             </tr>
                           <?php } ?>
@@ -319,7 +324,7 @@ login('EXANT', '../../');
                         $id_ex = $res_ex['id'];
                         $posto_ex = $res_ex['posto'];
                       ?>
-                        <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                        <option value="<?= $id_ex ?>"><?= $posto_ex ?></option>
                       <?php
                       }
                       ?>
@@ -371,23 +376,22 @@ login('EXANT', '../../');
     <footer class="main-footer">
       <?php footer() ?>
     </footer>
-    <aside class="control-sidebar control-sidebar-dark">
-    </aside>
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <?php echo javascript('../../') ?>
+  <?= javascript('../../') ?>
   <script>
-      $(document).ready(function() {
-          $("#example1").DataTable({
-              "scrollX": false,
-              "scrollY": "350px",
-              "paging": false,
-              "lengthChange": false,
-              "searching": false,
-              "ordering": true,
-              "info": false,
-              "autoWidth": false,
-          });
+    $(document).ready(function() {
+      $("#example1").DataTable({
+        "scrollX": false,
+        "scrollY": "350px",
+        "paging": false,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
       });
+    });
   </script>
   <script>
     $(document).ready(function() {
@@ -510,9 +514,9 @@ if (isset($_POST['button'])) {
   $posto = $_POST['txtposto'];
   $situacao = $_POST['txtsituacao'];
   $nome = strtoupper($_POST['txtnome']);
-  if ($_POST['txtdtnascimento'] == ''){
+  if ($_POST['txtdtnascimento'] == '') {
     $dtnascimento = data_db('00/00/0000');
-  }else{
+  } else {
     $dtnascimento = data_db($_POST['txtdtnascimento']);
   }
   $email = strtolower($_POST['txtemail']);
@@ -529,9 +533,9 @@ if (isset($_POST['button'])) {
     Alerta("info", "CPF já existe!", false, "requerentes.php");
     exit();
   }
-  
+
   $query = "INSERT into requerentes (saram, cpf, posto, situacao, nome, dt_nascimento, email, data) VALUES ('$saram', '$cpf', '$posto', '$situacao', '$nome', '$dtnascimento','$email', curDate() )";
-  
+
   $result = mysqli_query($conexao, $query);
 
   if ($result == '') {
@@ -567,16 +571,16 @@ if (isset($_POST['button'])) {
               <div class="row">
                 <div class="form-group col-4">
                   <label for="fornecedor">Saram</label>
-                  <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram2" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_2['saram']; ?>" required>
+                  <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram2" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?= $res_2['saram']; ?>" required>
                 </div>
                 <div class="form-group col-4">
                   <label for="fornecedor">CPF</label>
-                  <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf2" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_2['cpf']; ?>" required>
+                  <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf2" name="txtcpf2" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?= $res_2['cpf']; ?>" required>
                 </div>
                 <div class="form-group col-4">
                   <label for="">Posto</label>
                   <select class="form-control mr-2" id="txtposto2" name="txtposto2" required>
-                    <option value="<?php echo $res_2['id_posto']; ?>" selected><?php echo $res_2['nome_posto']; ?></option>
+                    <option value="<?= $res_2['id_posto']; ?>" selected><?= $res_2['nome_posto']; ?></option>
                     <?php
                     $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
                     $result_posto = mysqli_query($conexao, $query_posto);
@@ -584,7 +588,7 @@ if (isset($_POST['button'])) {
                       $id_p = $res_p['id'];
                       $posto_p = $res_p['posto'];
                     ?>
-                      <option value="<?php echo $id_p ?>"><?php echo $posto_p ?></option>
+                      <option value="<?= $id_p ?>"><?= $posto_p ?></option>
                     <?php
                     }
                     ?>
@@ -664,16 +668,16 @@ if (isset($_POST['button'])) {
                 <div class="col-2"></div>
                 <div class="form-group col-4" id="dtNascimento2">
                   <label for="">Dt. Nascimento</label>
-                  <input type="text" class="form-control mr-2" id="txtdtnascimento2" name="txtdtnascimento2" value="<?php echo data_show($res_2['dt_nascimento']); ?>" autocomplete="off" required>
+                  <input type="text" class="form-control mr-2" id="txtdtnascimento2" name="txtdtnascimento2" value="<?= data_show($res_2['dt_nascimento']); ?>" autocomplete="off" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome2" name="txtnome2" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_2['nome']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtnome2" name="txtnome2" autocomplete="off" placeholder="Nome Completo" value="<?= $res_2['nome']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="fornecedor">E-mail</label>
-                <input type="email" class="form-control mr-2" id="txtemail2" name="txtemail2" autocomplete="off" value="<?php echo $res_2['email']; ?>" placeholder="Email">
+                <input type="email" class="form-control mr-2" id="txtemail2" name="txtemail2" autocomplete="off" value="<?= $res_2['email']; ?>" placeholder="Email">
               </div>
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
@@ -695,7 +699,7 @@ if (isset($_POST['button'])) {
       $cpf_ed = $_POST['txtcpf2'];
       $posto_ed = $_POST['txtposto2'];
       $situacao_ed = $_POST['txtsituacao2'];
-      if ($_POST['txtdtnascimento2'] == ''){
+      if ($_POST['txtdtnascimento2'] == '') {
         $dtnascimento2 = data_db('00/00/0000');
       } else {
         $dtnascimento2 = data_db($_POST['txtdtnascimento2']);
@@ -715,9 +719,9 @@ if (isset($_POST['button'])) {
           exit();
         }
       }
-      
+
       $query_editar = "UPDATE requerentes SET saram = '$saram_ed', cpf = '$cpf_ed', posto = '$posto_ed', situacao = '$situacao_ed', dt_nascimento = '$dtnascimento2', nome = '$nome_ed', email = '$email_ed' WHERE id = '$id_ed'";
-      
+
       $result_editar = mysqli_query($conexao, $query_editar);
 
       if ($result_editar == '') {
@@ -750,7 +754,7 @@ if (isset($_POST['button'])) {
             $posto = $res_1['nome_posto'];
             $situacao = $res_1['situacao'];
             ?>
-            <h4 class="modal-title" style="text-align:center; width: 100%;"><i class="fas fa-user"></i> <strong><?php echo $posto, " ", $situacao, " ", $nome ?></strong></h4>
+            <h4 class="modal-title" style="text-align:center; width: 100%;"><i class="fas fa-user"></i> <strong><?= $posto, " ", $situacao, " ", $nome ?></strong></h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
@@ -784,14 +788,14 @@ if (isset($_POST['button'])) {
                       $secao_atual = $res_1['sec_atual'];
                     ?>
                       <tr>
-                        <td class="align-middle"><?php echo $id; ?></td>
-                        <td class="align-middle"><?php echo $nup; ?></td>
-                        <td class="align-middle"><?php echo data($data_criacao); ?></td>
-                        <td class="align-middle"><?php echo $direito_pleiteado; ?></td>
-                        <td class="align-middle"><?php echo $secao_origem; ?></td>
-                        <td class="align-middle"><?php echo $estado; ?></td>
-                        <td class="align-middle"><?php echo $secao_atual; ?></td>
-                        <!--<td class="align-middle">R$ <?php echo number_format($valor_total, 2, ',', '.'); ?></td>-->
+                        <td class="align-middle"><?= $id; ?></td>
+                        <td class="align-middle"><?= $nup; ?></td>
+                        <td class="align-middle"><?= data($data_criacao); ?></td>
+                        <td class="align-middle"><?= $direito_pleiteado; ?></td>
+                        <td class="align-middle"><?= $secao_origem; ?></td>
+                        <td class="align-middle"><?= $estado; ?></td>
+                        <td class="align-middle"><?= $secao_atual; ?></td>
+                        <!--<td class="align-middle">R$ <?= number_format($valor_total, 2, ',', '.'); ?></td>-->
                       </tr>
                     <?php } ?>
                   </tbody>

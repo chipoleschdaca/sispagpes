@@ -15,6 +15,80 @@ login('EXANT', '../../');
 	<?php head('../../') ?>
 
 </head>
+<style>
+    /* The container */
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked~.checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked~.checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+        top: 7px;
+        left: 7px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .textarea {
+        text-align: justify;
+        white-space: normal;
+    }
+    #actionbuttons {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
@@ -29,7 +103,7 @@ login('EXANT', '../../');
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#">
 						<i class="fas fa-bars"></i>
-						<?php echo $_SESSION['nome_usuario'] ?>
+						<?= $_SESSION['nome_usuario'] ?>
 						<span class="d-lg-none d-md-block">Some Actions</span>
 					</a>
 					<!-- Dropdown - User Information -->
@@ -194,7 +268,7 @@ login('EXANT', '../../');
 									<h4 class="align-middle" style="text-align:center;"><strong>EXERCÍCIOS ANTERIORES</strong></h4>
 								</div>
 								<div class="card-body">
-									<div class="table-responsive" style="text-align: center; font-size: 12px;">
+									<div class="table-responsive" style="text-align: center; font-size: 12px; height: 430px;">
 
 										<!-------------LISTAR TODOS OS PROCESSOS-------------->
 
@@ -221,7 +295,7 @@ login('EXANT', '../../');
 
 										?>
 
-										<table class="table table-sm table-borderless table-striped" id="example1">
+										<table class="table table-sm table-borderless table-striped" id="example1" style="height: 350px;">
 											<thead class="text-primary">
 												<th class="align-middle">#</th>
 												<th class="align-middle">SARAM</th>
@@ -274,10 +348,10 @@ login('EXANT', '../../');
 												?>
 
 													<tr>
-														<td class="align-middle"><?php echo $id; ?></td>
-														<td class="align-middle"><?php echo $saram; ?></td>
-														<td class="align-middle"><?php echo $requerente; ?></td>
-														<td class="align-middle"><?php echo $nup; ?></td>
+														<td class="align-middle"><?= $id; ?></td>
+														<td class="align-middle"><?= $saram; ?></td>
+														<td class="align-middle"><?= $requerente; ?></td>
+														<td class="align-middle"><?= $nup; ?></td>
 														<td class="align-middle">
 															<?php
 															if (($dt_nascimento) == '0000-00-00') {
@@ -288,61 +362,61 @@ login('EXANT', '../../');
 																echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
 															} ?>
 														</td>
-														<td class="align-middle"><?php echo data($data_criacao); ?></td>
-														<td class="align-middle"><?php echo $direito_pleiteado; ?></td>
-														<td class="align-middle"><?php echo $secao_origem ?></td>
-														<td class="align-middle"><?php echo $estado; ?></td>
-														<td class="align-middle"><?php echo $secao_atual; ?></td>
+														<td class="align-middle"><?= data($data_criacao); ?></td>
+														<td class="align-middle"><?= $direito_pleiteado; ?></td>
+														<td class="align-middle"><?= $secao_origem ?></td>
+														<td class="align-middle"><?= $estado; ?></td>
+														<td class="align-middle"><?= $secao_atual; ?></td>
 														<?php
 														if ($secao_atual == 'DP-1' or $secao_atual == 'DP-4' or $secao_atual == 'ES-LS') {
 															if (diferenca($prazo_pessoal, $today) > 15) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5);">' . data($prazo_pessoal) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_pessoal) . '</td>';
 															} elseif (diferenca($prazo_pessoal, $today) <= 15 and diferenca($prazo_pessoal, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.5);">' . data($prazo_pessoal) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_pessoal) . '</td>';
 															} elseif (diferenca($prazo_pessoal, $today) <= 10) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5);">' . data($prazo_pessoal) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_pessoal) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_pessoal) . '</td>';
 															}
 														} elseif ($secao_atual == 'DP-3') {
 															if (diferenca($prazo_pagpes, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5);">' . data($prazo_pagpes) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_pagpes) . '</td>';
 															} elseif (diferenca($prazo_pagpes, $today) <= 10 and diferenca($prazo_pagpes, $today) > 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.5);">' . data($prazo_pagpes) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_pagpes) . '</td>';
 															} elseif (diferenca($prazo_pagpes, $today) <= 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5);">' . data($prazo_pagpes) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_pagpes) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_pagpes) . '</td>';
 															}
 														} elseif ($secao_atual == 'ACI-1') {
 															if (diferenca($prazo_controle, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_controle) . '</td>';
 															} elseif (diferenca($prazo_controle, $today) <= 10 and diferenca($prazo_controle, $today) > 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.5);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_controle) . '</td>';
 															} elseif (diferenca($prazo_controle, $today) <= 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_controle) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_controle) . '</td>';
 															}
 														} else {
 															if (diferenca($prazo_sdpp, $today) > 120) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5);">' . data($prazo_sdpp) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_sdpp) . '</td>';
 															} elseif (diferenca($prazo_sdpp, $today) <= 120 and diferenca($prazo_sdpp, $today) > 90) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.5);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_controle) . '</td>';
 															} elseif (diferenca($prazo_sdpp, $today) <= 90 and diferenca($prazo_sdpp, $today) > 0) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5);">' . data($prazo_sdpp) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_sdpp) . '</td>';
 															} else {
 																echo '<td class="align-middle">' . data($prazo_sdpp) . '</td>';
 															}
 														}
 														?>
 														<td class="align-middle inline-block" id="actionbuttons" style="text-align: center">
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 24px; height: 24px;" href="processos_exant.php?func=estado&id=<?php echo $id; ?>"><i class="fas fa-truck"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Histórico" style="width: 24px; height: 24px;" href="processos_exant.php?func=historico&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-eye"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 24px; height: 24px;" href="rel/historico_processo_exant.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="PDF" style="width: 24px; height: 24px;" href="rel/historico_exant_pdf.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Editar" style="width: 24px; height: 24px;" href="processos_exant.php?func=edita&id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>"><i class="fas fa-tools"></i></a>
-															<a class="btn btn-light btn-xs" data-toggle="popover" data-content="Excluir" style="width: 24px; height: 24px;" href="processos_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
+															<a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 25px; height: 25px;" href="processos_exant.php?func=estado&id=<?= $id; ?>"><i class="fas fa-truck"></i></a>
+															<a class="btn btn-info btn-xs" data-toggle="popover" data-content="Histórico" style="width: 25px; height: 25px;" href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><i class="fas fa-eye"></i></a>
+															<!--<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 25px; height: 25px;" href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>-->
+															<a class="btn btn-primary btn-xs" data-toggle="popover" data-content="PDF" style="width: 25px; height: 25px;" href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
+															<a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" style="width: 25px; height: 25px;" href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><i class="fas fa-tools"></i></a>
+															<a class="btn btn-danger btn-xs" data-toggle="popover" data-content="Excluir" style="width: 25px; height: 25px;" href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
 														</td>
 													</tr>
 												<?php } ?>
@@ -369,12 +443,6 @@ login('EXANT', '../../');
 						</div>
 					</div>
 				</div>
-				<style>
-					#actionbuttons {
-						display: flex;
-						justify-content: space-between;
-					}
-				</style>
 				<div id="modalExemplo" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-dialog-centered modal-lg">
 						<div class="modal-content">
@@ -394,7 +462,7 @@ login('EXANT', '../../');
 												$result = mysqli_query($conexao, $query);
 												while ($res_1 = mysqli_fetch_array($result)) {
 												?>
-													<option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['saram']; ?> | <?php echo $res_1['nome']; ?></option>
+													<option value="<?= $res_1['id']; ?>"><?= $res_1['saram']; ?> | <?= $res_1['nome']; ?></option>
 												<?php
 												}
 												?>
@@ -409,7 +477,7 @@ login('EXANT', '../../');
 											$result = mysqli_query($conexao, $query);
 											$res_1 = mysqli_fetch_array($result);
 											?>
-											<input type="text" class="form-control mr-2" name="funcionario" value="<?php echo $_SESSION['nome_usuario'] ?>" disabled>
+											<input type="text" class="form-control mr-2" name="funcionario" value="<?= $_SESSION['nome_usuario'] ?>" disabled>
 										</div>
 									</div>
 									<br>
@@ -437,7 +505,7 @@ login('EXANT', '../../');
 													$id = $res_dir['id'];
 													$direito = $res_dir['direito'];
 												?>
-													<option value="<?php echo $id ?>"><?php echo $direito ?></option>
+													<option value="<?= $id ?>"><?= $direito ?></option>
 												<?php
 												}
 												?>
@@ -457,7 +525,7 @@ login('EXANT', '../../');
 													$id = $res_2['id'];
 													$secao = $res_2['secao'];
 												?>
-													<option value="<?php echo $id ?>"><?php echo $secao ?></option>
+													<option value="<?= $id ?>"><?= $secao ?></option>
 												<?php
 												}
 												?>
@@ -472,7 +540,7 @@ login('EXANT', '../../');
 											$id_estado = $res_estado['id'];
 											$estado_estado = $res_estado['estado'];
 											?>
-											<input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?php echo $res_estado["estado"]; ?>" disabled>
+											<input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?= $res_estado["estado"]; ?>" disabled>
 										</div>
 									</div>
 							</div>
@@ -489,10 +557,10 @@ login('EXANT', '../../');
 		<footer class="main-footer">
 			<?php footer() ?>
 		</footer>
-		<aside class="control-sidebar control-sidebar-dark">
-		</aside>
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
 	</div>
-	<?php echo javascript('../../') ?>
+	<?= javascript('../../') ?>
 	<script>
 		$(document).ready(function() {
 			$("#example1").DataTable({
@@ -517,79 +585,7 @@ login('EXANT', '../../');
 			});
 		});
 	</script>
-
 </body>
-<style>
-	/* The container */
-	.container {
-		display: block;
-		position: relative;
-		padding-left: 35px;
-		margin-bottom: 12px;
-		cursor: pointer;
-		font-size: 16px;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-
-	/* Hide the browser's default radio button */
-	.container input {
-		position: absolute;
-		opacity: 0;
-		cursor: pointer;
-	}
-
-	/* Create a custom radio button */
-	.checkmark {
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 20px;
-		width: 20px;
-		background-color: #eee;
-		border-radius: 50%;
-	}
-
-	/* On mouse-over, add a grey background color */
-	.container:hover input~.checkmark {
-		background-color: #ccc;
-	}
-
-	/* When the radio button is checked, add a blue background */
-	.container input:checked~.checkmark {
-		background-color: #2196F3;
-	}
-
-	/* Create the indicator (the dot/circle - hidden when not checked) */
-	.checkmark:after {
-		content: "";
-		position: absolute;
-		display: none;
-	}
-
-	/* Show the indicator (dot/circle) when checked */
-	.container input:checked~.checkmark:after {
-		display: block;
-	}
-
-	/* Style the indicator (dot/circle) */
-	.container .checkmark:after {
-		top: 7px;
-		left: 7px;
-		width: 6px;
-		height: 6px;
-		border-radius: 50%;
-		background: white;
-	}
-
-	.textarea {
-		text-align: justify;
-		white-space: normal;
-	}
-</style>
-
 </html>
 
 <!--CADASTRAR -->
@@ -673,7 +669,7 @@ if (isset($_POST['button'])) {
 					$situacao = $res_req["situacao"];
 					?>
 					<h4 class="modal-title" style="text-align:center; width: 100%;">Dados do(a):
-						<strong><?php echo $res_req["nome_posto"], " ", $res_req["situacao"], " ", $res_req["nome"] ?></strong>
+						<strong><?= $res_req["nome_posto"], " ", $res_req["situacao"], " ", $res_req["nome"] ?></strong>
 					</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
@@ -683,14 +679,14 @@ if (isset($_POST['button'])) {
 							<div class="form-group col-sm-7">
 								<label for="">Requerente</label>
 								<select class="form-control select2" name="txtcpf2" required>
-									<option value="<?php echo $res_1["id_req"]; ?>" selected><?php echo $res_1["req_saram"]; ?> |
-										<?php echo $res_1["req_nome"]; ?></option>
+									<option value="<?= $res_1["id_req"]; ?>" selected><?= $res_1["req_saram"]; ?> |
+										<?= $res_1["req_nome"]; ?></option>
 									<?php
 									$query_consulta_requerente = "SELECT * FROM requerentes ORDER BY nome asc";
 									$result_consulta_requerente = mysqli_query($conexao, $query_consulta_requerente);
 									while ($res_consulta_requerente = mysqli_fetch_array($result_consulta_requerente)) {
 									?>
-										<option value="<?php echo $res_consulta_requerente['id']; ?>"><?php echo $res_consulta_requerente['saram'] . " | " . $res_consulta_requerente['nome']; ?></option>
+										<option value="<?= $res_consulta_requerente['id']; ?>"><?= $res_consulta_requerente['saram'] . " | " . $res_consulta_requerente['nome']; ?></option>
 									<?php
 									} ?>
 								</select>
@@ -704,14 +700,14 @@ if (isset($_POST['button'])) {
 								$result = mysqli_query($conexao, $query);
 								$res_row = mysqli_fetch_array($result);
 								?>
-								<input type="text" class="form-control mr-2" name="funcionario2" value="<?php echo $_SESSION['nome_usuario'] ?>" disabled>
+								<input type="text" class="form-control mr-2" name="funcionario2" value="<?= $_SESSION['nome_usuario'] ?>" disabled>
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="form-group col-sm-3">
 								<label for="quantidade">NUP</label>
-								<input type="text" class="form-control mr-2" id="txtnup2" name="txtnup2" placeholder="00000.000000/0000-00" value="<?php echo $res_1["nup"]; ?>" required>
+								<input type="text" class="form-control mr-2" id="txtnup2" name="txtnup2" placeholder="00000.000000/0000-00" value="<?= $res_1["nup"]; ?>" required>
 							</div>
 							<div class="col-sm-2"></div>
 							<div class="form-group col-sm-7">
@@ -722,13 +718,13 @@ if (isset($_POST['button'])) {
 						<div class="row">
 							<div class="form-group col-sm-5">
 								<label for="quantidade">Data de Abertura</label>
-								<input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php echo $res_1['data_criacao']; ?>" required>
+								<input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?= $res_1['data_criacao']; ?>" required>
 								<!--<input class="form-control" type="text" id="datepicker" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php data_show($res_1['data_criacao']); ?>">-->
 							</div>
 							<div class="form-group col-sm-7">
 								<label>Direito Pleiteado</label>
 								<select class="form-control select2" id="txtdireitopleiteado2" name="txtdireitopleiteado2" required>
-									<option value="<?php echo $res_1["id_dir"]; ?>" selected><?php echo $res_1["dir_direito"]; ?></option>
+									<option value="<?= $res_1["id_dir"]; ?>" selected><?= $res_1["dir_direito"]; ?></option>
 									<?php
 									$query_direito = "SELECT * FROM tb_direitoPleiteado_exant WHERE status = 'Aprovado' ORDER BY direito ASC";
 									$result_direito = mysqli_query($conexao, $query_direito);
@@ -736,7 +732,7 @@ if (isset($_POST['button'])) {
 										$id_direito = $res_dir['id'];
 										$direito_direito = $res_dir['direito'];
 									?>
-										<option value="<?php echo $id_direito ?>"><?php echo $direito_direito ?></option>
+										<option value="<?= $id_direito ?>"><?= $direito_direito ?></option>
 									<?php
 									} ?>
 								</select>
@@ -747,7 +743,7 @@ if (isset($_POST['button'])) {
 							<div class="form-group col-sm-6">
 								<label>Seção de Origem</label>
 								<select class="form-control select2" id="txtsecaoorigem2" name="txtsecaoorigem2" required>
-									<option value="<?php echo $res_1['id_sec']; ?>" selected><?php echo $res_1['sec_origem']; ?></option>
+									<option value="<?= $res_1['id_sec']; ?>" selected><?= $res_1['sec_origem']; ?></option>
 									<?php
 									$query_secao = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
 									$result_secao = mysqli_query($conexao, $query_secao);
@@ -755,14 +751,14 @@ if (isset($_POST['button'])) {
 										$id_secao = $res_secao['id'];
 										$secao_secao = $res_secao['secao'];
 									?>
-										<option value="<?php echo $id_secao ?>"><?php echo $secao_secao ?></option>
+										<option value="<?= $id_secao ?>"><?= $secao_secao ?></option>
 									<?php
 									} ?>
 								</select>
 							</div>
 							<div class="form-group col-sm-6">
 								<label for="quantidade">Estado do Processo</label>
-								<input type="text" class="form-control mr-2" id="txtestado2" name="txtestado2" value="<?php echo $res_1["est_estado"]; ?>" disabled>
+								<input type="text" class="form-control mr-2" id="txtestado2" name="txtestado2" value="<?= $res_1["est_estado"]; ?>" disabled>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -857,13 +853,13 @@ if (isset($_POST['button'])) {
 									$result = mysqli_query($conexao, $query);
 									$res_row = mysqli_fetch_array($result);
 									?>
-									<input type="text" class="form-control mr-2" name="funcionario3" value="<?php echo $_SESSION['nome_usuario'] ?>" disabled>
+									<input type="text" class="form-control mr-2" name="funcionario3" value="<?= $_SESSION['nome_usuario'] ?>" disabled>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-5">
 									<label for="">Data Anterior</label>
-									<input type="date" class="form-control mr-2" value="<?php echo $res_1["data_saida"]; ?>" disabled>
+									<input type="date" class="form-control mr-2" value="<?= $res_1["data_saida"]; ?>" disabled>
 								</div>
 								<div class="col-sm-2" style="text-align: center;">
 									<label for=""></label>
@@ -877,7 +873,7 @@ if (isset($_POST['button'])) {
 							<div class="row">
 								<div class="form-group col-sm-5">
 									<label for="quantidade">Seção Atual</label>
-									<input type="text" class="form-control mr-2" id="txtsecaoatual" name="txtsecaoatual" value="<?php echo $res_1["sec_atual"]; ?>" disabled>
+									<input type="text" class="form-control mr-2" id="txtsecaoatual" name="txtsecaoatual" value="<?= $res_1["sec_atual"]; ?>" disabled>
 								</div>
 								<div class="col-sm-2" style="text-align: center;">
 									<label for=""></label>
@@ -895,7 +891,7 @@ if (isset($_POST['button'])) {
 											$id_sec_2 = $res_sec['id'];
 											$secao_sec = $res_sec['secao'];
 										?>
-											<option value="<?php echo $id_sec_2 ?>"><?php echo $secao_sec ?></option>
+											<option value="<?= $id_sec_2 ?>"><?= $secao_sec ?></option>
 										<?php
 										} ?>
 									</select>
@@ -904,7 +900,7 @@ if (isset($_POST['button'])) {
 							<div class="row">
 								<div class="form-group col-sm-5">
 									<label for="quantidade">Estado Atual</label>
-									<input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?php echo $res_1["est_estado"]; ?>" disabled>
+									<input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?= $res_1["est_estado"]; ?>" disabled>
 								</div>
 								<div class="col-sm-2" style="text-align: center;">
 									<label for=""></label>
@@ -922,7 +918,7 @@ if (isset($_POST['button'])) {
 											$id_est_2 = $res_est['id'];
 											$estado_est = $res_est['estado'];
 										?>
-											<option value="<?php echo $id_est_2 ?>"><?php echo $estado_est ?></option>
+											<option value="<?= $id_est_2 ?>"><?= $estado_est ?></option>
 										<?php
 										} ?>
 									</select>
@@ -996,8 +992,8 @@ if (isset($_POST['button'])) {
 						</h2>
 					</div>
 					<div class="col-sm-10">
-						<h5><i class="far fa-user"></i> Requerente: <strong><?php echo $posto ?> <?php echo $situacao ?> <?php echo $nome ?></strong></h5>
-						<h5><i class="far fa-folder-open"></i> Processo nº: <strong><?php echo $nup ?></strong></h5>
+						<h5><i class="far fa-user"></i> Requerente: <strong><?= $posto ?> <?= $situacao ?> <?= $nome ?></strong></h5>
+						<h5><i class="far fa-folder-open"></i> Processo nº: <strong><?= $nup ?></strong></h5>
 					</div>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
@@ -1058,18 +1054,18 @@ if (isset($_POST['button'])) {
 												} ?>
 											</td>
 											<td class="align-middle">
-												<strong><?php echo $new_estado; ?></strong><br>
+												<strong><?= $new_estado; ?></strong><br>
 												<?php
 												if ($res_h["obs_exant"] == '') {
 													echo 'Não há';
 												} else { ?>
-													<p style="text-align: justify;"><?php echo $obs_exant; ?> </p>
+													<p style="text-align: justify;"><?= $obs_exant; ?> </p>
 												<?php
 												}
 												?>
 											</td>
 											<td class="align-middle" style="text-align: center;">
-												<?php echo data($data_novo); ?>
+												<?= data($data_novo); ?>
 											</td>
 											<?php
 											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
@@ -1085,48 +1081,48 @@ if (isset($_POST['button'])) {
 											}
 											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} elseif ($old_secao == 'DP-3') {
 												if ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} elseif ($old_secao == 'ACI-1') {
 												if ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} elseif ($old_secao == 'SDPP') {
 												if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) > 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} else {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0,0.5); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											}
 											?>
 											<td class="align-middle" style="text-align: center;">
-												<?php echo $nome_sacador; ?>
+												<?= $nome_sacador; ?>
 											</td>
 										</tr>
 									<?php } ?>
@@ -1134,7 +1130,7 @@ if (isset($_POST['button'])) {
 							</table>
 						</div>
 						<div class="modal-footer">
-							<a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf.php?id=<?php echo $id; ?>&id_req=<?php echo $id_req; ?>&nup=<?php echo $nup; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
+							<a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>&nup=<?= $nup; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
 						</div>
 					</form>
 				</div>
