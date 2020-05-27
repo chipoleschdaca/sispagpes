@@ -130,17 +130,17 @@ login('EXANT', '../../');
                   <span class="info-box-text">ATIVOS</span>
                   <span class="info-box-number">
                     <h4>
-                       <?php
-                        $queryAtivo = "SELECT * FROM requerentes WHERE situacao = 'AT'";
-                        $resultAtivo = mysqli_query($conexao, $queryAtivo);
-                        $rowAtivo = mysqli_num_rows($resultAtivo);
-                        echo $rowAtivo;
-                        ?>
+                      <?php
+                      $queryAtivo = "SELECT * FROM requerentes WHERE situacao = 'AT'";
+                      $resultAtivo = mysqli_query($conexao, $queryAtivo);
+                      $rowAtivo = mysqli_num_rows($resultAtivo);
+                      echo $rowAtivo;
+                      ?>
                     </h4>
                   </span>
-                </div>                
-              </div>              
-            </div>           
+                </div>
+              </div>
+            </div>
             <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
@@ -149,17 +149,17 @@ login('EXANT', '../../');
                   <span class="info-box-text">VETERANOS</span>
                   <span class="info-box-number">
                     <h4>
-                        <?php
-                        $queryVeterano = "SELECT * FROM requerentes WHERE situacao = 'R1'";
-                        $resultVeterano = mysqli_query($conexao, $queryVeterano);
-                        $rowVeterano = mysqli_num_rows($resultVeterano);
-                        echo $rowVeterano;
-                        ?>
+                      <?php
+                      $queryVeterano = "SELECT * FROM requerentes WHERE situacao = 'R1'";
+                      $resultVeterano = mysqli_query($conexao, $queryVeterano);
+                      $rowVeterano = mysqli_num_rows($resultVeterano);
+                      echo $rowVeterano;
+                      ?>
                     </h4>
                   </span>
-                </div>               
-              </div>             
-            </div>            
+                </div>
+              </div>
+            </div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-user-tag"></i></span>
@@ -167,16 +167,16 @@ login('EXANT', '../../');
                   <span class="info-box-text">PENSIONISTAS</span>
                   <span class="info-box-number">
                     <h4>
-                        <?php
-                        $queryReformado = "SELECT * FROM requerentes WHERE situacao = 'PM'";
-                        $resultReformado = mysqli_query($conexao, $queryReformado);
-                        $rowReformado = mysqli_num_rows($resultReformado);
-                        echo $rowReformado;
-                        ?>
+                      <?php
+                      $queryReformado = "SELECT * FROM requerentes WHERE situacao = 'PM'";
+                      $resultReformado = mysqli_query($conexao, $queryReformado);
+                      $rowReformado = mysqli_num_rows($resultReformado);
+                      echo $rowReformado;
+                      ?>
                     </h4>
                   </span>
                 </div>
-              </div>              
+              </div>
             </div>
           </div>
           <div>

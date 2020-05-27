@@ -13,16 +13,17 @@ login('EXANT', '../../');
   <?php head('../../') ?>
 </head>
 <style>
-    #tabcharts {
-        display: flex;
-        justify-content: space-between
-    }
+  #tabcharts {
+    display: flex;
+    justify-content: space-between
+  }
 
-    #filter {
-        position: relative;
-        text-align: center;
-    }
+  #filter {
+    position: relative;
+    text-align: center;
+  }
 </style>
+
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
   <div class="wrapper">
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
