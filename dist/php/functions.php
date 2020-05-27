@@ -50,7 +50,7 @@ function head($diretorio)
 
 function footer()
 { ?>
-  <strong>&copy; 2019-<?php echo date("Y") ?> <a href="#"> SISPAGPES</a></strong>. Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. <div class="float-right d-none d-sm-inline-block"><b>Versão</b> 1.0.0</div>
+  <span>&copy; 2019-<?php echo date("Y") ?> <a href="#"> SISPAGPES</a></span> - Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int <div class="float-right d-none d-sm-inline-block">v1.0.0</div>
 <?php
 }
 
