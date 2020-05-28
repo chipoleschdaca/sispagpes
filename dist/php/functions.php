@@ -3,106 +3,67 @@ date_default_timezone_set('America/Sao_paulo');
 
 function head($diretorio)
 { ?>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="<?php echo $diretorio ?>dist/img/gapls.png">
-  <title>SISPAGPES</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="<?php echo $diretorio ?>dist/css/style_print_button.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/daterangepicker/daterangepicker.css">
-  <!-- JQuery UI -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/jquery-ui/jquery-ui.min.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?php echo $diretorio ?>plugins/summernote/summernote-bs4.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- Material Design-->
+  <link rel="icon" type="image/png" href="<?= $diretorio ?>dist/img/gapls.png">
+  <title>SISPAGPES</title>  
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/fontawesome-free/css/all.min.css"> 
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> 
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">  
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"> 
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">  
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/jqvmap/jqvmap.min.css">  
+  <link rel="stylesheet" href="<?= $diretorio ?>dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= $diretorio ?>dist/css/style_print_button.css">  
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">  
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/daterangepicker/daterangepicker.css"> 
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/jquery-ui/jquery-ui.min.css">  
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/summernote/summernote-bs4.css"> 
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">  
   <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <!-- SweetAlert2 -->
-  <script src="<?php echo $diretorio ?>plugins/sweetalert2/sweetalert2.min.js"></script>
-  <script src="<?php echo $diretorio ?>plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <!-- Toastr -->
-  <script src="<?php echo $diretorio ?>plugins/toastr/toastr.min.js"></script>
-
+  <script src="<?= $diretorio ?>plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="<?= $diretorio ?>plugins/sweetalert2/sweetalert2.all.min.js"></script>  
+  <script src="<?= $diretorio ?>plugins/toastr/toastr.min.js"></script>
 <?php
 }
 
 function footer()
 { ?>
-  <span>&copy; 2019-<?php echo date("Y") ?> <a href="#"> SISPAGPES</a></span> - Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int <div class="float-right d-none d-sm-inline-block">v1.0.1</div>
+  <span>&copy; 2019-<?= date("Y") ?> <a href="#"> SISPAGPES</a></span> - Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int <div class="float-right d-none d-sm-inline-block">v1.0.1</div>
 <?php
 }
 
 function javascript($diretorio)
 { ?>
-
-  <!-- jQuery -->
-  <script src="<?php echo $diretorio ?>plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="<?php echo $diretorio ?>plugins/jquery-mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="<?php echo $diretorio ?>plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script src="<?= $diretorio ?>plugins/jquery/jquery.min.js"></script>  
+  <script src="<?= $diretorio ?>plugins/jquery-mask/dist/jquery.mask.js"></script>  
+  <script src="<?= $diretorio ?>plugins/jquery-ui/jquery-ui.min.js"></script> 
   <script>
     $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Select2 -->
-  <script src="<?php echo $diretorio ?>plugins/select2/js/select2.full.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="<?php echo $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="<?php echo $diretorio ?>plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="<?php echo $diretorio ?>plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="<?php echo $diretorio ?>plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="<?php echo $diretorio ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <script src="<?php echo $diretorio ?>plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="<?php echo $diretorio ?>plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="<?php echo $diretorio ?>plugins/moment/moment.min.js"></script>
-  <script src="<?php echo $diretorio ?>plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="<?php echo $diretorio ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="<?php echo $diretorio ?>plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="<?php echo $diretorio ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="<?php echo $diretorio ?>dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="<?php echo $diretorio ?>dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="<?php echo $diretorio ?>dist/js/demo.js"></script>
-  <!-- Material Design-->
-  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
-  <!--IonIcon-->
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-  <!--DataTables-->
-  <script type="text/javascript" charset="utf8" src="<?php echo $diretorio ?>plugins/datatables/jquery.dataTables.js"></script>
-  <script type="text/javascript" charset="utf8" src="<?php echo $diretorio ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+  </script>  
+  <script src="<?= $diretorio ?>plugins/select2/js/select2.full.min.js"></script>  
+  <script src="<?= $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>  
+  <script src="<?= $diretorio ?>plugins/chart.js/Chart.min.js"></script>  
+  <script src="<?= $diretorio ?>plugins/sparklines/sparkline.js"></script>  
+  <script src="<?= $diretorio ?>plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="<?= $diretorio ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <script src="<?= $diretorio ?>plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>  
+  <script src="<?= $diretorio ?>plugins/jquery-knob/jquery.knob.min.js"></script> 
+  <script src="<?= $diretorio ?>plugins/moment/moment.min.js"></script>
+  <script src="<?= $diretorio ?>plugins/daterangepicker/daterangepicker.js"></script>  
+  <script src="<?= $diretorio ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>  
+  <script src="<?= $diretorio ?>plugins/summernote/summernote-bs4.min.js"></script>  
+  <script src="<?= $diretorio ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>  
+  <script src="<?= $diretorio ?>dist/js/adminlte.js"></script>  
+  <script src="<?= $diretorio ?>dist/js/pages/dashboard.js"></script> 
+  <script src="<?= $diretorio ?>dist/js/demo.js"></script>  
+  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>  
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>  
+  <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -292,13 +253,10 @@ function data_db($data)
 }
 
 function data2()
-{
-  // leitura das datas
+{  
   $dia = date('d');
   $mes = date('m');
-  $ano = date('Y');
-
-  // configuração mês
+  $ano = date('Y'); 
 
   switch ($mes) {
 
@@ -338,8 +296,7 @@ function data2()
     case 12:
       $mes = "dezembro";
       break;
-  }
-  //Agora basta imprimir na tela...
+  }  
   print("$dia de $mes de $ano");
 }
 
