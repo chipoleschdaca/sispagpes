@@ -274,9 +274,9 @@ login('EXANT', '../../');
                               <td class="align-middle"><?= $email; ?></td>
                               <td class="align-middle"><?= $data; ?></td>
                               <td class="align-middle">
-                                <a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?= $id; ?>&cpf=<?= $cpf ?>"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?= $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" data-toggle="popover" style="width: 23px;" data-content="Excluir" href="requerentes.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                <a href="requerentes.php?func=consulta&id=<?= $id; ?>&cpf=<?= $cpf ?>"><button class="btn btn-dark btn-xs btn-table" data-toggle="popover" data-content="Visualizar processos atrelados"><i class="fas fa-eye"></i></button></a>
+                                <a href="requerentes.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-xs btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
+                                <a href="requerentes.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-xs btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button></a>
                               </td>
                             </tr>
                           <?php } ?>

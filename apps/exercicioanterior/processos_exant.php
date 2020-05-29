@@ -410,13 +410,13 @@ login('EXANT', '../../');
 															}
 														}
 														?>
-														<td class="align-middle inline-block" id="actionbuttons" style="text-align: center">
-															<a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Encaminhar processo" style="width: 25px; height: 25px;" href="processos_exant.php?func=estado&id=<?= $id; ?>"><i class="fas fa-truck"></i></a>
-															<a class="btn btn-info btn-xs" data-toggle="popover" data-content="Histórico" style="width: 25px; height: 25px;" href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><i class="fas fa-eye"></i></a>
-															<!--<a class="btn btn-light btn-xs" data-toggle="popover" data-content="HTML" style="width: 25px; height: 25px;" href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></a>-->
-															<a class="btn btn-primary btn-xs" data-toggle="popover" data-content="PDF" style="width: 25px; height: 25px;" href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><i class="fas fa-file-pdf"></i></a>
-															<a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" style="width: 25px; height: 25px;" href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><i class="fas fa-tools"></i></a>
-															<a class="btn btn-danger btn-xs" data-toggle="popover" data-content="Excluir" style="width: 25px; height: 25px;" href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="fas fa-trash-alt"></i></a>
+														<td class="align-middle inline-block" id="actionbuttons">
+                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>"><a class="btn btn-dark btn-xs btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck"></i></a></a>
+															<a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><button class="btn btn-info btn-xs btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye"></i></button></a>
+															<!--<a href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><button class="btn btn-light btn-xs btn-table" data-toggle="popover" data-content="HTML"><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></button></a>-->
+															<a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-xs btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button></a>
+															<a href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><button class="btn btn-warning btn-xs btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
+															<a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-xs btn-table" data-toggle="popover" data-content="Excluir"><i class="fas fa-trash-alt"></i></button></a>
 														</td>
 													</tr>
 												<?php } ?>
