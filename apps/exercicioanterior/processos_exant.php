@@ -10,10 +10,9 @@ login('EXANT', '../../');
 <html lang="pt-br">
 
 <head>
-	<!-- DataTables -->
-	<link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 	<?php head('../../') ?>
-
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 </head>
 <style>
     /* The container */
@@ -83,16 +82,6 @@ login('EXANT', '../../');
     .textarea {
         text-align: justify;
         white-space: normal;
-    }
-    #actionbuttons {
-    display: flex;
-    }
-
-    td{
-        justify-content: center;
-        justify-items: center;
-        align-items: center;
-        align-content: center;
     }
 
     a{
@@ -422,13 +411,13 @@ login('EXANT', '../../');
 															}
 														}
 														?>
-														<td class="align-middle" id="actionbuttons">
-                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>" id="tableButton"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving"></i></button></a>
-															<a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>" id="tableButton"><button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye"></i></button></a>
-															<!--<a href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener” id="tableButton"><button class="btn btn-light btn-table" data-toggle="popover" data-content="HTML"><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></button></a>-->
-															<a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener” id="tableButton"><button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button></a>
+														<td class="align-middle">
+                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>" id="tableButton"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving align-top"></i></button></a>
+															<a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>" id="tableButton"><button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye align-top"></i></button></a>
+															<!--<a href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener” id="tableButton"><button class="btn btn-light btn-table" data-toggle="popover" data-content="HTML"><span class="material-icons">print</span></button></a>-->
+															<a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener” id="tableButton"><button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf align-top"></i></button></a>
 															<a href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?> id="tableButton""><button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
-															<a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');" id="tableButton"><button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button></a>
+															<a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');" id="tableButton"><button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt align-top"></i></button></a>
 														</td>
 													</tr>
 												<?php } ?>
@@ -447,7 +436,7 @@ login('EXANT', '../../');
 									$query_prazo2 = "SELECT * FROM tb_secoes_exant";
 									$result_prazo2 = mysqli_query($conexao, $query_prazo2);
 									while ($res_prazo2 = mysqli_fetch_array($result_prazo2)) {
-										echo $res_prazo2['secao'] . ': ' . $res_prazo2['prazo_exant'] . ' dias' . ' / ';
+										echo "<span style='margin-right: 5px; padding: 2px;'>". "<b>".$res_prazo2['secao'] . "</b>: " . $res_prazo2['prazo_exant'] . " dias " . "</span>";
 									}
 									?>
 								</div>
