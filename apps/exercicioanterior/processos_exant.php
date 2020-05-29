@@ -411,7 +411,7 @@ login('EXANT', '../../');
 														}
 														?>
 														<td class="align-middle inline-block" id="actionbuttons">
-                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>"><a class="btn btn-dark btn-xs btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck"></i></a></a>
+                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>"><button class="btn btn-dark btn-xs btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck"></i></button></a>
 															<a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><button class="btn btn-info btn-xs btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye"></i></button></a>
 															<!--<a href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><button class="btn btn-light btn-xs btn-table" data-toggle="popover" data-content="HTML"><span class="material-icons" style="font-size: 17px; padding: 0; margin: 0; vertical-align:middle;">print</span></button></a>-->
 															<a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-xs btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button></a>
