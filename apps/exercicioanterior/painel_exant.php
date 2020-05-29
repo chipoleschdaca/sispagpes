@@ -550,7 +550,7 @@ login('EXANT', '../../');
       ],
       datasets: [{
         data: [<?= $count_estado ?>],
-        backgroundColor: ['#9C0060', '#d2d6de', '#f56954', '#f39c12', '#00c0ef', '#00a65a', '#3c8dbc'],
+          backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
     }
     var donutChart1 = new Chart(donutChartCanvas1, {
