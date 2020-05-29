@@ -54,7 +54,7 @@ login('ADMIN', '../../');
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
+            <?= $_SESSION['nome_usuario'] ?>
             <span class="d-lg-none d-md-block">Some Actions</span>
           </a>
           <!-- Dropdown - User Information -->
@@ -277,11 +277,11 @@ login('ADMIN', '../../');
                           $id = $res_1["id"];
                         ?>
                           <tr style="text-align: center;">
-                            <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $nome; ?></td>
+                            <td class="align-middle"><?= $id; ?></td>
+                            <td class="align-middle"><?= $nome; ?></td>
                             <td class="align-middle">
-                              <a class="btn btn-warning btn-sm" href="perfis.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                              <a class="btn btn-danger btn-sm" href="perfis.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                              <a href="perfis.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                              <a href="perfis.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                             </td>
                           </tr>
                         <?php
@@ -460,7 +460,7 @@ if (@$_GET['func'] == 'edita') {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="id_produto">Perfis</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" value="<?php echo $perfil; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" value="<?= $perfil; ?>" required>
               </div>
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary btn-sm" name="buttonEditar" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>

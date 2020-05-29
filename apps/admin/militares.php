@@ -56,7 +56,7 @@ login('ADMIN', '../../');
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
+            <?= $_SESSION['nome_usuario'] ?>
             <span class="d-lg-none d-md-block">Some Actions</span>
           </a>
           <!-- Dropdown - User Information -->
@@ -333,28 +333,28 @@ login('ADMIN', '../../');
                           $data = $res_1['data'];
                         ?>
                           <tr>
-                            <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $saram; ?></td>
-                            <td class="align-middle"><?php echo $cpf; ?></td>
-                            <td class="align-middle"><?php echo $posto; ?></td>
-                            <td class="align-middle" style="text-transform:uppercase;"><?php echo $nome; ?></td>
-                            <td class="align-middle" style="text-transform:uppercase;"><?php echo $nomeguerra; ?></td>
-                            <td class="align-middle"><?php echo $perfil; ?></td>
+                            <td class="align-middle"><?= $id; ?></td>
+                            <td class="align-middle"><?= $saram; ?></td>
+                            <td class="align-middle"><?= $cpf; ?></td>
+                            <td class="align-middle"><?= $posto; ?></td>
+                            <td class="align-middle" style="text-transform:uppercase;"><?= $nome; ?></td>
+                            <td class="align-middle" style="text-transform:uppercase;"><?= $nomeguerra; ?></td>
+                            <td class="align-middle"><?= $perfil; ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aguardando') { ?>
                                 <span class="badge badge-warning">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else if ($status == 'Aprovado') { ?>
                                 <span class="badge badge-success">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else if ($status == 'Rejeitado') { ?>
                                 <span class="badge badge-danger">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else {
@@ -362,26 +362,26 @@ login('ADMIN', '../../');
                               }
                               ?>
                             </td>
-                            <td class="align-middle"><?php echo data($data); ?></td>
+                            <td class="align-middle"><?= data($data); ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aprovado') { ?>
-                                <a class="btn btn-success btn-sm disabled" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
+                                <a href="militares.php?func=aprova&id=<?= $id; ?>"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="militares.php?func=senha&id=<?= $id; ?>"><button class="btn btn-dark btn-table"><i class="fas fa-key"></i></button></a>
+                                <a href="militares.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="militares.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-sm" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
+                                <a href="militares.php?func=aprova&id=<?= $id; ?>"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="militares.php?func=senha&id=<?= $id; ?>"><button class="btn btn-dark btn-table"><i class="fas fa-key"></i></button></a>
+                                <a href="militares.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="militares.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } else { ?>
-                                <a class="btn btn-success btn-sm" href="militares.php?func=aprova&id=<?php echo $id; ?>"><i class="fas fa-thumbs-up"></i></a>
-                                <a class="btn btn-dark btn-sm" href="militares.php?func=senha&id=<?php echo $id; ?>"><i class="fas fa-key"></i></a>
-                                <a class="btn btn-warning btn-sm" href="militares.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-sm disabled" href="militares.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><i class="far fa-trash-alt"></i></a>
+                                <a href="militares.php?func=aprova&id=<?= $id; ?>"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="militares.php?func=senha&id=<?= $id; ?>"><button class="btn btn-dark btn-table"><i class="fas fa-key"></i></button></a>
+                                <a href="militares.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="militares.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                               <?php } ?>
                             </td>
                           </tr>
@@ -430,7 +430,7 @@ login('ADMIN', '../../');
                           $id_ex = $res_ex['id'];
                           $posto_ex = $res_ex['posto'];
                         ?>
-                          <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                          <option value="<?= $id_ex ?>"><?= $posto_ex ?></option>
                         <?php
                         }
                         ?>
@@ -461,7 +461,7 @@ login('ADMIN', '../../');
                         $result = mysqli_query($conexao, $query);
                         while ($res_1 = mysqli_fetch_array($result)) {
                         ?>
-                          <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['perfil']; ?></option>
+                          <option value="<?= $res_1['id']; ?>"><?= $res_1['perfil']; ?></option>
                         <?php
                         }
                         ?>
@@ -588,7 +588,7 @@ if (isset($_POST['button'])) {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="fornecedor">Senha</label>
-                <input type="text" class="form-control mr-2" id="txtsenhaatual" name="txtsenhaatual" autocomplete="off" value="<?php echo $res_1['senha']; ?>" disabled>
+                <input type="text" class="form-control mr-2" id="txtsenhaatual" name="txtsenhaatual" autocomplete="off" value="<?= $res_1['senha']; ?>" disabled>
               </div>
               <div class="form-group">
                 <label for="fornecedor">Nova Senha</label>
@@ -655,16 +655,16 @@ if (isset($_POST['button'])) {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="fornecedor">Saram</label>
-                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?= $res_1['saram']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="fornecedor">CPF</label>
-                <input type="text" class="form-control mr-2" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?= $res_1['cpf']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="id_produto">Posto/Grad.</label>
                 <select class="form-control mr-2" name="txtposto" required>
-                  <option value="<?php echo $id_posto ?>" selected><?php echo $posto ?></option>
+                  <option value="<?= $id_posto ?>" selected><?= $posto ?></option>
                   <?php
                   $query_posto = "SELECT * FROM tb_posto WHERE status = 'Aprovado'";
                   $result_posto = mysqli_query($conexao, $query_posto);
@@ -672,7 +672,7 @@ if (isset($_POST['button'])) {
                     $id_ex = $res_ex['id'];
                     $posto_ex = $res_ex['posto'];
                   ?>
-                    <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                    <option value="<?= $id_ex ?>"><?= $posto_ex ?></option>
                   <?php
                   }
                   ?>
@@ -680,22 +680,22 @@ if (isset($_POST['button'])) {
               </div>
               <div class="form-group">
                 <label for="id_produto">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?= $res_1['nome']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="id_produto">Nome Guerra</label>
-                <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" value="<?php echo $res_1['nomeguerra']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" value="<?= $res_1['nomeguerra']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="id_produto">Perfil</label>
                 <select name="perfil" class="form-control mr-2" id="category" name="category" required>
-                  <option value="<?php echo $id_perfil; ?>" selected><?php echo $perfil; ?></option>
+                  <option value="<?= $id_perfil; ?>" selected><?= $perfil; ?></option>
                   <?php
                   $query = "SELECT * FROM perfis ORDER BY perfil asc";
                   $result = mysqli_query($conexao, $query);
                   while ($res_2 = mysqli_fetch_array($result)) {
                   ?>
-                    <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['perfil']; ?></option>
+                    <option value="<?= $res_2['id']; ?>"><?= $res_2['perfil']; ?></option>
                   <?php
                   }
                   ?>
@@ -770,16 +770,16 @@ if (isset($_POST['button'])) {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="fornecedor">Saram</label>
-                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?php echo $res_1['saram']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtsaram2" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" value="<?= $res_1['saram']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="fornecedor">CPF</label>
-                <input type="text" class="form-control mr-2" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?php echo $res_1['cpf']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtcpf2" name="txtcpf" autocomplete="off" maxlength="14" placeholder="000.000.000-00" value="<?= $res_1['cpf']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="id_produto">Posto/Grad.</label>
                 <select class="form-control mr-2" name="txtposto" required>
-                  <option value="<?php echo $res_1['id_posto']; ?>" selected><?php echo $res_1['nome_posto']; ?></option>
+                  <option value="<?= $res_1['id_posto']; ?>" selected><?= $res_1['nome_posto']; ?></option>
                   <?php
                   $query_posto = "SELECT * FROM tb_posto where status = 'Aprovado'";
                   $result_posto = mysqli_query($conexao, $query_posto);
@@ -787,7 +787,7 @@ if (isset($_POST['button'])) {
                     $id_ex = $res_ex['id'];
                     $posto_ex = $res_ex['posto'];
                   ?>
-                    <option value="<?php echo $id_ex ?>"><?php echo $posto_ex ?></option>
+                    <option value="<?= $id_ex ?>"><?= $posto_ex ?></option>
                   <?php
                   }
                   ?>
@@ -795,22 +795,22 @@ if (isset($_POST['button'])) {
               </div>
               <div class="form-group">
                 <label for="id_produto">Nome Completo</label>
-                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?php echo $res_1['nome']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtnome" name="txtnome" autocomplete="off" placeholder="Nome Completo" value="<?= $res_1['nome']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="id_produto">Nome Guerra</label>
-                <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" value="<?php echo $res_1['nomeguerra']; ?>" required>
+                <input type="text" class="form-control mr-2" id="txtnomeguerra" name="txtnomeguerra" autocomplete="off" placeholder="Nome de Guerra" value="<?= $res_1['nomeguerra']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="id_produto">Perfil</label>
                 <select class="form-control mr-2" id="txtperfil2" name="txtperfil2" required>
-                  <option value="<?php echo $res_1['id_perfil']; ?>" selected><?php echo $res_1['nome_perfil']; ?></option>
+                  <option value="<?= $res_1['id_perfil']; ?>" selected><?= $res_1['nome_perfil']; ?></option>
                   <?php
                   $query = "SELECT * FROM perfis ORDER BY perfil asc";
                   $result = mysqli_query($conexao, $query);
                   while ($res_2 = mysqli_fetch_array($result)) {
                   ?>
-                    <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['perfil']; ?></option>
+                    <option value="<?= $res_2['id']; ?>"><?= $res_2['perfil']; ?></option>
                   <?php }
                   ?>
                 </select>

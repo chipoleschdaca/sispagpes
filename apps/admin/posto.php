@@ -53,7 +53,7 @@ login('ADMIN', '../../');
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
+            <?= $_SESSION['nome_usuario'] ?>
             <span class="d-lg-none d-md-block">Some Actions</span>
           </a>
           <!-- Dropdown - User Information -->
@@ -298,23 +298,23 @@ login('ADMIN', '../../');
                           $status = $res_1["status"];
                         ?>
                           <tr style="text-align: center;">
-                            <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $posto; ?></td>
+                            <td class="align-middle"><?= $id; ?></td>
+                            <td class="align-middle"><?= $posto; ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aguardando') { ?>
                                 <span class="badge badge-warning">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else if ($status == 'Aprovado') { ?>
                                 <span class="badge badge-success">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else if ($status == 'Excluído') { ?>
                                 <span class="badge badge-danger">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else {
@@ -325,22 +325,22 @@ login('ADMIN', '../../');
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aprovado') { ?>
-                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="posto.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="posto.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a>
+                                <a href="posto.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="posto.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-xs" href="posto.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="posto.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="posto.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="posto.php?func=aprova&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                <a href="posto.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="posto.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="posto.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Posto?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="posto.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="posto.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="posto.php?func=aprova&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Posto?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                <a href="posto.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
+                                <a href="posto.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } else {
                                 echo $status;
@@ -412,23 +412,23 @@ login('ADMIN', '../../');
                           $status = $res_1["status"];
                         ?>
                           <tr style="text-align: center;">
-                            <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $posto; ?></td>
+                            <td class="align-middle"><?= $id; ?></td>
+                            <td class="align-middle"><?= $posto; ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aguardando') { ?>
                                 <span class="badge badge-warning">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else if ($status == 'Aprovado') { ?>
                                 <span class="badge badge-success">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else if ($status == 'Excluído') { ?>
                                 <span class="badge badge-danger">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else {
@@ -439,22 +439,22 @@ login('ADMIN', '../../');
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aprovado') { ?>
-                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a>
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-xs" href="secoes_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="secoes_exant.php?func=aprova&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="secoes_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Posto?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="secoes_exant.php?func=aprova&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Posto?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } else {
                                 echo $status;
@@ -631,7 +631,7 @@ if (@$_GET['func'] == 'edita') {
             <form method="POST" action="">
               <div class="form-group">
                 <label for="id_produto">Postos</label>
-                <input type="text" class="form-control mr-2" name="txtposto2" value="<?php echo $res_1['posto']; ?>" maxlength="2" autocomplete="off">
+                <input type="text" class="form-control mr-2" name="txtposto2" value="<?= $res_1['posto']; ?>" maxlength="2" autocomplete="off">
               </div>
           </div>
           <div class="modal-footer">

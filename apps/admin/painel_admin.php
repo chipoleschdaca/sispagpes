@@ -57,7 +57,7 @@ login('ADMIN', '../../');
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
+            <?= $_SESSION['nome_usuario'] ?>
             <span class="d-lg-none d-md-block">Some Actions</span>
           </a>
           <!-- Dropdown - User Information -->
