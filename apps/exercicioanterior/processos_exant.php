@@ -399,11 +399,11 @@ login('EXANT', '../../');
 															} else {
 																echo '<td class="align-middle">' . data($prazo_controle) . '</td>';
 															}
-														} else {
+														} elseif ($secao_atual == 'SDPP') {
 															if (diferenca($prazo_sdpp, $today) > 120) {
 																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_sdpp) . '</td>';
 															} elseif (diferenca($prazo_sdpp, $today) <= 120 and diferenca($prazo_sdpp, $today) > 90) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_controle) . '</td>';
+																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_sdpp) . '</td>';
 															} elseif (diferenca($prazo_sdpp, $today) <= 90 and diferenca($prazo_sdpp, $today) > 0) {
 																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_sdpp) . '</td>';
 															} else {
@@ -518,9 +518,9 @@ login('EXANT', '../../');
 										<div class="form-group col-sm-6">
 											<label>Seção de Origem</label>
 											<select class="form-control select2" id="txtsecaoorigem" name="txtsecaoorigem">
-												<option value="" disabled selected hidden>Escolha a seção onde o processo foi criado...</option>
+												<option value="" disabled selected hidden>Seção que abriu o processo...</option>
 												<?php
-												$query_secao = "SELECT * FROM tb_secoes_exant where status = 'Aprovado'";
+												$query_secao = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
 												$result_secao = mysqli_query($conexao, $query_secao);
 												while ($res_2 = mysqli_fetch_array($result_secao)) {
 													$id = $res_2['id'];
@@ -1042,6 +1042,8 @@ if (isset($_POST['button'])) {
 										$prazo_controle_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
 										$prazo_sdpp_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
 										$today_cons = date('Y-m-d');
+
+
 									?>
 										<tr>
 											<td class="align-middle" style="width: 12.1%;">
@@ -1105,7 +1107,7 @@ if (isset($_POST['button'])) {
 													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												}
 											} elseif ($old_secao == 'SDPP') {
-												if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) > 0) {
+												if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
 													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
 													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
@@ -1114,7 +1116,7 @@ if (isset($_POST['button'])) {
 												}
 											} else {
 												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
+													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
 													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
 												} else {

@@ -134,7 +134,8 @@ login('EXANT', '../../');
                       $queryAtivo = "SELECT * FROM requerentes WHERE situacao = 'AT'";
                       $resultAtivo = mysqli_query($conexao, $queryAtivo);
                       $rowAtivo = mysqli_num_rows($resultAtivo);
-                      echo $rowAtivo;
+                      $percentual = number_format($rowAtivo/$row * 100, 0);
+                      echo $rowAtivo. " (".$percentual."%)";
                       ?>
                     </h4>
                   </span>
@@ -153,7 +154,8 @@ login('EXANT', '../../');
                       $queryVeterano = "SELECT * FROM requerentes WHERE situacao = 'R1'";
                       $resultVeterano = mysqli_query($conexao, $queryVeterano);
                       $rowVeterano = mysqli_num_rows($resultVeterano);
-                      echo $rowVeterano;
+                      $percentual = number_format($rowVeterano/$row * 100, 0);
+                      echo $rowVeterano. " (".$percentual."%)";
                       ?>
                     </h4>
                   </span>
@@ -171,7 +173,8 @@ login('EXANT', '../../');
                       $queryReformado = "SELECT * FROM requerentes WHERE situacao = 'PM'";
                       $resultReformado = mysqli_query($conexao, $queryReformado);
                       $rowReformado = mysqli_num_rows($resultReformado);
-                      echo $rowReformado;
+                      $percentual = number_format($rowReformado/$row * 100, 0);
+                      echo $rowReformado. " (".$percentual."%)";
                       ?>
                     </h4>
                   </span>
