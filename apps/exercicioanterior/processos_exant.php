@@ -10,9 +10,9 @@ login('EXANT', '../../');
 <html lang="pt-br">
 
 <head>
-	<?php head('../../') ?>
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+	<?php head('../../') ?>
 </head>
 <style>
     /* The container */
@@ -88,91 +88,98 @@ login('EXANT', '../../');
         padding: 0;
         margin: 2px;
     }
+    table {
+        text-align: center;
+    }
 
 </style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-	<div class="wrapper">
-		<!-- Navbar -->
-		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-			<!-- Left navbar links -->
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-			</ul>
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link" data-toggle="dropdown" href="#">
-						<i class="fas fa-bars"></i>
-						<?= $_SESSION['nome_usuario'] ?>
-						<span class="d-lg-none d-md-block">Some Actions</span>
-					</a>
-					<!-- Dropdown - User Information -->
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<a class="dropdown-item" href="#">
-							<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-							Perfil
-						</a>
-						<a class="dropdown-item" href="#">
-							<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-							Configurações
-						</a>
-						<a class="dropdown-item" href="#">
-							<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-							Atividade
-						</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
-							<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-							Sair
-						</a>
-					</div>
-				</li>
-			</ul>
-		</nav>
-		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<a href="painel_exant.php" class="brand-link">
-				<img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-				<b><span class="brand-text font-weight-light">SISPAGPES</span></b>
-			</a>
-			<div class="sidebar">
-				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<li class="nav-item">
-							<a href="painel_exant.php" class="nav-link">
-								<i class="nav-icon fas fa-home"></i>
-								<p>
-									Página Inicial
-								</p>
-							</a>
-						</li>
-						<li class="nav-item has-treeview menu-open">
-							<a href="#" class="nav-link active">
-								<i class="fas fa-folder-open nav-icon"></i>
-								<p>Exercício Anterior</p>
-								<i class="right fas fa-angle-left"></i>
-							</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item">
-									<a href="requerentes.php" class="nav-link">
-										<i class="far fa-hand-point-right nav-icon"></i>
-										<p>
-											Requerentes
-										</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="processos_exant.php" class="nav-link active">
-										<i class="far fa-hand-point-right nav-icon"></i>
-										<p>Processos</p>
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</aside>
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <!-- Este é a tag que faz aparecer o nome aparece no menu direito superior. -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="fas fa-bars"></i>
+                  <?= $_SESSION['nome_usuario'] ?>
+                    <span class="d-lg-none d-md-block">Some Actions</span>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Perfil
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Configurações
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Atividade
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Sair
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="painel_exant.php" class="brand-link">
+                <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3">
+                <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a href="painel_exant.php" class="nav-link">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p>
+                                    Página Inicial
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="fas fa-folder-open nav-icon"></i>
+                                <p>Exercício Anterior</p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="requerentes.php" class="nav-link">
+                                        <i class="far fa-hand-point-right nav-icon"></i>
+                                        <p>
+                                            Requerentes
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="processos_exant.php" class="nav-link active">
+                                        <i class="far fa-hand-point-right nav-icon"></i>
+                                        <p>Processos</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!--/.sidebar -->
+        </aside>
 		<div class="content-wrapper">
 			<section class="content">
 				<div class="container-fluid">
@@ -277,18 +284,18 @@ login('EXANT', '../../');
 
 										if (isset($_GET['buttonPesquisar']) and $_GET['txtnome'] != '') {
 											$nome = '%' . $_GET['txtnome'] . '%';
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.nome LIKE '$nome' order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.nome LIKE '$nome' order by e.id asc";
 										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
 											$saram_filtro = $_GET['txtsaram3'] . '%';
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram_filtro' order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram_filtro' order by e.id asc";
 										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtdirpleiteado'] != '') {
 											$dir_pleiteado = $_GET['txtdirpleiteado'] . '%';
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE d.id = '$dir_pleiteado' order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE d.id = '$dir_pleiteado' order by e.id asc";
 										} else if (isset($_GET['buttonPesquisar']) and $_GET['txtestadofiltro'] != '') {
 											$estado_filtro = $_GET['txtestadofiltro'];
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE est.id = '$estado_filtro' order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE est.id = '$estado_filtro' order by e.id asc";
 										} else {
-											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
+											$query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
 										}
 
 										$result = mysqli_query($conexao, $query);
@@ -298,6 +305,7 @@ login('EXANT', '../../');
 
 										<table class="table table-sm table-borderless table-striped" id="example1">
 											<thead class="text-primary">
+                                            <tr>
 												<th class="align-middle">#</th>
 												<th class="align-middle">SARAM</th>
 												<th class="align-middle">Requerente</th>
@@ -310,11 +318,10 @@ login('EXANT', '../../');
 												<th class="align-middle">Seção Atual</th>
 												<th class="align-middle">Prazo</th>
 												<th class="align-middle">Ações</th>
+                                            </tr>
 											</thead>
 											<tbody>
-
 												<?php
-
 												while ($res_1 = mysqli_fetch_array($result)) {
 													$id = $res_1["id"];
 													$id_req = $res_1["id_req"];
@@ -345,9 +352,7 @@ login('EXANT', '../../');
 													$prazo_controle = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
 													$prazo_sdpp = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
 													$today = date('Y-m-d');
-
 												?>
-
 													<tr>
 														<td class="align-middle"><?= $id; ?></td>
 														<td class="align-middle"><?= $saram; ?></td>
@@ -411,12 +416,12 @@ login('EXANT', '../../');
 															}
 														}
 														?>
-														<td class="align-middle">
-                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>" id="tableButton"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving align-top"></i></button></a>
-															<a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>" id="tableButton"><button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye align-top"></i></button></a>
+														<td class="align-middle inline-block">
+                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving align-top"></i></button></a>
+															<a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye align-top"></i></button></a>
 															<!--<a href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener” id="tableButton"><button class="btn btn-light btn-table" data-toggle="popover" data-content="HTML"><span class="material-icons">print</span></button></a>-->
-															<a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener” id="tableButton"><button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf align-top"></i></button></a>
-															<a href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?> id="tableButton""><button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
+															<a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf align-top"></i></button></a>
+															<a href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
 															<a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');" id="tableButton"><button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt align-top"></i></button></a>
 														</td>
 													</tr>
@@ -565,24 +570,14 @@ login('EXANT', '../../');
 	<script>
 		$(document).ready(function() {
 			$("#example1").DataTable({
-				"language": {
-					"decimal": ",",
-					"thousands": ".",
-					"select": {
-						"rows": {
-							"_": "Selecionado %d linhas",
-							"0": "Nenhuma linha selecionada",
-							"1": "Selecionado 1 linha"
-						}
-					}
-				},
-				"scrollY": "350px",
-				"paging": false,
-				"lengthChange": false,
-				"searching": true,
-				"ordering": true,
-				"info": false,
-				"autoWidth": false,
+                "scrollX": false,
+                "scrollY": "350px",
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": false,
+                "autoWidth": false,
 			});
 		});
 	</script>
@@ -631,7 +626,7 @@ if (isset($_POST['button'])) {
 	//Função para EDITAR o registro
 } else if (@$_GET['func'] == 'edita') {
 	$id_ed = $_GET['id'];
-	$query_ed = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r ON e.saram = r.id LEFT JOIN militares as m ON e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id_ed'";
+	$query_ed = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN militares as m ON e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id_ed'";
 
 	$result_ed = mysqli_query($conexao, $query_ed);
 	$res_1 = mysqli_fetch_array($result_ed);

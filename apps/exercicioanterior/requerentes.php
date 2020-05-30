@@ -56,7 +56,7 @@ login('EXANT', '../../');
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="painel_exant.php" class="brand-link">
-        <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+        <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <!-- Sidebar -->
@@ -233,6 +233,7 @@ login('EXANT', '../../');
                     ?>
                       <table class="table table-sm table-borderless table-striped" id="example1">
                         <thead class="text-primary">
+                        <tr>
                           <th class="align-middle">#</th>
                           <th class="align-middle">Saram</th>
                           <th class="align-middle">CPF</th>
@@ -243,6 +244,7 @@ login('EXANT', '../../');
                           <th class="align-middle">Email</th>
                           <th class="align-middle">Dt. Inclusão</th>
                           <th class="align-middle">Ações</th>
+                        </tr>
                         </thead>
                         <tbody>
                           <?php
@@ -257,7 +259,7 @@ login('EXANT', '../../');
                             $email = $res_1['email'];
                             $data = data_show($res_1['data']);
                           ?>
-                            <tr style="height: 40px;">
+                            <tr>
                               <td class="align-middle"><?= $id; ?></td>
                               <td class="align-middle"><?= $saram; ?></td>
                               <td class="align-middle"><?= $cpf; ?></td>
