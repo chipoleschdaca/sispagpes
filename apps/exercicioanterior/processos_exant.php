@@ -803,8 +803,8 @@ if (isset($_POST['button'])) {
 	}
 	// Função para ALTERAR ESTADO do processo.
 } elseif (@$_GET['func'] == 'estado') {
-	$id = $_GET['id'];
-	$query = "SELECT e.id, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, sec.secao as sec_atual, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$id'";
+	$idSetEstado = $_GET['id'];
+	$query = "SELECT e.id, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, sec.secao as sec_atual, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$idSetEstado'";
 	$id_req = $res_1["id_req"];
 	$id_mil = $res_1["id_mil"];
 	$id_dir = $res_1["id_dir"];
@@ -939,18 +939,15 @@ if (isset($_POST['button'])) {
 		<script>
 			$("#modalEstado").modal("show");
 		</script>
-		<!-- COMANDO PARA ALTERAR ESTADO DO PROCESSO -->
 	<?php
 		if (isset($_POST['buttonEstado'])) {
-
 			$novoestado = $_POST['txtnovoestado'];
 			$estadoatual = $_POST['txtestado'];
 			$novasecao = $_POST['txtnovasecao'];
 			$data_atual = $_POST['txtdataatual'];
 			$obs = $_POST['txtobs'];
-			$query_estado = "UPDATE exercicioanterior set sacador = '$id_militar3', obs = '$obs', data_saida = '$data_atual', estado = '$novoestado', secao_atual = '$novasecao' WHERE id = '$id'";
+			$query_estado = "UPDATE exercicioanterior set sacador = '$id_militar3', obs = '$obs', data_saida = '$data_atual', estado = '$novoestado', secao_atual = '$novasecao' WHERE id = '$idSetEstado'";
 			$result_estado = mysqli_query($conexao, $query_estado);
-
 			if ($result_estado == '') {
 				Alerta("error", "Não foi possível editar", false, "processos_exant.php");
 			} else {
