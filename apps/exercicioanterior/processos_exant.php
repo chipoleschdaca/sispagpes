@@ -874,13 +874,12 @@ if (isset($_POST['button'])) {
 
   //comando para CONSULTAR HISTÓRICO do processo
 } elseif (@$_GET['func'] == 'historico') {
-  $id = $_GET['id'];
-  $query = "SELECT * FROM exercicioanterior where id = '$id'";
-  $result = mysqli_query($conexao, $query);
-  $res_nup = mysqli_fetch_array($result);
-  $nup = $res_nup["nup"];
+  $idConsultHistorico = $_GET['id'];
+  $queryConsultHistorico = "SELECT * FROM exercicioanterior WHERE id = '$idConsultHistorico'";
+  $resultConsultHistorico = mysqli_query($conexao, $queryConsultHistorico);
+  $res_ConsultHistorico = mysqli_fetch_array($resultConsultHistorico);
+  $nup = $res_ConsultHistorico["nup"];
   ?>
-  <!-- Modal -->
   <div id="modalHistorico" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <!-- Modal content-->
@@ -911,7 +910,7 @@ if (isset($_POST['button'])) {
           <form method="POST" action="">
             <div class="table-responsive" style="border-radius: 3px; margin: 20px; width: 95%;">
               <?php
-              $query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.responsavel, m.id as id_militar, m.nome as nome_militar, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_id_anterior, s.secao as s_anterior, s.prazo_exant as prazo_secao_exant, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id LEFT JOIN militares as m ON h.responsavel = m.id WHERE id_exant = '$id' ORDER BY h.data_novo";
+              $query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.responsavel, m.id as id_militar, m.nome as nome_militar, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_id_anterior, s.secao as s_anterior, s.prazo_exant as prazo_secao_exant, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id LEFT JOIN militares as m ON h.responsavel = m.id WHERE id_exant = '$idConsultHistorico' ORDER BY h.data_novo";
               $result_h = mysqli_query($conexao, $query_h);
               $row_h = mysqli_num_rows($result_h);
               ?>
@@ -946,7 +945,6 @@ if (isset($_POST['button'])) {
                     $prazoSecao2 = $resPrazo2['prazo_exant'];
                     $dtPrazoSecao_cons = date('Y-m-d', strtotime('+' . $prazoSecao2 . ' days', strtotime($res_h["data_anterior"])));
                     $today_cons = date('Y-m-d');
-
                   ?>
                     <tr>
                       <td class="align-middle" style="width: 12.1%; text-align: justify;">
@@ -965,7 +963,7 @@ if (isset($_POST['button'])) {
                         if ($res_h["obs_exant"] == '') {
                           echo 'Não há';
                         } else { ?>
-                          <p><?= $obs_exant; ?> </p>
+                          <span><?= $obs_exant; ?> </span>
                         <?php
                         }
                         ?>
@@ -976,14 +974,14 @@ if (isset($_POST['button'])) {
                       <td class="align-middle" style="text-align:center;">
                         <?php
                         if ($old_secao == '') {
-                          echo '-----';
+                          echo '----------';
                         } else {
                           echo data($dtPrazoSecao_cons);
                         } ?>
                       </td>
                       <?php
                       if ($old_secao == '') {
-                        echo '<td class="align-middle"><b>Criado</b></td>';
+                        echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3); text-align:center;">Criado</td>';
                       } elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
                         echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . diferenca($dtPrazoSecao_cons, $data_novo) . '</td>';
                       } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {

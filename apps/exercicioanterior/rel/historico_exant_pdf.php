@@ -136,7 +136,7 @@ while ($res_h = mysqli_fetch_array($result_h)) {
   if ($old_secao == '') {
     $html .= "<td class='align-middle;' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>Criado</td>";
   } elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
-    $html .= "<td class='align-middle' style='background-color: rgba(255,0,0, 0.3); text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
+    $html .= "<td class='align-middle' style='background-color: rgba(255,0,0,0.3); text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
   } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
     $html .= "<td class='align-middle' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
   } else {
