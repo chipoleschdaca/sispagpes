@@ -34845,21 +34845,3 @@ a.text-muted:hover {
 .general-btn-xs:hover img {
 	transform: scale(1.3);
 }
-
-.btn-table {
-	width: 27px;
-	height: 27px;
-	padding: 0;
-	margin: 0;
-	text-align: center;
-	cursor: pointer;
-	border: none;
-}
-
-.btn-table i {
-	width: 25px;
-	height: 25px;
-	line-height: 25px;
-	margin: 0;
-	padding: 0;
-}

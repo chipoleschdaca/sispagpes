@@ -9,13 +9,14 @@ function head($diretorio)
   <title>SISPAGPES</title>  
   <meta name="viewport" content="width=device-width, initial-scale=1">  
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/fontawesome-free/css/all.min.css"> 
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> 
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">  
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"> 
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">  
-  <link rel="stylesheet" href="<?= $diretorio ?>plugins/jqvmap/jqvmap.min.css">  
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/jqvmap/jqvmap.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= $diretorio ?>dist/css/btn-table.css">
   <link rel="stylesheet" href="<?= $diretorio ?>dist/css/style_print_button.css">  
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">  
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/daterangepicker/daterangepicker.css"> 

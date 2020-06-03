@@ -293,7 +293,7 @@ login('ADMIN', '../../');
                         <th class="align-middle">Seção</th>
                         <th class="align-middle">Prazo Exercício Anterior (dias)</th>
                         <th class="align-middle">Status</th>
-                        <th class="align-middle">Ações</th>
+                        <th class="align-middle" style="width: 30%;">Ações</th>
                       </thead>
                       <tbody>
                         <?php
@@ -329,7 +329,7 @@ login('ADMIN', '../../');
                               }
                               ?>
                             </td>
-                            <td class="align-middle">
+                            <td class="align-middle" style="width: 30%;">
                               <?php
                               if ($status == 'Aprovado') { ?>
                                 <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>

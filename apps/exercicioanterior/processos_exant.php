@@ -15,70 +15,6 @@ login('EXANT', '../../');
 	<?php head('../../') ?>
 </head>
 <style>
-    /* The container */
-    .container {
-        display: block;
-        position: relative;
-        padding-left: 35px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        font-size: 16px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    /* Hide the browser's default radio button */
-    .container input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-    }
-
-    /* Create a custom radio button */
-    .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 20px;
-        width: 20px;
-        background-color: #eee;
-        border-radius: 50%;
-    }
-
-    /* On mouse-over, add a grey background color */
-    .container:hover input~.checkmark {
-        background-color: #ccc;
-    }
-
-    /* When the radio button is checked, add a blue background */
-    .container input:checked~.checkmark {
-        background-color: #2196F3;
-    }
-
-    /* Create the indicator (the dot/circle - hidden when not checked) */
-    .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none;
-    }
-
-    /* Show the indicator (dot/circle) when checked */
-    .container input:checked~.checkmark:after {
-        display: block;
-    }
-
-    /* Style the indicator (dot/circle) */
-    .container .checkmark:after {
-        top: 7px;
-        left: 7px;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: white;
-    }
-
     .textarea {
         text-align: justify;
         white-space: normal;
@@ -303,7 +239,7 @@ login('EXANT', '../../');
 
 										?>
 
-										<table class="table table-sm table-borderless table-striped" id="example1">
+										<table class="table table-sm table-borderless table-hover" id="example1">
 											<thead class="text-primary">
                                             <tr>
 												<th class="align-middle">#</th>
@@ -341,16 +277,14 @@ login('EXANT', '../../');
 													$query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$secao_atual'";
 													$result_prazo = mysqli_query($conexao, $query_prazo);
 													$res_prazo = mysqli_fetch_array($result_prazo);
-													$prazo_secao = $res_prazo['prazo_exant'];
+													$prazoSecao = $res_prazo['prazo_exant'];
 
 													if ($data_saida != "") {
-														$prazo_pessoal = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
+														$dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_saida"])));
 													} else {
-														$prazo_pessoal = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_criacao"])));
+														$dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_criacao"])));
 													}
-													$prazo_pagpes = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
-													$prazo_controle = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
-													$prazo_sdpp = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_1["data_saida"])));
+													$dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_saida"])));													
 													$today = date('Y-m-d');
 												?>
 													<tr>
@@ -373,56 +307,22 @@ login('EXANT', '../../');
 														<td class="align-middle"><?= $secao_origem ?></td>
 														<td class="align-middle"><?= $estado; ?></td>
 														<td class="align-middle"><?= $secao_atual; ?></td>
-														<?php
-														if ($secao_atual == 'DP-1' or $secao_atual == 'DP-4' or $secao_atual == 'ES-LS') {
-															if (diferenca($prazo_pessoal, $today) > 15) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_pessoal) . '</td>';
-															} elseif (diferenca($prazo_pessoal, $today) <= 15 and diferenca($prazo_pessoal, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_pessoal) . '</td>';
-															} elseif (diferenca($prazo_pessoal, $today) <= 10) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_pessoal) . '</td>';
-															} else {
-																echo '<td class="align-middle">' . data($prazo_pessoal) . '</td>';
-															}
-														} elseif ($secao_atual == 'DP-3') {
-															if (diferenca($prazo_pagpes, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_pagpes) . '</td>';
-															} elseif (diferenca($prazo_pagpes, $today) <= 10 and diferenca($prazo_pagpes, $today) > 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_pagpes) . '</td>';
-															} elseif (diferenca($prazo_pagpes, $today) <= 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_pagpes) . '</td>';
-															} else {
-																echo '<td class="align-middle">' . data($prazo_pagpes) . '</td>';
-															}
-														} elseif ($secao_atual == 'ACI-1') {
-															if (diferenca($prazo_controle, $today) > 10) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_controle) . '</td>';
-															} elseif (diferenca($prazo_controle, $today) <= 10 and diferenca($prazo_controle, $today) > 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_controle) . '</td>';
-															} elseif (diferenca($prazo_controle, $today) <= 5) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_controle) . '</td>';
-															} else {
-																echo '<td class="align-middle">' . data($prazo_controle) . '</td>';
-															}
-														} elseif ($secao_atual == 'SDPP') {
-															if (diferenca($prazo_sdpp, $today) > 120) {
-																echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3);">' . data($prazo_sdpp) . '</td>';
-															} elseif (diferenca($prazo_sdpp, $today) <= 120 and diferenca($prazo_sdpp, $today) > 90) {
-																echo '<td class="align-middle" style="background-color: rgba(255,255,0, 0.3);">' . data($prazo_sdpp) . '</td>';
-															} elseif (diferenca($prazo_sdpp, $today) <= 90 and diferenca($prazo_sdpp, $today) > 0) {
-																echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3);">' . data($prazo_sdpp) . '</td>';
-															} else {
-																echo '<td class="align-middle">' . data($prazo_sdpp) . '</td>';
-															}
-														}
-														?>
+                                                          <?php
+                                                          if (diferenca($dtPrazoSecao, $today) >= (2/3)*$prazoSecao) {
+                                                            echo'<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3);">'. data_show($dtPrazoSecao) .'</td>';
+                                                          } elseif (diferenca($dtPrazoSecao, $today) < (2/3)*$prazoSecao && diferenca($dtPrazoSecao, $today) >= $prazoSecao/3) {
+                                                            echo'<td class="align-middle" style="background-color: rgba(255, 255, 0, 0.3);">'. data_show($dtPrazoSecao) .'</td>';
+                                                          }else {
+                                                            echo'<td class="align-middle" style="background-color: rgba(255, 0, 0, 0.3);">'. data_show($dtPrazoSecao) .'</td>';
+                                                          }
+                                                          ?>
 														<td class="align-middle inline-block">
-                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving align-top"></i></button></a>
-															<a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye align-top"></i></button></a>
+                                                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving"></i></button></a>
+															<a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye"></i></button></a>
 															<!--<a href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener” id="tableButton"><button class="btn btn-light btn-table" data-toggle="popover" data-content="HTML"><span class="material-icons">print</span></button></a>-->
-															<a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf align-top"></i></button></a>
+															<a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button></a>
 															<a href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>"><button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
-															<a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');" id="tableButton"><button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt align-top"></i></button></a>
+															<a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');" id="tableButton"><button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button></a>
 														</td>
 													</tr>
 												<?php } ?>
@@ -854,7 +754,7 @@ if (isset($_POST['button'])) {
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-5">
-									<label for="">Data Anterior</label>
+									<label for="">Dt. Último Movimento</label>
 									<input type="date" class="form-control mr-2" value="<?= $res_1["data_saida"]; ?>" disabled>
 								</div>
 								<div class="col-sm-2" style="text-align: center;">
@@ -1023,38 +923,32 @@ if (isset($_POST['button'])) {
 										$new_secao = $res_h["sec_novo"];
 										$obs_exant = $res_h["obs_exant"];
 
-
-										$query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$new_secao'";
-										$result_prazo = mysqli_query($conexao, $query_prazo);
-										$res_prazo = mysqli_fetch_array($result_prazo);
-										$prazo_secao = $res_prazo['prazo_exant'];
-
-										$prazo_pessoal_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
-										$prazo_pagpes_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
-										$prazo_controle_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
-										$prazo_sdpp_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
+										$queryPrazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$old_secao'";
+                                        $resultPrazo = mysqli_query($conexao, $queryPrazo);
+                                        $resPrazo = mysqli_fetch_array($resultPrazo);
+                                        $prazoSecao2 = $resPrazo['prazo_exant'];
+                                        $dtPrazoSecao_cons = date('Y-m-d', strtotime('+' . $prazoSecao2 . ' days', strtotime($res_h["data_anterior"])));
 										$today_cons = date('Y-m-d');
-
 
 									?>
 										<tr>
-											<td class="align-middle" style="width: 12.1%;">
+											<td class="align-middle" style="width: 12.1%; text-align: justify;">
 												<?php
 												if ($old_secao == "") {
 													echo 'Criado na: ' . '<br>';
 													echo '<b>' . $new_secao . '</b>';
 												} else {
 													echo 'De:   ' . '<b>' . $old_secao . '</b><br>';
-													echo 'Para: ' . '<b>' . $new_secao . '</b>';
+													echo 'Para: ' . '<b>' . $new_secao . '</b><br>';
 												} ?>
 											</td>
-											<td class="align-middle">
+											<td class="align-middle" style="text-align: justify;">
 												<strong><?= $new_estado; ?></strong><br>
 												<?php
 												if ($res_h["obs_exant"] == '') {
 													echo 'Não há';
 												} else { ?>
-													<p style="text-align: justify;"><?= $obs_exant; ?> </p>
+													<p><?= $obs_exant; ?> </p>
 												<?php
 												}
 												?>
@@ -1062,59 +956,24 @@ if (isset($_POST['button'])) {
 											<td class="align-middle" style="text-align: center;">
 												<?= data($data_novo); ?>
 											</td>
+                                            <td class="align-middle" style="text-align:center;">
+                                              <?php
+                                              if ($old_secao == '') {
+                                                  echo '-----';
+                                              }else{
+                                                  echo data($dtPrazoSecao_cons);
+                                              } ?>
+                                            </td>
 											<?php
-											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
-											} elseif ($old_secao == 'DP-3') {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pagpes_cons) . '</td>';
-											} elseif ($old_secao == 'ACI-1') {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_controle_cons) . '</td>';
-											} elseif ($old_secao == 'SDPP') {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_sdpp_cons) . '</td>';
-											} else {
-												echo '<td class="align-middle" style="text-align:center;">' . data($prazo_pessoal_cons) . '</td>';
-											}
-											if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
-												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												}
-											} elseif ($old_secao == 'DP-3') {
-												if ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} elseif ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												}
-											} elseif ($old_secao == 'ACI-1') {
-												if ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} elseif ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												}
-											} elseif ($old_secao == 'SDPP') {
-												if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												}
-											} else {
-												if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-													echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-													echo '<td class="align-middle" style="background-color: rgba(0,128,0, 0.3); text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												} else {
-													echo '<td class="align-middle" style="text-align:center;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-												}
-											}
+                                            if ($old_secao == '') {
+                                                echo '<td class="align-middle"><b>Criado</b></td>';
+                                            }elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
+                                                echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . diferenca($dtPrazoSecao_cons, $data_novo) . '</td>';
+                                            } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
+                                                echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3); text-align:center;">' . diferenca($dtPrazoSecao_cons, $data_novo) . '</td>';
+                                            } else {
+                                                echo '<td class="align-middle" style="text-align:center;">'. diferenca($dtPrazoSecao_cons, $data_novo) . '</td>';
+                                            }
 											?>
 											<td class="align-middle" style="text-align: center;">
 												<?= $nome_sacador; ?>

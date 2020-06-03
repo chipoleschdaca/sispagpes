@@ -384,7 +384,7 @@ login('EXANT', '../../');
     <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
   <?= javascript('../../') ?>
-  <!--<script>
+  <script>
     $(document).ready(function() {
       $("#example1").DataTable({
         "scrollX": false,
@@ -397,7 +397,7 @@ login('EXANT', '../../');
         "autoWidth": false,
       });
     });
-  </script>-->
+  </script>
   <script>
     $(document).ready(function() {
       $("#dtNascimento").hide();
