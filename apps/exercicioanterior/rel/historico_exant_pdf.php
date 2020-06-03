@@ -27,7 +27,7 @@ function data($data)
 $id = $_GET['id'];
 $id_req = $_GET['id_req'];
 
-$query     = "SELECT * FROM exercicioanterior where id = '$id'";
+$query     = "SELECT * FROM exercicioanterior WHERE id = '$id'";
 $result    = mysqli_query($conexao, $query);
 $res_exant = mysqli_fetch_array($result);
 $nup       = $res_exant["nup"];
@@ -64,7 +64,7 @@ $html = "
 	    <div class='comaer'>COMANDO DA AERONÁUTICA</div>
 	    <div class='unidade'>GRUPAMENTO DE APOIO DE LAGOA SANTA</div>
     </li>
-    <li class='right' style='font-size: 10px'>v1.0.0</li>    
+    <li class='right' style='font-size: 10px'>v1.0.1</li>
   </ul>    
     <div class='texto-cab'><b>Histórico de Tramitação de Processo de Exercício Anterior</b></div>
     <div>Requerente: <strong>" . $posto . " " . $situacao . " " . $requerente . "</strong></div>
@@ -76,18 +76,19 @@ $query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.
 $result_h = mysqli_query($conexao, $query_h);
 $row_h = mysqli_num_rows($result_h);
 
-$html .= "<table class='table table-sm'>
-								<thead>
-									<tr>
-										<th class='align-middle'>Movimento</th>
-										<th class='align-middle'>Observação</th>
-										<th class='align-middle'>Dt. Movimento</th>
-										<th class='align-middle'>Dt. Prazo</th>
-										<th class='align-middle'>Meta</th>
-										<th class='align-middle'>Responsável</th>
-									</tr>
-								</thead>
-								<tbody>";
+$html .=
+  "<table class='table table-sm'>
+    <thead>
+      <tr>
+        <th class='align-middle'>Movimento</th>
+        <th class='align-middle'>Observação</th>
+        <th class='align-middle'>Dt. Movimento</th>
+        <th class='align-middle'>Dt. Prazo</th>
+        <th class='align-middle'>Meta</th>
+        <th class='align-middle'>Responsável</th>
+      </tr>
+    </thead>
+    <tbody>";
 
 while ($res_h = mysqli_fetch_array($result_h)) {
   $id_hist = $res_h["id_hist"];
@@ -101,17 +102,12 @@ while ($res_h = mysqli_fetch_array($result_h)) {
   $new_secao = $res_h["sec_novo"];
   $obs_exant = $res_h["obs_exant"];
 
-  $query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$new_secao'";
-  $result_prazo = mysqli_query($conexao, $query_prazo);
-  $res_prazo = mysqli_fetch_array($result_prazo);
-
-  $prazo_secao = $res_prazo['prazo_exant'];
-
-  $prazo_pessoal_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
-  $prazo_pagpes_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
-  $prazo_controle_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
-  $prazo_sdpp_cons = date('Y-m-d', strtotime('+' . $prazo_secao . ' days', strtotime($res_h["data_anterior"])));
-  $today_cons = date('Y-m-d');
+  $queryPrazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$old_secao'";
+  $resultPrazo = mysqli_query($conexao, $queryPrazo);
+  $resPrazo = mysqli_fetch_array($resultPrazo);
+  $prazoSecao = $resPrazo['prazo_exant'];
+  $dtPrazoSecao_cons = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_h["data_anterior"])));
+  $today = date('Y-m-d');
 
   $html .= "<tr><td class='align-middle'>";
   if ($old_secao == "") {
@@ -121,72 +117,35 @@ while ($res_h = mysqli_fetch_array($result_h)) {
               Para: <b>$new_secao</b>";
   }
   $html .= "</td>";
-  $html .= "<td class='align-middle'>
+  $html .= "<td class='align-middle' style='width:45%; text-align: justify;'>
 							<strong>$new_estado</strong><br>";
   if ($res_h['obs_exant'] == '') {
     $html .= "Não há";
   } else {
-    $html .= "<p style='text-align: justify; margin-bottom: 0;'>$obs_exant</p>";
+    $html .= "<span>$obs_exant</span>";
   }
-  $hmtl .= "</td>";
+  $html .= "</td>";
   $html .= "<td class='align-middle' style='text-align: center;'>" . data($data_novo) . "</td>";
-  if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
-    $html .= "<td class='align-middle' style='text-align:center;'>" . data($prazo_pessoal_cons) . "</td>";
-  } elseif ($old_secao == 'DP-3') {
-    $html .= "<td class='align-middle' style='text-align:center;'>" . data($prazo_pagpes_cons) . "</td>";
-  } elseif ($old_secao == 'ACI-1') {
-    $html .= "<td class='align-middle' style='text-align:center;'>" . data($prazo_controle_cons) . "</td>";
-  } elseif ($old_secao == 'SDPP') {
-    $html .= "<td class='align-middle' style='text-align:center;'>" . data($prazo_sdpp_cons) . "</td>";
+  $html .= "<td class='align-middle' style='text-align:center;'>";
+  if ($old_secao == '') {
+    $html .= "----------";
   } else {
-    $html .= "<td class='align-middle' style='text-align:center;'>" . data($prazo_pessoal_cons) . "</td>";
+    $html .= data($dtPrazoSecao_cons);
   }
-  if ($old_secao == 'DP-1' or $old_secao == 'DP-4' or $old_secao == 'ES-LS') {
-    if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-      $html .= "<td class='align-middle' style='background-color: rgba(255,0,0, 0.3); text-align:center; border: none;'>" . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . "</td>";
-    } elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3); text-align:center; border: none;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } else {
-      $html .= '<td class="align-middle" style="text-align:center; border: none;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    }
-  } elseif ($old_secao == 'DP-3') {
-    if ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center; border: none;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } elseif ((diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(0,128,0,0.3); text-align:center; border: none;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } else {
-      $html .= '<td class="align-middle" style="text-align:center; border: none;">' . (diferenca($prazo_pagpes_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    }
-  } elseif ($old_secao == 'ACI-1') {
-    if ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center; border: none;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } elseif ((diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(0,128,0,0.3); text-align:center; border: none;">' . (diferenca($prazo_controle_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } else {
-      $html .= '<td class="align-middle" style="text-align:center; border: none;">' . (diferenca($prazo_controle_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    }
-  } elseif ($old_secao == 'SDPP') {
-    if ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) > 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center; border: none;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } elseif ((diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(0,128,0,0.3); text-align:center; border: none;">' . (diferenca($prazo_sdpp_cons, $data_novo) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } else {
-      $html .= '<td class="align-middle" style="text-align:center; border: none;">' . (diferenca($prazo_sdpp_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    }
+  $html .= "</td>";
+  if ($old_secao == '') {
+    $html .= "<td class='align-middle;' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>Criado</td>";
+  } elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
+    $html .= "<td class='align-middle' style='background-color: rgba(255,0,0, 0.3); text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
+  } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
+    $html .= "<td class='align-middle' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
   } else {
-    if ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) < 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center; border: none;">' . (diferenca($prazo_pessoal_cons, $$data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } elseif ((diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) >= 0) {
-      $html .= '<td class="align-middle" style="background-color: rgba(0,128,0,0.3); text-align:center; border: none;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    } else {
-      $html .= '<td class="align-middle" style="text-align:center; border: none;">' . (diferenca($prazo_pessoal_cons, $data_anterior) - diferenca($data_novo, $data_anterior)) . '</td>';
-    }
+    $html .= "<td class='align-middle' style='text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
   }
   $html .= "<td class='align-middle' style='text-align: center; width: 15%;'>$nome_sacador</td>";
   $html .= "</tr>";
   //Final do While
 }
-
 
 $html .= "</tbody>
 							</table>
