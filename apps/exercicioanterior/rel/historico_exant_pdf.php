@@ -136,11 +136,11 @@ while ($res_h = mysqli_fetch_array($result_h)) {
   if ($old_secao == '') {
     $html .= "<td class='align-middle;' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>Criado</td>";
   } elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
-    $html .= "<td class='align-middle' style='background-color: rgba(255,0,0,0.3); text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
+    $html .= "<td class='align-middle' style='background-color: rgba(255,0,0,0.3); text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
   } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
-    $html .= "<td class='align-middle' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
+    $html .= "<td class='align-middle' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
   } else {
-    $html .= "<td class='align-middle' style='text-align:center;'>" . diferenca($dtPrazoSecao_cons, $data_novo) . "</td>";
+    $html .= "<td class='align-middle' style='text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
   }
   $html .= "<td class='align-middle' style='text-align: center; width: 15%;'>$nome_sacador</td>";
   $html .= "</tr>";
@@ -157,7 +157,7 @@ $footer = "<hr>
                 <li class='right'>Página {PAGENO} de {nbpg}</li>
               </ul>";
 
-$mpdf = new mPDF('utf-8', 'A4-L', 0, '', 10, 10, 10, 10);
+$mpdf = new mPDF('utf-8', 'A4-L');
 $mpdf->setDisplayMode('fullpage');
 $css = file_get_contents('../../../dist/css/mpdf.css');
 $mpdf->WriteHTML($css, 1);

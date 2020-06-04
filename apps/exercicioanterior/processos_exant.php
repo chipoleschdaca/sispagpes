@@ -209,8 +209,6 @@ login('EXANT', '../../');
                 <div class="card-body">
                   <div class="table-responsive" style="text-align: center; font-size: 12px; height: 430px;">
 
-                    <!-------------LISTAR TODOS OS PROCESSOS-------------->
-
                     <?php
 
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtnome'] != '') {
@@ -983,11 +981,11 @@ if (isset($_POST['button'])) {
                       if ($old_secao == '') {
                         echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3); text-align:center;">Criado</td>';
                       } elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
-                        echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . diferenca($dtPrazoSecao_cons, $data_novo) . '</td>';
+                        echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . number_format(diferenca($dtPrazoSecao_cons, $data_novo), 0) . '</td>';
                       } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
-                        echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3); text-align:center;">' . diferenca($dtPrazoSecao_cons, $data_novo) . '</td>';
+                        echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3); text-align:center;">' . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . '</td>';
                       } else {
-                        echo '<td class="align-middle" style="text-align:center;">' . diferenca($dtPrazoSecao_cons, $data_novo) . '</td>';
+                        echo '<td class="align-middle" style="text-align:center;">' . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . '</td>';
                       }
                       ?>
                       <td class="align-middle" style="text-align: center;">
