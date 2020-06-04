@@ -569,136 +569,77 @@ login('TESOU', '../../');
       }
     }
     ?>
-    <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
     </aside>
-    <!-- /.control-sidebar -->
   </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="../../plugins/jQuery-Mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <?php javascript('../../') ?>
   <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Select2 -->
-  <script src="../../plugins/select2/js/select2.full.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="../../plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="../../plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <script src="../../plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="../../plugins/moment/moment.min.js"></script>
-  <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="../../dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-  <!-- Material Design-->
-  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
-  <script>
-    $('[data-toggle="popover"]').popover({
-      placement: 'auto',
-      trigger: 'hover'
-    });
-  </script>
-  <script>
-    $(function() {
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      })
-
-      //Initialize Select2 Elements
-      $('.select2').select2()
-    });
-  </script>
-  <!--Máscaras-->
-  <script>
-    $(document).ready(function() {
-      $('#txtcpf').mask('000.000.000-00', {
-        reverse: true
-      });
-      $('#txtsaram').mask('000.000-0', {
-        reverse: true
-      });
-    });
-  </script>
-  <script>
-    var donutChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var donutChartCanvas = document.getElementById('pieChart');
     var donutData = {
       labels: [
-        <?php echo $direito_pleiteado ?>
+        <?= $direito_pleiteado ?>
       ],
       datasets: [{
-        data: [<?php echo $count_direito ?>],
-        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
+        data: [<?= $count_direito ?>],
+        backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
-    }
-    var donutOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var donutChart = new Chart(donutChartCanvas, {
       type: 'doughnut',
       data: donutData,
       options: {
+        tooltips: {
+          callbacks: {
+            title: function(tooltipItem, data) {
+              return data['labels'][tooltipItem[0]['index']];
+            },
+            label: function(tooltipItem, data) {
+              return data['datasets'][0]['data'][tooltipItem['index']];
+            },
+            afterLabel: function(tooltipItem, data) {
+              var dataset = data['datasets'][0];
+              var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100);
+              return '(' + percent + '%)';
+            }
+          },
+          //backgroundColor: '#FFF',
+          cornerRadius: 5,
+          titleFontSize: 12,
+          titleFontColor: '#FFF',
+          bodyFontColor: '#FFF',
+          bodyFontSize: 10,
+          displayColors: false
+        },
         title: {
           display: true,
           padding: 20,
           position: 'top',
           fontColor: '#000000',
           fontSize: 16,
-          text: 'DIREITO PLEITEADO'
+          text: 'QUANTIDADE vs. DIREITO PLEITEADO'
         },
         legend: {
           display: true,
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 10,
+            boxWidth: 40
           }
         }
       }
     })
   </script>
   <script>
-    var donutChartCanvas1 = $('#donutChart').get(0).getContext('2d')
+    var donutChartCanvas1 = document.getElementById('donutChart');
     var donutData1 = {
       labels: [
-        <?php echo $estado ?>
+        <?= $estado ?>
       ],
       datasets: [{
-        data: [<?php echo $count_estado ?>],
-        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
+        data: [<?= $count_estado ?>],
+        backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
-    }
-    var donutOptions1 = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var donutChart1 = new Chart(donutChartCanvas1, {
       type: 'doughnut',
@@ -710,36 +651,33 @@ login('TESOU', '../../');
           position: 'top',
           fontColor: '#000000',
           fontSize: 16,
-          text: 'ESTADO DO PROCESSO'
+          text: 'QUATIDADE vs. ESTADO'
         },
         legend: {
           display: true,
           position: 'right',
           labels: {
             fontColor: 'rgb(0,0,0)',
-            fontSize: 16
+            fontSize: 10,
+            boxWidth: 40
           }
         }
       }
     })
   </script>
   <script>
-    var barChartCanvas1 = $('#myChart2').get(0).getContext('2d')
+    var barChartCanvas1 = document.getElementById('myChart2');
     var barData1 = {
       labels: [
-        <?php echo $secao ?>
+        <?= $secao ?>
       ],
       datasets: [{
-        data: [<?php echo $count_secao ?>],
-        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
+        data: [<?= $count_secao ?>],
+        backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd'],
       }]
     }
-    var barOptions1 = {
-      maintainAspectRatio: false,
-      responsive: true,
-    }
     var barChart1 = new Chart(barChartCanvas1, {
-      type: 'bar',
+      type: 'horizontalBar',
       data: barData1,
       options: {
         scales: {
@@ -780,22 +718,18 @@ login('TESOU', '../../');
     })
   </script>
   <script>
-    var barChartCanvas = $('#myChart').get(0).getContext('2d')
+    var barChartCanvas = document.getElementById('myChart');
     var barData = {
       labels: [
-        <?php echo $posto ?>
+        <?= $posto ?>
       ],
       datasets: [{
-        data: [<?php echo $count_posto ?>],
-        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
+        data: [<?= $count_posto ?>],
+        backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd']
       }]
     }
-    var barOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
-    }
     var barChart = new Chart(barChartCanvas, {
-      type: 'horizontalBar',
+      type: 'bar',
       data: barData,
       options: {
         animation: {
@@ -825,7 +759,7 @@ login('TESOU', '../../');
           position: 'top',
           fontColor: '#000000',
           fontSize: 16,
-          text: 'QUANTIDADE X POSTO'
+          text: 'QUANTIDADE vs. POSTO'
         },
         legend: {
           display: false,

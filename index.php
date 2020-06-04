@@ -24,15 +24,12 @@ include('dist/php/functions.php');
 <body>
   <div class="wrapper fadeIn">
     <div id="formContent">
-      <!-- Tabs Titles -->
-      <!-- Icon -->
       <div class="fadeIn" id="img">
         <img src="dist/img/gapls1.png" id="icon" alt="User Icon" />
       </div>
       <div>
         <h1><strong>SISPAGPES</strong></h1>
       </div>
-      <!-- Login Form -->
       <form method="POST" class="form-container" action="login.php">
         <div class="form-group">
           <input type="text" id="txtcpf" class="fadeIn" name="usuario" placeholder="CPF" required><br>
@@ -57,22 +54,15 @@ include('dist/php/functions.php');
           <button type="submit" class="btn btn-primary btn-lg" value="Entrar" style="width:200px;">Entrar</button>
         </div>
       </form>
-      <!-- Remind Passowrd -->
       <div id="formFooter">
         <small><a class="underlineHover" href="#">Esqueceu a senha?</a></small>
         <br>
         <small><a class="underlineHover" href="solicitar_acesso.php">Registre-se</a></small>
       </div>
     </div>
-
-    <footer class="main-footer">
-      <strong>&copy; 2019-<?php echo date("Y") ?> <a href="#">GAP-LS</a>.</strong>
-      Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int. All rights reserved.
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Versão</b> 1.0.0
-      </div>
+    <footer class="main-footer" style="width: 32%;">
+      <?php footer() ?>
     </footer>
-
   </div>
 </body>
 <script>

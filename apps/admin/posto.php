@@ -9,37 +9,7 @@ login('ADMIN', '../../');
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="../../dist/img/gapls.png">
-  <title>SISPAGPES</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- SweetAlert2 -->
-  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-  <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <!-- Toastr -->
-  <script src="../../plugins/toastr/toastr.min.js"></script>
+  <?php head('../../') ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -80,12 +50,10 @@ login('ADMIN', '../../');
       </ul>
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
-      <!-- Sidebar -->
       <div class="sidebar">
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -168,13 +136,10 @@ login('ADMIN', '../../');
         </nav>
       </div>
     </aside>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <br>
-      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
@@ -210,11 +175,8 @@ login('ADMIN', '../../');
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-history"></i></span>
@@ -267,8 +229,6 @@ login('ADMIN', '../../');
                   </button>
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
 
-                    <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
-
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
@@ -280,8 +240,6 @@ login('ADMIN', '../../');
                     $row = mysqli_num_rows($result);
 
                     ?>
-
-                    <!-------------------------------------------------->
 
                     <table class="table table-sm table-borderless table-striped" style="table-layout: fixed;">
                       <thead class="text-primary" style="text-align: center;">
@@ -480,7 +438,6 @@ login('ADMIN', '../../');
             </div>
           </div>
           <div id="modalExemplo" class="modal fade" role="dialog">
-            <!---Modal Exemplo--->
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -503,69 +460,17 @@ login('ADMIN', '../../');
             </div>
           </div>
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+      </section>
+    </div>
+    <footer class="main-footer">
+      <?php footer() ?>
+    </footer>
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <?php footer() ?>
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="../../plugins/jquery-mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="../../plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="../../plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="../../plugins/moment/moment.min.js"></script>
-  <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="../../dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
-
-  <!-----------------FILTRO PARA PESQUISAR EM QUALQUER COLUNA DA TABELA (JQuery)------------------->
-
-  <!---------------------------------------------------------------------------------------------->
+  <?php javascript('../../') ?>
 </body>
 
 </html>
-
-<!---------------------------------CADASTRAR-------------------------------------------->
 
 <?php
 if (isset($_POST['button'])) {
@@ -598,7 +503,6 @@ if (isset($_POST['button'])) {
 
 ?>
 
-
 <!--------------------------EXCLUIR REGISTRO DA TABELA--------------------------->
 <?php
 if (@$_GET['func'] == 'deleta') {
@@ -609,7 +513,6 @@ if (@$_GET['func'] == 'deleta') {
 }
 ?>
 <!------------------------------------------------------------------------------->
-
 
 <!---------------------------EDITAR REGISTRO DA TABELA---------------------------->
 <?php
@@ -647,9 +550,6 @@ if (@$_GET['func'] == 'edita') {
       $('#modalEditar').modal("show");
     </script>
     <!--Modal EDITAR -->
-
-    <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
-
 <?php
     if (isset($_POST['buttonEditar'])) {
       $posto2 = strtoupper($_POST['txtposto2']);
@@ -673,7 +573,7 @@ if (@$_GET['func'] == 'edita') {
   }
 }
 
-//<!---------------------------APROVAR NOVA SEÇÃO NA TABELA---------------------------->
+// APROVAR NOVA SEÇÃO NA TABELA
 
 if (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];

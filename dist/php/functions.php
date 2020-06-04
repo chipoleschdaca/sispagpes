@@ -61,6 +61,7 @@ function javascript($diretorio)
   <script src="<?= $diretorio ?>dist/js/adminlte.js"></script>
   <script src="<?= $diretorio ?>dist/js/pages/dashboard.js"></script>
   <script src="<?= $diretorio ?>dist/js/demo.js"></script>
+  <script src="<?= $diretorio ?>dist/js/myCharts.js"></script>
   <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
   <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables/jquery.dataTables.js"></script>
