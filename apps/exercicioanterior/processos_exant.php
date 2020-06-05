@@ -309,7 +309,7 @@ login('EXANT', '../../');
                               echo '<td class="align-middle" style="background-color: rgba(255, 0, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
                             }
                             ?>
-                            <td class="align-middle inline-block">
+                            <td class="align-middle" style="display: inline;">
                               <a href="processos_exant.php?func=estado&id=<?= $id; ?>">
                                 <button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving"></i></button>
                               </a>

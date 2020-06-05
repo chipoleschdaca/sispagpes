@@ -524,10 +524,10 @@ login('EXANT', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUANTIDADE vs. DIREITO PLEITEADO'
         },
         legend: {
@@ -535,8 +535,8 @@ login('EXANT', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 10,
-            boxWidth: 40
+            fontSize: 8,
+            boxWidth: 30
           }
         }
       }
@@ -550,7 +550,7 @@ login('EXANT', '../../');
       ],
       datasets: [{
         data: [<?= $count_estado ?>],
-          backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
+        backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
     }
     var donutChart1 = new Chart(donutChartCanvas1, {
@@ -559,10 +559,10 @@ login('EXANT', '../../');
       options: {
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUATIDADE vs. ESTADO'
         },
         legend: {
@@ -570,8 +570,8 @@ login('EXANT', '../../');
           position: 'right',
           labels: {
             fontColor: 'rgb(0,0,0)',
-            fontSize: 10,
-            boxWidth: 40
+            fontSize: 8,
+            boxWidth: 30
           }
         }
       }
@@ -612,10 +612,10 @@ login('EXANT', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'SEÇÃO ATUAL'
         },
         legend: {
@@ -623,7 +623,7 @@ login('EXANT', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 14
           }
         }
       }
@@ -667,10 +667,10 @@ login('EXANT', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUANTIDADE vs. POSTO'
         },
         legend: {
@@ -678,7 +678,7 @@ login('EXANT', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 14
           }
         }
       }

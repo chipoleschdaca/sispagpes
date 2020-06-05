@@ -75,13 +75,12 @@ login('TESOU', '../../');
     <div class="content-wrapper">
       <section class="content">
         <div class="container-fluid">
-          <br>
-          <div class="row">
+          <!--<div class="row">
             <div class="col-12" style="display: inline">
               <img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:4rem; height:4rem;">
               <h1 style="display: inline; vertical-align:middle; margin-left: 15px;">Painel de Controle</h1>
             </div>
-          </div>
+          </div>-->
           <br>
           <div class="row">
             <div class="col-12">
@@ -612,10 +611,10 @@ login('TESOU', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUANTIDADE vs. DIREITO PLEITEADO'
         },
         legend: {
@@ -623,8 +622,8 @@ login('TESOU', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 10,
-            boxWidth: 40
+            fontSize: 8,
+            boxWidth: 30
           }
         }
       }
@@ -647,10 +646,10 @@ login('TESOU', '../../');
       options: {
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUATIDADE vs. ESTADO'
         },
         legend: {
@@ -658,8 +657,8 @@ login('TESOU', '../../');
           position: 'right',
           labels: {
             fontColor: 'rgb(0,0,0)',
-            fontSize: 10,
-            boxWidth: 40
+            fontSize: 8,
+            boxWidth: 30
           }
         }
       }
@@ -700,10 +699,10 @@ login('TESOU', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'SEÇÃO ATUAL'
         },
         legend: {
@@ -711,7 +710,7 @@ login('TESOU', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 14
           }
         }
       }
@@ -755,10 +754,10 @@ login('TESOU', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUANTIDADE vs. POSTO'
         },
         legend: {
@@ -766,7 +765,7 @@ login('TESOU', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 14
           }
         }
       }
