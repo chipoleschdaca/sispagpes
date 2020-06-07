@@ -15,43 +15,7 @@ login('TESOU', '../../');
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
   <div class="wrapper">
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <!-- Este é a tag que faz aparecer o nome aparece no menu direito superior. -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
-            <span class="d-lg-none d-md-block">Some Actions</span>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Perfil
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Configurações
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Atividade
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Sair
-            </a>
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <?php navbar() ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="painel_tesouraria.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">

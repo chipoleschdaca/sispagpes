@@ -15,45 +15,7 @@ login('ADMIN', '../../');
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
-
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-        <!-- Messages Dropdown Menu -->
-        <!-- Este é a tag que faz aparecer o nome aparece no menu direito superior. -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-bars"></i>
-            <?= $_SESSION['nome_usuario'] ?>
-            <span class="d-lg-none d-md-block">Some Actions</span>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Perfil
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Configurações
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Atividade
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Sair
-            </a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-    <!-- /.navbar -->
-    <!-- Main Sidebar Container -->
+    <?php navbar() ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link">
