@@ -24,7 +24,7 @@ login('EXANT', '../../');
   }
 </style>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <?php navbar() ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -146,7 +146,7 @@ login('EXANT', '../../');
                         </select>
                       </div>
                       <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px;">
-                        <i class="fas fa-search" style="padding: 0px; margin:0px;"></i>
+                        <i class="fas fa-search"></i>
                       </button>
                     </div>
                   </div>

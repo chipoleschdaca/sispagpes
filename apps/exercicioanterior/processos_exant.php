@@ -30,7 +30,7 @@ login('EXANT', '../../');
   }
 </style>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="sidebar-mini">
   <div class="wrapper">
     <?php navbar() ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -460,8 +460,6 @@ login('EXANT', '../../');
 
 </html>
 
-<!--CADASTRAR -->
-
 <?php
 if (isset($_POST['button'])) {
   $cpf = $_POST['txtcpf'];
@@ -647,7 +645,6 @@ if (isset($_POST['button'])) {
   <script>
     $("#modalEditar").modal("show");
   </script>
-  <!--Comando para editar os dados UPDATE -->
   <?php
   if (isset($_POST['buttonEditar'])) {
     $cpf_edita = $_POST['txtcpf2'];
@@ -706,7 +703,6 @@ if (isset($_POST['button'])) {
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
   ?>
-    <!-- Modal -->
     <div id="modalEstado" class="modal fade" role="dialog">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -720,9 +716,8 @@ if (isset($_POST['button'])) {
                 <div class="form-group col-sm-5">
                   <label for="fornecedor">Responsável</label>
                   <?php
-                  $id_perfil3 = $_SESSION['id_perfil'];
                   $id_militar3 = $_SESSION['id_militar'];
-                  $query = "SELECT * FROM militares WHERE id = '$id_militar3' AND perfil = '$id_perfil3'";
+                  $query = "SELECT * FROM militares WHERE id = '$id_militar3'";
                   $result = mysqli_query($conexao, $query);
                   $res_row = mysqli_fetch_array($result);
                   ?>

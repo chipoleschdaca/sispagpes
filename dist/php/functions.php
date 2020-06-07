@@ -95,13 +95,14 @@ function footer()
 function javascript($diretorio)
 { ?>
   <script src="<?= $diretorio ?>plugins/jquery/jquery.min.js"></script>
+  <script src="<?= $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= $diretorio ?>dist/js/adminlte.js"></script>
   <script src="<?= $diretorio ?>plugins/jquery-mask/dist/jquery.mask.js"></script>
   <script src="<?= $diretorio ?>plugins/jquery-ui/jquery-ui.min.js"></script>
   <script>
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <script src="<?= $diretorio ?>plugins/select2/js/select2.full.min.js"></script>
-  <script src="<?= $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?= $diretorio ?>plugins/chart.js/Chart.min.js"></script>
   <script src="<?= $diretorio ?>plugins/sparklines/sparkline.js"></script>
   <script src="<?= $diretorio ?>plugins/jqvmap/jquery.vmap.min.js"></script>
@@ -113,7 +114,6 @@ function javascript($diretorio)
   <script src="<?= $diretorio ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <script src="<?= $diretorio ?>plugins/summernote/summernote-bs4.min.js"></script>
   <script src="<?= $diretorio ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <script src="<?= $diretorio ?>dist/js/adminlte.js"></script>
   <script src="<?= $diretorio ?>dist/js/pages/dashboard.js"></script>
   <script src="<?= $diretorio ?>dist/js/demo.js"></script>
   <script src="<?= $diretorio ?>dist/js/myCharts.js"></script>
@@ -369,4 +369,31 @@ function descobrirIdade($dataNascimento)
 
   $idade = date_diff($agora, $dn);
   return $idade->y;
+}
+
+function tempoMedioSecao($conn)
+{
+  function diferenca2($a, $b)
+  {
+    return (strtotime($a) - strtotime($b)) / (60 * 60 * 24);
+  }
+  $queryTempoMedio = "SELECT h.id, h.data_anterior AS old_data, h.data_novo AS new_data, h.secao_anterior, s.id AS id_secao, s.secao AS nome_secao FROM tb_historico_exant_estado_secao AS h LEFT JOIN tb_secoes_exant AS s ON h.secao_anterior = s.id WHERE s.id = '1'";
+  $resultTempoMedio = mysqli_query($conn, $queryTempoMedio);
+  $countRows = mysqli_num_rows($resultTempoMedio);
+  if ($countRows == 0) {
+    echo 'Não existem dados para serem exibidos';
+  } else {
+    $i = 0;
+    $sumDif = 0;
+    while ($resTempoMedio = mysqli_fetch_array($resultTempoMedio)) {
+      $idSecao = $resTempoMedio['id_secao'];
+      $nomeSecao = $resTempoMedio['nome_secao'];
+      $oldData = $resTempoMedio['old_data'];
+      $newData = $resTempoMedio['new_data'];
+      $sumDif += diferenca2($newData, $oldData);
+      $i++;
+    }
+    $tempoMedioSecao = number_format($sumDif / $i, 0);
+    echo $nomeSecao . ': ' . $tempoMedioSecao . ' dias';
+  }
 }
