@@ -95,7 +95,6 @@ function footer()
 function javascript($diretorio)
 { ?>
   <script src="<?= $diretorio ?>plugins/jquery/jquery.min.js"></script>
-  <script src="<?= $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?= $diretorio ?>dist/js/adminlte.js"></script>
   <script src="<?= $diretorio ?>plugins/jquery-mask/dist/jquery.mask.js"></script>
   <script src="<?= $diretorio ?>plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -103,6 +102,7 @@ function javascript($diretorio)
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <script src="<?= $diretorio ?>plugins/select2/js/select2.full.min.js"></script>
+  <script src="<?= $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?= $diretorio ?>plugins/chart.js/Chart.min.js"></script>
   <script src="<?= $diretorio ?>plugins/sparklines/sparkline.js"></script>
   <script src="<?= $diretorio ?>plugins/jqvmap/jquery.vmap.min.js"></script>
@@ -183,6 +183,9 @@ function javascript($diretorio)
   </script>
   <script>
     $("[data-tt=tooltip]").tooltip({
+      placement: 'auto'
+    });
+    $("[data-toggle=tooltip]").tooltip({
       placement: 'auto'
     });
   </script>

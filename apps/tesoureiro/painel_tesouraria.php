@@ -243,7 +243,7 @@ login('TESOU', '../../');
                                       <?php echo $count_prazo ?>
                                     </td>
                                     <td class="align-middle">
-                                      <a data-toggle="popover" data-content="Alterar prazo" style="width: 24px; height: 24px;" href="#"><i class="fas fa-tools"></i></a>
+                                      <a data-tt="tooltip" title="Alterar Prazo" style="width: 24px; height: 24px;" href="#"><i class="fas fa-tools"></i></a>
                                     </td>
                                   </tr>
                                 <?php
