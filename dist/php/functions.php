@@ -88,7 +88,8 @@ function navbar()
 
 function footer()
 { ?>
-  <span>&copy; 2019-<?= date("Y") ?> <a href="#"> SISPAGPES</a></span> - Desenvolvido por DANIEL ANGELO CHIPOLESCH DE ALMEIDA 1º Ten Int <div class="float-right d-none d-sm-inline-block">v1.0.2</div>
+  <span>&copy; 2019-<?= date("Y") ?> <a href="#"> SISPAGPES</a></span> - Desenvolvido por DANIEL ANGELO <span style="text-decoration: underline;"><b>CHIPOLESCH</b></span> DE ALMEIDA <b>1º Ten Int</b>
+  <div class="float-right d-none d-sm-inline-block">v1.0.2</div>
 <?php
 }
 
