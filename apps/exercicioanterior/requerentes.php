@@ -228,11 +228,11 @@ login('EXANT', '../../');
                               <td class="align-middle">
                                 <?php
                                 if (($dt_nascimento) == '0000-00-00') {
-                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } else if (descobrirIdade($dt_nascimento) >= 60) {
-                                  echo '<img src="../../dist/icons/accept-colored.svg" style="height: 30px; width:30px;"/>';
+                                  echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } else {
-                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } ?>
                               </td>
                               <td class="align-middle"><?= $email; ?></td>
@@ -257,25 +257,23 @@ login('EXANT', '../../');
           </div>
         </div>
       </section>
-      <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
       <div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
-        <!---Modal Exemplo--->
-        <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title"><i class="fas fa-user-plus"></i> Inserir novo Requerente</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="">
+              <form method="POST" action="" id="cadastrarRequerente">
                 <div class="row">
                   <div class="form-group col-4">
                     <label for="fornecedor">Saram</label>
-                    <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
+                    <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" placeholder="000.000-0" required>
                   </div>
                   <div class="form-group col-5">
                     <label for="fornecedor">CPF</label>
-                    <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
+                    <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" placeholder="000.000.000-00" required>
                   </div>
                   <div class="form-group col-3">
                     <label for="id_produto">Posto</label>
@@ -297,7 +295,7 @@ login('EXANT', '../../');
                 </div>
                 <div class="row">
                   <div class="col-1"></div>
-                  <div class="form-group">
+                  <div class="form-group" name="situacao">
                     <label for="id_produto">Situação</label><br>
                     <div class="custom-control custom-radio">
                       <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
@@ -343,20 +341,6 @@ login('EXANT', '../../');
     <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
   <?= javascript('../../') ?>
-  <!--<script>
-    $(document).ready(function() {
-      $("#example1").DataTable({
-        "scrollX": false,
-        "scrollY": "350px",
-        "paging": false,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": false,
-        "autoWidth": false,
-      });
-    });
-  </script>-->
   <script>
     $(document).ready(function() {
       $("#dtNascimento").hide();
@@ -531,7 +515,7 @@ if (isset($_POST['button'])) {
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <form method="POST" action="">
+            <form method="POST" action="" id="editarRequerente">
               <div class="row">
                 <div class="form-group col-4">
                   <label for="fornecedor">Saram</label>
