@@ -1,18 +1,18 @@
 .btn-table {
-    width: 27px;
-    height: 27px;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    border-radius: 0.15rem;
+  width: 27px;
+  height: 27px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.2rem;
 }
 
 .btn-table i {
-    width: 27px;
-    height: 27px;
-    line-height: 27px;
-    margin: 0;
-    padding: 0;
+  width: 27px;
+  height: 27px;
+  line-height: 27px;
+  margin: 0;
+  padding: 0;
 }
