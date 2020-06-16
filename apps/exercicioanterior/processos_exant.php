@@ -330,16 +330,14 @@ login('EXANT', '../../');
                   <div class="row">
                     <div class="form-group col-sm-7">
                       <label for="">Requerente</label>
-                      <select class="form-control select2" name="txtcpf">
-                        <option value="" disabled selected hidden>Selecione o requerente...
-                        </option>
+                      <select class="form-control select2" name="txtcpf" required>
+                        <option value="" disabled selected hidden>Selecione o requerente...</option>
                         <?php
                         $query = "SELECT * FROM requerentes ORDER BY nome ASC";
                         $result = mysqli_query($conexao, $query);
                         while ($res_1 = mysqli_fetch_array($result)) {
                         ?>
-                          <option value="<?= $res_1['id']; ?>"><?= $res_1['saram']; ?>
-                            <?= $res_1['nome']; ?></option>
+                          <option value="<?= $res_1['id']; ?>"><?= $res_1['saram']; ?> | <?= $res_1['nome']; ?></option>
                         <?php
                         }
                         ?>
@@ -373,7 +371,7 @@ login('EXANT', '../../');
                     </div>
                     <div class="form-group col-sm-7">
                       <label>Direito Pleiteado</label>
-                      <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado">
+                      <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" required>
                         <option value="" disabled selected hidden>Direito Pleiteado</option>
                         <?php
                         $query_direito = "SELECT * FROM tb_direitoPleiteado_exant where status = 'Aprovado' ORDER BY direito";
@@ -393,10 +391,8 @@ login('EXANT', '../../');
                   <div class="row">
                     <div class="form-group col-sm-6">
                       <label>Seção de Origem</label>
-                      <select class="form-control select2" id="txtsecaoorigem" name="txtsecaoorigem">
-                        <option value="" disabled selected hidden>Seção que abriu o
-                          processo...
-                        </option>
+                      <select class="form-control select2" id="txtsecaoorigem" name="txtsecaoorigem" required>
+                        <option value="" disabled selected hidden>Seção que abriu o processo...</option>
                         <?php
                         $query_secao = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
                         $result_secao = mysqli_query($conexao, $query_secao);
@@ -549,8 +545,7 @@ if (isset($_POST['button'])) {
               <div class="form-group col-sm-7">
                 <label for="">Requerente</label>
                 <select class="form-control select2" name="txtcpf2" required>
-                  <option value="<?= $res_1["id_req"]; ?>" selected><?= $res_1["req_saram"]; ?> |
-                    <?= $res_1["req_nome"]; ?></option>
+                  <option value="<?= $res_1["id_req"]; ?>" selected><?= $res_1["req_saram"]; ?> | <?= $res_1["req_nome"]; ?></option>
                   <?php
                   $query_consulta_requerente = "SELECT * FROM requerentes ORDER BY nome asc";
                   $result_consulta_requerente = mysqli_query($conexao, $query_consulta_requerente);
