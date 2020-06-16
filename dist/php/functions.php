@@ -8,20 +8,19 @@ function head($diretorio)
   <link rel="icon" type="image/png" href="<?= $diretorio ?>dist/img/gapls.png">
   <title>SISPAGPES</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <link rel="stylesheet" href="<?= $diretorio ?>plugins/jqvmap/jqvmap.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>dist/css/adminlte.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>dist/css/btn-table.css">
-  <link rel="stylesheet" href="<?= $diretorio ?>dist/css/style_print_button.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/jquery-ui/jquery-ui.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -88,7 +87,7 @@ function navbar()
 
 function footer()
 { ?>
-  <span>&copy; 2019-<?= date("Y") ?> <a href="#"> SISPAGPES</a></span> - Desenvolvido por DANIEL ANGELO <span style="text-decoration: underline;"><b>CHIPOLESCH</b></span> DE ALMEIDA <b>1º Ten Int</b>
+  <b><span>SISPAGPES </b>&copy; 2019-<?= date("Y") ?></span> - Desenvolvido por DANIEL ANGELO <span style="text-decoration: underline;"><b>CHIPOLESCH</b></span> DE ALMEIDA <b>1º Ten Int</b>
   <div class="float-right d-none d-sm-inline-block">v1.0.2</div>
 <?php
 }
@@ -99,27 +98,23 @@ function javascript($diretorio)
   <script src="<?= $diretorio ?>dist/js/adminlte.js"></script>
   <script src="<?= $diretorio ?>plugins/jquery-mask/dist/jquery.mask.js"></script>
   <script src="<?= $diretorio ?>plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="<?= $diretorio ?>plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="<?= $diretorio ?>plugins/jquery-validation/additional-methods.min.js"></script>
+  <script src="<?= $diretorio ?>dist/js/validation.js"></script>
   <script>
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <script src="<?= $diretorio ?>plugins/select2/js/select2.full.min.js"></script>
-  <script src="<?= $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="<?= $diretorio ?>plugins/chart.js/Chart.min.js"></script>
-  <script src="<?= $diretorio ?>plugins/sparklines/sparkline.js"></script>
-  <script src="<?= $diretorio ?>plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="<?= $diretorio ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <script src="<?= $diretorio ?>plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
   <script src="<?= $diretorio ?>plugins/jquery-knob/jquery.knob.min.js"></script>
   <script src="<?= $diretorio ?>plugins/moment/moment.min.js"></script>
   <script src="<?= $diretorio ?>plugins/daterangepicker/daterangepicker.js"></script>
   <script src="<?= $diretorio ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <script src="<?= $diretorio ?>plugins/summernote/summernote-bs4.min.js"></script>
   <script src="<?= $diretorio ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <script src="<?= $diretorio ?>dist/js/pages/dashboard.js"></script>
   <script src="<?= $diretorio ?>dist/js/demo.js"></script>
   <script src="<?= $diretorio ?>dist/js/myCharts.js"></script>
-  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
   <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables/jquery.dataTables.js"></script>
   <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
