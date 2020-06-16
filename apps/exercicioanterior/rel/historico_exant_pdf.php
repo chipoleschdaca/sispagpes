@@ -142,7 +142,7 @@ while ($res_h = mysqli_fetch_array($result_h)) {
   } else {
     $html .= "<td class='align-middle' style='text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
   }
-  $html .= "<td class='align-middle' style='text-align: center; width: 15%;'>$nome_sacador</td>";
+  $html .= "<td class='align-middle' id='nomeSacador' style='text-align: center; width: 15%;'>$nome_sacador</td>";
   $html .= "</tr>";
   //Final do While
 }
