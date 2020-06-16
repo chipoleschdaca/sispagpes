@@ -27,6 +27,7 @@ login('EXANT', '../../');
 
   table {
     text-align: center;
+    display: inline-table;
   }
 </style>
 
@@ -253,11 +254,11 @@ login('EXANT', '../../');
                             <td class="align-middle">
                               <?php
                               if (($dt_nascimento) == '0000-00-00') {
-                                echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+                                echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                               } else if (descobrirIdade($dt_nascimento) >= 60) {
-                                echo '<img src="../../dist/icons/accept-colored.svg" style="height: 30px; width:30px;"/>';
+                                echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
                               } else {
-                                echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+                                echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                               } ?>
                             </td>
                             <td class="align-middle"><?= data($data_criacao); ?></td>
@@ -274,7 +275,7 @@ login('EXANT', '../../');
                               echo '<td class="align-middle" style="background-color: rgba(255, 0, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
                             }
                             ?>
-                            <td class="align-middle" style="display: inline;">
+                            <td class="align-middle" style="display: block;">
                               <a href="processos_exant.php?func=estado&id=<?= $id; ?>">
                                 <button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving"></i></button>
                               </a>
@@ -326,7 +327,7 @@ login('EXANT', '../../');
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                <form method="POST" action="">
+                <form method="POST" action="" id="inserirProcesso">
                   <div class="row">
                     <div class="form-group col-sm-7">
                       <label for="">Requerente</label>
@@ -357,7 +358,7 @@ login('EXANT', '../../');
                   </div>
                   <br>
                   <div class="row">
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-4">
                       <label for="quantidade">NUP</label>
                       <input type="text" class="form-control mr-2" id="txtnup" name="txtnup" placeholder="00000.000000/0000-00" autocomplete="off" required>
                     </div>
@@ -439,16 +440,21 @@ login('EXANT', '../../');
   </div>
   <?= javascript('../../') ?>
   <script>
+    $('#example1').on('shown.bs.collapse', function() {
+      $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+    });
+  </script>
+  <script>
     $(document).ready(function() {
       $("#example1").DataTable({
         "scrollX": false,
-        "scrollY": "350px",
+        "scrollY": '350px',
         "paging": false,
         "lengthChange": false,
         "searching": true,
         "ordering": true,
         "info": false,
-        "autoWidth": false,
+        "autoWidth": true,
       });
     });
   </script>
@@ -540,7 +546,7 @@ if (isset($_POST['button'])) {
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="">
+          <form method="POST" action="" id="editarProcesso">
             <div class="row">
               <div class="form-group col-sm-7">
                 <label for="">Requerente</label>
@@ -584,7 +590,6 @@ if (isset($_POST['button'])) {
               <div class="form-group col-sm-5">
                 <label for="quantidade">Data de Abertura</label>
                 <input type="date" class="form-control" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?= $res_1['data_criacao']; ?>" required>
-                <!--<input class="form-control" type="text" id="datepicker" name="txtdatacriacao2" placeholder="Data de Abertura" value="<?php data_show($res_1['data_criacao']); ?>">-->
               </div>
               <div class="form-group col-sm-7">
                 <label>Direito Pleiteado</label>
@@ -671,30 +676,11 @@ if (isset($_POST['button'])) {
       Alerta("success", "Editado com sucesso!", false, "processos_exant.php");
     }
   }
-  // Função para ALTERAR ESTADO do processo.
+  // Função para ALTERAR ESTADO do Processo.
 } elseif (@$_GET['func'] == 'estado') {
   $idSetEstado = $_GET['id'];
   $query = "SELECT e.id, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, sec.secao as sec_atual, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$idSetEstado'";
-  $id_req = $res_1["id_req"];
-  $id_mil = $res_1["id_mil"];
-  $id_dir = $res_1["id_dir"];
-  $id_sec = $res_1["id_sec"];
-  $id_est = $res_1["id_est"];
-  $saram = $res_1['req_saram'];
-  $cpf = $res_1["cpf"];
-  $posto = $res_1["req_posto"];
-  $situacao = $res_1["req_situacao"];
-  $requerente = $res_1["req_nome"];
-  $sacador = $res_1["mil_nome"];
-  $nup = $res_1["nup"];
-  $prioridade = $res_1["prioridade"];
-  $data_criacao = $res_1["data_criacao"];
-  $direito_pleiteado = $res_1["dir_direito"];
-  $secao_origem = $res_1["sec_origem"];
-  $data_saida = $res_1["data_saida"];
-  $obs = $res_1["obs"];
-  $estado = $res_1["est_estado"];
-  $secao_atual = $res_1['sec_atual'];
+
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
   ?>
@@ -706,7 +692,7 @@ if (isset($_POST['button'])) {
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <form method="POST" action="">
+            <form method="POST" action="" id="alterarEstadoProcesso">
               <div class="row">
                 <div class="form-group col-sm-5">
                   <label for="fornecedor">Responsável</label>
@@ -791,14 +777,12 @@ if (isset($_POST['button'])) {
               <div class="row">
                 <div class="form-group col-12">
                   <label>Observação</label>
-                  <textarea class="form-control" id="textobs" name="txtobs" rows="3" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..."></textarea>
+                  <textarea class="form-control" id="textobs" name="txtobs" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..." required></textarea>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar
-                </button>
-                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar
-                </button>
+                <button type="submit" class="btn btn-primary btn-sm" name="buttonEstado" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar</button>
+                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar</button>
               </div>
             </form>
           </div>
@@ -900,7 +884,7 @@ if (isset($_POST['button'])) {
                     $today_cons = date('Y-m-d');
                   ?>
                     <tr>
-                      <td class="align-middle" style="width: 12.1%; text-align: justify;">
+                      <td class="align-middle" style="width: 12%; text-align: justify;">
                         <?php
                         if ($old_secao == "") {
                           echo 'Criado na: ' . '<br>';
@@ -943,7 +927,7 @@ if (isset($_POST['button'])) {
                         echo '<td class="align-middle" style="text-align:center;">' . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . '</td>';
                       }
                       ?>
-                      <td class="align-middle" style="text-align: center;">
+                      <td class="align-middle" style="text-align: center; font-size: 10px;">
                         <?= $nome_sacador; ?>
                       </td>
                     </tr>
