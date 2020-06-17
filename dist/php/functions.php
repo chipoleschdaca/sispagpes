@@ -87,7 +87,7 @@ function navbar()
 
 function footer()
 { ?>
-  <b><span>SISPAGPES </b>&copy; 2019-<?= date("Y") ?></span> - Desenvolvido por DANIEL ANGELO <span style="text-decoration: underline;"><b>CHIPOLESCH</b></span> DE ALMEIDA <b>1º Ten Int</b>
+  <span>&copy; 2019-<?= date("Y") ?><a href="#" style="margin-right: 0;"><b> SISPAGPES</b></a></span>. Desenvolvido por DANIEL ANGELO <span style="text-decoration: underline;"><b>CHIPOLESCH</b></span> DE ALMEIDA <b>1º Ten Int</b>.
   <div class="float-right d-none d-sm-inline-block">v1.0.2</div>
 <?php
 }
@@ -196,7 +196,7 @@ function javascript($diretorio)
       $('.select2').select2()
     });
   </script>
-<?php
+  <?php
 }
 
 function Alerta($type, $title, $msg, $location)
@@ -372,27 +372,34 @@ function descobrirIdade($dataNascimento)
 
 function tempoMedioSecao($conn)
 {
-  function diferenca2($a, $b)
-  {
-    return (strtotime($a) - strtotime($b)) / (60 * 60 * 24);
-  }
-  $queryTempoMedio = "SELECT h.id, h.data_anterior AS old_data, h.data_novo AS new_data, h.secao_anterior, s.id AS id_secao, s.secao AS nome_secao FROM tb_historico_exant_estado_secao AS h LEFT JOIN tb_secoes_exant AS s ON h.secao_anterior = s.id WHERE s.id = '1'";
+  $queryTempoMedio = "SELECT h.id, AVG(DATEDIFF(h.data_novo, h.data_anterior)) AS difData, h.secao_anterior AS old_secao, s.id AS id_secao, s.secao AS nome_secao FROM tb_historico_exant_estado_secao AS h LEFT JOIN tb_secoes_exant AS s ON h.secao_anterior = s.id GROUP BY s.id";
   $resultTempoMedio = mysqli_query($conn, $queryTempoMedio);
   $countRows = mysqli_num_rows($resultTempoMedio);
   if ($countRows == 0) {
     echo 'Não existem dados para serem exibidos';
   } else {
-    $i = 0;
-    $sumDif = 0;
-    while ($resTempoMedio = mysqli_fetch_array($resultTempoMedio)) {
-      $idSecao = $resTempoMedio['id_secao'];
-      $nomeSecao = $resTempoMedio['nome_secao'];
-      $oldData = $resTempoMedio['old_data'];
-      $newData = $resTempoMedio['new_data'];
-      $sumDif += diferenca2($newData, $oldData);
-      $i++;
-    }
-    $tempoMedioSecao = number_format($sumDif / $i, 0);
-    echo $nomeSecao . ': ' . $tempoMedioSecao . ' dias';
+  ?>
+    <table class="table table-sm table-borderless table-striped" id="example1" style="width: 200px; height:200px; text-align: center;">
+      <thead class="text-primary">
+        <tr>
+          <th class="align-middle">Seção</th>
+          <th class="align-middle">T. Médio (dias)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        while ($resTempoMedio = mysqli_fetch_array($resultTempoMedio)) {
+          $nomeSecao = $resTempoMedio['nome_secao'];
+          $avgSecao = number_format($resTempoMedio['difData'], 0, ',', '.');
+        ?>
+          <tr>
+            <td class="align-middle"><?= $nomeSecao; ?></td>
+            <td class="align-middle"><?= $avgSecao; ?></td>
+          </tr>
+        <?php
+        } ?>
+      </tbody>
+    </table>
+<?php
   }
 }
