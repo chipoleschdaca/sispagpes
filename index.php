@@ -25,7 +25,7 @@ include('dist/php/functions.php');
   <div class="wrapper fadeIn">
     <div id="formContent">
       <div class="fadeIn" id="img">
-        <img src="dist/img/gapls1.png" id="icon" alt="User Icon" />
+        <img src="dist/img/gapls1.png" style="width: 4.7cm; height: 5.7cm;" id="icon" alt="User Icon" />
       </div>
       <div>
         <h1><strong>SISPAGPES</strong></h1>

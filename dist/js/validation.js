@@ -234,9 +234,6 @@ $(function () {
       txtnovoestado: {
         required: true,
       },
-      txtobs: {
-        required: true,
-      },
     },
     messages: {
       txtdataatual: {
@@ -247,9 +244,6 @@ $(function () {
       },
       txtnovoestado: {
         required: "Selecione o novo estado do processo",
-      },
-      txtobs: {
-        required: "O campo observação é obrigatório",
       },
     },
     errorElement: "span",
