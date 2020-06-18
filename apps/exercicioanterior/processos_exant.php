@@ -777,7 +777,7 @@ if (isset($_POST['button'])) {
               <div class="row">
                 <div class="form-group col-12">
                   <label>Observação</label>
-                  <textarea class="form-control" id="textobs" name="txtobs" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..." required></textarea>
+                  <textarea class="form-control" id="textobs" name="txtobs" style="text-align: justify; font-size:12px;" placeholder="Digite uma observação..."></textarea>
                 </div>
               </div>
               <div class="modal-footer">

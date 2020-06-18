@@ -107,15 +107,11 @@ login('ADMIN', '../../');
           </ul>
         </nav>
       </div>
-      <!--/.sidebar -->
     </aside>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <br>
-      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box">
@@ -134,11 +130,8 @@ login('ADMIN', '../../');
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-check"></i></span>
@@ -156,12 +149,8 @@ login('ADMIN', '../../');
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-            <!-- fix for small devices only -->
             <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
@@ -180,11 +169,8 @@ login('ADMIN', '../../');
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon badge-danger elevation-1"><i class="fa fa-user-times"></i></span>
@@ -202,11 +188,8 @@ login('ADMIN', '../../');
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
           </div>
           <br>
           <div class="row">
@@ -220,24 +203,16 @@ login('ADMIN', '../../');
                     <i class="fas fa-user-plus"></i> Inserir Novo
                   </button>
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
-                    <!-------------LISTAR TODOS OS FUNCIONÁRIOS-------------->
-
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
                       $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE nome LIKE '$nome' ORDER BY m.id ASC";
                     } else {
                       $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id ORDER BY m.id ASC";
                     }
-
                     $result = mysqli_query($conexao, $query);
                     $row = mysqli_num_rows($result);
                     ?>
-
-                    <!-------------------------------------------------->
-
                     <table class="table table-sm table-borderless table-striped">
                       <thead class="text-primary align-middle">
                         <th class="align-middle">#</th>
