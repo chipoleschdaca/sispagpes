@@ -25,7 +25,7 @@ function data($data)
 }
 
 $id = $_GET['id'];
-$id_req = $_GET['id_req'];
+
 
 $query     = "SELECT * FROM exercicioanterior WHERE id = '$id'";
 $result    = mysqli_query($conexao, $query);
@@ -34,7 +34,7 @@ $nup       = $res_exant["nup"];
 $secao_atual = $res_exant['secao_atual'];
 
 $id_req = $_GET['id_req'];
-$query_req = "SELECT r.posto, r.situacao, r.nome, r.dt_nascimento, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
+$query_req = "SELECT r.id, r.posto, r.situacao, r.nome, r.dt_nascimento, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
 $result_req = mysqli_query($conexao, $query_req);
 $row_req = mysqli_num_rows($result_req);
 $res_1 = mysqli_fetch_array($result_req);
