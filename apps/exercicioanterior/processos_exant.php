@@ -935,7 +935,7 @@ if (isset($_POST['button'])) {
             </table>
           </div>
           <div class="modal-footer">
-            <a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
+            <a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf.php?id=<?= $idConsultaHistorico; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
           </div>
         </div>
       </div>
