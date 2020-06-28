@@ -2,13 +2,14 @@
 date_default_timezone_set('America/Sao_paulo');
 
 function head($diretorio)
-{ ?>
+{
+?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="image/png" href="<?= $diretorio ?>dist/img/gapls.png">
   <title>SISPAGPES</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
@@ -21,9 +22,7 @@ function head($diretorio)
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/jquery-ui/jquery-ui.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/summernote/summernote-bs4.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/bootstrap-table/bootstrap-table.min.css">
   <script src="<?= $diretorio ?>plugins/sweetalert2/sweetalert2.min.js"></script>
   <script src="<?= $diretorio ?>plugins/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="<?= $diretorio ?>plugins/toastr/toastr.min.js"></script>
@@ -50,9 +49,7 @@ function navbar()
           </div>
         </li>
       </ul>
-    <?php
-    }
-    ?>
+    <?php } ?>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -113,8 +110,8 @@ function javascript($diretorio)
   <script src="<?= $diretorio ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <script src="<?= $diretorio ?>plugins/summernote/summernote-bs4.min.js"></script>
   <script src="<?= $diretorio ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <script src="<?= $diretorio ?>dist/js/demo.js"></script>
   <script src="<?= $diretorio ?>dist/js/myCharts.js"></script>
+  <script src="<?= $diretorio ?>plugins/bootstrap-table/bootstrap-table.min.js"></script>
   <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables/jquery.dataTables.js"></script>
   <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 

@@ -168,142 +168,133 @@ login('EXANT', '../../');
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header" style="text-align: center; height: 55px;">
-                  <h4 class="align-middle" style="text-align:center;"><strong>EXERCÍCIOS
-                      ANTERIORES</strong></h4>
+                <div class="card-header" style="text-align: center;">
+                  <h4 class="align-middle" style="text-align:center;"><strong>EXERCÍCIOS ANTERIORES</strong></h4>
                 </div>
-                <div class="card-body">
-                  <div class="table-responsive" style="text-align: center; font-size: 12px; height: 430px;">
+                <div class="card-body" style="font-size: 12px;">
+                  <?php
+                  if (isset($_GET['buttonPesquisar']) and $_GET['txtnome'] != '') {
+                    $nome = '%' . $_GET['txtnome'] . '%';
+                    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.nome LIKE '$nome' order by e.id asc";
+                  } else if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
+                    $saram_filtro = $_GET['txtsaram3'] . '%';
+                    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram_filtro' order by e.id asc";
+                  } else if (isset($_GET['buttonPesquisar']) and $_GET['txtdirpleiteado'] != '') {
+                    $dir_pleiteado = $_GET['txtdirpleiteado'] . '%';
+                    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE d.id = '$dir_pleiteado' order by e.id asc";
+                  } else if (isset($_GET['buttonPesquisar']) and $_GET['txtestadofiltro'] != '') {
+                    $estado_filtro = $_GET['txtestadofiltro'];
+                    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE est.id = '$estado_filtro' order by e.id asc";
+                  } else {
+                    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
+                  }
+                  $result = mysqli_query($conexao, $query);
+                  $row = mysqli_num_rows($result);
+                  ?>
+                  <table class="table-sm table-borderless table-hover" data-toggle="table" data-search="true" data-show-fullscreen="true" data-show-columns="true" data-show-toggle="true" data-height="450">
+                    <thead class="text-primary">
+                      <tr>
+                        <th class="align-middle">#</th>
+                        <th class="align-middle">SARAM</th>
+                        <th class="align-middle">Requerente</th>
+                        <th class="align-middle">NUP</th>
+                        <th class="align-middle">Est. Idoso</th>
+                        <th class="align-middle">Dt. Criação</th>
+                        <th class="align-middle">Direito Pleiteado</th>
+                        <th class="align-middle">Origem</th>
+                        <th class="align-middle">Estado</th>
+                        <th class="align-middle">Seção Atual</th>
+                        <th class="align-middle">Prazo</th>
+                        <th class="align-middle">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      while ($res_1 = mysqli_fetch_array($result)) {
+                        $id = $res_1["id"];
+                        $id_req = $res_1["id_req"];
+                        $saram = $res_1["req_saram"];
+                        $cpf = $res_1["cpf"];
+                        $requerente = $res_1["req_nome"];
+                        $sacador = $res_1["mil_nome"];
+                        $nup = $res_1["nup"];
+                        $dt_nascimento = $res_1["data_nascimento"];
+                        $data_criacao = $res_1["data_criacao"];
+                        $direito_pleiteado = $res_1["dir_direito"];
+                        $secao_origem = $res_1["sec_origem"];
+                        $data_saida = $res_1["data_saida"];
+                        $estado = $res_1["est_estado"];
+                        $secao_atual = $res_1['sec_atual'];
 
-                    <?php
+                        $query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$secao_atual'";
+                        $result_prazo = mysqli_query($conexao, $query_prazo);
+                        $res_prazo = mysqli_fetch_array($result_prazo);
+                        $prazoSecao = $res_prazo['prazo_exant'];
 
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtnome'] != '') {
-                      $nome = '%' . $_GET['txtnome'] . '%';
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.nome LIKE '$nome' order by e.id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
-                      $saram_filtro = $_GET['txtsaram3'] . '%';
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram_filtro' order by e.id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtdirpleiteado'] != '') {
-                      $dir_pleiteado = $_GET['txtdirpleiteado'] . '%';
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE d.id = '$dir_pleiteado' order by e.id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtestadofiltro'] != '') {
-                      $estado_filtro = $_GET['txtestadofiltro'];
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE est.id = '$estado_filtro' order by e.id asc";
-                    } else {
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
-                    }
-
-                    $result = mysqli_query($conexao, $query);
-                    $row = mysqli_num_rows($result);
-
-                    ?>
-
-                    <table class="table table-sm table-borderless table-hover" id="example1">
-                      <thead class="text-primary">
-                        <tr>
-                          <th class="align-middle">#</th>
-                          <th class="align-middle">SARAM</th>
-                          <th class="align-middle">Requerente</th>
-                          <th class="align-middle">NUP</th>
-                          <th class="align-middle">Est. Idoso</th>
-                          <th class="align-middle">Dt. Criação</th>
-                          <th class="align-middle">Direito Pleiteado</th>
-                          <th class="align-middle">Origem</th>
-                          <th class="align-middle">Estado</th>
-                          <th class="align-middle">Seção Atual</th>
-                          <th class="align-middle">Prazo</th>
-                          <th class="align-middle">Ações</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        while ($res_1 = mysqli_fetch_array($result)) {
-                          $id = $res_1["id"];
-                          $id_req = $res_1["id_req"];
-                          $saram = $res_1["req_saram"];
-                          $cpf = $res_1["cpf"];
-                          $requerente = $res_1["req_nome"];
-                          $sacador = $res_1["mil_nome"];
-                          $nup = $res_1["nup"];
-                          $dt_nascimento = $res_1["data_nascimento"];
-                          $data_criacao = $res_1["data_criacao"];
-                          $direito_pleiteado = $res_1["dir_direito"];
-                          $secao_origem = $res_1["sec_origem"];
-                          $data_saida = $res_1["data_saida"];
-                          $estado = $res_1["est_estado"];
-                          $secao_atual = $res_1['sec_atual'];
-
-                          $query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$secao_atual'";
-                          $result_prazo = mysqli_query($conexao, $query_prazo);
-                          $res_prazo = mysqli_fetch_array($result_prazo);
-                          $prazoSecao = $res_prazo['prazo_exant'];
-
-                          if ($data_saida != "") {
-                            $dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_saida"])));
-                          } else {
-                            $dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_criacao"])));
-                          }
+                        if ($data_saida != "") {
                           $dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_saida"])));
-                          $today = date('Y-m-d');
-                        ?>
-                          <tr>
-                            <td class="align-middle"><?= $id; ?></td>
-                            <td class="align-middle"><?= $saram; ?></td>
-                            <td class="align-middle"><?= $requerente; ?></td>
-                            <td class="align-middle"><?= $nup; ?></td>
-                            <td class="align-middle">
-                              <?php
-                              if (($dt_nascimento) == '0000-00-00') {
-                                echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
-                              } else if (descobrirIdade($dt_nascimento) >= 60) {
-                                echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
-                              } else {
-                                echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
-                              } ?>
-                            </td>
-                            <td class="align-middle"><?= data($data_criacao); ?></td>
-                            <td class="align-middle"><?= $direito_pleiteado; ?></td>
-                            <td class="align-middle"><?= $secao_origem ?></td>
-                            <td class="align-middle"><?= $estado; ?></td>
-                            <td class="align-middle"><?= $secao_atual; ?></td>
+                        } else {
+                          $dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_criacao"])));
+                        }
+                        $dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_saida"])));
+                        $today = date('Y-m-d');
+                      ?>
+                        <tr>
+                          <td class="align-middle"><?= $id; ?></td>
+                          <td class="align-middle"><?= $saram; ?></td>
+                          <td class="align-middle"><?= $requerente; ?></td>
+                          <td class="align-middle"><?= $nup; ?></td>
+                          <td class="align-middle">
                             <?php
-                            if (diferenca($dtPrazoSecao, $today) >= (2 / 3) * $prazoSecao) {
-                              echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
-                            } elseif (diferenca($dtPrazoSecao, $today) < (2 / 3) * $prazoSecao && diferenca($dtPrazoSecao, $today) >= $prazoSecao / 3) {
-                              echo '<td class="align-middle" style="background-color: rgba(255, 255, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
+                            if (($dt_nascimento) == '0000-00-00') {
+                              echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
+                            } else if (descobrirIdade($dt_nascimento) >= 60) {
+                              echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
                             } else {
-                              echo '<td class="align-middle" style="background-color: rgba(255, 0, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
-                            }
-                            ?>
-                            <td class="align-middle" style="display: block;">
-                              <a href="processos_exant.php?func=estado&id=<?= $id; ?>">
-                                <button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving"></i></button>
-                              </a>
-                              <a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>">
-                                <button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye"></i>
-                                </button>
-                              </a>
-                              <!--<a href="rel/historico_processo_exant.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener” id="tableButton"><button class="btn btn-light btn-table" data-toggle="popover" data-content="HTML"><span class="material-icons">print</span></button></a>-->
-                              <a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”>
-                                <button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button>
-                              </a>
+                              echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
+                            } ?>
+                          </td>
+                          <td class="align-middle"><?= data($data_criacao); ?></td>
+                          <td class="align-middle"><?= $direito_pleiteado; ?></td>
+                          <td class="align-middle"><?= $secao_origem ?></td>
+                          <td class="align-middle"><?= $estado; ?></td>
+                          <td class="align-middle"><?= $secao_atual; ?></td>
+                          <?php
+                          if (diferenca($dtPrazoSecao, $today) >= (2 / 3) * $prazoSecao) {
+                            echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
+                          } elseif (diferenca($dtPrazoSecao, $today) < (2 / 3) * $prazoSecao && diferenca($dtPrazoSecao, $today) >= $prazoSecao / 3) {
+                            echo '<td class="align-middle" style="background-color: rgba(255, 255, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
+                          } else {
+                            echo '<td class="align-middle" style="background-color: rgba(255, 0, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
+                          }
+                          ?>
+                          <td class="align-middle" style="display: block;">
+                            <a href="processos_exant.php?func=estado&id=<?= $id; ?>">
+                              <button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving"></i></button>
+                            </a>
+                            <a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>">
+                              <button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye"></i>
+                              </button>
+                            </a>
+                            <a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel=”noopener”>
+                              <button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button>
+                              </>
                               <a href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>">
                                 <button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button>
                               </a>
                               <a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');" id="tableButton">
                                 <button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button>
                               </a>
-                            </td>
-                          </tr>
-                        <?php } ?>
-                      </tbody>
-                    </table>
-                    <?php
-                    if ($row == '') {
-                      echo "<h3> Não existem dados cadastrados no banco </h3>";
-                    }
-                    ?>
-                  </div>
+                          </td>
+                        </tr>
+                      <?php } ?>
+                    </tbody>
+                  </table>
+                  <?php
+                  if ($row == '') {
+                    echo "<h3> Não existem dados cadastrados no banco </h3>";
+                  }
+                  ?>
                 </div>
                 <div class="card-footer clearfix" style="font-size: 12px;">
                   Prazo de cada seção:
@@ -439,29 +430,9 @@ login('EXANT', '../../');
     </aside>
   </div>
   <?= javascript('../../') ?>
-  <script>
-    $('#example1').on('shown.bs.collapse', function() {
-      $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-      $("#example1").DataTable({
-        "scrollX": false,
-        "scrollY": '350px',
-        "paging": false,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": true,
-        "info": false,
-        "autoWidth": true,
-      });
-    });
-  </script>
 </body>
 
 </html>
-
 <?php
 if (isset($_POST['button'])) {
   $cpf = $_POST['txtcpf'];
