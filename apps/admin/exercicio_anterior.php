@@ -281,19 +281,19 @@ login('ADMIN', '../../');
                                       <?php
                                       if ($status == 'Aprovado') { ?>
                                         <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
                                       } elseif ($status == 'Aguardando') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
                                       } elseif ($status == 'Excluído') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Direito Pleiteado?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
@@ -338,29 +338,21 @@ login('ADMIN', '../../');
                             </div>
                           </div>
                         </div>
-
-                        <!---------------------------------CADASTRAR-------------------------------------------->
                         <?php
                         if (isset($_POST['buttonDireito'])) {
                           $direito = strtoupper($_POST['txtdireito']);
                           $status_direito = 'Aprovado';
-
                           //Verificar se o DIREITO já está cadastrado
-
-                          $query_verificar = "select * from tb_direitoPleiteado_exant where direito = '$direito'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+                          $query_verificar = "SELECT * FROM tb_direitoPleiteado_exant WHERE direito = '$direito'";
                           $result_verificar = mysqli_query($conexao, $query_verificar);
                           $dado_verificar = mysqli_fetch_array($result_verificar);
                           $row_verificar = mysqli_num_rows($result_verificar);
-
                           if ($row_verificar > 0) {
                             Alerta("info", "Direito já cadastrado!", false, "exercicio_anterior.php");
                             exit();
                           }
-
-                          $query_direito = "INSERT into tb_direitoPleiteado_exant (direito, status) VALUES ('$direito', '$status_direito')";
-
+                          $query_direito = "INSERT INTO tb_direitoPleiteado_exant (direito, status) VALUES ('$direito', '$status_direito')";
                           $result_direito = mysqli_query($conexao, $query_direito);
-
                           if ($result_direito == '') {
                             Alerta("error", "Não foi possível cadastrar!", false, "exercicio_anterior.php");
                           } else {
@@ -372,8 +364,6 @@ login('ADMIN', '../../');
                           <button class="general-btn" href="#" data-toggle="modal" data-target="#modalDireito" data-tt="tooltip" title="Adicionar Direito"><img src="../../dist/icons/add-folder-colored.svg"></button>
                           <h3 style="text-align: center">Direitos Excluídos</h3>
                           <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
-                            <!---------------------- LISTAR TODOS DIREITOS EXCLUÍDOS -------------------------->
                             <?php
                             if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                               $nome = '%' . $_GET['txtpesquisar'] . '%';
@@ -384,9 +374,6 @@ login('ADMIN', '../../');
                             $result = mysqli_query($conexao, $query);
                             $row = mysqli_num_rows($result);
                             ?>
-
-                            <!-------------------------------------------------->
-
                             <table class="table table-sm table-borderless table-striped" style="table-layout: fixed;">
                               <thead class="text-primary" style="text-align: center;">
                                 <th class="align-middle" style="width: 4%;">#</th>
@@ -430,19 +417,19 @@ login('ADMIN', '../../');
                                       <?php
                                       if ($status == 'Aprovado') { ?>
                                         <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
                                       } elseif ($status == 'Aguardando') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
                                       } elseif ($status == 'Excluído') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
@@ -485,7 +472,6 @@ login('ADMIN', '../../');
                             <div class="icon">
                               <i class="fas fa-database"></i>
                             </div>
-                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
                         <div class="col-lg-3 col-6">
@@ -493,7 +479,7 @@ login('ADMIN', '../../');
                             <div class="inner">
                               <h3>
                                 <?php
-                                $query = "SELECT * FROM tb_estado_exant where status = 'Aprovado'";
+                                $query = "SELECT * FROM tb_estado_exant WHERE status = 'Aprovado'";
                                 $result = mysqli_query($conexao, $query);
                                 $row = mysqli_num_rows($result);
                                 echo $row;
@@ -504,7 +490,6 @@ login('ADMIN', '../../');
                             <div class="icon">
                               <i class="fas fa-thumbs-up"></i>
                             </div>
-                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
                         <div class="col-lg-3 col-6">
@@ -512,7 +497,7 @@ login('ADMIN', '../../');
                             <div class="inner">
                               <h3>
                                 <?php
-                                $query = "SELECT * FROM tb_estado_exant where status = 'Aguardando'";
+                                $query = "SELECT * FROM tb_estado_exant WHERE status = 'Aguardando'";
                                 $result = mysqli_query($conexao, $query);
                                 $row = mysqli_num_rows($result);
                                 echo $row;
@@ -523,7 +508,6 @@ login('ADMIN', '../../');
                             <div class="icon">
                               <i class="fas fa-history"></i>
                             </div>
-                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
                         <div class="col-lg-3 col-6">
@@ -531,7 +515,7 @@ login('ADMIN', '../../');
                             <div class="inner">
                               <h3>
                                 <?php
-                                $query = "SELECT * FROM tb_estado_exant where status = 'Excluído'";
+                                $query = "SELECT * FROM tb_estado_exant WHERE status = 'Excluído'";
                                 $result = mysqli_query($conexao, $query);
                                 $row = mysqli_num_rows($result);
                                 echo $row;
@@ -542,15 +526,12 @@ login('ADMIN', '../../');
                             <div class="icon">
                               <i class="fas fa-thumbs-down"></i>
                             </div>
-                            <!--<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>-->
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-8">
                           <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-                            <!----------------------LISTAR TODOS OS ESTADOS-------------------------->
-
                             <?php
                             if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                               $nome = '%' . $_GET['txtpesquisar'] . '%';
@@ -561,7 +542,6 @@ login('ADMIN', '../../');
                             $result = mysqli_query($conexao, $query);
                             $row = mysqli_num_rows($result);
                             ?>
-                            <!-------------------------------------------------->
                             <table class="table table-sm table-borderless table-striped">
                               <thead class="text-primary" style="text-align: center; overflow: auto;">
                                 <th class="align-middle" style="width: 4%;">#</th>
@@ -605,19 +585,19 @@ login('ADMIN', '../../');
                                       <?php
                                       if ($status == 'Aprovado') { ?>
                                         <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
                                       } elseif ($status == 'Aguardando') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
                                       } elseif ($status == 'Excluído') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
@@ -666,37 +646,27 @@ login('ADMIN', '../../');
                         if (isset($_POST['buttonEstado'])) {
                           $nome = strtoupper($_POST['txtnome']);
                           $status_estado = 'Aprovado';
-
                           //Verificar se a SEÇÃO já está cadastrado
-
-                          $query_verificar_estado = "SELECT * FROM tb_estado_exant WHERE estado = '$nome'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+                          $query_verificar_estado = "SELECT * FROM tb_estado_exant WHERE estado = '$nome'";
                           $result_verificar_estado = mysqli_query($conexao, $query_verificar_estado);
                           $dado_verificar_estado = mysqli_fetch_array($result_verificar_estado);
                           $row_verificar_estado = mysqli_num_rows($result_verificar_estado);
-
                           if ($row_verificar_estado > 0) {
                             Alerta("info", "Estado já cadastrado!", false, "exercicio_anterior.php");
                             exit();
                           }
-
                           $query_estado = "INSERT into tb_estado_exant (estado, status) VALUES ('$nome', '$status_estado')";
-
                           $result_estado = mysqli_query($conexao, $query_estado);
-
                           if ($result_estado == '') {
                             Alerta("error", "Não foi possível cadastrar", false, "exercicio_anterior.php");
                           } else {
                             Alerta("success", "Salvo com sucesso!", false, "exercicio_anterior.php");
                           }
                         }
-
                         ?>
                         <div class="col-4">
                           <button type="button" class="general-btn" href="#" data-toggle="modal" data-target="#modalEstado" data-tt="tooltip" title="Adicionar Estado"><img src="../../dist/icons/add-folder-colored.svg"></button>
                           <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
-                            <!----------------------LISTAR TODOS OS ESTADOS EXCLUÍDOS-------------------------->
-
                             <?php
                             if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                               $nome = '%' . $_GET['txtpesquisar'] . '%';
@@ -707,9 +677,6 @@ login('ADMIN', '../../');
                             $result = mysqli_query($conexao, $query);
                             $row = mysqli_num_rows($result);
                             ?>
-
-                            <!-------------------------------------------------->
-
                             <table class="table table-sm table-borderless table-striped" style="table-layout: fixed;">
                               <thead class="text-primary" style="text-align: center;">
                                 <th class="align-middle" style="width: 4%;">#</th>
@@ -753,19 +720,19 @@ login('ADMIN', '../../');
                                       <?php
                                       if ($status == 'Aprovado') { ?>
                                         <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
                                       } elseif ($status == 'Aguardando') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
                                       } elseif ($status == 'Excluído') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o status?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
-                                        <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a>
+                                        <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
@@ -855,7 +822,6 @@ if (@$_GET['func'] == 'editaDireito') {
       $('#modalEditarDireito').modal("show");
     </script>
     <!--Modal EDITAR -->
-
 <?php
     if (isset($_POST['buttonEditarDireito'])) {
       $direito2 = strtoupper($_POST['txtdireito2']);
@@ -931,14 +897,10 @@ if (@$_GET['func'] == 'editaEstado') {
     <script>
       $('#modalEditar').modal("show");
     </script>
-    <!--Modal EDITAR -->
-
-    <!-------------------------------------------------------------- Comando para alterar os dados da tabela ------------------------------------------------------------->
-
 <?php
     if (isset($_POST['buttonEditarEstado'])) {
       $nome2 = strtoupper($_POST['txtnome2']);
-      $query_verificar_estado = "SELECT * FROM tb_estado_exant WHERE estado = '$nome2'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+      $query_verificar_estado = "SELECT * FROM tb_estado_exant WHERE estado = '$nome2'";
       $result_verificar_estado = mysqli_query($conexao, $query_verificar_estado);
       $row_verificar_estado = mysqli_num_rows($result_verificar_estado);
 
