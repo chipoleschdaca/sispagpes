@@ -21,8 +21,6 @@ function head($diretorio)
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/jquery-ui/jquery-ui.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/summernote/summernote-bs4.css">
-  <link rel="stylesheet" href="<?= $diretorio ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="<?= $diretorio ?>plugins/bootstrap-table/bootstrap-table.min.css">
   <script src="<?= $diretorio ?>plugins/sweetalert2/sweetalert2.min.js"></script>
   <script src="<?= $diretorio ?>plugins/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="<?= $diretorio ?>plugins/toastr/toastr.min.js"></script>
@@ -111,9 +109,7 @@ function javascript($diretorio)
   <script src="<?= $diretorio ?>plugins/summernote/summernote-bs4.min.js"></script>
   <script src="<?= $diretorio ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <script src="<?= $diretorio ?>dist/js/myCharts.js"></script>
-  <script src="<?= $diretorio ?>plugins/bootstrap-table/bootstrap-table.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables/jquery.dataTables.js"></script>
-  <script type="text/javascript" charset="utf8" src="<?= $diretorio ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+  <script src="<?= $diretorio ?>plugins/jquery-quicksearch/jquery.quicksearch.min.js"></script>
 
   <script>
     $(document).ready(function() {

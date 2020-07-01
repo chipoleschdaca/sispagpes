@@ -171,7 +171,7 @@ login('EXANT', '../../');
                       </form>
                     </div>
                   </div>
-                  <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 430px;">
+                  <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 425px;">
                     <!-------------LISTAR TODOS OS PROCESSOS-------------->
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
