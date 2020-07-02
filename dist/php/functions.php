@@ -9,7 +9,7 @@ function head($diretorio)
   <link rel="icon" type="image/png" href="<?= $diretorio ?>dist/img/gapls.png">
   <title>SISPAGPES</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= $diretorio ?>plugins/bootstrap-4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= $diretorio ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
@@ -100,7 +100,7 @@ function javascript($diretorio)
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <script src="<?= $diretorio ?>plugins/select2/js/select2.full.min.js"></script>
-  <script src="<?= $diretorio ?>plugins/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="<?= $diretorio ?>plugins/bootstrap-4.1.3/js/bootstrap.bundle.min.js"></script>
   <script src="<?= $diretorio ?>plugins/chart.js/Chart.min.js"></script>
   <script src="<?= $diretorio ?>plugins/jquery-knob/jquery.knob.min.js"></script>
   <script src="<?= $diretorio ?>plugins/moment/moment.min.js"></script>

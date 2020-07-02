@@ -153,44 +153,22 @@ login('EXANT', '../../');
                   <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
                 </div>
                 <div class="card-body">
-                  <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-sm-6">
-                      <!-- SEARCH FORM -->
-                      <form class="form-inline">
-                        <label for="">Filtros: </label>
-                        <div class="input-group input-group-sm" style="margin-left: 10px; border-radius: 15px;">
-                          <input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-                          <input class="form-control" type="search" id="txtcpf3" name="txtcpf3" placeholder="CPF" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-                          <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 5px;">
-                          <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
-                              <i class="fas fa-search"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </form>
+                  <div class="row" style="margin-bottom: 10px; margin-left:5px;">
+                    <div class="form-inline">
+                      <label for="search-requerente">Filtrar: </label>
+                      <div class="input-group input-group-sm" style="margin-left: 10px;">
+                        <input class="form-control" type="search" id="search-requerente" placeholder="Digite um parâmetro" aria-label="Pesquisar" autocomplete="off">
+                      </div>
                     </div>
                   </div>
                   <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 425px;">
-                    <!-------------LISTAR TODOS OS PROCESSOS-------------->
                     <?php
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
-                      $nome = '%' . $_GET['txtsaram3'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE saram LIKE '$nome' order by nome asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtcpf3'] != '') {
-                      $nome = '%' . $_GET['txtcpf3'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE cpf LIKE '$nome' order by nome asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                      $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
-                    } else {
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
-                    }
+                    $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
                     $result = mysqli_query($conexao, $query);
                     $row = mysqli_num_rows($result);
                     if ($row > 0) {
                     ?>
-                      <table class="table table-sm table-borderless table-striped" id="example1">
+                      <table class="table table-sm table-borderless table-striped" id="tabela-requerentes">
                         <thead class="text-primary">
                           <tr>
                             <th class="align-middle">#</th>
@@ -385,6 +363,9 @@ login('EXANT', '../../');
         $("#txtdtnascimento2").removeAttr("required");
       }
     });
+  </script>
+  <script>
+    $('input#search-requerente').quicksearch('table#tabela-requerentes tbody tr');
   </script>
 </body>
 <style>

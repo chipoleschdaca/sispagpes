@@ -12,6 +12,11 @@ login('EXANT', '../../');
 <head>
   <?php head('../../') ?>
 </head>
+<style>
+  #tabela-processos {
+    overflow-y: auto;
+  }
+</style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -154,29 +159,17 @@ login('EXANT', '../../');
                   <h4 class="align-middle" style="text-align:center;"><strong>EXERCÍCIOS ANTERIORES</strong></h4>
                 </div>
                 <div class="card-body" style="font-size: 12px;">
-                  <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-lg-10 col-md-10"></div>
-                    <div class="input-group input-group-sm col-lg-2 col-md-2" style="border-radius: 15px;">
-                      <input type="search" class="form-control" id="search-processo" aria-label="Pesquisar" placeholder="Filtrar Tabela">
+                  <div class="row" style="margin-bottom: 10px; margin-left:5px;">
+                    <div class="form-inline">
+                      <label for="search-processo" style="font-size: 16px;">Filtrar: </label>
+                      <div class="input-group input-group-sm" style="margin-left: 10px;">
+                        <input class="form-control" type="search" id="search-processo" placeholder="Digite um parâmetro" aria-label="Pesquisar" autocomplete="off">
+                      </div>
                     </div>
                   </div>
                   <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 375px;">
                     <?php
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtnome'] != '') {
-                      $nome = '%' . $_GET['txtnome'] . '%';
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.nome LIKE '$nome' order by e.id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
-                      $saram_filtro = $_GET['txtsaram3'] . '%';
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE r.saram LIKE '$saram_filtro' order by e.id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtdirpleiteado'] != '') {
-                      $dir_pleiteado = $_GET['txtdirpleiteado'] . '%';
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE d.id = '$dir_pleiteado' order by e.id asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtestadofiltro'] != '') {
-                      $estado_filtro = $_GET['txtestadofiltro'];
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE est.id = '$estado_filtro' order by e.id asc";
-                    } else {
-                      $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id order by e.id asc";
-                    }
+                    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id ORDER BY e.id asc";
                     $result = mysqli_query($conexao, $query);
                     $row = mysqli_num_rows($result);
                     ?>
