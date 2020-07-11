@@ -232,7 +232,8 @@ login('EXANT', '../../');
                                 echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                               } else if (descobrirIdade($dt_nascimento) >= 60) {
                                 echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
-                              } else {
+                              }
+                              else {
                                 echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                               } ?>
                             </td>
@@ -246,7 +247,8 @@ login('EXANT', '../../');
                               echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
                             } elseif (diferenca($dtPrazoSecao, $today) < (2 / 3) * $prazoSecao && diferenca($dtPrazoSecao, $today) >= $prazoSecao / 3) {
                               echo '<td class="align-middle" style="background-color: rgba(255, 255, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
-                            } else {
+                            }
+                            else {
                               echo '<td class="align-middle" style="background-color: rgba(255, 0, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
                             }
                             ?>
@@ -457,7 +459,8 @@ if (isset($_POST['button'])) {
   Alerta("success", "Excluído com sucesso!", false, "processos_exant.php");
 
   //Função para EDITAR o registro
-} else if (@$_GET['func'] == 'edita') {
+}
+else if (@$_GET['func'] == 'edita') {
   $id_ed = $_GET['id'];
   $query_ed = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.posto as req_posto, r.situacao as req_situacao, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.id as id_mil, m.nome as mil_nome, d.id as id_dir, d.direito as dir_direito, s.id as id_sec, s.secao as sec_origem, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN militares as m ON e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id = '$id_ed'";
 
@@ -634,7 +637,8 @@ if (isset($_POST['button'])) {
     }
   }
   // Função para ALTERAR ESTADO do Processo.
-} elseif (@$_GET['func'] == 'estado') {
+}
+elseif (@$_GET['func'] == 'estado') {
   $idSetEstado = $_GET['id'];
   $query = "SELECT e.id, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, s.id as id_sec, s.secao as sec_origem, sec.secao as sec_atual, est.id as id_est, est.estado as est_estado from exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id where e.id = '$idSetEstado'";
 
@@ -767,7 +771,8 @@ if (isset($_POST['button'])) {
   }
 
   //comando para CONSULTAR HISTÓRICO do processo
-} elseif (@$_GET['func'] == 'historico') {
+}
+elseif (@$_GET['func'] == 'historico') {
   $idConsultaHistorico = $_GET['id'];
   $queryConsultaHistorico = "SELECT * FROM exercicioanterior WHERE id = '$idConsultaHistorico'";
   $resultConsultaHistorico = mysqli_query($conexao, $queryConsultaHistorico);
@@ -877,9 +882,11 @@ if (isset($_POST['button'])) {
                       echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3); text-align:center;">Criado</td>';
                     } elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
                       echo '<td class="align-middle" style="background-color: rgba(255,0,0, 0.3); text-align:center;">' . number_format(diferenca($dtPrazoSecao_cons, $data_novo), 0) . '</td>';
-                    } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
+                    }
+                    elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
                       echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3); text-align:center;">' . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . '</td>';
-                    } else {
+                    }
+                    else {
                       echo '<td class="align-middle" style="text-align:center;">' . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . '</td>';
                     }
                     ?>

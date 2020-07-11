@@ -50,7 +50,8 @@ if (($dtNascimento) == '0000-00-00') {
   $header .= "";
 } else if (descobrirIdade($dtNascimento) >= 60) {
   $header .= "<div class='badge'><span style='margin: 0'>PRIORIDADE</span></div>";
-} else {
+}
+else {
   $header .= '';
 }
 $header .= "</div>";
@@ -137,9 +138,11 @@ while ($res_h = mysqli_fetch_array($result_h)) {
     $html .= "<td class='align-middle;' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>Criado</td>";
   } elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
     $html .= "<td class='align-middle' style='background-color: rgba(255,0,0,0.3); text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
-  } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
+  }
+  elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
     $html .= "<td class='align-middle' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
-  } else {
+  }
+  else {
     $html .= "<td class='align-middle' style='text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
   }
   $html .= "<td class='align-middle' id='nomeSacador' style='text-align: center; width: 15%;'>$nome_sacador</td>";

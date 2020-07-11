@@ -303,7 +303,8 @@ login('EXANT', '../../');
         $count_secao =  trim($count_secao);
       }
       // Filtro para ESTADO
-    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtestado'] != '') {
+    }
+    elseif (isset($_GET['buttonPesquisar']) and $_GET['txtestado'] != '') {
 
       $nome = $_GET['txtestado'];
 
@@ -352,7 +353,8 @@ login('EXANT', '../../');
       }
 
       // Filtro para SEÇÃO ATUAL
-    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtsecao'] != '') {
+    }
+    elseif (isset($_GET['buttonPesquisar']) and $_GET['txtsecao'] != '') {
 
       $nome = $_GET['txtsecao'];
 
@@ -399,7 +401,8 @@ login('EXANT', '../../');
         $secao =  trim($secao);
         $count_secao =  trim($count_secao);
       }
-    } else {
+    }
+    else {
       $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
@@ -647,6 +650,19 @@ login('EXANT', '../../');
         }
       }
     })
+  </script>
+  <script>
+    $.ajax({
+      url: "http://api.sidra.ibge.gov.br/values/t/1419/n1/all/v/all/p/all/c315/7169,7170,7445,7486,7558,7625,7660,7712,7766,7786/d/v63%202,v66%204,v69%202,v2265%202?formato=json",
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+        console.log(data);
+      },
+      error: function() {
+        console.log("Erro na requisição!");
+      }
+    });
   </script>
 </body>
 
