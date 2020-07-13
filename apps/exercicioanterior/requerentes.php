@@ -202,23 +202,24 @@ login('EXANT', '../../');
                               <td class="align-middle"><?= $cpf; ?></td>
                               <td class="align-middle"><?= $posto; ?></td>
                               <td class="align-middle"><?= $situacao; ?></td>
-                              <td class="align-middle"><?= '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?= $nome; ?></td>
+                              <td class="align-middle"><?= '<a class="nav-link" href="requerentes.php?func=consulta&id_req=' . $id . '">'; ?><?= $nome; ?></td>
                               <td class="align-middle">
                                 <?php
                                 if (($dt_nascimento) == '0000-00-00') {
                                   echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } else if (descobrirIdade($dt_nascimento) >= 60) {
                                   echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
-                                } else {
+                                }
+                                else {
                                   echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } ?>
                               </td>
                               <td class="align-middle"><?= $email; ?></td>
                               <td class="align-middle"><?= $data; ?></td>
                               <td class="align-middle">
-                                <a href="requerentes.php?func=consulta&id=<?= $id; ?>&cpf=<?= $cpf ?>"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Visualizar processos atrelados"><i class="fas fa-eye"></i></button></a>
-                                <a href="requerentes.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
-                                <a href="requerentes.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button></a>
+                                <a href="requerentes.php?func=consulta&id_req=<?= $id; ?>"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Visualizar processos atrelados"><i class="fas fa-eye"></i></button></a>
+                                <a href="requerentes.php?func=edita&id_req=<?= $id; ?>"><button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
+                                <a href="requerentes.php?func=deleta&id_req=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button></a>
                               </td>
                             </tr>
                           <?php } ?>
@@ -475,14 +476,15 @@ if (isset($_POST['button'])) {
 
   //EXCLUIR DADOS DA TABELA
 } else if (@$_GET['func'] == 'deleta') {
-  $id_del = $_GET['id'];
+  $id_del = $_GET['id_req'];
   $query_del = "DELETE FROM requerentes WHERE id = '$id_del'";
   mysqli_query($conexao, $query_del);
   Alerta("success", "Excluído com sucesso!", false, "requerentes.php");
 
   // EDITAR REGISTRO
-} else if (@$_GET['func'] == 'edita') {
-  $id_ed = $_GET['id'];
+}
+else if (@$_GET['func'] == 'edita') {
+  $id_ed = $_GET['id_req'];
   $query_ed = "SELECT r.id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, p.id as id_posto, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE r.id = '$id_ed'";
   $result_ed = mysqli_query($conexao, $query_ed);
   while ($res_2 = mysqli_fetch_array($result_ed)) {
@@ -571,7 +573,8 @@ if (isset($_POST['button'])) {
                     </div>
                   </div>
                 <?php
-                } elseif ($res_2['situacao'] == 'PM') { ?>
+                }
+                elseif ($res_2['situacao'] == 'PM') { ?>
                   <div class="form-group">
                     <label for="">Situação</label><br>
                     <div class="custom-control custom-radio col-4">
@@ -662,8 +665,9 @@ if (isset($_POST['button'])) {
   }
   //CONSULTAR PROCESSOS
 
-} else if (@$_GET['func'] == 'consulta') {
-  $id = $_GET['id'];
+}
+else if (@$_GET['func'] == 'consulta') {
+  $id = $_GET['id_req'];
   $query = "SELECT * FROM requerentes WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
@@ -674,8 +678,8 @@ if (isset($_POST['button'])) {
         <div class="modal-content">
           <div class="modal-header">
             <?php
-            $cpf = $_GET['cpf'];
-            $query = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto where cpf = '$cpf'";
+            //$cpf = $_GET['cpf'];
+            $query = "SELECT r.id, r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id'";
             $result = mysqli_query($conexao, $query);
             $row = mysqli_num_rows($result);
             $res_1 = mysqli_fetch_array($result);
@@ -690,7 +694,7 @@ if (isset($_POST['button'])) {
             <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
               <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
               <?php
-              $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.requerente = '$id' ORDER BY e.id asc";
+              $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado FROM exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.requerente = '$id' ORDER BY e.id asc";
               $result = mysqli_query($conexao, $query);
               $row = mysqli_num_rows($result);
               if ($row > 0) {

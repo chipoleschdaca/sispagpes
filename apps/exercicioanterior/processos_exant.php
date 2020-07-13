@@ -180,14 +180,14 @@ login('EXANT', '../../');
                           <th class="align-middle">SARAM</th>
                           <th class="align-middle">Requerente</th>
                           <th class="align-middle">NUP</th>
-                          <th class="align-middle">Est. Idoso</th>
+                          <th class="align-middle">Prioridade</th>
                           <th class="align-middle">Dt. Criação</th>
                           <th class="align-middle">Direito Pleiteado</th>
                           <th class="align-middle">Origem</th>
                           <th class="align-middle">Estado</th>
-                          <th class="align-middle">Seção Atual</th>
+                          <th class="align-middle">S. Atual</th>
                           <th class="align-middle">Prazo</th>
-                          <th class="align-middle">Ações</th>
+                          <th class="align-middle" style="width: 12%;">Ações</th>
                         </tr>
                       </thead>
                       <tbody>
