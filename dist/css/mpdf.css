@@ -1,1 +1,111 @@
-body {	font-family: 'opensans', serif;}.header {	text-align: right;	font-size: 12px;}.badge {	text-align: center;	font-weight: bold;	font-size: 26px;	color: white;	width: 17%;	margin: 0;	background-color: #ff0000;	border-radius: 5px;	float: right;	display: grid;}.cabecalho {	text-align: center;}.img-dom {	height: 2cm;	width: 2cm;	margin-bottom: 5px;}.mindef { font-weight: bold; font-size: 12pt; text-align: center;}.comaer {	font-size: 12pt;	text-decoration: underline;	text-align: center;}.unidade {	font-size: 12pt;	text-align: center;}.texto-cab {	text-align: center;	font-size: 20px;	background-color: #f2f4f6;	padding: 10px;	margin-bottom: 10px;}.table {	width: 100%;	font-size: 12px;	border-spacing: 0;}th {	font-size: 14px;	padding-bottom: 10px;}tr:nth-child(even) {	background-color: #f2f4f6;}ul {	list-style: none;	width: 100%;	border: none;	padding: 0;	display: flex;	overflow: hidden;	justify-content: space-between;}.left {	float: left;	text-align: left;	width: 20%;	padding: 0;	margin: 0;}.center {	width: 60%;}.right {	float: right;	text-align: right;	width: 20%;	padding: 0;	margin: 0;}.footer {	margin: 0;	padding: 0;	font-size: 10px;}
+body {
+  font-family: "opensans", serif;
+}
+
+.header {
+  text-align: right;
+  font-size: 12px;
+}
+
+.badge {
+  text-align: center;
+  font-weight: bold;
+  font-size: 26px;
+  color: white;
+  width: 17%;
+  margin: 0;
+  background-color: #ff0000;
+  border-radius: 5px;
+  float: right;
+  display: grid;
+}
+
+.cabecalho {
+  text-align: center;
+}
+
+.img-dom {
+  height: 2.2cm;
+  width: 1.8cm;
+  margin-bottom: 5px;
+}
+
+.mindef {
+  font-weight: bold;
+  font-size: 12pt;
+  text-align: center;
+}
+
+.comaer {
+  font-size: 12pt;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.unidade {
+  font-size: 12pt;
+  text-align: center;
+}
+
+.texto-cab {
+  text-align: center;
+  font-size: 20px;
+  background-color: #f2f4f6;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.table {
+  width: 100%;
+  font-size: 12px;
+  border-spacing: 0;
+}
+
+th {
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f4f6;
+}
+
+ul {
+  list-style: none;
+  width: 100%;
+  border: none;
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+  justify-content: space-between;
+}
+
+.left {
+  float: left;
+  text-align: left;
+  width: 20%;
+  padding: 0;
+  margin: 0;
+}
+
+.center {
+  width: 60%;
+}
+
+.right {
+  float: right;
+  text-align: right;
+  width: 20%;
+  padding: 0;
+  margin: 0;
+}
+
+#nomeSacador {
+  font-size: 10px;
+}
+
+.footer {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+}

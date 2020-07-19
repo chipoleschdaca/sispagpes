@@ -8,58 +8,16 @@ login('EXANT', '../../');
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <!-- Este é a tag que faz aparecer o nome aparece no menu direito superior. -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-bars"></i>
-            <?= $_SESSION['nome_usuario'] ?>
-            <span class="d-lg-none d-md-block">Some Actions</span>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Perfil
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Configurações
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Atividade
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Sair
-            </a>
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
       <a href="painel_exant.php" class="brand-link">
-        <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+        <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
-      <!-- Sidebar -->
       <div class="sidebar">
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -97,9 +55,7 @@ login('EXANT', '../../');
           </ul>
         </nav>
       </div>
-      <!--/.sidebar -->
     </aside>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <section class="content">
         <div class="container-fluid">
@@ -134,7 +90,8 @@ login('EXANT', '../../');
                       $queryAtivo = "SELECT * FROM requerentes WHERE situacao = 'AT'";
                       $resultAtivo = mysqli_query($conexao, $queryAtivo);
                       $rowAtivo = mysqli_num_rows($resultAtivo);
-                      echo $rowAtivo;
+                      $percentual = number_format($rowAtivo / $row * 100, 0);
+                      echo $rowAtivo . " (" . $percentual . "%)";
                       ?>
                     </h4>
                   </span>
@@ -153,7 +110,8 @@ login('EXANT', '../../');
                       $queryVeterano = "SELECT * FROM requerentes WHERE situacao = 'R1'";
                       $resultVeterano = mysqli_query($conexao, $queryVeterano);
                       $rowVeterano = mysqli_num_rows($resultVeterano);
-                      echo $rowVeterano;
+                      $percentual = number_format($rowVeterano / $row * 100, 0);
+                      echo $rowVeterano . " (" . $percentual . "%)";
                       ?>
                     </h4>
                   </span>
@@ -171,7 +129,8 @@ login('EXANT', '../../');
                       $queryReformado = "SELECT * FROM requerentes WHERE situacao = 'PM'";
                       $resultReformado = mysqli_query($conexao, $queryReformado);
                       $rowReformado = mysqli_num_rows($resultReformado);
-                      echo $rowReformado;
+                      $percentual = number_format($rowReformado / $row * 100, 0);
+                      echo $rowReformado . " (" . $percentual . "%)";
                       ?>
                     </h4>
                   </span>
@@ -191,55 +150,35 @@ login('EXANT', '../../');
                   <h4 class="" style="text-align:center;"><strong>TABELA DE REQUERENTES</strong></h4>
                 </div>
                 <div class="card-body">
-                  <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-sm-6">
-                      <!-- SEARCH FORM -->
-                      <form class="form-inline">
-                        <label for="">Filtros: </label>
-                        <div class="input-group input-group-sm" style="margin-left: 10px; border-radius: 15px;">
-                          <input class="form-control" type="search" id="txtsaram3" name="txtsaram3" placeholder="SARAM" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-                          <input class="form-control" type="search" id="txtcpf3" name="txtcpf3" placeholder="CPF" aria-label="Pesquisar" style="border-radius:3px; margin-right: 20px;">
-                          <input class="form-control" type="search" id="txtpesquisar" name="txtpesquisar" placeholder="Nome" aria-label="Pesquisar" style="border-radius:3px; margin-right: 5px;">
-                          <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit" name="buttonPesquisar">
-                              <i class="fas fa-search"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </form>
+                  <div class="row" style="margin-bottom: 10px; margin-left:5px;">
+                    <div class="form-inline">
+                      <label for="search-requerente">Filtrar: </label>
+                      <div class="input-group input-group-sm" style="margin-left: 10px;">
+                        <input class="form-control" type="search" id="search-requerente" placeholder="Digite um parâmetro" aria-label="Pesquisar" autocomplete="off">
+                      </div>
                     </div>
                   </div>
-                  <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 430px;">
-                    <!-------------LISTAR TODOS OS PROCESSOS-------------->
+                  <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 425px;">
                     <?php
-                    if (isset($_GET['buttonPesquisar']) and $_GET['txtsaram3'] != '') {
-                      $nome = '%' . $_GET['txtsaram3'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE saram LIKE '$nome' order by nome asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtcpf3'] != '') {
-                      $nome = '%' . $_GET['txtcpf3'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE cpf LIKE '$nome' order by nome asc";
-                    } else if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
-                      $nome = '%' . $_GET['txtpesquisar'] . '%';
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE nome LIKE '$nome' order by nome asc";
-                    } else {
-                      $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
-                    }
+                    $query = "SELECT r.id as req_id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, r.data, p.id, p.posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id ORDER BY nome asc";
                     $result = mysqli_query($conexao, $query);
                     $row = mysqli_num_rows($result);
                     if ($row > 0) {
                     ?>
-                      <table class="table table-sm table-borderless table-striped" id="example1">
+                      <table class="table table-sm table-borderless table-striped" id="tabela-requerentes">
                         <thead class="text-primary">
-                          <th class="align-middle">#</th>
-                          <th class="align-middle">Saram</th>
-                          <th class="align-middle">CPF</th>
-                          <th class="align-middle">Posto</th>
-                          <th class="align-middle">Situação</th>
-                          <th class="align-middle">Nome Completo</th>
-                          <th class="align-middle">Est. Idoso</th>
-                          <th class="align-middle">Email</th>
-                          <th class="align-middle">Dt. Inclusão</th>
-                          <th class="align-middle">Ações</th>
+                          <tr>
+                            <th class="align-middle">#</th>
+                            <th class="align-middle">Saram</th>
+                            <th class="align-middle">CPF</th>
+                            <th class="align-middle">Posto</th>
+                            <th class="align-middle">Situação</th>
+                            <th class="align-middle">Nome Completo</th>
+                            <th class="align-middle">Est. Idoso</th>
+                            <th class="align-middle">Email</th>
+                            <th class="align-middle">Dt. Inclusão</th>
+                            <th class="align-middle">Ações</th>
+                          </tr>
                         </thead>
                         <tbody>
                           <?php
@@ -254,29 +193,30 @@ login('EXANT', '../../');
                             $email = $res_1['email'];
                             $data = data_show($res_1['data']);
                           ?>
-                            <tr style="height: 40px;">
+                            <tr>
                               <td class="align-middle"><?= $id; ?></td>
                               <td class="align-middle"><?= $saram; ?></td>
                               <td class="align-middle"><?= $cpf; ?></td>
                               <td class="align-middle"><?= $posto; ?></td>
                               <td class="align-middle"><?= $situacao; ?></td>
-                              <td class="align-middle"><?= '<a class="nav-link" href="requerentes.php?func=consulta&id=' . $id . '&cpf=' . $cpf . '" ?>'; ?><?= $nome; ?></td>
+                              <td class="align-middle"><?= '<a class="nav-link" href="requerentes.php?func=consulta&id_req=' . $id . '">'; ?><?= $nome; ?></td>
                               <td class="align-middle">
                                 <?php
                                 if (($dt_nascimento) == '0000-00-00') {
-                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } else if (descobrirIdade($dt_nascimento) >= 60) {
-                                  echo '<img src="../../dist/icons/accept-colored.svg" style="height: 30px; width:30px;"/>';
-                                } else {
-                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 30px; width:30px;"/>';
+                                  echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
+                                }
+                                else {
+                                  echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } ?>
                               </td>
                               <td class="align-middle"><?= $email; ?></td>
                               <td class="align-middle"><?= $data; ?></td>
                               <td class="align-middle">
-                                <a class="btn btn-dark btn-xs" data-toggle="popover" data-content="Visualizar processos atrelados" href="requerentes.php?func=consulta&id=<?= $id; ?>&cpf=<?= $cpf ?>"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-xs" data-toggle="popover" data-content="Editar" href="requerentes.php?func=edita&id=<?= $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" data-toggle="popover" style="width: 23px;" data-content="Excluir" href="requerentes.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt"></i></a>
+                                <a href="requerentes.php?func=consulta&id_req=<?= $id; ?>"><button class="btn btn-dark btn-table" data-toggle="popover" data-content="Visualizar processos atrelados"><i class="fas fa-eye"></i></button></a>
+                                <a href="requerentes.php?func=edita&id_req=<?= $id; ?>"><button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button></a>
+                                <a href="requerentes.php?func=deleta&id_req=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button></a>
                               </td>
                             </tr>
                           <?php } ?>
@@ -293,25 +233,23 @@ login('EXANT', '../../');
           </div>
         </div>
       </section>
-      <!-----------------------------------------------------------------------------------------------MODAL--------------------------------------------------------------------------------------------------->
       <div id="modalExemplo" name="modalExemplo" class="modal fade" role="dialog">
-        <!---Modal Exemplo--->
-        <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title"><i class="fas fa-user-plus"></i> Inserir novo Requerente</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="">
+              <form method="POST" action="" id="cadastrarRequerente">
                 <div class="row">
                   <div class="form-group col-4">
                     <label for="fornecedor">Saram</label>
-                    <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" maxlength="9" placeholder="000.000-0" required>
+                    <input type="text" class="form-control mr-2" id="txtsaram" name="txtsaram" autocomplete="off" placeholder="000.000-0" required>
                   </div>
                   <div class="form-group col-5">
                     <label for="fornecedor">CPF</label>
-                    <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" data-mask="000.000.000-00" maxlength="14" placeholder="000.000.000-00" required>
+                    <input type="text" class="form-control mr-2 cpf-mask" id="txtcpf" name="txtcpf" autocomplete="off" placeholder="000.000.000-00" required>
                   </div>
                   <div class="form-group col-3">
                     <label for="id_produto">Posto</label>
@@ -333,7 +271,7 @@ login('EXANT', '../../');
                 </div>
                 <div class="row">
                   <div class="col-1"></div>
-                  <div class="form-group">
+                  <div class="form-group" name="situacao">
                     <label for="id_produto">Situação</label><br>
                     <div class="custom-control custom-radio">
                       <input type="radio" class="custom-control-input" id="ativo" name="txtsituacao" value="AT" required>
@@ -373,26 +311,10 @@ login('EXANT', '../../');
       </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
+    <?php include('../../dist/php/pageFooter.php'); ?>
     <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <?= javascript('../../') ?>
-  <script>
-    $(document).ready(function() {
-      $("#example1").DataTable({
-        "scrollX": false,
-        "scrollY": "350px",
-        "paging": false,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": false,
-        "autoWidth": false,
-      });
-    });
-  </script>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
   <script>
     $(document).ready(function() {
       $("#dtNascimento").hide();
@@ -437,6 +359,9 @@ login('EXANT', '../../');
         $("#txtdtnascimento2").removeAttr("required");
       }
     });
+  </script>
+  <script>
+    $('input#search-requerente').quicksearch('table#tabela-requerentes tbody tr');
   </script>
 </body>
 <style>
@@ -523,7 +448,7 @@ if (isset($_POST['button'])) {
 
   //Verificar se o CPF já está cadastrado
 
-  $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf'";
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
@@ -546,14 +471,15 @@ if (isset($_POST['button'])) {
 
   //EXCLUIR DADOS DA TABELA
 } else if (@$_GET['func'] == 'deleta') {
-  $id_del = $_GET['id'];
+  $id_del = $_GET['id_req'];
   $query_del = "DELETE FROM requerentes WHERE id = '$id_del'";
   mysqli_query($conexao, $query_del);
   Alerta("success", "Excluído com sucesso!", false, "requerentes.php");
 
   // EDITAR REGISTRO
-} else if (@$_GET['func'] == 'edita') {
-  $id_ed = $_GET['id'];
+}
+else if (@$_GET['func'] == 'edita') {
+  $id_ed = $_GET['id_req'];
   $query_ed = "SELECT r.id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, p.id as id_posto, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE r.id = '$id_ed'";
   $result_ed = mysqli_query($conexao, $query_ed);
   while ($res_2 = mysqli_fetch_array($result_ed)) {
@@ -567,7 +493,7 @@ if (isset($_POST['button'])) {
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <form method="POST" action="">
+            <form method="POST" action="" id="editarRequerente">
               <div class="row">
                 <div class="form-group col-4">
                   <label for="fornecedor">Saram</label>
@@ -642,7 +568,8 @@ if (isset($_POST['button'])) {
                     </div>
                   </div>
                 <?php
-                } elseif ($res_2['situacao'] == 'PM') { ?>
+                }
+                elseif ($res_2['situacao'] == 'PM') { ?>
                   <div class="form-group">
                     <label for="">Situação</label><br>
                     <div class="custom-control custom-radio col-4">
@@ -733,8 +660,9 @@ if (isset($_POST['button'])) {
   }
   //CONSULTAR PROCESSOS
 
-} else if (@$_GET['func'] == 'consulta') {
-  $id = $_GET['id'];
+}
+else if (@$_GET['func'] == 'consulta') {
+  $id = $_GET['id_req'];
   $query = "SELECT * FROM requerentes WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
   while ($res_1 = mysqli_fetch_array($result)) {
@@ -745,8 +673,8 @@ if (isset($_POST['button'])) {
         <div class="modal-content">
           <div class="modal-header">
             <?php
-            $cpf = $_GET['cpf'];
-            $query = "SELECT r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto where cpf = '$cpf'";
+            //$cpf = $_GET['cpf'];
+            $query = "SELECT r.id, r.posto, r.situacao, r.nome, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id'";
             $result = mysqli_query($conexao, $query);
             $row = mysqli_num_rows($result);
             $res_1 = mysqli_fetch_array($result);
@@ -761,7 +689,7 @@ if (isset($_POST['button'])) {
             <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
               <!-------------LISTAR TODOS OS ORÇAMENTOS-------------->
               <?php
-              $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.requerente = '$id' ORDER BY e.id asc";
+              $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado FROM exercicioanterior as e LEFT JOIN requerentes as r on e.saram = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.requerente = '$id' ORDER BY e.id asc";
               $result = mysqli_query($conexao, $query);
               $row = mysqli_num_rows($result);
               if ($row > 0) {
@@ -816,7 +744,6 @@ if (isset($_POST['button'])) {
       <script>
         $('#modalConsultar').modal("show");
       </script>
-      <!--Modal CONSULTAR -->
   <?php
   }
 }

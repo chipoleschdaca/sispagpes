@@ -8,10 +8,7 @@ login('EXANT', '../../');
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 <style>
   #tabcharts {
     display: flex;
@@ -24,45 +21,9 @@ login('EXANT', '../../');
   }
 </style>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini">
   <div class="wrapper">
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <!-- Este é a tag que faz aparecer o nome aparece no menu direito superior. -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-bars"></i>
-            <?= $_SESSION['nome_usuario'] ?>
-            <span class="d-lg-none d-md-block">Some Actions</span>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Perfil
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Configurações
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Atividade
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Sair
-            </a>
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="painel_exant.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
@@ -182,7 +143,7 @@ login('EXANT', '../../');
                         </select>
                       </div>
                       <button class="btn btn-primary btn-sm" type="submit" id="filter" name="buttonPesquisar" style="width: 36px; height: 36px;">
-                        <i class="fas fa-search" style="padding: 0px; margin:0px;"></i>
+                        <i class="fas fa-search"></i>
                       </button>
                     </div>
                   </div>
@@ -225,9 +186,7 @@ login('EXANT', '../../');
         </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
+    <?php include('../../dist/php/pageFooter.php'); ?>
     <?php
 
     $id = "";
@@ -339,7 +298,8 @@ login('EXANT', '../../');
         $count_secao =  trim($count_secao);
       }
       // Filtro para ESTADO
-    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtestado'] != '') {
+    }
+    elseif (isset($_GET['buttonPesquisar']) and $_GET['txtestado'] != '') {
 
       $nome = $_GET['txtestado'];
 
@@ -388,7 +348,8 @@ login('EXANT', '../../');
       }
 
       // Filtro para SEÇÃO ATUAL
-    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtsecao'] != '') {
+    }
+    elseif (isset($_GET['buttonPesquisar']) and $_GET['txtsecao'] != '') {
 
       $nome = $_GET['txtsecao'];
 
@@ -435,7 +396,8 @@ login('EXANT', '../../');
         $secao =  trim($secao);
         $count_secao =  trim($count_secao);
       }
-    } else {
+    }
+    else {
       $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
@@ -483,7 +445,7 @@ login('EXANT', '../../');
     ?>
     <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <?= javascript('../../') ?>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
   <script src="../../dist/js/functions.js"></script>
   <script>
     var donutChartCanvas = document.getElementById('pieChart');
@@ -524,10 +486,10 @@ login('EXANT', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUANTIDADE vs. DIREITO PLEITEADO'
         },
         legend: {
@@ -535,8 +497,8 @@ login('EXANT', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 10,
-            boxWidth: 40
+            fontSize: 8,
+            boxWidth: 30
           }
         }
       }
@@ -550,7 +512,7 @@ login('EXANT', '../../');
       ],
       datasets: [{
         data: [<?= $count_estado ?>],
-        backgroundColor: ['#9C0060', '#d2d6de', '#f56954', '#f39c12', '#00c0ef', '#00a65a', '#3c8dbc'],
+        backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
     }
     var donutChart1 = new Chart(donutChartCanvas1, {
@@ -559,10 +521,10 @@ login('EXANT', '../../');
       options: {
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUATIDADE vs. ESTADO'
         },
         legend: {
@@ -570,8 +532,8 @@ login('EXANT', '../../');
           position: 'right',
           labels: {
             fontColor: 'rgb(0,0,0)',
-            fontSize: 10,
-            boxWidth: 40
+            fontSize: 8,
+            boxWidth: 30
           }
         }
       }
@@ -612,10 +574,10 @@ login('EXANT', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'SEÇÃO ATUAL'
         },
         legend: {
@@ -623,7 +585,7 @@ login('EXANT', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 14
           }
         }
       }
@@ -667,10 +629,10 @@ login('EXANT', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'QUANTIDADE vs. POSTO'
         },
         legend: {
@@ -678,11 +640,24 @@ login('EXANT', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 14
           }
         }
       }
     })
+  </script>
+  <script>
+    $.ajax({
+      url: "http://api.sidra.ibge.gov.br/values/t/1419/n1/all/v/all/p/all/c315/7169,7170,7445,7486,7558,7625,7660,7712,7766,7786/d/v63%202,v66%204,v69%202,v2265%202?formato=json",
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+        console.log(data);
+      },
+      error: function() {
+        console.log("Erro na requisição!");
+      }
+    });
   </script>
 </body>
 

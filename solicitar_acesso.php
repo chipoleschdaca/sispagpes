@@ -5,10 +5,7 @@ include('dist/php/functions.php');
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-  <?php head('') ?>
-</head>
+<?php include('dist/php/pageHead2.php'); ?>
 
 <style>
   body {
@@ -122,7 +119,8 @@ include('dist/php/functions.php');
       </div>
     </section>
   </div>
-  <?php echo javascript(''); ?>
+  <?php include('dist/php/pageFooter.php'); ?>
+  <?php include('dist/php/pageJavascript2.php'); ?>
 </body>
 
 </html>

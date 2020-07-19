@@ -8,53 +8,14 @@ login('TESOU', '../../');
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
   <div class="wrapper">
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <!-- Este é a tag que faz aparecer o nome aparece no menu direito superior. -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
-            <span class="d-lg-none d-md-block">Some Actions</span>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Perfil
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Configurações
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Atividade
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Sair
-            </a>
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="painel_tesouraria.php" class="brand-link">
-        <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+        <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
       <div class="sidebar">
@@ -75,13 +36,12 @@ login('TESOU', '../../');
     <div class="content-wrapper">
       <section class="content">
         <div class="container-fluid">
-          <br>
-          <div class="row">
+          <!--<div class="row">
             <div class="col-12" style="display: inline">
               <img src="../../dist/icons/big-data.svg" class="nav-icon" style="width:4rem; height:4rem;">
               <h1 style="display: inline; vertical-align:middle; margin-left: 15px;">Painel de Controle</h1>
             </div>
-          </div>
+          </div>-->
           <br>
           <div class="row">
             <div class="col-12">
@@ -92,7 +52,7 @@ login('TESOU', '../../');
                       <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true"><i class="far fa-folder-open"></i> Exercício Anterior</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false"><i class="fas fa-users"></i> Profile</a>
+                      <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false"><i class="fas fa-door-open"></i> Tempo Médio</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false"><i class="far fa-comment-dots"></i> Messages</a>
@@ -280,7 +240,7 @@ login('TESOU', '../../');
                                       <?php echo $count_prazo ?>
                                     </td>
                                     <td class="align-middle">
-                                      <a data-toggle="popover" data-content="Alterar prazo" style="width: 24px; height: 24px;" href="#"><i class="fas fa-tools"></i></a>
+                                      <a data-tt="tooltip" title="Alterar Prazo" style="width: 24px; height: 24px;" href="#"><i class="fas fa-tools"></i></a>
                                     </td>
                                   </tr>
                                 <?php
@@ -293,7 +253,7 @@ login('TESOU', '../../');
                       </div>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                      Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                      <?= tempoMedioSecao($conexao); ?>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
                       Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
@@ -312,9 +272,7 @@ login('TESOU', '../../');
         </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
+    <?php include('../../dist/php/pageFooter.php'); ?>
     <?php
 
     $id = "";
@@ -327,7 +285,6 @@ login('TESOU', '../../');
     $count_estado = "";
     $count_secao = "";
     $count_posto = "";
-
 
     // Filtro para POSTO
     if (isset($_GET['buttonPesquisar']) and $_GET['txtposto'] != '') {
@@ -427,7 +384,8 @@ login('TESOU', '../../');
         $count_secao =  trim($count_secao);
       }
       // Filtro para ESTADO
-    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtestado'] != '') {
+    }
+    elseif (isset($_GET['buttonPesquisar']) and $_GET['txtestado'] != '') {
 
       $nome = $_GET['txtestado'];
 
@@ -476,7 +434,8 @@ login('TESOU', '../../');
       }
 
       // Filtro para SEÇÃO ATUAL
-    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtsecao'] != '') {
+    }
+    elseif (isset($_GET['buttonPesquisar']) and $_GET['txtsecao'] != '') {
 
       $nome = $_GET['txtsecao'];
 
@@ -523,7 +482,8 @@ login('TESOU', '../../');
         $secao =  trim($secao);
         $count_secao =  trim($count_secao);
       }
-    } else {
+    }
+    else {
       $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
@@ -569,136 +529,76 @@ login('TESOU', '../../');
       }
     }
     ?>
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="../../plugins/jQuery-Mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <?php include('../../dist/php/pageJavascript.php'); ?>
   <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Select2 -->
-  <script src="../../plugins/select2/js/select2.full.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="../../plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="../../plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <script src="../../plugins/jqvmap/maps/jquery.vmap.brazil.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="../../plugins/moment/moment.min.js"></script>
-  <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="../../dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-  <!-- Material Design-->
-  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
-  <script>
-    $('[data-toggle="popover"]').popover({
-      placement: 'auto',
-      trigger: 'hover'
-    });
-  </script>
-  <script>
-    $(function() {
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      })
-
-      //Initialize Select2 Elements
-      $('.select2').select2()
-    });
-  </script>
-  <!--Máscaras-->
-  <script>
-    $(document).ready(function() {
-      $('#txtcpf').mask('000.000.000-00', {
-        reverse: true
-      });
-      $('#txtsaram').mask('000.000-0', {
-        reverse: true
-      });
-    });
-  </script>
-  <script>
-    var donutChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var donutChartCanvas = document.getElementById('pieChart');
     var donutData = {
       labels: [
-        <?php echo $direito_pleiteado ?>
+        <?= $direito_pleiteado ?>
       ],
       datasets: [{
-        data: [<?php echo $count_direito ?>],
-        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
+        data: [<?= $count_direito ?>],
+        backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
-    }
-    var donutOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var donutChart = new Chart(donutChartCanvas, {
       type: 'doughnut',
       data: donutData,
       options: {
+        tooltips: {
+          callbacks: {
+            title: function(tooltipItem, data) {
+              return data['labels'][tooltipItem[0]['index']];
+            },
+            label: function(tooltipItem, data) {
+              return data['datasets'][0]['data'][tooltipItem['index']];
+            },
+            afterLabel: function(tooltipItem, data) {
+              var dataset = data['datasets'][0];
+              var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100);
+              return '(' + percent + '%)';
+            }
+          },
+          //backgroundColor: '#FFF',
+          cornerRadius: 5,
+          titleFontSize: 12,
+          titleFontColor: '#FFF',
+          bodyFontColor: '#FFF',
+          bodyFontSize: 10,
+          displayColors: false
+        },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
-          text: 'DIREITO PLEITEADO'
+          fontSize: 14,
+          text: 'QUANTIDADE vs. DIREITO PLEITEADO'
         },
         legend: {
           display: true,
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 8,
+            boxWidth: 30
           }
         }
       }
     })
   </script>
   <script>
-    var donutChartCanvas1 = $('#donutChart').get(0).getContext('2d')
+    var donutChartCanvas1 = document.getElementById('donutChart');
     var donutData1 = {
       labels: [
-        <?php echo $estado ?>
+        <?= $estado ?>
       ],
       datasets: [{
-        data: [<?php echo $count_estado ?>],
-        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
+        data: [<?= $count_estado ?>],
+        backgroundColor: ['#f56954', '#00a65a', 'red', '#f39c12', 'green', '#00c0ef', 'orange', '#3c8dbc', 'blue', '#d2d6de', '#9C0060', 'yellow', 'pink'],
       }]
-    }
-    var donutOptions1 = {
-      maintainAspectRatio: false,
-      responsive: true,
     }
     var donutChart1 = new Chart(donutChartCanvas1, {
       type: 'doughnut',
@@ -706,40 +606,37 @@ login('TESOU', '../../');
       options: {
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
-          text: 'ESTADO DO PROCESSO'
+          fontSize: 14,
+          text: 'QUATIDADE vs. ESTADO'
         },
         legend: {
           display: true,
           position: 'right',
           labels: {
             fontColor: 'rgb(0,0,0)',
-            fontSize: 16
+            fontSize: 8,
+            boxWidth: 30
           }
         }
       }
     })
   </script>
   <script>
-    var barChartCanvas1 = $('#myChart2').get(0).getContext('2d')
+    var barChartCanvas1 = document.getElementById('myChart2');
     var barData1 = {
       labels: [
-        <?php echo $secao ?>
+        <?= $secao ?>
       ],
       datasets: [{
-        data: [<?php echo $count_secao ?>],
-        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
+        data: [<?= $count_secao ?>],
+        backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd'],
       }]
     }
-    var barOptions1 = {
-      maintainAspectRatio: false,
-      responsive: true,
-    }
     var barChart1 = new Chart(barChartCanvas1, {
-      type: 'bar',
+      type: 'horizontalBar',
       data: barData1,
       options: {
         scales: {
@@ -762,10 +659,10 @@ login('TESOU', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
+          fontSize: 14,
           text: 'SEÇÃO ATUAL'
         },
         legend: {
@@ -773,29 +670,25 @@ login('TESOU', '../../');
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 14
           }
         }
       }
     })
   </script>
   <script>
-    var barChartCanvas = $('#myChart').get(0).getContext('2d')
+    var barChartCanvas = document.getElementById('myChart');
     var barData = {
       labels: [
-        <?php echo $posto ?>
+        <?= $posto ?>
       ],
       datasets: [{
-        data: [<?php echo $count_posto ?>],
-        backgroundColor: ['#17a2b8', '#e83e8c', '#343a40', '#6c757d', '#ffffff', '#dc3545', '#6610f2', '#6f42c1', '#007bff', '#fd7e14', '#ffc107', '#28a745', '#20c997']
+        data: [<?= $count_posto ?>],
+        backgroundColor: ['#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd', '#2216dd']
       }]
     }
-    var barOptions = {
-      maintainAspectRatio: false,
-      responsive: true,
-    }
     var barChart = new Chart(barChartCanvas, {
-      type: 'horizontalBar',
+      type: 'bar',
       data: barData,
       options: {
         animation: {
@@ -821,18 +714,18 @@ login('TESOU', '../../');
         },
         title: {
           display: true,
-          padding: 20,
+          padding: 10,
           position: 'top',
           fontColor: '#000000',
-          fontSize: 16,
-          text: 'QUANTIDADE X POSTO'
+          fontSize: 14,
+          text: 'QUANTIDADE vs. POSTO'
         },
         legend: {
           display: false,
           position: 'right',
           labels: {
             fontColor: '#000000',
-            fontSize: 16
+            fontSize: 14
           }
         }
       }

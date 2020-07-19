@@ -8,87 +8,16 @@ login('ADMIN', '../../');
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/png" href="../../dist/img/gapls.png">
-  <title>SISPAGPES</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../../plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- SweetAlert2 -->
-  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-  <script src="../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
-  <!-- Toastr -->
-  <script src="../../plugins/toastr/toastr.min.js"></script>
-  <!-- DataTable -->
-  <link rel="stylesheet" type="text/css" href="../../DataTables/datatables.css">
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-        <!-- Messages Dropdown Menu -->
-        <!-- Este é a tag que faz aparecer o nome aparece no menu direito superior. -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-bars"></i>
-            <?php echo $_SESSION['nome_usuario'] ?>
-            <span class="d-lg-none d-md-block">Some Actions</span>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Perfil
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-              Configurações
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-              Atividade
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="../../logout.php" data-target="#logoutModal">
-              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              Sair
-            </a>
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
-      <!-- Sidebar -->
       <div class="sidebar">
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -171,13 +100,10 @@ login('ADMIN', '../../');
         </nav>
       </div>
     </aside>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <br>
-      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
@@ -213,11 +139,8 @@ login('ADMIN', '../../');
                     </h4>
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-history"></i></span>
@@ -269,9 +192,6 @@ login('ADMIN', '../../');
                     <i class="fas fa-plus"></i> Inserir Novo
                   </button>
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
-                    <!----------------------LISTAR TODOS OS USUÁRIOS-------------------------->
-
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
@@ -280,20 +200,15 @@ login('ADMIN', '../../');
                       $query = "select * from tb_secoes_exant where status <> 'Excluído' order by id asc";
                     }
                     $result = mysqli_query($conexao, $query);
-                    //$dado = mysqli_fetch_array($result);
                     $row = mysqli_num_rows($result);
-
                     ?>
-
-                    <!-------------------------------------------------->
-
                     <table class="table table-sm table-borderless table-striped" style="table-layout: fixed;">
                       <thead class="text-primary" style="text-align: center;">
                         <th class="align-middle">#</th>
                         <th class="align-middle">Seção</th>
                         <th class="align-middle">Prazo Exercício Anterior (dias)</th>
                         <th class="align-middle">Status</th>
-                        <th class="align-middle">Ações</th>
+                        <th class="align-middle" style="width: 30%;">Ações</th>
                       </thead>
                       <tbody>
                         <?php
@@ -304,52 +219,56 @@ login('ADMIN', '../../');
                           $status = $res_1["status"];
                         ?>
                           <tr style="text-align: center;">
-                            <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $secao; ?></td>
-                            <td class="align-middle"><?php echo $prazo_exant; ?></td>
+                            <td class="align-middle"><?= $id; ?></td>
+                            <td class="align-middle"><?= $secao; ?></td>
+                            <td class="align-middle"><?= $prazo_exant; ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aguardando') { ?>
                                 <span class="badge badge-warning">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else if ($status == 'Aprovado') { ?>
                                 <span class="badge badge-success">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
-                              } else if ($status == 'Excluído') { ?>
+                              }
+                              else if ($status == 'Excluído') { ?>
                                 <span class="badge badge-danger">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
-                              } else {
+                              }
+                              else {
                                 echo $status;
                               }
                               ?>
                             </td>
-                            <td class="align-middle">
+                            <td class="align-middle" style="width: 30%;">
                               <?php
                               if ($status == 'Aprovado') { ?>
-                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
+                                <!-- <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a> -->
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-xs" href="secoes_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="secoes_exant.php?func=aprova&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
-                              } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="secoes_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              }
+                              elseif ($status == 'Excluído') { ?>
+                                <a href="secoes_exant.php?func=aprova&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                               <?php
-                              } else {
+                              }
+                              else {
                                 echo $status;
                               } ?>
                             </td>
@@ -388,9 +307,6 @@ login('ADMIN', '../../');
                 </div>
                 <div class="card-body">
                   <div class="table-responsive" style="text-align: center; overflow-x:auto; overflow-y:auto;">
-
-
-                    <!----------------------LISTAR TODOS AS SEÇÕES-------------------------->
                     <?php
                     if (isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '') {
                       $nome = '%' . $_GET['txtpesquisar'] . '%';
@@ -401,9 +317,6 @@ login('ADMIN', '../../');
                     $result = mysqli_query($conexao, $query);
                     $row = mysqli_num_rows($result);
                     ?>
-
-                    <!-------------------------------------------------->
-
                     <table class="table table-sm table-bordered table-striped" style="table-layout: fixed;">
                       <thead class="text-primary" style="text-align: center;">
                         <th class="align-middle">#</th>
@@ -421,27 +334,29 @@ login('ADMIN', '../../');
                           $status = $res_1["status"];
                         ?>
                           <tr style="text-align: center;">
-                            <td class="align-middle"><?php echo $id; ?></td>
-                            <td class="align-middle"><?php echo $secao; ?></td>
-                            <td class="align-middle"><?php echo $prazo_exant ?></td>
+                            <td class="align-middle"><?= $id; ?></td>
+                            <td class="align-middle"><?= $secao; ?></td>
+                            <td class="align-middle"><?= $prazo_exant ?></td>
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aguardando') { ?>
                                 <span class="badge badge-warning">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
                               } else if ($status == 'Aprovado') { ?>
                                 <span class="badge badge-success">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
-                              } else if ($status == 'Excluído') { ?>
+                              }
+                              else if ($status == 'Excluído') { ?>
                                 <span class="badge badge-danger">
-                                  <?php echo $status; ?>
+                                  <?= $status; ?>
                                 </span>
                               <?php
-                              } else {
+                              }
+                              else {
                                 echo $status;
                               }
                               ?>
@@ -449,24 +364,26 @@ login('ADMIN', '../../');
                             <td class="align-middle">
                               <?php
                               if ($status == 'Aprovado') { ?>
-                                <a class="btn btn-success btn-xs disabled" href="#"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs" href="rel/invoice-print.php?id=<?php echo $id; ?>" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="#"><button class="btn btn-success btn-table disabled"><i class="fas fa-thumbs-up"></i></button></a>
+                                <!-- <a href="rel/invoice-print.php?id=<?= $id; ?>" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table"><i class="fas fa-print"></i></button></a> -->
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
                               } elseif ($status == 'Aguardando') { ?>
-                                <a class="btn btn-success btn-xs" href="secoes_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                                <a href="secoes_exant.php?func=aprova&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo APROVAR a solicitação?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
-                              } elseif ($status == 'Excluído') { ?>
-                                <a class="btn btn-success btn-xs" href="secoes_exant.php?func=aprova&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><i class="fas fa-thumbs-up" style="width: 14px;"></i></a>
-                                <a class="btn btn-primary btn-xs disabled" href="#" target="_blank" rel=”noopener”><i class="fas fa-print" style="width: 14px;"></i></a>
-                                <a class="btn btn-warning btn-xs disabled" href="secoes_exant.php?func=edita&id=<?php echo $id; ?>"><i class="fas fa-tools"></i></a>
-                                <a class="btn btn-danger btn-xs disabled" href="secoes_exant.php?func=deleta&id=<?php echo $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><i class="far fa-trash-alt" style="width: 14px;"></i></a>
+                              }
+                              elseif ($status == 'Excluído') { ?>
+                                <a href="secoes_exant.php?func=aprova&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
+                                <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
+                                <a href="secoes_exant.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
+                                <a href="secoes_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                               <?php
-                              } else {
+                              }
+                              else {
                                 echo $status;
                               } ?>
                             </td>
@@ -488,7 +405,6 @@ login('ADMIN', '../../');
             </div>
           </div>
           <div id="modalExemplo" class="modal fade" role="dialog">
-            <!---Modal Exemplo--->
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -515,67 +431,15 @@ login('ADMIN', '../../');
             </div>
           </div>
         </div>
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+      </section>
+    </div>
+    <?php include('../../dist/php/pageFooter.php'); ?>
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <?php footer() ?>
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery Mask -->
-  <script src="../../plugins/jquery-mask/dist/jquery.mask.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- ChartJS -->
-  <script src="../../plugins/chart.js/Chart.min.js"></script>
-  <!-- Sparkline -->
-  <script src="../../plugins/sparklines/sparkline.js"></script>
-  <!-- JQVMap -->
-  <script src="../../plugins/jqvmap/jquery.vmap.min.js"></script>
-  <script src="../../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-  <!-- jQuery Knob Chart -->
-  <script src="../../plugins/jquery-knob/jquery.knob.min.js"></script>
-  <!-- daterangepicker -->
-  <script src="../../plugins/moment/moment.min.js"></script>
-  <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
-  <!-- Tempusdominus Bootstrap 4 -->
-  <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-  <!-- Summernote -->
-  <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="../../dist/js/pages/dashboard.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../dist/js/demo.js"></script>
-  <!-- DataTable -->
-  <script type="text/javascript" charset="utf8" src="../../DataTables/datatables.js"></script>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
 </body>
 
 </html>
-
-<!---------------------------------CADASTRAR-------------------------------------------->
 
 <?php
 if (isset($_POST['button'])) {
@@ -627,11 +491,11 @@ elseif (@$_GET['func'] == 'edita') {
             <div class="modal-body">
               <div class="form-group">
                 <label for="id_produto">Seção</label>
-                <input type="text" class="form-control mr-2" name="txtsecao2" value="<?php echo $res_1['secao']; ?>" autocomplete="off">
+                <input type="text" class="form-control mr-2" name="txtsecao2" value="<?= $res_1['secao']; ?>" autocomplete="off">
               </div>
               <div class="form-group">
                 <label for="id_produto">Prazo Exercício Anterior</label>
-                <input type="text" class="form-control mr-2" name="txtprazoexant2" value="<?php echo $res_1['prazo_exant']; ?>" autocomplete="off" disabled>
+                <input type="text" class="form-control mr-2" name="txtprazoexant2" value="<?= $res_1['prazo_exant']; ?>" autocomplete="off" disabled>
               </div>
             </div>
             <div class="modal-footer">
@@ -646,9 +510,6 @@ elseif (@$_GET['func'] == 'edita') {
     <script>
       $('#modalEditar').modal("show");
     </script>
-    <!--Modal EDITAR -->
-
-    <!-------------------------------------------------------------------------------Comando para alterar os dados da tabela--------------------------------------------------------------------------------->
 
 <?php
     if (isset($_POST['buttonEditar'])) {
@@ -690,4 +551,3 @@ elseif (@$_GET['func'] == 'deleta') {
   Alerta("success", "Excluído com sucesso!", false, "secoes_exant.php");
 }
 ?>
-<!------------------------------------------------------------------------------->

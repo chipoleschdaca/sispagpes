@@ -23,14 +23,13 @@ if ($row > 0) {
 	$_SESSION['id_perfil'] = $dado['id_perfil'];
 
 	if ($_SESSION['status'] == 'Aprovado') {
-
-		if ($_SESSION['perfil_usuario'] == 'TESOU') {
-			header('Location: apps/tesoureiro/painel_tesouraria.php');
-			exit();
-		} elseif ($_SESSION['perfil_usuario'] == 'ADMIN') {
+		if ($_SESSION['perfil_usuario'] == 'ADMIN') {
 			header('Location: apps/admin/painel_admin.php');
 			exit();
-		} elseif ($_SESSION['perfil_usuario'] == 'EXANT') {
+		} elseif ($_SESSION['perfil_usuario'] == 'TESOU' || $_SESSION['perfil_usuario'] == 'ADMIN') {
+			header('Location: apps/tesoureiro/painel_tesouraria.php');
+			exit();
+		} elseif ($_SESSION['perfil_usuario'] == 'EXANT' || $_SESSION['perfil_usuario'] == 'ADMIN') {
 			header('Location: apps/exercicioanterior/painel_exant.php');
 			exit();
 		} else {
