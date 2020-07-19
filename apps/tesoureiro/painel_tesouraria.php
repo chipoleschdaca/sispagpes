@@ -8,14 +8,11 @@ login('TESOU', '../../');
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
   <div class="wrapper">
-    <?php navbar() ?>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="painel_tesouraria.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3">
@@ -256,7 +253,7 @@ login('TESOU', '../../');
                       </div>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                      <?= tempoMedioSecao($conexao) ?>
+                      <?= tempoMedioSecao($conexao); ?>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
                       Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
@@ -275,9 +272,7 @@ login('TESOU', '../../');
         </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
+    <?php include('../../dist/php/pageFooter.php'); ?>
     <?php
 
     $id = "";
@@ -290,7 +285,6 @@ login('TESOU', '../../');
     $count_estado = "";
     $count_secao = "";
     $count_posto = "";
-
 
     // Filtro para POSTO
     if (isset($_GET['buttonPesquisar']) and $_GET['txtposto'] != '') {
@@ -390,7 +384,8 @@ login('TESOU', '../../');
         $count_secao =  trim($count_secao);
       }
       // Filtro para ESTADO
-    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtestado'] != '') {
+    }
+    elseif (isset($_GET['buttonPesquisar']) and $_GET['txtestado'] != '') {
 
       $nome = $_GET['txtestado'];
 
@@ -439,7 +434,8 @@ login('TESOU', '../../');
       }
 
       // Filtro para SEÇÃO ATUAL
-    } elseif (isset($_GET['buttonPesquisar']) and $_GET['txtsecao'] != '') {
+    }
+    elseif (isset($_GET['buttonPesquisar']) and $_GET['txtsecao'] != '') {
 
       $nome = $_GET['txtsecao'];
 
@@ -486,7 +482,8 @@ login('TESOU', '../../');
         $secao =  trim($secao);
         $count_secao =  trim($count_secao);
       }
-    } else {
+    }
+    else {
       $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
@@ -532,10 +529,9 @@ login('TESOU', '../../');
       }
     }
     ?>
-    <aside class="control-sidebar control-sidebar-dark">
-    </aside>
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <?php javascript('../../') ?>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
   <script>
     var donutChartCanvas = document.getElementById('pieChart');
     var donutData = {

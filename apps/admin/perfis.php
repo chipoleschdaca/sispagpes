@@ -8,13 +8,11 @@ login('ADMIN', '../../');
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <?php navbar() ?>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
@@ -214,13 +212,11 @@ login('ADMIN', '../../');
         </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
+    <?php include('../../dist/php/pageFooter.php'); ?>
     <aside class="control-sidebar control-sidebar-dark">
     </aside>
   </div>
-  <?php javascript('../../') ?>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
 </body>
 
 </html>

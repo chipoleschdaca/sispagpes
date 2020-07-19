@@ -8,14 +8,11 @@ login('EXANT', '../../');
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <?php navbar() ?>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="painel_exant.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3">
@@ -314,12 +311,10 @@ login('EXANT', '../../');
       </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
+    <?php include('../../dist/php/pageFooter.php'); ?>
     <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <?= javascript('../../') ?>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
   <script>
     $(document).ready(function() {
       $("#dtNascimento").hide();
@@ -453,7 +448,7 @@ if (isset($_POST['button'])) {
 
   //Verificar se o CPF já está cadastrado
 
-  $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf'"; //Adicionar mais campos para filtrar. Por exemplo, SARAM.
+  $query_verificar = "SELECT * FROM requerentes WHERE cpf = '$cpf'";
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $dado_verificar = mysqli_fetch_array($result_verificar);
@@ -749,7 +744,6 @@ else if (@$_GET['func'] == 'consulta') {
       <script>
         $('#modalConsultar').modal("show");
       </script>
-      <!--Modal CONSULTAR -->
   <?php
   }
 }

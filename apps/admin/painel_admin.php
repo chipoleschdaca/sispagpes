@@ -9,15 +9,12 @@ login('ADMIN', '../../');
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <?php navbar() ?>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
@@ -25,8 +22,6 @@ login('ADMIN', '../../');
       <div class="sidebar">
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="painel_admin.php" class="nav-link active">
                 <i class="nav-icon fas fa-home"></i>
@@ -180,13 +175,11 @@ login('ADMIN', '../../');
         </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
+    <?php include('../../dist/php/pageFooter.php'); ?>
     <aside class="control-sidebar control-sidebar-dark">
     </aside>
   </div>
-  <?php javascript('../../') ?>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
 </body>
 
 </html>

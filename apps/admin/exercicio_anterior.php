@@ -9,13 +9,11 @@ login('ADMIN', '../../');
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <?php navbar() ?>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
@@ -267,12 +265,14 @@ login('ADMIN', '../../');
                                           <?= $status; ?>
                                         </span>
                                       <?php
-                                      } else if ($status == 'Excluído') { ?>
+                                      }
+                                      else if ($status == 'Excluído') { ?>
                                         <span class="badge badge-danger">
                                           <?= $status; ?>
                                         </span>
                                       <?php
-                                      } else {
+                                      }
+                                      else {
                                         echo $status;
                                       }
                                       ?>
@@ -291,13 +291,15 @@ login('ADMIN', '../../');
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
-                                      } elseif ($status == 'Excluído') { ?>
+                                      }
+                                      elseif ($status == 'Excluído') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o Direito Pleiteado?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
                                         <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
-                                      } else {
+                                      }
+                                      else {
                                         echo $status;
                                       } ?>
                                     </td>
@@ -403,12 +405,14 @@ login('ADMIN', '../../');
                                           <?= $status; ?>
                                         </span>
                                       <?php
-                                      } else if ($status == 'Excluído') { ?>
+                                      }
+                                      else if ($status == 'Excluído') { ?>
                                         <span class="badge badge-danger">
                                           <?= $status; ?>
                                         </span>
                                       <?php
-                                      } else {
+                                      }
+                                      else {
                                         echo $status;
                                       }
                                       ?>
@@ -427,13 +431,15 @@ login('ADMIN', '../../');
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
-                                      } elseif ($status == 'Excluído') { ?>
+                                      }
+                                      elseif ($status == 'Excluído') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
                                         <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaDireito&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaDireito&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
-                                      } else {
+                                      }
+                                      else {
                                         echo $status;
                                       } ?>
                                     </td>
@@ -571,12 +577,14 @@ login('ADMIN', '../../');
                                           <?= $status; ?>
                                         </span>
                                       <?php
-                                      } else if ($status == 'Excluído') { ?>
+                                      }
+                                      else if ($status == 'Excluído') { ?>
                                         <span class="badge badge-danger">
                                           <?= $status; ?>
                                         </span>
                                       <?php
-                                      } else {
+                                      }
+                                      else {
                                         echo $status;
                                       }
                                       ?>
@@ -595,13 +603,15 @@ login('ADMIN', '../../');
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
-                                      } elseif ($status == 'Excluído') { ?>
+                                      }
+                                      elseif ($status == 'Excluído') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR a seção?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
                                         <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
-                                      } else {
+                                      }
+                                      else {
                                         echo $status;
                                       } ?>
                                     </td>
@@ -706,12 +716,14 @@ login('ADMIN', '../../');
                                           <?= $status; ?>
                                         </span>
                                       <?php
-                                      } else if ($status == 'Excluído') { ?>
+                                      }
+                                      else if ($status == 'Excluído') { ?>
                                         <span class="badge badge-danger">
                                           <?= $status; ?>
                                         </span>
                                       <?php
-                                      } else {
+                                      }
+                                      else {
                                         echo $status;
                                       }
                                       ?>
@@ -730,13 +742,15 @@ login('ADMIN', '../../');
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
-                                      } elseif ($status == 'Excluído') { ?>
+                                      }
+                                      elseif ($status == 'Excluído') { ?>
                                         <a href="exercicio_anterior.php?func=aprovaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo REATIVAR o status?');"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
                                         <!-- <a href="#" target="_blank" rel=”noopener”><button class="btn btn-primary btn-table disabled"><i class="fas fa-print"></i></button></a> -->
                                         <a href="exercicio_anterior.php?func=editaEstado&id=<?= $id; ?>"><button class="btn btn-warning btn-table disabled"><i class="fas fa-tools"></i></button></a>
                                         <a href="exercicio_anterior.php?func=deletaEstado&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');"><button class="btn btn-danger btn-table disabled"><i class="far fa-trash-alt"></i></button></a>
                                       <?php
-                                      } else {
+                                      }
+                                      else {
                                         echo $status;
                                       } ?>
                                     </td>
@@ -776,13 +790,10 @@ login('ADMIN', '../../');
         </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
-    <aside class="control-sidebar control-sidebar-dark">
-    </aside>
+    <?php include('../../dist/php/pageFooter.php'); ?>
+    <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <?php javascript('../../') ?>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
 </body>
 
 </html>

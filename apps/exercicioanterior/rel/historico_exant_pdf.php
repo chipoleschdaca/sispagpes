@@ -50,8 +50,7 @@ if (($dtNascimento) == '0000-00-00') {
   $header .= "";
 } else if (descobrirIdade($dtNascimento) >= 60) {
   $header .= "<div class='badge'><span style='margin: 0'>PRIORIDADE</span></div>";
-}
-else {
+} else {
   $header .= '';
 }
 $header .= "</div>";
@@ -59,13 +58,13 @@ $header .= "</div>";
 $html = "
 <fieldset>
   <ul class='cabecalho'>    
-    <li class='left'><img class='img-dom' src='../../../dist/icons/brasao-republica.jpeg'/></li>
+    <li class='left'><img class='img-dom' src='../../../dist/img/gapls1.png'/></li>
     <li class='center'>
 	    <div class='mindef'>MINISTÉRIO DA DEFESA</div>
 	    <div class='comaer'>COMANDO DA AERONÁUTICA</div>
 	    <div class='unidade'>GRUPAMENTO DE APOIO DE LAGOA SANTA</div>
     </li>
-    <li class='right' style='font-size: 10px'>v1.0.1</li>
+    <li class='right' style='font-size: 10px'>v1.0.2</li>
   </ul>    
     <div class='texto-cab'><b>Histórico de Tramitação de Processo de Exercício Anterior</b></div>
     <div>Requerente: <strong>" . $posto . " " . $situacao . " " . $requerente . "</strong></div>
@@ -138,11 +137,9 @@ while ($res_h = mysqli_fetch_array($result_h)) {
     $html .= "<td class='align-middle;' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>Criado</td>";
   } elseif (diferenca($dtPrazoSecao_cons, $data_novo) < 0) {
     $html .= "<td class='align-middle' style='background-color: rgba(255,0,0,0.3); text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
-  }
-  elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
+  } elseif (diferenca($dtPrazoSecao_cons, $data_novo) >= 0) {
     $html .= "<td class='align-middle' style='background-color: rgba(0, 128, 0, 0.3); text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
-  }
-  else {
+  } else {
     $html .= "<td class='align-middle' style='text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
   }
   $html .= "<td class='align-middle' id='nomeSacador' style='text-align: center; width: 15%;'>$nome_sacador</td>";

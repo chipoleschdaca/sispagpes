@@ -25,10 +25,10 @@ include('dist/php/functions.php');
   <div class="wrapper fadeIn">
     <div id="formContent">
       <div class="fadeIn" id="img">
-        <img src="dist/img/gapls1.png" style="width: 4.7cm; height: 5.7cm;" id="icon" alt="User Icon" />
+        <img src="dist/img/gapls1.png" style="width: 3.7cm; height: 4.5cm;" id="icon" alt="User Icon" />
       </div>
       <div>
-        <h1><strong>SISPAGPES</strong></h1>
+        <h2><b>SISPAGPES</b></h2>
       </div>
       <form method="POST" class="form-container" action="login.php">
         <div class="form-group">
@@ -58,11 +58,11 @@ include('dist/php/functions.php');
         <small><a class="underlineHover" href="#">Esqueceu a senha?</a></small>
         <br>
         <small><a class="underlineHover" href="solicitar_acesso.php">Registre-se</a></small>
+        <br>
+        <small><a class="underlineHover" href="apps/exercicioanterior/consultar_processo.php" target="_blank" rel="noopener">Consultar processo</a></small>
       </div>
     </div>
-    <footer class="main-footer" style="width: 32%;">
-      <?php footer() ?>
-    </footer>
+    <?php include('dist/php/pageFooter.php'); ?>
   </div>
 </body>
 <script>

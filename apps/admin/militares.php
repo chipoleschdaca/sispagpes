@@ -9,26 +9,19 @@ login('ADMIN', '../../');
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-  <?php head('../../') ?>
-</head>
+<?php include('../../dist/php/pageHead.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-    <?php navbar() ?>
+    <?php include('../../dist/php/pageNavbar.php'); ?>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <!-- Brand Logo -->
       <a href="painel_admin.php" class="brand-link">
         <img src="../../dist/img/gapls.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
         <b><span class="brand-text font-weight-light">SISPAGPES</span></b>
       </a>
-      <!-- Sidebar -->
       <div class="sidebar">
-        <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="painel_admin.php" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
@@ -259,12 +252,14 @@ login('ADMIN', '../../');
                                   <?= $status; ?>
                                 </span>
                               <?php
-                              } else if ($status == 'Rejeitado') { ?>
+                              }
+                              else if ($status == 'Rejeitado') { ?>
                                 <span class="badge badge-danger">
                                   <?= $status; ?>
                                 </span>
                               <?php
-                              } else {
+                              }
+                              else {
                                 echo $status;
                               }
                               ?>
@@ -284,7 +279,8 @@ login('ADMIN', '../../');
                                 <a href="militares.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                 <a href="militares.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
-                              } else { ?>
+                              }
+                              else { ?>
                                 <a href="militares.php?func=aprova&id=<?= $id; ?>"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
                                 <a href="militares.php?func=senha&id=<?= $id; ?>"><button class="btn btn-dark btn-table"><i class="fas fa-key"></i></button></a>
                                 <a href="militares.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
@@ -386,12 +382,10 @@ login('ADMIN', '../../');
         </div>
       </section>
     </div>
-    <footer class="main-footer">
-      <?php footer() ?>
-    </footer>
+    <?php include('../../dist/php/pageFooter.php'); ?>
     <aside class="control-sidebar control-sidebar-dark"></aside>
   </div>
-  <?php javascript('../../') ?>
+  <?php include('../../dist/php/pageJavascript.php'); ?>
 </body>
 
 </html>
@@ -442,7 +436,8 @@ if (isset($_POST['button'])) {
   Alerta("success", "Excluído com sucesso", false, "militares.php");
 
   //ALTERAR SENHA
-} elseif (@$_GET['func'] == 'senha') {
+}
+elseif (@$_GET['func'] == 'senha') {
   $id = $_GET['id'];
   $query = "SELECT * FROM militares WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
@@ -504,7 +499,8 @@ if (isset($_POST['button'])) {
   }
 
   //EDITAR REGISTRO DA TABELA
-} elseif (@$_GET['func'] == 'edita') {
+}
+elseif (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
   $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id as id_posto, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id as id_perfil, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE m.id = '$id'";
   $result = mysqli_query($conexao, $query);
@@ -584,9 +580,7 @@ if (isset($_POST['button'])) {
     <script>
       $('#modalEditar').modal("show");
     </script>
-
     <!--Modal EDITAR -->
-
     <?php
     if (isset($_POST['buttonEditar'])) {
       $saram = $_POST['txtsaram'];
@@ -624,7 +618,8 @@ if (isset($_POST['button'])) {
   }
 
   // APROVAR NOVA SOLICITAÇÃO
-} elseif (@$_GET['func'] == 'aprova') {
+}
+elseif (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
   $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id as id_posto, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id as id_perfil, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE m.id = '$id'";
   $result = mysqli_query($conexao, $query);
