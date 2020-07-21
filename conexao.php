@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+@session_start();
 try {
 	$pdo = new PDO("mysql:dbname=$db;host=$host", "$usuario", "$senha");	
 } catch (Exception $e) {
