@@ -1,3 +1,3 @@
-<footer class="main-footer" style="font-size: 12px;">
-  <span>&copy; 2019-<?= date("Y") ?><a href="#" style="margin-right: 0;"><b> SISPAGPES</b></a></span>. Desenvolvido por DANIEL ANGELO <span style="text-decoration: underline;"><b>CHIPOLESCH</b></span> DE ALMEIDA <b>1º Ten Int</b>.<div class="float-right d-none d-sm-inline-block">v1.0.2</div>
+<footer class="main-footer">
+  &copy; 2019-<?= date("Y") ?> <a href="#"><b>SISPAGPES</b></a>. Desenvolvido por DANIEL ANGELO <b style="text-decoration: underline;">CHIPOLESCH</b> DE ALMEIDA <b>1º Ten Int</b> <span class="float-right"> v1.1.0</span>
 </footer>
