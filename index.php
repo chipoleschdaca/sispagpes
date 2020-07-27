@@ -7,7 +7,7 @@ include('dist/php/functions.php');
 
 <head>
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <link href="dist/css/index.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="dist/css/index.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="plugins/toastr/toastr.css" />
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -33,13 +33,13 @@ include('dist/php/functions.php');
       <form method="POST" class="form-container" action="login.php">
         <div class="form-group">
           <input type="text" id="txtcpf" class="fadeIn" name="usuario" placeholder="CPF" required><br>
-          <div class="valid-feedback">Valid.</div>
-          <div class="invalid-feedback">Please fill out this field.</div>
+          <div class="valid-feedback">Válido</div>
+          <div class="invalid-feedback">Preencha este campo</div>
         </div>
         <div class="form-group">
           <input type="password" id="senha" class="fadeIn" name="senha" placeholder="Senha" required> <br>
-          <div class="valid-feedback">Valid.</div>
-          <div class="invalid-feedback">Please fill out this field.</div>
+          <div class="valid-feedback">Válido</div>
+          <div class="invalid-feedback">Preencha este campo</div>
         </div>
         <?php
         if (isset($_SESSION['status'])) {
@@ -59,10 +59,13 @@ include('dist/php/functions.php');
         <br>
         <small><a class="underlineHover" href="solicitar_acesso.php">Registre-se</a></small>
         <br>
-        <small><a class="underlineHover" href="apps/exercicioanterior/consultar_processo.php" target="_blank" rel="noopener">Consultar processo</a></small>
+        <small><a class="underlineHover" href="apps/exercicioanterior/consultar_processo.php" target="_blank" rel="noopener">Consultar Processo</a></small>
       </div>
     </div>
-    <?php include('dist/php/pageFooter.php'); ?>
+    <!-- <?php include('dist/php/pageFooter.php'); ?> -->
+    <footer class="main-footer">
+      <span style="margin-right: 1cm;">&copy; 2019-<?= date("Y") ?> <a href="#"><b>SISPAGPES</b></a>. Desenvolvido por DANIEL ANGELO <b style="text-decoration: underline;">CHIPOLESCH</b> DE ALMEIDA <b>1º Ten Int</b></span> <span class="float-right"> v1.1.0</span>
+    </footer>
   </div>
 </body>
 <script>
