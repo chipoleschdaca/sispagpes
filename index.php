@@ -24,11 +24,11 @@ include('dist/php/functions.php');
 <body>
   <div class="wrapper fadeIn">
     <div id="formContent">
-      <div class="fadeIn" id="img">
-        <img src="dist/img/gapls1.png" style="width: 3.7cm; height: 4.5cm;" id="icon" alt="User Icon" />
+      <div class="fadeIn" id="img" style="padding:10px;">
+        <img src="dist/img/gapls1.png" style="width: 3cm; height: 3.5cm; margin-top:10px;" id="icon" alt="User Icon" />
       </div>
       <div>
-        <h2><b>SISPAGPES</b></h2>
+        <div style="font-size: 30px; margin-bottom: 5px;"><b>SISPAGPES</b></div>
       </div>
       <form method="POST" class="form-container" action="login.php">
         <div class="form-group">
