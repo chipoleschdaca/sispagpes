@@ -54,7 +54,7 @@ include('dist/php/functions.php');
           <button type="submit" class="btn btn-primary btn-lg" value="Entrar" style="width:200px;">Entrar</button>
         </div>
       </form>
-      <div id="formFooter">
+      <div id="formFooter" style="font-size: 12px; padding-top: 5px;">
         <small><a class="underlineHover" href="#">Esqueceu a senha?</a></small>
         <br>
         <small><a class="underlineHover" href="solicitar_acesso.php">Registre-se</a></small>
