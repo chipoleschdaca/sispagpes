@@ -55,11 +55,11 @@ include('dist/php/functions.php');
         </div>
       </form>
       <div id="formFooter" style="font-size: 12px; padding-top: 5px;">
-        <small><a class="underlineHover" href="#">Esqueceu a senha?</a></small>
+        <a class="underlineHover" href="#">Esqueceu a senha?</a>
         <br>
-        <small><a class="underlineHover" href="solicitar_acesso.php">Registre-se</a></small>
+        <a class="underlineHover" href="solicitar_acesso.php">Registre-se</a>
         <br>
-        <small><a class="underlineHover" href="apps/exercicioanterior/consultar_processo.php" target="_blank" rel="noopener">Consultar Processo</a></small>
+        <a class="underlineHover" href="apps/exercicioanterior/consultar_processo.php" target="_blank" rel="noopener">Consultar Processo</a>
       </div>
     </div>
     <!-- <?php include('dist/php/pageFooter.php'); ?> -->
