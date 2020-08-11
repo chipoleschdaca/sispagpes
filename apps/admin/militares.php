@@ -252,12 +252,14 @@ login('ADMIN', '../../');
                                   <?= $status; ?>
                                 </span>
                               <?php
-                              } else if ($status == 'Rejeitado') { ?>
+                              }
+                              else if ($status == 'Rejeitado') { ?>
                                 <span class="badge badge-danger">
                                   <?= $status; ?>
                                 </span>
                               <?php
-                              } else {
+                              }
+                              else {
                                 echo $status;
                               }
                               ?>
@@ -277,7 +279,8 @@ login('ADMIN', '../../');
                                 <a href="militares.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
                                 <a href="militares.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo rejeitar a solicitação?');"><button class="btn btn-danger btn-table"><i class="far fa-trash-alt"></i></button></a>
                               <?php
-                              } else { ?>
+                              }
+                              else { ?>
                                 <a href="militares.php?func=aprova&id=<?= $id; ?>"><button class="btn btn-success btn-table"><i class="fas fa-thumbs-up"></i></button></a>
                                 <a href="militares.php?func=senha&id=<?= $id; ?>"><button class="btn btn-dark btn-table"><i class="fas fa-key"></i></button></a>
                                 <a href="militares.php?func=edita&id=<?= $id; ?>"><button class="btn btn-warning btn-table"><i class="fas fa-tools"></i></button></a>
@@ -433,7 +436,8 @@ if (isset($_POST['button'])) {
   Alerta("success", "Excluído com sucesso", false, "militares.php");
 
   //ALTERAR SENHA
-} elseif (@$_GET['func'] == 'senha') {
+}
+elseif (@$_GET['func'] == 'senha') {
   $id = $_GET['id'];
   $query = "SELECT * FROM militares WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
@@ -495,7 +499,8 @@ if (isset($_POST['button'])) {
   }
 
   //EDITAR REGISTRO DA TABELA
-} elseif (@$_GET['func'] == 'edita') {
+}
+elseif (@$_GET['func'] == 'edita') {
   $id = $_GET['id'];
   $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id as id_posto, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id as id_perfil, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE m.id = '$id'";
   $result = mysqli_query($conexao, $query);
@@ -613,7 +618,8 @@ if (isset($_POST['button'])) {
   }
 
   // APROVAR NOVA SOLICITAÇÃO
-} elseif (@$_GET['func'] == 'aprova') {
+}
+elseif (@$_GET['func'] == 'aprova') {
   $id = $_GET['id'];
   $query = "SELECT m.id as id_militar, m.saram, m.cpf, m.posto, p.id as id_posto, p.posto as nome_posto, m.nome, m.nomeguerra, m.perfil, f.id as id_perfil, f.perfil as nome_perfil, m.status, m.data FROM militares as m LEFT JOIN tb_posto as p ON m.posto = p.id LEFT JOIN perfis as f ON m.perfil = f.id WHERE m.id = '$id'";
   $result = mysqli_query($conexao, $query);
