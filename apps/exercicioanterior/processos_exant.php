@@ -431,7 +431,6 @@ login('EXANT', '../../');
                       <th class="align-middle">Dt. Criação</th>
                       <th class="align-middle">Direito Pleiteado</th>
                       <th class="align-middle">Origem</th>
-                      <th class="align-middle">S. Atual</th>
                       <th class="align-middle" style="width: 14%;">Ações</th>
                     </tr>
                   </thead>
@@ -485,7 +484,6 @@ login('EXANT', '../../');
                         <td class="align-middle"><?= data($data_criacao); ?></td>
                         <td class="align-middle"><?= $direito_pleiteado; ?></td>
                         <td class="align-middle"><?= $secao_origem ?></td>
-                        <td class="align-middle"><?= $secao_atual; ?></td>
                         <td class="align-middle">
                           <a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel="noopener">
                             <button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button>
