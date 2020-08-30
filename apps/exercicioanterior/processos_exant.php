@@ -431,9 +431,7 @@ login('EXANT', '../../');
                       <th class="align-middle">Dt. Criação</th>
                       <th class="align-middle">Direito Pleiteado</th>
                       <th class="align-middle">Origem</th>
-                      <!-- <th class="align-middle">Estado</th> -->
                       <th class="align-middle">S. Atual</th>
-                      <!-- <th class="align-middle">Prazo</th> -->
                       <th class="align-middle" style="width: 14%;">Ações</th>
                     </tr>
                   </thead>
@@ -487,34 +485,11 @@ login('EXANT', '../../');
                         <td class="align-middle"><?= data($data_criacao); ?></td>
                         <td class="align-middle"><?= $direito_pleiteado; ?></td>
                         <td class="align-middle"><?= $secao_origem ?></td>
-                        <!-- <td class="align-middle"><?= $estado; ?></td> -->
                         <td class="align-middle"><?= $secao_atual; ?></td>
-                        <!-- <?php
-                              if (diferenca($dtPrazoSecao, $today) >= (2 / 3) * $prazoSecao) {
-                                echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
-                              } elseif (diferenca($dtPrazoSecao, $today) < (2 / 3) * $prazoSecao && diferenca($dtPrazoSecao, $today) >= $prazoSecao / 3) {
-                                echo '<td class="align-middle" style="background-color: rgba(255, 255, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
-                              } else {
-                                echo '<td class="align-middle" style="background-color: rgba(255, 0, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
-                              }
-                              ?> -->
                         <td class="align-middle">
-                          <!-- <a href="processos_exant.php?func=estado&id=<?= $id; ?>">
-                    <button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving"></i></button>
-                  </a> -->
-                          <!-- <a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>">
-                    <button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye"></i>
-                    </button>
-                  </a> -->
                           <a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel="noopener">
                             <button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button>
                           </a>
-                          <!-- <a href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>">
-                    <button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button>
-                  </a>
-                  <a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');" id="tableButton">
-                    <button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button>
-                  </a> -->
                         </td>
                       </tr>
                     <?php $qtde++;
@@ -526,6 +501,9 @@ login('EXANT', '../../');
                   echo "<h3> Não existem dados cadastrados no banco </h3>";
                 }
                 ?>
+              </div>
+              <div class="modal-footer">
+                <span style="text-align:left;"><?= 'Total de processos arquivados: ' . $row ?></span>
               </div>
             </div>
           </div>
