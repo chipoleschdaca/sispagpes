@@ -299,12 +299,12 @@ login('EXANT', '../../');
         <div id="modalExemplo" class="modal fade" role="dialog">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title"><i class="far fa-folder-open"></i> Inserir novo Processo</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" action="" id="inserirProcesso">
+              <form method="POST" action="" id="inserirProcesso">
+                <div class="modal-header">
+                  <h4 class="modal-title"><i class="far fa-folder-open"></i> Inserir novo Processo</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
                   <div class="row">
                     <div class="form-group col-sm-7">
                       <label for="">Requerente</label>
@@ -396,14 +396,14 @@ login('EXANT', '../../');
                       <input type="text" class="form-control mr-2" id="txtestado" name="txtestado" value="<?= $res_estado["estado"]; ?>" disabled>
                     </div>
                   </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar
-                </button>
-                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar
-                </button>
-                </form>
-              </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary btn-sm" name="button" style="text-transform: capitalize;"><i class="fas fa-check"></i> Salvar
+                  </button>
+                  <button type="button" class="btn btn-light btn-sm" data-dismiss="modal" style="text-transform: capitalize;"><i class="fas fa-times"></i> Cancelar
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -900,7 +900,7 @@ if (isset($_POST['button'])) {
   $nup = $res_ConsultaHistorico["nup"];
   ?>
   <div id="modalHistorico" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header align-middle">
@@ -1016,9 +1016,9 @@ if (isset($_POST['button'])) {
               </tbody>
             </table>
           </div>
-          <div class="modal-footer">
-            <a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf.php?id=<?= $idConsultaHistorico; ?>&id_req=<?= $id_req; ?>" target="_blank" rel="noopener" style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf.php?id=<?= $idConsultaHistorico; ?>&id_req=<?= $id_req; ?>" target="_blank" rel="noopener" style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
         </div>
       </div>
     </div>
