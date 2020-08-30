@@ -17,7 +17,8 @@ body {
   background-color: #ff0000;
   border-radius: 5px;
   float: right;
-  display: grid;
+  display: block;
+  margin-bottom: 20px;
 }
 
 .cabecalho {

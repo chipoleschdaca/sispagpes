@@ -174,7 +174,8 @@ function descobrirIdade($dataNascimento)
 
 function tempoMedioSecao($conn)
 {
-  $queryTempoMedio = "SELECT h.id, AVG(DATEDIFF(h.data_novo, h.data_anterior)) AS difData, h.secao_anterior AS old_secao, s.id AS id_secao, s.secao AS nome_secao FROM tb_historico_exant_estado_secao AS h LEFT JOIN tb_secoes_exant AS s ON h.secao_anterior = s.id GROUP BY s.id";
+  $queryTempoMedio = "SELECT h.id, h.id_exant, AVG(DATEDIFF(h.data_novo, h.data_anterior)) AS difData, s.id AS id_secao, s.secao AS nome_secao FROM tb_historico_exant_estado_secao AS h LEFT JOIN tb_estado_exant AS e ON h.estado_novo = e.id LEFT JOIN tb_secoes_exant AS s ON h.secao_anterior = s.id WHERE h.id_exant IN (SELECT id FROM exercicioanterior) AND h.id_exant NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.id";
+
   $resultTempoMedio = mysqli_query($conn, $queryTempoMedio);
   $countRows = mysqli_num_rows($resultTempoMedio);
   if ($countRows == 0) {

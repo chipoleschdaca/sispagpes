@@ -75,26 +75,7 @@ login('EXANT', '../../');
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM exercicioanterior";
-                      $result = mysqli_query($conexao, $query);
-                      $res = mysqli_fetch_array($result);
-                      $row = mysqli_num_rows($result);
-                      echo $row;
-                      ?>
-                    </h4>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-              <div class="info-box">
-                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-folder-open"></i></span>
-                <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">PROCESSOS ABERTOS</span>
-                  <span class="info-box-number">
-                    <h4>
-                      <?php
-                      $query = "SELECT * FROM exercicioanterior where estado = 'Aberto'";
+                      $query = "SELECT * FROM exercicioanterior WHERE estado NOT IN (SELECT id FROM tb_estado_exant WHERE estado = 'ARQUIVADO')";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
@@ -109,11 +90,11 @@ login('EXANT', '../../');
               <div class="info-box mb-3">
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-cogs"></i></span>
                 <div class="info-box-content" style="text-align:center;">
-                  <span class="info-box-text">PROCESSOS AGUARDANDO</span>
+                  <span class="info-box-text">PROCESSOS EM TRÂMITE</span>
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM exercicioanterior where estado = 'Aguardando'";
+                      $query = "SELECT * FROM exercicioanterior WHERE estado <> (SELECT id FROM tb_estado_exant WHERE estado = 'ARQUIVADO') AND estado NOT IN (SELECT id FROM tb_estado_exant WHERE estado = 'APROVADO')";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
@@ -133,7 +114,26 @@ login('EXANT', '../../');
                   <span class="info-box-number">
                     <h4>
                       <?php
-                      $query = "SELECT * FROM exercicioanterior where estado = 'Aprovado'";
+                      $query = "SELECT * FROM exercicioanterior WHERE estado = (SELECT id FROM tb_estado_exant WHERE estado = 'APROVADO')";
+                      $result = mysqli_query($conexao, $query);
+                      $res = mysqli_fetch_array($result);
+                      $row = mysqli_num_rows($result);
+                      echo $row;
+                      ?>
+                    </h4>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box">
+                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-folder-open"></i></span>
+                <div class="info-box-content" style="text-align:center;">
+                  <span class="info-box-text">PROCESSOS ARQUIVADOS</span>
+                  <span class="info-box-number">
+                    <h4>
+                      <?php
+                      $query = "SELECT * FROM exercicioanterior WHERE estado = (SELECT id FROM tb_estado_exant WHERE estado = 'ARQUIVADO')";
                       $result = mysqli_query($conexao, $query);
                       $res = mysqli_fetch_array($result);
                       $row = mysqli_num_rows($result);
@@ -148,6 +148,9 @@ login('EXANT', '../../');
           <div>
             <button type="button" class="general-btn" data-toggle="modal" data-target="#modalExemplo" data-tt="tooltip" title="Inserir Processo" style="background-color: white;">
               <img src="../../dist/icons/add_to_open_folder.svg" />
+            </button>
+            <button type="button" name="buttonProcessoArquivado" class="general-btn" data-toggle="modal" data-target="#modalProcessoArquivado" data-tt="tooltip" title="Processos Arquivados" style="background-color: white;">
+              <img src="../../dist/icons/folder.svg" />
             </button>
           </div>
           <div class="row">
@@ -167,7 +170,7 @@ login('EXANT', '../../');
                   </div>
                   <div class="table-responsive" style="text-align: center; overflow-x: hidden; height: 375px;">
                     <?php
-                    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id ORDER BY e.id asc";
+                    $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.estado NOT IN (SELECT id FROM tb_estado_exant WHERE estado = 'ARQUIVADO') ORDER BY e.id asc";
                     $result = mysqli_query($conexao, $query);
                     $row = mysqli_num_rows($result);
                     ?>
@@ -190,6 +193,7 @@ login('EXANT', '../../');
                       </thead>
                       <tbody>
                         <?php
+                        $qtde = 1;
                         while ($res_1 = mysqli_fetch_array($result)) {
                           $id = $res_1["id"];
                           $id_req = $res_1["id_req"];
@@ -220,7 +224,7 @@ login('EXANT', '../../');
                           $today = date('Y-m-d');
                         ?>
                           <tr>
-                            <td class="align-middle"><?= $id; ?></td>
+                            <td class="align-middle"><?= $qtde; ?></td>
                             <td class="align-middle"><?= $saram; ?></td>
                             <td class="align-middle"><?= $requerente; ?></td>
                             <td class="align-middle"><?= $nup; ?></td>
@@ -267,7 +271,8 @@ login('EXANT', '../../');
                               </a>
                             </td>
                           </tr>
-                        <?php } ?>
+                        <?php $qtde++;
+                        } ?>
                       </tbody>
                     </table>
                     <?php
@@ -402,6 +407,132 @@ login('EXANT', '../../');
             </div>
           </div>
         </div>
+        <div id="modalProcessoArquivado" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Processos Arquivados</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <?php
+                $query = "SELECT e.id, e.saram, e.cpf, e.requerente, e.sacador, e.nup, e.data_criacao, e.direito_pleiteado, e.secao_origem, e.obs, e.data_saida, e.estado, e.secao_atual, r.id as id_req, r.saram as req_saram, r.cpf as req_cpf, r.nome as req_nome, r.dt_nascimento as data_nascimento, m.nome as mil_nome, d.direito as dir_direito, s.secao as sec_origem, sec.secao as sec_atual, est.estado as est_estado from exercicioanterior as e LEFT JOIN requerentes as r on e.requerente = r.id LEFT JOIN militares as m on e.sacador = m.id LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN tb_secoes_exant as s ON e.secao_origem = s.id LEFT JOIN tb_secoes_exant as sec ON e.secao_atual = sec.id LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.estado = (SELECT id FROM tb_estado_exant WHERE estado = 'ARQUIVADO') ORDER BY e.id asc";
+                $result = mysqli_query($conexao, $query);
+                $row = mysqli_num_rows($result);
+                ?>
+                <table class="table-sm table-borderless table-striped" id="tabela-processos" style="width: 100%; font-size: 10px; text-align: center;">
+                  <thead class="text-primary">
+                    <tr>
+                      <th class="align-middle">#</th>
+                      <th class="align-middle">SARAM</th>
+                      <th class="align-middle">Requerente</th>
+                      <th class="align-middle">NUP</th>
+                      <th class="align-middle">Prioridade</th>
+                      <th class="align-middle">Dt. Criação</th>
+                      <th class="align-middle">Direito Pleiteado</th>
+                      <th class="align-middle">Origem</th>
+                      <!-- <th class="align-middle">Estado</th> -->
+                      <th class="align-middle">S. Atual</th>
+                      <!-- <th class="align-middle">Prazo</th> -->
+                      <th class="align-middle" style="width: 14%;">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $qtde = 1;
+                    while ($res_1 = mysqli_fetch_array($result)) {
+                      $id = $res_1["id"];
+                      $id_req = $res_1["id_req"];
+                      $saram = $res_1["req_saram"];
+                      $cpf = $res_1["cpf"];
+                      $requerente = $res_1["req_nome"];
+                      $sacador = $res_1["mil_nome"];
+                      $nup = $res_1["nup"];
+                      $dt_nascimento = $res_1["data_nascimento"];
+                      $data_criacao = $res_1["data_criacao"];
+                      $direito_pleiteado = $res_1["dir_direito"];
+                      $secao_origem = $res_1["sec_origem"];
+                      $data_saida = $res_1["data_saida"];
+                      $estado = $res_1["est_estado"];
+                      $secao_atual = $res_1['sec_atual'];
+
+                      $query_prazo = "SELECT prazo_exant FROM tb_secoes_exant WHERE secao = '$secao_atual'";
+                      $result_prazo = mysqli_query($conexao, $query_prazo);
+                      $res_prazo = mysqli_fetch_array($result_prazo);
+                      $prazoSecao = $res_prazo['prazo_exant'];
+
+                      if ($data_saida != "") {
+                        $dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_saida"])));
+                      } else {
+                        $dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_criacao"])));
+                      }
+                      $dtPrazoSecao = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_1["data_saida"])));
+                      $today = date('Y-m-d');
+                    ?>
+                      <tr>
+                        <td class="align-middle"><?= $qtde; ?></td>
+                        <td class="align-middle"><?= $saram; ?></td>
+                        <td class="align-middle"><?= $requerente; ?></td>
+                        <td class="align-middle"><?= $nup; ?></td>
+                        <td class="align-middle">
+                          <?php
+                          if (($dt_nascimento) == '0000-00-00') {
+                            echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
+                          } else if (descobrirIdade($dt_nascimento) >= 60) {
+                            echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
+                          } else {
+                            echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
+                          } ?>
+                        </td>
+                        <td class="align-middle"><?= data($data_criacao); ?></td>
+                        <td class="align-middle"><?= $direito_pleiteado; ?></td>
+                        <td class="align-middle"><?= $secao_origem ?></td>
+                        <!-- <td class="align-middle"><?= $estado; ?></td> -->
+                        <td class="align-middle"><?= $secao_atual; ?></td>
+                        <!-- <?php
+                              if (diferenca($dtPrazoSecao, $today) >= (2 / 3) * $prazoSecao) {
+                                echo '<td class="align-middle" style="background-color: rgba(0, 128, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
+                              } elseif (diferenca($dtPrazoSecao, $today) < (2 / 3) * $prazoSecao && diferenca($dtPrazoSecao, $today) >= $prazoSecao / 3) {
+                                echo '<td class="align-middle" style="background-color: rgba(255, 255, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
+                              } else {
+                                echo '<td class="align-middle" style="background-color: rgba(255, 0, 0, 0.3);">' . data_show($dtPrazoSecao) . '</td>';
+                              }
+                              ?> -->
+                        <td class="align-middle">
+                          <!-- <a href="processos_exant.php?func=estado&id=<?= $id; ?>">
+                    <button class="btn btn-dark btn-table" data-toggle="popover" data-content="Encaminhar processo"><i class="fas fa-truck-moving"></i></button>
+                  </a> -->
+                          <!-- <a href="processos_exant.php?func=historico&id=<?= $id; ?>&id_req=<?= $id_req; ?>">
+                    <button class="btn btn-info btn-table" data-toggle="popover" data-content="Histórico"><i class="fas fa-eye"></i>
+                    </button>
+                  </a> -->
+                          <a href="rel/historico_exant_pdf.php?id=<?= $id; ?>&id_req=<?= $id_req; ?>" target="_blank" rel="noopener">
+                            <button class="btn btn-primary btn-table" data-toggle="popover" data-content="PDF"><i class="fas fa-file-pdf"></i></button>
+                          </a>
+                          <!-- <a href="processos_exant.php?func=edita&id=<?= $id; ?>&id_req=<?= $id_req; ?>">
+                    <button class="btn btn-warning btn-table" data-toggle="popover" data-content="Editar"><i class="fas fa-tools"></i></button>
+                  </a>
+                  <a href="processos_exant.php?func=deleta&id=<?= $id; ?>" onclick="return confirm('Deseja mesmo excluir o registro?');" id="tableButton">
+                    <button class="btn btn-danger btn-table" data-toggle="popover" data-content="Excluir"><i class="far fa-trash-alt"></i></button>
+                  </a> -->
+                        </td>
+                      </tr>
+                    <?php $qtde++;
+                    } ?>
+                  </tbody>
+                </table>
+                <?php
+                if ($row == '') {
+                  echo "<h3> Não existem dados cadastrados no banco </h3>";
+                }
+                ?>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          $("#modalProcessoArquivado").modal("show");
+        </script>
       </section>
     </div>
     <?php include('../../dist/php/pageFooter.php'); ?>
@@ -668,8 +799,8 @@ if (isset($_POST['button'])) {
                   <h1><i class="fas fa-angle-double-right"></i></h1>
                 </div>
                 <div class="form-group col-sm-5">
-                  <label for="">Data</label>
-                  <input type="date" class="form-control mr-2" id="txtdataatual" name="txtdataatual" required>
+                  <label for="txtdataatual">Data</label>
+                  <input type="date" class="form-control mr-2" id="txtdataatual" name="txtdataatual" min="2016-01-01" max="<?php date('Y-m-d') ?>" required>
                 </div>
               </div>
               <div class="row">
@@ -684,8 +815,7 @@ if (isset($_POST['button'])) {
                 <div class="form-group col-sm-5">
                   <label>Seção de Destino</label>
                   <select class="form-control select2" id="txtnovasecao" name="txtnovasecao" required>
-                    <option value="" disabled selected hidden>Selecione a nova Seção...
-                    </option>
+                    <option value="" disabled selected hidden>Selecione a nova Seção...</option>
                     <?php
                     $query_sec = "SELECT * FROM tb_secoes_exant WHERE status = 'Aprovado'";
                     $result_sec = mysqli_query($conexao, $query_sec);
@@ -694,8 +824,7 @@ if (isset($_POST['button'])) {
                       $secao_sec = $res_sec['secao'];
                     ?>
                       <option value="<?= $id_sec_2 ?>"><?= $secao_sec ?></option>
-                    <?php
-                    } ?>
+                    <?php } ?>
                   </select>
                 </div>
               </div>
@@ -897,4 +1026,6 @@ if (isset($_POST['button'])) {
   <script>
     $("#modalHistorico").modal("show");
   </script>
-<?php } ?>
+<?php
+} ?>
+<!-- Modal -->

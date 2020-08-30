@@ -7,14 +7,20 @@
   <?php
   if ($_SESSION['perfil_usuario'] == 'ADMIN') { ?>
     <ul class="navbar-nav ml-auto" style="float: right;">
-      <li class="nav-item dropdown">
+      <select class="form-control" name="" id="" onchange="location = this.value;">
+        <option value="" hidden selected>Alterar Perfil</option>
+        <option value="../exercicioanterior/painel_exant.php"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Painel Sacador</option>
+        <option value="../tesoureiro/painel_tesouraria.php"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Painel Tesouraria</option>
+        <option value="../admin/painel_admin.php"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Painel Administrador</option>
+      </select>
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#"><i class="fas fa-users fa-sm fa-fw mr-2 text-gray-400"></i>Perfil</a>
         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
           <a class="dropdown-item" href="../exercicioanterior/painel_exant.php"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Painel Sacador</a>
           <a class="dropdown-item" href="../tesoureiro/painel_tesouraria.php"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Painel Tesouraria</a>
           <a class="dropdown-item" href="../admin/painel_admin.php"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Painel Administrador</a>
         </div>
-      </li>
+      </li> -->
     </ul>
   <?php } ?>
   <ul class="navbar-nav ml-auto">

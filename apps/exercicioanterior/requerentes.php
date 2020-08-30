@@ -206,8 +206,7 @@ login('EXANT', '../../');
                                   echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } else if (descobrirIdade($dt_nascimento) >= 60) {
                                   echo '<img src="../../dist/icons/accept-colored.svg" style="height: 25px; width: 25px;"/>';
-                                }
-                                else {
+                                } else {
                                   echo '<img src="../../dist/icons/delete-colored.svg" style="height: 25px; width: 25px;"/>';
                                 } ?>
                               </td>
@@ -477,8 +476,7 @@ if (isset($_POST['button'])) {
   Alerta("success", "Excluído com sucesso!", false, "requerentes.php");
 
   // EDITAR REGISTRO
-}
-else if (@$_GET['func'] == 'edita') {
+} else if (@$_GET['func'] == 'edita') {
   $id_ed = $_GET['id_req'];
   $query_ed = "SELECT r.id, r.saram, r.cpf, r.posto, r.situacao, r.nome, r.dt_nascimento, r.email, p.id as id_posto, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON r.posto = p.id WHERE r.id = '$id_ed'";
   $result_ed = mysqli_query($conexao, $query_ed);
@@ -568,8 +566,7 @@ else if (@$_GET['func'] == 'edita') {
                     </div>
                   </div>
                 <?php
-                }
-                elseif ($res_2['situacao'] == 'PM') { ?>
+                } elseif ($res_2['situacao'] == 'PM') { ?>
                   <div class="form-group">
                     <label for="">Situação</label><br>
                     <div class="custom-control custom-radio col-4">
@@ -660,8 +657,7 @@ else if (@$_GET['func'] == 'edita') {
   }
   //CONSULTAR PROCESSOS
 
-}
-else if (@$_GET['func'] == 'consulta') {
+} else if (@$_GET['func'] == 'consulta') {
   $id = $_GET['id_req'];
   $query = "SELECT * FROM requerentes WHERE id = '$id'";
   $result = mysqli_query($conexao, $query);
