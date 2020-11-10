@@ -83,7 +83,7 @@ login('EXANT', '../../');
                         <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="" selected>POSTO/GRAD.</option>
                           <?php
-                          $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto";
+                          $query_posto = "SELECT r.posto AS id_posto, p.posto AS nome_posto FROM exercicioanterior AS e LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto";
                           $result_posto = mysqli_query($conexao, $query_posto);
                           while ($res_p = mysqli_fetch_array($result_posto)) {
                             $id = $res_p['id_posto'];
@@ -98,7 +98,7 @@ login('EXANT', '../../');
                         <select class="form-control select2" id="txtdireitopleiteado" name="txtdireitopleiteado" placeholder="DIREITO PLEITEADO" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="">DIREITO PLEITEADO</option>
                           <?php
-                          $query_direito = "SELECT d.id as id_direito, d.direito as direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON d.id = e.direito_pleiteado WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.direito_pleiteado";
+                          $query_direito = "SELECT d.id AS id_direito, d.direito AS direito_pleiteado, COUNT(e.direito_pleiteado) FROM exercicioanterior AS e LEFT JOIN tb_direitopleiteado_exant AS d ON d.id = e.direito_pleiteado WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.direito_pleiteado";
                           $result_direito = mysqli_query($conexao, $query_direito);
                           while ($res_dir = mysqli_fetch_array($result_direito)) {
                             $id = $res_dir['id_direito'];
@@ -114,7 +114,7 @@ login('EXANT', '../../');
                         <select class="form-control select2" id="txtestado" name="txtestado" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="" selected>ESTADO DO PROCESSO</option>
                           <?php
-                          $query_est = "SELECT est.id as id_estado, est.estado as estado_processo, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON est.id = e.estado WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado";
+                          $query_est = "SELECT est.id AS id_estado, est.estado AS estado_processo, COUNT(e.estado) FROM exercicioanterior AS e LEFT JOIN tb_estado_exant AS est ON est.id = e.estado WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado";
                           $result_est = mysqli_query($conexao, $query_est);
                           while ($res_est = mysqli_fetch_array($result_est)) {
                             $id_est_2 = $res_est['id_estado'];
@@ -130,7 +130,7 @@ login('EXANT', '../../');
                         <select class="form-control select2" id="txtsecao" name="txtsecao" style="border-radius:3px; margin-left:10px; width: 100%;">
                           <option value="" selected>SEÇÃO ATUAL</option>
                           <?php
-                          $query_sec = "SELECT s.id as id_secao, s.secao as secao_atual, COUNT(e.secao_atual) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON s.id = e.secao_atual WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.secao_atual";
+                          $query_sec = "SELECT s.id AS id_secao, s.secao AS secao_atual, COUNT(e.secao_atual) FROM exercicioanterior AS e LEFT JOIN tb_secoes_exant AS s ON s.id = e.secao_atual WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.secao_atual";
                           $result_sec = mysqli_query($conexao, $query_sec);
                           while ($res_sec = mysqli_fetch_array($result_sec)) {
                             $id_sec_2 = $res_sec['id_secao'];
@@ -205,7 +205,7 @@ login('EXANT', '../../');
 
       $nome = $_GET['txtposto'];
 
-      $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.posto = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
+      $query_posto = "SELECT r.posto, p.posto AS nome_posto, COUNT(r.posto) FROM exercicioanterior AS e LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto WHERE r.posto = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
 
@@ -216,7 +216,7 @@ login('EXANT', '../../');
         $count_posto =  trim($count_posto);
       }
 
-      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, r.posto, p.posto, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.posto = '$nome' e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito AS nome_direito, r.posto, p.posto, COUNT(e.direito_pleiteado) FROM exercicioanterior AS e LEFT JOIN tb_direitopleiteado_exant AS d ON e.direito_pleiteado = d.id LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto WHERE r.posto = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
       $result_direito = mysqli_query($conexao, $query_direito);
       while ($res_direito = mysqli_fetch_array($result_direito)) {
 
@@ -227,7 +227,7 @@ login('EXANT', '../../');
         $count_direito =  trim($count_direito);
       }
 
-      $query_estado = "SELECT e.estado, est.id, est.estado, r.posto, p.posto, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.posto = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
+      $query_estado = "SELECT e.estado, est.id, est.estado, r.posto, p.posto, COUNT(e.estado) FROM exercicioanterior AS e LEFT JOIN tb_estado_exant AS est ON e.estado = est.id LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto WHERE r.posto = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
       $result_estado = mysqli_query($conexao, $query_estado);
       while ($res_estado = mysqli_fetch_array($result_estado)) {
 
@@ -238,7 +238,7 @@ login('EXANT', '../../');
         $count_estado =  trim($count_estado);
       }
 
-      $query_sec = "SELECT s.secao as nome_secao, r.posto, p.posto, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.posto = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
+      $query_sec = "SELECT s.secao AS nome_secao, r.posto, p.posto, COUNT(s.secao) FROM exercicioanterior AS e LEFT JOIN tb_secoes_exant AS s ON e.secao_atual = s.id LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto WHERE r.posto = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
       $result_sec = mysqli_query($conexao, $query_sec);
       while ($res_sec = mysqli_fetch_array($result_sec)) {
 
@@ -254,7 +254,7 @@ login('EXANT', '../../');
 
       $nome = $_GET['txtdireitopleiteado'];
 
-      $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
+      $query_posto = "SELECT r.posto, p.posto AS nome_posto, COUNT(r.posto) FROM exercicioanterior AS e LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
 
@@ -265,7 +265,7 @@ login('EXANT', '../../');
         $count_posto =  trim($count_posto);
       }
 
-      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito AS nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior AS e LEFT JOIN tb_direitopleiteado_exant AS d ON e.direito_pleiteado = d.id WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exantASS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
       $result_direito = mysqli_query($conexao, $query_direito);
       while ($res_direito = mysqli_fetch_array($result_direito)) {
 
@@ -276,7 +276,7 @@ login('EXANT', '../../');
         $count_direito =  trim($count_direito);
       }
 
-      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
+      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior AS e LEFT JOIN tb_estado_exant AS est ON e.estado = est.id WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
       $result_estado = mysqli_query($conexao, $query_estado);
       while ($res_estado = mysqli_fetch_array($result_estado)) {
 
@@ -287,7 +287,7 @@ login('EXANT', '../../');
         $count_estado =  trim($count_estado);
       }
 
-      $query_sec = "SELECT s.secao as nome_secao, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
+      $query_sec = "SELECT s.secao AS nome_secao, COUNT(s.secao) FROM exercicioanterior AS e LEFT JOIN tb_secoes_exant AS s ON e.secao_atual = s.id WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
       $result_sec = mysqli_query($conexao, $query_sec);
       while ($res_sec = mysqli_fetch_array($result_sec)) {
 
@@ -302,7 +302,7 @@ login('EXANT', '../../');
 
       $nome = $_GET['txtestado'];
 
-      $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE estado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
+      $query_posto = "SELECT r.posto, p.posto AS nome_posto, COUNT(r.posto) FROM exercicioanterior AS e LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto WHERE estado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
 
@@ -313,7 +313,7 @@ login('EXANT', '../../');
         $count_posto =  trim($count_posto);
       }
 
-      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id WHERE estado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito AS nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior AS e LEFT JOIN tb_direitopleiteado_exant AS d ON e.direito_pleiteado = d.id WHERE estado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
       $result_direito = mysqli_query($conexao, $query_direito);
       while ($res_direito = mysqli_fetch_array($result_direito)) {
 
@@ -324,7 +324,7 @@ login('EXANT', '../../');
         $count_direito =  trim($count_direito);
       }
 
-      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.estado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
+      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior AS e LEFT JOIN tb_estado_exant AS est ON e.estado = est.id WHERE e.estado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
       $result_estado = mysqli_query($conexao, $query_estado);
       while ($res_estado = mysqli_fetch_array($result_estado)) {
 
@@ -335,7 +335,7 @@ login('EXANT', '../../');
         $count_estado =  trim($count_estado);
       }
 
-      $query_sec = "SELECT s.secao as nome_secao, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id WHERE estado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
+      $query_sec = "SELECT s.secao AS nome_secao, COUNT(s.secao) FROM exercicioanterior AS e LEFT JOIN tb_secoes_exant AS s ON e.secao_atual = s.id WHERE estado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
       $result_sec = mysqli_query($conexao, $query_sec);
       while ($res_sec = mysqli_fetch_array($result_sec)) {
 
@@ -351,7 +351,7 @@ login('EXANT', '../../');
 
       $nome = $_GET['txtsecao'];
 
-      $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE secao_atual = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
+      $query_posto = "SELECT r.posto, p.posto AS nome_posto, COUNT(r.posto) FROM exercicioanterior AS e LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto WHERE secao_atual = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
 
@@ -362,7 +362,7 @@ login('EXANT', '../../');
         $count_posto =  trim($count_posto);
       }
 
-      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id WHERE secao_atual = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito AS nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior AS e LEFT JOIN tb_direitopleiteado_exant AS d ON e.direito_pleiteado = d.id WHERE secao_atual = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
       $result_direito = mysqli_query($conexao, $query_direito);
       while ($res_direito = mysqli_fetch_array($result_direito)) {
 
@@ -373,7 +373,7 @@ login('EXANT', '../../');
         $count_direito =  trim($count_direito);
       }
 
-      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE secao_atual = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
+      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior AS e LEFT JOIN tb_estado_exant AS est ON e.estado = est.id WHERE secao_atual = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
       $result_estado = mysqli_query($conexao, $query_estado);
       while ($res_estado = mysqli_fetch_array($result_estado)) {
 
@@ -384,7 +384,7 @@ login('EXANT', '../../');
         $count_estado =  trim($count_estado);
       }
 
-      $query_sec = "SELECT s.secao as nome_secao, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id WHERE secao_atual = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
+      $query_sec = "SELECT s.secao AS nome_secao, COUNT(s.secao) FROM exercicioanterior AS e LEFT JOIN tb_secoes_exant AS s ON e.secao_atual = s.id WHERE secao_atual = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
       $result_sec = mysqli_query($conexao, $query_sec);
       while ($res_sec = mysqli_fetch_array($result_sec)) {
 
@@ -395,7 +395,7 @@ login('EXANT', '../../');
         $count_secao =  trim($count_secao);
       }
     } else {
-      $query_posto = "SELECT r.posto, p.posto as nome_posto, COUNT(r.posto) FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
+      $query_posto = "SELECT r.posto, p.posto AS nome_posto, COUNT(r.posto) FROM exercicioanterior AS e LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto ORDER BY p.posto";
       $result_posto = mysqli_query($conexao, $query_posto);
       while ($res_posto = mysqli_fetch_array($result_posto)) {
 
@@ -406,7 +406,7 @@ login('EXANT', '../../');
         $count_posto =  trim($count_posto);
       }
 
-      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito as nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior as e LEFT JOIN tb_direitoPleiteado_exant as d ON e.direito_pleiteado = d.id WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito AS nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior AS e LEFT JOIN tb_direitopleiteado_exant AS d ON e.direito_pleiteado = d.id WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
       $result_direito = mysqli_query($conexao, $query_direito);
       while ($res_direito = mysqli_fetch_array($result_direito)) {
 
@@ -417,7 +417,7 @@ login('EXANT', '../../');
         $count_direito =  trim($count_direito);
       }
 
-      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior as e LEFT JOIN tb_estado_exant as est ON e.estado = est.id WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
+      $query_estado = "SELECT e.estado, est.id, est.estado, COUNT(e.estado) FROM exercicioanterior AS e LEFT JOIN tb_estado_exant AS est ON e.estado = est.id WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY e.estado ORDER BY est.estado";
       $result_estado = mysqli_query($conexao, $query_estado);
       while ($res_estado = mysqli_fetch_array($result_estado)) {
 
@@ -428,7 +428,7 @@ login('EXANT', '../../');
         $count_estado =  trim($count_estado);
       }
 
-      $query_sec = "SELECT s.secao as nome_secao, COUNT(s.secao) FROM exercicioanterior as e LEFT JOIN tb_secoes_exant as s ON e.secao_atual = s.id WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
+      $query_sec = "SELECT s.secao AS nome_secao, COUNT(s.secao) FROM exercicioanterior AS e LEFT JOIN tb_secoes_exant AS s ON e.secao_atual = s.id WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY s.secao ORDER BY s.secao";
       $result_sec = mysqli_query($conexao, $query_sec);
       while ($res_sec = mysqli_fetch_array($result_sec)) {
 
