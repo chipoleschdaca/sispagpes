@@ -26,12 +26,15 @@ function data($data)
 
 $id = $_GET['id'];
 
-
 $query     = "SELECT * FROM exercicioanterior WHERE id = '$id'";
 $result    = mysqli_query($conexao, $query);
 $res_exant = mysqli_fetch_array($result);
 $nup       = $res_exant["nup"];
-$secao_atual = $res_exant['secao_atual'];
+$secao_atual = $res_exant["secao_atual"];
+$data_criacao = $res_exant["data_criacao"];
+$today = date("Y-m-d");
+
+$tempoTotalProcesso = number_format(diferenca($today, $data_criacao), 0, ',', '.');
 
 $id_req = $_GET['id_req'];
 $query_req = "SELECT r.id, r.posto, r.situacao, r.nome, r.dt_nascimento, p.id, p.posto as nome_posto FROM requerentes as r LEFT JOIN tb_posto as p ON p.id = r.posto WHERE r.id = '$id_req'";
@@ -49,7 +52,7 @@ $header .= "";
 if (($dtNascimento) == '0000-00-00') {
   $header .= "";
 } else if (descobrirIdade($dtNascimento) >= 60) {
-  $header .= "<div class='badge'><span style='margin: 0'>PRIORIDADE</span></div>";
+  $header .= "<div class='badge-header'><span style='margin: 0'>PRIORIDADE</span></div>";
 } else {
   $header .= '';
 }
@@ -64,12 +67,12 @@ $html = "
 	    <div class='comaer'>COMANDO DA AERONÁUTICA</div>
 	    <div class='unidade'>GRUPAMENTO DE APOIO DE LAGOA SANTA</div>
     </li>
-    <li class='right' style='font-size: 10px'>v1.0.2</li>
+    <li class='right' style='font-size: 10px'>v1.0.3</li>
   </ul>    
     <div class='texto-cab'><b>Histórico de Tramitação de Processo de Exercício Anterior</b></div>
     <div>Requerente: <strong>" . $posto . " " . $situacao . " " . $requerente . "</strong></div>
-    <div>Processo nº: <strong>" . $nup . "</strong></div>
-  <hr>";
+    <div>Processo nº: <strong>" . $nup . "</strong></div>    
+    <div>Duração total (dias): <b style='background-color: black; color: white;'>" . $tempoTotalProcesso . "</b></div><hr>";
 $html .= "<div class='table-responsive' style='border-radius: 3px;'>";
 
 $query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.responsavel, m.id as id_militar, m.nome as nome_militar, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_id_anterior, s.secao as s_anterior, s.prazo_exant as prazo_secao_exant, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id LEFT JOIN militares as m ON h.responsavel = m.id WHERE id_exant = " . $id . " ORDER BY h.data_novo";
@@ -109,16 +112,17 @@ while ($res_h = mysqli_fetch_array($result_h)) {
   $dtPrazoSecao_cons = date('Y-m-d', strtotime('+' . $prazoSecao . ' days', strtotime($res_h["data_anterior"])));
   $today = date('Y-m-d');
 
-  $html .= "<tr><td class='align-middle'>";
+  $html .= "<tr>
+        <td class='align-middle'>";
   if ($old_secao == "") {
     $html .= "Criado na: <br><b>$new_secao</b>";
   } else {
-    $html .= "De:   <b>$old_secao</b><br>
-              Para: <b>$new_secao</b>";
+    $html .= "De: <b>$old_secao</b><br>
+          Para: <b>$new_secao</b>";
   }
   $html .= "</td>";
   $html .= "<td class='align-middle' style='width:45%; text-align: justify;'>
-							<strong>$new_estado</strong><br>";
+          <strong>$new_estado</strong><br>";
   if ($res_h['obs_exant'] == '') {
     $html .= "Não há";
   } else {
@@ -143,19 +147,21 @@ while ($res_h = mysqli_fetch_array($result_h)) {
     $html .= "<td class='align-middle' style='text-align:center;'>" . number_format(diferenca($dtPrazoSecao_cons, $data_novo)) . "</td>";
   }
   $html .= "<td class='align-middle' id='nomeSacador' style='text-align: center; width: 15%;'>$nome_sacador</td>";
-  $html .= "</tr>";
+  $html .= "
+      </tr>";
   //Final do While
 }
 
 $html .= "</tbody>
-							</table>
-						</div>";
+  </table>
+</div>";
 $html .= "</fieldset>";
-$footer = "<hr>
-              <ul class='footer'>                
-                <li class='left'>Emissão: " . date('d/m/Y - H:i:s') . "</li>
-                <li class='right'>Página {PAGENO} de {nbpg}</li>
-              </ul>";
+$footer = "
+<hr>
+<ul class='footer'>
+  <li class='left'>Emissão: " . date('d/m/Y - H:i:s') . "</li>
+  <li class='right'>Página {PAGENO} de {nbpg}</li>
+</ul>";
 
 $mpdf = new mPDF('utf-8', 'A4-L');
 $mpdf->setDisplayMode('fullpage');

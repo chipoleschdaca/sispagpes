@@ -874,6 +874,11 @@ if (isset($_POST['button'])) {
   $resultConsultaHistorico = mysqli_query($conexao, $queryConsultaHistorico);
   $res_ConsultaHistorico = mysqli_fetch_array($resultConsultaHistorico);
   $nup = $res_ConsultaHistorico["nup"];
+  $data_criacao = $res_ConsultaHistorico["data_criacao"];
+  $today = date('Y-m-d');
+
+  $tempoTotalProcesso = number_format(diferenca($today, $data_criacao), 0, ',', '.');
+
   ?>
   <div id="modalHistorico" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -894,16 +899,35 @@ if (isset($_POST['button'])) {
               <div class="modal-title"></div>
             </h2>
           </div>
-          <div class="col-sm-10">
+          <div class="col-sm-8">
             <h5><i class="far fa-user"></i> Requerente:
               <strong><?= $posto ?> <?= $situacao ?> <?= $nome ?></strong></h5>
             <h5><i class="far fa-folder-open"></i> Processo nº: <strong><?= $nup ?></strong></h5>
+            <h5><i class="far fa-clock"></i> Duração total (dias):
+              <?php if ($tempoTotalProcesso >= 180) { ?>
+                <span class="badge badge-danger" style="font-size: 20px;"><?= $tempoTotalProcesso ?></span>
+              <?php
+              } elseif ($tempoTotalProcesso >= 60 and $tempoTotalProcesso < 180) { ?>
+                <span class="badge badge-warning" style="font-size: 20px;"><?= $tempoTotalProcesso ?></span>
+              <?php
+              } else { ?>
+                <span class="badge badge-success" style="font-size: 20px;"><?= $tempoTotalProcesso ?></span>
+              <?php } ?></h5>
           </div>
+          <!-- <div class="info-box bg-gradient-warning">
+            <span class="info-box-icon"><i class="far fa-clock"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Duração total (dias)</span>
+              <span class="info-box-number" style="text-align: center;">
+                <h4><?= $tempoTotalProcesso ?></h4>
+              </span>
+            </div>
+          </div> -->
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <?php
-          $query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.responsavel, m.id as id_militar, m.nome as nome_militar, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_id_anterior, s.secao as s_anterior, s.prazo_exant as prazo_secao_exant, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id LEFT JOIN militares as m ON h.responsavel = m.id WHERE id_exant = '$idConsultaHistorico' ORDER BY h.data_novo";
+          $query_h = "SELECT h.id as id_hist, h.data_anterior, h.data_novo, h.id_exant, h.responsavel, m.id as id_militar, m.nome as nome_militar, h.estado_anterior, h.estado_novo, h.secao_anterior, h.secao_novo, h.obs_exant, e.id, e.nup as e_nup, e.data_criacao as e_dt_criacao, es.id as es_id, es.estado as es_anterior, est.estado as est_novo, s.id as s_id_anterior, s.secao as s_anterior, s.prazo_exant as prazo_secao_exant, sec.secao as sec_novo FROM tb_historico_exant_estado_secao as h LEFT JOIN exercicioanterior as e ON h.id_exant = e.id LEFT JOIN tb_estado_exant as es ON h.estado_anterior = es.id LEFT JOIN tb_estado_exant as est ON h.estado_novo = est.id LEFT JOIN tb_secoes_exant as s ON h.secao_anterior = s.id LEFT JOIN tb_secoes_exant as sec ON h.secao_novo = sec.id LEFT JOIN militares as m ON h.responsavel = m.id WHERE id_exant = '$idConsultaHistorico' ORDER BY h.data_novo";
           $result_h = mysqli_query($conexao, $query_h);
           $row_h = mysqli_num_rows($result_h);
           ?>
@@ -994,7 +1018,7 @@ if (isset($_POST['button'])) {
           </div>
         </div>
         <div class="modal-footer">
-          <a class="btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf.php?id=<?= $idConsultaHistorico; ?>&id_req=<?= $id_req; ?>" target="_blank" rel="noopener" style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
+          <a class=" btn btn-primary btn-sm" type="button" href="rel/historico_exant_pdf.php?id=<?= $idConsultaHistorico; ?>&id_req=<?= $id_req; ?>" target="_blank" rel="noopener" style="margin-right: 5px;"><i class="far fa-file-pdf"></i> Gerar PDF</a>
         </div>
       </div>
     </div>
@@ -1002,6 +1026,4 @@ if (isset($_POST['button'])) {
   <script>
     $("#modalHistorico").modal("show");
   </script>
-<?php
-} ?>
-<!-- Modal -->
+<?php } ?>

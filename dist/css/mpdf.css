@@ -7,7 +7,36 @@ body {
   font-size: 12px;
 }
 
+span {
+  padding: 10px;
+  margin: 10px;
+}
+
 .badge {
+  text-align: center;
+  font-weight: bold;
+  font-size: 26px;
+  color: white;
+  border-radius: 5px;
+  float: left;
+  display: block;
+  width: 7%;
+}
+
+.badge-danger {
+  background-color: rgba(255, 0, 0, 1);
+}
+
+.badge-warning {
+  color: black;
+  background-color: rgba(255, 255, 0, 1);
+}
+
+.badge-success {
+  background-color: rgba(0, 128, 0, 1);
+}
+
+.badge-header {
   text-align: center;
   font-weight: bold;
   font-size: 26px;
@@ -18,7 +47,6 @@ body {
   border-radius: 5px;
   float: right;
   display: block;
-  margin-bottom: 20px;
 }
 
 .cabecalho {
