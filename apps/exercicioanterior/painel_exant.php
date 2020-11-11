@@ -265,7 +265,7 @@ login('EXANT', '../../');
         $count_posto =  trim($count_posto);
       }
 
-      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito AS nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior AS e LEFT JOIN tb_direitopleiteado_exant AS d ON e.direito_pleiteado = d.id WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exantASS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
+      $query_direito = "SELECT e.direito_pleiteado, d.id, d.direito AS nome_direito, COUNT(e.direito_pleiteado) FROM exercicioanterior AS e LEFT JOIN tb_direitopleiteado_exant AS d ON e.direito_pleiteado = d.id WHERE direito_pleiteado = '$nome' AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY direito_pleiteado ORDER BY d.direito";
       $result_direito = mysqli_query($conexao, $query_direito);
       while ($res_direito = mysqli_fetch_array($result_direito)) {
 
