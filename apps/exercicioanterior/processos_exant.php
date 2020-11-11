@@ -877,7 +877,7 @@ if (isset($_POST['button'])) {
   $data_criacao = $res_ConsultaHistorico["data_criacao"];
   $today = date('Y-m-d');
 
-  $tempoTotalProcesso = number_format(diferenca($today, $data_criacao), 0, ',', '.');
+  $tempoTotalProcesso = diferenca($today, $data_criacao);
 
   ?>
   <div id="modalHistorico" class="modal fade" role="dialog">
@@ -905,13 +905,13 @@ if (isset($_POST['button'])) {
             <h5><i class="far fa-folder-open"></i> Processo nº: <strong><?= $nup ?></strong></h5>
             <h5><i class="far fa-clock"></i> Duração total (dias):
               <?php if ($tempoTotalProcesso >= 180) { ?>
-                <span class="badge badge-danger" style="font-size: 20px;"><?= $tempoTotalProcesso ?></span>
+                <span class="badge badge-danger" style="font-size: 20px;"><?= number_format($tempoTotalProcesso, 0, ',', '.') ?></span>
               <?php
               } elseif ($tempoTotalProcesso >= 60 and $tempoTotalProcesso < 180) { ?>
-                <span class="badge badge-warning" style="font-size: 20px;"><?= $tempoTotalProcesso ?></span>
+                <span class="badge badge-warning" style="font-size: 20px;"><?= number_format($tempoTotalProcesso, 0, ',', '.') ?></span>
               <?php
               } else { ?>
-                <span class="badge badge-success" style="font-size: 20px;"><?= $tempoTotalProcesso ?></span>
+                <span class="badge badge-success" style="font-size: 20px;"><?= number_format($tempoTotalProcesso, 0, ',', '.') ?></span>
               <?php } ?></h5>
           </div>
           <!-- <div class="info-box bg-gradient-warning">
