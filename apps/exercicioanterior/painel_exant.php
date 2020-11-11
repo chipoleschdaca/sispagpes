@@ -83,15 +83,15 @@ login('EXANT', '../../');
                         <select class="form-control select2" name="txtposto" style="border-radius:3px; margin-right:20px; width: 100%;">
                           <option value="" selected>POSTO/GRAD.</option>
                           <?php
-                          $query_posto = "SELECT r.posto AS id_posto, p.posto AS nome_posto FROM exercicioanterior AS e LEFT JOIN requerentes AS r ON e.requerente = r.id LEFT JOIN tb_posto AS p ON p.id = r.posto AND e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto";
-                          $result_posto = mysqli_query($conexao, $query_posto);
-                          while ($res_p = mysqli_fetch_array($result_posto)) {
-                            $id = $res_p['id_posto'];
-                            $posto = $res_p['nome_posto'];
-                          ?>
-                            <option value="<?= $id ?>"><?= $posto ?></option>
-                          <?php }
-                          ?>
+                            $query_posto = "SELECT r.posto as id_posto, p.posto as nome_posto FROM exercicioanterior as e LEFT JOIN requerentes as r ON e.requerente = r.id LEFT JOIN tb_posto as p ON p.id = r.posto WHERE e.id NOT IN (SELECT id_exant FROM tb_historico_exant_estado_secao AS hist LEFT JOIN tb_estado_exant AS estado ON hist.estado_novo = estado.id WHERE estado.estado = 'ARQUIVADO') GROUP BY r.posto";
+                            $result_posto = mysqli_query($conexao, $query_posto);
+                            while ($res_p = mysqli_fetch_array($result_posto)) {
+                              $id = $res_p['id_posto'];
+                              $posto = $res_p['nome_posto'];
+                            ?>
+                              <option value="<?php echo $id ?>"><?php echo $posto ?></option>
+                            <?php }
+                            ?>
                         </select>
                       </div>
                       <div style="width: 22%;">
