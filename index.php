@@ -64,7 +64,7 @@ include('dist/php/functions.php');
     </div>
     <!-- <?php include('dist/php/pageFooter.php'); ?> -->
     <footer class="main-footer">
-      <span style="margin-right: 1cm;">&copy; 2019-<?= date("Y") ?> <a href="#"><b>SISPAGPES</b></a>. Desenvolvido por DANIEL ANGELO <b style="text-decoration: underline;">CHIPOLESCH</b> DE ALMEIDA <b>1º Ten Int</b></span> <span class="float-right"> v1.2.1</span>
+      <span style="margin-right: 1cm;">&copy; 2019-<?= date("Y") ?> <a href="#"><b>SISPAGPES</b></a>. Desenvolvido por DANIEL ANGELO <b style="text-decoration: underline;">CHIPOLESCH</b> DE ALMEIDA <b>1º Ten Int</b></span> <span class="float-right"> v1.2.2</span>
     </footer>
   </div>
 </body>
